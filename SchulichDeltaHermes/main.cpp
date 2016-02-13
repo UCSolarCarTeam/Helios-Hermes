@@ -23,17 +23,12 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#include "FakePacketUnstuffer.h"
+#include "SchulichDeltaHermes.h"
+#include <QApplication>
 
-FakePacketUnstuffer::FakePacketUnstuffer()
+int main(int argc, char *argv[])
 {
-}
-
-FakePacketUnstuffer::~FakePacketUnstuffer()
-{
-}
-
-void FakePacketUnstuffer::emitPacketUnstuffed(QByteArray decodedData)
-{
-   emit packetUnstuffed(decodedData);
+   QScopedPointer<SchulichDeltaHermes> app;
+   app.reset(new SchulichDeltaHermes(argc, argv));
+   return app->exec();
 }

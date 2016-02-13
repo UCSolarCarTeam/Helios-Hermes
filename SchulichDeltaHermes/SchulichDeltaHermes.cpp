@@ -23,17 +23,20 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#include "FakePacketUnstuffer.h"
+#include "DataLayer/DataContainer.h"
+#include "CommunicationLayer/CommunicationContainer.h"
+#include "BusinessLayer/BusinessContainer.h"
 
-FakePacketUnstuffer::FakePacketUnstuffer()
+#include "SchulichDeltaHermes.h"
+
+SchulichDeltaHermes::SchulichDeltaHermes(int& argc, char** argv)
+: QApplication(argc, argv)
+, dataContainer_(new DataContainer())
+, communicationContainer_(new CommunicationContainer(*dataContainer_))
+, businessContainer_(new BusinessContainer(*communicationContainer_))
 {
 }
 
-FakePacketUnstuffer::~FakePacketUnstuffer()
+SchulichDeltaHermes::~SchulichDeltaHermes()
 {
-}
-
-void FakePacketUnstuffer::emitPacketUnstuffed(QByteArray decodedData)
-{
-   emit packetUnstuffed(decodedData);
 }
