@@ -37,6 +37,7 @@ namespace
    const int backEmfIndex = 13;
    const int dpsBoardTemperatureIndex = 17;
    const int dcBusAmpHoursIndex = 21;
+   const int odometerIndex = 25;
 }
 
 DriverControlDetails::DriverControlDetails(
@@ -73,6 +74,11 @@ float DriverControlDetails::dpsBoardTemperature() const
 float DriverControlDetails::dcBusAmpHours() const
 {
    return getFloat(messageData_, dcBusAmpHoursIndex);
+}
+
+float DriverControlDetails::odometer() const 
+{
+   return getFloat(messageData_, odometerIndex);
 }
 
 QString DriverControlDetails::toString() const

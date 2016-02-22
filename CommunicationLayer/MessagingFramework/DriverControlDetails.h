@@ -39,6 +39,7 @@ public:
    float backEmf() const;
    float dpsBoardTemperature() const;
    float dcBusAmpHours() const;
+   float odometer() const;
 
    QString toString() const;
 

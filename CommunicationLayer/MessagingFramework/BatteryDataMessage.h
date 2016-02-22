@@ -35,6 +35,9 @@ public:
 
    float batteryVoltage() const;
    float batteryCurrent() const;
+   float stateOfCharge() const;
+   float balanceStateOfCharge() const;
+   bool secondaryBatteryUnderVoltage() const;
    QString toString() const;
 
 private:
