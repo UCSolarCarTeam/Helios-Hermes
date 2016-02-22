@@ -36,7 +36,7 @@ TARGET = ../release/SchulichDeltaHermes
 TEMPLATE = app
 CONFIG += static
 
-QMAKE_CXXFLAGS +=
+QMAKE_CXXFLAGS += -Werror
 RCC_DIR= ../release
 DESTDIR = ../release
 OBJECTS_DIR = ../release/.obj
