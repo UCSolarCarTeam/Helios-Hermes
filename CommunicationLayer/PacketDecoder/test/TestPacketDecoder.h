@@ -43,7 +43,6 @@ private slots:
    void willReceiveFaultsMessage();
    void willReceiveBatteryDataMessage();
    void willReceiveCmuDataMessage();
-   void willReceiveMpptDataMessage();
 
 protected slots:
    void handlePacketDecoded(const KeyDriverControlTelemetry message);
