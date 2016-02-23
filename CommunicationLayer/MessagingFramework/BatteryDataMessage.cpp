@@ -1,3 +1,28 @@
+/**
+ *  Schulich Delta Hermes
+ *  Copyright (C) 2015 University of Calgary Solar Car Team
+ *
+ *  This file is part of Schulich Delta Hermes
+ *
+ *  Schulich Delta Hermes is free software: 
+ *  you can redistribute it and/or modify it under the terms 
+ *  of the GNU Affero General Public License as published by 
+ *  the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ *
+ *  Schulich Delta Hermes is distributed 
+ *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+ *  without even the implied warranty of MERCHANTABILITY or 
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
+ *  General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General 
+ *  Public License along with Schulich Delta Hermes.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  For further contact, email <software@calgarysolarcar.ca>
+ */
+
 #include "BatteryDataMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
@@ -30,17 +55,17 @@ float BatteryDataMessage::batteryCurrent() const
 
 float BatteryDataMessage::stateOfCharge() const
 {
-   return getFloat(messageData_, STATE_OF_CHARGE_INDEX);
+	return getFloat(messageData_, STATE_OF_CHARGE_INDEX);
 }
 
 float BatteryDataMessage::balanceStateOfCharge() const
 {
-   return getFloat(messageData_, BALANCE_SOC_INDEX);
+	return getFloat(messageData_, BALANCE_SOC_INDEX);
 }
 
 bool BatteryDataMessage::secondaryBatteryUnderVoltage() const
 {
-   return static_cast<bool>(messageData_.at(SECONDARY_ERROR_INDEX));
+	return static_cast<bool>(messageData_.at(SECONDARY_ERROR_INDEX));
 }
 
 QString BatteryDataMessage::toString() const
@@ -51,6 +76,6 @@ QString BatteryDataMessage::toString() const
    messageString += QString::number(batteryCurrent()) + ", ";
    messageString += QString::number(stateOfCharge()) + ", ";
    messageString += QString::number(balanceStateOfCharge()) + ", ";
-   messageString += QString::number(secondaryBatteryUnderVoltage()) + ", ";
+   messageString += QString::number(secondaryBatteryUnderVoltage()) + ", ";   
    return messageString;
 }

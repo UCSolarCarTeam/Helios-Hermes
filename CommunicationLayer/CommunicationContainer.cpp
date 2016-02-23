@@ -1,13 +1,35 @@
+/**
+ *  Schulich Delta Hermes
+ *  Copyright (C) 2015 University of Calgary Solar Car Team
+ *
+ *  This file is part of Schulich Delta Hermes
+ *
+ *  Schulich Delta Hermes is free software: 
+ *  you can redistribute it and/or modify it under the terms 
+ *  of the GNU Affero General Public License as published by 
+ *  the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ *
+ *  Schulich Delta Hermes is distributed 
+ *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+ *  without even the implied warranty of MERCHANTABILITY or 
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
+ *  General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General 
+ *  Public License along with Schulich Delta Hermes.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  For further contact, email <software@calgarysolarcar.ca>
+ */
+
 #include <QtSerialPort/QSerialPort>
 #include <QUdpSocket>
 
 #include "../DataLayer/DataContainer.h"
-#include "CommunicationContainer.h"
-#include "CommDeviceControl/ConnectionController.h"
-#include "CommDeviceControl/CommDeviceManager.h"
-#include "CommDeviceControl/RadioConnectionService.h"
-#include "CommDeviceControl/UdpConnectionService.h"
+#include "CommDeviceControl/RadioCommDevice.h"
 #include "CommDeviceControl/UdpMessageForwarder.h"
+#include "CommunicationContainer.h"
 #include "DataPopulators/BatteryPopulator.h"
 #include "DataPopulators/CmuPopulator.h"
 #include "DataPopulators/DriverDetailsPopulator.h"
@@ -23,15 +45,8 @@ class CommunicationContainerPrivate
 public:
    CommunicationContainerPrivate(DataContainer& dataContainer)
    : radioConnectionService(serialPort)
-   , udpConnectionService(udpSocket)
-   , commDeviceManager(
-      udpSocket,
-      serialPort)
-   , connectionController(
-      radioConnectionService,
-      udpConnectionService)
-   , messageForwarder(commDeviceManager)
-   , packetSynchronizer(commDeviceManager)
+   , messageForwarder(radioConnectionService)
+   , packetSynchronizer(radioConnectionService)
    , packetUnstuffer(packetSynchronizer)
    , packetChecksumChecker(packetUnstuffer)
    , packetDecoder(packetChecksumChecker)
@@ -56,11 +71,7 @@ public:
    }
 
    QSerialPort serialPort;
-   QUdpSocket udpSocket;
-   RadioConnectionService radioConnectionService;
-   UdpConnectionService udpConnectionService;
-   CommDeviceManager commDeviceManager;
-   ConnectionController connectionController;
+   RadioCommDevice radioConnectionService;
    UdpMessageForwarder messageForwarder;
    PacketSynchronizer packetSynchronizer;
    PacketUnstuffer packetUnstuffer;
@@ -82,22 +93,7 @@ CommunicationContainer::~CommunicationContainer()
 {
 }
 
-UdpMessageForwarder& CommunicationContainer::messageForwarder()
-{
-   return impl_->messageForwarder;
-}
-
-ConnectionController& CommunicationContainer::connectionController()
-{
-   return impl_->connectionController;
-}
-
-UdpConnectionService& CommunicationContainer::udpConnectionService()
-{
-   return impl_->udpConnectionService;
-}
-
-RadioConnectionService& CommunicationContainer::radioConnectionService()
+I_CommDevice& CommunicationContainer::commDevice()
 {
    return impl_->radioConnectionService;
 }
@@ -120,9 +116,4 @@ I_PacketDecoder& CommunicationContainer::packetDecoder()
 I_PacketChecksumChecker& CommunicationContainer::packetChecksumChecker()
 {
    return impl_->packetChecksumChecker;
-}
-
-CommDeviceManager& CommunicationContainer::commDeviceManager()
-{
-   return impl_->commDeviceManager;
 }
