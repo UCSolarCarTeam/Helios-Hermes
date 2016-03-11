@@ -47,6 +47,7 @@ SOURCES += \
     BusinessLayer/BusinessContainer.cpp \
     BusinessLayer/LoggerService/LoggerService.cpp \
     BusinessLayer/CommunicationsMonitoringService/CommunicationsMonitoringService.cpp \
+    BusinessLayer/JsonForwarder/JsonForwarder.cpp \
     CommunicationLayer/CommDeviceControl/RadioCommDevice.cpp \
     CommunicationLayer/CommDeviceControl/UdpMessageForwarder.cpp \
     CommunicationLayer/CommunicationContainer.cpp \
@@ -82,6 +83,8 @@ HEADERS  += \
     BusinessLayer/LoggerService/LoggerService.h \
     BusinessLayer/CommunicationsMonitoringService/CommunicationsMonitoringService.h \
     BusinessLayer/CommunicationsMonitoringService/I_CommunicationsMonitoringService.h \
+    BusinessLayer/JsonForwarder/JsonForwarder.h \
+    BusinessLayer/JsonForwarder/I_JsonForwarder.h \
     CommunicationLayer/CommDeviceControl/I_CommDevice.h \
     CommunicationLayer/CommDeviceControl/RadioCommDevice.h \
     CommunicationLayer/CommDeviceControl/UdpMessageForwarder.h \
