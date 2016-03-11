@@ -36,8 +36,7 @@ namespace
    const quint16 MULTICAST_PORT = 44550;
 }
 
-UdpMessageForwarder::UdpMessageForwarder(const I_CommDevice& device)
-: device_(device)
+UdpMessageForwarder::UdpMessageForwarder()
 {
 }
 

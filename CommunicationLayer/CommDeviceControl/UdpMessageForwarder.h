@@ -33,12 +33,10 @@ class UdpMessageForwarder : public QObject
 {
    Q_OBJECT
 public:
-   UdpMessageForwarder(const I_CommDevice& device);
+   UdpMessageForwarder();
    virtual ~UdpMessageForwarder();
    void forwardData(QByteArray data);
 
 private:
-   const I_CommDevice& device_;
-
    QUdpSocket socket_;
 };

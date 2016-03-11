@@ -45,7 +45,7 @@ class CommunicationContainerPrivate
 public:
    CommunicationContainerPrivate(DataContainer& dataContainer)
    : radioConnectionService(serialPort)
-   , messageForwarder(radioConnectionService)
+   , messageForwarder()
    , packetSynchronizer(radioConnectionService)
    , packetUnstuffer(packetSynchronizer)
    , packetChecksumChecker(packetUnstuffer)
