@@ -23,6 +23,8 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 #include <QTimer>
+#include <QJsonDocument>
+
 
 #include "DataLayer/BatteryData/I_BatteryData.h"
 #include "DataLayer/FaultsData/I_FaultsData.h"
@@ -44,54 +46,61 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
 , readTimer_(new QTimer())
 , dataToRead_()
 {
-	connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(convertData()));
+    connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(convertData()));
 }
 
 void JsonForwarder::start(int conversionFrequency)
 {
-	readTimer_->setInterval(conversionFrequency);
-	readTimer_->start();
+    readTimer_->setInterval(conversionFrequency);
+    readTimer_->start();
 }
 
 void JsonForwarder::convertData()
 {
-	switch(dataToRead)
-	{
-		case BATTERY_DATA:
-			convertFaultData();
-			dataToRead_ = FAULT_DATA;
-			break;
-		case FAULT_DATA:
-			convertPowerData();
-			dataToRead_ = POWER_DATA;
-			break;
-		case POWER_DATA:
-			convertVehicLEData();
-			dataToRead_ = VEHICLE_DATA;
-			break;
-		case VEHICLE_DATA :
-			convertPowerData();
-			dataToRead_ = POWER_DATA;
-			break;
-	}
+    switch(dataToRead_)
+    {
+        case BATTERY_DATA:
+            convertFaultsData();
+            dataToRead_ = FAULT_DATA;
+            break;
+        case FAULT_DATA:
+            convertPowerData();
+            dataToRead_ = POWER_DATA;
+            break;
+        case POWER_DATA:
+            convertVehicleData();
+            dataToRead_ = VEHICLE_DATA;
+            break;
+        case VEHICLE_DATA :
+            convertPowerData();
+            dataToRead_ = POWER_DATA;
+            break;
+    }
 }
 
 void JsonForwarder::convertBatteryData()
 {
+    QJsonDocument batteryJson;
+    messageForwarder_.forwardData(batteryJson.toJson(QJsonDocument::Compact));
 
 }
 
 void JsonForwarder::convertFaultsData()
 {
+    QJsonDocument faultJson;
+    messageForwarder_.forwardData(faultJson.toJson(QJsonDocument::Compact));
 
 }
 
 void JsonForwarder::convertPowerData()
 {
+    QJsonDocument powerJson;
+    messageForwarder_.forwardData(powerJson.toJson(QJsonDocument::Compact));
 
 }
 
 void JsonForwarder::convertVehicleData()
 {
-
+    QJsonDocument vehicleJson;
+    messageForwarder_.forwardData(vehicleJson.toJson(QJsonDocument::Compact));
 }

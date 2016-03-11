@@ -37,9 +37,9 @@ class I_PowerData;
 class I_VehicleData;
 class UdpMessageForwarder;
 
-enum DataTypes { BATTERY_DATA, 
-                 FAULT_DATA, 
-                 POWER_DATA, 
+enum DataTypes { BATTERY_DATA,
+                 FAULT_DATA,
+                 POWER_DATA,
                  VEHICLE_DATA };
 
 class JsonForwarder : public I_JsonForwarder
@@ -56,12 +56,12 @@ public:
 
 private slots:
     void convertData();
+
+private:
     void convertBatteryData();
     void convertFaultsData();
     void convertPowerData();
     void convertVehicleData();
-
-private:
     I_BatteryData& batteryData_;
     I_FaultsData& faultsData_;
     I_PowerData& powerData_;
