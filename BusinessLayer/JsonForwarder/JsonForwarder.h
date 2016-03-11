@@ -26,27 +26,31 @@
 #pragma once
 
 #include <QObject>
+#include <QScopedPointer>
 #include <QTimer>
+
+#include "I_JsonForwarder.h"
 
 class I_BatteryData;
 class I_FaultsData;
 class I_PowerData;
 class I_VehicleData;
+class UdpMessageForwarder;
 
-enum DataTypes { FAULT_DATA, 
-                 BATTERY_DATA, 
+enum DataTypes { BATTERY_DATA, 
+                 FAULT_DATA, 
                  POWER_DATA, 
-                 VEHICLE_DATA }
+                 VEHICLE_DATA };
 
-class JsonForwarder : public QObject
+class JsonForwarder : public I_JsonForwarder
 {
     Q_OBJECT
 public:
-    JsonForwarder(I_BatteryDataV batteryData,
-                  I_FaultsDataV faultsData,
-                  I_PowerDataV powerData,
-                  I_VehicleDataV vehicleData,
-                  I_MessageForwarder messageForwarder);
+    JsonForwarder(I_BatteryData& batteryData,
+                  I_FaultsData& faultsData,
+                  I_PowerData& powerData,
+                  I_VehicleData& vehicleData,
+                  UdpMessageForwarder& messageForwarder);
     ~JsonForwarder() {}
     void start(int conversionFrequency);
 
@@ -62,7 +66,7 @@ private:
     I_FaultsData& faultsData_;
     I_PowerData& powerData_;
     I_VehicleData& vehicleData_;
-    I_MessageForwader& messageForwarder_;
-    QTimer readTimer_;
+    UdpMessageForwarder& messageForwarder_;
+    QScopedPointer<QTimer> readTimer_;
     DataTypes dataToRead_;
 };
