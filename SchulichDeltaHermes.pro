@@ -37,4 +37,5 @@ SUBDIRS = \
    DataLayer \
    CommunicationLayer \
    BusinessLayer \
+   Tests \
    SchulichDeltaHermes
