@@ -44,9 +44,9 @@ class CommunicationContainerPrivate
 {
 public:
    CommunicationContainerPrivate(DataContainer& dataContainer)
-   : radioConnectionService(serialPort)
-   , messageForwarder(radioConnectionService)
-   , packetSynchronizer(radioConnectionService)
+   : radioCommDevice(serialPort)
+   , messageForwarder(radioCommDevice)
+   , packetSynchronizer(radioCommDevice)
    , packetUnstuffer(packetSynchronizer)
    , packetChecksumChecker(packetUnstuffer)
    , packetDecoder(packetChecksumChecker)
@@ -71,7 +71,7 @@ public:
    }
 
    QSerialPort serialPort;
-   RadioCommDevice radioConnectionService;
+   RadioCommDevice radioCommDevice;
    UdpMessageForwarder messageForwarder;
    PacketSynchronizer packetSynchronizer;
    PacketUnstuffer packetUnstuffer;
@@ -95,7 +95,7 @@ CommunicationContainer::~CommunicationContainer()
 
 I_CommDevice& CommunicationContainer::commDevice()
 {
-   return impl_->radioConnectionService;
+   return impl_->radioCommDevice;
 }
 
 I_PacketSynchronizer& CommunicationContainer::packetSynchronizer()
