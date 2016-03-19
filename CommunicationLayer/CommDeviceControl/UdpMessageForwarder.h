@@ -25,13 +25,11 @@
 
 #pragma once
 
-#include <QObject>
 #include <QUdpSocket>
-class I_CommDevice;
+#include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
-class UdpMessageForwarder : public QObject
+class UdpMessageForwarder : public I_MessageForwarder
 {
-   Q_OBJECT
 public:
    UdpMessageForwarder();
    virtual ~UdpMessageForwarder();

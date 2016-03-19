@@ -30,14 +30,14 @@
 #include "DataLayer/FaultsData/I_FaultsData.h"
 #include "DataLayer/PowerData/I_PowerData.h"
 #include "DataLayer/VehicleData/I_VehicleData.h"
-#include "CommunicationLayer/CommDeviceControl/UdpMessageForwarder.h"
+#include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 #include "JsonForwarder.h"
 
 JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
                              I_FaultsData& faultsData,
                              I_PowerData& powerData,
                              I_VehicleData& vehicleData,
-                             UdpMessageForwarder& messageForwarder)
+                             I_MessageForwarder& messageForwarder)
 : batteryData_(batteryData)
 , faultsData_(faultsData)
 , powerData_(powerData)

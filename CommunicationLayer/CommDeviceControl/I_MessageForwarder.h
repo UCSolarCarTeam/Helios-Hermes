@@ -25,32 +25,11 @@
 
 #pragma once
 
-#include <QScopedPointer>
+#include <QByteArray>
 
-class DataContainer;
-class CommunicationContainerPrivate;
-
-class I_DataInjectionService;
-class I_PacketChecksumChecker;
-class I_PacketDecoder;
-class I_PacketSynchronizer;
-class I_CommDevice;
-class I_MessageForwarder;
-
-class CommunicationContainer
+class I_MessageForwarder
 {
 public:
-   explicit CommunicationContainer(DataContainer& dataContainer);
-   ~CommunicationContainer();
-
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
-
-private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
+   virtual ~I_MessageForwarder() {}
+   virtual void forwardData(QByteArray data) = 0;
 };

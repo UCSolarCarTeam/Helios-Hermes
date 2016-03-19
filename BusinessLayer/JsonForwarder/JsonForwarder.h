@@ -35,7 +35,7 @@ class I_BatteryData;
 class I_FaultsData;
 class I_PowerData;
 class I_VehicleData;
-class UdpMessageForwarder;
+class I_MessageForwarder;
 
 enum DataTypes { BATTERY_DATA,
                  FAULT_DATA,
@@ -50,7 +50,7 @@ public:
                   I_FaultsData& faultsData,
                   I_PowerData& powerData,
                   I_VehicleData& vehicleData,
-                  UdpMessageForwarder& messageForwarder);
+                  I_MessageForwarder& messageForwarder);
     ~JsonForwarder() {}
     void start(int conversionFrequency);
 
@@ -66,7 +66,7 @@ private:
     I_FaultsData& faultsData_;
     I_PowerData& powerData_;
     I_VehicleData& vehicleData_;
-    UdpMessageForwarder& messageForwarder_;
+    I_MessageForwarder& messageForwarder_;
     QScopedPointer<QTimer> readTimer_;
     DataTypes dataToRead_;
 };

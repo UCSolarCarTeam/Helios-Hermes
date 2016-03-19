@@ -38,7 +38,9 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lgm
 }
 
 HEADERS += *.h
-SOURCES += *.cpp
+SOURCES += \
+	testmain.cpp
+	BusinessLayer/JsonForwarder/JsonForwarderTest.cpp
 
 !win32 {
     QMAKE_CXXFLAGS += -Werror

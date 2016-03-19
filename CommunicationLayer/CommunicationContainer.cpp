@@ -117,3 +117,8 @@ I_PacketChecksumChecker& CommunicationContainer::packetChecksumChecker()
 {
    return impl_->packetChecksumChecker;
 }
+
+I_MessageForwarder& CommunicationContainer::udpMessageForwarder()
+{
+   return impl_->messageForwarder;
+}
