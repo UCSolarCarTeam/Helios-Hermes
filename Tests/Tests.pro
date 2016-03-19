@@ -1,5 +1,7 @@
 #-------------------------------------------------
 #
+#  Project created by QtCreator 2014-10-13T12:01:32
+#
 #  Schulich Delta Hermes
 #  Copyright (C) 2015 University of Calgary Solar Car Team
 #
@@ -25,27 +27,21 @@
 #
 #-------------------------------------------------
 
-QT += core testlib
 TEMPLATE = app
+QT += testlib
+CONFIG += testcase
 
-TARGET = packetUnstufferTest
+LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lgmock
 
-RCC_DIR= ../../../../release
+! include( ../common.pri ) {
+    error( "Couldn't find the common.pri file!" )
+}
 
-DESTDIR = ../../../../release
-OBJECTS_DIR = ../../../../release/.obj
-MOC_DIR = ../../../../release/.moc
-RCC_DIR = ../../../../release/.rcc
-UI_DIR = ../../../../release/.ui
+HEADERS += *.h
+SOURCES += *.cpp
 
-SOURCES += \
-   TestPacketUnstuffer.cpp \
-   ../PacketUnstuffer.cpp \
-   ../../PacketSynchronizer/FakePacketSynchronizer.cpp \
+!win32 {
+    QMAKE_CXXFLAGS += -Werror
+}
 
-HEADERS += \
-   TestPacketUnstuffer.h \
-   ../PacketUnstuffer.h \
-   ../I_PacketUnstuffer.h \
-   ../../PacketSynchronizer/FakePacketSynchronizer.h \
-   ../../PacketSynchronizer/I_PacketSynchronizer.h \
+DESTDIR = ../../build/.tests

@@ -1,5 +1,7 @@
 #-------------------------------------------------
 #
+#  Project created by QtCreator 2014-10-13T12:01:32
+#
 #  Schulich Delta Hermes
 #  Copyright (C) 2015 University of Calgary Solar Car Team
 #
@@ -25,29 +27,16 @@
 #
 #-------------------------------------------------
 
-QT += core testlib
-TEMPLATE = app
+QT += serialport widgets network svg
+CONFIG += c++11 debug console static
 
-TARGET = packetSynchronizerTest
+!win32 {
+   QMAKE_CXXFLAGS += -Werror
+}
 
-RCC_DIR= ../../../../release
+INCLUDEPATH += ..
 
-DESTDIR = ../../../../release
-OBJECTS_DIR = ../../../../release/.obj
-MOC_DIR = ../../../../release/.moc
-RCC_DIR = ../../../../release/.rcc
-UI_DIR = ../../../../release/.ui
-
-SOURCES += \
-   TestPacketSynchronizer.cpp \
-   FakeSerialPort.cpp \
-   ../PacketSynchronizer.cpp \
-   ../../ConnectionService/FakeConnectionService.cpp
-
-HEADERS += \
-   TestPacketSynchronizer.h \
-   FakeSerialPort.h \
-   ../PacketSynchronizer.h \
-   ../I_PacketSynchronizer.h \
-   ../../ConnectionService/I_ConnectionService.h \
-   ../../ConnectionService/FakeConnectionService.h
+OBJECTS_DIR = ../../build/.obj
+MOC_DIR = ../../build/.moc
+RCC_DIR = ../../build/.rcc
+UI_DIR = ../../build/.ui

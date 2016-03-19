@@ -26,7 +26,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QUdpSocket>
 
-#include "../DataLayer/DataContainer.h"
+#include "DataLayer/DataContainer.h"
 #include "CommDeviceControl/RadioCommDevice.h"
 #include "CommDeviceControl/UdpMessageForwarder.h"
 #include "CommunicationContainer.h"
@@ -44,9 +44,9 @@ class CommunicationContainerPrivate
 {
 public:
    CommunicationContainerPrivate(DataContainer& dataContainer)
-   : radioConnectionService(serialPort)
+   : radioCommDevice(serialPort)
    , messageForwarder()
-   , packetSynchronizer(radioConnectionService)
+   , packetSynchronizer(radioCommDevice)
    , packetUnstuffer(packetSynchronizer)
    , packetChecksumChecker(packetUnstuffer)
    , packetDecoder(packetChecksumChecker)
@@ -71,7 +71,7 @@ public:
    }
 
    QSerialPort serialPort;
-   RadioCommDevice radioConnectionService;
+   RadioCommDevice radioCommDevice;
    UdpMessageForwarder messageForwarder;
    PacketSynchronizer packetSynchronizer;
    PacketUnstuffer packetUnstuffer;
@@ -95,7 +95,7 @@ CommunicationContainer::~CommunicationContainer()
 
 I_CommDevice& CommunicationContainer::commDevice()
 {
-   return impl_->radioConnectionService;
+   return impl_->radioCommDevice;
 }
 
 I_PacketSynchronizer& CommunicationContainer::packetSynchronizer()
