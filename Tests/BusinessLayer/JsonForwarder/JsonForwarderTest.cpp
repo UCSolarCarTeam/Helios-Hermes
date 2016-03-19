@@ -26,7 +26,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "BusinessLayer/JsonForwader/JsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/JsonForwarder.h"
 
 using ::testing::_;
 
@@ -42,7 +42,6 @@ protected:
 };
 
 TEST(JsonForwarderTest, batteryDataForwarded){
-
 }
 
 TEST(JsonForwarderTest, faultDataForwarded){

@@ -39,7 +39,7 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lgm
 
 HEADERS += *.h
 SOURCES += \
-	testmain.cpp
+	testmain.cpp \
 	BusinessLayer/JsonForwarder/JsonForwarderTest.cpp
 
 !win32 {
