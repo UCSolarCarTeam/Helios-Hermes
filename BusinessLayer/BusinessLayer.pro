@@ -11,9 +11,12 @@ HEADERS += \
    BusinessContainer.h \
    CommunicationsMonitoringService/CommunicationsMonitoringService.h \
    CommunicationsMonitoringService/I_CommunicationsMonitoringService.h \
+   JsonForwarder/I_JsonForwarder.h \
+   JsonForwarder/JsonForwarder.h \
    LoggerService/LoggerService.h \
 
 SOURCES += \
    BusinessContainer.cpp \
    CommunicationsMonitoringService/CommunicationsMonitoringService.cpp \
+   JsonForwarder/JsonForwarder.cpp \
    LoggerService/LoggerService.cpp \

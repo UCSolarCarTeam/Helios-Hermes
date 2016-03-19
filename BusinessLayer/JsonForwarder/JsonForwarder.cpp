@@ -25,7 +25,6 @@
 #include <QTimer>
 #include <QJsonDocument>
 
-
 #include "DataLayer/BatteryData/I_BatteryData.h"
 #include "DataLayer/FaultsData/I_FaultsData.h"
 #include "DataLayer/PowerData/I_PowerData.h"

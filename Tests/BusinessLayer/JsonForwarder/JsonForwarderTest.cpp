@@ -26,32 +26,76 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <QTest>
+#include <QDebug>
+
 #include "BusinessLayer/JsonForwarder/JsonForwarder.h"
 
+#include "Tests/CommunicationLayer/CommDeviceControl/MockMessageForwarder.h"
+#include "Tests/DataLayer/BatteryData/MockBatteryData.h"
+#include "Tests/DataLayer/FaultsData/MockFaultsData.h"
+#include "Tests/DataLayer/PowerData/MockPowerData.h"
+#include "Tests/DataLayer/VehicleData/MockVehicleData.h"
+
 using ::testing::_;
+using ::testing::AtLeast;
 
-class JsonForwarderTest : public ::testing::Test {
+class JsonForwarderTest : public ::testing::Test 
+{
+
 protected:
-    virtual void SetUp() {
+    MockBatteryData* batteryData_;
+    MockFaultsData* faultsData_;
+    MockPowerData* powerData_;
+    MockVehicleData* vehicleData_;
+    MockMessageForwarder* messageForwarder_;
+    JsonForwarder* jsonForwarder_;
 
+    virtual void SetUp() 
+    {
+
+        batteryData_ = new MockBatteryData();
+        faultsData_ = new MockFaultsData();
+        powerData_ = new MockPowerData();
+        vehicleData_ = new MockVehicleData();
+        messageForwarder_ = new MockMessageForwarder();
+        jsonForwarder_ = new JsonForwarder(*batteryData_,
+                                           *faultsData_,
+                                           *powerData_,
+                                           *vehicleData_,
+                                           *messageForwarder_);
     }
 
-    virtual void TearDown() {
-
+    virtual void QTest() 
+    {
+        delete batteryData_;
+        delete faultsData_;
+        delete powerData_;
+        delete vehicleData_;
+        delete messageForwarder_;
+        delete jsonForwarder_;
     }
 };
 
-TEST(JsonForwarderTest, batteryDataForwarded){
+TEST_F(JsonForwarderTest, batteryDataForwarded) 
+{
+    EXPECT_CALL(*messageForwarder_, forwardData(_))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(10);
+    QTest::qWait(1000);
 }
 
-TEST(JsonForwarderTest, faultDataForwarded){
+TEST_F(JsonForwarderTest, faultDataForwarded) 
+{
 
 }
 
-TEST(JsonForwarderTest, PowerDataForwarded){
+TEST_F(JsonForwarderTest, PowerDataForwarded) 
+{
 
 }
 
-TEST(JsonForwarderTest, vehicleDataForwarded){
+TEST_F(JsonForwarderTest, vehicleDataForwarded) 
+{
 
 }
