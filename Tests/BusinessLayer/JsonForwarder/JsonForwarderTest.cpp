@@ -246,8 +246,34 @@ TEST_F(JsonForwarderTest, faultsDataForwarded)
 
 TEST_F(JsonForwarderTest, powerDataForwarded)
 {
+    double busCurrentAValue = 1.0f;
+    double busVoltageValue = -2.0f;
+    double motorVoltageRealValue = 3.0f;
+    double motorCurrentRealValue = -4.0f;
+    double backEmfImaginaryValue = 5.0f;
+    double dcBusAmpHoursValue = -6.0f;
+    
+    ON_CALL(*powerData_, busCurrentA())
+        .WillByDefault(Return(busCurrentAValue));
+    ON_CALL(*powerData_, busVoltage())
+        .WillByDefault(Return(busVoltageValue));
+    ON_CALL(*powerData_, motorVoltageReal())
+        .WillByDefault(Return(motorVoltageRealValue));
+    ON_CALL(*powerData_, motorCurrentReal())
+        .WillByDefault(Return(motorCurrentRealValue));
+    ON_CALL(*powerData_, backEmfImaginary())
+        .WillByDefault(Return(backEmfImaginaryValue));
+    ON_CALL(*powerData_, dcBusAmpHours())
+        .WillByDefault(Return(dcBusAmpHoursValue));
+
     EXPECT_CALL(*messageForwarder_,
-                forwardData(JsonStringIs("dataType", "Power")))
+                forwardData(AllOf(JsonStringIs("dataType", "Power"),
+                                  JsonDoubleIs("busCurrentA", busCurrentAValue),
+                                  JsonDoubleIs("busVoltage", busVoltageValue),
+                                  JsonDoubleIs("motorVoltageReal", motorVoltageRealValue),
+                                  JsonDoubleIs("motorCurrentReal", motorCurrentRealValue),
+                                  JsonDoubleIs("backEmfImaginary", backEmfImaginaryValue),
+                                  JsonDoubleIs("dcBusAmpHours", dcBusAmpHoursValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
@@ -257,8 +283,42 @@ TEST_F(JsonForwarderTest, powerDataForwarded)
 
 TEST_F(JsonForwarderTest, vehicleDataForwarded)
 {
+    double driverSetSpeedMetersPerSecondValue = 1.1f;
+    double driverSetCurrentValue = -2.2f;
+    double vehicleVelocityMetersPerSecondValue = 3.3f;
+    double motorVelocityRpmValue = -4.4f;
+    double ipmHeatSinkTempValue = 5.5f;
+    double dspBoardTempValue = -6.6f;
+    double receivedErrorCountValue = 8.8f;
+    double transmittedErrorCountValue = -9.9f;
+
+    ON_CALL(*vehicleData_, driverSetSpeedMetersPerSecond())
+        .WillByDefault(Return(driverSetSpeedMetersPerSecondValue)); 
+    ON_CALL(*vehicleData_, driverSetCurrent())
+        .WillByDefault(Return(driverSetCurrentValue)); 
+    ON_CALL(*vehicleData_, vehicleVelocityMetersPerSecond())
+        .WillByDefault(Return(vehicleVelocityMetersPerSecondValue)); 
+    ON_CALL(*vehicleData_, motorVelocityRpm())
+        .WillByDefault(Return(motorVelocityRpmValue)); 
+    ON_CALL(*vehicleData_, ipmHeatSinkTemp())
+        .WillByDefault(Return(ipmHeatSinkTempValue)); 
+    ON_CALL(*vehicleData_, dspBoardTemp())
+        .WillByDefault(Return(dspBoardTempValue)); 
+    ON_CALL(*vehicleData_, receivedErrorCount())
+        .WillByDefault(Return(receivedErrorCountValue)); 
+    ON_CALL(*vehicleData_, transmittedErrorCount())
+        .WillByDefault(Return(transmittedErrorCountValue)); 
+
     EXPECT_CALL(*messageForwarder_,
-                forwardData(JsonStringIs("dataType", "Vehicle")))
+                forwardData(AllOf(JsonStringIs("dataType", "Vehicle"),
+                                  JsonDoubleIs("driverSetSpeedMetersPerSecond", driverSetSpeedMetersPerSecondValue),
+                                  JsonDoubleIs("driverSetCurrent", driverSetCurrentValue),
+                                  JsonDoubleIs("vehicleVelocityMetersPerSecond", vehicleVelocityMetersPerSecondValue),
+                                  JsonDoubleIs("motorVelocityRpm", motorVelocityRpmValue),
+                                  JsonDoubleIs("ipmHeatSinkTemp", ipmHeatSinkTempValue),
+                                  JsonDoubleIs("dspBoardTemp", dspBoardTempValue),
+                                  JsonDoubleIs("receivedErrorCount", receivedErrorCountValue),
+                                  JsonDoubleIs("transmittedErrorCount", transmittedErrorCountValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
