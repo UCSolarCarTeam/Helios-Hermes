@@ -30,6 +30,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QScopedPointer>
 
 #include "BusinessLayer/JsonForwarder/JsonForwarder.h"
 
@@ -47,42 +48,33 @@ using ::testing::AllOf;
 namespace
 {
     const int FORWARD_INTERVAL = 10;
+    const int FORWARD_ITERATIONS = 10;
 }
 
 class JsonForwarderBatteryTest : public ::testing::Test
 {
 
 protected:
-    MockBatteryData* batteryData_;
-    MockFaultsData* faultsData_;
-    MockPowerData* powerData_;
-    MockVehicleData* vehicleData_;
-    MockMessageForwarder* messageForwarder_;
-    JsonForwarder* jsonForwarder_;
+    QScopedPointer<MockBatteryData> batteryData_;
+    QScopedPointer<MockFaultsData> faultsData_;
+    QScopedPointer<MockPowerData> powerData_;
+    QScopedPointer<MockVehicleData> vehicleData_;
+    QScopedPointer<MockMessageForwarder> messageForwarder_;
+    QScopedPointer<JsonForwarder> jsonForwarder_;
 
     virtual void SetUp()
     {
 
-        batteryData_ = new MockBatteryData();
-        faultsData_ = new MockFaultsData();
-        powerData_ = new MockPowerData();
-        vehicleData_ = new MockVehicleData();
-        messageForwarder_ = new MockMessageForwarder();
-        jsonForwarder_ = new JsonForwarder(*batteryData_,
-                                           *faultsData_,
-                                           *powerData_,
-                                           *vehicleData_,
-                                           *messageForwarder_);
-    }
-
-    virtual void TearDown()
-    {
-        delete batteryData_;
-        delete faultsData_;
-        delete powerData_;
-        delete vehicleData_;
-        delete messageForwarder_;
-        delete jsonForwarder_;
+        batteryData_.reste(new MockBatteryData())
+        faultsData_.reste(new MockFaultsData())
+        powerData_.reste(new MockPowerData())
+        vehicleData_.reste(new MockVehicleData())
+        messageForwarder_.reste(new MockMessageForwarder())
+        jsonForwarder_.reste(new JsonForwarder(*batteryData_,
+                                               *faultsData_,
+                                               *powerData_,
+                                               *vehicleData_,
+                                               *messageForwarder_));
     }
 };
 
@@ -120,7 +112,7 @@ TEST_F(JsonForwarderBatteryTest, batteryDataForwarded)
                 forwardData(JsonStringIs("dataType", "Battery")))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
-    QTest::qWait(FORWARD_INTERVAL * 10); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
 TEST_F(JsonForwarderBatteryTest, mod0DataForwarded)
@@ -142,7 +134,7 @@ TEST_F(JsonForwarderBatteryTest, mod0DataForwarded)
                                   JsonNestedDoubleArrayIs("mod0", "cellVoltages", mod0CellVoltagesValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
-    QTest::qWait(FORWARD_INTERVAL * 10); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
 TEST_F(JsonForwarderBatteryTest, mod1DataForwarded)
@@ -164,7 +156,7 @@ TEST_F(JsonForwarderBatteryTest, mod1DataForwarded)
                                   JsonNestedDoubleArrayIs("mod1", "cellVoltages", mod1CellVoltagesValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
-    QTest::qWait(FORWARD_INTERVAL * 10); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
 TEST_F(JsonForwarderBatteryTest, mod2DataForwarded)
@@ -185,7 +177,7 @@ TEST_F(JsonForwarderBatteryTest, mod2DataForwarded)
                                   JsonNestedDoubleArrayIs("mod2", "cellVoltages", mod2CellVoltagesValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
-    QTest::qWait(FORWARD_INTERVAL * 10); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
 TEST_F(JsonForwarderBatteryTest, mod3DataForwarded)
@@ -206,7 +198,7 @@ TEST_F(JsonForwarderBatteryTest, mod3DataForwarded)
                                   JsonNestedDoubleArrayIs("mod3", "cellVoltages", mod3CellVoltagesValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
-    QTest::qWait(FORWARD_INTERVAL * 10); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
 TEST_F(JsonForwarderBatteryTest, batteryBatteryDataForwarded)
@@ -223,6 +215,6 @@ TEST_F(JsonForwarderBatteryTest, batteryBatteryDataForwarded)
                                   JsonDoubleIs("batteryCurrent", batteryCurrentValue))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
-    QTest::qWait(FORWARD_INTERVAL * 10); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
