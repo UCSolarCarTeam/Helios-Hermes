@@ -27,7 +27,9 @@
 #include <gmock/gmock.h>
 
 #include <QTest>
-#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "BusinessLayer/JsonForwarder/JsonForwarder.h"
 
@@ -40,6 +42,7 @@
 using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
+using ::testing::AllOf;
 
 class JsonForwarderBatteryTest : public ::testing::Test 
 {
@@ -53,24 +56,24 @@ protected:
     JsonForwarder* jsonForwarder_;
     const int FORWARD_INTERVAL = 10;
     
-    double mod0_pcb_temperature_value_;
-    double mod0_cell_temperature_value_;
-    QList<double> mod0_cell_voltages_value_;
+    double mod0PcbTemperatureValue_;
+    double mod0CellTemperatureValue_;
+    QList<double> mod0CellVoltagesValue_;
     
-    double mod1_pcb_temperature_value_;
-    double mod1_cell_temperature_value_;
-    QList<double> mod1_cell_voltages_value_;
+    double mod1PcbTemperatureValue_;
+    double mod1CellTemperatureValue_;
+    QList<double> mod1CellVoltagesValue_;
     
-    double mod2_pcb_temperature_value_;
-    double mod2_cell_temperature_value_;
-    QList<double> mod2_cell_voltages_value_;
+    double mod2PcbTemperatureValue_;
+    double mod2CellTemperatureValue_;
+    QList<double> mod2CellVoltagesValue_;
     
-    double mod3_pcb_temperature_value_;
-    double mod3_cell_temperature_value_;
-    QList<double> mod3_cell_voltages_value_;
+    double mod3PcbTemperatureValue_;
+    double mod3CellTemperatureValue_;
+    QList<double> mod3CellVoltagesValue_;
     
-    double battery_voltage_value_;
-    double battery_current_value_;
+    double batteryVoltageValue_;
+    double batteryCurrentValue_;
 
 
     virtual void SetUp() 
@@ -86,56 +89,56 @@ protected:
                                            *powerData_,
                                            *vehicleData_,
                                            *messageForwarder_);
-        mod0_pcb_temperature_value_ = 1.0;
-        mod0_cell_temperature_value_ = 2.0;
-        mod0_cell_voltages_value_ =  {3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f};
+        mod0PcbTemperatureValue_ = 1.0;
+        mod0CellTemperatureValue_ = 2.0;
+        mod0CellVoltagesValue_ =  {3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f};
 
-        mod1_pcb_temperature_value_ = 11.0;
-        mod1_cell_temperature_value_ = 12.0;
-        mod1_cell_voltages_value_ = {13.1f, 13.2f, 13.3f, 13.4f, 13.5f, 13.6f, 13.7f, 13.8f};
+        mod1PcbTemperatureValue_ = 11.0;
+        mod1CellTemperatureValue_ = 12.0;
+        mod1CellVoltagesValue_ = {13.1f, 13.2f, 13.3f, 13.4f, 13.5f, 13.6f, 13.7f, 13.8f};
         
-        mod2_pcb_temperature_value_ = 21.0;
-        mod2_cell_temperature_value_ = 22.0;
-        mod2_cell_voltages_value_ = {23.1f, 23.2f, 23.3f, 23.4f, 23.5f, 23.6f, 23.7f, 23.8f};
+        mod2PcbTemperatureValue_ = 21.0;
+        mod2CellTemperatureValue_ = 22.0;
+        mod2CellVoltagesValue_ = {23.1f, 23.2f, 23.3f, 23.4f, 23.5f, 23.6f, 23.7f, 23.8f};
         
-        mod3_pcb_temperature_value_ = 31.0;
-        mod3_cell_temperature_value_ = 32.0;
-        mod3_cell_voltages_value_ = {33.1f, 33.2f, 33.3f, 33.4f, 33.5f, 33.6f, 33.7f, 33.8f};
+        mod3PcbTemperatureValue_ = 31.0;
+        mod3CellTemperatureValue_ = 32.0;
+        mod3CellVoltagesValue_ = {33.1f, 33.2f, 33.3f, 33.4f, 33.5f, 33.6f, 33.7f, 33.8f};
         
-        battery_voltage_value_ = 41.0;
-        battery_current_value_ = 42.0;
+        batteryVoltageValue_ = 41.0;
+        batteryCurrentValue_ = 42.0;
 
         ON_CALL(*batteryData_, mod0PcbTemperature())
-            .WillByDefault(Return(mod0_pcb_temperature_value_));
+            .WillByDefault(Return(mod0PcbTemperatureValue_));
         ON_CALL(*batteryData_, mod0CellTemperature())
-            .WillByDefault(Return(mod0_cell_temperature_value_));
+            .WillByDefault(Return(mod0CellTemperatureValue_));
         ON_CALL(*batteryData_, mod0CellVoltages())
-            .WillByDefault(Return(mod0_cell_voltages_value_));
+            .WillByDefault(Return(mod0CellVoltagesValue_));
         ON_CALL(*batteryData_, mod1PcbTemperature())
-            .WillByDefault(Return(mod1_pcb_temperature_value_));
+            .WillByDefault(Return(mod1PcbTemperatureValue_));
         ON_CALL(*batteryData_, mod1CellTemperature())
-            .WillByDefault(Return(mod1_cell_temperature_value_));
+            .WillByDefault(Return(mod1CellTemperatureValue_));
         ON_CALL(*batteryData_, mod1CellVoltages())
-            .WillByDefault(Return(mod1_cell_voltages_value_));
+            .WillByDefault(Return(mod1CellVoltagesValue_));
         ON_CALL(*batteryData_, mod2PcbTemperature())
-            .WillByDefault(Return(mod2_pcb_temperature_value_));
+            .WillByDefault(Return(mod2PcbTemperatureValue_));
         ON_CALL(*batteryData_, mod2CellTemperature())
-            .WillByDefault(Return(mod2_cell_temperature_value_));
+            .WillByDefault(Return(mod2CellTemperatureValue_));
         ON_CALL(*batteryData_, mod2CellVoltages())
-            .WillByDefault(Return(mod2_cell_voltages_value_));
+            .WillByDefault(Return(mod2CellVoltagesValue_));
         ON_CALL(*batteryData_, mod3PcbTemperature())
-            .WillByDefault(Return(mod3_pcb_temperature_value_));
+            .WillByDefault(Return(mod3PcbTemperatureValue_));
         ON_CALL(*batteryData_, mod3CellTemperature())
-            .WillByDefault(Return(mod3_cell_temperature_value_));
+            .WillByDefault(Return(mod3CellTemperatureValue_));
         ON_CALL(*batteryData_, mod3CellVoltages())
-            .WillByDefault(Return(mod3_cell_voltages_value_));
+            .WillByDefault(Return(mod3CellVoltagesValue_));
         ON_CALL(*batteryData_, batteryVoltage())
-            .WillByDefault(Return(battery_voltage_value_));
+            .WillByDefault(Return(batteryVoltageValue_));
         ON_CALL(*batteryData_, batteryCurrent())
-            .WillByDefault(Return(battery_current_value_));
+            .WillByDefault(Return(batteryCurrentValue_));
     }
 
-    virtual void QTest() 
+    virtual void TearDown() 
     {
         delete batteryData_;
         delete faultsData_;
@@ -146,9 +149,38 @@ protected:
     }
 };
 
-TEST_F(JsonForwarderBatteryTest, dataForwarded) 
+MATCHER_P2(JsonDoubleIs, key, value, "") {
+    QJsonObject jsonObj = QJsonDocument::fromBinaryData(arg).object();
+    return jsonObj[key].toDouble() == value;
+}
+
+MATCHER_P3(JsonNestedDoubleIs, key1, key2, value, "") {
+    QJsonObject jsonObj = QJsonDocument::fromBinaryData(arg).object();
+    return jsonObj[key1].toObject()[key2].toDouble() == value;
+}
+
+MATCHER_P3(JsonNestedDoubleArrayIs, key1, key2, value, "") {
+    QJsonObject jsonObj = QJsonDocument::fromBinaryData(arg).object();
+    QJsonArray jsonArr = jsonObj[key1].toObject()[key2].toArray();
+    for(int i = 0; i < value.size(); i++)
+    {
+        if(jsonArr[i].toDouble() != value[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+MATCHER_P2(JsonStringIs, key, value, "") {
+    QJsonObject jsonObj = QJsonDocument::fromBinaryData(arg).object();
+    return jsonObj[key].toString() == value;
+}
+
+TEST_F(JsonForwarderBatteryTest, batteryDataForwarded) 
 {
-    EXPECT_CALL(*messageForwarder_, forwardData(_))
+    EXPECT_CALL(*messageForwarder_, 
+                forwardData(JsonStringIs("dataType", "Battery")))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
     QTest::qWait(FORWARD_INTERVAL * 10); //msec
@@ -156,25 +188,55 @@ TEST_F(JsonForwarderBatteryTest, dataForwarded)
 
 TEST_F(JsonForwarderBatteryTest, mod0DataForwarded) 
 {
-
+    EXPECT_CALL(*messageForwarder_, 
+                forwardData(AllOf(JsonNestedDoubleIs("mod0", "pcbTemperature", mod0PcbTemperatureValue_),
+                                  JsonNestedDoubleIs("mod0", "cellTemperature", mod0CellTemperatureValue_),
+                                  JsonNestedDoubleArrayIs("mod0", "cellVoltages", mod0CellVoltagesValue_))))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * 10); //msec    
 }
 
 TEST_F(JsonForwarderBatteryTest, mod1DataForwarded) 
 {
-
+    EXPECT_CALL(*messageForwarder_, 
+                forwardData(AllOf(JsonNestedDoubleIs("mod1", "pcbTemperature", mod1PcbTemperatureValue_),
+                                  JsonNestedDoubleIs("mod1", "cellTemperature", mod1CellTemperatureValue_),
+                                  JsonNestedDoubleArrayIs("mod1", "cellVoltages", mod1CellVoltagesValue_))))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * 10); //msec    
 }
 
 TEST_F(JsonForwarderBatteryTest, mod2DataForwarded) 
 {
-
+    EXPECT_CALL(*messageForwarder_, 
+                forwardData(AllOf(JsonNestedDoubleIs("mod2", "pcbTemperature", mod2PcbTemperatureValue_),
+                                  JsonNestedDoubleIs("mod2", "cellTemperature", mod2CellTemperatureValue_),
+                                  JsonNestedDoubleArrayIs("mod2", "cellVoltages", mod2CellVoltagesValue_))))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * 10); //msec    
 }
 
 TEST_F(JsonForwarderBatteryTest, mod3DataForwarded) 
 {
-
+    EXPECT_CALL(*messageForwarder_, 
+                forwardData(AllOf(JsonNestedDoubleIs("mod3", "pcbTemperature", mod3PcbTemperatureValue_),
+                                  JsonNestedDoubleIs("mod3", "cellTemperature", mod3CellTemperatureValue_),
+                                  JsonNestedDoubleArrayIs("mod3", "cellVoltages", mod3CellVoltagesValue_))))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * 10); //msec    
 }
 
-TEST_F(JsonForwarderBatteryTest, batteryDataForwarded) 
+TEST_F(JsonForwarderBatteryTest, batteryBatteryDataForwarded) 
 {
-
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(AllOf(JsonDoubleIs("batteryVoltage", batteryVoltageValue_),
+                                  JsonDoubleIs("batteryCurrent", batteryCurrentValue_))))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * 10); //msec    
 }
+
