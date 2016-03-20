@@ -45,13 +45,22 @@ using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::AllOf;
 
+/**************************
+ * SECTIONS               *
+ **************************
+ * JSON_MATCHERS          *
+ * BATTERY_DATA_TESTS     *
+ * FAULT_DATA_TESTS       *
+ * POWER_DATA_TESTS       *
+ * VEHICLE_DATA_TESTS     *
+ **************************/
 namespace
 {
     const int FORWARD_INTERVAL = 10;
     const int FORWARD_ITERATIONS = 10;
 }
 
-class JsonForwarderBatteryTest : public ::testing::Test
+class JsonForwarderTest : public ::testing::Test
 {
 
 protected:
@@ -65,18 +74,20 @@ protected:
     virtual void SetUp()
     {
 
-        batteryData_.reste(new MockBatteryData())
-        faultsData_.reste(new MockFaultsData())
-        powerData_.reste(new MockPowerData())
-        vehicleData_.reste(new MockVehicleData())
-        messageForwarder_.reste(new MockMessageForwarder())
-        jsonForwarder_.reste(new JsonForwarder(*batteryData_,
+        batteryData_.reset(new MockBatteryData());
+        faultsData_.reset(new MockFaultsData());
+        powerData_.reset(new MockPowerData());
+        vehicleData_.reset(new MockVehicleData());
+        messageForwarder_.reset(new MockMessageForwarder());
+        jsonForwarder_.reset(new JsonForwarder(*batteryData_,
                                                *faultsData_,
                                                *powerData_,
                                                *vehicleData_,
                                                *messageForwarder_));
     }
 };
+
+/****** JSON_ MATCHERS ******/ 
 
 MATCHER_P2(JsonDoubleIs, key, value, "") {
     QJsonObject jsonObj = QJsonDocument::fromBinaryData(arg).object();
@@ -106,7 +117,9 @@ MATCHER_P2(JsonStringIs, key, value, "") {
     return jsonObj[key].toString() == value;
 }
 
-TEST_F(JsonForwarderBatteryTest, batteryDataForwarded)
+/****** BATTERY_DATA_TESTS ******/ 
+
+TEST_F(JsonForwarderTest, batteryDataForwarded)
 {
     EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs("dataType", "Battery")))
@@ -115,7 +128,7 @@ TEST_F(JsonForwarderBatteryTest, batteryDataForwarded)
     QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
-TEST_F(JsonForwarderBatteryTest, mod0DataForwarded)
+TEST_F(JsonForwarderTest, batteryMod0DataForwarded)
 {
 
     double mod0PcbTemperatureValue = 1.0;
@@ -137,7 +150,7 @@ TEST_F(JsonForwarderBatteryTest, mod0DataForwarded)
     QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
-TEST_F(JsonForwarderBatteryTest, mod1DataForwarded)
+TEST_F(JsonForwarderTest, batteryMod1DataForwarded)
 {
     double mod1PcbTemperatureValue = 11.0;
     double mod1CellTemperatureValue = 12.0;
@@ -159,7 +172,7 @@ TEST_F(JsonForwarderBatteryTest, mod1DataForwarded)
     QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
-TEST_F(JsonForwarderBatteryTest, mod2DataForwarded)
+TEST_F(JsonForwarderTest, batteryMod2DataForwarded)
 {
     double mod2PcbTemperatureValue = 21.0;
     double mod2CellTemperatureValue = 22.0;
@@ -180,7 +193,7 @@ TEST_F(JsonForwarderBatteryTest, mod2DataForwarded)
     QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
-TEST_F(JsonForwarderBatteryTest, mod3DataForwarded)
+TEST_F(JsonForwarderTest, batteryMod3DataForwarded)
 {
     double mod3PcbTemperatureValue = 31.0;
     double mod3CellTemperatureValue = 32.0;
@@ -201,7 +214,7 @@ TEST_F(JsonForwarderBatteryTest, mod3DataForwarded)
     QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
-TEST_F(JsonForwarderBatteryTest, batteryBatteryDataForwarded)
+TEST_F(JsonForwarderTest, batteryBatteryDataForwarded)
 {
     double batteryVoltageValue = 41.0;
     double batteryCurrentValue = 42.0;
@@ -218,3 +231,26 @@ TEST_F(JsonForwarderBatteryTest, batteryBatteryDataForwarded)
     QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
 }
 
+/****** FAULTS_DATA_TESTS ******/ 
+
+TEST_F(JsonForwarderTest, faultsDataForwarded)
+{
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(JsonStringIs("dataType", "Faults")))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
+}
+
+TEST_F(JsonForwarderTest, faultsMotorFaultsForwardedDataForwarded)
+{
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(JsonStringIs("dataType", "Faults")))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * FORWARD_ITERATIONS); //msec
+}
+
+/****** POWER_DATA_TESTS ******/ 
+
+/****** VEHICLE_DATA_TESTS ******/ 
