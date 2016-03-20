@@ -39,8 +39,9 @@
 
 using ::testing::_;
 using ::testing::AtLeast;
+using ::testing::Return;
 
-class JsonForwarderTest : public ::testing::Test 
+class JsonForwarderVehicleTest : public ::testing::Test 
 {
 
 protected:
@@ -50,6 +51,8 @@ protected:
     MockVehicleData* vehicleData_;
     MockMessageForwarder* messageForwarder_;
     JsonForwarder* jsonForwarder_;
+    const int FORWARD_INTERVAL = 10;
+    
 
     virtual void SetUp() 
     {
@@ -66,7 +69,7 @@ protected:
                                            *messageForwarder_);
     }
 
-    virtual void QTest() 
+    virtual void TearDown() 
     {
         delete batteryData_;
         delete faultsData_;
@@ -77,25 +80,34 @@ protected:
     }
 };
 
-TEST_F(JsonForwarderTest, batteryDataForwarded) 
+TEST_F(JsonForwarderVehicleTest, dataForwarded) 
 {
     EXPECT_CALL(*messageForwarder_, forwardData(_))
         .Times(AtLeast(1));
-    jsonForwarder_->start(10);
-    QTest::qWait(1000);
+    jsonForwarder_->start(FORWARD_INTERVAL); //msec
+    QTest::qWait(FORWARD_INTERVAL * 10); //msec
 }
 
-TEST_F(JsonForwarderTest, faultDataForwarded) 
+TEST_F(JsonForwarderVehicleTest, batteryDataForwarded) 
+{
+    EXPECT_CALL(*messageForwarder_, forwardData(_))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL);
+    QTest::qWait(FORWARD_INTERVAL * 10);
+
+}
+
+TEST_F(JsonForwarderVehicleTest, faultDataForwarded) 
 {
 
 }
 
-TEST_F(JsonForwarderTest, PowerDataForwarded) 
+TEST_F(JsonForwarderVehicleTest, PowerDataForwarded) 
 {
 
 }
 
-TEST_F(JsonForwarderTest, vehicleDataForwarded) 
+TEST_F(JsonForwarderVehicleTest, vehicleDataForwarded) 
 {
 
 }
