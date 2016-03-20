@@ -56,15 +56,19 @@ protected:
     double mod0_pcb_temperature_value_;
     double mod0_cell_temperature_value_;
     QList<double> mod0_cell_voltages_value_;
+    
     double mod1_pcb_temperature_value_;
     double mod1_cell_temperature_value_;
     QList<double> mod1_cell_voltages_value_;
+    
     double mod2_pcb_temperature_value_;
     double mod2_cell_temperature_value_;
     QList<double> mod2_cell_voltages_value_;
+    
     double mod3_pcb_temperature_value_;
     double mod3_cell_temperature_value_;
     QList<double> mod3_cell_voltages_value_;
+    
     double battery_voltage_value_;
     double battery_current_value_;
 
@@ -84,7 +88,7 @@ protected:
                                            *messageForwarder_);
         mod0_pcb_temperature_value_ = 1.0;
         mod0_cell_temperature_value_ = 2.0;
-        mod0_cell_voltages_value_ = {3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f};
+        mod0_cell_voltages_value_ =  {3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f};
 
         mod1_pcb_temperature_value_ = 11.0;
         mod1_cell_temperature_value_ = 12.0;
@@ -131,7 +135,7 @@ protected:
             .WillByDefault(Return(battery_current_value_));
     }
 
-    virtual void TearDown() 
+    virtual void QTest() 
     {
         delete batteryData_;
         delete faultsData_;
@@ -150,27 +154,27 @@ TEST_F(JsonForwarderBatteryTest, dataForwarded)
     QTest::qWait(FORWARD_INTERVAL * 10); //msec
 }
 
+TEST_F(JsonForwarderBatteryTest, mod0DataForwarded) 
+{
+
+}
+
+TEST_F(JsonForwarderBatteryTest, mod1DataForwarded) 
+{
+
+}
+
+TEST_F(JsonForwarderBatteryTest, mod2DataForwarded) 
+{
+
+}
+
+TEST_F(JsonForwarderBatteryTest, mod3DataForwarded) 
+{
+
+}
+
 TEST_F(JsonForwarderBatteryTest, batteryDataForwarded) 
 {
-    EXPECT_CALL(*messageForwarder_, forwardData(_))
-        .Times(AtLeast(1));
-    jsonForwarder_->start(FORWARD_INTERVAL);
-    QTest::qWait(FORWARD_INTERVAL * 10);
 
 }
-
-TEST_F(JsonForwarderBatteryTest, faultDataForwarded) 
-{
-
-}
-
-TEST_F(JsonForwarderBatteryTest, PowerDataForwarded) 
-{
-
-}
-
-TEST_F(JsonForwarderBatteryTest, vehicleDataForwarded) 
-{
-
-}
- 

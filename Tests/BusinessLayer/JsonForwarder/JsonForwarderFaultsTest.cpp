@@ -87,27 +87,3 @@ TEST_F(JsonForwarderFaultsTest, dataForwarded)
     jsonForwarder_->start(FORWARD_INTERVAL); //msec
     QTest::qWait(FORWARD_INTERVAL * 10); //msec
 }
-
-TEST_F(JsonForwarderFaultsTest, batteryDataForwarded) 
-{
-    EXPECT_CALL(*messageForwarder_, forwardData(_))
-        .Times(AtLeast(1));
-    jsonForwarder_->start(FORWARD_INTERVAL);
-    QTest::qWait(FORWARD_INTERVAL * 10);
-
-}
-
-TEST_F(JsonForwarderFaultsTest, faultDataForwarded) 
-{
-
-}
-
-TEST_F(JsonForwarderFaultsTest, PowerDataForwarded) 
-{
-
-}
-
-TEST_F(JsonForwarderFaultsTest, vehicleDataForwarded) 
-{
-
-}
