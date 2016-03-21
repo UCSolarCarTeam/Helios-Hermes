@@ -185,8 +185,145 @@ TEST_F(JsonForwarderTest, batteryDataForwarded)
 
 TEST_F(JsonForwarderTest, faultsDataForwarded)
 {
+    quint8 mockMotorFaultPattern = 0xaa; // 0xaa == 1010 1010 in binary
+    quint8 mockLimitFlagPattern = 0xaa; // 0xaa == 1010 1010 in binary
+    quint16 mockBatteryFaultPattern = 0xaaaa; // 0xaaaa == 1010 1010 1010 1010 in binary
+    
+    MotorFaults motorOneFaultsValue = MotorFaults(mockMotorFaultPattern);
+    LimitFlags motorOneLimitFlagsValue = LimitFlags(mockLimitFlagPattern);
+    MotorFaults motorTwoFaultsValue = MotorFaults(mockMotorFaultPattern);
+    LimitFlags motorTwoLimitFlagsValue = LimitFlags(mockLimitFlagPattern);
+    BatteryFaults batteryFaultsValue = BatteryFaults(mockBatteryFaultPattern);
+    ON_CALL(*faultsData_, motorOneFaults())
+        .WillByDefault(Return(motorOneFaultsValue));
+    ON_CALL(*faultsData_, motorOneLimitFlags())
+        .WillByDefault(Return(motorOneLimitFlagsValue));
+    ON_CALL(*faultsData_, motorTwoFaults())
+        .WillByDefault(Return(motorTwoFaultsValue));
+    ON_CALL(*faultsData_, motorTwoLimitFlags())
+        .WillByDefault(Return(motorTwoLimitFlagsValue));
+    ON_CALL(*faultsData_, batteryFaults())
+        .WillByDefault(Return(batteryFaultsValue));
+
+
     EXPECT_CALL(*messageForwarder_,
-                forwardData(JsonStringIs("dataType", "Faults")))
+                forwardData(AllOf(JsonStringIs("dataType", "Faults"),
+                                  JsonNestedBoolIs("motorOneFaults", "hardwareOverCurrent", false),
+                                  JsonNestedBoolIs("motorOneFaults", "softwareOverCurrent", true),
+                                  JsonNestedBoolIs("motorOneFaults", "dcBusOverVoltage", false),
+                                  JsonNestedBoolIs("motorOneFaults", "badMotorPositionHallSequence", true),
+                                  JsonNestedBoolIs("motorOneFaults", "watchdogCausedLastReset", false),
+                                  JsonNestedBoolIs("motorOneFaults", "configReadError", true),
+                                  JsonNestedBoolIs("motorOneFaults", "railUnderVoltageLockOut", false),
+                                  JsonNestedBoolIs("motorOneFaults", "desaturationFault", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "outputVoltagePwmLimit", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "motorCurrentLimit", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "velocityLimit", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "busCurrentLimit", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "busVoltageUpperLimit", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "busVoltageLowerLimit", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "ipmOrMotorTelemetryLimit", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "hardwareOverCurrent", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "softwareOverCurrent", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "dcBusOverVoltage", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "badMotorPositionHallSequence", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "watchdogCausedLastReset", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "configReadError", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "railUnderVoltageLockOut", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "desaturationFault", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "outputVoltagePwmLimit", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "motorCurrentLimit", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "velocityLimit", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "busCurrentLimit", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "busVoltageUpperLimit", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "busVoltageLowerLimit", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "ipmOrMotorTelemetryLimit", false),
+                                  JsonNestedBoolIs("batteryFaults", "cellOverVoltage", false),
+                                  JsonNestedBoolIs("batteryFaults", "cellUnderVoltage", true),
+                                  JsonNestedBoolIs("batteryFaults", "cellOverTemperature", false),
+                                  JsonNestedBoolIs("batteryFaults", "measurementUntrusted", true),
+                                  JsonNestedBoolIs("batteryFaults", "cmuCommTimeout", false),
+                                  JsonNestedBoolIs("batteryFaults", "vehicleCommTimeout", true),
+                                  JsonNestedBoolIs("batteryFaults", "bmuIsInSetupMode", false),
+                                  JsonNestedBoolIs("batteryFaults", "cmuCanBusPowerStatus", true),
+                                  JsonNestedBoolIs("batteryFaults", "packIsolationTestFailure", false),
+                                  JsonNestedBoolIs("batteryFaults", "softwareOverCurrentMeasured", true),
+                                  JsonNestedBoolIs("batteryFaults", "canSupplyIsLow", false),
+                                  JsonNestedBoolIs("batteryFaults", "contactorIsStuck", true),
+                                  JsonNestedBoolIs("batteryFaults", "cmuDetectedExtraCellPresent", false))))
+        .Times(AtLeast(1));
+    jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
+}
+
+TEST_F(JsonForwarderTest, invertedFaultsDataForwarded)
+{
+    quint8 mockInvertedMotorFaultPattern = 0x55; // 0x55 == 0101 0101 in binary
+    quint8 mockInvertedLimitFlagPattern = 0x55; // 0x55 == 0101 0101 in binary
+    quint16 mockInvertedBatteryFaultPattern = 0x5555; // 0x5555 == 0101 0101 0101 0101 in binary
+    
+    MotorFaults motorOneFaultsValue = MotorFaults(mockInvertedMotorFaultPattern);
+    LimitFlags motorOneLimitFlagsValue = LimitFlags(mockInvertedLimitFlagPattern);
+    MotorFaults motorTwoFaultsValue = MotorFaults(mockInvertedMotorFaultPattern);
+    LimitFlags motorTwoLimitFlagsValue = LimitFlags(mockInvertedLimitFlagPattern);
+    BatteryFaults batteryFaultsValue = BatteryFaults(mockInvertedBatteryFaultPattern);
+    ON_CALL(*faultsData_, motorOneFaults())
+        .WillByDefault(Return(motorOneFaultsValue));
+    ON_CALL(*faultsData_, motorOneLimitFlags())
+        .WillByDefault(Return(motorOneLimitFlagsValue));
+    ON_CALL(*faultsData_, motorTwoFaults())
+        .WillByDefault(Return(motorTwoFaultsValue));
+    ON_CALL(*faultsData_, motorTwoLimitFlags())
+        .WillByDefault(Return(motorTwoLimitFlagsValue));
+    ON_CALL(*faultsData_, batteryFaults())
+        .WillByDefault(Return(batteryFaultsValue));
+
+
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(AllOf(JsonStringIs("dataType", "Faults"),
+                                  JsonNestedBoolIs("motorOneFaults", "hardwareOverCurrent", true),
+                                  JsonNestedBoolIs("motorOneFaults", "softwareOverCurrent", false),
+                                  JsonNestedBoolIs("motorOneFaults", "dcBusOverVoltage", true),
+                                  JsonNestedBoolIs("motorOneFaults", "badMotorPositionHallSequence", false),
+                                  JsonNestedBoolIs("motorOneFaults", "watchdogCausedLastReset", true),
+                                  JsonNestedBoolIs("motorOneFaults", "configReadError", false),
+                                  JsonNestedBoolIs("motorOneFaults", "railUnderVoltageLockOut", true),
+                                  JsonNestedBoolIs("motorOneFaults", "desaturationFault", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "outputVoltagePwmLimit", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "motorCurrentLimit", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "velocityLimit", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "busCurrentLimit", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "busVoltageUpperLimit", true),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "busVoltageLowerLimit", false),
+                                  JsonNestedBoolIs("motorOneLimitFlags", "ipmOrMotorTelemetryLimit", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "hardwareOverCurrent", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "softwareOverCurrent", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "dcBusOverVoltage", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "badMotorPositionHallSequence", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "watchdogCausedLastReset", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "configReadError", false),
+                                  JsonNestedBoolIs("motorTwoFaults", "railUnderVoltageLockOut", true),
+                                  JsonNestedBoolIs("motorTwoFaults", "desaturationFault", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "outputVoltagePwmLimit", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "motorCurrentLimit", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "velocityLimit", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "busCurrentLimit", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "busVoltageUpperLimit", true),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "busVoltageLowerLimit", false),
+                                  JsonNestedBoolIs("motorTwoLimitFlags", "ipmOrMotorTelemetryLimit", true),
+                                  JsonNestedBoolIs("batteryFaults", "cellOverVoltage", true),
+                                  JsonNestedBoolIs("batteryFaults", "cellUnderVoltage", false),
+                                  JsonNestedBoolIs("batteryFaults", "cellOverTemperature", true),
+                                  JsonNestedBoolIs("batteryFaults", "measurementUntrusted", false),
+                                  JsonNestedBoolIs("batteryFaults", "cmuCommTimeout", true),
+                                  JsonNestedBoolIs("batteryFaults", "vehicleCommTimeout", false),
+                                  JsonNestedBoolIs("batteryFaults", "bmuIsInSetupMode", true),
+                                  JsonNestedBoolIs("batteryFaults", "cmuCanBusPowerStatus", false),
+                                  JsonNestedBoolIs("batteryFaults", "packIsolationTestFailure", true),
+                                  JsonNestedBoolIs("batteryFaults", "softwareOverCurrentMeasured", false),
+                                  JsonNestedBoolIs("batteryFaults", "canSupplyIsLow", true),
+                                  JsonNestedBoolIs("batteryFaults", "contactorIsStuck", false),
+                                  JsonNestedBoolIs("batteryFaults", "cmuDetectedExtraCellPresent", true))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
