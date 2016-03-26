@@ -57,55 +57,55 @@ class JsonForwarderTest : public ::testing::Test
 {
 
 protected:
-    QScopedPointer<NiceMock<MockBatteryData> > batteryData_;
-    QScopedPointer<NiceMock<MockFaultsData> > faultsData_;
-    QScopedPointer<NiceMock<MockPowerData> > powerData_;
-    QScopedPointer<NiceMock<MockVehicleData> > vehicleData_;
-    QScopedPointer<NiceMock<MockMessageForwarder> > messageForwarder_;
-    QScopedPointer<JsonForwarder> jsonForwarder_;
+    NiceMock<MockBatteryData> batteryData_;
+    NiceMock<MockFaultsData> faultsData_;
+    NiceMock<MockPowerData> powerData_;
+    NiceMock<MockVehicleData> vehicleData_;
+    MockMessageForwarder messageForwarder_;
+    JsonForwarder jsonForwarder_;
 
     virtual void SetUp()
     {
-        batteryData_.reset(static_cast<NiceMock<MockBatteryData>*> (new MockBatteryData()));
-        faultsData_.reset(static_cast<NiceMock<MockFaultsData>*> (new MockFaultsData()));
-        powerData_.reset(static_cast<NiceMock<MockPowerData>*> (new MockPowerData()));
-        vehicleData_.reset(static_cast<NiceMock<MockVehicleData>*> (new MockVehicleData()));
-        messageForwarder_.reset(static_cast<NiceMock<MockMessageForwarder>*> (new MockMessageForwarder()));
-        jsonForwarder_.reset(new JsonForwarder(*batteryData_,
-                                               *faultsData_,
-                                               *powerData_,
-                                               *vehicleData_,
-                                               *messageForwarder_));
 
+        batteryData_ = MockBatteryData();
+        faultsData_ = MockFaultsData();
+        powerData_ = MockPowerData();
+        vehicleData_ = MockVehicleData();
+        messageForwarder_ = MockMessageForwarder();
+        jsonForwarder_ = JsonForwarder(batteryData_,
+                                       faultsData_,
+                                       powerData_,
+                                       vehicleData_,
+                                       messageForwarder_)   ;
         QList<double> emptyList = {0, 0, 0, 0, 0, 0, 0, 0};
-        EXPECT_CALL(*batteryData_, mod0PcbTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod0CellTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod0CellVoltages())
-            .WillRepeatedly(Return(emptyList));
-        EXPECT_CALL(*batteryData_, mod1PcbTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod1CellTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod1CellVoltages())
-            .WillRepeatedly(Return(emptyList));
-        EXPECT_CALL(*batteryData_, mod2PcbTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod2CellTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod2CellVoltages())
-            .WillRepeatedly(Return(emptyList));
-        EXPECT_CALL(*batteryData_, mod3PcbTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod3CellTemperature())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, mod3CellVoltages())
-            .WillRepeatedly(Return(emptyList));
-        EXPECT_CALL(*batteryData_, batteryVoltage())
-            .WillRepeatedly(Return(0));
-        EXPECT_CALL(*batteryData_, batteryCurrent())
-            .WillRepeatedly(Return(0));
+        ON_CALL(batteryData_, mod0PcbTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod0CellTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod0CellVoltages())
+            .WillByDefault(Return(emptyList));
+        ON_CALL(batteryData_, mod1PcbTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod1CellTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod1CellVoltages())
+            .WillByDefault(Return(emptyList));
+        ON_CALL(batteryData_, mod2PcbTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod2CellTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod2CellVoltages())
+            .WillByDefault(Return(emptyList));
+        ON_CALL(batteryData_, mod3PcbTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod3CellTemperature())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, mod3CellVoltages())
+            .WillByDefault(Return(emptyList));
+        ON_CALL(batteryData_, batteryVoltage())
+            .WillByDefault(Return(0));
+        ON_CALL(batteryData_, batteryCurrent())
+            .WillByDefault(Return(0));
     }
 };
 
@@ -145,7 +145,7 @@ MATCHER_P3(JsonNestedBoolIs, key1, key2, value, "") {
 
 TEST_F(JsonForwarderTest, batteryDataTypeForwarded)
 {
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(JsonStringIs("dataType", "Battery")))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
@@ -161,14 +161,14 @@ TEST_F(JsonForwarderTest, batteryMod0DataForwarded)
     QList<double> mod0CellVoltagesDouble =  {3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f};
     QList<QString> mod0CellVoltagesString =  {"3.10", "3.20", "3.30", "3.40", "3.50", "3.60", "3.70", "3.80"};
 
-    EXPECT_CALL(*batteryData_, mod0PcbTemperature())
-        .WillRepeatedly(Return(mod0PcbTemperatureDouble_));
-    EXPECT_CALL(*batteryData_, mod0CellTemperature())
-        .WillRepeatedly(Return(mod0CellTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod0CellVoltages())
-        .WillRepeatedly(Return(mod0CellVoltagesDouble));
+    ON_CALL(batteryData_, mod0PcbTemperature())
+        .WillByDefault(Return(mod0PcbTemperatureDouble_));
+    ON_CALL(batteryData_, mod0CellTemperature())
+        .WillByDefault(Return(mod0CellTemperatureDouble));
+    ON_CALL(batteryData_, mod0CellVoltages())
+        .WillByDefault(Return(mod0CellVoltagesDouble));
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonNestedStringIs("mod0", "pcbTemperature", mod0PcbTemperatureString),
                                   JsonNestedStringIs("mod0", "cellTemperature", mod0CellTemperatureString),
                                   JsonNestedStringArrayIs("mod0", "cellVoltages", mod0CellVoltagesString))))
@@ -186,14 +186,14 @@ TEST_F(JsonForwarderTest, batteryMod1DataForwarded)
     QList<double> mod1CellVoltagesDouble = {13.1f, 13.2f, 13.3f, 13.4f, 13.5f, 13.6f, 13.7f, 13.8f};
     QList<QString> mod1CellVoltagesString = {"13.10", "13.20", "13.30", "13.40", "13.50", "13.60", "13.70", "13.80"};
 
-    EXPECT_CALL(*batteryData_, mod1PcbTemperature())
-        .WillRepeatedly(Return(mod1PcbTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod1CellTemperature())
-        .WillRepeatedly(Return(mod1CellTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod1CellVoltages())
-        .WillRepeatedly(Return(mod1CellVoltagesDouble));
+    ON_CALL(batteryData_, mod1PcbTemperature())
+        .WillByDefault(Return(mod1PcbTemperatureDouble));
+    ON_CALL(batteryData_, mod1CellTemperature())
+        .WillByDefault(Return(mod1CellTemperatureDouble));
+    ON_CALL(batteryData_, mod1CellVoltages())
+        .WillByDefault(Return(mod1CellVoltagesDouble));
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonNestedStringIs("mod1", "pcbTemperature", mod1PcbTemperatureString),
                                   JsonNestedStringIs("mod1", "cellTemperature", mod1CellTemperatureString),
                                   JsonNestedStringArrayIs("mod1", "cellVoltages", mod1CellVoltagesString))))
@@ -211,14 +211,14 @@ TEST_F(JsonForwarderTest, batteryMod2DataForwarded)
     QList<double> mod2CellVoltagesDouble = {23.1f, 23.2f, 23.3f, 23.4f, 23.5f, 23.6f, 23.7f, 23.8f};
     QList<QString> mod2CellVoltagesString = {"23.10", "23.20", "23.30", "23.40", "23.50", "23.60", "23.70", "23.80"};
 
-    EXPECT_CALL(*batteryData_, mod2PcbTemperature())
-        .WillRepeatedly(Return(mod2PcbTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod2CellTemperature())
-        .WillRepeatedly(Return(mod2CellTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod2CellVoltages())
-        .WillRepeatedly(Return(mod2CellVoltagesDouble));
+    ON_CALL(batteryData_, mod2PcbTemperature())
+        .WillByDefault(Return(mod2PcbTemperatureDouble));
+    ON_CALL(batteryData_, mod2CellTemperature())
+        .WillByDefault(Return(mod2CellTemperatureDouble));
+    ON_CALL(batteryData_, mod2CellVoltages())
+        .WillByDefault(Return(mod2CellVoltagesDouble));
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonNestedStringIs("mod2", "pcbTemperature", mod2PcbTemperatureString),
                                   JsonNestedStringIs("mod2", "cellTemperature", mod2CellTemperatureString),
                                   JsonNestedStringArrayIs("mod2", "cellVoltages", mod2CellVoltagesString))))
@@ -236,14 +236,14 @@ TEST_F(JsonForwarderTest, batteryMod3DataForwarded)
     QList<double> mod3CellVoltagesDouble = {33.1f, 33.2f, 33.3f, 33.4f, 33.5f, 33.6f, 33.7f, 33.8f};
     QList<QString> mod3CellVoltagesString = {"33.10", "33.20", "33.30", "33.40", "33.50", "33.60", "33.70", "33.80"};
     
-    EXPECT_CALL(*batteryData_, mod3PcbTemperature())
-        .WillRepeatedly(Return(mod3PcbTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod3CellTemperature())
-        .WillRepeatedly(Return(mod3CellTemperatureDouble));
-    EXPECT_CALL(*batteryData_, mod3CellVoltages())
-        .WillRepeatedly(Return(mod3CellVoltagesDouble));
+    ON_CALL(batteryData_, mod3PcbTemperature())
+        .WillByDefault(Return(mod3PcbTemperatureDouble));
+    ON_CALL(batteryData_, mod3CellTemperature())
+        .WillByDefault(Return(mod3CellTemperatureDouble));
+    ON_CALL(batteryData_, mod3CellVoltages())
+        .WillByDefault(Return(mod3CellVoltagesDouble));
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonNestedStringIs("mod3", "pcbTemperature", mod3PcbTemperatureString),
                                   JsonNestedStringIs("mod3", "cellTemperature", mod3CellTemperatureString),
                                   JsonNestedStringArrayIs("mod3", "cellVoltages", mod3CellVoltagesString))))
@@ -259,12 +259,12 @@ TEST_F(JsonForwarderTest, batteryInternalDataForwarded)
     double batteryCurrentDouble = 42.0;
     QString batteryCurrentString = "42.00";
 
-    EXPECT_CALL(*batteryData_, batteryVoltage())
-        .WillRepeatedly(Return(batteryVoltageDouble));
-    EXPECT_CALL(*batteryData_, batteryCurrent())
-        .WillRepeatedly(Return(batteryCurrentDouble));   
+    ON_CALL(batteryData_, batteryVoltage())
+        .WillByDefault(Return(batteryVoltageDouble));
+    ON_CALL(batteryData_, batteryCurrent())
+        .WillByDefault(Return(batteryCurrentDouble));   
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonStringIs("batteryVoltage", batteryVoltageString),
                                   JsonStringIs("batteryCurrent", batteryCurrentString))))
         .Times(AtLeast(1));
@@ -284,19 +284,19 @@ TEST_F(JsonForwarderTest, faultsDataForwarded)
     MotorFaults motorTwoFaultsValue = MotorFaults(mockMotorFaultPattern);
     LimitFlags motorTwoLimitFlagsValue = LimitFlags(mockLimitFlagPattern);
     BatteryFaults batteryFaultsValue = BatteryFaults(mockBatteryFaultPattern);
-    EXPECT_CALL(*faultsData_, motorOneFaults())
-        .WillRepeatedly(Return(motorOneFaultsValue));
-    EXPECT_CALL(*faultsData_, motorOneLimitFlags())
-        .WillRepeatedly(Return(motorOneLimitFlagsValue));
-    EXPECT_CALL(*faultsData_, motorTwoFaults())
-        .WillRepeatedly(Return(motorTwoFaultsValue));
-    EXPECT_CALL(*faultsData_, motorTwoLimitFlags())
-        .WillRepeatedly(Return(motorTwoLimitFlagsValue));
-    EXPECT_CALL(*faultsData_, batteryFaults())
-        .WillRepeatedly(Return(batteryFaultsValue));
+    ON_CALL(*faultsData_, motorOneFaults())
+        .WillByDefault(Return(motorOneFaultsValue));
+    ON_CALL(*faultsData_, motorOneLimitFlags())
+        .WillByDefault(Return(motorOneLimitFlagsValue));
+    ON_CALL(*faultsData_, motorTwoFaults())
+        .WillByDefault(Return(motorTwoFaultsValue));
+    ON_CALL(*faultsData_, motorTwoLimitFlags())
+        .WillByDefault(Return(motorTwoLimitFlagsValue));
+    ON_CALL(*faultsData_, batteryFaults())
+        .WillByDefault(Return(batteryFaultsValue));
 
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonStringIs("dataType", "Faults"),
                                   JsonNestedBoolIs("motorOneFaults", "hardwareOverCurrent", false),
                                   JsonNestedBoolIs("motorOneFaults", "softwareOverCurrent", true),
@@ -357,19 +357,19 @@ TEST_F(JsonForwarderTest, invertedFaultsDataForwarded)
     MotorFaults motorTwoFaultsValue = MotorFaults(mockInvertedMotorFaultPattern);
     LimitFlags motorTwoLimitFlagsValue = LimitFlags(mockInvertedLimitFlagPattern);
     BatteryFaults batteryFaultsValue = BatteryFaults(mockInvertedBatteryFaultPattern);
-    EXPECT_CALL(*faultsData_, motorOneFaults())
-        .WillRepeatedly(Return(motorOneFaultsValue));
-    EXPECT_CALL(*faultsData_, motorOneLimitFlags())
-        .WillRepeatedly(Return(motorOneLimitFlagsValue));
-    EXPECT_CALL(*faultsData_, motorTwoFaults())
-        .WillRepeatedly(Return(motorTwoFaultsValue));
-    EXPECT_CALL(*faultsData_, motorTwoLimitFlags())
-        .WillRepeatedly(Return(motorTwoLimitFlagsValue));
-    EXPECT_CALL(*faultsData_, batteryFaults())
-        .WillRepeatedly(Return(batteryFaultsValue));
+    ON_CALL(*faultsData_, motorOneFaults())
+        .WillByDefault(Return(motorOneFaultsValue));
+    ON_CALL(*faultsData_, motorOneLimitFlags())
+        .WillByDefault(Return(motorOneLimitFlagsValue));
+    ON_CALL(*faultsData_, motorTwoFaults())
+        .WillByDefault(Return(motorTwoFaultsValue));
+    ON_CALL(*faultsData_, motorTwoLimitFlags())
+        .WillByDefault(Return(motorTwoLimitFlagsValue));
+    ON_CALL(*faultsData_, batteryFaults())
+        .WillByDefault(Return(batteryFaultsValue));
 
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonStringIs("dataType", "Faults"),
                                   JsonNestedBoolIs("motorOneFaults", "hardwareOverCurrent", true),
                                   JsonNestedBoolIs("motorOneFaults", "softwareOverCurrent", false),
@@ -428,20 +428,20 @@ TEST_F(JsonForwarderTest, powerDataForwarded)
     double backEmfImaginaryValue = 5.0f;
     double dcBusAmpHoursValue = -6.0f;
 
-    EXPECT_CALL(*powerData_, busCurrentA())
-        .WillRepeatedly(Return(busCurrentAValue));
-    EXPECT_CALL(*powerData_, busVoltage())
-        .WillRepeatedly(Return(busVoltageValue));
-    EXPECT_CALL(*powerData_, motorVoltageReal())
-        .WillRepeatedly(Return(motorVoltageRealValue));
-    EXPECT_CALL(*powerData_, motorCurrentReal())
-        .WillRepeatedly(Return(motorCurrentRealValue));
-    EXPECT_CALL(*powerData_, backEmfImaginary())
-        .WillRepeatedly(Return(backEmfImaginaryValue));
-    EXPECT_CALL(*powerData_, dcBusAmpHours())
-        .WillRepeatedly(Return(dcBusAmpHoursValue));
+    ON_CALL(*powerData_, busCurrentA())
+        .WillByDefault(Return(busCurrentAValue));
+    ON_CALL(*powerData_, busVoltage())
+        .WillByDefault(Return(busVoltageValue));
+    ON_CALL(*powerData_, motorVoltageReal())
+        .WillByDefault(Return(motorVoltageRealValue));
+    ON_CALL(*powerData_, motorCurrentReal())
+        .WillByDefault(Return(motorCurrentRealValue));
+    ON_CALL(*powerData_, backEmfImaginary())
+        .WillByDefault(Return(backEmfImaginaryValue));
+    ON_CALL(*powerData_, dcBusAmpHours())
+        .WillByDefault(Return(dcBusAmpHoursValue));
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonStringIs("dataType", "Power"),
                                   JsonDoubleIs("busCurrentA", busCurrentAValue),
                                   JsonDoubleIs("busVoltage", busVoltageValue),
@@ -465,24 +465,24 @@ TEST_F(JsonForwarderTest, vehicleDataForwarded)
     double receivedErrorCountValue = 8.8f;
     double transmittedErrorCountValue = -9.9f;
 
-    EXPECT_CALL(*vehicleData_, driverSetSpeedMetersPerSecond())
-        .WillRepeatedly(Return(driverSetSpeedMetersPerSecondValue));
-    EXPECT_CALL(*vehicleData_, driverSetCurrent())
-        .WillRepeatedly(Return(driverSetCurrentValue));
-    EXPECT_CALL(*vehicleData_, vehicleVelocityMetersPerSecond())
-        .WillRepeatedly(Return(vehicleVelocityMetersPerSecondValue));
-    EXPECT_CALL(*vehicleData_, motorVelocityRpm())
-        .WillRepeatedly(Return(motorVelocityRpmValue));
-    EXPECT_CALL(*vehicleData_, ipmHeatSinkTemp())
-        .WillRepeatedly(Return(ipmHeatSinkTempValue));
-    EXPECT_CALL(*vehicleData_, dspBoardTemp())
-        .WillRepeatedly(Return(dspBoardTempValue));
-    EXPECT_CALL(*vehicleData_, receivedErrorCount())
-        .WillRepeatedly(Return(receivedErrorCountValue));
-    EXPECT_CALL(*vehicleData_, transmittedErrorCount())
-        .WillRepeatedly(Return(transmittedErrorCountValue));
+    ON_CALL(*vehicleData_, driverSetSpeedMetersPerSecond())
+        .WillByDefault(Return(driverSetSpeedMetersPerSecondValue));
+    ON_CALL(*vehicleData_, driverSetCurrent())
+        .WillByDefault(Return(driverSetCurrentValue));
+    ON_CALL(*vehicleData_, vehicleVelocityMetersPerSecond())
+        .WillByDefault(Return(vehicleVelocityMetersPerSecondValue));
+    ON_CALL(*vehicleData_, motorVelocityRpm())
+        .WillByDefault(Return(motorVelocityRpmValue));
+    ON_CALL(*vehicleData_, ipmHeatSinkTemp())
+        .WillByDefault(Return(ipmHeatSinkTempValue));
+    ON_CALL(*vehicleData_, dspBoardTemp())
+        .WillByDefault(Return(dspBoardTempValue));
+    ON_CALL(*vehicleData_, receivedErrorCount())
+        .WillByDefault(Return(receivedErrorCountValue));
+    ON_CALL(*vehicleData_, transmittedErrorCount())
+        .WillByDefault(Return(transmittedErrorCountValue));
 
-    EXPECT_CALL(*messageForwarder_,
+    EXPECT_CALL(messageForwarder_,
                 forwardData(AllOf(JsonStringIs("dataType", "Vehicle"),
                                   JsonDoubleIs("driverSetSpeedMetersPerSecond", driverSetSpeedMetersPerSecondValue),
                                   JsonDoubleIs("driverSetCurrent", driverSetCurrentValue),
