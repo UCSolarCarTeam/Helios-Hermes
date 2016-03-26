@@ -23,7 +23,10 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 #include <QTimer>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QJsonDocument>
+#include <QDebug>
 
 #include "DataLayer/BatteryData/I_BatteryData.h"
 #include "DataLayer/FaultsData/I_FaultsData.h"
@@ -43,7 +46,7 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
 , vehicleData_(vehicleData)
 , messageForwarder_(messageForwarder)
 , readTimer_(new QTimer())
-, dataToRead_()
+, dataToRead_(BATTERY_DATA)
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(convertData()));
 }
@@ -59,7 +62,7 @@ void JsonForwarder::convertData()
     switch(dataToRead_)
     {
         case BATTERY_DATA:
-            convertFaultsData();
+            convertBatteryData();
             dataToRead_ = FAULT_DATA;
             break;
         case FAULT_DATA:
@@ -72,34 +75,95 @@ void JsonForwarder::convertData()
             break;
         case VEHICLE_DATA :
             convertPowerData();
-            dataToRead_ = POWER_DATA;
+            dataToRead_ = BATTERY_DATA;
             break;
     }
 }
 
 void JsonForwarder::convertBatteryData()
 {
-    QJsonDocument batteryJson;
-    messageForwarder_.forwardData(batteryJson.toJson(QJsonDocument::Compact));
+    QJsonObject batteryJsonObject = QJsonObject();
+    batteryJsonObject["dataType"] = "Battery";
 
+    QJsonObject mod0 = QJsonObject();
+    mod0["pcbTemperature"] = batteryData_.mod0PcbTemperature();
+    mod0["cellTemperature"] = batteryData_.mod0CellTemperature();
+    QJsonArray mod0CellVoltages = { QString::number(batteryData_.mod0CellVoltages()[0], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[1], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[2], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[3], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[4], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[5], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[6], 'f', 2),
+                                    QString::number(batteryData_.mod0CellVoltages()[7], 'f', 2) };
+    mod0["cellVoltages"] = mod0CellVoltages;
+    batteryJsonObject["mod0"] = mod0;
+
+    QJsonObject mod1 = QJsonObject();
+    mod1["pcbTemperature"] = QString::number(batteryData_.mod1PcbTemperature(), 'f', 2);
+    mod1["cellTemperature"] = QString::number(batteryData_.mod1CellTemperature(), 'f', 2);
+    QJsonArray mod1CellVoltages = { QString::number(batteryData_.mod1CellVoltages()[1], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[1], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[2], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[3], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[4], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[5], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[6], 'f', 2),
+                                    QString::number(batteryData_.mod1CellVoltages()[7], 'f', 2) };
+    mod1["cellVoltages"] = mod1CellVoltages;
+    batteryJsonObject["mod1"] = mod1;
+
+    QJsonObject mod2 = QJsonObject();
+    mod2["pcbTemperature"] = QString::number(batteryData_.mod2PcbTemperature(), 'f', 2);
+    mod2["cellTemperature"] = QString::number(batteryData_.mod2CellTemperature(), 'f', 2);
+    QJsonArray mod2CellVoltages = { QString::number(batteryData_.mod2CellVoltages()[2], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[1], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[2], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[3], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[4], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[5], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[6], 'f', 2),
+                                    QString::number(batteryData_.mod2CellVoltages()[7], 'f', 2) };
+    mod2["cellVoltages"] = mod2CellVoltages;
+    batteryJsonObject["mod2"] = mod2;
+
+    QJsonObject mod3 = QJsonObject();
+    mod3["pcbTemperature"] = QString::number(batteryData_.mod3PcbTemperature(), 'f', 2);
+    mod3["cellTemperature"] = QString::number(batteryData_.mod3CellTemperature(), 'f', 2);
+    QJsonArray mod3CellVoltages = { QString::number(batteryData_.mod3CellVoltages()[3], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[1], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[2], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[3], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[4], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[5], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[6], 'f', 2),
+                                    QString::number(batteryData_.mod3CellVoltages()[7], 'f', 2) };
+    mod3["cellVoltages"] = mod3CellVoltages;
+    batteryJsonObject["mod3"] = mod3;
+
+    batteryJsonObject["batteryVoltage"] = QString::number(batteryData_.batteryVoltage(), 'f', 2);
+    batteryJsonObject["batteryCurrent"] = QString::number(batteryData_.batteryCurrent(), 'f', 2);
+
+    qDebug() << "SENDING...";
+    qDebug() << QJsonDocument(batteryJsonObject).toJson(QJsonDocument::Compact);
+    qDebug() << "DONE!!!";
+    messageForwarder_.forwardData(QJsonDocument(batteryJsonObject).toJson(QJsonDocument::Compact));
 }
 
 void JsonForwarder::convertFaultsData()
 {
-    QJsonDocument faultJson;
-    messageForwarder_.forwardData(faultJson.toJson(QJsonDocument::Compact));
-
+    // QJsonDocument faultJson;
+    // messageForwarder_.forwardData(faultJson.toJson(QJsonDocument::Compact));
 }
 
 void JsonForwarder::convertPowerData()
 {
-    QJsonDocument powerJson;
-    messageForwarder_.forwardData(powerJson.toJson(QJsonDocument::Compact));
-
+    // QJsonDocument powerJson;
+    // messageForwarder_.forwardData(powerJson.toJson(QJsonDocument::Compact));
 }
 
 void JsonForwarder::convertVehicleData()
 {
-    QJsonDocument vehicleJson;
-    messageForwarder_.forwardData(vehicleJson.toJson(QJsonDocument::Compact));
+    // QJsonDocument vehicleJson;
+    // messageForwarder_.forwardData(vehicleJson.toJson(QJsonDocument::Compact));
 }
