@@ -127,8 +127,10 @@ MATCHER_P3(JsonNestedStringArrayIs, key1, key2, value, "") {
     QJsonArray jsonArr = jsonObj[key1].toObject()[key2].toArray();
     for(int i = 0; i < value.size(); i++)
     {
-        if(jsonArr[i].toString() == value[i])
+        if(jsonArr[i].toString() != value[i])
         {
+            qDebug() << "actual is " << jsonArr[i].toString();
+            qDebug() << "expected is " << value[i];
             return false;
         }
     }

@@ -86,8 +86,8 @@ void JsonForwarder::convertBatteryData()
     batteryJsonObject["dataType"] = "Battery";
 
     QJsonObject mod0 = QJsonObject();
-    mod0["pcbTemperature"] = batteryData_.mod0PcbTemperature();
-    mod0["cellTemperature"] = batteryData_.mod0CellTemperature();
+    mod0["pcbTemperature"] = QString::number(batteryData_.mod0PcbTemperature(), 'f', 2);
+    mod0["cellTemperature"] = QString::number(batteryData_.mod0CellTemperature(), 'f', 2);
     QJsonArray mod0CellVoltages = { QString::number(batteryData_.mod0CellVoltages()[0], 'f', 2),
                                     QString::number(batteryData_.mod0CellVoltages()[1], 'f', 2),
                                     QString::number(batteryData_.mod0CellVoltages()[2], 'f', 2),
@@ -102,7 +102,7 @@ void JsonForwarder::convertBatteryData()
     QJsonObject mod1 = QJsonObject();
     mod1["pcbTemperature"] = QString::number(batteryData_.mod1PcbTemperature(), 'f', 2);
     mod1["cellTemperature"] = QString::number(batteryData_.mod1CellTemperature(), 'f', 2);
-    QJsonArray mod1CellVoltages = { QString::number(batteryData_.mod1CellVoltages()[1], 'f', 2),
+    QJsonArray mod1CellVoltages = { QString::number(batteryData_.mod1CellVoltages()[0], 'f', 2),
                                     QString::number(batteryData_.mod1CellVoltages()[1], 'f', 2),
                                     QString::number(batteryData_.mod1CellVoltages()[2], 'f', 2),
                                     QString::number(batteryData_.mod1CellVoltages()[3], 'f', 2),
@@ -116,7 +116,7 @@ void JsonForwarder::convertBatteryData()
     QJsonObject mod2 = QJsonObject();
     mod2["pcbTemperature"] = QString::number(batteryData_.mod2PcbTemperature(), 'f', 2);
     mod2["cellTemperature"] = QString::number(batteryData_.mod2CellTemperature(), 'f', 2);
-    QJsonArray mod2CellVoltages = { QString::number(batteryData_.mod2CellVoltages()[2], 'f', 2),
+    QJsonArray mod2CellVoltages = { QString::number(batteryData_.mod2CellVoltages()[0], 'f', 2),
                                     QString::number(batteryData_.mod2CellVoltages()[1], 'f', 2),
                                     QString::number(batteryData_.mod2CellVoltages()[2], 'f', 2),
                                     QString::number(batteryData_.mod2CellVoltages()[3], 'f', 2),
@@ -130,7 +130,7 @@ void JsonForwarder::convertBatteryData()
     QJsonObject mod3 = QJsonObject();
     mod3["pcbTemperature"] = QString::number(batteryData_.mod3PcbTemperature(), 'f', 2);
     mod3["cellTemperature"] = QString::number(batteryData_.mod3CellTemperature(), 'f', 2);
-    QJsonArray mod3CellVoltages = { QString::number(batteryData_.mod3CellVoltages()[3], 'f', 2),
+    QJsonArray mod3CellVoltages = { QString::number(batteryData_.mod3CellVoltages()[0], 'f', 2),
                                     QString::number(batteryData_.mod3CellVoltages()[1], 'f', 2),
                                     QString::number(batteryData_.mod3CellVoltages()[2], 'f', 2),
                                     QString::number(batteryData_.mod3CellVoltages()[3], 'f', 2),
@@ -144,9 +144,6 @@ void JsonForwarder::convertBatteryData()
     batteryJsonObject["batteryVoltage"] = QString::number(batteryData_.batteryVoltage(), 'f', 2);
     batteryJsonObject["batteryCurrent"] = QString::number(batteryData_.batteryCurrent(), 'f', 2);
 
-    qDebug() << "SENDING...";
-    qDebug() << QJsonDocument(batteryJsonObject).toJson(QJsonDocument::Compact);
-    qDebug() << "DONE!!!";
     messageForwarder_.forwardData(QJsonDocument(batteryJsonObject).toJson(QJsonDocument::Compact));
 }
 
