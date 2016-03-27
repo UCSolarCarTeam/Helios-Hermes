@@ -22,6 +22,7 @@
  *
  *  For further contact, email <software@calgarysolarcar.ca>
  */
+
 #include <QTimer>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -34,6 +35,7 @@
 #include "DataLayer/VehicleData/I_VehicleData.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 #include "JsonForwarder.h"
+#include "JsonDefines.h" 
 
 JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
                              I_FaultsData& faultsData,
@@ -83,66 +85,66 @@ void JsonForwarder::convertData()
 void JsonForwarder::convertBatteryData()
 {
     QJsonObject batteryJsonObject = QJsonObject();
-    batteryJsonObject["dataType"] = "Battery";
+    batteryJsonObject[JsonFormat::DATA_TYPE] = JsonFormat::BATTERY;
 
     QJsonObject mod0 = QJsonObject();
-    mod0["pcbTemperature"] = QString::number(batteryData_.mod0PcbTemperature(), 'f', 2);
-    mod0["cellTemperature"] = QString::number(batteryData_.mod0CellTemperature(), 'f', 2);
-    QJsonArray mod0CellVoltages = { QString::number(batteryData_.mod0CellVoltages()[0], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[1], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[2], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[3], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[4], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[5], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[6], 'f', 2),
-                                    QString::number(batteryData_.mod0CellVoltages()[7], 'f', 2) };
-    mod0["cellVoltages"] = mod0CellVoltages;
-    batteryJsonObject["mod0"] = mod0;
+    mod0[JsonFormat::PCB_TEMPERATURE] = QString::number(batteryData_.mod0PcbTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    mod0[JsonFormat::CELL_TEMPERATURE] = QString::number(batteryData_.mod0CellTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    QJsonArray mod0CellVoltages = { QString::number(batteryData_.mod0CellVoltages()[0], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[1], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[2], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[3], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[4], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[5], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[6], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod0CellVoltages()[7], 'f', JsonFormat::DECIMAL_PRECISION) };
+    mod0[JsonFormat::CELL_VOLTAGES] = mod0CellVoltages;
+    batteryJsonObject[JsonFormat::MOD_0] = mod0;
 
     QJsonObject mod1 = QJsonObject();
-    mod1["pcbTemperature"] = QString::number(batteryData_.mod1PcbTemperature(), 'f', 2);
-    mod1["cellTemperature"] = QString::number(batteryData_.mod1CellTemperature(), 'f', 2);
-    QJsonArray mod1CellVoltages = { QString::number(batteryData_.mod1CellVoltages()[0], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[1], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[2], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[3], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[4], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[5], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[6], 'f', 2),
-                                    QString::number(batteryData_.mod1CellVoltages()[7], 'f', 2) };
-    mod1["cellVoltages"] = mod1CellVoltages;
-    batteryJsonObject["mod1"] = mod1;
+    mod1[JsonFormat::PCB_TEMPERATURE] = QString::number(batteryData_.mod1PcbTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    mod1[JsonFormat::CELL_TEMPERATURE] = QString::number(batteryData_.mod1CellTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    QJsonArray mod1CellVoltages = { QString::number(batteryData_.mod1CellVoltages()[0], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[1], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[2], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[3], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[4], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[5], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[6], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod1CellVoltages()[7], 'f', JsonFormat::DECIMAL_PRECISION) };
+    mod1[JsonFormat::CELL_VOLTAGES] = mod1CellVoltages;
+    batteryJsonObject[JsonFormat::MOD_1] = mod1;
 
     QJsonObject mod2 = QJsonObject();
-    mod2["pcbTemperature"] = QString::number(batteryData_.mod2PcbTemperature(), 'f', 2);
-    mod2["cellTemperature"] = QString::number(batteryData_.mod2CellTemperature(), 'f', 2);
-    QJsonArray mod2CellVoltages = { QString::number(batteryData_.mod2CellVoltages()[0], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[1], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[2], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[3], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[4], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[5], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[6], 'f', 2),
-                                    QString::number(batteryData_.mod2CellVoltages()[7], 'f', 2) };
-    mod2["cellVoltages"] = mod2CellVoltages;
-    batteryJsonObject["mod2"] = mod2;
+    mod2[JsonFormat::PCB_TEMPERATURE] = QString::number(batteryData_.mod2PcbTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    mod2[JsonFormat::CELL_TEMPERATURE] = QString::number(batteryData_.mod2CellTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    QJsonArray mod2CellVoltages = { QString::number(batteryData_.mod2CellVoltages()[0], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[1], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[2], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[3], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[4], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[5], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[6], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod2CellVoltages()[7], 'f', JsonFormat::DECIMAL_PRECISION) };
+    mod2[JsonFormat::CELL_VOLTAGES] = mod2CellVoltages;
+    batteryJsonObject[JsonFormat::MOD_2] = mod2;
 
     QJsonObject mod3 = QJsonObject();
-    mod3["pcbTemperature"] = QString::number(batteryData_.mod3PcbTemperature(), 'f', 2);
-    mod3["cellTemperature"] = QString::number(batteryData_.mod3CellTemperature(), 'f', 2);
-    QJsonArray mod3CellVoltages = { QString::number(batteryData_.mod3CellVoltages()[0], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[1], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[2], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[3], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[4], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[5], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[6], 'f', 2),
-                                    QString::number(batteryData_.mod3CellVoltages()[7], 'f', 2) };
-    mod3["cellVoltages"] = mod3CellVoltages;
-    batteryJsonObject["mod3"] = mod3;
+    mod3[JsonFormat::PCB_TEMPERATURE] = QString::number(batteryData_.mod3PcbTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    mod3[JsonFormat::CELL_TEMPERATURE] = QString::number(batteryData_.mod3CellTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
+    QJsonArray mod3CellVoltages = { QString::number(batteryData_.mod3CellVoltages()[0], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[1], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[2], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[3], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[4], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[5], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[6], 'f', JsonFormat::DECIMAL_PRECISION),
+                                    QString::number(batteryData_.mod3CellVoltages()[7], 'f', JsonFormat::DECIMAL_PRECISION) };
+    mod3[JsonFormat::CELL_VOLTAGES] = mod3CellVoltages;
+    batteryJsonObject[JsonFormat::MOD_3] = mod3;
 
-    batteryJsonObject["batteryVoltage"] = QString::number(batteryData_.batteryVoltage(), 'f', 2);
-    batteryJsonObject["batteryCurrent"] = QString::number(batteryData_.batteryCurrent(), 'f', 2);
+    batteryJsonObject[JsonFormat::BATTERY_VOLTAGE] = QString::number(batteryData_.batteryVoltage(), 'f', JsonFormat::DECIMAL_PRECISION);
+    batteryJsonObject[JsonFormat::BATTERY_CURRENT] = QString::number(batteryData_.batteryCurrent(), 'f', JsonFormat::DECIMAL_PRECISION);
 
     messageForwarder_.forwardData(QJsonDocument(batteryJsonObject).toJson(QJsonDocument::Compact));
 }

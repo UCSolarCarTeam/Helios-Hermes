@@ -13,6 +13,7 @@ HEADERS += \
    CommunicationsMonitoringService/I_CommunicationsMonitoringService.h \
    JsonForwarder/I_JsonForwarder.h \
    JsonForwarder/JsonForwarder.h \
+   JsonForwarder/JsonDefines.h \
    LoggerService/LoggerService.h \
 
 SOURCES += \
