@@ -25,6 +25,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QDebug>
 
 #include "FaultsJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
@@ -41,6 +42,7 @@ FaultsJsonForwarder::FaultsJsonForwarder(I_FaultsData& faultsData,
 void FaultsJsonForwarder::forwardFaultsData()
 {
     QJsonObject faultsJson = QJsonObject();
+    faultsJson[JsonFormat::DATA_TYPE] = JsonFormat::FAULTS;
 
     QJsonObject motorOneFaultsJson = QJsonObject();
     motorOneFaultsJson[JsonFormat::HARDWARE_OVER_CURRENT] = faultsData_.motorOneFaults().hardwareOverCurrent();
@@ -72,17 +74,17 @@ void FaultsJsonForwarder::forwardFaultsData()
     motorOneLimitsJson[JsonFormat::BUS_VOLTAGE_UPPER_LIMIT] = faultsData_.motorOneLimitFlags().busVoltageUpperLimit();
     motorOneLimitsJson[JsonFormat::BUS_VOLTAGE_LOWER_LIMIT] = faultsData_.motorOneLimitFlags().busVoltageLowerLimit();
     motorOneLimitsJson[JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT] = faultsData_.motorOneLimitFlags().ipmOrMotorTelemetryLimit();
-    faultsJson[JsonFormat::MOTOR_TWO_FAULTS] = motorOneLimitsJson;
+    faultsJson[JsonFormat::MOTOR_ONE_LIMIT_FLAGS] = motorOneLimitsJson;
 
     QJsonObject motorTwoLimitsJson = QJsonObject();
-    motorTwoLimitsJson[JsonFormat::OUTPUT_VOLTAGE_PWM_LIMIT] = faultsData_.motorOneLimitFlags().outputVoltagePwmLimit();
-    motorTwoLimitsJson[JsonFormat::MOTOR_CURRENT_LIMIT] = faultsData_.motorOneLimitFlags().motorCurrentLimit();
-    motorTwoLimitsJson[JsonFormat::VELOCITY_LIMIT] = faultsData_.motorOneLimitFlags().velocityLimit();
-    motorTwoLimitsJson[JsonFormat::BUS_CURRENT_LIMIT] = faultsData_.motorOneLimitFlags().busCurrentLimit();
-    motorTwoLimitsJson[JsonFormat::BUS_VOLTAGE_UPPER_LIMIT] = faultsData_.motorOneLimitFlags().busVoltageUpperLimit();
-    motorTwoLimitsJson[JsonFormat::BUS_VOLTAGE_LOWER_LIMIT] = faultsData_.motorOneLimitFlags().busVoltageLowerLimit();
-    motorTwoLimitsJson[JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT] = faultsData_.motorOneLimitFlags().ipmOrMotorTelemetryLimit();
-    faultsJson[JsonFormat::MOTOR_TWO_FAULTS] = motorTwoLimitsJson;
+    motorTwoLimitsJson[JsonFormat::OUTPUT_VOLTAGE_PWM_LIMIT] = faultsData_.motorTwoLimitFlags().outputVoltagePwmLimit();
+    motorTwoLimitsJson[JsonFormat::MOTOR_CURRENT_LIMIT] = faultsData_.motorTwoLimitFlags().motorCurrentLimit();
+    motorTwoLimitsJson[JsonFormat::VELOCITY_LIMIT] = faultsData_.motorTwoLimitFlags().velocityLimit();
+    motorTwoLimitsJson[JsonFormat::BUS_CURRENT_LIMIT] = faultsData_.motorTwoLimitFlags().busCurrentLimit();
+    motorTwoLimitsJson[JsonFormat::BUS_VOLTAGE_UPPER_LIMIT] = faultsData_.motorTwoLimitFlags().busVoltageUpperLimit();
+    motorTwoLimitsJson[JsonFormat::BUS_VOLTAGE_LOWER_LIMIT] = faultsData_.motorTwoLimitFlags().busVoltageLowerLimit();
+    motorTwoLimitsJson[JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT] = faultsData_.motorTwoLimitFlags().ipmOrMotorTelemetryLimit();
+    faultsJson[JsonFormat::MOTOR_TWO_LIMIT_FLAGS] = motorTwoLimitsJson;
 
     QJsonObject batteryFaultsJson = QJsonObject();
     batteryFaultsJson[JsonFormat::CELL_OVER_VOLTAGE] = faultsData_.batteryFaults().cellOverVoltage();
@@ -99,6 +101,14 @@ void FaultsJsonForwarder::forwardFaultsData()
     batteryFaultsJson[JsonFormat::CONTACTOR_IS_STUCK] = faultsData_.batteryFaults().contactorIsStuck();
     batteryFaultsJson[JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT] = faultsData_.batteryFaults().cmuDetectedExtraCellPresent();
     faultsJson[JsonFormat::BATTERY_FAULTS] = batteryFaultsJson;
+
+    qDebug() << "";
+    qDebug() << "";
+    qDebug() << "SENDING";
+    qDebug() << QJsonDocument(faultsJson).toJson(QJsonDocument::Indented);
+    qDebug() << "DONE";
+    qDebug() << "";
+    qDebug() << "";
 
     messageForwarder_.forwardData(QJsonDocument(faultsJson).toJson(QJsonDocument::Compact));
 }

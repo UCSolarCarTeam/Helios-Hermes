@@ -95,7 +95,7 @@ MATCHER_P3(JsonNestedBoolIs, key1, key2, value, "") {
 TEST_F(FaultsJsonForwarderTest, faultsDataForwarded)
 {
     EXPECT_CALL(*messageForwarder_, 
-                forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::BATTERY)))
+                forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::FAULTS)))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
 }
@@ -340,7 +340,7 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueBatteryFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
                                                    JsonFormat::BMU_IS_IN_SETUP_MODE, true),
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
-                                                   JsonFormat::CMU_CAN_BUS_POWER_STATUS, true),
+                                                   JsonFormat::CMU_CAN_BUS_POWER_STATUS, !true), // note in BatteryFaults.cpp
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
                                                    JsonFormat::PACK_ISOLATION_TEST_FAILURE, true),
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
@@ -378,7 +378,7 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseBatteryFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
                                                    JsonFormat::BMU_IS_IN_SETUP_MODE, false),
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
-                                                   JsonFormat::CMU_CAN_BUS_POWER_STATUS, false),
+                                                   JsonFormat::CMU_CAN_BUS_POWER_STATUS, true), // note in BatteryFaults.cpp
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
                                                    JsonFormat::PACK_ISOLATION_TEST_FAILURE, false),
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
