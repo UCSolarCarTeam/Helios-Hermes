@@ -47,7 +47,8 @@ HEADERS += \
 SOURCES += \
 	testmain.cpp \
 	BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
-	BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp
+	BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp \
+	BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarderTest.cpp
 	
 !win32 {
     QMAKE_CXXFLAGS += -Werror

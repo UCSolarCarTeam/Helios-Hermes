@@ -31,6 +31,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QScopedPointer>
+#include <QDebug>
 
 #include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h" 
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
@@ -39,14 +40,7 @@
 #include "Tests/DataLayer/BatteryData/MockBatteryData.h"
 
 using ::testing::AllOf;
-using ::testing::AtLeast;
 using ::testing::Return;
-
-namespace
-{
-    const int FORWARD_INTERVAL_MSEC = 5;
-    const int FORWARD_ITERATIONS = 10;
-}
 
 class BatteryJsonForwarderTest : public ::testing::Test
 {
@@ -147,7 +141,7 @@ TEST_F(BatteryJsonForwarderTest, typeForwarded)
 {
     EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::BATTERY)))
-        .Times(AtLeast(1));
+        .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
 }
 
@@ -181,7 +175,7 @@ TEST_F(BatteryJsonForwarderTest, mod0DataForwarded)
                                   JsonNestedStringArrayIs(JsonFormat::MOD_0, 
                                                           JsonFormat::CELL_VOLTAGES, 
                                                           mod0CellVoltagesString))))
-        .Times(AtLeast(1));
+        .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
 }
 
@@ -215,7 +209,7 @@ TEST_F(BatteryJsonForwarderTest, mod1DataForwarded)
                                   JsonNestedStringArrayIs(JsonFormat::MOD_1, 
                                                           JsonFormat::CELL_VOLTAGES, 
                                                           mod1CellVoltagesString))))
-        .Times(AtLeast(1));
+        .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
 }
 
@@ -249,7 +243,7 @@ TEST_F(BatteryJsonForwarderTest, mod2DataForwarded)
                                   JsonNestedStringArrayIs(JsonFormat::MOD_2, 
                                                           JsonFormat::CELL_VOLTAGES, 
                                                           mod2CellVoltagesString))))
-        .Times(AtLeast(1));
+        .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
 }
 
@@ -283,7 +277,7 @@ TEST_F(BatteryJsonForwarderTest, mod3DataForwarded)
                                   JsonNestedStringArrayIs(JsonFormat::MOD_3, 
                                                           JsonFormat::CELL_VOLTAGES, 
                                                           mod3CellVoltagesString))))
-        .Times(AtLeast(1));
+        .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
 }
 
@@ -302,6 +296,6 @@ TEST_F(BatteryJsonForwarderTest, batteryInternalDataForwarded)
     EXPECT_CALL(*messageForwarder_,
                 forwardData(AllOf(JsonStringIs(JsonFormat::BATTERY_VOLTAGE, batteryVoltageString),
                                   JsonStringIs(JsonFormat::BATTERY_CURRENT, batteryCurrentString))))
-        .Times(AtLeast(1));
+        .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
 }
