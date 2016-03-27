@@ -27,10 +27,23 @@
 
 #include <QObject>
 
-class I_JsonForwarder : public QObject
+#include "I_FaultsJsonForwarder.h"
+
+class I_FaultsData;
+class I_MessageForwarder;
+
+class FaultsJsonForwarder : public I_FaultsJsonForwarder
 {
     Q_OBJECT
 public:
-    virtual ~I_JsonForwarder() {}
-    virtual void startConvertingData(int conversionFrequency) = 0;
+FaultsJsonForwarder(I_FaultsData& faultsData,
+                         I_MessageForwarder& messageForwarder);
+    ~FaultsJsonForwarder() {}
+
+public slots:
+    void forwardFaultsData();
+
+private:
+    I_FaultsData& faultsData_;
+    I_MessageForwarder& messageForwarder_;
 };

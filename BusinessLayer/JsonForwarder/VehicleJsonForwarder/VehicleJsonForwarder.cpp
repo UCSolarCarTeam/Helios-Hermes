@@ -23,14 +23,24 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once
+#include <QJsonDocument>
+#include <QJsonObject>
 
-#include <QObject>
+#include "VehicleJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/JsonDefines.h"
+#include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
+#include "DataLayer/VehicleData/I_VehicleData.h"
 
-class I_JsonForwarder : public QObject
+VehicleJsonForwarder::VehicleJsonForwarder(I_VehicleData& vehicleData,
+                                           I_MessageForwarder& messageForwarder)
+: vehicleData_(vehicleData)
+, messageForwarder_(messageForwarder)
 {
-    Q_OBJECT
-public:
-    virtual ~I_JsonForwarder() {}
-    virtual void startConvertingData(int conversionFrequency) = 0;
-};
+}
+
+void VehicleJsonForwarder::forwardVehicleData()
+{
+    QJsonObject vehicleJson = QJsonObject();
+    vehicleJson[JsonFormat::DATA_TYPE] = JsonFormat::VEHICLE;
+    messageForwarder_.forwardData(QJsonDocument(vehicleJson).toJson(QJsonDocument::Compact));
+}

@@ -27,10 +27,23 @@
 
 #include <QObject>
 
-class I_JsonForwarder : public QObject
+#include "I_VehicleJsonForwarder.h"
+
+class I_VehicleData;
+class I_MessageForwarder;
+
+class VehicleJsonForwarder : public I_VehicleJsonForwarder
 {
     Q_OBJECT
 public:
-    virtual ~I_JsonForwarder() {}
-    virtual void startConvertingData(int conversionFrequency) = 0;
+    VehicleJsonForwarder(I_VehicleData& vehicleData,
+                         I_MessageForwarder& messageForwarder);
+    ~VehicleJsonForwarder() {}
+
+public slots:
+    void forwardVehicleData();
+
+private:
+    I_VehicleData& vehicleData_;
+    I_MessageForwarder& messageForwarder_;
 };

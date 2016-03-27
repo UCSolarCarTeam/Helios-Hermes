@@ -31,6 +31,11 @@
 
 #include "I_JsonForwarder.h"
 
+#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/I_BatteryJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/I_FaultsJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/PowerJsonForwarder/I_PowerJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/I_VehicleJsonForwarder.h"
+
 class I_BatteryData;
 class I_FaultsData;
 class I_PowerData;
@@ -40,7 +45,8 @@ class I_MessageForwarder;
 enum DataTypes { BATTERY_DATA,
                  FAULT_DATA,
                  POWER_DATA,
-                 VEHICLE_DATA };
+                 VEHICLE_DATA
+               };
 
 class JsonForwarder : public I_JsonForwarder
 {
@@ -55,18 +61,13 @@ public:
     void start(int conversionFrequency);
 
 private slots:
-    void convertData();
+    void forwardData();
 
 private:
-    void convertBatteryData();
-    void convertFaultsData();
-    void convertPowerData();
-    void convertVehicleData();
-    I_BatteryData& batteryData_;
-    I_FaultsData& faultsData_;
-    I_PowerData& powerData_;
-    I_VehicleData& vehicleData_;
-    I_MessageForwarder& messageForwarder_;
+    QScopedPointer<I_BatteryJsonForwarder> batteryJsonForwarder_;
+    QScopedPointer<I_FaultsJsonForwarder> faultsJsonForwarder_;
+    QScopedPointer<I_PowerJsonForwarder> powerJsonForwarder_;
+    QScopedPointer<I_VehicleJsonForwarder> vehicleJsonForwarder_;
     QScopedPointer<QTimer> readTimer_;
     DataTypes dataToRead_;
 };

@@ -27,10 +27,12 @@
 
 #include <QObject>
 
-class I_JsonForwarder : public QObject
+class I_PowerJsonForwarder : public QObject
 {
     Q_OBJECT
 public:
-    virtual ~I_JsonForwarder() {}
-    virtual void startConvertingData(int conversionFrequency) = 0;
+    virtual ~I_PowerJsonForwarder() {}
+
+public slots:
+    virtual void forwardPowerData() = 0;
 };

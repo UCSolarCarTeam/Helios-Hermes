@@ -27,18 +27,55 @@ namespace JsonFormat
 {
     const int DECIMAL_PRECISION = 2;
     const QString DATA_TYPE = "datatype";
+    
     const QString BATTERY = "Battery";
-    const QString MOD_0 = "mod0";
-    const QString MOD_1 = "mod1";
-    const QString MOD_2 = "mod2";
-    const QString MOD_3 = "mod3";
-    const QString PCB_TEMPERATURE = "pcbTemperature";
-    const QString CELL_TEMPERATURE = "cellTemperature";
-    const QString CELL_VOLTAGES = "cellVoltages";
-    const QString BATTERY_VOLTAGE = "batteryVoltage";
-    const QString BATTERY_CURRENT = "batteryCurrent";
+        const QString MOD_0 = "mod0";
+        const QString MOD_1 = "mod1";
+        const QString MOD_2 = "mod2";
+        const QString MOD_3 = "mod3";
+        const QString PCB_TEMPERATURE = "pcbTemperature";
+        const QString CELL_TEMPERATURE = "cellTemperature";
+        const QString CELL_VOLTAGES = "cellVoltages";
+        const QString BATTERY_VOLTAGE = "batteryVoltage";
+        const QString BATTERY_CURRENT = "batteryCurrent";
 
-    const QString FAULTS = "Faults";
+    const QString FAULTS = "Faults";;
+        const QString MOTOR_ONE_FAULTS = "motorOneFaults";
+        const QString MOTOR_TWO_FAULTS = "motorTwoFaults";
+            const QString HARDWARE_OVER_CURRENT = "hardwareOverCurrent";
+            const QString SOFTWARE_OVER_CURRENT = "softwareOverCurrent";
+            const QString DC_BUS_OVER_VOLTAGE = "dcBusOverVoltage";
+            const QString BAD_MOTOR_POSITION_HALL_SEQUENCE = "badMotorPositionHallSequence";
+            const QString WATCHDOG_CAUSED_LAST_RESET = "watchdogCausedLastReset";
+            const QString CONFIG_READ_ERROR = "configReadError";
+            const QString RAIL_UNDER_VOLTAGE_LOCK_OUT = "railUnderVoltageLockOut";
+            const QString DESATURATION_FAULT = "desaturationFault";
+    
+        const QString MOTOR_ONE_LIMIT_FLAGS = "motorOneLimitFlags";
+        const QString MOTOR_TWO_LIMIT_FLAGS = "motorTwoLimitFlags";
+            const QString OUTPUT_VOLTAGE_PWM_LIMIT = "outputVoltagePwmLimit";
+            const QString MOTOR_CURRENT_LIMIT = "motorCurrentLimit";
+            const QString VELOCITY_LIMIT = "velocityLimit";
+            const QString BUS_CURRENT_LIMIT = "busCurrentLimit";
+            const QString BUS_VOLTAGE_UPPER_LIMIT = "busVoltageUpperLimit";
+            const QString BUS_VOLTAGE_LOWER_LIMIT = "busVoltageLowerLimit";
+            const QString IPM_OR_MOTOR_TELEMETRY_LIMIT = "ipmOrMotorTelemetryLimit";
+    
+        const QString BATTERY_FAULTS = "batteryFaults";
+            const QString CELL_OVER_VOLTAGE = "cellOverVoltage";
+            const QString CELL_UNDER_VOLTAGE = "cellUnderVoltage";
+            const QString CELL_OVER_TEMPERATURE = "cellOverTemperature";
+            const QString MEASUREMENT_UNTRUSTED = "measurementUntrusted";
+            const QString CMU_COMM_TIMEOUT = "cmuCommTimeout";
+            const QString VEHICLE_COMM_TIMEOUT = "vehicleCommTimeout";
+            const QString BMU_IS_IN_SETUP_MODE = "bmuIsInSetupMode";
+            const QString CMU_CAN_BUS_POWER_STATUS = "cmuCanBusPowerStatus";
+            const QString PACK_ISOLATION_TEST_FAILURE = "packIsolationTestFailure";
+            const QString SOFTWARE_OVER_CURRENT_MEASURED = "softwareOverCurrentMeasured";
+            const QString CAN_SUPPLY_IS_LOW = "canSupplyIsLow";
+            const QString CONTACTOR_IS_STUCK = "contactorIsStuck";
+            const QString CMU_DETECTED_EXTRA_CELL_PRESENT = "cmuDetectedExtraCellPresent";
+
     const QString POWER = "Power";
-    const QString VEHICLE = "Vehicle";
+        const QString VEHICLE = "Vehicle";
 }
