@@ -35,8 +35,8 @@ namespace JsonFormat
     const QString PCB_TEMPERATURE = "pcbTemperature";
     const QString CELL_TEMPERATURE = "cellTemperature";
     const QString CELL_VOLTAGES = "cellVoltages";
-    const QString BATTERY_VOLTAGE = "cellvoltages";
-    const QString BATTERY_CURRENT = "cellvoltages";
+    const QString BATTERY_VOLTAGE = "batteryVoltage";
+    const QString BATTERY_CURRENT = "batteryCurrent";
 
     const QString FAULTS = "Faults";
     const QString POWER = "Power";

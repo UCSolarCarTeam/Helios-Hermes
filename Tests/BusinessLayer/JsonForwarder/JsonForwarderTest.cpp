@@ -50,7 +50,7 @@ using ::testing::NiceMock;
 
 namespace
 {
-    const int FORWARD_INTERVAL_MSEC = 10;
+    const int FORWARD_INTERVAL_MSEC = 5;
     const int FORWARD_ITERATIONS_MSEC = 10;
 }
 
@@ -169,7 +169,7 @@ TEST_F(JsonForwarderTest, batteryDataTypeForwarded)
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::BATTERY)))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC * 10);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
 }
 
 TEST_F(JsonForwarderTest, batteryMod0DataForwarded)
@@ -204,7 +204,7 @@ TEST_F(JsonForwarderTest, batteryMod0DataForwarded)
                                                           mod0CellVoltagesString))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC * 10);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
 }
 
 TEST_F(JsonForwarderTest, batteryMod1DataForwarded)
@@ -239,7 +239,7 @@ TEST_F(JsonForwarderTest, batteryMod1DataForwarded)
                                                           mod1CellVoltagesString))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC * 10);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
 }
 
 TEST_F(JsonForwarderTest, batteryMod2DataForwarded)
@@ -274,7 +274,7 @@ TEST_F(JsonForwarderTest, batteryMod2DataForwarded)
                                                           mod2CellVoltagesString))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC * 10);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
 }
 
 TEST_F(JsonForwarderTest, batteryMod3DataForwarded)
@@ -309,7 +309,7 @@ TEST_F(JsonForwarderTest, batteryMod3DataForwarded)
                                                           mod3CellVoltagesString))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC * 10);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
 }
 
 TEST_F(JsonForwarderTest, batteryInternalDataForwarded)
@@ -329,7 +329,7 @@ TEST_F(JsonForwarderTest, batteryInternalDataForwarded)
                                   JsonStringIs(JsonFormat::BATTERY_CURRENT, batteryCurrentString))))
         .Times(AtLeast(1));
     jsonForwarder_->start(FORWARD_INTERVAL_MSEC);
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC * 10);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS_MSEC);
 }
 
 /*
