@@ -58,7 +58,7 @@ public:
                   I_VehicleData& vehicleData,
                   I_MessageForwarder& messageForwarder);
     ~JsonForwarder() {}
-    void start(int conversionFrequency);
+    void startForwardingData(int conversionFrequency);
 
 private slots:
     void forwardData();

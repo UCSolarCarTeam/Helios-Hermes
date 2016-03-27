@@ -32,5 +32,5 @@ class I_JsonForwarder : public QObject
     Q_OBJECT
 public:
     virtual ~I_JsonForwarder() {}
-    virtual void startConvertingData(int conversionFrequency) = 0;
+    virtual void startForwardingData(int conversionFrequency) = 0;
 };
