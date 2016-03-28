@@ -42,5 +42,13 @@ void PowerJsonForwarder::forwardPowerData()
 {
     QJsonObject powerJson = QJsonObject();
     powerJson[JsonFormat::DATA_TYPE] = JsonFormat::POWER;
+
+    powerJson[JsonFormat::BUS_CURRENT_A] = QString::number(powerData_.busCurrentA(), 'f', JsonFormat::DECIMAL_PRECISION);
+    powerJson[JsonFormat::BUS_VOLTAGE] = QString::number(powerData_.busVoltage(), 'f', JsonFormat::DECIMAL_PRECISION);
+    powerJson[JsonFormat::MOTOR_VOLTAGE_REAL] = QString::number(powerData_.motorVoltageReal(), 'f', JsonFormat::DECIMAL_PRECISION);
+    powerJson[JsonFormat::MOTOR_CURRENT_REAL] = QString::number(powerData_.motorCurrentReal(), 'f', JsonFormat::DECIMAL_PRECISION);
+    powerJson[JsonFormat::BACK_EMF_IMAGINARY] = QString::number(powerData_.backEmfImaginary(), 'f', JsonFormat::DECIMAL_PRECISION);
+    powerJson[JsonFormat::DC_BUS_AMP_HOURS] = QString::number(powerData_.dcBusAmpHours(), 'f', JsonFormat::DECIMAL_PRECISION);
+
     messageForwarder_.forwardData(QJsonDocument(powerJson).toJson(QJsonDocument::Compact));
 }

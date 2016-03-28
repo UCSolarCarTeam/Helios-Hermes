@@ -77,5 +77,12 @@ namespace JsonFormat
             const QString CMU_DETECTED_EXTRA_CELL_PRESENT = "cmuDetectedExtraCellPresent";
 
     const QString POWER = "Power";
-        const QString VEHICLE = "Vehicle";
+        const QString BUS_CURRENT_A = "busCurrentA";
+        const QString BUS_VOLTAGE = "busVoltage";
+        const QString MOTOR_VOLTAGE_REAL = "motorVoltageReal";
+        const QString MOTOR_CURRENT_REAL = "motorCurrentReal";
+        const QString BACK_EMF_IMAGINARY = "backEmfImaginary";
+        const QString DC_BUS_AMP_HOURS = "dcBusAmpHours";
+    
+    const QString VEHICLE = "Vehicle";
 }
