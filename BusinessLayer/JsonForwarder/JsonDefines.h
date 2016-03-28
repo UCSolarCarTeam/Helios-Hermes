@@ -85,4 +85,12 @@ namespace JsonFormat
         const QString DC_BUS_AMP_HOURS = "dcBusAmpHours";
     
     const QString VEHICLE = "Vehicle";
+        const QString DRIVER_SET_SPEED_METERS_PER_SECOND = "driverSetSpeedMetersPerSecond";
+        const QString DRIVER_SET_CURRENT = "driverSetCurrent";
+        const QString VEHICLE_VELOCITY_METERS_PER_SECOND = "vehicleVelocityMetersPerSecond";
+        const QString MOTOR_VELOCITY_RPM = "motorVelocityRpm";
+        const QString IPM_HEAT_SINK_TEMP = "ipmHeatSinkTemp";
+        const QString DSP_BOARD_TEMP = "dspBoardTemp";
+        const QString RECEIVED_ERROR_COUNT = "receivedErrorCount";
+        const QString TRANSMITTED_ERROR_COUNT = "transmittedErrorCount";
 }
