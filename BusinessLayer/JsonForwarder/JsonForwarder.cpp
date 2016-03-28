@@ -69,7 +69,7 @@ void JsonForwarder::forwardData()
         dataToRead_ = FAULT_DATA;
         break;
     case FAULT_DATA:
-        powerJsonForwarder_->forwardPowerData();
+        faultsJsonForwarder_->forwardFaultsData();
         dataToRead_ = POWER_DATA;
         break;
     case POWER_DATA:

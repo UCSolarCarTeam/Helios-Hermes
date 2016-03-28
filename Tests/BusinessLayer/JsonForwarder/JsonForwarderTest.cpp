@@ -48,7 +48,7 @@ using ::testing::Return;
 
 namespace
 {
-    const int FORWARD_INTERVAL_MSEC = 5;
+    const int FORWARD_INTERVAL_MSEC = 50;
     const int FORWARD_ITERATIONS = 10;
 }
 
