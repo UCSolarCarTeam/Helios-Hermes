@@ -75,16 +75,86 @@ protected:
                                                *powerData_,
                                                *vehicleData_,
                                                *messageForwarder_));
-        
+
+        QList<double> emptyList = {0, 0, 0, 0, 0, 0, 0, 0};
+        EXPECT_CALL(*batteryData_, mod0PcbTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod0CellTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod0CellVoltages())
+            .WillRepeatedly(Return(emptyList));
+        EXPECT_CALL(*batteryData_, mod1PcbTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod1CellTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod1CellVoltages())
+            .WillRepeatedly(Return(emptyList));
+        EXPECT_CALL(*batteryData_, mod2PcbTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod2CellTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod2CellVoltages())
+            .WillRepeatedly(Return(emptyList));
+        EXPECT_CALL(*batteryData_, mod3PcbTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod3CellTemperature())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, mod3CellVoltages())
+            .WillRepeatedly(Return(emptyList));
+        EXPECT_CALL(*batteryData_, batteryVoltage())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*batteryData_, batteryCurrent())
+            .WillRepeatedly(Return(0));
+
+        EXPECT_CALL(*faultsData_, motorOneFaults())
+            .WillRepeatedly(Return(MotorFaults(0)));
+        EXPECT_CALL(*faultsData_, motorOneLimitFlags())
+            .WillRepeatedly(Return(LimitFlags(0)));
+        EXPECT_CALL(*faultsData_, motorTwoFaults())
+            .WillRepeatedly(Return(MotorFaults(0)));
+        EXPECT_CALL(*faultsData_, motorTwoLimitFlags())
+            .WillRepeatedly(Return(LimitFlags(0)));
+        EXPECT_CALL(*faultsData_, batteryFaults())
+            .WillRepeatedly(Return(BatteryFaults(0)));
+
+        EXPECT_CALL(*powerData_, busCurrentA())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*powerData_, busVoltage())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*powerData_, motorVoltageReal())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*powerData_, motorCurrentReal())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*powerData_, backEmfImaginary())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*powerData_, dcBusAmpHours())
+            .WillRepeatedly(Return(0));
+
+        EXPECT_CALL(*vehicleData_, driverSetSpeedMetersPerSecond())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, driverSetCurrent())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, vehicleVelocityMetersPerSecond())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, motorVelocityRpm())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, ipmHeatSinkTemp())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, dspBoardTemp())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, receivedErrorCount())
+            .WillRepeatedly(Return(0));
+        EXPECT_CALL(*vehicleData_, transmittedErrorCount())
+            .WillRepeatedly(Return(0));
     }
 };
 
 /****** TESTS ******/
 
-// TEST_F(JsonForwarderTest, dataForwarded)
-// {
-//     EXPECT_CALL(*messageForwarder_, forwardData(_))
-//         .Times(AtLeast(1));
-//     jsonForwarder_->startForwardingData(FORWARD_INTERVAL_MSEC);
-//     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS);
-// }
+TEST_F(JsonForwarderTest, dataForwarded)
+{
+    EXPECT_CALL(*messageForwarder_, forwardData(_))
+        .Times(FORWARD_ITERATIONS);
+    jsonForwarder_->startForwardingData(FORWARD_INTERVAL_MSEC);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC/2);
+}

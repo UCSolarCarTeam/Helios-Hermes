@@ -30,7 +30,7 @@
 class MockFaultsData : public I_FaultsData
 {
 public:
-    
+
    /* FaultData Gets */
    MOCK_CONST_METHOD0(motorOneFaults, MotorFaults()); // MotorFaults motorOneFaults() const;
    MOCK_CONST_METHOD0(motorOneLimitFlags, LimitFlags()); // LimitFlags motorOneLimitFlags() const;

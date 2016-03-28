@@ -26,15 +26,15 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "PowerJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 #include "DataLayer/PowerData/I_PowerData.h"
+#include "PowerJsonForwarder.h"
 
 PowerJsonForwarder::PowerJsonForwarder(I_PowerData& powerData,
                                        I_MessageForwarder& messageForwarder)
-: powerData_(powerData)
-, messageForwarder_(messageForwarder)
+    : powerData_(powerData)
+    , messageForwarder_(messageForwarder)
 {
 }
 
