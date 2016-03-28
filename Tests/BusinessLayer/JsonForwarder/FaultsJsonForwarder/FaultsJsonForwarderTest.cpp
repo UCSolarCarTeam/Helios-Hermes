@@ -26,13 +26,12 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QScopedPointer>
-#include <QDebug>
 
-#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h" 
+#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
 
 #include "Tests/CommunicationLayer/CommDeviceControl/MockMessageForwarder.h"
@@ -94,7 +93,7 @@ MATCHER_P3(JsonNestedBoolIs, key1, key2, value, "") {
 
 TEST_F(FaultsJsonForwarderTest, faultsDataForwarded)
 {
-    EXPECT_CALL(*messageForwarder_, 
+    EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::FAULTS)))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -108,21 +107,21 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorOneFaultsDataForwarded)
         .WillRepeatedly(Return(faultsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::HARDWARE_OVER_CURRENT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::SOFTWARE_OVER_CURRENT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::DC_BUS_OVER_VOLTAGE, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::BAD_MOTOR_POSITION_HALL_SEQUENCE, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::WATCHDOG_CAUSED_LAST_RESET, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::CONFIG_READ_ERROR, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::RAIL_UNDER_VOLTAGE_LOCK_OUT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, true))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -136,21 +135,21 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorOneFaultsDataForwarded)
         .WillRepeatedly(Return(faultsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::HARDWARE_OVER_CURRENT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::SOFTWARE_OVER_CURRENT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::DC_BUS_OVER_VOLTAGE, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::BAD_MOTOR_POSITION_HALL_SEQUENCE, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::WATCHDOG_CAUSED_LAST_RESET, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::CONFIG_READ_ERROR, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::RAIL_UNDER_VOLTAGE_LOCK_OUT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, false))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -164,19 +163,19 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorOneLimitsDataForwarded)
         .WillRepeatedly(Return(limitsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::OUTPUT_VOLTAGE_PWM_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::MOTOR_CURRENT_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::VELOCITY_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::BUS_CURRENT_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_UPPER_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_LOWER_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, true))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -190,19 +189,19 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorOneLimitsDataForwarded)
         .WillRepeatedly(Return(limitsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::OUTPUT_VOLTAGE_PWM_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::MOTOR_CURRENT_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::VELOCITY_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::BUS_CURRENT_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_UPPER_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_LOWER_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, false))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -216,21 +215,21 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorTwoFaultsDataForwarded)
         .WillRepeatedly(Return(faultsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::HARDWARE_OVER_CURRENT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::SOFTWARE_OVER_CURRENT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::DC_BUS_OVER_VOLTAGE, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::BAD_MOTOR_POSITION_HALL_SEQUENCE, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::WATCHDOG_CAUSED_LAST_RESET, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::CONFIG_READ_ERROR, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::RAIL_UNDER_VOLTAGE_LOCK_OUT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, true))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -244,21 +243,21 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorTwoFaultsDataForwarded)
         .WillRepeatedly(Return(faultsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::HARDWARE_OVER_CURRENT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::SOFTWARE_OVER_CURRENT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::DC_BUS_OVER_VOLTAGE, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::BAD_MOTOR_POSITION_HALL_SEQUENCE, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::WATCHDOG_CAUSED_LAST_RESET, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::CONFIG_READ_ERROR, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::RAIL_UNDER_VOLTAGE_LOCK_OUT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, false))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -272,19 +271,19 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorTwoLimitsDataForwarded)
         .WillRepeatedly(Return(limitsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::OUTPUT_VOLTAGE_PWM_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::MOTOR_CURRENT_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::VELOCITY_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::BUS_CURRENT_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_UPPER_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_LOWER_LIMIT, true),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, true))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -298,19 +297,19 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorTwoLimitsDataForwarded)
         .WillRepeatedly(Return(limitsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::OUTPUT_VOLTAGE_PWM_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::MOTOR_CURRENT_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::VELOCITY_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::BUS_CURRENT_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_UPPER_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::BUS_VOLTAGE_LOWER_LIMIT, false),
-                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS, 
+                                  JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, false))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -325,31 +324,31 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueBatteryFaultsDataForwarded)
         .WillRepeatedly(Return(batteryFaultsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CELL_OVER_VOLTAGE, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CELL_UNDER_VOLTAGE, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CELL_OVER_TEMPERATURE, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::MEASUREMENT_UNTRUSTED, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_COMM_TIMEOUT, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::VEHICLE_COMM_TIMEOUT, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::BMU_IS_IN_SETUP_MODE, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_CAN_BUS_POWER_STATUS, !true), // note in BatteryFaults.cpp
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::PACK_ISOLATION_TEST_FAILURE, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::SOFTWARE_OVER_CURRENT_MEASURED, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CAN_SUPPLY_IS_LOW, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CONTACTOR_IS_STUCK, true),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT, true))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();
@@ -363,31 +362,31 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseBatteryFaultsDataForwarded)
         .WillRepeatedly(Return(batteryFaultsValue));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                forwardData(AllOf(JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CELL_OVER_VOLTAGE, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CELL_UNDER_VOLTAGE, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CELL_OVER_TEMPERATURE, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::MEASUREMENT_UNTRUSTED, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_COMM_TIMEOUT, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::VEHICLE_COMM_TIMEOUT, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::BMU_IS_IN_SETUP_MODE, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_CAN_BUS_POWER_STATUS, true), // note in BatteryFaults.cpp
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::PACK_ISOLATION_TEST_FAILURE, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::SOFTWARE_OVER_CURRENT_MEASURED, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CAN_SUPPLY_IS_LOW, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CONTACTOR_IS_STUCK, false),
-                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS, 
+                                  JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT, false))))
         .Times(AtLeast(1));
     faultsJsonForwarder_->forwardFaultsData();

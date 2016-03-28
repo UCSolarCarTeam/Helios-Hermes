@@ -25,17 +25,16 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QDebug>
 
-#include "FaultsJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 #include "DataLayer/FaultsData/I_FaultsData.h"
+#include "FaultsJsonForwarder.h"
 
 FaultsJsonForwarder::FaultsJsonForwarder(I_FaultsData& faultsData,
-                                         I_MessageForwarder& messageForwarder)
-: faultsData_(faultsData)
-, messageForwarder_(messageForwarder)
+        I_MessageForwarder& messageForwarder)
+    : faultsData_(faultsData)
+    , messageForwarder_(messageForwarder)
 {
 }
 

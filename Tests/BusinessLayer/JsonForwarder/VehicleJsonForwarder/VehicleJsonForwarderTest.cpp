@@ -26,12 +26,10 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include <QTest>
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QScopedPointer>
-#include <QDebug>
 
 #include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"

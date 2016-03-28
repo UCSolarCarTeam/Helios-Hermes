@@ -27,7 +27,7 @@ namespace JsonFormat
 {
     const int DECIMAL_PRECISION = 2;
     const QString DATA_TYPE = "datatype";
-    
+
     const QString BATTERY = "Battery";
         const QString MOD_0 = "mod0";
         const QString MOD_1 = "mod1";
@@ -50,7 +50,7 @@ namespace JsonFormat
             const QString CONFIG_READ_ERROR = "configReadError";
             const QString RAIL_UNDER_VOLTAGE_LOCK_OUT = "railUnderVoltageLockOut";
             const QString DESATURATION_FAULT = "desaturationFault";
-    
+
         const QString MOTOR_ONE_LIMIT_FLAGS = "motorOneLimitFlags";
         const QString MOTOR_TWO_LIMIT_FLAGS = "motorTwoLimitFlags";
             const QString OUTPUT_VOLTAGE_PWM_LIMIT = "outputVoltagePwmLimit";
@@ -60,7 +60,7 @@ namespace JsonFormat
             const QString BUS_VOLTAGE_UPPER_LIMIT = "busVoltageUpperLimit";
             const QString BUS_VOLTAGE_LOWER_LIMIT = "busVoltageLowerLimit";
             const QString IPM_OR_MOTOR_TELEMETRY_LIMIT = "ipmOrMotorTelemetryLimit";
-    
+
         const QString BATTERY_FAULTS = "batteryFaults";
             const QString CELL_OVER_VOLTAGE = "cellOverVoltage";
             const QString CELL_UNDER_VOLTAGE = "cellUnderVoltage";
@@ -83,7 +83,7 @@ namespace JsonFormat
         const QString MOTOR_CURRENT_REAL = "motorCurrentReal";
         const QString BACK_EMF_IMAGINARY = "backEmfImaginary";
         const QString DC_BUS_AMP_HOURS = "dcBusAmpHours";
-    
+
     const QString VEHICLE = "Vehicle";
         const QString DRIVER_SET_SPEED_METERS_PER_SECOND = "driverSetSpeedMetersPerSecond";
         const QString DRIVER_SET_CURRENT = "driverSetCurrent";

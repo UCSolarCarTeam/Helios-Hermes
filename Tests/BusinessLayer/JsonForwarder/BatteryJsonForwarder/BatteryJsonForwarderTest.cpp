@@ -26,14 +26,13 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include <QTest>
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QScopedPointer>
-#include <QDebug>
 
-#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h" 
+#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
 
 #include "Tests/CommunicationLayer/CommDeviceControl/MockMessageForwarder.h"
@@ -124,7 +123,7 @@ MATCHER_P3(JsonNestedStringArrayIs, key1, key2, value, "") {
     for(int i = 0; i < value.size(); i++)
     {
         QString actual = jsonArr[i].toString();
-        QString expected = value[i];    
+        QString expected = value[i];
         if(actual != expected)
         {
             qDebug() << "Actual is " << actual;
@@ -166,14 +165,14 @@ TEST_F(BatteryJsonForwarderTest, mod0DataForwarded)
         .WillRepeatedly(Return(mod0CellVoltages));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_0, 
-                                                     JsonFormat::PCB_TEMPERATURE, 
+                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_0,
+                                                     JsonFormat::PCB_TEMPERATURE,
                                                      mod0PcbTemperatureString),
-                                  JsonNestedStringIs(JsonFormat::MOD_0, 
-                                                     JsonFormat::CELL_TEMPERATURE, 
+                                  JsonNestedStringIs(JsonFormat::MOD_0,
+                                                     JsonFormat::CELL_TEMPERATURE,
                                                      mod0CellTemperatureString),
-                                  JsonNestedStringArrayIs(JsonFormat::MOD_0, 
-                                                          JsonFormat::CELL_VOLTAGES, 
+                                  JsonNestedStringArrayIs(JsonFormat::MOD_0,
+                                                          JsonFormat::CELL_VOLTAGES,
                                                           mod0CellVoltagesString))))
         .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
@@ -200,14 +199,14 @@ TEST_F(BatteryJsonForwarderTest, mod1DataForwarded)
         .WillRepeatedly(Return(mod1CellVoltages));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_1, 
-                                                     JsonFormat::PCB_TEMPERATURE, 
+                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_1,
+                                                     JsonFormat::PCB_TEMPERATURE,
                                                      mod1PcbTemperatureString),
-                                  JsonNestedStringIs(JsonFormat::MOD_1, 
-                                                     JsonFormat::CELL_TEMPERATURE, 
+                                  JsonNestedStringIs(JsonFormat::MOD_1,
+                                                     JsonFormat::CELL_TEMPERATURE,
                                                      mod1CellTemperatureString),
-                                  JsonNestedStringArrayIs(JsonFormat::MOD_1, 
-                                                          JsonFormat::CELL_VOLTAGES, 
+                                  JsonNestedStringArrayIs(JsonFormat::MOD_1,
+                                                          JsonFormat::CELL_VOLTAGES,
                                                           mod1CellVoltagesString))))
         .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
@@ -234,14 +233,14 @@ TEST_F(BatteryJsonForwarderTest, mod2DataForwarded)
         .WillRepeatedly(Return(mod2CellVoltages));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_2, 
-                                                     JsonFormat::PCB_TEMPERATURE, 
+                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_2,
+                                                     JsonFormat::PCB_TEMPERATURE,
                                                      mod2PcbTemperatureString),
-                                  JsonNestedStringIs(JsonFormat::MOD_2, 
-                                                     JsonFormat::CELL_TEMPERATURE, 
+                                  JsonNestedStringIs(JsonFormat::MOD_2,
+                                                     JsonFormat::CELL_TEMPERATURE,
                                                      mod2CellTemperatureString),
-                                  JsonNestedStringArrayIs(JsonFormat::MOD_2, 
-                                                          JsonFormat::CELL_VOLTAGES, 
+                                  JsonNestedStringArrayIs(JsonFormat::MOD_2,
+                                                          JsonFormat::CELL_VOLTAGES,
                                                           mod2CellVoltagesString))))
         .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
@@ -268,14 +267,14 @@ TEST_F(BatteryJsonForwarderTest, mod3DataForwarded)
         .WillRepeatedly(Return(mod3CellVoltages));
 
     EXPECT_CALL(*messageForwarder_,
-                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_3, 
-                                                     JsonFormat::PCB_TEMPERATURE, 
+                forwardData(AllOf(JsonNestedStringIs(JsonFormat::MOD_3,
+                                                     JsonFormat::PCB_TEMPERATURE,
                                                      mod3PcbTemperatureString),
-                                  JsonNestedStringIs(JsonFormat::MOD_3, 
-                                                     JsonFormat::CELL_TEMPERATURE, 
+                                  JsonNestedStringIs(JsonFormat::MOD_3,
+                                                     JsonFormat::CELL_TEMPERATURE,
                                                      mod3CellTemperatureString),
-                                  JsonNestedStringArrayIs(JsonFormat::MOD_3, 
-                                                          JsonFormat::CELL_VOLTAGES, 
+                                  JsonNestedStringArrayIs(JsonFormat::MOD_3,
+                                                          JsonFormat::CELL_VOLTAGES,
                                                           mod3CellVoltagesString))))
         .Times(1);
     batteryJsonForwarder_->forwardBatteryData();
@@ -291,7 +290,7 @@ TEST_F(BatteryJsonForwarderTest, batteryInternalDataForwarded)
     EXPECT_CALL(*batteryData_, batteryVoltage())
         .WillRepeatedly(Return(batteryVoltage));
     EXPECT_CALL(*batteryData_, batteryCurrent())
-        .WillRepeatedly(Return(batteryCurrent));   
+        .WillRepeatedly(Return(batteryCurrent));
 
     EXPECT_CALL(*messageForwarder_,
                 forwardData(AllOf(JsonStringIs(JsonFormat::BATTERY_VOLTAGE, batteryVoltageString),

@@ -26,12 +26,10 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include <QTest>
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QScopedPointer>
-#include <QDebug>
 
 #include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
@@ -117,7 +115,7 @@ TEST_F(PowerJsonForwarderTest, busVoltageForwarded)
 
 TEST_F(PowerJsonForwarderTest, motorVoltageRealForwarded)
 {
-    double motorVoltageReal = 3.45; 
+    double motorVoltageReal = 3.45;
     QString motorVoltageRealString = QString::number(motorVoltageReal, 'f', JsonFormat::DECIMAL_PRECISION);
     EXPECT_CALL(*powerData_, motorVoltageReal())
         .WillRepeatedly(Return(motorVoltageReal));

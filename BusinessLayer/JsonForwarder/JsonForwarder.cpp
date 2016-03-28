@@ -24,18 +24,14 @@
  */
 
 #include <QTimer>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QDebug>
 
 #include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
-#include "JsonForwarder.h"
 #include "JsonDefines.h"
+#include "JsonForwarder.h"
 
 class I_BatteryData;
 class I_FaultsData;
@@ -73,15 +69,15 @@ void JsonForwarder::forwardData()
         dataToRead_ = FAULT_DATA;
         break;
     case FAULT_DATA:
-        powerJsonForwarder_->forwardPowerData();
+        faultsJsonForwarder_->forwardFaultsData();
         dataToRead_ = POWER_DATA;
         break;
     case POWER_DATA:
-        vehicleJsonForwarder_->forwardVehicleData();
+        powerJsonForwarder_->forwardPowerData();
         dataToRead_ = VEHICLE_DATA;
         break;
     case VEHICLE_DATA :
-        powerJsonForwarder_->forwardPowerData();
+        vehicleJsonForwarder_->forwardVehicleData();
         dataToRead_ = BATTERY_DATA;
         break;
     }

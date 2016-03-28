@@ -36,8 +36,8 @@ class FaultsJsonForwarder : public I_FaultsJsonForwarder
 {
     Q_OBJECT
 public:
-FaultsJsonForwarder(I_FaultsData& faultsData,
-                         I_MessageForwarder& messageForwarder);
+    FaultsJsonForwarder(I_FaultsData& faultsData,
+                        I_MessageForwarder& messageForwarder);
     ~FaultsJsonForwarder() {}
 
 public slots:

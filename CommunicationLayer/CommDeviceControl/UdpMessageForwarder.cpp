@@ -32,8 +32,8 @@
 
 namespace
 {
-   const QHostAddress MULTICAST_ADDRESS = QHostAddress("239.255.43.21");
-   const quint16 MULTICAST_PORT = 44550;
+    const QHostAddress MULTICAST_ADDRESS = QHostAddress("239.255.43.21");
+    const quint16 MULTICAST_PORT = 44550;
 }
 
 UdpMessageForwarder::UdpMessageForwarder()
@@ -46,9 +46,9 @@ UdpMessageForwarder::~UdpMessageForwarder()
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-   const quint64 dataWritten = socket_.writeDatagram(data, MULTICAST_ADDRESS, MULTICAST_PORT);
-   if (dataWritten != static_cast<quint64>(data.size()))
-   {
-      qWarning() << "Unable to forward data";
-   }
+    const quint64 dataWritten = socket_.writeDatagram(data, MULTICAST_ADDRESS, MULTICAST_PORT);
+    if (dataWritten != static_cast<quint64>(data.size()))
+    {
+        qWarning() << "Unable to forward data";
+    }
 }
