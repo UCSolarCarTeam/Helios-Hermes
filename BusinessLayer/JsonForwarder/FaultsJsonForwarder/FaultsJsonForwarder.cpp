@@ -102,13 +102,5 @@ void FaultsJsonForwarder::forwardFaultsData()
     batteryFaultsJson[JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT] = faultsData_.batteryFaults().cmuDetectedExtraCellPresent();
     faultsJson[JsonFormat::BATTERY_FAULTS] = batteryFaultsJson;
 
-    qDebug() << "";
-    qDebug() << "";
-    qDebug() << "SENDING";
-    qDebug() << QJsonDocument(faultsJson).toJson(QJsonDocument::Indented);
-    qDebug() << "DONE";
-    qDebug() << "";
-    qDebug() << "";
-
     messageForwarder_.forwardData(QJsonDocument(faultsJson).toJson(QJsonDocument::Compact));
 }
