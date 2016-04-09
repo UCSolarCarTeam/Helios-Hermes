@@ -44,6 +44,4 @@ SOURCES += *.cpp
     QMAKE_CXXFLAGS += -Werror
 }
 
-PRE_TARGETDEPS += \
-   ../../build/.lib/*g
 DESTDIR = ../../build/.tests

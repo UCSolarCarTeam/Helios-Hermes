@@ -37,22 +37,22 @@ Settings::Settings(QString filepath)
 {
 }
 
-const QString Settings::serialPortName() const
+QString Settings::serialPortName() const
 {
-    return settings.value("SerialPort/portName");
+    return settings_.value("SerialPort/portName").toString();
 }
 
-const int Settings::baudrate() const
+int Settings::baudrate() const
 {
-    return settings.value("SerialPort/baudrate");
+    return settings_.value("SerialPort/baudrate").toInt();
 }
 
-const QHostAddress Settings::ipAddress() const
+QHostAddress Settings::ipAddress() const
 {
-    return QHostAddress(settings.value("UdpAddress/ipAddress"));
+    return QHostAddress(settings_.value("UdpAddress/ipAddress").toString());
 }
 
-const quint16 Settings::udpPort() const
+quint16 Settings::udpPort() const
 {
-    return (quint16)settings.value("UdpAddress/port");
+    return (quint16)settings_.value("UdpAddress/port").toInt();
 }

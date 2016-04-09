@@ -31,11 +31,11 @@ class Settings : I_Settings
 {
 public:
     Settings(QString filepath);
-    virtual ~I_Settings() {}
-    const QString serialPortName() const;
-    const int baudrate() const;
-    const QHostAddress ipAddress() const;
-    const quint16 udpPort() const;
+    virtual ~Settings() {}
+    QString serialPortName() const;
+    int baudrate() const;
+    QHostAddress ipAddress() const;
+    quint16 udpPort() const;
 
 private:
     QSettings settings_;

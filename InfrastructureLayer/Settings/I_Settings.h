@@ -25,12 +25,14 @@
 
 #pragma once
 
+#include <QHostAddress>
+
 class I_Settings
 {
 public:
     virtual ~I_Settings() {}
-    virtual const QString serialPortName() const = 0;
-    virtual const int baudrate() const = 0;
-    virtual const QHostAddress ipAddress() const = 0;
-    virtual const quint16 udpPort() const = 0;
+    virtual QString serialPortName() const = 0;
+    virtual int baudrate() const = 0;
+    virtual QHostAddress ipAddress() const = 0;
+    virtual quint16 udpPort() const = 0;
 };
