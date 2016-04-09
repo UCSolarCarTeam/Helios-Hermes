@@ -35,11 +35,11 @@
 #include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
 
-class BatteryData;
-class FaultsData;
-class PowerData;
-class VehicleData;
-class MessageForwarder;
+class I_BatteryData;
+class I_FaultsData;
+class I_PowerData;
+class I_VehicleData;
+class I_MessageForwarder;
 
 class JsonForwarder : public I_JsonForwarder
 {
