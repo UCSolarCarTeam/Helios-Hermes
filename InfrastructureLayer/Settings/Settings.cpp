@@ -27,35 +27,32 @@
 
 #include "Settings.h"
 
-namespace 
+namespace
 {
-    const QString SETTINGS_FILE_PATH = "config.ini";
-    const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
+const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
 }
 
-Settings::Settings()
-: settings_(SETTINGS_FILE_PATH, SETTINGS_FILE_FORMAT)
+Settings::Settings(QString filepath)
+: settings_(filepath, SETTINGS_FILE_FORMAT)
 {
 }
 
 const QString Settings::serialPortName() const
 {
-
+    return settings.value("SerialPort/portName");
 }
 
 const int Settings::baudrate() const
 {
-
+    return settings.value("SerialPort/baudrate");
 }
 
 const QHostAddress Settings::ipAddress() const
 {
-
+    return QHostAddress(settings.value("UdpAddress/ipAddress"));
 }
 
-const quint16 Settings::port() const
+const quint16 Settings::udpPort() const
 {
-
+    return (quint16)settings.value("UdpAddress/port");
 }
-
-

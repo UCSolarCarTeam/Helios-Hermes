@@ -36,6 +36,7 @@ message(University of Calgary Solar Car Team Delta Hermes)
 SUBDIRS = \
    DataLayer \
    CommunicationLayer \
+   InfrastructureLayer \
    BusinessLayer \
    Tests \
    SchulichDeltaHermes

@@ -23,7 +23,7 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once 
+#pragma once
 
 class I_Settings
 {
@@ -32,5 +32,5 @@ public:
     virtual const QString serialPortName() const = 0;
     virtual const int baudrate() const = 0;
     virtual const QHostAddress ipAddress() const = 0;
-    virtual const quint16 port() const = 0;
+    virtual const quint16 udpPort() const = 0;
 };

@@ -23,19 +23,19 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once 
+#pragma once
 
 #include "I_Settings.h"
 
 class Settings : I_Settings
 {
 public:
-    Settings();
+    Settings(QString filepath);
     virtual ~I_Settings() {}
     const QString serialPortName() const;
     const int baudrate() const;
     const QHostAddress ipAddress() const;
-    const quint16 port() const;
+    const quint16 udpPort() const;
 
 private:
     QSettings settings_;
