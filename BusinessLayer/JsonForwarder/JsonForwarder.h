@@ -30,16 +30,16 @@
 
 #include "I_JsonForwarder.h"
 
-#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/I_BatteryJsonForwarder.h"
-#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/I_FaultsJsonForwarder.h"
-#include "BusinessLayer/JsonForwarder/PowerJsonForwarder/I_PowerJsonForwarder.h"
-#include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/I_VehicleJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
 
-class I_BatteryData;
-class I_FaultsData;
-class I_PowerData;
-class I_VehicleData;
-class I_MessageForwarder;
+class BatteryData;
+class FaultsData;
+class PowerData;
+class VehicleData;
+class MessageForwarder;
 
 class JsonForwarder : public I_JsonForwarder
 {
@@ -57,10 +57,10 @@ private slots:
     void forwardData();
 
 private:
-    QScopedPointer<I_BatteryJsonForwarder> batteryJsonForwarder_;
-    QScopedPointer<I_FaultsJsonForwarder> faultsJsonForwarder_;
-    QScopedPointer<I_PowerJsonForwarder> powerJsonForwarder_;
-    QScopedPointer<I_VehicleJsonForwarder> vehicleJsonForwarder_;
+    QScopedPointer<BatteryJsonForwarder> batteryJsonForwarder_;
+    QScopedPointer<FaultsJsonForwarder> faultsJsonForwarder_;
+    QScopedPointer<PowerJsonForwarder> powerJsonForwarder_;
+    QScopedPointer<VehicleJsonForwarder> vehicleJsonForwarder_;
     QScopedPointer<QTimer> readTimer_;
     int dataToReadCount_;
 };

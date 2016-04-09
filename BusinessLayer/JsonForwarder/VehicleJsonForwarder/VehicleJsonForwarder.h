@@ -25,12 +25,12 @@
 
 #pragma once
 
-#include "I_VehicleJsonForwarder.h"
+#include <QObject>
 
 class I_VehicleData;
 class I_MessageForwarder;
 
-class VehicleJsonForwarder : public I_VehicleJsonForwarder
+class VehicleJsonForwarder : public QObject
 {
     Q_OBJECT
 public:

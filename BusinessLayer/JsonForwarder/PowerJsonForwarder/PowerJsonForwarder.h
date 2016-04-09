@@ -25,12 +25,12 @@
 
 #pragma once
 
-#include "I_PowerJsonForwarder.h"
+#include <QObject>
 
 class I_PowerData;
 class I_MessageForwarder;
 
-class PowerJsonForwarder : public I_PowerJsonForwarder
+class PowerJsonForwarder : public QObject
 {
     Q_OBJECT
 public:

@@ -25,12 +25,12 @@
 
 #pragma once
 
-#include "I_BatteryJsonForwarder.h"
+#include <QObject>
 
 class I_BatteryData;
 class I_MessageForwarder;
 
-class BatteryJsonForwarder : public I_BatteryJsonForwarder
+class BatteryJsonForwarder : public QObject
 {
     Q_OBJECT
 public:

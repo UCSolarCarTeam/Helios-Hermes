@@ -12,15 +12,11 @@ HEADERS += \
    CommunicationsMonitoringService/CommunicationsMonitoringService.h \
    CommunicationsMonitoringService/I_CommunicationsMonitoringService.h \
    JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h \
-   JsonForwarder/BatteryJsonForwarder/I_BatteryJsonForwarder.h \
    JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h \
-   JsonForwarder/FaultsJsonForwarder/I_FaultsJsonForwarder.h \
    JsonForwarder/I_JsonForwarder.h \
    JsonForwarder/JsonDefines.h \
    JsonForwarder/JsonForwarder.h \
-   JsonForwarder/PowerJsonForwarder/I_PowerJsonForwarder.h \
    JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h \
-   JsonForwarder/VehicleJsonForwarder/I_VehicleJsonForwarder.h \
    JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h \
    LoggerService/LoggerService.h \
 
