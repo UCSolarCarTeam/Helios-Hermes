@@ -23,6 +23,7 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
+#include <QDebug>
 #include <QSettings>
 
 #include "Settings.h"
@@ -47,9 +48,9 @@ int Settings::baudrate() const
     return settings_.value("SerialPort/baudrate").toInt();
 }
 
-QHostAddress Settings::ipAddress() const
+QString Settings::ipAddress() const
 {
-    return QHostAddress(settings_.value("UdpAddress/ipAddress").toString());
+    return QString(settings_.value("UdpAddress/ipAddress").toString());
 }
 
 quint16 Settings::udpPort() const

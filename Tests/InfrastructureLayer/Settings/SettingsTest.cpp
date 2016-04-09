@@ -23,26 +23,45 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-#include <QSettings>
+#include <QScopedPointer>
 
-#include "I_Settings.h"
+#include "InfrastructureLayer/Settings/Settings.h"
 
-class Settings : I_Settings
+namespace
 {
-public:
-    Settings(QString filepath);
-    virtual ~Settings() {}
-    QString serialPortName() const;
-    int baudrate() const;
-    QString ipAddress() const;
-    quint16 udpPort() const;
+const QString TEST_FILE_PATH = "testconfig.ini";
+}
 
-private:
-    QSettings settings_;
-    QString serialPortName_;
-    int baudrate_;
-    QString ipAddress_;
-    quint16 port_;
+class SettingsTest : public ::testing::Test
+{
+protected:
+    QScopedPointer<Settings> settings_;
+
+    virtual void SetUp()
+    {
+        settings_.reset(new Settings(TEST_FILE_PATH));
+    }
 };
+
+TEST_F(SettingsTest, serialPortName)
+{
+    EXPECT_EQ(settings_->serialPortName(), "/dev/pts/7");
+}
+
+TEST_F(SettingsTest, baudrate)
+{
+    EXPECT_EQ(settings_->baudrate(), 9600);
+}
+
+TEST_F(SettingsTest, ipAddress)
+{
+    EXPECT_EQ(settings_->ipAddress(), "239.255.43.21");
+}
+
+TEST_F(SettingsTest, port)
+{
+    EXPECT_EQ(settings_->udpPort(), 44550);
+}

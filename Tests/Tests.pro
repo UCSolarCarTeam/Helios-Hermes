@@ -31,14 +31,16 @@ TEMPLATE = app
 QT += testlib
 CONFIG += testcase
 
-LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lgmock
+LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lInfrastructureLayer -lgmock
 
 ! include( ../common.pri ) {
     error( "Couldn't find the common.pri file!" )
 }
 
 HEADERS += *.h
-SOURCES += *.cpp
+SOURCES += \
+    testmain.cpp \
+    InfrastructureLayer/Settings/SettingsTest.cpp
 
 !win32 {
     QMAKE_CXXFLAGS += -Werror
