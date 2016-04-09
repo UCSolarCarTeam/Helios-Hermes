@@ -33,8 +33,8 @@
 
 PowerJsonForwarder::PowerJsonForwarder(I_PowerData& powerData,
                                        I_MessageForwarder& messageForwarder)
-    : powerData_(powerData)
-    , messageForwarder_(messageForwarder)
+: powerData_(powerData)
+, messageForwarder_(messageForwarder)
 {
 }
 

@@ -32,9 +32,9 @@
 #include "FaultsJsonForwarder.h"
 
 FaultsJsonForwarder::FaultsJsonForwarder(I_FaultsData& faultsData,
-        I_MessageForwarder& messageForwarder)
-    : faultsData_(faultsData)
-    , messageForwarder_(messageForwarder)
+                                         I_MessageForwarder& messageForwarder)
+: faultsData_(faultsData)
+, messageForwarder_(messageForwarder)
 {
 }
 

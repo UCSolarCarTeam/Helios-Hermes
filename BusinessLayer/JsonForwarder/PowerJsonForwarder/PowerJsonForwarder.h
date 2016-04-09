@@ -25,8 +25,6 @@
 
 #pragma once
 
-#include <QObject>
-
 #include "I_PowerJsonForwarder.h"
 
 class I_PowerData;
@@ -38,7 +36,7 @@ class PowerJsonForwarder : public I_PowerJsonForwarder
 public:
     PowerJsonForwarder(I_PowerData& powerData,
                        I_MessageForwarder& messageForwarder);
-    ~PowerJsonForwarder() {}
+    virtual ~PowerJsonForwarder() {}
 
 public slots:
     void forwardPowerData();

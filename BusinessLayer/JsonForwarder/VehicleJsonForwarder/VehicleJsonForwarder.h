@@ -25,8 +25,6 @@
 
 #pragma once
 
-#include <QObject>
-
 #include "I_VehicleJsonForwarder.h"
 
 class I_VehicleData;
@@ -38,7 +36,7 @@ class VehicleJsonForwarder : public I_VehicleJsonForwarder
 public:
     VehicleJsonForwarder(I_VehicleData& vehicleData,
                          I_MessageForwarder& messageForwarder);
-    ~VehicleJsonForwarder() {}
+    virtual ~VehicleJsonForwarder() {}
 
 public slots:
     void forwardVehicleData();

@@ -33,9 +33,9 @@
 #include "DataLayer/BatteryData/I_BatteryData.h"
 
 BatteryJsonForwarder::BatteryJsonForwarder(I_BatteryData& batteryData,
-        I_MessageForwarder& messageForwarder)
-    : batteryData_(batteryData)
-    , messageForwarder_(messageForwarder)
+                                           I_MessageForwarder& messageForwarder)
+: batteryData_(batteryData)
+, messageForwarder_(messageForwarder)
 {
 }
 

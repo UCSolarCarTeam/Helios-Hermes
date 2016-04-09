@@ -25,8 +25,6 @@
 
 #pragma once
 
-#include <QObject>
-
 #include "I_BatteryJsonForwarder.h"
 
 class I_BatteryData;
@@ -38,7 +36,7 @@ class BatteryJsonForwarder : public I_BatteryJsonForwarder
 public:
     BatteryJsonForwarder(I_BatteryData& batteryData,
                          I_MessageForwarder& messageForwarder);
-    ~BatteryJsonForwarder() {}
+    virtual ~BatteryJsonForwarder() {}
 
 public slots:
     void forwardBatteryData();

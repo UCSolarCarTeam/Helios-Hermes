@@ -25,7 +25,6 @@
 
 #pragma once
 
-#include <QObject>
 #include <QScopedPointer>
 #include <QTimer>
 
@@ -42,12 +41,6 @@ class I_PowerData;
 class I_VehicleData;
 class I_MessageForwarder;
 
-enum DataTypes { BATTERY_DATA,
-                 FAULT_DATA,
-                 POWER_DATA,
-                 VEHICLE_DATA
-               };
-
 class JsonForwarder : public I_JsonForwarder
 {
     Q_OBJECT
@@ -57,7 +50,7 @@ public:
                   I_PowerData& powerData,
                   I_VehicleData& vehicleData,
                   I_MessageForwarder& messageForwarder);
-    ~JsonForwarder() {}
+    virtual ~JsonForwarder() {}
     void startForwardingData(int conversionFrequency);
 
 private slots:
@@ -69,5 +62,5 @@ private:
     QScopedPointer<I_PowerJsonForwarder> powerJsonForwarder_;
     QScopedPointer<I_VehicleJsonForwarder> vehicleJsonForwarder_;
     QScopedPointer<QTimer> readTimer_;
-    DataTypes dataToRead_;
+    int dataToReadCount_;
 };

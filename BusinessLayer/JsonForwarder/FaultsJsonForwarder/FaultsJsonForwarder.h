@@ -25,8 +25,6 @@
 
 #pragma once
 
-#include <QObject>
-
 #include "I_FaultsJsonForwarder.h"
 
 class I_FaultsData;
@@ -38,7 +36,7 @@ class FaultsJsonForwarder : public I_FaultsJsonForwarder
 public:
     FaultsJsonForwarder(I_FaultsData& faultsData,
                         I_MessageForwarder& messageForwarder);
-    ~FaultsJsonForwarder() {}
+    virtual ~FaultsJsonForwarder() {}
 
 public slots:
     void forwardFaultsData();

@@ -33,12 +33,6 @@
 #include "JsonDefines.h"
 #include "JsonForwarder.h"
 
-class I_BatteryData;
-class I_FaultsData;
-class I_PowerData;
-class I_VehicleData;
-class I_MessageForwarder;
-
 JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
                              I_FaultsData& faultsData,
                              I_PowerData& powerData,
@@ -49,7 +43,7 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
 , powerJsonForwarder_(new PowerJsonForwarder(powerData, messageForwarder))
 , vehicleJsonForwarder_(new VehicleJsonForwarder(vehicleData, messageForwarder))
 , readTimer_(new QTimer())
-, dataToRead_(BATTERY_DATA)
+, dataToReadCount_(0)
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
 }
@@ -62,23 +56,28 @@ void JsonForwarder::startForwardingData(int conversionFrequency)
 
 void JsonForwarder::forwardData()
 {
-    switch (dataToRead_)
+    switch (dataToReadCount_)
     {
-    case BATTERY_DATA:
+    case 0:
         batteryJsonForwarder_->forwardBatteryData();
-        dataToRead_ = FAULT_DATA;
         break;
-    case FAULT_DATA:
+    case 1:
         faultsJsonForwarder_->forwardFaultsData();
-        dataToRead_ = POWER_DATA;
         break;
-    case POWER_DATA:
+    case 2:
         powerJsonForwarder_->forwardPowerData();
-        dataToRead_ = VEHICLE_DATA;
         break;
-    case VEHICLE_DATA :
+    case 3 :
         vehicleJsonForwarder_->forwardVehicleData();
-        dataToRead_ = BATTERY_DATA;
         break;
+    }
+
+    if (dataToReadCount_ >= 3)
+    {
+        dataToReadCount_ = 0;
+    }
+    else
+    {
+        dataToReadCount_++;
     }
 }
