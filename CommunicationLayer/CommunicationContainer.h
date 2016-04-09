@@ -28,6 +28,7 @@
 #include <QScopedPointer>
 
 class DataContainer;
+class InfrastructureContainer;
 class CommunicationContainerPrivate;
 
 class I_DataInjectionService;
@@ -39,7 +40,7 @@ class I_CommDevice;
 class CommunicationContainer
 {
 public:
-   explicit CommunicationContainer(DataContainer& dataContainer);
+   explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
    ~CommunicationContainer();
 
    I_PacketSynchronizer& packetSynchronizer();

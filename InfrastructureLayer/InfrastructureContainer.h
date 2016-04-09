@@ -25,24 +25,18 @@
 
 #pragma once
 
-#include <QSettings>
+#include <QScopedPointer>
 
-#include "I_Settings.h"
+class I_Settings;
 
-class Settings : public I_Settings
+class InfrastructureContainer
 {
 public:
-    Settings(QString filepath);
-    virtual ~Settings() {}
-    QString serialPortName() const;
-    int baudrate() const;
-    QString ipAddress() const;
-    quint16 udpPort() const;
+    InfrastructureContainer();
+    ~InfrastructureContainer();
+
+    I_Settings& settings();
 
 private:
-    QSettings settings_;
-    QString serialPortName_;
-    int baudrate_;
-    QString ipAddress_;
-    quint16 port_;
+    QScopedPointer<I_Settings> settings_;
 };

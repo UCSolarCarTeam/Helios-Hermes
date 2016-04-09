@@ -1,17 +1,13 @@
 #include <QDebug>
 #include <QTimer>
+
 #include "RadioCommDevice.h"
+#include "InfrastructureLayer/Settings/I_Settings.h"
 
-namespace
-{
-   const QString DEFAULT_PORT_NAME = "/dev/pts/7";
-   const int DEFAULT_BAUDRATE = 9600;
-}
-
-RadioCommDevice::RadioCommDevice(QSerialPort& serialPort)
+RadioCommDevice::RadioCommDevice(QSerialPort& serialPort, I_Settings& settings)
 : serialPort_(serialPort)
 {
-   setSerialParameters(DEFAULT_PORT_NAME, DEFAULT_BAUDRATE);
+   setSerialParameters(settings.serialPortName(), settings.baudrate());
    // This makes sure that it is connected after everything is created.
    // Otherwise the error messages won't be sent to the GUI
    QTimer::singleShot(0, this, SLOT(connectToDataSource()));

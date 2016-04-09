@@ -8,8 +8,10 @@ CONFIG += staticlib
 DESTDIR = ../../build/.lib
 
 HEADERS += \
+    InfrastructureContainer.h \
     Settings/Settings.h \
-    Settings/I_Settings.h 
+    Settings/I_Settings.h \
 
 SOURCES += \
-    Settings/Settings.cpp
+    InfrastructureContainer.cpp \
+    Settings/Settings.cpp \

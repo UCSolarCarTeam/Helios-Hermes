@@ -34,9 +34,9 @@ CONFIG += ordered static
 message(University of Calgary Solar Car Team Delta Hermes)
 
 SUBDIRS = \
+   InfrastructureLayer \
    DataLayer \
    CommunicationLayer \
-   InfrastructureLayer \
    BusinessLayer \
    Tests \
    SchulichDeltaHermes

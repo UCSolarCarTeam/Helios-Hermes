@@ -23,26 +23,24 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once
+#include "InfrastructureContainer.h"
+#include "Settings/Settings.h"
 
-#include <QSettings>
-
-#include "I_Settings.h"
-
-class Settings : public I_Settings
+namespace
 {
-public:
-    Settings(QString filepath);
-    virtual ~Settings() {}
-    QString serialPortName() const;
-    int baudrate() const;
-    QString ipAddress() const;
-    quint16 udpPort() const;
+QString SETTINGS_FILE_NAME = "config.ini";
+}
 
-private:
-    QSettings settings_;
-    QString serialPortName_;
-    int baudrate_;
-    QString ipAddress_;
-    quint16 port_;
-};
+InfrastructureContainer::InfrastructureContainer()
+: settings_(new Settings(SETTINGS_FILE_NAME))
+{
+}
+
+InfrastructureContainer::~InfrastructureContainer()
+{   
+}
+
+I_Settings& InfrastructureContainer::settings()
+{
+    return *settings_;
+}
