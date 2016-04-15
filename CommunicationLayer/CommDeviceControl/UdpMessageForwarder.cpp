@@ -34,6 +34,7 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 : ipAddress_(settings.ipAddress())
 , port_(settings.udpPort())
 {
+    socket_.bind(ipAddress_, port_);
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
