@@ -24,6 +24,7 @@
  */
 
 #include <QTimer>
+#include <QDebug>
 
 #include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
@@ -46,6 +47,7 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
 , dataToReadCount_(0)
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
+    startForwardingData(500);
 }
 
 JsonForwarder::~JsonForwarder()
@@ -62,15 +64,19 @@ void JsonForwarder::forwardData()
     switch (dataToReadCount_)
     {
     case 0:
+        qDebug() << "JsonForwarder: Forwarding battery data";
         batteryJsonForwarder_->forwardBatteryData();
         break;
     case 1:
+        qDebug() << "JsonForwarder: Forwarding faults data";
         faultsJsonForwarder_->forwardFaultsData();
         break;
     case 2:
+        qDebug() << "JsonForwarder: Forwarding power data";
         powerJsonForwarder_->forwardPowerData();
         break;
     case 3 :
+        qDebug() << "JsonForwarder: Forwarding vehicle data";
         vehicleJsonForwarder_->forwardVehicleData();
         break;
     }

@@ -27,13 +27,16 @@
 
 #include <QScopedPointer>
 class CommunicationContainer;
+class DataContainer;
 class LoggerService;
 class I_CommunicationsMonitoringService;
+class I_JsonForwarder;
 
 class BusinessContainer
 {
 public:
-   explicit BusinessContainer(CommunicationContainer& communicationContainer);
+   explicit BusinessContainer(CommunicationContainer& communicationContainer,
+                              DataContainer& dataContainer);
    ~BusinessContainer();
 
    I_CommunicationsMonitoringService& communicationsMonitoringService();
@@ -41,4 +44,5 @@ public:
 private:
    QScopedPointer<LoggerService> loggerService_;
    QScopedPointer<I_CommunicationsMonitoringService> communicationsMonitoringService_;
+   QScopedPointer<I_JsonForwarder> jsonForwarder_;
 };

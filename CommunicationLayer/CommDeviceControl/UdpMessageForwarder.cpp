@@ -27,17 +27,13 @@
 #include <QDebug>
 #include <QHostAddress>
 
-#include "I_CommDevice.h"
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "UdpMessageForwarder.h"
 
-UdpMessageForwarder::UdpMessageForwarder(const I_CommDevice& device, I_Settings& settings)
-: device_(device)
-, multicastAddress_(settings.ipAddress())
-, multicastPort_(settings.udpPort())
+UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
+: ipAddress_(settings.ipAddress())
+, port_(settings.udpPort())
 {
-    connect(&device_, SIGNAL(dataReceived(QByteArray)),
-            this, SLOT(forwardData(QByteArray)));
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
@@ -47,7 +43,7 @@ UdpMessageForwarder::~UdpMessageForwarder()
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
     qDebug() << "Forwarding data";
-    const quint64 dataWritten = socket_.writeDatagram(data, multicastAddress_, multicastPort_);
+    const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
     if (dataWritten != static_cast<quint64>(data.size()))
     {
         qWarning() << "Unable to forward data";

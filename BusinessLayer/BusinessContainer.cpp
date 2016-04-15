@@ -25,15 +25,22 @@
 
 #include "BusinessContainer.h"
 #include "CommunicationLayer/CommunicationContainer.h"
+#include "DataLayer/DataContainer.h"
 #include "CommunicationsMonitoringService/CommunicationsMonitoringService.h"
 #include "LoggerService/LoggerService.h"
+#include "JsonForwarder/JsonForwarder.h"
 
-BusinessContainer::BusinessContainer(CommunicationContainer& communicationContainer)
-: loggerService_(new LoggerService(
-   communicationContainer.packetSynchronizer(),
-   communicationContainer.packetDecoder()))
+BusinessContainer::BusinessContainer(CommunicationContainer& communicationContainer, 
+                                     DataContainer& dataContainer)
+: loggerService_(new LoggerService(communicationContainer.packetSynchronizer(),
+                                   communicationContainer.packetDecoder()))
 , communicationsMonitoringService_(new CommunicationsMonitoringService(
    communicationContainer.packetChecksumChecker()))
+, jsonForwarder_(new JsonForwarder(dataContainer.batteryData(),
+                                   dataContainer.faultsData(),
+                                   dataContainer.powerData(),
+                                   dataContainer.vehicleData(),
+                                   communicationContainer.udpMessageForwarder()))
 {
 }
 
