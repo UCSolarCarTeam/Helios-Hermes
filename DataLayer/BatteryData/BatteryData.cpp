@@ -27,7 +27,22 @@
 #include <QDebug>
 
 BatteryData::BatteryData()
+: mod0PcbTemperature_(-1)
+, mod0CellTemperature_(-1)
+, mod0CellVoltages_({-1, -1, -1, -1, -1, -1, -1, -1})
+, mod1PcbTemperature_(-1)
+, mod1CellTemperature_(-1)
+, mod1CellVoltages_({-1, -1, -1, -1, -1, -1, -1, -1})
+, mod2PcbTemperature_(-1)
+, mod2CellTemperature_(-1)
+, mod2CellVoltages_({-1, -1, -1, -1, -1, -1, -1, -1})
+, mod3PcbTemperature_(-1)
+, mod3CellTemperature_(-1)
+, mod3CellVoltages_({-1, -1, -1, -1, -1, -1, -1, -1})
+, batteryVoltage_(-1)
+, batteryCurrent_(-1)
 {
+   // initialize to -1
 }
 
 BatteryData::~BatteryData()

@@ -26,7 +26,14 @@
 #include "PowerData.h"
 
 PowerData::PowerData()
+: busCurrentA_(-1)
+, busVoltage_(-1)
+, motorVoltageReal_(-1)
+, motorCurrentReal_(-1)
+, backEmfImaginary_(-1)
+, dcBusAmpHours_(-1)
 {
+   // initialize to -1
 }
 
 PowerData::~PowerData()

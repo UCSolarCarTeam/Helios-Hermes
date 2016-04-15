@@ -26,7 +26,16 @@
 #include "VehicleData.h"
 
 VehicleData::VehicleData()
+: driverSetSpeedMetersPerSecond_(-1)
+, driverSetCurrent_(-1)
+, vehicleVelocityMetersPerSecond_(-1)
+, motorVelocityRpm_(-1)
+, ipmHeatSinkTemp_(-1)
+, dspBoardTemp_(-1)
+, receivedErrorCount_(-1)
+, transmittedErrorCount_(-1)
 {
+   // initialize to -1
 }
 
 VehicleData::~VehicleData()
