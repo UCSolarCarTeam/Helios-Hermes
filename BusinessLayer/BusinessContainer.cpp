@@ -46,11 +46,11 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                    communicationContainer.udpMessageForwarder(),
                                    infrastructureContainer.settings()))
 {
+    jsonForwarder_->startForwardingData();
 }
 
 BusinessContainer::~BusinessContainer()
 {
-    jsonForwarder_->startForwardingData();
 }
 
 I_CommunicationsMonitoringService& BusinessContainer::communicationsMonitoringService()
