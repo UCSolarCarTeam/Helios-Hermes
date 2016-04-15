@@ -36,6 +36,7 @@
 #include "BusinessLayer/JsonForwarder/JsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
 
+#include "Tests/InfrastructureLayer/Settings/MockSettings.h"
 #include "Tests/CommunicationLayer/CommDeviceControl/MockMessageForwarder.h"
 #include "Tests/DataLayer/BatteryData/MockBatteryData.h"
 #include "Tests/DataLayer/FaultsData/MockFaultsData.h"
@@ -48,7 +49,7 @@ using ::testing::Return;
 
 namespace
 {
-    const int FORWARD_INTERVAL_MSEC = 100;
+    const int FORWARD_INTERVAL_MSEC = 50;
     const int FORWARD_ITERATIONS = 10;
 }
 
@@ -61,6 +62,7 @@ protected:
     QScopedPointer<MockPowerData> powerData_;
     QScopedPointer<MockVehicleData> vehicleData_;
     QScopedPointer<MockMessageForwarder> messageForwarder_;
+    QScopedPointer<MockSettings> settings_;
     QScopedPointer<JsonForwarder> jsonForwarder_;
 
     virtual void SetUp()
@@ -70,11 +72,15 @@ protected:
         powerData_.reset(new MockPowerData());
         vehicleData_.reset(new MockVehicleData());
         messageForwarder_.reset(new MockMessageForwarder());
+        settings_.reset(new MockSettings());
+        EXPECT_CALL(*settings_, forwardPeriod())
+            .WillRepeatedly(Return(FORWARD_INTERVAL_MSEC)); // Action must be set before jsonForwarder constructor
         jsonForwarder_.reset(new JsonForwarder(*batteryData_,
                                                *faultsData_,
                                                *powerData_,
                                                *vehicleData_,
-                                               *messageForwarder_));
+                                               *messageForwarder_,
+                                               *settings_));
 
         QList<double> emptyList = {0, 0, 0, 0, 0, 0, 0, 0};
         EXPECT_CALL(*batteryData_, mod0PcbTemperature())
@@ -146,6 +152,8 @@ protected:
             .WillRepeatedly(Return(0));
         EXPECT_CALL(*vehicleData_, transmittedErrorCount())
             .WillRepeatedly(Return(0));
+        
+
     }
 };
 
@@ -155,6 +163,6 @@ TEST_F(JsonForwarderTest, dataForwarded)
 {
     EXPECT_CALL(*messageForwarder_, forwardData(_))
         .Times(FORWARD_ITERATIONS);
-    jsonForwarder_->startForwardingData(FORWARD_INTERVAL_MSEC);
+    jsonForwarder_->startForwardingData();
     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC/2);
 }

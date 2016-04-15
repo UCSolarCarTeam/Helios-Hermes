@@ -39,6 +39,7 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lIn
 
 HEADERS += \
     CommunicationLayer/CommDeviceControl/MockMessageForwarder.h \
+    InfrastructureLayer/Settings/MockSettings.h \
     DataLayer/BatteryData/MockBatteryData.h \
     DataLayer/FaultsData/MockFaultsData.h \
     DataLayer/PowerData/MockPowerData.h \

@@ -60,5 +60,5 @@ quint16 Settings::udpPort() const
 
 int Settings::forwardPeriod() const
 {
-    return settings_.value("General/forwardPeriod").toInt();
+    return settings_.value("forwardPeriod").toInt();
 }

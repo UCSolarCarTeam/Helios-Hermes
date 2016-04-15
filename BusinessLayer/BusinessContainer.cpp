@@ -24,6 +24,7 @@
  */
 
 #include "BusinessContainer.h"
+#include "InfrastructureLayer/InfrastructureContainer.h"
 #include "CommunicationLayer/CommunicationContainer.h"
 #include "DataLayer/DataContainer.h"
 #include "CommunicationsMonitoringService/CommunicationsMonitoringService.h"
@@ -31,7 +32,8 @@
 #include "JsonForwarder/JsonForwarder.h"
 
 BusinessContainer::BusinessContainer(CommunicationContainer& communicationContainer, 
-                                     DataContainer& dataContainer)
+                                     DataContainer& dataContainer,
+                                     InfrastructureContainer& infrastructureContainer)
 : loggerService_(new LoggerService(communicationContainer.packetSynchronizer(),
                                    communicationContainer.packetDecoder()))
 , communicationsMonitoringService_(new CommunicationsMonitoringService(
@@ -40,12 +42,14 @@ BusinessContainer::BusinessContainer(CommunicationContainer& communicationContai
                                    dataContainer.faultsData(),
                                    dataContainer.powerData(),
                                    dataContainer.vehicleData(),
-                                   communicationContainer.udpMessageForwarder()))
+                                   communicationContainer.udpMessageForwarder(),
+                                   infrastructureContainer.settings()))
 {
 }
 
 BusinessContainer::~BusinessContainer()
 {
+    jsonForwarder_->startForwardingData();
 }
 
 I_CommunicationsMonitoringService& BusinessContainer::communicationsMonitoringService()

@@ -31,6 +31,7 @@
 #include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
+#include "InfrastructureLayer/Settings/I_Settings.h"
 #include "JsonDefines.h"
 #include "JsonForwarder.h"
 
@@ -38,24 +39,25 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
                              I_FaultsData& faultsData,
                              I_PowerData& powerData,
                              I_VehicleData& vehicleData,
-                             I_MessageForwarder& messageForwarder)
+                             I_MessageForwarder& messageForwarder,
+                             I_Settings& settings)
 : batteryJsonForwarder_(new BatteryJsonForwarder(batteryData, messageForwarder))
 , faultsJsonForwarder_(new FaultsJsonForwarder(faultsData, messageForwarder))
 , powerJsonForwarder_(new PowerJsonForwarder(powerData, messageForwarder))
 , vehicleJsonForwarder_(new VehicleJsonForwarder(vehicleData, messageForwarder))
 , readTimer_(new QTimer())
 , dataToReadCount_(0)
+, forwardPeriod_(settings.forwardPeriod())
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
-    startForwardingData(500);
 }
 
 JsonForwarder::~JsonForwarder()
 {}
 
-void JsonForwarder::startForwardingData(int conversionFrequency)
+void JsonForwarder::startForwardingData()
 {
-    readTimer_->setInterval(conversionFrequency);
+    readTimer_->setInterval(forwardPeriod_);
     readTimer_->start();
 }
 

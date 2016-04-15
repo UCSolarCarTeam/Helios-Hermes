@@ -24,13 +24,17 @@
  */
 
 #pragma once
+#include <gmock/gmock.h>
 
-#include <QObject>
+#include "InfrastructureLayer/Settings/I_Settings.h"
 
-class I_JsonForwarder : public QObject
+class MockSettings : public I_Settings
 {
-    Q_OBJECT
 public:
-    virtual ~I_JsonForwarder() {}
-    virtual void startForwardingData() = 0;
+    MOCK_CONST_METHOD0(serialPortName, QString());
+    MOCK_CONST_METHOD0(baudrate, int());
+    MOCK_CONST_METHOD0(ipAddress, QString());
+    MOCK_CONST_METHOD0(udpPort, quint16());
+    MOCK_CONST_METHOD0(forwardPeriod, int());
 };
+

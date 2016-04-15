@@ -35,7 +35,7 @@ SchulichDeltaHermes::SchulichDeltaHermes(int& argc, char** argv)
 , infrastructureContainer_(new InfrastructureContainer())
 , dataContainer_(new DataContainer())
 , communicationContainer_(new CommunicationContainer(*dataContainer_, *infrastructureContainer_))
-, businessContainer_(new BusinessContainer(*communicationContainer_, *dataContainer_))
+, businessContainer_(new BusinessContainer(*communicationContainer_, *dataContainer_, *infrastructureContainer_))
 {
 }
 
