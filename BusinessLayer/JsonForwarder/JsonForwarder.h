@@ -30,10 +30,10 @@
 
 #include "I_JsonForwarder.h"
 
-#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
-#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
-#include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
-#include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
+class BatteryJsonForwarder;
+class FaultsJsonForwarder;
+class PowerJsonForwarder;
+class VehicleJsonForwarder;
 
 class I_BatteryData;
 class I_FaultsData;
@@ -50,7 +50,7 @@ public:
                   I_PowerData& powerData,
                   I_VehicleData& vehicleData,
                   I_MessageForwarder& messageForwarder);
-    virtual ~JsonForwarder() {}
+    virtual ~JsonForwarder();
     void startForwardingData(int conversionFrequency);
 
 private slots:

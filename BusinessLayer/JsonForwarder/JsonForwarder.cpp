@@ -48,6 +48,9 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
 }
 
+JsonForwarder::~JsonForwarder()
+{}
+
 void JsonForwarder::startForwardingData(int conversionFrequency)
 {
     readTimer_->setInterval(conversionFrequency);
