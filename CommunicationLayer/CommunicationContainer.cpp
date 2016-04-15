@@ -46,7 +46,7 @@ class CommunicationContainerPrivate
 public:
    CommunicationContainerPrivate(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)
    : radioCommDevice(serialPort, infrastructureContainer.settings())
-   , messageForwarder(radioCommDevice, infrastructureContainer.settings())
+   , messageForwarder(infrastructureContainer.settings())
    , packetSynchronizer(radioCommDevice)
    , packetUnstuffer(packetSynchronizer)
    , packetChecksumChecker(packetUnstuffer)

@@ -40,6 +40,7 @@ class I_FaultsData;
 class I_PowerData;
 class I_VehicleData;
 class I_MessageForwarder;
+class I_Settings;
 
 class JsonForwarder : public I_JsonForwarder
 {
@@ -49,9 +50,10 @@ public:
                   I_FaultsData& faultsData,
                   I_PowerData& powerData,
                   I_VehicleData& vehicleData,
-                  I_MessageForwarder& messageForwarder);
+                  I_MessageForwarder& messageForwarder,
+                  I_Settings& settings);
     virtual ~JsonForwarder();
-    void startForwardingData(int conversionFrequency);
+    void startForwardingData();
 
 private slots:
     void forwardData();
@@ -63,4 +65,5 @@ private:
     QScopedPointer<VehicleJsonForwarder> vehicleJsonForwarder_;
     QScopedPointer<QTimer> readTimer_;
     int dataToReadCount_;
+    int forwardPeriod_;
 };

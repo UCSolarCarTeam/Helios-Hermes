@@ -4,19 +4,19 @@
  *
  *  This file is part of Schulich Delta Hermes
  *
- *  Schulich Delta Hermes is free software: 
- *  you can redistribute it and/or modify it under the terms 
- *  of the GNU Affero General Public License as published by 
+ *  Schulich Delta Hermes is free software:
+ *  you can redistribute it and/or modify it under the terms
+ *  of the GNU Affero General Public License as published by
  *  the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
  *
- *  Schulich Delta Hermes is distributed 
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or 
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
+ *  Schulich Delta Hermes is distributed
+ *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *  without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
  *  General Public License for more details.
  *
- *  You should have received a copy of the GNU Affero General 
+ *  You should have received a copy of the GNU Affero General
  *  Public License along with Schulich Delta Hermes.
  *  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -26,7 +26,16 @@
 #include "VehicleData.h"
 
 VehicleData::VehicleData()
+: driverSetSpeedMetersPerSecond_(-1)
+, driverSetCurrent_(-1)
+, vehicleVelocityMetersPerSecond_(-1)
+, motorVelocityRpm_(-1)
+, ipmHeatSinkTemp_(-1)
+, dspBoardTemp_(-1)
+, receivedErrorCount_(-1)
+, transmittedErrorCount_(-1)
 {
+   // initialize to -1
 }
 
 VehicleData::~VehicleData()

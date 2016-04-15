@@ -38,11 +38,8 @@ public:
     int baudrate() const;
     QString ipAddress() const;
     quint16 udpPort() const;
+    int forwardPeriod() const;
 
 private:
     QSettings settings_;
-    QString serialPortName_;
-    int baudrate_;
-    QString ipAddress_;
-    quint16 port_;
 };

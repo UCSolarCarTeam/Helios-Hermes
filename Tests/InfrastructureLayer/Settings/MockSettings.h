@@ -24,28 +24,17 @@
  */
 
 #pragma once
+#include <gmock/gmock.h>
 
-#include <QScopedPointer>
+#include "InfrastructureLayer/Settings/I_Settings.h"
 
-class CommunicationContainer;
-class DataContainer;
-class I_CommunicationsMonitoringService;
-class I_JsonForwarder;
-class InfrastructureContainer;
-class LoggerService;
-
-class BusinessContainer
+class MockSettings : public I_Settings
 {
 public:
-   explicit BusinessContainer(InfrastructureContainer& infrastructureContainer,
-                              CommunicationContainer& communicationContainer,
-                              DataContainer& dataContainer);
-   ~BusinessContainer();
-
-   I_CommunicationsMonitoringService& communicationsMonitoringService();
-
-private:
-   QScopedPointer<LoggerService> loggerService_;
-   QScopedPointer<I_CommunicationsMonitoringService> communicationsMonitoringService_;
-   QScopedPointer<I_JsonForwarder> jsonForwarder_;
+    MOCK_CONST_METHOD0(serialPortName, QString());
+    MOCK_CONST_METHOD0(baudrate, int());
+    MOCK_CONST_METHOD0(ipAddress, QString());
+    MOCK_CONST_METHOD0(udpPort, quint16());
+    MOCK_CONST_METHOD0(forwardPeriod, int());
 };
+
