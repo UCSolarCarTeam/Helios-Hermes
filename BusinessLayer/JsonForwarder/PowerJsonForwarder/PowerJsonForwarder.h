@@ -25,32 +25,23 @@
 
 #pragma once
 
-#include <QScopedPointer>
+#include <QObject>
 
-class DataContainer;
-class CommunicationContainerPrivate;
-
-class I_DataInjectionService;
-class I_PacketChecksumChecker;
-class I_PacketDecoder;
-class I_PacketSynchronizer;
-class I_CommDevice;
+class I_PowerData;
 class I_MessageForwarder;
 
-class CommunicationContainer
+class PowerJsonForwarder : public QObject
 {
+    Q_OBJECT
 public:
-   explicit CommunicationContainer(DataContainer& dataContainer);
-   ~CommunicationContainer();
+    PowerJsonForwarder(I_PowerData& powerData,
+                       I_MessageForwarder& messageForwarder);
+    virtual ~PowerJsonForwarder() {}
 
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
+public slots:
+    void forwardPowerData();
 
 private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
+    I_PowerData& powerData_;
+    I_MessageForwarder& messageForwarder_;
 };

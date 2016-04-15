@@ -37,13 +37,23 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lgm
     error( "Couldn't find the common.pri file!" )
 }
 
-HEADERS += *.h
-SOURCES += *.cpp
-
+HEADERS += \
+	CommunicationLayer/CommDeviceControl/MockMessageForwarder.h \
+	DataLayer/BatteryData/MockBatteryData.h \
+	DataLayer/FaultsData/MockFaultsData.h \
+	DataLayer/PowerData/MockPowerData.h \
+	DataLayer/VehicleData/MockVehicleData.h 
+	
+SOURCES += \
+	testmain.cpp \
+	BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
+	BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp \
+	BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarderTest.cpp \
+	BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarderTest.cpp \
+	BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarderTest.cpp
+	
 !win32 {
     QMAKE_CXXFLAGS += -Werror
 }
 
-PRE_TARGETDEPS += \
-   ../../build/.lib/*g
 DESTDIR = ../../build/.tests
