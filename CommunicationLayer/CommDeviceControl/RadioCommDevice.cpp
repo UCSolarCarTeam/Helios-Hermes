@@ -42,9 +42,11 @@ bool RadioCommDevice::connectToDataSource()
 
 void RadioCommDevice::handleSerialDataIncoming()
 {
+   qDebug() << "Serial port received data";
    QByteArray incomingData = serialPort_.readAll();
    if (incomingData.isEmpty())
    {
+      qWarning() <<"Incoming data empty";
       return;
    }
    emit dataReceived(incomingData);

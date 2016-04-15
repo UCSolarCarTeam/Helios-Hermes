@@ -46,6 +46,7 @@ UdpMessageForwarder::~UdpMessageForwarder()
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
+    qDebug() << "Forwarding data";
     const quint64 dataWritten = socket_.writeDatagram(data, multicastAddress_, multicastPort_);
     if (dataWritten != static_cast<quint64>(data.size()))
     {

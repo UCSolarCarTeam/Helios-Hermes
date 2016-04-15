@@ -37,9 +37,9 @@ class UdpMessageForwarder : public I_MessageForwarder
 public:
     UdpMessageForwarder(const I_CommDevice& device, I_Settings& settings);
     virtual ~UdpMessageForwarder();
-    void forwardData(QByteArray data);
 
-private slots:
+public slots:
+    void forwardData(QByteArray data);
 
 private:
     const I_CommDevice& device_;
