@@ -4,19 +4,19 @@
  *
  *  This file is part of Schulich Delta Hermes
  *
- *  Schulich Delta Hermes is free software: 
- *  you can redistribute it and/or modify it under the terms 
- *  of the GNU Affero General Public License as published by 
+ *  Schulich Delta Hermes is free software:
+ *  you can redistribute it and/or modify it under the terms
+ *  of the GNU Affero General Public License as published by
  *  the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
  *
- *  Schulich Delta Hermes is distributed 
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or 
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
+ *  Schulich Delta Hermes is distributed
+ *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *  without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
  *  General Public License for more details.
  *
- *  You should have received a copy of the GNU Affero General 
+ *  You should have received a copy of the GNU Affero General
  *  Public License along with Schulich Delta Hermes.
  *  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -51,11 +51,11 @@ BatteryData::~BatteryData()
 
 /*BatteryData "Gets"*/
 double BatteryData::mod0PcbTemperature() const
-{           
+{
    return mod0PcbTemperature_;
 }
 double BatteryData::mod0CellTemperature() const
-{           
+{
    return mod0CellTemperature_;
 }
 
@@ -65,11 +65,11 @@ QList<double> BatteryData::mod0CellVoltages() const
 }
 
 double BatteryData::mod1PcbTemperature() const
-{           
+{
    return mod1PcbTemperature_;
 }
 double BatteryData::mod1CellTemperature() const
-{           
+{
    return mod1CellTemperature_;
 }
 
@@ -79,11 +79,11 @@ QList<double> BatteryData::mod1CellVoltages() const
 }
 
 double BatteryData::mod2PcbTemperature() const
-{           
+{
    return mod2PcbTemperature_;
 }
 double BatteryData::mod2CellTemperature() const
-{           
+{
    return mod2CellTemperature_;
 }
 
@@ -93,11 +93,11 @@ QList<double> BatteryData::mod2CellVoltages() const
 }
 
 double BatteryData::mod3PcbTemperature() const
-{           
+{
    return mod3PcbTemperature_;
 }
 double BatteryData::mod3CellTemperature() const
-{           
+{
    return mod3CellTemperature_;
 }
 
@@ -107,13 +107,13 @@ QList<double> BatteryData::mod3CellVoltages() const
 }
 
 double BatteryData::batteryVoltage() const
-{           
+{
    return batteryVoltage_;
 }
 double BatteryData::batteryCurrent() const
-{           
+{
    return batteryCurrent_;
-}                      
+}
 
 /*BatteryData "Sets"*/
 void BatteryData::setMod0PcbTemperature(double mod0PcbTemperature)
