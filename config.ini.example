@@ -1,5 +1,7 @@
 ; Schulich Delta Hermes Specification File
 
+forwardPeriod=500
+
 [SerialPort]
 portName=/dev/pts/7
 baudrate=9600
