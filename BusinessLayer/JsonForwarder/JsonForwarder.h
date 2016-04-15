@@ -26,32 +26,41 @@
 #pragma once
 
 #include <QScopedPointer>
+#include <QTimer>
 
-class DataContainer;
-class InfrastructureContainer;
-class CommunicationContainerPrivate;
+#include "I_JsonForwarder.h"
 
-class I_DataInjectionService;
-class I_PacketChecksumChecker;
-class I_PacketDecoder;
-class I_PacketSynchronizer;
-class I_CommDevice;
+class BatteryJsonForwarder;
+class FaultsJsonForwarder;
+class PowerJsonForwarder;
+class VehicleJsonForwarder;
+
+class I_BatteryData;
+class I_FaultsData;
+class I_PowerData;
+class I_VehicleData;
 class I_MessageForwarder;
 
-class CommunicationContainer
+class JsonForwarder : public I_JsonForwarder
 {
+    Q_OBJECT
 public:
-   explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
-   ~CommunicationContainer();
+    JsonForwarder(I_BatteryData& batteryData,
+                  I_FaultsData& faultsData,
+                  I_PowerData& powerData,
+                  I_VehicleData& vehicleData,
+                  I_MessageForwarder& messageForwarder);
+    virtual ~JsonForwarder();
+    void startForwardingData(int conversionFrequency);
 
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
+private slots:
+    void forwardData();
 
 private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
+    QScopedPointer<BatteryJsonForwarder> batteryJsonForwarder_;
+    QScopedPointer<FaultsJsonForwarder> faultsJsonForwarder_;
+    QScopedPointer<PowerJsonForwarder> powerJsonForwarder_;
+    QScopedPointer<VehicleJsonForwarder> vehicleJsonForwarder_;
+    QScopedPointer<QTimer> readTimer_;
+    int dataToReadCount_;
 };

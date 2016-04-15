@@ -12,6 +12,7 @@ HEADERS += \
    CommDeviceControl/I_ConnectionService.h \
    CommDeviceControl/RadioCommDevice.h \
    CommDeviceControl/UdpMessageForwarder.h \
+   CommDeviceControl/I_MessageForwarder.h \
    CommunicationContainer.h \
    DataPopulators/BatteryPopulator.h \
    DataPopulators/CmuPopulator.h \

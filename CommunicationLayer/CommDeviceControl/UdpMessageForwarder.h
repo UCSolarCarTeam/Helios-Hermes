@@ -25,21 +25,21 @@
 
 #pragma once
 
-#include <QObject>
 #include <QUdpSocket>
+#include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
 class I_CommDevice;
 class I_Settings;
 
-class UdpMessageForwarder : public QObject
+class UdpMessageForwarder : public I_MessageForwarder
 {
     Q_OBJECT
 public:
     UdpMessageForwarder(const I_CommDevice& device, I_Settings& settings);
     virtual ~UdpMessageForwarder();
+    void forwardData(QByteArray data);
 
 private slots:
-    void forwardData(QByteArray data);
 
 private:
     const I_CommDevice& device_;

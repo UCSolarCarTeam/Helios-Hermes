@@ -25,33 +25,12 @@
 
 #pragma once
 
-#include <QScopedPointer>
+#include <QObject>
 
-class DataContainer;
-class InfrastructureContainer;
-class CommunicationContainerPrivate;
-
-class I_DataInjectionService;
-class I_PacketChecksumChecker;
-class I_PacketDecoder;
-class I_PacketSynchronizer;
-class I_CommDevice;
-class I_MessageForwarder;
-
-class CommunicationContainer
+class I_JsonForwarder : public QObject
 {
+    Q_OBJECT
 public:
-   explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
-   ~CommunicationContainer();
-
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
-
-private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
+    virtual ~I_JsonForwarder() {}
+    virtual void startForwardingData(int conversionFrequency) = 0;
 };
