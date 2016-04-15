@@ -65,3 +65,8 @@ TEST_F(SettingsTest, port)
 {
     EXPECT_EQ(settings_->udpPort(), 44550);
 }
+
+TEST_F(SettingsTest, forwardPeriod)
+{
+    EXPECT_EQ(settings_->forwardPeriod(), 500);
+}

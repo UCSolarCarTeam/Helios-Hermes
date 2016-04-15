@@ -57,3 +57,8 @@ quint16 Settings::udpPort() const
 {
     return (quint16)settings_.value("UdpAddress/port").toInt();
 }
+
+int Settings::forwardPeriod() const
+{
+    return settings_.value("General/forwardPeriod").toInt();
+}
