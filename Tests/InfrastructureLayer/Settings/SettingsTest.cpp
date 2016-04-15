@@ -23,35 +23,45 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #include <QScopedPointer>
 
-class DataContainer;
-class InfrastructureContainer;
-class CommunicationContainerPrivate;
+#include "InfrastructureLayer/Settings/Settings.h"
 
-class I_DataInjectionService;
-class I_PacketChecksumChecker;
-class I_PacketDecoder;
-class I_PacketSynchronizer;
-class I_CommDevice;
-class I_MessageForwarder;
-
-class CommunicationContainer
+namespace
 {
-public:
-   explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
-   ~CommunicationContainer();
+const QString TEST_FILE_PATH = "testconfig.ini";
+}
 
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
+class SettingsTest : public ::testing::Test
+{
+protected:
+    QScopedPointer<Settings> settings_;
 
-private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
+    virtual void SetUp()
+    {
+        settings_.reset(new Settings(TEST_FILE_PATH));
+    }
 };
+
+TEST_F(SettingsTest, serialPortName)
+{
+    EXPECT_EQ(settings_->serialPortName(), "/dev/pts/7");
+}
+
+TEST_F(SettingsTest, baudrate)
+{
+    EXPECT_EQ(settings_->baudrate(), 9600);
+}
+
+TEST_F(SettingsTest, ipAddress)
+{
+    EXPECT_EQ(settings_->ipAddress(), "239.255.43.21");
+}
+
+TEST_F(SettingsTest, port)
+{
+    EXPECT_EQ(settings_->udpPort(), 44550);
+}

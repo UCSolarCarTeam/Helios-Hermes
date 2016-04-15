@@ -28,13 +28,22 @@
 #include <QUdpSocket>
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
+class I_CommDevice;
+class I_Settings;
+
 class UdpMessageForwarder : public I_MessageForwarder
 {
+    Q_OBJECT
 public:
-   UdpMessageForwarder();
-   virtual ~UdpMessageForwarder();
-   void forwardData(QByteArray data);
+    UdpMessageForwarder(const I_CommDevice& device, I_Settings& settings);
+    virtual ~UdpMessageForwarder();
+
+public slots:
+    void forwardData(QByteArray data);
 
 private:
-   QUdpSocket socket_;
+    const I_CommDevice& device_;
+    QHostAddress multicastAddress_;
+    quint16 multicastPort_;
+    QUdpSocket socket_;
 };

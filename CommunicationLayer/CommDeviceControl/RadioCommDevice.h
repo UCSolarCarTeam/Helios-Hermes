@@ -29,11 +29,13 @@
 #include <QString>
 #include "I_CommDevice.h"
 
+class I_Settings;
+
 class RadioCommDevice : public I_CommDevice
 {
    Q_OBJECT
 public:
-   RadioCommDevice(QSerialPort& serialPort);
+   RadioCommDevice(QSerialPort& serialPort, I_Settings& settings);
    virtual ~RadioCommDevice();
 
 private slots:

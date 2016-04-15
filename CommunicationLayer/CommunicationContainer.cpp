@@ -26,6 +26,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QUdpSocket>
 
+#include "InfrastructureLayer/InfrastructureContainer.h"
 #include "DataLayer/DataContainer.h"
 #include "CommDeviceControl/RadioCommDevice.h"
 #include "CommDeviceControl/UdpMessageForwarder.h"
@@ -43,9 +44,9 @@
 class CommunicationContainerPrivate
 {
 public:
-   CommunicationContainerPrivate(DataContainer& dataContainer)
-   : radioCommDevice(serialPort)
-   , messageForwarder()
+   CommunicationContainerPrivate(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)
+   : radioCommDevice(serialPort, infrastructureContainer.settings())
+   , messageForwarder(radioCommDevice, infrastructureContainer.settings())
    , packetSynchronizer(radioCommDevice)
    , packetUnstuffer(packetSynchronizer)
    , packetChecksumChecker(packetUnstuffer)
@@ -84,8 +85,8 @@ public:
    CmuPopulator cmuPopulator;
 };
 
-CommunicationContainer::CommunicationContainer(DataContainer& dataContainer)
-: impl_(new CommunicationContainerPrivate(dataContainer))
+CommunicationContainer::CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)
+: impl_(new CommunicationContainerPrivate(dataContainer, infrastructureContainer))
 {
 }
 

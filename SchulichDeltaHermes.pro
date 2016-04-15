@@ -1,5 +1,4 @@
-    
-#-------------------------------------------------
+    #-------------------------------------------------
 #
 #  Project created by QtCreator 2014-10-13T12:01:32
 #
@@ -34,6 +33,7 @@ CONFIG += ordered static
 message(University of Calgary Solar Car Team Delta Hermes)
 
 SUBDIRS = \
+   InfrastructureLayer \
    DataLayer \
    CommunicationLayer \
    BusinessLayer \

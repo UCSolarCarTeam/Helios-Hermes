@@ -23,35 +23,37 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#pragma once
+#include <QDebug>
+#include <QSettings>
 
-#include <QScopedPointer>
+#include "Settings.h"
 
-class DataContainer;
-class InfrastructureContainer;
-class CommunicationContainerPrivate;
-
-class I_DataInjectionService;
-class I_PacketChecksumChecker;
-class I_PacketDecoder;
-class I_PacketSynchronizer;
-class I_CommDevice;
-class I_MessageForwarder;
-
-class CommunicationContainer
+namespace
 {
-public:
-   explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
-   ~CommunicationContainer();
+const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
+}
 
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
+Settings::Settings(QString filepath)
+: settings_(filepath, SETTINGS_FILE_FORMAT)
+{
+}
 
-private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
-};
+QString Settings::serialPortName() const
+{
+    return settings_.value("SerialPort/portName").toString();
+}
+
+int Settings::baudrate() const
+{
+    return settings_.value("SerialPort/baudrate").toInt();
+}
+
+QString Settings::ipAddress() const
+{
+    return QString(settings_.value("UdpAddress/ipAddress").toString());
+}
+
+quint16 Settings::udpPort() const
+{
+    return (quint16)settings_.value("UdpAddress/port").toInt();
+}
