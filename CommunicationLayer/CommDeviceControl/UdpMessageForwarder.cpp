@@ -43,10 +43,10 @@ UdpMessageForwarder::~UdpMessageForwarder()
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-    qDebug() << "Forwarding data";
+    qDebug() << "UdpMessageForwarder: Forwarding data";
     const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
     if (dataWritten != static_cast<quint64>(data.size()))
     {
-        qWarning() << "Unable to forward data";
+        qWarning() << "UdpMessageForwader: Unable to forward data";
     }
 }

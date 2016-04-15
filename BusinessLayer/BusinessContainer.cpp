@@ -24,16 +24,17 @@
  */
 
 #include "BusinessContainer.h"
-#include "InfrastructureLayer/InfrastructureContainer.h"
-#include "CommunicationLayer/CommunicationContainer.h"
-#include "DataLayer/DataContainer.h"
-#include "CommunicationsMonitoringService/CommunicationsMonitoringService.h"
-#include "LoggerService/LoggerService.h"
-#include "JsonForwarder/JsonForwarder.h"
 
-BusinessContainer::BusinessContainer(CommunicationContainer& communicationContainer, 
-                                     DataContainer& dataContainer,
-                                     InfrastructureContainer& infrastructureContainer)
+#include "CommunicationLayer/CommunicationContainer.h"
+#include "CommunicationsMonitoringService/CommunicationsMonitoringService.h"
+#include "DataLayer/DataContainer.h"
+#include "InfrastructureLayer/InfrastructureContainer.h"
+#include "JsonForwarder/JsonForwarder.h"
+#include "LoggerService/LoggerService.h"
+
+BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureContainer,
+                                     CommunicationContainer& communicationContainer, 
+                                     DataContainer& dataContainer)
 : loggerService_(new LoggerService(communicationContainer.packetSynchronizer(),
                                    communicationContainer.packetDecoder()))
 , communicationsMonitoringService_(new CommunicationsMonitoringService(
@@ -54,5 +55,5 @@ BusinessContainer::~BusinessContainer()
 
 I_CommunicationsMonitoringService& BusinessContainer::communicationsMonitoringService()
 {
-   return *communicationsMonitoringService_;
+    return *communicationsMonitoringService_;
 }

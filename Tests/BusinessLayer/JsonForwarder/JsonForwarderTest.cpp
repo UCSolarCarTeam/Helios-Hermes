@@ -55,7 +55,6 @@ namespace
 
 class JsonForwarderTest : public ::testing::Test
 {
-
 protected:
     QScopedPointer<MockBatteryData> batteryData_;
     QScopedPointer<MockFaultsData> faultsData_;
@@ -152,8 +151,6 @@ protected:
             .WillRepeatedly(Return(0));
         EXPECT_CALL(*vehicleData_, transmittedErrorCount())
             .WillRepeatedly(Return(0));
-        
-
     }
 };
 
