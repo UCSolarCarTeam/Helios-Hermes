@@ -141,7 +141,7 @@ TEST_F(BatteryJsonForwarderTest, typeForwarded)
     EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::BATTERY)))
         .Times(1);
-    batteryJsonForwarder_->forwardBatteryData();
+    batteryJsonForwarder_->forwardBatteryData(QJsonObject());
 }
 
 TEST_F(BatteryJsonForwarderTest, mod0DataForwarded)
@@ -175,7 +175,7 @@ TEST_F(BatteryJsonForwarderTest, mod0DataForwarded)
                                                           JsonFormat::CELL_VOLTAGES,
                                                           mod0CellVoltagesString))))
         .Times(1);
-    batteryJsonForwarder_->forwardBatteryData();
+    batteryJsonForwarder_->forwardBatteryData(QJsonObject());
 }
 
 TEST_F(BatteryJsonForwarderTest, mod1DataForwarded)
@@ -209,7 +209,7 @@ TEST_F(BatteryJsonForwarderTest, mod1DataForwarded)
                                                           JsonFormat::CELL_VOLTAGES,
                                                           mod1CellVoltagesString))))
         .Times(1);
-    batteryJsonForwarder_->forwardBatteryData();
+    batteryJsonForwarder_->forwardBatteryData(QJsonObject());
 }
 
 TEST_F(BatteryJsonForwarderTest, mod2DataForwarded)
@@ -243,7 +243,7 @@ TEST_F(BatteryJsonForwarderTest, mod2DataForwarded)
                                                           JsonFormat::CELL_VOLTAGES,
                                                           mod2CellVoltagesString))))
         .Times(1);
-    batteryJsonForwarder_->forwardBatteryData();
+    batteryJsonForwarder_->forwardBatteryData(QJsonObject());
 }
 
 TEST_F(BatteryJsonForwarderTest, mod3DataForwarded)
@@ -277,7 +277,7 @@ TEST_F(BatteryJsonForwarderTest, mod3DataForwarded)
                                                           JsonFormat::CELL_VOLTAGES,
                                                           mod3CellVoltagesString))))
         .Times(1);
-    batteryJsonForwarder_->forwardBatteryData();
+    batteryJsonForwarder_->forwardBatteryData(QJsonObject());
 }
 
 TEST_F(BatteryJsonForwarderTest, batteryInternalDataForwarded)
@@ -296,5 +296,18 @@ TEST_F(BatteryJsonForwarderTest, batteryInternalDataForwarded)
                 forwardData(AllOf(JsonStringIs(JsonFormat::BATTERY_VOLTAGE, batteryVoltageString),
                                   JsonStringIs(JsonFormat::BATTERY_CURRENT, batteryCurrentString))))
         .Times(1);
-    batteryJsonForwarder_->forwardBatteryData();
+    batteryJsonForwarder_->forwardBatteryData(QJsonObject());
+}
+
+TEST_F(BatteryJsonForwarderTest, baseJsonPreserved)
+{
+    QString fakeFieldKey = "Key";
+    QString fakeFieldValue = "Value";
+    QJsonObject fakeBaseJson = QJsonObject();
+    fakeBaseJson[fakeFieldKey] = fakeFieldValue;
+
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(JsonStringIs(fakeFieldKey, fakeFieldValue)))
+        .Times(1);
+    batteryJsonForwarder_->forwardBatteryData(fakeBaseJson);
 }

@@ -95,7 +95,7 @@ TEST_F(VehicleJsonForwarderTest, typeForwarded)
     EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::VEHICLE)))
         .Times(1);
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 
 TEST_F(VehicleJsonForwarderTest, driverSetSpeedMetersPerSecond)
@@ -105,7 +105,7 @@ TEST_F(VehicleJsonForwarderTest, driverSetSpeedMetersPerSecond)
     EXPECT_CALL(*vehicleData_, driverSetSpeedMetersPerSecond())
         .WillRepeatedly(Return(driverSetSpeedMetersPerSecond));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::DRIVER_SET_SPEED_METERS_PER_SECOND, driverSetSpeedMetersPerSecondString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, driverSetCurrent)
 {
@@ -114,7 +114,7 @@ TEST_F(VehicleJsonForwarderTest, driverSetCurrent)
     EXPECT_CALL(*vehicleData_, driverSetCurrent())
         .WillRepeatedly(Return(driverSetCurrent));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::DRIVER_SET_CURRENT, driverSetCurrentString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, vehicleVelocityMetersPerSecond)
 {
@@ -123,7 +123,7 @@ TEST_F(VehicleJsonForwarderTest, vehicleVelocityMetersPerSecond)
     EXPECT_CALL(*vehicleData_, vehicleVelocityMetersPerSecond())
         .WillRepeatedly(Return(vehicleVelocityMetersPerSecond));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::VEHICLE_VELOCITY_METERS_PER_SECOND, vehicleVelocityMetersPerSecondString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, motorVelocityRpm)
 {
@@ -132,7 +132,7 @@ TEST_F(VehicleJsonForwarderTest, motorVelocityRpm)
     EXPECT_CALL(*vehicleData_, motorVelocityRpm())
         .WillRepeatedly(Return(motorVelocityRpm));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::MOTOR_VELOCITY_RPM, motorVelocityRpmString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, ipmHeatSinkTemp)
 {
@@ -141,7 +141,7 @@ TEST_F(VehicleJsonForwarderTest, ipmHeatSinkTemp)
     EXPECT_CALL(*vehicleData_, ipmHeatSinkTemp())
         .WillRepeatedly(Return(ipmHeatSinkTemp));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::IPM_HEAT_SINK_TEMP, ipmHeatSinkTempString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, dspBoardTemp)
 {
@@ -150,7 +150,7 @@ TEST_F(VehicleJsonForwarderTest, dspBoardTemp)
     EXPECT_CALL(*vehicleData_, dspBoardTemp())
         .WillRepeatedly(Return(dspBoardTemp));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::DSP_BOARD_TEMP, dspBoardTempString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, receivedErrorCount)
 {
@@ -159,7 +159,7 @@ TEST_F(VehicleJsonForwarderTest, receivedErrorCount)
     EXPECT_CALL(*vehicleData_, receivedErrorCount())
         .WillRepeatedly(Return(receivedErrorCount));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::RECEIVED_ERROR_COUNT, receivedErrorCountString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
 }
 TEST_F(VehicleJsonForwarderTest, transmittedErrorCount)
 {
@@ -168,5 +168,18 @@ TEST_F(VehicleJsonForwarderTest, transmittedErrorCount)
     EXPECT_CALL(*vehicleData_, transmittedErrorCount())
         .WillRepeatedly(Return(transmittedErrorCount));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::TRANSMITTED_ERROR_COUNT, transmittedErrorCountString)));
-    vehicleJsonForwarder_->forwardVehicleData();
+    vehicleJsonForwarder_->forwardVehicleData(QJsonObject());
+}
+
+TEST_F(VehicleJsonForwarderTest, baseJsonPreserved)
+{
+    QString fakeFieldKey = "Key";
+    QString fakeFieldValue = "Value";
+    QJsonObject fakeBaseJson = QJsonObject();
+    fakeBaseJson[fakeFieldKey] = fakeFieldValue;
+
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(JsonStringIs(fakeFieldKey, fakeFieldValue)))
+        .Times(1);
+    vehicleJsonForwarder_->forwardVehicleData(fakeBaseJson);
 }

@@ -39,6 +39,7 @@ public:
     QString ipAddress() const;
     quint16 udpPort() const;
     int forwardPeriod() const;
+    QString packetTitle() const;
 
 private:
     QSettings settings_;

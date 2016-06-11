@@ -38,9 +38,9 @@ FaultsJsonForwarder::FaultsJsonForwarder(I_FaultsData& faultsData,
 {
 }
 
-void FaultsJsonForwarder::forwardFaultsData()
+void FaultsJsonForwarder::forwardFaultsData(const QJsonObject& baseJson)
 {
-    QJsonObject faultsJson = QJsonObject();
+    QJsonObject faultsJson = baseJson;
     faultsJson[JsonFormat::DATA_TYPE] = JsonFormat::FAULTS;
 
     QJsonObject motorOneFaultsJson = QJsonObject();

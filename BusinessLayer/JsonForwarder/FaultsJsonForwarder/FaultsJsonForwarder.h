@@ -27,6 +27,7 @@
 
 #include <QObject>
 
+class QJsonObject;
 class I_FaultsData;
 class I_MessageForwarder;
 
@@ -39,7 +40,7 @@ public:
     virtual ~FaultsJsonForwarder() {}
 
 public slots:
-    void forwardFaultsData();
+    void forwardFaultsData(const QJsonObject& baseJson);
 
 private:
     I_FaultsData& faultsData_;

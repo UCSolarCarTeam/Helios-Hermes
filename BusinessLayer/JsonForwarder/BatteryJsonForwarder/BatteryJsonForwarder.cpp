@@ -39,9 +39,9 @@ BatteryJsonForwarder::BatteryJsonForwarder(I_BatteryData& batteryData,
 {
 }
 
-void BatteryJsonForwarder::forwardBatteryData()
+void BatteryJsonForwarder::forwardBatteryData(const QJsonObject& baseJson)
 {
-    QJsonObject batteryJson = QJsonObject();
+    QJsonObject batteryJson = baseJson;
     batteryJson[JsonFormat::DATA_TYPE] = JsonFormat::BATTERY;
 
     QJsonObject mod0 = QJsonObject();

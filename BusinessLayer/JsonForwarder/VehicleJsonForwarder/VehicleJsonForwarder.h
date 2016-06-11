@@ -39,7 +39,7 @@ public:
     virtual ~VehicleJsonForwarder() {}
 
 public slots:
-    void forwardVehicleData();
+    void forwardVehicleData(const QJsonObject& baseJson);
 
 private:
     I_VehicleData& vehicleData_;
