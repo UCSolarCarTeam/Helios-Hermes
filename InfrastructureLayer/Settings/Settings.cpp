@@ -62,3 +62,8 @@ int Settings::forwardPeriod() const
 {
     return settings_.value("forwardPeriod").toInt();
 }
+
+QString Settings::packetTitle() const
+{
+    return settings_.value("JsonFormat/packetTitle").toString();
+}

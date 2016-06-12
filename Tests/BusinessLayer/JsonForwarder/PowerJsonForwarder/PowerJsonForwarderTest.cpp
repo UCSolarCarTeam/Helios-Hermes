@@ -90,7 +90,7 @@ TEST_F(PowerJsonForwarderTest, typeForwarded)
     EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::POWER)))
         .Times(1);
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
 }
 
 TEST_F(PowerJsonForwarderTest, busCurrentAForwarded)
@@ -100,7 +100,7 @@ TEST_F(PowerJsonForwarderTest, busCurrentAForwarded)
     EXPECT_CALL(*powerData_, busCurrentA())
         .WillRepeatedly(Return(busCurrentA));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::BUS_CURRENT_A, busCurrentAString)));
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
 }
 
 TEST_F(PowerJsonForwarderTest, busVoltageForwarded)
@@ -110,7 +110,7 @@ TEST_F(PowerJsonForwarderTest, busVoltageForwarded)
     EXPECT_CALL(*powerData_, busVoltage())
         .WillRepeatedly(Return(busVoltage));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::BUS_VOLTAGE, busVoltageString)));
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
 }
 
 TEST_F(PowerJsonForwarderTest, motorVoltageRealForwarded)
@@ -120,7 +120,7 @@ TEST_F(PowerJsonForwarderTest, motorVoltageRealForwarded)
     EXPECT_CALL(*powerData_, motorVoltageReal())
         .WillRepeatedly(Return(motorVoltageReal));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::MOTOR_VOLTAGE_REAL, motorVoltageRealString)));
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
 }
 
 TEST_F(PowerJsonForwarderTest, motorCurrentRealForwarded)
@@ -130,7 +130,7 @@ TEST_F(PowerJsonForwarderTest, motorCurrentRealForwarded)
     EXPECT_CALL(*powerData_, motorCurrentReal())
         .WillRepeatedly(Return(motorCurrentReal));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::MOTOR_CURRENT_REAL, motorCurrentRealString)));
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
 }
 
 TEST_F(PowerJsonForwarderTest, backEmfImaginaryForwarded)
@@ -140,7 +140,7 @@ TEST_F(PowerJsonForwarderTest, backEmfImaginaryForwarded)
     EXPECT_CALL(*powerData_, backEmfImaginary())
         .WillRepeatedly(Return(backEmfImaginary));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::BACK_EMF_IMAGINARY, backEmfImaginaryString)));
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
 }
 
 TEST_F(PowerJsonForwarderTest, dcBusAmpHoursForwarded)
@@ -150,5 +150,18 @@ TEST_F(PowerJsonForwarderTest, dcBusAmpHoursForwarded)
     EXPECT_CALL(*powerData_, dcBusAmpHours())
         .WillRepeatedly(Return(dcBusAmpHours));
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::DC_BUS_AMP_HOURS, dcBusAmpHoursString)));
-    powerJsonForwarder_->forwardPowerData();
+    powerJsonForwarder_->forwardPowerData(QJsonObject());
+}
+
+TEST_F(PowerJsonForwarderTest, baseJsonPreserved)
+{
+    QString fakeFieldKey = "Key";
+    QString fakeFieldValue = "Value";
+    QJsonObject fakeBaseJson = QJsonObject();
+    fakeBaseJson[fakeFieldKey] = fakeFieldValue;
+
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(JsonStringIs(fakeFieldKey, fakeFieldValue)))
+        .Times(1);
+    powerJsonForwarder_->forwardPowerData(fakeBaseJson);
 }

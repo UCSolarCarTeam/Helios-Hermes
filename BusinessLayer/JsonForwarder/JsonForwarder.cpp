@@ -25,6 +25,8 @@
 
 #include <QTimer>
 #include <QDebug>
+#include <QJsonObject>
+#include <QDateTime>
 
 #include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
@@ -34,6 +36,11 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "JsonDefines.h"
 #include "JsonForwarder.h"
+
+namespace
+{
+    const QString MYSQL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+}
 
 JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
                              I_FaultsData& faultsData,
@@ -48,6 +55,7 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
 , readTimer_(new QTimer())
 , dataToReadCount_(0)
 , forwardPeriod_(settings.forwardPeriod())
+, PACKET_TITLE_(settings.packetTitle())
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
 }
@@ -63,23 +71,29 @@ void JsonForwarder::startForwardingData()
 
 void JsonForwarder::forwardData()
 {
+    QJsonObject baseJson = QJsonObject();
+    baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
+
+    QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
+    baseJson[JsonFormat::TIMESTAMP] = currentTime;
+
     switch (dataToReadCount_)
     {
     case 0:
         qDebug() << "JsonForwarder: Forwarding battery data";
-        batteryJsonForwarder_->forwardBatteryData();
+        batteryJsonForwarder_->forwardBatteryData(baseJson);
         break;
     case 1:
         qDebug() << "JsonForwarder: Forwarding faults data";
-        faultsJsonForwarder_->forwardFaultsData();
+        faultsJsonForwarder_->forwardFaultsData(baseJson);
         break;
     case 2:
         qDebug() << "JsonForwarder: Forwarding power data";
-        powerJsonForwarder_->forwardPowerData();
+        powerJsonForwarder_->forwardPowerData(baseJson);
         break;
     case 3 :
         qDebug() << "JsonForwarder: Forwarding vehicle data";
-        vehicleJsonForwarder_->forwardVehicleData();
+        vehicleJsonForwarder_->forwardVehicleData(baseJson);
         break;
     }
 

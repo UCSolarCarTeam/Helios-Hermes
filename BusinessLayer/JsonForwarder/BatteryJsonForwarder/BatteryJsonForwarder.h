@@ -27,6 +27,8 @@
 
 #include <QObject>
 
+class QJsonObject;
+
 class I_BatteryData;
 class I_MessageForwarder;
 
@@ -39,7 +41,7 @@ public:
     virtual ~BatteryJsonForwarder() {}
 
 public slots:
-    void forwardBatteryData();
+    void forwardBatteryData(const QJsonObject& baseJson);
 
 private:
     I_BatteryData& batteryData_;

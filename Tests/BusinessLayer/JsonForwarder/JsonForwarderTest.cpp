@@ -32,6 +32,7 @@
 #include <QJsonArray>
 #include <QScopedPointer>
 #include <QDebug>
+#include <QDateTime>
 
 #include "BusinessLayer/JsonForwarder/JsonForwarder.h"
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
@@ -51,6 +52,8 @@ namespace
 {
     const int FORWARD_INTERVAL_MSEC = 50;
     const int FORWARD_ITERATIONS = 10;
+    const QString PACKET_TITLE = "Gen5";
+    const QString MYSQL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }
 
 class JsonForwarderTest : public ::testing::Test
@@ -74,6 +77,8 @@ protected:
         settings_.reset(new MockSettings());
         EXPECT_CALL(*settings_, forwardPeriod())
             .WillRepeatedly(Return(FORWARD_INTERVAL_MSEC)); // Action must be set before jsonForwarder constructor
+        EXPECT_CALL(*settings_, packetTitle())
+            .WillRepeatedly(Return(PACKET_TITLE)); // Action must be set before jsonForwarder constructor
         jsonForwarder_.reset(new JsonForwarder(*batteryData_,
                                                *faultsData_,
                                                *powerData_,
@@ -154,6 +159,22 @@ protected:
     }
 };
 
+/****** JSON MATCHERS ******/
+
+MATCHER_P2(JsonStringIs, key, value, "")
+{
+    QJsonObject jsonObj = QJsonDocument::fromJson(arg).object();
+    QString actual = jsonObj[key].toString();
+    QString expected = value;
+    if(actual != expected)
+    {
+        qDebug() << "Actual is " << actual;
+        qDebug() << "Expected is " << expected;
+        return false;
+    }
+    return true;
+}
+
 /****** TESTS ******/
 
 TEST_F(JsonForwarderTest, dataForwarded)
@@ -163,3 +184,22 @@ TEST_F(JsonForwarderTest, dataForwarded)
     jsonForwarder_->startForwardingData();
     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC/2);
 }
+
+TEST_F(JsonForwarderTest, correctTimeStamp)
+{
+
+    QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
+    EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::TIMESTAMP, currentTime)))
+        .Times(AtLeast(1));
+    jsonForwarder_->startForwardingData();
+    QTest::qWait(FORWARD_INTERVAL_MSEC + FORWARD_INTERVAL_MSEC/2);
+}
+
+TEST_F(JsonForwarderTest, packetTitle)
+{
+    EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::PACKET_TITLE, PACKET_TITLE)))
+        .Times(AtLeast(1));
+    jsonForwarder_->startForwardingData();
+    QTest::qWait(FORWARD_INTERVAL_MSEC + FORWARD_INTERVAL_MSEC/2);
+}
+

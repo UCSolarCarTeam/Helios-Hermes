@@ -26,6 +26,8 @@
 namespace JsonFormat
 {
 const int DECIMAL_PRECISION = 2;
+const QString PACKET_TITLE = "packetTitle";
+const QString TIMESTAMP = "timestamp";
 const QString DATA_TYPE = "datatype";
 
 /* Battery */

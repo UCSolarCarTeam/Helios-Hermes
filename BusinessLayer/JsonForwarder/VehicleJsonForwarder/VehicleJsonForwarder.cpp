@@ -38,9 +38,9 @@ VehicleJsonForwarder::VehicleJsonForwarder(I_VehicleData& vehicleData,
 {
 }
 
-void VehicleJsonForwarder::forwardVehicleData()
+void VehicleJsonForwarder::forwardVehicleData(const QJsonObject& baseJson)
 {
-    QJsonObject vehicleJson = QJsonObject();
+    QJsonObject vehicleJson = baseJson;
     vehicleJson[JsonFormat::DATA_TYPE] = JsonFormat::VEHICLE;
 
     vehicleJson[JsonFormat::DRIVER_SET_SPEED_METERS_PER_SECOND] = QString::number(vehicleData_.driverSetSpeedMetersPerSecond(), 'f', JsonFormat::DECIMAL_PRECISION);

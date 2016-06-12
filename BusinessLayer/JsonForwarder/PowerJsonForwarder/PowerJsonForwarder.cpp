@@ -38,9 +38,9 @@ PowerJsonForwarder::PowerJsonForwarder(I_PowerData& powerData,
 {
 }
 
-void PowerJsonForwarder::forwardPowerData()
+void PowerJsonForwarder::forwardPowerData(const QJsonObject& baseJson)
 {
-    QJsonObject powerJson = QJsonObject();
+    QJsonObject powerJson = baseJson;
     powerJson[JsonFormat::DATA_TYPE] = JsonFormat::POWER;
 
     powerJson[JsonFormat::BUS_CURRENT_A] = QString::number(powerData_.busCurrentA(), 'f', JsonFormat::DECIMAL_PRECISION);

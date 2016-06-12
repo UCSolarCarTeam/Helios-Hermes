@@ -70,3 +70,8 @@ TEST_F(SettingsTest, forwardPeriod)
 {
     EXPECT_EQ(settings_->forwardPeriod(), 500);
 }
+
+TEST_F(SettingsTest, packetTitle)
+{
+    EXPECT_EQ(settings_->packetTitle(), "Gen5");
+}

@@ -96,7 +96,7 @@ TEST_F(FaultsJsonForwarderTest, faultsDataForwarded)
     EXPECT_CALL(*messageForwarder_,
                 forwardData(JsonStringIs(JsonFormat::DATA_TYPE, JsonFormat::FAULTS)))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsTrueMotorOneFaultsDataForwarded)
@@ -124,7 +124,7 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorOneFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, true))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsFalseMotorOneFaultsDataForwarded)
@@ -152,7 +152,7 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorOneFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_ONE_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, false))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsTrueMotorOneLimitsDataForwarded)
@@ -178,7 +178,7 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorOneLimitsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, true))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsFalseMotorOneLimitsDataForwarded)
@@ -204,7 +204,7 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorOneLimitsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_ONE_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, false))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsTrueMotorTwoFaultsDataForwarded)
@@ -232,7 +232,7 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorTwoFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, true))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsFalseMotorTwoFaultsDataForwarded)
@@ -260,7 +260,7 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorTwoFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_TWO_FAULTS,
                                                    JsonFormat::DESATURATION_FAULT, false))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsTrueMotorTwoLimitsDataForwarded)
@@ -286,7 +286,7 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueMotorTwoLimitsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, true))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsFalseMotorTwoLimitsDataForwarded)
@@ -312,7 +312,7 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseMotorTwoLimitsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::MOTOR_TWO_LIMIT_FLAGS,
                                                    JsonFormat::IPM_OR_MOTOR_TELEMETRY_LIMIT, false))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsTrueBatteryFaultsDataForwarded)
@@ -351,7 +351,7 @@ TEST_F(FaultsJsonForwarderTest, faultsTrueBatteryFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT, true))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
 
 TEST_F(FaultsJsonForwarderTest, faultsFalseBatteryFaultsDataForwarded)
@@ -389,5 +389,19 @@ TEST_F(FaultsJsonForwarderTest, faultsFalseBatteryFaultsDataForwarded)
                                   JsonNestedBoolIs(JsonFormat::BATTERY_FAULTS,
                                                    JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT, false))))
         .Times(AtLeast(1));
-    faultsJsonForwarder_->forwardFaultsData();
+    faultsJsonForwarder_->forwardFaultsData(QJsonObject());
 }
+
+TEST_F(FaultsJsonForwarderTest, baseJsonPreserved)
+{
+    QString fakeFieldKey = "Key";
+    QString fakeFieldValue = "Value";
+    QJsonObject fakeBaseJson = QJsonObject();
+    fakeBaseJson[fakeFieldKey] = fakeFieldValue;
+
+    EXPECT_CALL(*messageForwarder_,
+                forwardData(JsonStringIs(fakeFieldKey, fakeFieldValue)))
+        .Times(1);
+    faultsJsonForwarder_->forwardFaultsData(fakeBaseJson);    
+}
+

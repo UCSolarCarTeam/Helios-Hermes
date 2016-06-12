@@ -39,7 +39,7 @@ public:
     virtual ~PowerJsonForwarder() {}
 
 public slots:
-    void forwardPowerData();
+    void forwardPowerData(const QJsonObject& baseJson);
 
 private:
     I_PowerData& powerData_;

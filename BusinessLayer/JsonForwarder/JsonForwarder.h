@@ -66,4 +66,5 @@ private:
     QScopedPointer<QTimer> readTimer_;
     int dataToReadCount_;
     int forwardPeriod_;
+    const QString PACKET_TITLE_;
 };
