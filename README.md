@@ -28,7 +28,7 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
 5. Collect both the resulting .o files into an archive file:
     `ar -rv libgmock.a gtest-all.o gmock-all.o`
 
-Congratulations! You now have a `libgmock.a` archive file, include it in the `../build/.lib/` directory and you should be good to go, run `qmake` then `make` in the Tests directory to check if you can compile the tests. If you can't find the `.lib`, use `ls -a` to show it.
+Congratulations! You now have a `libgmock.a` archive file, include it in the `../build/.lib/` directory and you should be good to go, run `qmake` then `make` in the Tests directory to check if you can compile the tests. Use `ls -a` to show all hidden files (including ones starting with `.`)
 
 To get the Settings test to pass, testconfig.ini must be copied beside the Tests binary. 
 Use the following command in the root directory
