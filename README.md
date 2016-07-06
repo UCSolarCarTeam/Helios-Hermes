@@ -10,8 +10,8 @@ The name is inspired by the Olympian god Hermes who is portrayed as a messenger 
 You have now successfully cloned the Hermes git repo, next is ensuring that you have the proper file structure.
 Originally it should look similar to this:
 
-  --<Original Directory>
-    --Hermes
+  - "Original Directory"
+    - Hermes
 
 From the directory that this README is currently located in (we assume this is named Hermes), run the command:
     `cd ../ && mv ./Hermes ./src && mkdir Hermes && mv ./src ./Hermes/`  
@@ -19,9 +19,9 @@ From the directory that this README is currently located in (we assume this is n
 This will rename the cloned directory to src and move it within a new directory called 'Hermes'
 Your new file structure should look like:
 
-  --<Original Directory>
-    --Hermes
-      --src
+  - "Original Directory"
+    - Hermes
+      - src
 
 ## Testing
 
