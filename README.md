@@ -10,7 +10,7 @@ The name is inspired by the Olympian god Hermes who is portrayed as a messenger 
 You have now successfully cloned the Hermes git repo, next is ensuring that you have the proper file structure.
 Originally it should look similar to this:
 
-  --<Original Directory>
+  --root
     --Hermes
 
 From the directory that this README is currently located in (we assume this is named Hermes), run the command:
@@ -19,21 +19,17 @@ From the directory that this README is currently located in (we assume this is n
 This will rename the cloned directory to src and move it within a new directory called 'Hermes'
 Your new file structure should look like:
 
-  --<Original Directory>
+  --root
     --Hermes
       --src
 
 ## Testing
 
-Testing the Schulich Delta Desktop Hermes is done with googletest and googlemock,
-the gmock and gtest header files need to be in your include path /usr/local/include
-or /usr/include.
+Testing the Schulich Delta Desktop Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path /usr/local/include or /usr/include.
 
-You must compile the library that has the definitions yourself. Meaning you need a
-`libgmock.a` archive file in the test directory in order to compile the tests.
+You must compile the library that has the definitions yourself. Meaning you need a `libgmock.a` archive file in the test directory in order to compile the tests.
 
-To create a `libgmock.a` file in a Linux system follow these instructions in an
-arbitrary dir.
+To create a `libgmock.a` file in a Linux system follow these instructions in an arbitrary dir.
 
 1. Get the googletest and googlemock source code:
     `git clone https://github.com/google/googletest.git`
@@ -50,18 +46,9 @@ arbitrary dir.
 5. Collect both the resulting .o files into an archive file:
     `ar -rv libgmock.a gtest-all.o gmock-all.o`
 
-Now you must run `qmake` in the `Hermes/src/Tests/` directory, which will
-generate a `Hermes/build/.lib` directory.
+Congratulations! You now have a `libgmock.a` archive file. Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go, run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests. Use `ls -a` to show all hidden files (including ones starting with `.`).
 
-Congratulations! You now have a `libgmock.a` archive file, include it in
-the `Hermes/build/.lib/` directory and you should be good to go, run `qmake`
-then `make` in the Tests directory to check if you can compile the tests.
-Use `ls -a` to show all hidden files (including ones starting with `.`)
-
-To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must
-be copied beside the Tests binary. Use the following command in the root directory
+To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary. Use the following command in the root directory
     `cp testconfig.ini ../build/.tests/`
 
-Both gmock and the gtest folders located in `googletest/googlemock/include/` and
-`googletest/googletest/include/` need to be placed in the `/usr/local/include`
-system directory.
+Both gmock and the gtest folders located in `googletest/googlemock/include/` and `googletest/googletest/include/` need to be placed in the `/usr/local/include` system directory.
