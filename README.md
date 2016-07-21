@@ -10,8 +10,8 @@ The name is inspired by the Olympian god Hermes who is portrayed as a messenger 
 You have now successfully cloned the Hermes git repo, next is ensuring that you have the proper file structure.
 Originally it should look similar to this:
 
-  --root
-    --Hermes
+  - root
+    - Hermes
 
 From the directory that this README is currently located in (we assume this is named Hermes), run the command:
     `cd ../ && mv ./Hermes ./src && mkdir Hermes && mv ./src ./Hermes/`  
@@ -19,9 +19,9 @@ From the directory that this README is currently located in (we assume this is n
 This will rename the cloned directory to src and move it within a new directory called 'Hermes'
 Your new file structure should look like:
 
-  --root
-    --Hermes
-      --src
+  - root
+    - Hermes
+      - src
 
 ## Testing
 
@@ -46,7 +46,7 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
 5. Collect both the resulting .o files into an archive file:
     `ar -rv libgmock.a gtest-all.o gmock-all.o`
 
-Congratulations! You now have a `libgmock.a` archive file. Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go, run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests. Use `ls -a` to show all hidden files (including ones starting with `.`).
+Congratulations! You now have a `libgmock.a` archive file. Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go. Run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests. Use `ls -a` to show all hidden files (including ones starting with `.`).
 
 To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary. Use the following command in the root directory
     `cp testconfig.ini ../build/.tests/`
