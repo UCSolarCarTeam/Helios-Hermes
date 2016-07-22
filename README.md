@@ -50,7 +50,7 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
 Congratulations! You now have a `libgmock.a` archive file. 
 Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go. 
 Run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests. 
-Use `ls -a` to show all hidden files (including ones starting with `.`).
+Use `ls -a` to show all hidden files.
 
 To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary. 
 Use the following command in the root directory
