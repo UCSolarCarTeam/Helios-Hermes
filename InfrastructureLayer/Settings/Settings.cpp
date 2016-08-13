@@ -70,5 +70,6 @@ QString Settings::packetTitle() const
 
 QString Settings::queueName() const
 {
-    // TODO implement settings
+    // TODO alter setting files to accommodate addition of queue
+    return QString(settings_.value("UdpAddress/queueName").toString());
 }

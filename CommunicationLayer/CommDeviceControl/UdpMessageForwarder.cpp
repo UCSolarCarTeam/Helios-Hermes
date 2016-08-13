@@ -31,6 +31,7 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "UdpMessageForwarder.h"
 
+// TODO Determine what type of exchange should be used
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
@@ -39,16 +40,20 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
     // Create rabbitMQ channel
     channel = Channel::Create(settings.ipAddress(), settings.udpPort());
 
+    #define QUEUE_NAME "placeholder_queue_name"
+    #define EXCHANGE_NAME "placeholder_exchange_name"
+    #define ROUTING_KEY "placeholder_routing_key"
+
     // declare rabbitMQ Queue
     channel->DeclareQueue(QUEUE_NAME, false, false, false, false); // TODO determine if arguments must be changed
 
     // bind rabbitMQ Queue
-    channel->BindQueue(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
+    channel->BindQueue(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);  //TODO construct this with appropriate arguments
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
 {
-
+    // TODO Deal with queue and channel
 }
 
 void UdpMessageForwarder::forwardData(QByteArray data)
