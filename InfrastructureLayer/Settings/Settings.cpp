@@ -67,3 +67,8 @@ QString Settings::packetTitle() const
 {
     return settings_.value("JsonFormat/packetTitle").toString();
 }
+
+QString Settings::queueName() const
+{
+  
+}

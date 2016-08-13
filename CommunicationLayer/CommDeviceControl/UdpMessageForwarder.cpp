@@ -27,26 +27,38 @@
 #include <QDebug>
 #include <QHostAddress>
 
+
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "UdpMessageForwarder.h"
 
+
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
-: ipAddress_(settings.ipAddress())
-, port_(settings.udpPort())
 {
-    socket_.bind(ipAddress_, port_);
+    // Create rabbitMQ channel
+    channel = Channel::Create(settings.ipAddress(), settings.udpPort());
+
+    // declare rabbitMQ Queue
+    channel->DeclareQueue
+
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
 {
+
 }
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-    qDebug() << "UdpMessageForwarder: Forwarding data";
-    const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
-    if (dataWritten != static_cast<quint64>(data.size()))
-    {
-        qWarning() << "UdpMessageForwader: Unable to forward data";
-    }
+    //  ------------ Old Implementation TODO remove -------------------
+    // qDebug() << "UdpMessageForwarder: Forwarding data";
+    // const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
+    // if (dataWritten != static_cast<quint64>(data.size()))
+    // {
+    //     qWarning() << "UdpMessageForwader: Unable to forward data";
+    // }
+    //
+    // ------------------------------------------------------------------
+
+
+
 }
