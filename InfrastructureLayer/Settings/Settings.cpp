@@ -70,5 +70,5 @@ QString Settings::packetTitle() const
 
 QString Settings::queueName() const
 {
-  
+    // TODO implement settings
 }

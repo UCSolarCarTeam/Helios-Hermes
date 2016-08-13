@@ -34,12 +34,16 @@
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
+    // TODO deal with exceptional situations
+
     // Create rabbitMQ channel
     channel = Channel::Create(settings.ipAddress(), settings.udpPort());
 
     // declare rabbitMQ Queue
-    channel->DeclareQueue
+    channel->DeclareQueue(QUEUE_NAME, false, false, false, false); // TODO determine if arguments must be changed
 
+    // bind rabbitMQ Queue
+    channel->BindQueue(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
@@ -59,6 +63,11 @@ void UdpMessageForwarder::forwardData(QByteArray data)
     //
     // ------------------------------------------------------------------
 
+    // TODO populate message with data
+    // Using:
+    // static ptr_t AmqpClient::BasicMessage::Create	(	amqp_bytes_t_& body, amqp_basic_properties_t_*	properties);
+    #define FAKE_MESSAGE "placeholder_message"
+    BasicMessage::ptr_t mq_msg = BasicMessage::Create(FAKE_MESSAGE);
 
-
+    channel->BasicPublish(mq_msg);
 }
