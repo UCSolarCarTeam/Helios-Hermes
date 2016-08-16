@@ -32,47 +32,59 @@
 #include "UdpMessageForwarder.h"
 
 // TODO Determine what type of exchange should be used
+// TODO determine what values should be put into config.ini
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
-    // TODO deal with exceptional situations
+  QString queueName = settings.queueName();
 
-    // Create rabbitMQ channel
-    channel = Channel::Create(settings.ipAddress(), settings.udpPort());
+  // Create rabbitMQ channel
+  channel = Channel::Create(settings.ipAddress(), settings.udpPort());
 
-    #define QUEUE_NAME "placeholder_queue_name"
+  // TODO remove
     #define EXCHANGE_NAME "placeholder_exchange_name"
     #define ROUTING_KEY "placeholder_routing_key"
 
-    // declare rabbitMQ Queue
-    channel->DeclareQueue(QUEUE_NAME, false, false, false, false); // TODO determine if arguments must be changed
+  // declare rabbitMQ Queue
+  channel->DeclareQueue(queueName, false, false, false, false);
 
-    // bind rabbitMQ Queue
-    channel->BindQueue(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);  //TODO construct this with appropriate arguments
+  // TODO determine if arguments must be changed
+
+  // bind rabbitMQ Queue
+  channel->BindQueue(queueName, EXCHANGE_NAME, ROUTING_KEY);
+
+  // TODO construct this with appropriate arguments
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
 {
-    // TODO Deal with queue and channel
+  // TODO Deal with queue and channel upon destruction, see examples for
+  // reference
 }
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-    //  ------------ Old Implementation TODO remove -------------------
-    // qDebug() << "UdpMessageForwarder: Forwarding data";
-    // const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
-    // if (dataWritten != static_cast<quint64>(data.size()))
-    // {
-    //     qWarning() << "UdpMessageForwader: Unable to forward data";
-    // }
-    //
-    // ------------------------------------------------------------------
+  //  ------------ Old Implementation  ------------------- TODO remove
+  // qDebug() << "UdpMessageForwarder: Forwarding data";
+  // const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
+  // if (dataWritten != static_cast<quint64>(data.size()))
+  // {
+  //     qWarning() << "UdpMessageForwader: Unable to forward data";
+  // }
+  //
+  // ------------------------------------------------------------------
 
-    // TODO populate message with data
-    // Using:
-    // static ptr_t AmqpClient::BasicMessage::Create	(	amqp_bytes_t_& body, amqp_basic_properties_t_*	properties);
-    #define FAKE_MESSAGE "placeholder_message"
-    BasicMessage::ptr_t mq_msg = BasicMessage::Create(FAKE_MESSAGE);
 
+  // TODO Must send data to ipAddress_:port_
+    #define FAKE_MESSAGE "This is a placeholder message for the time being"
+  qDebug() << "UdpMessageForwader: Forwarding Data";
+
+  BasicMessage::ptr_t mq_msg = BasicMessage::Create(FAKE_MESSAGE);
+
+  try {
     channel->BasicPublish(mq_msg);
+  } catch (ChannelException ex) {
+    // TODO determine what exceptions are thrown
+    // TODO deal with exception
+  }
 }

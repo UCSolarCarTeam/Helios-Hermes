@@ -70,6 +70,5 @@ QString Settings::packetTitle() const
 
 QString Settings::queueName() const
 {
-    // TODO alter setting files to accommodate addition of queue
-    return QString(settings_.value("UdpAddress/queueName").toString());
+    return QString(settings_.value("rabbitMQ/queueName").toString());
 }

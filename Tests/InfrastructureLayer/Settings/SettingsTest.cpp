@@ -75,3 +75,8 @@ TEST_F(SettingsTest, packetTitle)
 {
     EXPECT_EQ(settings_->packetTitle(), "Gen5");
 }
+
+TEST_F(SettingsTest, queueName)
+{
+  EXPECT_EQ(settings_->queueName(), "queue_name");
+}
