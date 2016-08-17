@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 
 
@@ -15,29 +16,32 @@ protected:
   virtual void SetUp() {
     // TODO Must retrieve values from settings
     // Create the channel
-    Channel::ptr_t = Channel::Create();
+    //Channel::ptr_t = Channel::Create();
   }
 
-  /**
-   * Send a single message via UdpMessageForwarder and verify its success
-   */
-  TEST_F(UdpMessageForwarderTest, testSendingMessage) {
-    // Send via UdpMessageForwarder
+};
 
-    // Receive message from local server
 
-    // Verify Success
-  }
+/**
+ * Send a single message via UdpMessageForwarder and verify its success
+ */
+TEST_F(UdpMessageForwarderTest, testSendingMessage) {
+  // Send via UdpMessageForwarder
 
-  /**
-   * Send a series of messages that make up a JSON string and verify its success
-   */
-  TEST_F(UdpMessageForwarderTest, testSendingJSON) {
-    // Send via UdpMessageForwarder
+  // Receive message from local server
 
-    // Receive message from local server
+  // Verify Success
+    EXPECT_EQ(1, 0);
+}
 
-    // Verify Success
-  }
+/**
+ * Send a series of messages that make up a JSON string and verify its success
+ */
+TEST_F(UdpMessageForwarderTest, testSendingJSON) {
+  // Send via UdpMessageForwarder
 
+  // Receive message from local server
+
+  // Verify Success
+    EXPECT_EQ(1, 0);
 }

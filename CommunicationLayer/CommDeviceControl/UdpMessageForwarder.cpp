@@ -32,26 +32,29 @@
 #include "UdpMessageForwarder.h"
 
 // TODO Determine what type of exchange should be used
+// TODO Determine whether the queue should auto-delete
 // TODO determine what values should be put into config.ini
+
+// TODO remove
+  #define EXCHANGE_NAME "placeholder_exchange_name"
+  #define ROUTING_KEY "placeholder_routing_key"
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
   QString queueName = settings.queueName();
 
   // Create rabbitMQ channel
-  channel = Channel::Create(settings.ipAddress(), settings.udpPort());
+  channel = Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
 
-  // TODO remove
-    #define EXCHANGE_NAME "placeholder_exchange_name"
-    #define ROUTING_KEY "placeholder_routing_key"
+
 
   // declare rabbitMQ Queue
-  channel->DeclareQueue(queueName, false, false, false, false);
+  channel->DeclareQueue(queueName.toStdString(), false, false, false, false);
 
   // TODO determine if arguments must be changed
 
   // bind rabbitMQ Queue
-  channel->BindQueue(queueName, EXCHANGE_NAME, ROUTING_KEY);
+  channel->BindQueue(queueName.toStdString(), EXCHANGE_NAME, ROUTING_KEY);
 
   // TODO construct this with appropriate arguments
 }
@@ -79,11 +82,11 @@ void UdpMessageForwarder::forwardData(QByteArray data)
     #define FAKE_MESSAGE "This is a placeholder message for the time being"
   qDebug() << "UdpMessageForwader: Forwarding Data";
 
-  BasicMessage::ptr_t mq_msg = BasicMessage::Create(FAKE_MESSAGE);
+  BasicMessage::ptr_t mq_msg = BasicMessage::Create(QString(data).toStdString());
 
   try {
-    channel->BasicPublish(mq_msg);
-  } catch (ChannelException ex) {
+    channel->BasicPublish(EXCHANGE_NAME, ROUTING_KEY, mq_msg);
+  } catch (NotFoundException ex) {
     // TODO determine what exceptions are thrown
     // TODO deal with exception
   }
