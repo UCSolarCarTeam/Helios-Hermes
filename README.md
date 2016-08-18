@@ -27,7 +27,7 @@ Your new file structure should look like:
 
 Testing the Schulich Delta Desktop Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path /usr/local/include or /usr/include.
 
-You must compile the library that has the definitions yourself. 
+You must compile the library that has the definitions yourself.
 Meaning you need a `libgmock.a` archive file in the test directory in order to compile the tests.
 
 To create a `libgmock.a` file in a Linux system follow these instructions in an arbitrary dir.
@@ -47,13 +47,13 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
 5. Collect both the resulting .o files into an archive file:
     `ar -rv libgmock.a gtest-all.o gmock-all.o`
 
-Congratulations! You now have a `libgmock.a` archive file. 
-Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go. 
-Run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests. 
+Congratulations! You now have a `libgmock.a` archive file.
+Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go.
+Run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests.
 Use `ls -a` to show all hidden files.
 
-To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary. 
+To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary.
 Use the following command in the root directory
-    `cp testconfig.ini ../build/.tests/`
+    `cp Tests/testconfig.ini ../build/.tests/`
 
 Both gmock and the gtest folders located in `googletest/googlemock/include/` and `googletest/googletest/include/` need to be placed in the `/usr/local/include` system directory.

@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-
+#include <QScopedPointer>
+#include <SimpleAmqpClient/SimpleAmqpClient.h>
 
 #include "CommunicationLayer/CommDeviceControl/UdpMessageForwarder.h"
+#include "InfrastructureLayer/Settings/Settings.h"
 
 using namespace AmqpClient;
 
@@ -11,13 +13,28 @@ class UdpMessageForwarderTest : public ::testing::Test
 {
 protected:
 
+  QScopedPointer<Settings> settings_;
+
   // TODO complete testing of UdpMessageForwarder
 
   virtual void SetUp() {
-    // TODO Must retrieve values from settings
+    // TODO Setup settings
+    // TODO mock settings
+    const QString TEST_FILE_PATH = "forwarderconfig.ini";
+    settings_.reset(new Settings(TEST_FILE_PATH));
+
     // Create the channel
-    //Channel::ptr_t = Channel::Create();
+    Channel::ptr_t channel = Channel::Create();
+
+
   }
+
+private:
+
+  /**
+  * Validates whether the expected equals the observed results
+  */
+  void testResponse(QString&, QString&);
 
 };
 
