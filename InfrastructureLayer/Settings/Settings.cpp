@@ -72,3 +72,8 @@ QString Settings::queueName() const
 {
     return QString(settings_.value("rabbitMQ/queueName").toString());
 }
+
+QString Settings::routingKey() const
+{
+    return QString(settings_.value("rabbitMQ/routingKey").toString());
+}

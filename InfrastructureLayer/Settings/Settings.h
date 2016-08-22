@@ -41,6 +41,7 @@ public:
     int forwardPeriod() const;
     QString packetTitle() const;
     QString queueName() const;
+    QString routingKey() const;
 
 private:
     QSettings settings_;

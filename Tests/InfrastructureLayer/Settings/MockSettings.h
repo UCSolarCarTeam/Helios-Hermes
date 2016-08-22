@@ -38,5 +38,6 @@ public:
     MOCK_CONST_METHOD0(forwardPeriod, int());
     MOCK_CONST_METHOD0(packetTitle, QString());
     MOCK_CONST_METHOD0(queueName, QString());
+    MOCK_CONST_METHOD0(routingKey, QString());
 };
 

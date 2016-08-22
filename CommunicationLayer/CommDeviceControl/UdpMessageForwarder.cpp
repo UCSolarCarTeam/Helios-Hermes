@@ -35,7 +35,7 @@
 // TODO Determine whether the queue should auto-delete
 // TODO determine what values should be put into config.ini
 
-// TODO remove
+// TODO remove and add to settings
   #define EXCHANGE_NAME "placeholder_exchange_name"
   #define ROUTING_KEY "placeholder_routing_key"
 
@@ -49,7 +49,7 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 
 
   // declare rabbitMQ Queue
-  channel->DeclareQueue(queueName.toStdString(), false, false, false, false);
+  channel->DeclareQueue(queueName.toStdString(), false, true, false, false);
 
   // TODO determine if arguments must be changed
 

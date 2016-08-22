@@ -43,3 +43,4 @@ port=44550
 
 [rabbitMQ]
 queueName=queue_name
+routingKey=routing_key
