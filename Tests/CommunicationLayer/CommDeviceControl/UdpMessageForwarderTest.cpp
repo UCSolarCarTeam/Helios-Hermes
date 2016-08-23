@@ -49,7 +49,7 @@ protected:
         // TODO determine what these should be for the purposes of HERMES
         receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 
-        EXPECT_CALL(*settings_, queueName())
+        EXPECT_CALL(*settings_, ipAddress())
                 .WillRepeatedly(Return(MOCK_IP));
         EXPECT_CALL(*settings_, queueName())
                 .WillRepeatedly(Return(MOCK_QUEUE));
@@ -73,14 +73,27 @@ protected:
 TEST_F(UdpMessageForwarderTest, testSendingMessage) {
     // Send via UdpMessageForwarder
     QString expected = "Message Test";
-    forwarder.reset(new UdpMessageForwarder(*settings_));
-    forwarder->forwardData(QByteArray(expected.toLocal8Bit()));
+    try {
+        forwarder.reset(new UdpMessageForwarder(*settings_));
+    } catch (quint16 err) {
+        qDebug() << "Failed to reset forwarder with exception: " << err;
+    }
+    try {
+        forwarder->forwardData(QByteArray(expected.toLocal8Bit()));
+    } catch (quint16 err) {
+        qDebug() << "Failed to forward data with exception: " << err;
+    }
 
     // Receive message from local server
-    QString actual = QString::fromStdString(receiver->BasicConsume(MOCK_QUEUE.toStdString()));
+    QString actual;
+    try {
+        actual = QString::fromStdString(receiver->BasicConsume(MOCK_QUEUE.toStdString()));
+    } catch (quint16 err) {
+        qDebug() << "Failed to receive data with exception: " << err;
+    }
 
     // Verify Success
-    EXPECT_EQ(expected, actual);
+    EXPECT_EQ(expected.toStdString(), actual.toStdString());
 }
 
 /**
