@@ -45,4 +45,5 @@ public slots:
 
 private:
   Channel::ptr_t channel;
+  QString routingKey;
 };

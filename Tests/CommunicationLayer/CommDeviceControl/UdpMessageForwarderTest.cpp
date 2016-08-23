@@ -36,6 +36,7 @@ protected:
     // TODO test that sending when the queue has not been created yet still works
     // TODO test that upon deletion of the UdpMessageForwarder the destructor performs its duties
     // TODO test that disconnecting the receiver does not destroy the messages being sent
+    // TODO test to check if data is getting converted from string to bytes to string correctly
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
@@ -68,7 +69,7 @@ protected:
 
 
 /**
- * Send a single message representing a JSON string via UdpMessageForwarder and verify its success
+ * @brief Send a single message representing a JSON string via UdpMessageForwarder and verify its success
  */
 TEST_F(UdpMessageForwarderTest, testSendingMessage) {
     // Send via UdpMessageForwarder
@@ -97,7 +98,7 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
 }
 
 /**
- * Send a series of messages that make up a JSON string via UdpMessageForwarder and verify its success
+ * @brief Send a series of messages that make up a JSON string via UdpMessageForwarder and verify its success
  */
 TEST_F(UdpMessageForwarderTest, testSendingSeries) {
     // Send via UdpMessageForwarder

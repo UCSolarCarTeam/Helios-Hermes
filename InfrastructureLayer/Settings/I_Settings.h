@@ -36,4 +36,5 @@ public:
     virtual int forwardPeriod() const = 0;
     virtual QString packetTitle() const = 0;
     virtual QString queueName() const = 0;
+    virtual QString routingKey() const = 0;
 };

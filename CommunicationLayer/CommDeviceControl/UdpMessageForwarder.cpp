@@ -37,24 +37,20 @@
 
 // TODO remove and add to settings
   #define EXCHANGE_NAME "amq.direct"
-  #define ROUTING_KEY "routing-key"
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
   QString queueName = settings.queueName();
 
-  // Create rabbitMQ channel
+  routingKey = settings.routingKey();
+
   channel = Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
 
-
-
-  // declare rabbitMQ Queue
   channel->DeclareQueue(queueName.toStdString(), false, true, false, false);
 
   // TODO determine if arguments must be changed
 
-  // bind rabbitMQ Queue
-  channel->BindQueue(queueName.toStdString(), EXCHANGE_NAME, ROUTING_KEY);
+  channel->BindQueue(queueName.toStdString(), EXCHANGE_NAME, routingKey.toStdString());
 
   // TODO construct this with appropriate arguments
 }
@@ -66,27 +62,8 @@ UdpMessageForwarder::~UdpMessageForwarder()
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-  //  ------------ Old Implementation  ------------------- TODO remove
-  // qDebug() << "UdpMessageForwarder: Forwarding data";
-  // const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
-  // if (dataWritten != static_cast<quint64>(data.size()))
-  // {
-  //     qWarning() << "UdpMessageForwader: Unable to forward data";
-  // }
-  //
-  // ------------------------------------------------------------------
-
-
-  // TODO Must send data to ipAddress_:port_
-    #define FAKE_MESSAGE "This is a placeholder message for the time being"
-  qDebug() << "UdpMessageForwader: Forwarding Data";
-
+    // TODO check this for the error in translation
   BasicMessage::ptr_t mq_msg = BasicMessage::Create(QString(data).toStdString());
 
-  try {
-    channel->BasicPublish(EXCHANGE_NAME, ROUTING_KEY, mq_msg);
-  } catch (NotFoundException ex) {
-    // TODO determine what exceptions are thrown
-    // TODO deal with exception
-  }
+  channel->BasicPublish(EXCHANGE_NAME, routingKey.toStdString(), mq_msg);
 }
