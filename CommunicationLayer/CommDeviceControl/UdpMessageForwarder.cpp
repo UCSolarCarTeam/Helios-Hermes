@@ -26,6 +26,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include <QHostAddress>
+#include <QTextCodec>
 
 
 #include "InfrastructureLayer/Settings/I_Settings.h"
@@ -63,7 +64,7 @@ UdpMessageForwarder::~UdpMessageForwarder()
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
     // TODO check this for the error in translation
-  BasicMessage::ptr_t mq_msg = BasicMessage::Create(QString(data).toStdString());
+  BasicMessage::ptr_t mq_msg = BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
 
   channel->BasicPublish(EXCHANGE_NAME, routingKey.toStdString(), mq_msg);
 }

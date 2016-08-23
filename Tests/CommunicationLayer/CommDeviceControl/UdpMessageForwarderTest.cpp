@@ -35,7 +35,7 @@ protected:
     // TODO Setup queue to receive data sent by UdpMessageForwarder
     // TODO test that sending when the queue has not been created yet still works
     // TODO test that upon deletion of the UdpMessageForwarder the destructor performs its duties
-    // TODO test that disconnecting the receiver does not destroy the messages being sent
+    // TODO test that disconnecting the sender does not destroy messages in the queue
     // TODO test to check if data is getting converted from string to bytes to string correctly
 
     /**
@@ -79,8 +79,10 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
     } catch (quint16 err) {
         qDebug() << "Failed to reset forwarder with exception: " << err;
     }
+    QByteArray expectedBytes = QByteArray();
+    expectedBytes.append(expected);
     try {
-        forwarder->forwardData(QByteArray(expected.toLocal8Bit()));
+        forwarder->forwardData(expectedBytes);
     } catch (quint16 err) {
         qDebug() << "Failed to forward data with exception: " << err;
     }
