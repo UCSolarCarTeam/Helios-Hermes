@@ -23,6 +23,16 @@ Your new file structure should look like:
     - Hermes
       - src
 
+## RabbitMQ Broker
+
+
+
+### Refresh Server
+
+`rabbitmqctl stop_app`
+`rabbitmqctl reset`
+`rabbitmqctl start_app`
+
 ## Testing
 
 Testing the Schulich Delta Desktop Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path /usr/local/include or /usr/include.

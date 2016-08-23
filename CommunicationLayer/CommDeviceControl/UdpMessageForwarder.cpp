@@ -36,8 +36,8 @@
 // TODO determine what values should be put into config.ini
 
 // TODO remove and add to settings
-  #define EXCHANGE_NAME "placeholder_exchange_name"
-  #define ROUTING_KEY "placeholder_routing_key"
+  #define EXCHANGE_NAME "amq.direct"
+  #define ROUTING_KEY "routing-key"
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
@@ -61,8 +61,7 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 
 UdpMessageForwarder::~UdpMessageForwarder()
 {
-  // TODO Deal with queue and channel upon destruction, see examples for
-  // reference
+  // TODO Deal with queue and channel upon destruction, see examples for reference
 }
 
 void UdpMessageForwarder::forwardData(QByteArray data)
