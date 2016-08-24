@@ -66,8 +66,14 @@ protected:
 
     void sendMessage(const QString& message, bool resetForwarder);
     void receiveMessage(QString& actual, bool setupConsume);
+    /**
+     * @brief setup the receiver for usage
+     */
     void setupReceiver();
-    void resetReceiver();
+    /**
+     * @brief reset the receiver (clear and delete queue)
+     */
+    void cleanReceiver();
 };
 
 void UdpMessageForwarderTest::sendMessage(const QString& message, bool resetForwarder) {
@@ -100,7 +106,7 @@ void UdpMessageForwarderTest::setupReceiver() {
     receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 }
 
-void UdpMessageForwarderTest::resetReceiver() {
+void UdpMessageForwarderTest::cleanReceiver() {
     receiver->PurgeQueue(MOCK_QUEUE.toStdString());
     receiver->DeleteQueue(MOCK_QUEUE.toStdString());
     receiver.reset();
@@ -125,7 +131,7 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
  */
 TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
 
-    resetReceiver();
+    cleanReceiver();
 
     sendMessage(EXPECTED_1, true);
 
@@ -160,7 +166,7 @@ TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
 }
 
 /**
- * @brief Disconnect the receiver during delivery and ensure messages still arrive
+ * @brief test sending message with special characters
  */
 TEST_F(UdpMessageForwarderTest, testSendingSpecialChars) {
     sendMessage(EXPECTED_3, true);
