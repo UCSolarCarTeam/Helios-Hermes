@@ -20,6 +20,9 @@ namespace
     const QString MOCK_QUEUE = "test-queue";
     const QString MOCK_EXCHANGE = "amq.direct";
     const QString MOCK_ROUTING_KEY = "routing-key";
+    const QString EXPECTED_1 = "Message Test";
+    const QString EXPECTED_2 = "Second Message Test";
+    const QString EXPECTED_3 = "Sp3c1a1** Ch4r4c74r5__ 7357";
 }
 
 class UdpMessageForwarderTest : public ::testing::Test
@@ -72,15 +75,14 @@ protected:
  * @brief Send a single message representing a JSON string via UdpMessageForwarder and verify its success
  */
 TEST_F(UdpMessageForwarderTest, testSendingMessage) {
-    // Send via UdpMessageForwarder
-    QString expected = "Message Test";
+
     try {
         forwarder.reset(new UdpMessageForwarder(*settings_));
     } catch (quint16 err) {
         qDebug() << "Failed to reset forwarder with exception: " << err;
     }
     QByteArray expectedBytes = QByteArray();
-    expectedBytes.append(expected);
+    expectedBytes.append(EXPECTED_1);
     try {
         forwarder->forwardData(expectedBytes);
     } catch (quint16 err) {
@@ -88,25 +90,125 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
     }
 
     // Receive message from local server
-    QString actual;
+    receiver->BasicConsume(MOCK_QUEUE.toStdString());
+    QString ACTUAL;
     try {
-        actual = QString::fromStdString(receiver->BasicConsume(MOCK_QUEUE.toStdString()));
+        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
     } catch (quint16 err) {
         qDebug() << "Failed to receive data with exception: " << err;
     }
 
     // Verify Success
-    EXPECT_EQ(expected.toStdString(), actual.toStdString());
+    EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
 }
 
 /**
- * @brief Send a series of messages that make up a JSON string via UdpMessageForwarder and verify its success
+ * @brief Send a message before the receiver has setup
  */
-TEST_F(UdpMessageForwarderTest, testSendingSeries) {
+TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
+
+    // Reset the receiver
+    receiver->PurgeQueue(MOCK_QUEUE.toStdString());
+    receiver->DeleteQueue(MOCK_QUEUE.toStdString());
+    receiver.reset();
+
     // Send via UdpMessageForwarder
+    try {
+        forwarder.reset(new UdpMessageForwarder(*settings_));
+    } catch (quint16 err) {
+        qDebug() << "Failed to reset forwarder with exception: " << err;
+    }
+    QByteArray expectedBytes = QByteArray();
+    expectedBytes.append(EXPECTED_1);
+    try {
+        forwarder->forwardData(expectedBytes);
+    } catch (quint16 err) {
+        qDebug() << "Failed to forward data with exception: " << err;
+    }
+
+    // Setup Receiver
+    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+
+    // TODO determine what these should be for the purposes of HERMES
+    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 
     // Receive message from local server
+    receiver->BasicConsume(MOCK_QUEUE.toStdString());
+    QString ACTUAL;
+    try {
+        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
+    } catch (quint16 err) {
+        qDebug() << "Failed to receive data with exception: " << err;
+    }
 
     // Verify Success
-    EXPECT_EQ(1, 0);
+    EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
+}
+
+/**
+ * @brief Disconnect the receiver during delivery and ensure messages still arrive
+ */
+TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
+    // Send via UdpMessageForwarder
+    try {
+        forwarder.reset(new UdpMessageForwarder(*settings_));
+    } catch (quint16 err) {
+        qDebug() << "Failed to reset forwarder with exception: " << err;
+    }
+    QByteArray expectedBytes = QByteArray();
+    expectedBytes.append(EXPECTED_1);
+    try {
+        forwarder->forwardData(expectedBytes);
+    } catch (quint16 err) {
+        qDebug() << "Failed to forward data with exception: " << err;
+    }
+
+    // Setup Receiver
+    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+
+    // TODO determine what these should be for the purposes of HERMES
+    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
+
+    // Receive message from local server
+    receiver->BasicConsume(MOCK_QUEUE.toStdString());
+    QString ACTUAL;
+    try {
+        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
+    } catch (quint16 err) {
+        qDebug() << "Failed to receive data with exception: " << err;
+    }
+
+    // Verify Success
+    EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
+
+    // Reset the receiver
+    receiver.reset();
+
+    // Send another message
+    expectedBytes = QByteArray();
+    expectedBytes.append(EXPECTED_2);
+    try {
+        forwarder->forwardData(expectedBytes);
+    } catch (quint16 err) {
+        qDebug() << "Failed to forward data with exception: " << err;
+    }
+
+    // Setup Receiver Again
+    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+
+    // Receive second message
+    receiver->BasicConsume(MOCK_QUEUE.toStdString());
+    try {
+        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
+    } catch (quint16 err) {
+        qDebug() << "Failed to receive data with exception: " << err;
+    }
+
+    // Verify Success
+    EXPECT_EQ(EXPECTED_2.toStdString(), ACTUAL.toStdString());
+
+
 }
