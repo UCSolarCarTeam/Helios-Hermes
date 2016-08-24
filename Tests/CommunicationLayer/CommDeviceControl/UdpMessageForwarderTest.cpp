@@ -68,7 +68,35 @@ protected:
         receiver->DeleteQueue(MOCK_QUEUE.toStdString());
         receiver.reset();
     }
+
+    // Test Methods
+
+    void sendMessage(const QString& message, bool resetForwarder);
+    void receiveMessage(QString& actual, bool setupConsume);
 };
+
+void UdpMessageForwarderTest::sendMessage(const QString& message, bool resetForwarder) {
+    if (resetForwarder)
+        forwarder.reset(new UdpMessageForwarder(*settings_));
+    QByteArray expectedBytes = QByteArray();
+    expectedBytes.append(message);
+    try {
+        forwarder->forwardData(expectedBytes);
+    } catch (quint16 err) {
+        qDebug() << "Failed to forward data with exception: " << err;
+    }
+}
+
+void UdpMessageForwarderTest::receiveMessage(QString& actual, bool setupConsume) {
+    // Receive message from local server
+    if (setupConsume)
+        receiver->BasicConsume(MOCK_QUEUE.toStdString());
+    try {
+        actual = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
+    } catch (quint16 err) {
+        qDebug() << "Failed to receive data with exception: " << err;
+    }
+}
 
 
 /**
@@ -76,27 +104,10 @@ protected:
  */
 TEST_F(UdpMessageForwarderTest, testSendingMessage) {
 
-    try {
-        forwarder.reset(new UdpMessageForwarder(*settings_));
-    } catch (quint16 err) {
-        qDebug() << "Failed to reset forwarder with exception: " << err;
-    }
-    QByteArray expectedBytes = QByteArray();
-    expectedBytes.append(EXPECTED_1);
-    try {
-        forwarder->forwardData(expectedBytes);
-    } catch (quint16 err) {
-        qDebug() << "Failed to forward data with exception: " << err;
-    }
+    sendMessage(EXPECTED_1, true);
 
-    // Receive message from local server
-    receiver->BasicConsume(MOCK_QUEUE.toStdString());
     QString ACTUAL;
-    try {
-        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
-    } catch (quint16 err) {
-        qDebug() << "Failed to receive data with exception: " << err;
-    }
+    receiveMessage(ACTUAL, true);
 
     // Verify Success
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
@@ -113,18 +124,7 @@ TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
     receiver.reset();
 
     // Send via UdpMessageForwarder
-    try {
-        forwarder.reset(new UdpMessageForwarder(*settings_));
-    } catch (quint16 err) {
-        qDebug() << "Failed to reset forwarder with exception: " << err;
-    }
-    QByteArray expectedBytes = QByteArray();
-    expectedBytes.append(EXPECTED_1);
-    try {
-        forwarder->forwardData(expectedBytes);
-    } catch (quint16 err) {
-        qDebug() << "Failed to forward data with exception: " << err;
-    }
+    sendMessage(EXPECTED_1, true);
 
     // Setup Receiver
     receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
@@ -150,19 +150,7 @@ TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
  * @brief Disconnect the receiver during delivery and ensure messages still arrive
  */
 TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
-    // Send via UdpMessageForwarder
-    try {
-        forwarder.reset(new UdpMessageForwarder(*settings_));
-    } catch (quint16 err) {
-        qDebug() << "Failed to reset forwarder with exception: " << err;
-    }
-    QByteArray expectedBytes = QByteArray();
-    expectedBytes.append(EXPECTED_1);
-    try {
-        forwarder->forwardData(expectedBytes);
-    } catch (quint16 err) {
-        qDebug() << "Failed to forward data with exception: " << err;
-    }
+    sendMessage(EXPECTED_1, true);
 
     // Setup Receiver
     receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
@@ -187,13 +175,7 @@ TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
     receiver.reset();
 
     // Send another message
-    expectedBytes = QByteArray();
-    expectedBytes.append(EXPECTED_2);
-    try {
-        forwarder->forwardData(expectedBytes);
-    } catch (quint16 err) {
-        qDebug() << "Failed to forward data with exception: " << err;
-    }
+    sendMessage(EXPECTED_2, false);
 
     // Setup Receiver Again
     receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
