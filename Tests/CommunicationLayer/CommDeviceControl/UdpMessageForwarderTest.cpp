@@ -33,9 +33,7 @@ protected:
     QScopedPointer<UdpMessageForwarder> forwarder;
     AmqpClient::Channel::ptr_t receiver;
 
-    // TODO complete testing of UdpMessageForwarder
     // TODO test that disconnecting the sender does not destroy messages in the queue
-    // TODO test to check if data is getting converted from string to bytes to string correctly (special strings)
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
@@ -159,4 +157,16 @@ TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
     receiveMessage(ACTUAL, true);
 
     EXPECT_EQ(EXPECTED_2.toStdString(), ACTUAL.toStdString());
+}
+
+/**
+ * @brief Disconnect the receiver during delivery and ensure messages still arrive
+ */
+TEST_F(UdpMessageForwarderTest, testSendingSpecialChars) {
+    sendMessage(EXPECTED_3, true);
+
+    QString ACTUAL;
+    receiveMessage(ACTUAL, true);
+
+    EXPECT_EQ(EXPECTED_3.toStdString(), ACTUAL.toStdString());
 }
