@@ -25,9 +25,40 @@ Your new file structure should look like:
 
 ## RabbitMQ Broker
 
+### Getting setup
 
+1) Installing rabbitMQ
+
+In order to send messages, you must have a rabbitMQ server to send the messages to.
+This can be installed [here](https://www.rabbitmq.com/)
+
+2) Installing dependencies for SimpleAmqpClient
+
+SimpleAmqpClient requires rabbitmq-c, which can be downloaded and compiled from the repository [alanxz/rabbitmq-c](https://github.com/alanxz/rabbitmq-c)
+This repository contains instructions on how to generate a library in the README
+
+3) Generating SimpleAmqpClient library
+
+SimpleAmqpClient can be downloaded and compiled from [alanxz/SimpleAmqpClient](https://github.com/alanxz/SimpleAmqpClient)
+This repository once again contains instructions on how to generate the library in the README.
+
+4) Adding libraries to path
+
+Both of these libraries must be added to your PATH environment variable, in order for the project to be able to see and use it.
+On linux this can also be done by adding them to /usr/lib or /usr/local/lib
+
+5) Header files
+
+The header files in these libraries must also be visible.
+On linux this can be accomplished by moving AMQP/ and SimpleAmqpClient/ containing the header files to /usr/include or /usr/local/include
+
+### Start Server
+
+`sudo rabbitmq-server` can be used to start the server on Linux
 
 ### Refresh Server
+
+On linux to refresh the contents of the server perform the following commands
 
 `rabbitmqctl stop_app`
 `rabbitmqctl reset`
