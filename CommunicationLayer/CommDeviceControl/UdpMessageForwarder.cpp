@@ -32,12 +32,10 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "UdpMessageForwarder.h"
 
-// TODO Determine what type of exchange should be used
-// TODO Determine whether the queue should auto-delete
-// TODO determine what values should be put into config.ini
-
-// TODO remove and add to settings
-  #define EXCHANGE_NAME "amq.direct"
+namespace
+{
+    const QString EXCHANGE_NAME = QString("amq.direct");
+}
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
@@ -49,22 +47,18 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 
   channel->DeclareQueue(queueName.toStdString(), false, true, false, false);
 
-  // TODO determine if arguments must be changed
+  channel->BindQueue(queueName.toStdString(), EXCHANGE_NAME.toStdString(), routingKey.toStdString());
 
-  channel->BindQueue(queueName.toStdString(), EXCHANGE_NAME, routingKey.toStdString());
-
-  // TODO construct this with appropriate arguments
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
 {
-  // TODO Deal with queue and channel upon destruction, see examples for reference
+  // TODO What to do for destructor? Nothing?
 }
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-    // TODO check this for the error in translation
   BasicMessage::ptr_t mq_msg = BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
 
-  channel->BasicPublish(EXCHANGE_NAME, routingKey.toStdString(), mq_msg);
+  channel->BasicPublish(EXCHANGE_NAME.toStdString(), routingKey.toStdString(), mq_msg);
 }

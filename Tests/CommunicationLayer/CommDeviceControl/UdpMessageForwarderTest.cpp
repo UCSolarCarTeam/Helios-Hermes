@@ -34,12 +34,8 @@ protected:
     AmqpClient::Channel::ptr_t receiver;
 
     // TODO complete testing of UdpMessageForwarder
-    // TODO mock settings for using UdpMessageForwarder
-    // TODO Setup queue to receive data sent by UdpMessageForwarder
-    // TODO test that sending when the queue has not been created yet still works
-    // TODO test that upon deletion of the UdpMessageForwarder the destructor performs its duties
     // TODO test that disconnecting the sender does not destroy messages in the queue
-    // TODO test to check if data is getting converted from string to bytes to string correctly
+    // TODO test to check if data is getting converted from string to bytes to string correctly (special strings)
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
@@ -50,7 +46,6 @@ protected:
         receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
         receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
 
-        // TODO determine what these should be for the purposes of HERMES
         receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 
         EXPECT_CALL(*settings_, ipAddress())
@@ -104,7 +99,6 @@ void UdpMessageForwarderTest::setupReceiver() {
     receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
     receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
 
-    // TODO determine what these should be for the purposes of HERMES
     receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 }
 
