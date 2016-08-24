@@ -73,6 +73,8 @@ protected:
 
     void sendMessage(const QString& message, bool resetForwarder);
     void receiveMessage(QString& actual, bool setupConsume);
+    void setupReceiver();
+    void resetReceiver();
 };
 
 void UdpMessageForwarderTest::sendMessage(const QString& message, bool resetForwarder) {
@@ -98,6 +100,20 @@ void UdpMessageForwarderTest::receiveMessage(QString& actual, bool setupConsume)
     }
 }
 
+void UdpMessageForwarderTest::setupReceiver() {
+    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+
+    // TODO determine what these should be for the purposes of HERMES
+    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
+}
+
+void UdpMessageForwarderTest::resetReceiver() {
+    receiver->PurgeQueue(MOCK_QUEUE.toStdString());
+    receiver->DeleteQueue(MOCK_QUEUE.toStdString());
+    receiver.reset();
+}
+
 
 /**
  * @brief Send a single message representing a JSON string via UdpMessageForwarder and verify its success
@@ -109,7 +125,6 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
     QString ACTUAL;
     receiveMessage(ACTUAL, true);
 
-    // Verify Success
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
 }
 
@@ -118,31 +133,15 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
  */
 TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
 
-    // Reset the receiver
-    receiver->PurgeQueue(MOCK_QUEUE.toStdString());
-    receiver->DeleteQueue(MOCK_QUEUE.toStdString());
-    receiver.reset();
+    resetReceiver();
 
-    // Send via UdpMessageForwarder
     sendMessage(EXPECTED_1, true);
 
-    // Setup Receiver
-    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
-    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+    setupReceiver();
 
-    // TODO determine what these should be for the purposes of HERMES
-    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
-
-    // Receive message from local server
-    receiver->BasicConsume(MOCK_QUEUE.toStdString());
     QString ACTUAL;
-    try {
-        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
-    } catch (quint16 err) {
-        qDebug() << "Failed to receive data with exception: " << err;
-    }
+    receiveMessage(ACTUAL, true);
 
-    // Verify Success
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
 }
 
@@ -152,45 +151,18 @@ TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
 TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
     sendMessage(EXPECTED_1, true);
 
-    // Setup Receiver
-    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
-    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
-
-    // TODO determine what these should be for the purposes of HERMES
-    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
-
-    // Receive message from local server
-    receiver->BasicConsume(MOCK_QUEUE.toStdString());
     QString ACTUAL;
-    try {
-        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
-    } catch (quint16 err) {
-        qDebug() << "Failed to receive data with exception: " << err;
-    }
+    receiveMessage(ACTUAL, true);
 
-    // Verify Success
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
 
-    // Reset the receiver
     receiver.reset();
 
-    // Send another message
     sendMessage(EXPECTED_2, false);
 
-    // Setup Receiver Again
-    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
-    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+    setupReceiver();
 
-    // Receive second message
-    receiver->BasicConsume(MOCK_QUEUE.toStdString());
-    try {
-        ACTUAL = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
-    } catch (quint16 err) {
-        qDebug() << "Failed to receive data with exception: " << err;
-    }
+    receiveMessage(ACTUAL, true);
 
-    // Verify Success
     EXPECT_EQ(EXPECTED_2.toStdString(), ACTUAL.toStdString());
-
-
 }
