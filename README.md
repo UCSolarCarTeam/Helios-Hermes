@@ -45,7 +45,7 @@ This repository once again contains instructions on how to generate the library 
 4) Adding libraries to path
 
 Both of these libraries must be added to your PATH environment variable, in order for the project to be able to see and use it.
-On linux this can also be done by adding them to /usr/lib or /usr/local/lib
+On linux this can also be done by adding them to `/usr/local/lib`
 
 5) Header files
 

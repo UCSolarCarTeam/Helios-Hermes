@@ -8,9 +8,3 @@ build*
 *.user*
 *.orig
 logs/
-
-
-# CLion Ignore
-
-CMakeLists.txt
-.idea/

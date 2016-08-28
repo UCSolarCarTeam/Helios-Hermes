@@ -44,6 +44,6 @@ public slots:
   void forwardData(QByteArray data);
 
 private:
-  Channel::ptr_t channel;
-  QString routingKey;
+  Channel::ptr_t channel_;
+  QString routingKey_;
 };

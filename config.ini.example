@@ -43,4 +43,5 @@ port=44550
 
 [rabbitMQ]
 queueName=queue_name
+exchangeName=exchange_name
 routingKey=routing_key

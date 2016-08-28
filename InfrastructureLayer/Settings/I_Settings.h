@@ -35,6 +35,8 @@ public:
     virtual quint16 udpPort() const = 0;
     virtual int forwardPeriod() const = 0;
     virtual QString packetTitle() const = 0;
-    virtual QString queueName() const = 0;
+    virtual QString mainQueueName() const = 0;
+    virtual QString secondaryQueueName() const = 0;
     virtual QString routingKey() const = 0;
+    virtual QString exchangeName() const = 0;
 };

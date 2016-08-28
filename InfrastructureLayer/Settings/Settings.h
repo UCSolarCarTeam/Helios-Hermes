@@ -40,7 +40,9 @@ public:
     quint16 udpPort() const;
     int forwardPeriod() const;
     QString packetTitle() const;
-    QString queueName() const;
+    QString mainQueueName() const;
+    QString secondaryQueueName() const;
+    QString exchangeName() const;
     QString routingKey() const;
 
 private:

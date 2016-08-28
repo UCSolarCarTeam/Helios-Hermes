@@ -43,6 +43,7 @@ namespace
     const QString MOCK_IP = QString("localhost");
     const quint16 MOCK_PORT = 5672;
     const QString MOCK_QUEUE = "test-queue";
+    // TODO fix exchange values
     const QString MOCK_EXCHANGE = "amq.direct";
     const QString MOCK_ROUTING_KEY = "routing-key";
     const QString EXPECTED_1 = "Message Test";
@@ -58,7 +59,12 @@ protected:
     QScopedPointer<UdpMessageForwarder> forwarder;
     AmqpClient::Channel::ptr_t receiver;
 
-    // TODO test that disconnecting the sender does not destroy messages in the queue
+    // TODO any new tests?
+    // TODO add documentation for rabbitMQ libraries
+    // TODO fix travis
+    // TODO Fix indentation
+    // TODO fix .ini files
+    // TODO fix exhange usage in test
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
@@ -68,9 +74,9 @@ protected:
         settings_.reset(new MockSettings());
         receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
         receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
-
         receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 
+        // TODO fix mocking
         EXPECT_CALL(*settings_, ipAddress())
                 .WillRepeatedly(Return(MOCK_IP));
         EXPECT_CALL(*settings_, queueName())
@@ -106,28 +112,20 @@ void UdpMessageForwarderTest::sendMessage(const QString& message, bool resetForw
         forwarder.reset(new UdpMessageForwarder(*settings_));
     QByteArray expectedBytes = QByteArray();
     expectedBytes.append(message);
-    try {
-        forwarder->forwardData(expectedBytes);
-    } catch (quint16 err) {
-        qDebug() << "Failed to forward data with exception: " << err;
-    }
+    forwarder->forwardData(expectedBytes);
 }
 
 void UdpMessageForwarderTest::receiveMessage(QString& actual, bool setupConsume) {
     // Receive message from local server
     if (setupConsume)
         receiver->BasicConsume(MOCK_QUEUE.toStdString());
-    try {
-        actual = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
-    } catch (quint16 err) {
-        qDebug() << "Failed to receive data with exception: " << err;
-    }
+    actual = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
 }
 
 void UdpMessageForwarderTest::setupReceiver() {
     receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    // TODO document bits
     receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
-
     receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
 }
 
@@ -142,12 +140,9 @@ void UdpMessageForwarderTest::cleanReceiver() {
  * @brief Send a single message representing a JSON string via UdpMessageForwarder and verify its success
  */
 TEST_F(UdpMessageForwarderTest, testSendingMessage) {
-
-    sendMessage(EXPECTED_1, true);
-
     QString ACTUAL;
+    sendMessage(EXPECTED_1, true);
     receiveMessage(ACTUAL, true);
-
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
 }
 
@@ -155,16 +150,11 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
  * @brief Send a message before the receiver has setup
  */
 TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
-
-    cleanReceiver();
-
-    sendMessage(EXPECTED_1, true);
-
-    setupReceiver();
-
     QString ACTUAL;
+    cleanReceiver();
+    sendMessage(EXPECTED_1, true);
+    setupReceiver();
     receiveMessage(ACTUAL, true);
-
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
 }
 
@@ -172,21 +162,14 @@ TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
  * @brief Disconnect the receiver during delivery and ensure messages still arrive
  */
 TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
-    sendMessage(EXPECTED_1, true);
-
     QString ACTUAL;
+    sendMessage(EXPECTED_1, true);
     receiveMessage(ACTUAL, true);
-
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
-
     receiver.reset();
-
     sendMessage(EXPECTED_2, false);
-
     setupReceiver();
-
     receiveMessage(ACTUAL, true);
-
     EXPECT_EQ(EXPECTED_2.toStdString(), ACTUAL.toStdString());
 }
 
@@ -194,10 +177,8 @@ TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
  * @brief test sending message with special characters
  */
 TEST_F(UdpMessageForwarderTest, testSendingSpecialChars) {
-    sendMessage(EXPECTED_3, true);
-
     QString ACTUAL;
+    sendMessage(EXPECTED_3, true);
     receiveMessage(ACTUAL, true);
-
     EXPECT_EQ(EXPECTED_3.toStdString(), ACTUAL.toStdString());
 }

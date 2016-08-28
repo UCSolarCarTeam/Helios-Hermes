@@ -76,7 +76,17 @@ TEST_F(SettingsTest, packetTitle)
     EXPECT_EQ(settings_->packetTitle(), "Gen5");
 }
 
-TEST_F(SettingsTest, queueName)
+TEST_F(SettingsTest, mainQueueName)
 {
-  EXPECT_EQ(settings_->queueName(), "queue_name");
+  EXPECT_EQ(settings_->mainQueueName(), "queue_name");
+}
+
+TEST_F(SettingsTest, secondaryQueueName)
+{
+  EXPECT_EQ(settings_->secondaryQueueName(), "second_queue_name");
+}
+
+TEST_F(SettingsTest, exchangeName)
+{
+  EXPECT_EQ(settings_->exchangeName(), "exchange_name");
 }
