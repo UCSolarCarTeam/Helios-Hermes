@@ -65,12 +65,15 @@ protected:
     // TODO Fix indentation
     // TODO fix .ini files
     // TODO fix exhange usage in test
+    // TODO Only the receiver should be generating the queue
+    // TODO Come up with official queue/exchange names and include in settings and spreadsheet
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
    */
     virtual void SetUp()
     {
+        // TODO move to tests
         settings_.reset(new MockSettings());
         receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
         receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
@@ -108,8 +111,10 @@ protected:
 };
 
 void UdpMessageForwarderTest::sendMessage(const QString& message, bool resetForwarder) {
-    if (resetForwarder)
+  // TODO move this into test
+    if (resetForwarder) {
         forwarder.reset(new UdpMessageForwarder(*settings_));
+    }
     QByteArray expectedBytes = QByteArray();
     expectedBytes.append(message);
     forwarder->forwardData(expectedBytes);
@@ -117,8 +122,9 @@ void UdpMessageForwarderTest::sendMessage(const QString& message, bool resetForw
 
 void UdpMessageForwarderTest::receiveMessage(QString& actual, bool setupConsume) {
     // Receive message from local server
-    if (setupConsume)
+    if (setupConsume) {
         receiver->BasicConsume(MOCK_QUEUE.toStdString());
+    }
     actual = QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
 }
 
