@@ -8,3 +8,5 @@ build*
 *.user*
 *.orig
 logs/
+
+*.gch

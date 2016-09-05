@@ -35,15 +35,16 @@ class I_Settings;
 
 class UdpMessageForwarder : public I_MessageForwarder
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  UdpMessageForwarder(I_Settings& settings);
-  virtual ~UdpMessageForwarder();
+    UdpMessageForwarder(I_Settings& settings);
+    virtual ~UdpMessageForwarder();
 
 public slots:
-  void forwardData(QByteArray data);
+    void forwardData(QByteArray data);
 
 private:
-  Channel::ptr_t channel_;
-  QString routingKey_;
+    Channel::ptr_t channel_;
+    QString routingKey_;
+    QString exchangeName_;
 };

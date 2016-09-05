@@ -68,16 +68,6 @@ QString Settings::packetTitle() const
     return settings_.value("JsonFormat/packetTitle").toString();
 }
 
-QString Settings::mainQueueName() const
-{
-    return QString(settings_.value("rabbitMQ/mainQueueName").toString());
-}
-
-QString Settings::secondaryQueueName() const
-{
-    return QString(settings_.value("rabbitMQ/secondaryQueueName").toString());
-}
-
 QString Settings::exchangeName() const
 {
     return QString(settings_.value("rabbitMQ/exchangeName").toString());

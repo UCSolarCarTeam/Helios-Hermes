@@ -32,22 +32,13 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "UdpMessageForwarder.h"
 
- // TODO add support for exhange declaration so usage is independent from server
-
-namespace
-{
-    // TODO declare fanout type here instead
-    const QString EXHANGE_TYPE = QString("amq.direct");
-}
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
-  QString queueName = settings.queueName();
-  routingKey_ = settings.routingKey();
-  channel_ = Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
-  // TODO explain the bits here
-  channel_->DeclareQueue(queueName.toStdString(), false, true, false, false);
-  channel_->BindQueue(queueName.toStdString(), settings.exchangeName().toStdString(), routingKey_.toStdString());
+    routingKey_ = settings.routingKey();
+    exchangeName_ = settings.exchangeName();
+    channel_ = Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
+    channel_->DeclareExchange(exchangeName_.toStdString(), Channel::EXCHANGE_TYPE_FANOUT);
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
@@ -56,6 +47,6 @@ UdpMessageForwarder::~UdpMessageForwarder()
 
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-  BasicMessage::ptr_t mq_msg = BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
-  channel_->BasicPublish(settings.exchangeName().toStdString(), routingKey_.toStdString(), mq_msg);
+    BasicMessage::ptr_t mq_msg = BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
+    channel_->BasicPublish(exchangeName_.toStdString(), routingKey_.toStdString(), mq_msg);
 }
