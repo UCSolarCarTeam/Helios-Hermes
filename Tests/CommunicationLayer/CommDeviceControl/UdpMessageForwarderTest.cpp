@@ -43,7 +43,6 @@ namespace
 const QString MOCK_IP = QString("localhost");
 const quint16 MOCK_PORT = 5672;
 const QString MOCK_QUEUE = "test-queue";
-// TODO fix exchange values
 const QString MOCK_EXCHANGE = "testExchange";
 const QString MOCK_ROUTING_KEY = "x73F34rS0dl";
 const QString EXPECTED_1 = "Message Test";
@@ -59,14 +58,8 @@ protected:
     QScopedPointer<UdpMessageForwarder> forwarder;
     AmqpClient::Channel::ptr_t receiver;
 
-    // TODO any new tests?
     // TODO add documentation for rabbitMQ libraries
     // TODO fix travis
-    // TODO Fix indentation
-    // TODO fix .ini files
-    // TODO fix exhange usage in test
-    // TODO Only the receiver should be generating the queue
-    // TODO Come up with official exchange name
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
