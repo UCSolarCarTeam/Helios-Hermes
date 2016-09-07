@@ -58,8 +58,6 @@ protected:
     QScopedPointer<UdpMessageForwarder> forwarder;
     AmqpClient::Channel::ptr_t receiver;
 
-    // TODO add documentation for rabbitMQ libraries
-    // TODO fix travis
 
     /**
    * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
