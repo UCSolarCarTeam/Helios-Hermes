@@ -34,23 +34,55 @@ This can be installed [here](https://www.rabbitmq.com/)
 
 2) Installing dependencies for SimpleAmqpClient
 
-SimpleAmqpClient requires rabbitmq-c, which can be downloaded and compiled from the repository [alanxz/rabbitmq-c](https://github.com/alanxz/rabbitmq-c)
-This repository contains instructions on how to generate a library in the README
+First, boost and cmake is required to generate the libraries below, you may install these using your appropriate package manager (such as apt-get on debian).
+The following are the commands that could be used on a debian based distro to install these dependencies if you do not already have them.
+
+`sudo apt-get install libboost-dev`
+
+`sudo apt-get install cmake`
+
+SimpleAmqpClient requires rabbitmq-c, which can be downloaded and compiled from the repository [alanxz/rabbitmq-c](https://github.com/alanxz/rabbitmq-c).
+From the src directory of Hermes, start by cloning the repository from github
+
+`git clone https://github.com/alanxz/rabbitmq-c`
+
+Navigate into this new folder and create a build directory with the following command
+
+`mkdir rabbitmq-c/build && cd rabbitmq-c/build`
+
+You can now use cmake to generate the library required by SimpleAmqpClient
+
+`cmake ..`
+
+`- cmake --build .`
+
+There should now be a `.a` file in your current directory, as well as multiple `*.so*` files. Use the following commands to make them visible to SimpleAmqpClient.
+
+`sudo cp librabbitmq/*.a /usr/local/lib/`
+
+`sudo cp librabbitmq/*.so* /usr/local/lib/`
+
+Finally navigate back to the src folder
+
+`cd ../..`
 
 3) Generating SimpleAmqpClient library
 
-SimpleAmqpClient can be downloaded and compiled from [alanxz/SimpleAmqpClient](https://github.com/alanxz/SimpleAmqpClient)
-This repository once again contains instructions on how to generate the library in the README.
+SimpleAmqpClient can be downloaded and compiled from [alanxz/SimpleAmqpClient](https://github.com/alanxz/SimpleAmqpClient).
+Once again from the src directory, run the following command
 
-4) Adding libraries to path
+`git clone https://github.com/alanxz/SimpleAmqpClient`
 
-Both of these libraries must be added to your PATH environment variable, in order for the project to be able to see and use it.
-On linux this can also be done by adding them to `/usr/local/lib`
+And once again generate a build directory and navigate to it
 
-5) Header files
+`mkdir SimpleAmqpClient/build && cd SimpleAmqpClient/build`
 
-The header files in these libraries must also be visible.
-On linux this can be accomplished by moving AMQP/ and SimpleAmqpClient/ containing the header files to /usr/include or /usr/local/include
+Run the following commands to generate the libraries needed by Hermes
+
+`cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq ..`
+
+`make`
+
 
 ### Start Server
 
@@ -61,7 +93,9 @@ On linux this can be accomplished by moving AMQP/ and SimpleAmqpClient/ containi
 On linux to refresh the contents of the server perform the following commands
 
 `rabbitmqctl stop_app`
+
 `rabbitmqctl reset`
+
 `rabbitmqctl start_app`
 
 ## Testing
@@ -98,3 +132,5 @@ Use the following command in the root directory
     `cp Tests/testconfig.ini ../build/.tests/`
 
 Both gmock and the gtest folders located in `googletest/googlemock/include/` and `googletest/googletest/include/` need to be placed in the `/usr/local/include` system directory.
+
+If you feel there are any issues with the instructions in this README please contact one of the members of the team or open an issue on github against Hermes

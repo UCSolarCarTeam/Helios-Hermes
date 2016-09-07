@@ -5,6 +5,7 @@ before_install:
     - sudo apt-add-repository -y ppa:beineri/opt-qt542
     - sudo apt-get -qq update
     - sudo apt-get -qq install g++-4.8 libc6-i386 qt54tools qt54svg qt54webkit qt54serialport
+    - sudo apt-get -qq install libboost-dev
     - sudo cp /usr/bin/g++-4.8 /usr/bin/g++
     - PATH="/opt/qt54/bin:$PATH"
     - qt54-env.sh
@@ -13,6 +14,8 @@ before_install:
     - mkdir -p Hermes/build/.lib/
     - mv ./src ./Hermes/
     - cd ./Hermes/src
+
+
 
 install:
     - git clone https://github.com/google/googletest.git
@@ -24,6 +27,21 @@ install:
     - ar -rv libgmock.a gtest-all.o gmock-all.o
     - cp libgmock.a ../../build/.lib/
     - cd ..
+    - git clone https://github.com/alanxz/rabbitmq-c
+    - cd rabbitmq-c
+    - mkdir build && cd build
+    - cmake ..
+    - cmake --build .
+    - sudo cp librabbitmq/*.a ../../../build/.lib/
+    - cd ../..
+    - git clone https://github.com/alanxz/SimpleAmqpClient
+    - cd SimpleAmqpClient
+    - mkdir build && cd build
+    - cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq ..
+    - make
+    - sudo cp *.so* ../../../build/.lib/
+    - sudo cp ../src/SimpleAmqpClient/*.h ../../../build/.lib
+    - cd ../..
 
 script:
     - qmake
