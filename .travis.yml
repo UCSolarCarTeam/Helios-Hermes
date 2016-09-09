@@ -29,6 +29,7 @@ install:
     - cd ..
     - git clone https://github.com/alanxz/rabbitmq-c
     - cd rabbitmq-c
+    - sudo cp librabbitmq/*.h /usr/local/include/
     - mkdir build && cd build
     - cmake ..
     - cmake --build .
