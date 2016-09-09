@@ -34,6 +34,7 @@ install:
     - cmake ..
     - cmake --build .
     - sudo cp librabbitmq/librabbitmq.a /usr/local/lib/
+    - sudo cp librabbitmq/*.so* /usr/local/lib/
     - cd ../..
     - git clone https://github.com/alanxz/SimpleAmqpClient
     - cd SimpleAmqpClient
