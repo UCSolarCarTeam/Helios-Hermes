@@ -79,7 +79,7 @@ And once again generate a build directory and navigate to it
 
 Run the following commands to generate the libraries needed by Hermes
 
-`cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq ..`
+`cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq -DRabbitmqc_LIBRARY=../../rabbitmq-c/build/librabbitmq ..`
 
 `make`
 

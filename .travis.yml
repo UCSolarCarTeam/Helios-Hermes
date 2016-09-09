@@ -39,8 +39,9 @@ install:
     - mkdir build && cd build
     - cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq -DRabbitmqc_LIBRARY=../../rabbitmq-c/build/librabbitmq ..
     - make
+    - sudo mkdir /usr/local/include/SimpleAmqpClient
     - sudo cp *.so* /usr/local/lib/
-    - sudo cp ../src/SimpleAmqpClient/*.h /usr/local/include/
+    - sudo cp ../src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient/
     - cd ../..
 
 script:
