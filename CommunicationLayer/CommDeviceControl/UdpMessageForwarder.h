@@ -29,8 +29,6 @@
 #include <QUdpSocket>
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
-using namespace AmqpClient;
-
 class I_Settings;
 
 class UdpMessageForwarder : public I_MessageForwarder
@@ -44,7 +42,7 @@ public slots:
     void forwardData(QByteArray data);
 
 private:
-    Channel::ptr_t channel_;
+    AmqpClient::Channel::ptr_t channel_;
     QString routingKey_;
     QString exchangeName_;
 };

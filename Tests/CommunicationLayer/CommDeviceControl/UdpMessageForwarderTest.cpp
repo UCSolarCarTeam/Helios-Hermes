@@ -60,7 +60,7 @@ protected:
 
 
     /**
-   * @brief SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
+   * SetUp will set up the receiver to verify messages are being sent, as well as mocking the settings to be used by the UdpMessageForwarder
    */
     virtual void SetUp()
     {
@@ -87,11 +87,11 @@ protected:
     void sendMessage(const QString& message);
     QString receiveMessage(bool setupConsume);
     /**
-     * @brief setup the receiver for usage
+     * setup the receiver for usage
      */
     void setupReceiver();
     /**
-     * @brief reset the receiver (clear and delete queue)
+     * reset the receiver (clear and delete queue)
      */
     void cleanReceiver();
 };
@@ -126,7 +126,7 @@ void UdpMessageForwarderTest::cleanReceiver() {
 
 
 /**
- * @brief Send a single message representing a JSON string via UdpMessageForwarder and verify its success
+ * Send a single message representing a JSON string via UdpMessageForwarder and verify its success
  */
 TEST_F(UdpMessageForwarderTest, testSendingMessage) {
     setupReceiver();
@@ -137,7 +137,7 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage) {
 }
 
 /**
- * @brief Send a message before the receiver has setup
+ * Send a message before the receiver has setup
  */
 TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
     setupReceiver();
@@ -149,7 +149,7 @@ TEST_F(UdpMessageForwarderTest, testSendingNoReceiver) {
 }
 
 /**
- * @brief Disconnect the receiver during delivery and ensure messages still arrive
+ * Disconnect the receiver during delivery and ensure messages still arrive
  */
 TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
     setupReceiver();
@@ -165,7 +165,7 @@ TEST_F(UdpMessageForwarderTest, testSendingReceiverDC) {
 }
 
 /**
- * @brief test sending message with special characters
+ * test sending message with special characters
  */
 TEST_F(UdpMessageForwarderTest, testSendingSpecialChars) {
     setupReceiver();

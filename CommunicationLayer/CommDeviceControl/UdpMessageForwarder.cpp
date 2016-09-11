@@ -37,6 +37,7 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
     routingKey_ = settings.routingKey();
     exchangeName_ = settings.exchangeName();
+    // TODO Let's keep the same type for settings.updPort() so it's not necessary to cast it to a different type.
     channel_ = Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
     channel_->DeclareExchange(exchangeName_.toStdString(), Channel::EXCHANGE_TYPE_FANOUT);
 }
@@ -45,6 +46,15 @@ UdpMessageForwarder::~UdpMessageForwarder()
 {
 }
 
+/*
+TODO There must be some case that data still can't be forwarded, this function should be able know when that happens and at least list a warning.
+
+-    qDebug() << "UdpMessageForwarder: Forwarding data";
+-    const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
+-    if (dataWritten != static_cast<quint64>(data.size()))
+-    {
+-        qWarning() << "UdpMessageForwader: Unable to forward data";
+ */
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
     BasicMessage::ptr_t mq_msg = BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());

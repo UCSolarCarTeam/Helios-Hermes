@@ -30,54 +30,54 @@ Your new file structure should look like:
 1) Installing rabbitMQ
 
 In order to send messages, you must have a rabbitMQ server to send the messages to.
-This can be installed [here](https://www.rabbitmq.com/)
+This can be installed [here](https://www.rabbitmq.com/) or via the package manager using:
+
+`echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list && sudo apt-get update && sudo apt-get install rabbitmq-server`
 
 2) Installing dependencies for SimpleAmqpClient
 
 First, boost and cmake is required to generate the libraries below, you may install these using your appropriate package manager (such as apt-get on debian).
 The following are the commands that could be used on a debian based distro to install these dependencies if you do not already have them.
 
-`sudo apt-get install libboost-dev`
-
-`sudo apt-get install cmake`
+`sudo apt-get install cmake libboost-dev`
 
 SimpleAmqpClient requires rabbitmq-c, which can be downloaded and compiled from the repository [alanxz/rabbitmq-c](https://github.com/alanxz/rabbitmq-c).
-From the src directory of Hermes, start by cloning the repository from github
+From the src directory of Hermes, start by cloning the repository from github:
 
 `git clone https://github.com/alanxz/rabbitmq-c`
 
-Navigate into this new folder and create a build directory with the following command
+Navigate into this new folder and create a build directory with the following command:
 
 `mkdir rabbitmq-c/build && cd rabbitmq-c/build`
 
-You can now use cmake to generate the library required by SimpleAmqpClient
+You can now use cmake to generate the library required by SimpleAmqpClient:
 
 `cmake ..`
 
-`- cmake --build .`
+`cmake --build .`
 
-There should now be a `.a` file in your current directory, as well as multiple `*.so*` files. Use the following commands to make them visible to SimpleAmqpClient.
+There should now be a `.a` file in your current directory, as well as multiple `*.so*` files. Use the following commands to make them visible to SimpleAmqpClient:
 
 `sudo cp librabbitmq/*.a /usr/local/lib/`
 
 `sudo cp librabbitmq/*.so* /usr/local/lib/`
 
-Finally navigate back to the src folder
+Finally navigate back to the src folder:
 
 `cd ../..`
 
 3) Generating SimpleAmqpClient library
 
 SimpleAmqpClient can be downloaded and compiled from [alanxz/SimpleAmqpClient](https://github.com/alanxz/SimpleAmqpClient).
-Once again from the src directory, run the following command
+Once again from the src directory, run the following command:
 
 `git clone https://github.com/alanxz/SimpleAmqpClient`
 
-And once again generate a build directory and navigate to it
+And once again generate a build directory and navigate to it:
 
 `mkdir SimpleAmqpClient/build && cd SimpleAmqpClient/build`
 
-Run the following commands to generate the libraries needed by Hermes
+Run the following commands to generate the libraries needed by Hermes:
 
 `cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq -DRabbitmqc_LIBRARY=../../rabbitmq-c/build/librabbitmq ..`
 
@@ -86,11 +86,11 @@ Run the following commands to generate the libraries needed by Hermes
 
 ### Start Server
 
-`sudo rabbitmq-server` can be used to start the server on Linux
+`sudo rabbitmq-server` can be used to start the server on Linux.
 
 ### Refresh Server
 
-On linux to refresh the contents of the server perform the following commands
+On linux to refresh the contents of the server perform the following commands:
 
 `rabbitmqctl stop_app`
 
@@ -110,7 +110,7 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
 1. Get the googletest and googlemock source code:
     `git clone https://github.com/google/googletest.git`
 
-2. Go into the cloned directory
+2. Go into the cloned directory:
     `cd googletest/`
 
 3. Compile googletest:
@@ -128,9 +128,9 @@ Run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you
 Use `ls -a` to show all hidden files.
 
 To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary.
-Use the following command in the root directory
+Use the following command in the root directory:
     `cp Tests/testconfig.ini ../build/.tests/`
 
 Both gmock and the gtest folders located in `googletest/googlemock/include/` and `googletest/googletest/include/` need to be placed in the `/usr/local/include` system directory.
 
-If you feel there are any issues with the instructions in this README please contact one of the members of the team or open an issue on github against Hermes
+If you feel there are any issues with the instructions in this README please contact one of the members of the team or open an issue on github against Hermes.
