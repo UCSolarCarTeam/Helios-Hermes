@@ -38,8 +38,8 @@ UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
     routingKey_ = settings.routingKey();
     exchangeName_ = settings.exchangeName();
     // TODO Let's keep the same type for settings.updPort() so it's not necessary to cast it to a different type.
-    channel_ = Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
-    channel_->DeclareExchange(exchangeName_.toStdString(), Channel::EXCHANGE_TYPE_FANOUT);
+    channel_ = AmqpClient::Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
+    channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
@@ -57,6 +57,6 @@ TODO There must be some case that data still can't be forwarded, this function s
  */
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
-    BasicMessage::ptr_t mq_msg = BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
+    AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
     channel_->BasicPublish(exchangeName_.toStdString(), routingKey_.toStdString(), mq_msg);
 }
