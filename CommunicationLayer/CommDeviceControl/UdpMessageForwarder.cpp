@@ -61,7 +61,6 @@ void UdpMessageForwarder::forwardData(QByteArray data)
         qWarning() << "UdpMessageForwarder: Failed to forward data";
     } catch (AmqpClient::ConnectionException& ex) {
         qWarning() << "UdpMessageForwarder: Connection to broker terminated";
-        channel_->~Channel();
         setupChannel();
     }
 }

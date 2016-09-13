@@ -46,5 +46,5 @@ private:
     AmqpClient::Channel::ptr_t channel_;
     QString exchangeName_;
     QString ipAddress_;
-    quint64 udpPort_;
+    quint16 udpPort_;
 };
