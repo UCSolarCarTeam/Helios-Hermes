@@ -35,28 +35,33 @@
 
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
-    routingKey_ = settings.routingKey();
     exchangeName_ = settings.exchangeName();
-    // TODO Let's keep the same type for settings.updPort() so it's not necessary to cast it to a different type.
-    channel_ = AmqpClient::Channel::Create(settings.ipAddress().toStdString(), (int)settings.udpPort());
-    channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
+    ipAddress_ = settings.ipAddress();
+    udpPort_ = settings.udpPort();
+    setupChannel();
 }
 
 UdpMessageForwarder::~UdpMessageForwarder()
 {
 }
 
-/*
-TODO There must be some case that data still can't be forwarded, this function should be able know when that happens and at least list a warning.
+void UdpMessageForwarder::setupChannel()
+{
+    channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), udpPort_);
+    channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
+}
 
--    qDebug() << "UdpMessageForwarder: Forwarding data";
--    const quint64 dataWritten = socket_.writeDatagram(data, ipAddress_, port_);
--    if (dataWritten != static_cast<quint64>(data.size()))
--    {
--        qWarning() << "UdpMessageForwader: Unable to forward data";
- */
 void UdpMessageForwarder::forwardData(QByteArray data)
 {
+    qDebug() << "UdpMessageForwarder: Forwarding data";
     AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
-    channel_->BasicPublish(exchangeName_.toStdString(), routingKey_.toStdString(), mq_msg);
+    try {
+        channel_->BasicPublish(exchangeName_.toStdString(), "", mq_msg);
+    } catch (AmqpClient::ChannelException& ex) {
+        qWarning() << "UdpMessageForwarder: Failed to forward data";
+    } catch (AmqpClient::ConnectionException& ex) {
+        qWarning() << "UdpMessageForwarder: Connection to broker terminated";
+        channel_->~Channel();
+        setupChannel();
+    }
 }

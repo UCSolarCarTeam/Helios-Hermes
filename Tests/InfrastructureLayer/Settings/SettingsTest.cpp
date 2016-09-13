@@ -80,8 +80,3 @@ TEST_F(SettingsTest, exchangeName)
 {
     EXPECT_EQ(settings_->exchangeName(), "hermesExchange");
 }
-
-TEST_F(SettingsTest, routingKey)
-{
-    EXPECT_EQ(settings_->routingKey(), "10vby5v5j3orid8");
-}

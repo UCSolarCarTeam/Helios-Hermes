@@ -37,6 +37,5 @@ public:
     MOCK_CONST_METHOD0(udpPort, quint16());
     MOCK_CONST_METHOD0(forwardPeriod, int());
     MOCK_CONST_METHOD0(packetTitle, QString());
-    MOCK_CONST_METHOD0(routingKey, QString());
     MOCK_CONST_METHOD0(exchangeName, QString());
 };

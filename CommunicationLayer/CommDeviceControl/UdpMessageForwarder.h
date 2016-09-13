@@ -42,7 +42,9 @@ public slots:
     void forwardData(QByteArray data);
 
 private:
+    void setupChannel();
     AmqpClient::Channel::ptr_t channel_;
-    QString routingKey_;
     QString exchangeName_;
+    QString ipAddress_;
+    quint64 udpPort_;
 };

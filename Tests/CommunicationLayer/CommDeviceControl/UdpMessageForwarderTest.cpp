@@ -44,7 +44,6 @@ const QString MOCK_IP = QString("localhost");
 const quint16 MOCK_PORT = 5672;
 const QString MOCK_QUEUE = "test-queue";
 const QString MOCK_EXCHANGE = "testExchange";
-const QString MOCK_ROUTING_KEY = "x73F34rS0dl";
 const QString EXPECTED_1 = "Message Test";
 const QString EXPECTED_2 = "Second Message Test";
 const QString EXPECTED_3 = "Sp3c1a1** Ch4r4c74r5__ 7357";
@@ -72,8 +71,6 @@ protected:
                 .WillByDefault(Return(MOCK_EXCHANGE));
         ON_CALL(*settings_, udpPort())
                 .WillByDefault(Return(MOCK_PORT));
-        ON_CALL(*settings_, routingKey())
-                .WillByDefault(Return(MOCK_ROUTING_KEY));
     }
 
     virtual void TearDown() {
@@ -111,11 +108,11 @@ QString UdpMessageForwarderTest::receiveMessage(bool setupConsume) {
 }
 
 void UdpMessageForwarderTest::setupReceiver() {
-    receiver = Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    receiver = AmqpClient::Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
     // passive (false), durable (true), exclusive (false), auto_delete (false)
     receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
     receiver->DeclareExchange(MOCK_EXCHANGE.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
-    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), MOCK_ROUTING_KEY.toStdString());
+    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), "");
 }
 
 void UdpMessageForwarderTest::cleanReceiver() {
