@@ -27,6 +27,7 @@
 
 #include <SimpleAmqpClient/SimpleAmqpClient.h>
 #include <QUdpSocket>
+#include <QThread>
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
 class I_Settings;

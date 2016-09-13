@@ -33,6 +33,11 @@
 #include "UdpMessageForwarder.h"
 
 
+namespace {
+    quint32 TIMEOUT = 120;
+    quint32 SLEEP_TIME = 2;
+}
+
 UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
 {
     exchangeName_ = settings.exchangeName();
@@ -45,9 +50,32 @@ UdpMessageForwarder::~UdpMessageForwarder()
 {
 }
 
+
 void UdpMessageForwarder::setupChannel()
 {
-    channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), udpPort_);
+    quint32 i = 0;
+    do {
+        if (i++) {
+            qWarning() << "UdpMessageForwarder: Attempting to reconnect";
+        }
+        try {
+            channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), udpPort_);
+        } catch (std::exception&) {
+            if (channel_ == NULL) {
+                if (i == (TIMEOUT / SLEEP_TIME)) {
+                    qWarning() << "UdpMessageForwarder timed out waiting for connection to broker";
+                    throw;
+                }
+                qWarning() << "UdpMessageForwarder: error creating channel";
+                QThread::sleep(SLEEP_TIME);
+            }
+            else {
+                throw;
+            }
+        }
+
+
+    } while (channel_ == NULL);
     channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
 }
 
