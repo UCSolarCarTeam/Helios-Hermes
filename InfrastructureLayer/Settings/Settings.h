@@ -40,6 +40,7 @@ public:
     quint16 udpPort() const;
     int forwardPeriod() const;
     QString packetTitle() const;
+    QString exchangeName() const;
 
 private:
     QSettings settings_;

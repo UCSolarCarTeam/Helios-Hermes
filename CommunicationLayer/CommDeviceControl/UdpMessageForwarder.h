@@ -25,7 +25,9 @@
 
 #pragma once
 
+#include <SimpleAmqpClient/SimpleAmqpClient.h>
 #include <QUdpSocket>
+#include <QThread>
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
 class I_Settings;
@@ -41,7 +43,9 @@ public slots:
     void forwardData(QByteArray data);
 
 private:
-    QHostAddress ipAddress_;
-    quint16 port_;
-    QUdpSocket socket_;
+    void setupChannel();
+    AmqpClient::Channel::ptr_t channel_;
+    QString exchangeName_;
+    QString ipAddress_;
+    quint16 udpPort_;
 };
