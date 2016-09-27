@@ -96,7 +96,7 @@ public:
     void setBmsCanLockedOut(const unsigned char&);
 
 
-private: 
+private:
     unsigned char packageID_;
     unsigned char alive_;
     float packSocAmpHours_;
@@ -127,4 +127,3 @@ private:
     unsigned short cmu12VCurrentConsumption_;
     unsigned char bmsCanLockedOut_;
 };
-

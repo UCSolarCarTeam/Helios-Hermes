@@ -50,8 +50,8 @@ HEADERS += \
    LightsData/I_LightsData.h \
    KeyMotorData/KeyMotorData.h \
    KeyMotorData/I_KeyMotorData.h \
-   DriverControlData/DriverControlData.h \
-   DriverControlData/I_DriverControlData.h \
+   DriverControlsData/DriverControlsData.h \
+   DriverControlsData/I_DriverControlsData.h \
    CmuData/CmuData.h \
    CmuData/I_CmuData.h \
    MpptData/MpptData.h \
@@ -65,6 +65,6 @@ SOURCES += \
    MotorDetailsData/MotorDetailsData.cpp \
    LightsData/LightsData.cpp \
    KeyMotorData/KeyMotorData.cpp \
-   DriverControlData/DriverControlData.cpp \
+   DriverControlsData/DriverControlsData.cpp \
    CmuData/CmuData.cpp \
    MpptData/MpptData.cpp
