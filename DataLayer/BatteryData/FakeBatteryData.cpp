@@ -4,24 +4,26 @@
  *
  *  This file is part of Schulich Delta Hermes
  *
- *  Schulich Delta Hermes is free software: 
- *  you can redistribute it and/or modify it under the terms 
- *  of the GNU Affero General Public License as published by 
+ *  Schulich Delta Hermes is free software:
+ *  you can redistribute it and/or modify it under the terms
+ *  of the GNU Affero General Public License as published by
  *  the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
  *
- *  Schulich Delta Hermes is distributed 
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or 
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
+ *  Schulich Delta Hermes is distributed
+ *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *  without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
  *  General Public License for more details.
  *
- *  You should have received a copy of the GNU Affero General 
+ *  You should have received a copy of the GNU Affero General
  *  Public License along with Schulich Delta Hermes.
  *  If not, see <http://www.gnu.org/licenses/>.
  *
  *  For further contact, email <software@calgarysolarcar.ca>
  */
+
+ // TODO fix this
 
 #include "FakeBatteryData.h"
 
@@ -35,11 +37,11 @@ FakeBatteryData::~FakeBatteryData()
 
 /*FakeBatteryData "Gets"*/
 double FakeBatteryData::mod0PcbTemperature() const
-{           
+{
  return 1;
 }
 double FakeBatteryData::mod0CellTemperature() const
-{           
+{
  return 2;
 }
 
@@ -51,11 +53,11 @@ QList<double> FakeBatteryData::mod0CellVoltages() const
 }
 
 double FakeBatteryData::mod1PcbTemperature() const
-{           
+{
  return 4;
 }
 double FakeBatteryData::mod1CellTemperature() const
-{           
+{
  return 5;
 }
 
@@ -67,11 +69,11 @@ QList<double> FakeBatteryData::mod1CellVoltages() const
 }
 
 double FakeBatteryData::mod2PcbTemperature() const
-{           
+{
  return 7;
 }
 double FakeBatteryData::mod2CellTemperature() const
-{           
+{
  return 8;
 }
 
@@ -83,11 +85,11 @@ QList<double> FakeBatteryData::mod2CellVoltages() const
 }
 
 double FakeBatteryData::mod3PcbTemperature() const
-{           
+{
   return 10;
 }
 double FakeBatteryData::mod3CellTemperature() const
-{           
+{
   return 11;
 }
 
@@ -99,13 +101,13 @@ QList<double> FakeBatteryData::mod3CellVoltages() const
 }
 
 double FakeBatteryData::batteryVoltage() const
-{           
+{
   return 13;
 }
 double FakeBatteryData::batteryCurrent() const
-{           
+{
   return 14;
-}                      
+}
 
 /*FakeBatteryData "Sets"*/
 void FakeBatteryData::setMod0PcbTemperature(double mod0PcbTemperature){}
@@ -132,4 +134,3 @@ void FakeBatteryData::setMod3CellVoltages(QList<double> mod3CellVoltages){}
 void FakeBatteryData::setBatteryVoltage(double batteryVoltage){}
 
 void FakeBatteryData::setBatteryCurrent(double batteryCurrent){}
-
