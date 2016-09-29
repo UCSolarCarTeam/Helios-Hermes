@@ -23,7 +23,7 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-// TODO fix this
+// TODO What is this for?
 
 #pragma once
 
