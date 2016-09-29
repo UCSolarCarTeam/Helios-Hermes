@@ -4,19 +4,19 @@
  *
  *  This file is part of Schulich Delta Hermes
  *
- *  Schulich Delta Hermes is free software: 
- *  you can redistribute it and/or modify it under the terms 
- *  of the GNU Affero General Public License as published by 
+ *  Schulich Delta Hermes is free software:
+ *  you can redistribute it and/or modify it under the terms
+ *  of the GNU Affero General Public License as published by
  *  the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
  *
- *  Schulich Delta Hermes is distributed 
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or 
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
+ *  Schulich Delta Hermes is distributed
+ *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *  without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
  *  General Public License for more details.
  *
- *  You should have received a copy of the GNU Affero General 
+ *  You should have received a copy of the GNU Affero General
  *  Public License along with Schulich Delta Hermes.
  *  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -27,34 +27,21 @@
 
 #include <QObject>
 
-#include "CommunicationLayer/MessagingFramework/MotorFaults.h"
-#include "CommunicationLayer/MessagingFramework/LimitFlags.h"
-#include "CommunicationLayer/MessagingFramework/BatteryFaults.h"
-
-class I_FaultsData : public QObject
+class I_BatteryFaultsData : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   virtual ~I_FaultsData() {}
+    virtual ~I_BatteryFaultsData() {}
 
-   /* FaultData Gets */
-   virtual MotorFaults motorOneFaults() const = 0;
-   virtual LimitFlags motorOneLimitFlags() const = 0;
-   virtual MotorFaults motorTwoFaults() const = 0;
-   virtual LimitFlags motorTwoLimitFlags() const = 0;
-   virtual BatteryFaults batteryFaults() const = 0;
+    /* BatterFaults Gets */
+    virtual unsigned char getPackageID() const = 0;
+    virtual unsigned short getErrorFlag() const = 0;
 
-   /* FaultData Sets */
-   virtual void setMotorOneFaults(MotorFaults motorFaults) = 0;
-   virtual void setMotorOneLimitFlags(LimitFlags limitFlags) = 0;
-   virtual void setMotorTwoFaults(MotorFaults motorFaults) = 0;
-   virtual void setMotorTwoLimitFlags(LimitFlags limitFlags) = 0;
-   virtual void setBatteryFaults(BatteryFaults batteryFaults) = 0;
+    /* BatteryFaults Sets */
+    void setPackageID(const unsigned char& packageID) = 0;
+    void setErrorFlag(const unsigned char& errorFlag) = 0;
 
 signals:
-   void motorOneFaultsReceived(MotorFaults motorFaults);
-   void motorOneLimitFlagsReceived(LimitFlags limitFlags);
-   void motorTwoFaultsReceived(MotorFaults motorFaults);
-   void motorTwoLimitFlagsReceived(LimitFlags limitFlags);
-   void batteryFaultsReceived(BatteryFaults batteryFaults);
+    void packageIDRecieved(const unsigned char packageID);
+    void errorFlagRecieved(const unsigned short errorFlag);
 };

@@ -41,7 +41,7 @@ HEADERS += \
    BatteryData/BatteryData.h \
    BatteryData/I_BatteryData.h \
    BatteryFaultsData/BatteryFaultsData.h \
-   BatteryFaultsData/I_BatterFaultsData.h \
+   BatteryFaultsData/I_BatteryFaultsData.h \
    MotorFaultsData/MotorFaultsData.h \
    MotorFaultsData/I_MotorFaultsData.h \
    MotorDetailsData/MotorDetailsData.h \

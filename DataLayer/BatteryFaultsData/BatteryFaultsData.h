@@ -25,36 +25,24 @@
 
 #pragma once
 
-#include "I_FaultsData.h"
+#include "I_BatteryFaultsData.h"
 
-class MotorFaults;
-class LimitFlags;
-class BatteryFaults;
-
-class FaultsData : public I_FaultsData
+class BatteryFaultsData : public I_BatteryFaultsData
 {
 public:
-   FaultsData();
-   virtual ~FaultsData();
+   BatteryFaultsData();
+   virtual ~BatteryFaultsData();
 
-   /* FaultData Gets */
-   MotorFaults motorOneFaults() const;
-   LimitFlags motorOneLimitFlags() const;
-   MotorFaults motorTwoFaults() const;
-   LimitFlags motorTwoLimitFlags() const;
-   BatteryFaults batteryFaults() const;
+   /* BatteryFaults Gets */
+   unsigned char getPackageID() const;
+   unsigned short getErrorFlag() const;
 
-   /* FaultData Sets */
-   void setMotorOneFaults(MotorFaults motorFaults);
-   void setMotorOneLimitFlags(LimitFlags limitFlags);
-   void setMotorTwoFaults(MotorFaults motorFaults);
-   void setMotorTwoLimitFlags(LimitFlags limitFlags);
-   void setBatteryFaults(BatteryFaults batteryFaults);
+   /* BatteryFaults Sets */
+   void setPackageID(const unsigned char&);
+   void setErrorFlag(const unsigned short&);
+
 
 private:
-   MotorFaults motorOneFaults_;
-   LimitFlags motorOneLimitFlags_;
-   MotorFaults motorTwoFaults_;
-   LimitFlags motorTwoLimitFlags_;
-   BatteryFaults batteryFaults_;
+    unsigned char packageID_;
+    unsigned short errorFlag_;
 };
