@@ -147,101 +147,126 @@ void CmuData::setPackageID(const unsigned char&) {
 }
 
 void CmuData::setCmuNumber(const unsigned char&) {
-
+    cmuNumber_ = cmuNumber;
+    emit cmuNumberReceived(cmuNumber_);
 }
 
 void CmuData::setCell0Voltage(const unsigned short&) {
-
+    cell0Voltage_ = cell0Voltage;
+    emit cell0VoltageReceived(cell0Voltage_);
 }
 
 void CmuData::setCell1Voltage(const unsigned short&) {
-
+    cell1Voltage_ = cell1Voltage;
+    emit cell1VoltageReceived(cell1Voltage_);
 }
 
 void CmuData::setCell2Voltage(const unsigned short&) {
-
+    cell2Voltage_ = cell2Voltage;
+    emit cell2Voltage_VoltageReceived(cell2Voltage_);
 }
 
 void CmuData::setCell3Voltage(const unsigned short&) {
-
+    cell3Voltage_ = cell3Voltage;
+    emit cell3VoltageReceived(cell3Voltage_);
 }
 
 void CmuData::setCell4Voltage(const unsigned short&) {
-
+    cell4Voltage_ = cell4Voltage;
+    emit cell4VoltageReceived(cell4Voltage_);
 }
 
 void CmuData::setCell5Voltage(const unsigned short&) {
-
+    cell5Voltage_ = cell5Voltage;
+    emit cell5VoltageReceived(cell5Voltage_);
 }
 
 void CmuData::setCell6Voltage(const unsigned short&) {
-
+    cell6Voltage_ = cell6Voltage;
+    emit cell6VoltageReceived(cell6Voltage_);
 }
 
 void CmuData::setCell7Voltage(const unsigned short&) {
-
+    cell7Voltage_ = cell7Voltage;
+    emit cell7VoltageReceived(cell7Voltage_);
 }
 
 void CmuData::setPcbTemp(const unsigned short&) {
-
+    pcbTemp_ = pcbTemp;
+    emit pcbTempReceived(pcbTemp_);
 }
 
 void CmuData::setCellTemp0(const unsigned short&) {
-
+    cellTemp0_ = cellTemp0;
+    emit cellTemp0Received(cellTemp0_);
 }
 
 void CmuData::setCellTemp1(const unsigned short&) {
-
+    cellTemp1_ = cellTemp1;
+    emit cellTemp1Received(cellTemp1_);
 }
 
 void CmuData::setCellTemp2(const unsigned short&) {
-
+    cellTemp2_ = cellTemp2;
+    emit cellTemp2Received(cellTemp2_);
 }
 
 void CmuData::setCellTemp3(const unsigned short&) {
-
+    cellTemp3_ = cellTemp3;
+    emit cellTemp3Received(cellTemp3_);
 }
 
 void CmuData::setCellTemp4(const unsigned short&) {
-
+    cellTemp4_ = cellTemp4;
+    emit cellTemp4Received(cellTemp4_);
 }
 
 void CmuData::setCellTemp5(const unsigned short&) {
-
+    cellTemp5_ = cellTemp5;
+    emit cellTemp5Received(cellTemp5_);
 }
 
 void CmuData::setCellTemp6(const unsigned short&) {
-
+    cellTemp6_ = cellTemp6;
+    emit cellTemp6Received(cellTemp6_);
 }
 
 void CmuData::setCellTemp7(const unsigned short&) {
-
+    cellTemp7_ = cellTemp7;
+    emit cellTemp7Received(cellTemp7_);
 }
 
 void CmuData::setCellTemp8(const unsigned short&) {
-
+    cellTemp8_ = cellTemp8;
+    emit cellTemp8Received(cellTemp8_);
 }
 
 void CmuData::setCellTemp9(const unsigned short&) {
-
+    cellTemp9_ = cellTemp9;
+    emit cellTemp9Received(cellTemp9_);
 }
 
 void CmuData::setCellTemp10(const unsigned short&) {
-
+    cellTemp10_ = cellTemp10;
+    emit cellTemp10Received(cellTemp10_);
 }
 
 void CmuData::setCellTemp11(const unsigned short&) {
-
+    cellTemp11_ = cellTemp11;
+    emit cellTemp11Received(cellTemp11_);
 }
 
 void CmuData::setCellTemp12(const unsigned short&) {
-
+    cellTemp12_ = cellTemp12;
+    emit cellTemp12Received(cellTemp12_);
 }
 
 void CmuData::setCellTemp13(const unsigned short&) {
-
+    cellTemp13_ = cellTemp13;
+    emit cellTemp13Received(cellTemp13_);
 }
 
 void CmuData::setCellTemp14(const unsigned short&) {
-
+    cellTemp14_ = cellTemp14;
+    emit cellTemp14Received(cellTemp14_);
 }
