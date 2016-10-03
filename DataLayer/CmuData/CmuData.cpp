@@ -28,6 +28,7 @@
 CmuData::CmuData()
 : packageID_(0)
 , cmuNumber_(0)
+{
 
     // Initialize to 0
 }

@@ -116,5 +116,4 @@ signals:
     void cellTemp12Received(const unsigned short& cellTemp12);
     void cellTemp13Received(const unsigned short& cellTemp13);
     void cellTemp14Received(const unsigned short& cellTemp14);
-
 };
