@@ -33,7 +33,7 @@ public:
     MotorFaultsData();
     virtual ~MotorFaultsData();
 
-    /* BatteryFaults Gets */
+    /* MotorFaults Gets */
     unsigned char getPackageID() const;
     unsigned char getM0ErrorFlags() const;
     unsigned char getM1ErrorFlags() const;
@@ -44,7 +44,7 @@ public:
     unsigned char getM1CanRxErrorCount() const;
     unsigned char getM1CanTxErrorCount() const;
 
-    /* BatteryFaults Sets */
+    /* MotorFaults Sets */
     void getM0ErrorFlags(const unsigned char&);
     void getM1ErrorFlags(const unsigned char&);
     void getM0LimitFlags(const unsigned char&);
@@ -56,7 +56,8 @@ public:
 
 
 private:
-    unsigned char packageID_;
+    const unsigned char packageID_;
+    
     unsigned char m0ErrorFlags_;
     unsigned char m1ErrorFlags_;
     unsigned char m0LimitFlags_;

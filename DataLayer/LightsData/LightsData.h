@@ -42,5 +42,6 @@ public:
 
 private:
     const unsigned char packageID_;
+    
     unsigned char lightStatus_;
 }

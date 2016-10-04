@@ -73,7 +73,8 @@ public:
     void MotorDetailsData::setSlipSpeed(const float& slipSpeed);
 
 private:
-    unsigned char packageID_;
+    const unsigned char packageID_;
+    
     float phaseCCurrent_;
     float phaseBCurrent_;
     float motorVoltageReal_;

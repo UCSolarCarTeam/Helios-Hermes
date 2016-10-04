@@ -33,7 +33,7 @@ class I_MotorFaultsData : public QObject
 public:
     virtual ~I_MotorFaultsData() {}
 
-    /* BatterFaults Gets */
+    /* MotorFaults Gets */
     virtual unsigned char getPackageID() const;
     virtual unsigned char getM0ErrorFlags() const;
     virtual unsigned char getM1ErrorFlags() const;
@@ -44,7 +44,7 @@ public:
     virtual unsigned char getM1CanRxErrorCount() const;
     virtual unsigned char getM1CanTxErrorCount() const;
 
-    /* BatteryFaults Sets */
+    /* MotorFaults Sets */
     virtual void setM0ErrorFlags(const unsigned char& m0ErrorFlags;
     virtual void setM1ErrorFlags(const unsigned char& m1ErrorFlags;
     virtual void setM0LimitFlags(const unsigned char& m0LimitFlags;

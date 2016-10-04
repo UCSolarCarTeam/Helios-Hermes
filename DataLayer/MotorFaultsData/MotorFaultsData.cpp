@@ -41,7 +41,7 @@ MotorFaultsData::~MotorFaultsData()
 {
 }
 
-/* BatteryFaults Gets */
+/* MotorFaults Gets */
 unsigned char MotorFaultsData::getPackageID() const {
     return packageID_;
 }
@@ -79,50 +79,50 @@ unsigned char MotorFaultsData::getM1CanTxErrorCount() const {
 }
 
 
-/* BatteryFaults Sets */
-unsigned char BatteryFaults::setM0ErrorFlags() const
+/* MotorFaults Sets */
+unsigned char MotorFaults::setM0ErrorFlags() const
 {
     m0ErrorFlags_ = m0ErrorFlags;
     emit m0ErrorFlagsReceived(m0ErrorFlags_);
 }
 
-unsigned char BatteryFaults::setM1ErrorFlags() const
+unsigned char MotorFaults::setM1ErrorFlags() const
 {
     m1ErrorFlags_ = m1ErrorFlags;
     emit m1ErrorFlagsReceived(m1ErrorFlags_);
 }
 
-unsigned char BatteryFaults::setM0LimitFlags() const
+unsigned char MotorFaults::setM0LimitFlags() const
 {
     m0LimitFlags_ = m0LimitFlags;
     emit m0LimitFlagsReceived(m0LimitFlags_);
 }
 
-unsigned char BatteryFaults::setM1LimitFlags() const
+unsigned char MotorFaults::setM1LimitFlags() const
 {
     m1LimitFlags_ = m1LimitFlags;
     emit m1LimitFlagsReceived(m1LimitFlags_);
 }
 
-unsigned char BatteryFaults::setM0CanRxErrorCount() const
+unsigned char MotorFaults::setM0CanRxErrorCount() const
 {
     m0CanRxErrorCount_ = m0CanRxErrorCount;
     emit m0CanRxErrorCountReceived(m0CanRxErrorCount_);
 }
 
-unsigned char BatteryFaults::setM0CanTxErrorCount() const
+unsigned char MotorFaults::setM0CanTxErrorCount() const
 {
     m0CanTxErrorCount_ = m0CanTxErrorCount;
     emit m0CanTxErrorCountReceived(m0CanTxErrorCount_);
 }
 
-unsigned char BatteryFaults::setM1CanRxErrorCount() const
+unsigned char MotorFaults::setM1CanRxErrorCount() const
 {
     m1CanRxErrorCount_ = m1CanRxErrorCount;
     emit m1CanRxErrorCountReceived(m1CanRxErrorCount_);
 }
 
-unsigned char BatteryFaults::setM1CanTxErrorCount() const
+unsigned char MotorFaults::setM1CanTxErrorCount() const
 {
     m1CanTxErrorCount_ = m1CanTxErrorCount;
     emit m1CanTxErrorCountReceived(m1CanTxErrorCount_);
