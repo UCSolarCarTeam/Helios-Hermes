@@ -45,7 +45,6 @@ public:
     unsigned char getM1CanTxErrorCount() const;
 
     /* BatteryFaults Sets */
-    void setPackageID(const unsigned char&);
     void getM0ErrorFlags(const unsigned char&);
     void getM1ErrorFlags(const unsigned char&);
     void getM0LimitFlags(const unsigned char&);

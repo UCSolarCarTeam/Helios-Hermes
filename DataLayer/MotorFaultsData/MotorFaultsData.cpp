@@ -26,10 +26,16 @@
 #include "MotorFaultsData.h"
 
 MotorFaultsData::MotorFaultsData()
-    : packageID_(0)
+: packageID_(5);
+, m0ErrorFlags_(0);
+, m1ErrorFlags_(0);
+, m0LimitFlags_(0);
+, m1LimitFlags_(0);
+, m0CanRxErrorCount_(0);
+, m0CanTxErrorCount_(0);
+, m1CanRxErrorCount_(0);
+, m1CanTxErrorCount_(0);
 {
-    // Initialize to 0
-    // TODO complete
 }
 MotorFaultsData::~MotorFaultsData()
 {
@@ -74,9 +80,52 @@ unsigned char MotorFaultsData::getM1CanTxErrorCount() const {
 
 
 /* BatteryFaults Sets */
-void MotorFaultsData::setPackageID(const unsigned char& packageID) {
-    packageID_ = packageID;
-    emit packageIDReceived(packageID_);
+unsigned char BatteryFaults::setM0ErrorFlags() const
+{
+    m0ErrorFlags_ = m0ErrorFlags;
+    emit m0ErrorFlagsReceived(m0ErrorFlags_);
 }
 
-// TODO finish
+unsigned char BatteryFaults::setM1ErrorFlags() const
+{
+    m1ErrorFlags_ = m1ErrorFlags;
+    emit m1ErrorFlagsReceived(m1ErrorFlags_);
+}
+
+unsigned char BatteryFaults::setM0LimitFlags() const
+{
+    m0LimitFlags_ = m0LimitFlags;
+    emit m0LimitFlagsReceived(m0LimitFlags_);
+}
+
+unsigned char BatteryFaults::setM1LimitFlags() const
+{
+    m1LimitFlags_ = m1LimitFlags;
+    emit m1LimitFlagsReceived(m1LimitFlags_);
+}
+
+unsigned char BatteryFaults::setM0CanRxErrorCount() const
+{
+    m0CanRxErrorCount_ = m0CanRxErrorCount;
+    emit m0CanRxErrorCountReceived(m0CanRxErrorCount_);
+}
+
+unsigned char BatteryFaults::setM0CanTxErrorCount() const
+{
+    m0CanTxErrorCount_ = m0CanTxErrorCount;
+    emit m0CanTxErrorCountReceived(m0CanTxErrorCount_);
+}
+
+unsigned char BatteryFaults::setM1CanRxErrorCount() const
+{
+    m1CanRxErrorCount_ = m1CanRxErrorCount;
+    emit m1CanRxErrorCountReceived(m1CanRxErrorCount_);
+}
+
+unsigned char BatteryFaults::setM1CanTxErrorCount() const
+{
+    m1CanTxErrorCount_ = m1CanTxErrorCount;
+    emit m1CanTxErrorCountReceived(m1CanTxErrorCount_);
+}
+
+

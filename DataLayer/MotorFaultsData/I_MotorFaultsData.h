@@ -34,15 +34,34 @@ public:
     virtual ~I_MotorFaultsData() {}
 
     /* BatterFaults Gets */
-    virtual unsigned char getPackageID() const = 0;
-
-    // TODO complete
+    virtual unsigned char getPackageID() const;
+    virtual unsigned char getM0ErrorFlags() const;
+    virtual unsigned char getM1ErrorFlags() const;
+    virtual unsigned char getM0LimitFlags() const;
+    virtual unsigned char getM1LimitFlags() const;
+    virtual unsigned char getM0CanRxErrorCount() const;
+    virtual unsigned char getM0CanTxErrorCount() const;
+    virtual unsigned char getM1CanRxErrorCount() const;
+    virtual unsigned char getM1CanTxErrorCount() const;
 
     /* BatteryFaults Sets */
-
-    // TODO complete
+    virtual void setM0ErrorFlags(const unsigned char& m0ErrorFlags;
+    virtual void setM1ErrorFlags(const unsigned char& m1ErrorFlags;
+    virtual void setM0LimitFlags(const unsigned char& m0LimitFlags;
+    virtual void setM1LimitFlags(const unsigned char& m1LimitFlags;
+    virtual void setM0CanRxErrorCount(const unsigned char& m0CanRxErrorCount;
+    virtual void setM0CanTxErrorCount(const unsigned char& m0CanTxErrorCount;
+    virtual void setM1CanRxErrorCount(const unsigned char& m1CanRxErrorCount;
+    virtual void setM1CanTxErrorCount(const unsigned char& m1CanTxErrorCount;
 
 signals:
+    void m0ErrorFlagsReceived(const unsigned char& m0ErrorFlags);
+    void m1ErrorFlagsReceived(const unsigned char& m1ErrorFlags);
+    void m0LimitFlagsReceived(const unsigned char& m0LimitFlags);
+    void m1LimitFlagsReceived(const unsigned char& m1LimitFlags);
+    void m0CanRxErrorCountReceived(const unsigned char& m0CanRxErrorCount);
+    void m0CanTxErrorCountReceived(const unsigned char& m0CanTxErrorCount);
+    void m1CanRxErrorCountReceived(const unsigned char& m1CanRxErrorCount);
+    void m1CanTxErrorCountReceived(const unsigned char& m1CanTxErrorCount);
 
-    // TODO complete
 };
