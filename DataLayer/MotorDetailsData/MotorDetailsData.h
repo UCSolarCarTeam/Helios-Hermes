@@ -34,9 +34,61 @@ public:
     virtual ~MotorDetailsData();
 
     /*MotorDetailsData "Gets"*/
+    unsigned char MotorDetailsData::getPackageID() const;
+    float MotorDetailsData::getPhaseCCurrent() const;
+    float MotorDetailsData::getPhaseBCurrent() const;
+    float MotorDetailsData::getMotorVoltageReal() const;
+    float MotorDetailsData::getMotorVoltageImaginary() const;
+    float MotorDetailsData::getMotorCurrentReal() const;
+    float MotorDetailsData::getMotorCurrentImaginary() const;
+    float MotorDetailsData::getBackEmfReal() const;
+    float MotorDetailsData::getBackEmfImaginary() const;
+    float MotorDetailsData::getVoltageRailSuppply15V() const;
+    float MotorDetailsData::getVoltageRailSupply33V() const;
+    float MotorDetailsData::getVoltageRailSupply19V() const;
+    float MotorDetailsData::getHeatSinkTemperature() const;
+    float MotorDetailsData::getMotorTempterature() const;
+    float MotorDetailsData::getDspBoardTemperature() const;
+    float MotorDetailsData::getDcBusAmpHours() const;
+    float MotorDetailsData::getOdometer() const;
+    float MotorDetailsData::getSlipSpeed() const;
 
     /*MotorDetailsData "Sets"*/
+    void MotorDetailsData::setPhaseCCurrent(const float& phaseCCurrent);
+    void MotorDetailsData::setPhaseBCurrent(const float& phaseBCurrent);
+    void MotorDetailsData::setMotorVoltageReal(const float& motorVoltageReal);
+    void MotorDetailsData::setMotorVoltageImaginary(const float& motorVoltageImaginary);
+    void MotorDetailsData::setMotorCurrentReal(const float& motorCurrentReal);
+    void MotorDetailsData::setMotorCurrentImaginary(const float& motorCurrentImaginary);
+    void MotorDetailsData::setBackEmfReal(const float& backEmfReal);
+    void MotorDetailsData::setBackEmfImaginary(const float& backEmfImaginary);
+    void MotorDetailsData::setVoltageRailSuppply15V(const float& voltageRailSuppply15V);
+    void MotorDetailsData::setVoltageRailSupply33V(const float& voltageRailSupply33V);
+    void MotorDetailsData::setVoltageRailSupply19V(const float& voltageRailSupply19V);
+    void MotorDetailsData::setHeatSinkTemperature(const float& heatSinkTemperature);
+    void MotorDetailsData::setMotorTempterature(const float& motorTempterature);
+    void MotorDetailsData::setDspBoardTemperature(const float& dspBoardTemperature);
+    void MotorDetailsData::setDcBusAmpHours(const float& dcBusAmpHours);
+    void MotorDetailsData::setOdometer(const float& odometer);
+    void MotorDetailsData::setSlipSpeed(const float& slipSpeed);
 
 private:
-    
+    unsigned char packageID_;
+    float phaseCCurrent_;
+    float phaseBCurrent_;
+    float motorVoltageReal_;
+    float motorVoltageImaginary_;
+    float motorCurrentReal_;
+    float motorCurrentImaginary_;
+    float backEmfReal_;
+    float backEmfImaginary_;
+    float voltageRailSuppply15V_;
+    float voltageRailSupply33V_;
+    float voltageRailSupply19V_;
+    float heatSinkTemperature_;
+    float motorTempterature_;
+    float dspBoardTemperature_;
+    float dcBusAmpHours_;
+    float odometer_;
+    float slipSpeed_;
 };

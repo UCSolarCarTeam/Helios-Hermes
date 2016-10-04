@@ -42,7 +42,7 @@ unsigned char LightsData::getPackageID() const
     return packageID_;
 }
 
-unsigned char LightsData::getLightStatus() const 
+unsigned char LightsData::getLightStatus() const
 {
     return lightStatus_;
 }

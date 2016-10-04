@@ -50,67 +50,67 @@ KeyMotorData::~KeyMotorData()
 }
 
 /*Data "Gets"*/
-unsigned char KeyMotorData::getPackageID()
+unsigned char KeyMotorData::getPackageID() const
 {
     return packageID_;
 }
 
-unsigned char KeyMotorData::getM0Alive() 
+unsigned char KeyMotorData::getM0Alive() const
 {
     return m0Alive_;
 }
 
-float KeyMotorData::getM0SetCurrent() 
+float KeyMotorData::getM0SetCurrent() const
 {
     return m0SetCurrent_;
 }
 
-float KeyMotorData::getM0SetVelocity() 
+float KeyMotorData::getM0SetVelocity() const
 {
     return m0SetVelocity_;
 }
 
-float KeyMotorData::getM0BusCurrent() 
+float KeyMotorData::getM0BusCurrent() const
 {
     return m0BusCurrent_;
 }
 
-float KeyMotorData::getM0BusVoltage() 
+float KeyMotorData::getM0BusVoltage() const
 {
     return m0BusVoltage_;
 }
 
-float KeyMotorData::getM0VehicleVelocity() 
+float KeyMotorData::getM0VehicleVelocity() const
 {
     return m0VehicleVelocity_;
 }
 
-unsigned char KeyMotorData::getM1Alive() 
+unsigned char KeyMotorData::getM1Alive() const
 {
     return m1Alive_;
 }
 
-float KeyMotorData::getM1SetCurrent() 
+float KeyMotorData::getM1SetCurrent() const
 {
     return m1SetCurrent_;
 }
 
-float KeyMotorData::getM1SetVelocity() 
+float KeyMotorData::getM1SetVelocity() const
 {
     return m1SetVelocity_;
 }
 
-float KeyMotorData::getM1BusCurrent() 
+float KeyMotorData::getM1BusCurrent() const
 {
     return m1BusCurrent_;
 }
 
-float KeyMotorData::getM1BusVoltage() 
+float KeyMotorData::getM1BusVoltage() const
 {
     return m1BusVoltage_;
 }
 
-float KeyMotorData::getM1VehicleVelocity() 
+float KeyMotorData::getM1VehicleVelocity() const
 {
     return m1VehicleVelocity_;
 }
