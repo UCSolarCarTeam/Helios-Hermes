@@ -26,9 +26,9 @@
 #include "MotorDetailsData.h"
 
 MotorDetailsData::MotorDetailsData()
-: 
+    :
 {
-   // initialize to -1
+    // initialize to -1
 }
 
 MotorDetailsData::~MotorDetailsData()

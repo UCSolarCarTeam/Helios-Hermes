@@ -26,8 +26,8 @@
 #include "CmuData.h"
 
 CmuData::CmuData()
-: packageID_(8)
-, cmuNumber_(0)
+    : packageID_(8)
+    , cmuNumber_(0)
 {
 
     // Initialize to 0

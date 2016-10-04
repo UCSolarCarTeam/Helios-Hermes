@@ -27,19 +27,19 @@
 #include <QDebug>
 
 KeyMotorData::KeyMotorData()
-: packageID_(1)
-, m0Alive_(0)
-, m0SetCurrent_(0)
-, m0SetVelocity_(0)
-, m0BusCurrent_(0)
-, m0BusVoltage_(0)
-, m0VehicleVelocity_(0)
-, m1Alive_(0)
-, m1SetCurrent_(0)
-, m1SetVelocity_(0)
-, m1BusCurrent_(0)
-, m1BusVoltage_(0)
-, m1VehicleVelocity_(0)
+    : packageID_(1)
+    , m0Alive_(0)
+    , m0SetCurrent_(0)
+    , m0SetVelocity_(0)
+    , m0BusCurrent_(0)
+    , m0BusVoltage_(0)
+    , m0VehicleVelocity_(0)
+    , m1Alive_(0)
+    , m1SetCurrent_(0)
+    , m1SetVelocity_(0)
+    , m1BusCurrent_(0)
+    , m1BusVoltage_(0)
+    , m1VehicleVelocity_(0)
 
 {
     // initialize to 0
@@ -57,62 +57,62 @@ unsigned char KeyMotorData::getPackageID()
 
 unsigned char KeyMotorData::getM0Alive() 
 {
-    return m0Alive_;    
+    return m0Alive_;
 }
 
 float KeyMotorData::getM0SetCurrent() 
 {
-    return m0SetCurrent_;    
+    return m0SetCurrent_;
 }
 
 float KeyMotorData::getM0SetVelocity() 
 {
-    return m0SetVelocity_;    
+    return m0SetVelocity_;
 }
 
 float KeyMotorData::getM0BusCurrent() 
 {
-    return m0BusCurrent_;    
+    return m0BusCurrent_;
 }
 
 float KeyMotorData::getM0BusVoltage() 
 {
-    return m0BusVoltage_;    
+    return m0BusVoltage_;
 }
 
 float KeyMotorData::getM0VehicleVelocity() 
 {
-    return m0VehicleVelocity_;    
+    return m0VehicleVelocity_;
 }
 
 unsigned char KeyMotorData::getM1Alive() 
 {
-    return m1Alive_;    
+    return m1Alive_;
 }
 
 float KeyMotorData::getM1SetCurrent() 
 {
-    return m1SetCurrent_;    
+    return m1SetCurrent_;
 }
 
 float KeyMotorData::getM1SetVelocity() 
 {
-    return m1SetVelocity_;    
+    return m1SetVelocity_;
 }
 
 float KeyMotorData::getM1BusCurrent() 
 {
-    return m1BusCurrent_;    
+    return m1BusCurrent_;
 }
 
 float KeyMotorData::getM1BusVoltage() 
 {
-    return m1BusVoltage_;    
+    return m1BusVoltage_;
 }
 
 float KeyMotorData::getM1VehicleVelocity() 
 {
-    return m1VehicleVelocity_;    
+    return m1VehicleVelocity_;
 }
 
 

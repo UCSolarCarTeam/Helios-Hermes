@@ -23,13 +23,13 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
- #include "LightsData.h"
+#include "LightsData.h"
 
 LightsData::LightsData()
-: packageID_(10)
-, lightStatus_(0); 
+    : packageID_(10)
+    , lightStatus_(0);
 {   
-    //    Initialize to 0
+//    Initialize to 0
 }
 
 LightsData::~LightsData()

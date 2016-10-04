@@ -35,7 +35,7 @@ public:
 
     /* LightsData Gets */
     unsigned char getPackageID() const;
-    unsigned char getLightStatus() const; 
+    unsigned char getLightStatus() const;
 
     /* LightsData Sets */
     void setLightStatus(const unsigned char&);
