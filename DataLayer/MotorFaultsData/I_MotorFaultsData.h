@@ -39,12 +39,10 @@ public:
     // TODO complete
 
     /* BatteryFaults Sets */
-    void setPackageID(const unsigned char& packageID) = 0;
 
     // TODO complete
 
 signals:
-    void packageIDRecieved(const unsigned char packageID);
 
     // TODO complete
 };

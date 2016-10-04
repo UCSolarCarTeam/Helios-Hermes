@@ -65,7 +65,6 @@ public:
     unsigned char getBmsCanLockedOut() const;
 
     /*BatteryData "Sets"*/
-    void setPackageID(const unsigned char&);
     void setAlive(const unsigned char&);
     void setPackSocAmpHours(const float&);
     void setPackSocPercentage(const float&);
@@ -97,7 +96,8 @@ public:
 
 
 private:
-    unsigned char packageID_;
+    const unsigned char packageID_;
+    
     unsigned char alive_;
     float packSocAmpHours_;
     float packSocPercentage_;

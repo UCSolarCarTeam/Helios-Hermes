@@ -26,7 +26,7 @@
 #include "BatteryFaultsData.h"
 
 BatteryFaultsData::BatteryFaultsData()
-: packageID_(0)
+: packageID_(6)
 , errorFlag_(0)
 {
     // Initialize to 0
@@ -45,10 +45,6 @@ unsigned short BatteryFaultsData::getErrorFlag() const {
 }
 
 /* BatteryFaults Sets */
-void BatteryFaultsData::setPackageID(const unsigned char& packageID) {
-    packageID_ = packageID;
-    emit packageIDReceived(packageID_);
-}
 
 void BatteryFaultsData::setErrorFlag(const unsigned short& errorFlag) {
     errorFlag_ = errorFlag;

@@ -34,6 +34,7 @@ public:
     virtual ~I_LightsData() {}
 
     /* LightsData Gets */
+    virtual unsigned char getPackageID() const = 0;
     virtual unsigned char getLightStatus() const = 0;
     
     /* LightsData Sets */

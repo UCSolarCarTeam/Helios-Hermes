@@ -23,61 +23,63 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#include "FakeVehicleData.h"
+// TODO fix this
 
-FakeVehicleData::FakeVehicleData()
+#include "FakeMotorDetailsData.h"
+
+FakeMotorDetailsData::FakeMotorDetailsData()
 {
 }
 
-FakeVehicleData::~FakeVehicleData()
+FakeMotorDetailsData::~FakeMotorDetailsData()
 {
 }
 
 /*PowerData "Gets"*/
-double FakeVehicleData::driverSetSpeedMetersPerSecond() const
+double FakeMotorDetailsData::driverSetSpeedMetersPerSecond() const
 {   
    return 1;
 }
 
-double FakeVehicleData::driverSetCurrent() const
+double FakeMotorDetailsData::driverSetCurrent() const
 {
    return 2;
 }
 
-double FakeVehicleData::vehicleVelocityMetersPerSecond() const
+double FakeMotorDetailsData::vehicleVelocityMetersPerSecond() const
 {
    return 3;
 }
 
-double FakeVehicleData::motorVelocityRpm() const
+double FakeMotorDetailsData::motorVelocityRpm() const
 {
    return 4;
 }
 
-double FakeVehicleData::ipmHeatSinkTemp() const
+double FakeMotorDetailsData::ipmHeatSinkTemp() const
 {
    return 5;
 }
-double FakeVehicleData::dspBoardTemp() const
+double FakeMotorDetailsData::dspBoardTemp() const
 {
    return 6;
 }
 
-double FakeVehicleData::receivedErrorCount() const
+double FakeMotorDetailsData::receivedErrorCount() const
 {
    return 7;
 }
-double FakeVehicleData::transmittedErrorCount() const
+double FakeMotorDetailsData::transmittedErrorCount() const
 {
    return 8;
 }
 
 /*PowerData "Sets"*/
-void FakeVehicleData::setDriverSetSpeedMetersPerSecond(double driverSetSpeedMetersPerSecond){}
-void FakeVehicleData::setDriverSetCurrent(double driverSetCurrent){}
-void FakeVehicleData::setVehicleVelocityMetersPerSecond(double vehicleVelocityMetersPerSecond){}
-void FakeVehicleData::setMotorVelocityRpm(double motorVelocityRpm){}
-void FakeVehicleData::setIpmHeatSinkTemp(double ipmHeatSinkTemp){}
-void FakeVehicleData::setDspBoardTemp(double dspBoardTemp){}
-void FakeVehicleData::setReceivedErrorCount(double receivedErrorCount){}
-void FakeVehicleData::setTransmittedErrorCount(double transmittedErrorCount){}
+void FakeMotorDetailsData::setDriverSetSpeedMetersPerSecond(double driverSetSpeedMetersPerSecond){}
+void FakeMotorDetailsData::setDriverSetCurrent(double driverSetCurrent){}
+void FakeMotorDetailsData::setVehicleVelocityMetersPerSecond(double vehicleVelocityMetersPerSecond){}
+void FakeMotorDetailsData::setMotorVelocityRpm(double motorVelocityRpm){}
+void FakeMotorDetailsData::setIpmHeatSinkTemp(double ipmHeatSinkTemp){}
+void FakeMotorDetailsData::setDspBoardTemp(double dspBoardTemp){}
+void FakeMotorDetailsData::setReceivedErrorCount(double receivedErrorCount){}
+void FakeMotorDetailsData::setTransmittedErrorCount(double transmittedErrorCount){}

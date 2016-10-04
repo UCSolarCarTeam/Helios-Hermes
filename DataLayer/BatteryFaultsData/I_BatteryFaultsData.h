@@ -38,10 +38,8 @@ public:
     virtual unsigned short getErrorFlag() const = 0;
 
     /* BatteryFaults Sets */
-    virtual void setPackageID(const unsigned char& packageID) = 0;
     virtual void setErrorFlag(const unsigned char& errorFlag) = 0;
 
 signals:
-    void packageIDRecieved(const unsigned char packageID);
     void errorFlagRecieved(const unsigned short errorFlag);
 };

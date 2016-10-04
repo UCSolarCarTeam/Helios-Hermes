@@ -62,7 +62,6 @@ public:
    unsigned short getCellTemp14() const;
 
    /* CmuData Sets */
-   void setPackageID(const unsigned char&);
    void setCmuNumber(const unsigned char&);
    void setCell0Voltage(const unsigned short&);
    void setCell1Voltage(const unsigned short&);
@@ -91,7 +90,7 @@ public:
 
 
 private:
-    unsigned char packageID_;
+    const unsigned char packageID_;
     unsigned char cmuNumber_;
     unsigned short cell0Voltage_;
     unsigned short cell1Voltage_;

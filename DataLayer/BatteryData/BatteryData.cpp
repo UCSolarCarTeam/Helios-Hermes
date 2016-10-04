@@ -27,7 +27,7 @@
 #include <QDebug>
 
 BatteryData::BatteryData()
-    : packageID_(0)
+    : packageID_(7)
     , alive_(0)
     , packSocAmpHours_(0)
     , packSocPercentage_(0)
@@ -184,11 +184,6 @@ unsigned char BatteryData::getBmsCanLockedOut() const {
 
 
 /*BatteryData "Sets"*/
-void BatteryData::setPackageID(const unsigned char& packageID) {
-    packageID_ = packageID;
-    emit packageIDReceived(packageID_);
-}
-
 void BatteryData::setAlive(const unsigned char& alive) {
     alive_ = alive;
     emit aliveReceived(alive_);

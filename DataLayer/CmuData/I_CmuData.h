@@ -62,7 +62,6 @@ public:
     virtual unsigned short getCellTemp14() const = 0;
 
     /* CmuData Sets */
-    virtual void setPackageID(const unsigned char&) = 0;
     virtual void setCmuNumber(const unsigned char&) = 0;
     virtual void setCell0Voltage(const unsigned short&) = 0;
     virtual void setCell1Voltage(const unsigned short&) = 0;
@@ -90,7 +89,6 @@ public:
     virtual void setCellTemp14(const unsigned short&) = 0;
 
 signals:
-    void packageIDReceived(const unsigned char& packageID);
     void cmuNumberReceived(const unsigned char& cmuNumber);
     void cell0VoltageReceived(const unsigned short& cell0Voltage);
     void cell1VoltageReceived(const unsigned short& cell1Voltage);

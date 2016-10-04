@@ -38,11 +38,10 @@ public:
    unsigned short getErrorFlag() const;
 
    /* BatteryFaults Sets */
-   void setPackageID(const unsigned char&);
    void setErrorFlag(const unsigned short&);
 
 
 private:
-    unsigned char packageID_;
+    const unsigned char packageID_;
     unsigned short errorFlag_;
 };

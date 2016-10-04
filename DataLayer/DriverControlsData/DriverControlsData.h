@@ -51,7 +51,7 @@ public:
     void setDriverInputs(const unsigned char driverInputs);
 
 private:
-    const unsigned char packageID_ = 4;
+    const unsigned char packageID_;
 
     unsigned char driverControlsBoardAlive_;
     unsigned char lightsInputs_;

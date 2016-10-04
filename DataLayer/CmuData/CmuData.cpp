@@ -26,7 +26,7 @@
 #include "CmuData.h"
 
 CmuData::CmuData()
-: packageID_(0)
+: packageID_(8)
 , cmuNumber_(0)
 {
 
@@ -142,10 +142,6 @@ unsigned short CmuData::getCellTemp14() const {
 }
 
 /* CmuData Sets */
-
-void CmuData::setPackageID(const unsigned char&) {
-
-}
 
 void CmuData::setCmuNumber(const unsigned char&) {
     cmuNumber_ = cmuNumber;

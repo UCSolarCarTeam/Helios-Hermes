@@ -66,7 +66,6 @@ public:
     virtual unsigned char getBmsCanLockedOut() const = 0;
 
     /*BatteryData "Sets"*/
-    virtual void setPackageID(const unsigned char&) = 0;
     virtual void setAlive(const unsigned char&) = 0;
     virtual void setPackSocAmpHours(const float&) = 0;
     virtual void setPackSocPercentage(const float&) = 0;
@@ -97,7 +96,6 @@ public:
     virtual void setBmsCanLockedOut(const unsigned char&) = 0;
 
 signals:
-    void packageIDReceived(const unsigned char& packageID);
     void aliveReceived(const unsigned char& alive);
     void packSocAmpHoursReceived(const float& packSocAmpHours);
     void packSocPercentageReceived(const float& packSocPercentage);

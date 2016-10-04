@@ -23,17 +23,19 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
+ // TODO fix this
+
 #pragma once
 
-#include "I_VehicleData.h"
+#include "I_MotorDetailsData.h"
 
-class FakeVehicleData : public I_VehicleData
+class FakeMotorDetailsData : public I_MotorDetailsData
 {
 public:
-    FakeVehicleData();
-    virtual ~FakeVehicleData();
+    FakeMotorDetailsData();
+    virtual ~FakeMotorDetailsData();
 
-    /*VehicleData "Gets"*/
+    /*MotorDetailsData "Gets"*/
     double driverSetSpeedMetersPerSecond() const;
     double driverSetCurrent() const;
     double vehicleVelocityMetersPerSecond() const;
@@ -43,7 +45,7 @@ public:
     double receivedErrorCount() const;
     double transmittedErrorCount() const;
 
-    /*VehicleData "Sets"*/
+    /*MotorDetailsData "Sets"*/
     void setDriverSetSpeedMetersPerSecond(double driverSetSpeedMetersPerSecond);
     void setDriverSetCurrent(double driverSetCurrent);
     void setVehicleVelocityMetersPerSecond(double vehicleVelocityMetersPerSecond);

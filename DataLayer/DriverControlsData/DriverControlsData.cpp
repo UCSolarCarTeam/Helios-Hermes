@@ -27,7 +27,8 @@
 #include <QDebug>
 
 DriverControlsData::DriverControlsData()
-: driverControlsBoardAlive_(0)
+: packageID_(4)
+, driverControlsBoardAlive_(0)
 , lightsInputs_(0)
 , musicInputs_(0)
 , acceleration_(0)
