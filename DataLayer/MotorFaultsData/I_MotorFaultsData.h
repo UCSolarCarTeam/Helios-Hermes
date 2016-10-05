@@ -34,7 +34,6 @@ public:
     virtual ~I_MotorFaultsData() {}
 
     /* MotorFaults Gets */
-    virtual unsigned char getPackageID() const;
     virtual unsigned char getM0ErrorFlags() const;
     virtual unsigned char getM1ErrorFlags() const;
     virtual unsigned char getM0LimitFlags() const;
@@ -63,5 +62,4 @@ signals:
     void m0CanTxErrorCountReceived(const unsigned char& m0CanTxErrorCount);
     void m1CanRxErrorCountReceived(const unsigned char& m1CanRxErrorCount);
     void m1CanTxErrorCountReceived(const unsigned char& m1CanTxErrorCount);
-
 };

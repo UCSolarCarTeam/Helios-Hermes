@@ -26,8 +26,7 @@
 #include "BatteryFaultsData.h"
 
 BatteryFaultsData::BatteryFaultsData()
-    : packageID_(6)
-    , errorFlag_(0)
+    : errorFlag_(0)
 {
     // Initialize to 0
 }
@@ -36,10 +35,6 @@ BatteryFaultsData::~BatteryFaultsData()
 }
 
 /* BatteryFaults Gets */
-unsigned char BatteryFaultsData::getPackageID() const {
-    return packageID_;
-}
-
 unsigned short BatteryFaultsData::getErrorFlag() const {
     return errorFlag_;
 }

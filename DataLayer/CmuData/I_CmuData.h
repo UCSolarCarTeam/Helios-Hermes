@@ -34,7 +34,6 @@ public:
     virtual ~I_CmuData() {}
 
     /* CmuData Gets */
-    virtual unsigned char getPackageID() const = 0;
     virtual unsigned char getCmuNumber() const = 0;
     virtual unsigned short getCell0Voltage() const = 0;
     virtual unsigned short getCell1Voltage() const = 0;

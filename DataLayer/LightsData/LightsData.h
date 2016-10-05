@@ -34,14 +34,11 @@ public:
     virtual ~LightsData();
 
     /* LightsData Gets */
-    unsigned char getPackageID() const;
     unsigned char getLightStatus() const;
 
     /* LightsData Sets */
     void setLightStatus(const unsigned char&);
 
 private:
-    const unsigned char packageID_;
-    
     unsigned char lightStatus_;
 }

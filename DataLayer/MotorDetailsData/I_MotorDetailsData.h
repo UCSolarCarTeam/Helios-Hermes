@@ -35,7 +35,6 @@ public:
     virtual ~I_MotorDetailsData() {}
 
     /*MotorDetailsData "Gets"*/
-    virtual unsigned char getPackageID() const;
     virtual float getPhaseCCurrent() const;
     virtual float getPhaseBCurrent() const;
     virtual float getMotorVoltageReal() const;

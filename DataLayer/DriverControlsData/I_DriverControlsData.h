@@ -35,7 +35,6 @@ public:
     virtual ~I_BatteryData() {}
 
     /*Data "Gets"*/
-    virtual unsigned char getPackageID() const = 0;
     virtual unsigned char getDriverControlsBoardAlive() const = 0;
     virtual unsigned char getLightsInputs() const = 0;
     virtual unsigned char getMusicInputs() const = 0;

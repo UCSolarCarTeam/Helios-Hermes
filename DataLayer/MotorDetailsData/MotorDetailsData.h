@@ -34,7 +34,6 @@ public:
     virtual ~MotorDetailsData();
 
     /*MotorDetailsData "Gets"*/
-    unsigned char MotorDetailsData::getPackageID() const;
     float MotorDetailsData::getPhaseCCurrent() const;
     float MotorDetailsData::getPhaseBCurrent() const;
     float MotorDetailsData::getMotorVoltageReal() const;
@@ -73,8 +72,6 @@ public:
     void MotorDetailsData::setSlipSpeed(const float& slipSpeed);
 
 private:
-    const unsigned char packageID_;
-    
     float phaseCCurrent_;
     float phaseBCurrent_;
     float motorVoltageReal_;

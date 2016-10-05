@@ -34,7 +34,6 @@ public:
     virtual ~BatteryFaultsData();
 
     /* BatteryFaults Gets */
-    unsigned char getPackageID() const;
     unsigned short getErrorFlag() const;
 
     /* BatteryFaults Sets */
@@ -42,6 +41,5 @@ public:
 
 
 private:
-    const unsigned char packageID_;
     unsigned short errorFlag_;
 };

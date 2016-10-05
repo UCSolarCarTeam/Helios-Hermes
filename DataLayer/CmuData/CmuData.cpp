@@ -26,8 +26,7 @@
 #include "CmuData.h"
 
 CmuData::CmuData()
-    : packageID_(8)
-    , cmuNumber_(0)
+    : cmuNumber_(0)
 {
 
     // Initialize to 0
@@ -37,10 +36,6 @@ CmuData::~CmuData()
 }
 
 /* CmuData gets */
-unsigned char CmuData::getPackageID() const {
-    return packageID_;
-}
-
 unsigned char CmuData::getCmuNumber() const {
     return cmuNumber_;
 }

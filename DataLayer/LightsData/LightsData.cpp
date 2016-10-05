@@ -26,8 +26,7 @@
 #include "LightsData.h"
 
 LightsData::LightsData()
-    : packageID_(10)
-    , lightStatus_(0);
+    : lightStatus_(0);
 {   
 //    Initialize to 0
 }
@@ -37,11 +36,6 @@ LightsData::~LightsData()
 }
 
 /* LightsData Gets */
-unsigned char LightsData::getPackageID() const
-{
-    return packageID_;
-}
-
 unsigned char LightsData::getLightStatus() const
 {
     return lightStatus_;

@@ -27,8 +27,7 @@
 #include <QDebug>
 
 DriverControlsData::DriverControlsData()
-    : packageID_(4)
-    , driverControlsBoardAlive_(0)
+    : driverControlsBoardAlive_(0)
     , lightsInputs_(0)
     , musicInputs_(0)
     , acceleration_(0)
@@ -43,11 +42,6 @@ DriverControlsData::~DriverControlsData()
 }
 
 /*Data "Gets"*/
-unsigned char DriverControlsData::getPackageID()
-{
-    return packageID_;
-}
-
 unsigned char DriverControlsData::getDriverControlsBoardAlive() const 
 {
     return driverControlsBoardAlive_;

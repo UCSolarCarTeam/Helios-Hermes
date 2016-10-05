@@ -27,8 +27,7 @@
 #include <QDebug>
 
 KeyMotorData::KeyMotorData()
-    : packageID_(1)
-    , m0Alive_(0)
+    : m0Alive_(0)
     , m0SetCurrent_(0)
     , m0SetVelocity_(0)
     , m0BusCurrent_(0)
@@ -50,11 +49,6 @@ KeyMotorData::~KeyMotorData()
 }
 
 /*Data "Gets"*/
-unsigned char KeyMotorData::getPackageID() const
-{
-    return packageID_;
-}
-
 unsigned char KeyMotorData::getM0Alive() const
 {
     return m0Alive_;

@@ -35,7 +35,6 @@ public:
     virtual ~I_KeyMotorData() {}
 
     /*Data "Gets"*/
-    virtual unsigned char KeyMotorData::getPackageID() const = 0;
     virtual unsigned char KeyMotorData::getM0Alive() const = 0;
     virtual float KeyMotorData::getM0SetCurrent() const = 0;
     virtual float KeyMotorData::getM0SetVelocity() const = 0;

@@ -26,8 +26,7 @@
 #include "MotorFaultsData.h"
 
 MotorFaultsData::MotorFaultsData()
-: packageID_(5);
-, m0ErrorFlags_(0);
+: m0ErrorFlags_(0);
 , m1ErrorFlags_(0);
 , m0LimitFlags_(0);
 , m1LimitFlags_(0);
@@ -42,10 +41,6 @@ MotorFaultsData::~MotorFaultsData()
 }
 
 /* MotorFaults Gets */
-unsigned char MotorFaultsData::getPackageID() const {
-    return packageID_;
-}
-
 unsigned char MotorFaultsData::getM0ErrorFlags() const {
     return m0ErrorFlags_;
 }

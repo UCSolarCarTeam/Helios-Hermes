@@ -34,7 +34,6 @@ public:
     virtual ~MpptData();
 
     /* MpptData Gets */
-    unsigned char getPackageID() const;
     unsigned char getMpptStatus() const;
     unsigned short getArrayVoltage() const;
     unsigned short getArrayCurrent() const;
@@ -50,8 +49,6 @@ public:
 
 
 private:
-    const unsigned char packageID_;
-
     unsigned char mpptStatus_;
     unsigned short arrayVoltage_;
     unsigned short arrayCurrent_;

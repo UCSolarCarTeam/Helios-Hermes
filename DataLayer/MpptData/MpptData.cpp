@@ -26,8 +26,7 @@
 #include "MpptData.h"
 
 MpptData::MpptData()
-: packageID_(9)
-, mpptStatus_(0)
+: mpptStatus_(0)
 , arrayVoltage_(0)
 , arrayCurrent_(0)
 , batteryVoltage_(0)
@@ -41,11 +40,6 @@ MpptData::~MpptData()
 }
 
 /* MpptData Gets */
-unsigned char MpptData::getPackageID() const
-{
-    return packageID_;
-}
-
 unsigned char MpptData::getMpptStatus() const
 {
     return mpptStatus_;

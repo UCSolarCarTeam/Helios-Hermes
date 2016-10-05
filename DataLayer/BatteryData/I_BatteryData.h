@@ -35,7 +35,6 @@ public:
     virtual ~I_BatteryData() {}
 
     /*Data "Gets"*/
-    virtual unsigned char getPackageID() const = 0;
     virtual unsigned char getAlive() const = 0;
     virtual float getPackSocAmpHours() const = 0;
     virtual float getPackSocPercentage() const = 0;

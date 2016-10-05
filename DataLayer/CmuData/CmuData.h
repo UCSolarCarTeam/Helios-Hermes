@@ -34,7 +34,6 @@ public:
     virtual ~CmuData();
 
     /* CmuData Gets */
-    unsigned char getPackageID() const;
     unsigned char getCmuNumber() const;
     unsigned short getCell0Voltage() const;
     unsigned short getCell1Voltage() const;
@@ -90,7 +89,6 @@ public:
 
 
 private:
-    const unsigned char packageID_;
     unsigned char cmuNumber_;
     unsigned short cell0Voltage_;
     unsigned short cell1Voltage_;

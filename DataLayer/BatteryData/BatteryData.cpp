@@ -27,8 +27,7 @@
 #include <QDebug>
 
 BatteryData::BatteryData()
-    : packageID_(7)
-    , alive_(0)
+    : alive_(0)
     , packSocAmpHours_(0)
     , packSocPercentage_(0)
     , packBalanceSoc_(0)
@@ -66,10 +65,6 @@ BatteryData::~BatteryData()
 }
 
 /*Data "Gets"*/
-unsigned char BatteryData::getPackageID() const {
-    return packageID_;
-}
-
 unsigned char BatteryData::getAlive() const {
     return alive_;
 }

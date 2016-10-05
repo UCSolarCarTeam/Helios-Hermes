@@ -34,7 +34,6 @@ public:
     virtual ~DriverControlsData();
 
     /*Data "Gets"*/
-    unsigned char getPackageID() const;
     unsigned char getDriverControlsBoardAlive() const;
     unsigned char getLightsInputs() const;
     unsigned char getMusicInputs() const;
@@ -51,8 +50,6 @@ public:
     void setDriverInputs(const unsigned char driverInputs);
 
 private:
-    const unsigned char packageID_;
-
     unsigned char driverControlsBoardAlive_;
     unsigned char lightsInputs_;
     unsigned char musicInputs_;

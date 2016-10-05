@@ -34,7 +34,6 @@ public:
     virtual ~KeyMotorData();
 
     /*Data "Gets"*/
-    unsigned char getPackageID() const;
     unsigned char KeyMotorData::getM0Alive() const;
     float KeyMotorData::getM0SetCurrent() const;
     float KeyMotorData::getM0SetVelocity() const;
@@ -63,8 +62,6 @@ public:
     void KeyMotorData::setM1VehicleVelocity(const float& m1VehicleVelocity);
 
 private:
-    const unsigned char packageID_;
-
     unsigned char m0Alive_;
     float m0SetCurrent_;
     float m0SetVelocity_;

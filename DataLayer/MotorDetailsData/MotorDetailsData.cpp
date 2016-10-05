@@ -45,16 +45,6 @@ MotorDetailsData::MotorDetailsData(unsigned char motorNumber)
 , slipSpeed_(0)
 {
     // initialize to 0
-    switch (motorNumber) {
-        case 0:
-            packageID_ = 2;
-            break;
-        case 1:
-            packageID_ = 3;
-            break;
-        default:
-            throw "Invalid motor number"
-    }
 }
 
 MotorDetailsData::~MotorDetailsData()
@@ -62,11 +52,6 @@ MotorDetailsData::~MotorDetailsData()
 }
 
 /* MotorDetailsData Gets*/
-unsigned char MotorDetailsData::getPackageID() const
-{
-    return packageID_;
-}
-
 float MotorDetailsData::getPhaseCCurrent() const
 {
     return phaseCCurrent_;

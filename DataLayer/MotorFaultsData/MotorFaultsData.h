@@ -34,7 +34,6 @@ public:
     virtual ~MotorFaultsData();
 
     /* MotorFaults Gets */
-    unsigned char getPackageID() const;
     unsigned char getM0ErrorFlags() const;
     unsigned char getM1ErrorFlags() const;
     unsigned char getM0LimitFlags() const;
@@ -56,8 +55,6 @@ public:
 
 
 private:
-    const unsigned char packageID_;
-    
     unsigned char m0ErrorFlags_;
     unsigned char m1ErrorFlags_;
     unsigned char m0LimitFlags_;
