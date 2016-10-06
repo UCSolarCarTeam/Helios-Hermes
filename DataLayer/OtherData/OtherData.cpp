@@ -24,7 +24,6 @@
  */
 
 #include "OtherData.h"
-#include <QDebug>
 
 OtherData::OtherData()
     : gps_(0)

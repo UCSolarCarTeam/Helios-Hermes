@@ -24,7 +24,6 @@
  */
 
 #include "KeyMotorData.h"
-#include <QDebug>
 
 KeyMotorData::KeyMotorData()
     : m0Alive_(0)

@@ -24,7 +24,6 @@
  */
 
 #include "DriverControlsData.h"
-#include <QDebug>
 
 DriverControlsData::DriverControlsData()
     : driverControlsBoardAlive_(0)

@@ -24,7 +24,6 @@
  */
 
 #include "BatteryData.h"
-#include <QDebug>
 
 BatteryData::BatteryData()
     : alive_(0)
