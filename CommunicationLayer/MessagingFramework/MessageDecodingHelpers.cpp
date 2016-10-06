@@ -62,10 +62,10 @@ const int MessageDecodingHelpers::numberOfBytesInData(const Type& type)
     switch (type)
     {
     case FLOAT:
-        return 4;
+        return sizeof(float);
         break;
     case UNSIGNED_SHORT:
-        return 2;
+        return sizeof(unsigned short);
         break;
     default:
         throw "Unhandled data type!";

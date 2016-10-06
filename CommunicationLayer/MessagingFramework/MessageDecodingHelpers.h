@@ -32,7 +32,7 @@ class MessageDecodingHelpers
 public:
     float getFloat(const QByteArray& data, int startIndex);
     unsigned short getUnsignedShort(const QByteArray& data, int startIndex);
-    enum Type { FLOAT, UNSIGNED_SHORT };
+    enum Type { FLOAT = 1, UNSIGNED_SHORT = 2 };
 
 private:
     static const int numberOfBytesInData(const Type&);
