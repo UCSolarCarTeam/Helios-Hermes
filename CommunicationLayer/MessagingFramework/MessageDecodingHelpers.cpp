@@ -27,23 +27,47 @@
 
 namespace
 {
-   const int NUMBER_OF_BYTES_IN_FLOAT = 4;
+    const int UNION_SIZE = 4;
 
-   union FloatCharTranslator
-   {
-      float floatData;
-      char charData[NUMBER_OF_BYTES_IN_FLOAT];
-   };
+    union DataFromCharTranslator
+    {
+        unsigned short unsignedShortData;
+        float floatData;
+        char charData[MessageDecodingHelpers::numberOfBytesInData(UNION_SIZE)];
+    }
 }
 
-float MessageDecodingHelpers::getFloat(
-   const QByteArray& data, int startIndex)
+float MessageDecodingHelpers::getFloat(const QByteArray& data, int startIndex)
 {
-   FloatCharTranslator dataUnion;
-   for (int i = 0; i < NUMBER_OF_BYTES_IN_FLOAT; i++)
-   {
-      dataUnion.charData[i] = data.at(i + startIndex);
-   }
+   return getData(data, startIndex, Type::FLOAT).floatData;
+}
 
-   return dataUnion.floatData;
+unsigned short MessageDecodingHelpers::getUnsignedShort(const QByteArray& data, int startIndex)
+{
+    return getData(data, startIndex, TYPE::UNSIGNED_SHORT).unsignedShortData;
+}
+
+void MessageDecodingHelpers::getData(const QByteArray& data, int startIndex, Type type)
+{
+    DataFromCharTranslator dataUnion;
+    for (int i = 0; i < numberOfBytesInData(type); i++)
+    {
+        dataUnion.charData[i] = data.at(i = startIndex);
+    }
+    return dataUnion;
+}
+
+const int MessageDecodingHelpers::numberOfBytesInData(const Type& type)
+{
+    switch (type)
+    {
+    case FLOAT:
+        return 4;
+        break;
+    case UNSIGNED_SHORT:
+        return 2;
+        break;
+    default:
+        throw "Unhandled data type!";
+    }
 }

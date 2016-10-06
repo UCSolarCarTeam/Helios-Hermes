@@ -36,6 +36,34 @@ namespace
    const int STATE_OF_CHARGE_INDEX = 9;
    const int BALANCE_SOC_INDEX = 13;
    const int SECONDARY_ERROR_INDEX = 17;
+
+    const int BMU_ALIVE = 1;
+    const int PACK_SOC_AMP_HOURS = 2;
+    const int PACK_SOC_PERCENTAGE = 6;
+    const int PACK_BALANCE_SOC = 10;
+    const int PACK_BALANCE_SOC_PERCENTAGE = 14;
+    const int CHARGING_CELL_VOLTAGE_ERROR = 18;
+    const int CELL_TEMPERATURE_MARGIN = 20;
+    const int DISCHARGING_CELL_VOLTAGE_ERROR = 22;
+    const int TOTAL_PACK_CAPACITY = 24;
+    const int PRECHARGE_CONTACTOR_DRIVER_STATUS = 26;
+    const int PRECHARGE_STATE = 27;
+    const int PRECHARGE_TIMER_ELAPSED = 28;
+    const int PRECHARGE_TIMER_COUNT = 29;
+    const int LOWEST_CELL_VOLTAGE = 31;
+    const int LOWEST_CELL_VOLTAGE_NUMBER = 33;
+    const int HIGHEST_CELL_VOLTAGE = 34;
+    const int HIGHEST_CELL_VOLTAGE_NUMBER = 36;
+    const int LOWEST_CELL_TEMPERATURE = 37;
+    const int LOWEST_CELL_TEMPERATURE_NUMBER = 39;
+    const int HIGHEST_CELL_TEMPERATURE = 40;
+    const int HIGHEST_CELL_TEMPERATURE_NUMBER = 42;
+    const int VOLTAGE = 43;
+    const int CURRENT = 47;
+    const int FAN_0_SPEED = 51;
+    const int FAN_1_SPEED = 53;
+    const int FAN_AND_CONTACTORS_12V_CURRENT_CONSUMPTION = 55;
+    const int CMU_12V_CURRENT_CONSUMPTION = 59;
 }
 
 BatteryDataMessage::BatteryDataMessage(const QByteArray& messageData)

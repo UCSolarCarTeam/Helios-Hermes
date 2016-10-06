@@ -27,7 +27,14 @@
 
 #include <QByteArray>
 
-namespace MessageDecodingHelpers
+class MessageDecodingHelpers
 {
-   float getFloat(const QByteArray& data, int startIndex);
+public:
+    float getFloat(const QByteArray& data, int startIndex);
+    unsigned short getUnsignedShort(const QByteArray& data, int startIndex);
+    enum Type { FLOAT, UNSIGNED_SHORT };
+
+private:
+    static const int numberOfBytesInData(const Type&);
+    void getData(const QByteArray& data, int startIndex, void* output);
 }

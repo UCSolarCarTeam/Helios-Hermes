@@ -33,6 +33,8 @@
 #include "MotorDetailsData/MotorDetailsData.h"
 #include "MotorFaultsData/MotorFaultsData.h"
 #include "MpptData/MpptData.h"
+#include "OtherData/OtherData.h"
+// TODO question here, why in .cpp?
 
 DataContainer::DataContainer()
 : batteryData_(new BatteryData())
@@ -44,6 +46,7 @@ DataContainer::DataContainer()
 , motorDetailsData_(new MotorDetailsData())
 , motorFaultsData_(new MotorFaultsData())
 , mpptData_(new MpptData())
+, otherData(new OtherData())
 {
 }
 
