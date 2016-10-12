@@ -32,11 +32,13 @@ using namespace MessageDecodingHelpers;
 namespace
 {
    const int CELL_NUMBER_INDEX = 1;
-   const int PCB_TEMPERATURE_INDEX = 2;
-   const int CELL_TEMPERATURE_INDEX = 6;
-   const int CELL_VOLTAGE_0_INDEX = 10;
+   const int CELL_VOLTAGE_0_INDEX = 2;
+   const int PCB_TEMPERATURE_INDEX = 18;
+   const int CELL_TEMPERATURE_0_INDEX = 20;
    const int NUMBER_OF_CELLS = 8;
-   const int NUMBER_OF_BYTES_IN_FLOAT = 4;
+   const int NUMBER_OF_TEMPERATURES = 15;
+   // TODO make sure this is correct
+   const int NUMBER_OF_BYTES_IN_UNSIGNED_SHORT = 3;
 }
 
 CmuDataMessage::CmuDataMessage(const QByteArray& messageData)
@@ -44,42 +46,51 @@ CmuDataMessage::CmuDataMessage(const QByteArray& messageData)
 {
 }
 
-quint8 CmuDataMessage::cellNumber() const
+unsigned char CmuDataMessage::cellNumber() const
 {
    return messageData_.at(CELL_NUMBER_INDEX);
 }
 
-float CmuDataMessage::pcbTemperature() const
+QList<unsigned short> CmuDataMessage::cellVoltages() const
 {
-   return getFloat(messageData_, PCB_TEMPERATURE_INDEX);
-}
-
-float CmuDataMessage::cellTemperature() const
-{
-   return getFloat(messageData_, CELL_TEMPERATURE_INDEX);
-}
-
-QList<float> CmuDataMessage::cellVoltages() const
-{
-   QList<float> cellVoltagesData;
+   QList<unsigned short> cellVoltagesData;
    for (int i = 0; i < NUMBER_OF_CELLS; i++)
    {
-      const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * NUMBER_OF_BYTES_IN_FLOAT;
-      cellVoltagesData << getFloat(messageData_, indexOfCell);
+      const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
+      cellVoltagesData << getUnsignedShort(messageData_, indexOfCell);
    }
    return cellVoltagesData;
+}
+
+unsigned short CmuDataMessage::pcbTemperature() const
+{
+   return getUnsignedShort(messageData_, PCB_TEMPERATURE_INDEX);
+}
+
+unsigned short CmuDataMessage::cellTemperatures() const
+{
+   QList<unsigned short> cellTemperatureData;
+   for (int i = 0; i < NUMBER_OF_TEMPERATURES; i++)
+   {
+      const int indexOfCell = CELL_TEMPERATURE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
+      cellTemperatureData << getUnsignedShort(messageData_, indexOfCell);
+   }
+   return cellTemperatureData;
 }
 
 QString CmuDataMessage::toString() const
 {
    QString messageString;
-   messageString += QString::number(MessageDefines::CmuData) + ", ";
+   messageString += QString::number(SerialDefines::CmuData) + ", ";
    messageString += QString::number(cellNumber()) + ", ";
-   messageString += QString::number(pcbTemperature()) + ", ";
-   messageString += QString::number(cellTemperature()) + ", ";
    foreach(const float& cellVoltage, cellVoltages())
    {
       messageString += QString::number(cellVoltage) + ", ";
+   }
+   messageString += QString::number(pcbTemperature()) + ", ";
+   foreach(const unsigned short& cellTemperature, cellTemperatures())
+   {
+       messageString += QString::number(cellTemperature) + ", ";
    }
    return messageString;
 }

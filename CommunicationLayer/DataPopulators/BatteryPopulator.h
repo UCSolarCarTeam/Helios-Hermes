@@ -23,6 +23,8 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
+ // TODO
+
 #pragma once
 
 #include <QObject>

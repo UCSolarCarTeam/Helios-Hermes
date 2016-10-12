@@ -34,10 +34,10 @@ class CmuDataMessage
 public:
    CmuDataMessage(const QByteArray& messageData);
 
-   quint8 cellNumber() const;
-   float pcbTemperature() const;
-   float cellTemperature() const;
-   QList<float> cellVoltages() const;
+   unsigned char cellNumber() const;
+   QList<unsigned short> cellVoltages() const;
+   unsigned short pcbTemperature() const;
+   QList<unsigned short> cellTemperatures() const;
 
    QString toString() const;
 
