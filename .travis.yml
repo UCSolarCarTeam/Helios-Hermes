@@ -14,9 +14,11 @@ before_install:
     - mv ./src ./Epsilon-Hermes/
     - cd ./Epsilon-Hermes/src
 
-
-
 install:
+    - wget 'https://sourceforge.net/projects/astyle/files/latest/download'
+    - tar -zxvf download
+    - (cd astyle/build/gcc && make release && sudo make install)
+    - rm astyle -rf
     - git clone https://github.com/google/googletest.git
     - cd googletest
     - sudo cp -r googletest/include/gtest /usr/local/include
@@ -46,6 +48,7 @@ install:
     - cd ../..
 
 script:
+    - "! (astyle *.h *.c -r --dry-run --options=astylerc | grep Formatted)"
     - qmake
     - make
 
