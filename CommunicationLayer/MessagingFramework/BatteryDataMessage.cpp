@@ -27,7 +27,6 @@
 #include "BatteryDataMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
-#include "SerialDefines.h"
 
 using namespace MessageDecodingHelpers;
 
@@ -213,7 +212,7 @@ QString BatteryDataMessage::toString() const
 {
     // TODO fix
     QString messageString;
-    messageString += QString::number(SerialDefines::BATTERY_SERIAL_ID) + ", ";
+    messageString += QString::number(MessageDefines::BATTERY_SERIAL_ID) + ", ";
     messageString += QString::number(alive()) + ", ";
     messageString += QString::number(packSocAmpHours()) + ", ";
     messageString += QString::number(packSocPercentage()) + ", ";
