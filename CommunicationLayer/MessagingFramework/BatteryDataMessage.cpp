@@ -24,6 +24,7 @@
  */
 
 // TODO check these includes
+// TODO delete the files in MessagingFramework that are not being used
 #include "BatteryDataMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
