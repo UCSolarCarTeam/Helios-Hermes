@@ -38,7 +38,7 @@ namespace
    const int NUMBER_OF_CELLS = 8;
    const int NUMBER_OF_TEMPERATURES = 15;
    // TODO make sure this is correct
-   const int NUMBER_OF_BYTES_IN_UNSIGNED_SHORT = 3;
+   const int NUMBER_OF_BYTES_IN_UNSIGNED_SHORT = 2;
 }
 
 CmuDataMessage::CmuDataMessage(const QByteArray& messageData)
