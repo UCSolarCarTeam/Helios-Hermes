@@ -242,6 +242,6 @@ QString BatteryDataMessage::toString() const
     messageString += QString::number(fanContactors12VCurrentConsumption()) + ", ";
     messageString += QString::number(cmu12VCurrentConsumption()) + ", ";
     messageString += QString::number(bmsCanLockedOut()) + ", ";
-
+    // TODO fix the termination of string
     return messageString;
 }
