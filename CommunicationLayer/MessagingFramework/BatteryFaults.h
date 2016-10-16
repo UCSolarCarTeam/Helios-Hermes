@@ -30,7 +30,7 @@
 class BatteryFaults
 {
 public:
-   BatteryFaults(quint16 flags);
+   BatteryFaults(unsigned char flags);
 
    bool cellOverVoltage() const;
    bool cellUnderVoltage() const;
@@ -50,5 +50,5 @@ public:
    QString toString() const;
 
 private:
-   quint16 flags_;
+   unsigned char flags_;
 };

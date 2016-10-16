@@ -27,19 +27,19 @@
 
 namespace
 {
-   const quint16 CELL_OVER_VOLTAGE_MASK = 0x0001;
-   const quint16 CELL_UNDER_VOLTAGE_MASK = 0x0002;
-   const quint16 CELL_OVER_TEMP_MASK = 0x0004;
-   const quint16 MEASUREMENT_UNTRUSTED_MASK = 0x0008;
-   const quint16 CMU_COMM_TIMEOUT_MASK = 0x0010;
-   const quint16 VEHICLE_COMM_TIMEOUT_MASK = 0x0020;
-   const quint16 BMU_IN_SETUP_MODE_MASK = 0x0040;
-   const quint16 CMU_CAN_BUS_POWER_STATUS_MASK = 0x0080;
-   const quint16 PACK_ISOLATION_TEST_FAILURE_MASK = 0x0100;
-   const quint16 SOFTWARE_OVER_CURRENT_MASK = 0x0200;
-   const quint16 CAN_SUPPLY_LOW_MASK = 0x0400;
-   const quint16 CONTACTOR_STUCK_MASK = 0x0800;
-   const quint16 CMU_DETECTED_EXTRA_CELL_MASK = 0x1000;
+   const unsigned char CELL_OVER_VOLTAGE_MASK = 0x0001;
+   const unsigned char CELL_UNDER_VOLTAGE_MASK = 0x0002;
+   const unsigned char CELL_OVER_TEMP_MASK = 0x0004;
+   const unsigned char MEASUREMENT_UNTRUSTED_MASK = 0x0008;
+   const unsigned char CMU_COMM_TIMEOUT_MASK = 0x0010;
+   const unsigned char VEHICLE_COMM_TIMEOUT_MASK = 0x0020;
+   const unsigned char BMU_IN_SETUP_MODE_MASK = 0x0040;
+   const unsigned char CMU_CAN_BUS_POWER_STATUS_MASK = 0x0080;
+   const unsigned char PACK_ISOLATION_TEST_FAILURE_MASK = 0x0100;
+   const unsigned char SOFTWARE_OVER_CURRENT_MASK = 0x0200;
+   const unsigned char CAN_SUPPLY_LOW_MASK = 0x0400;
+   const unsigned char CONTACTOR_STUCK_MASK = 0x0800;
+   const unsigned char CMU_DETECTED_EXTRA_CELL_MASK = 0x1000;
 }
 
 BatteryFaults::BatteryFaults(quint16 flags)
