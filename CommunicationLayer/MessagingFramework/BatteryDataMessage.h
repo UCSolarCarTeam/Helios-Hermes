@@ -62,8 +62,7 @@ public:
     unsigned short cmu12VCurrentConsumption() const;
     bool bmsCanLockedOut() const;
 
-   
-   QString toString() const;
+    QString toString() const;
 
 private:
    const QByteArray messageData_;
