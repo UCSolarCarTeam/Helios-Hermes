@@ -5,10 +5,10 @@
 
 class I_PacketUnstuffer : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   virtual ~I_PacketUnstuffer() {}
+    virtual ~I_PacketUnstuffer() {}
 
 signals:
-   void packetUnstuffed(QByteArray decodedData);
+    void packetUnstuffed(QByteArray decodedData);
 };

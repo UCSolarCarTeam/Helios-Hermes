@@ -5,18 +5,18 @@ class I_CommDevice;
 
 class PacketSynchronizer : public I_PacketSynchronizer
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   PacketSynchronizer(I_CommDevice& inputDevice);
-   virtual ~PacketSynchronizer();
+    PacketSynchronizer(I_CommDevice& inputDevice);
+    virtual ~PacketSynchronizer();
 
 private slots:
-   void handleIncomingData(QByteArray incomingData);
+    void handleIncomingData(QByteArray incomingData);
 
 private:
-   bool alignStartOfPacketToBeginningOfBuffer();
-   bool extractPacketIfComplete();
+    bool alignStartOfPacketToBeginningOfBuffer();
+    bool extractPacketIfComplete();
 
 private:
-   QByteArray buffer_;
+    QByteArray buffer_;
 };

@@ -16,17 +16,17 @@ class I_MessageForwarder;
 class CommunicationContainer
 {
 public:
-   explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
-   ~CommunicationContainer();
+    explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
+    ~CommunicationContainer();
 
-   I_PacketSynchronizer& packetSynchronizer();
-   I_PacketDecoder& packetDecoder();
-   I_PacketChecksumChecker& packetChecksumChecker();
-   I_DataInjectionService& dataInjectionService();
-   I_CommDevice& commDevice();
-   I_MessageForwarder& udpMessageForwarder();
+    I_PacketSynchronizer& packetSynchronizer();
+    I_PacketDecoder& packetDecoder();
+    I_PacketChecksumChecker& packetChecksumChecker();
+    I_DataInjectionService& dataInjectionService();
+    I_CommDevice& commDevice();
+    I_MessageForwarder& udpMessageForwarder();
 
 private:
-   // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
-   QScopedPointer<CommunicationContainerPrivate> impl_;
+    // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom
+    QScopedPointer<CommunicationContainerPrivate> impl_;
 };

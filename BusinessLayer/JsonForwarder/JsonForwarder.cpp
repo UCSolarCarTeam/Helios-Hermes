@@ -23,14 +23,14 @@ JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
                              I_VehicleData& vehicleData,
                              I_MessageForwarder& messageForwarder,
                              I_Settings& settings)
-: batteryJsonForwarder_(new BatteryJsonForwarder(batteryData, messageForwarder))
-, faultsJsonForwarder_(new FaultsJsonForwarder(faultsData, messageForwarder))
-, powerJsonForwarder_(new PowerJsonForwarder(powerData, messageForwarder))
-, vehicleJsonForwarder_(new VehicleJsonForwarder(vehicleData, messageForwarder))
-, readTimer_(new QTimer())
-, dataToReadCount_(0)
-, forwardPeriod_(settings.forwardPeriod())
-, PACKET_TITLE_(settings.packetTitle())
+    : batteryJsonForwarder_(new BatteryJsonForwarder(batteryData, messageForwarder))
+    , faultsJsonForwarder_(new FaultsJsonForwarder(faultsData, messageForwarder))
+    , powerJsonForwarder_(new PowerJsonForwarder(powerData, messageForwarder))
+    , vehicleJsonForwarder_(new VehicleJsonForwarder(vehicleData, messageForwarder))
+    , readTimer_(new QTimer())
+    , dataToReadCount_(0)
+    , forwardPeriod_(settings.forwardPeriod())
+    , PACKET_TITLE_(settings.packetTitle())
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
 }
@@ -48,28 +48,30 @@ void JsonForwarder::forwardData()
 {
     QJsonObject baseJson = QJsonObject();
     baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
-
     QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
     baseJson[JsonFormat::TIMESTAMP] = currentTime;
 
     switch (dataToReadCount_)
     {
-    case 0:
-        qDebug() << "JsonForwarder: Forwarding battery data";
-        batteryJsonForwarder_->forwardBatteryData(baseJson);
-        break;
-    case 1:
-        qDebug() << "JsonForwarder: Forwarding faults data";
-        faultsJsonForwarder_->forwardFaultsData(baseJson);
-        break;
-    case 2:
-        qDebug() << "JsonForwarder: Forwarding power data";
-        powerJsonForwarder_->forwardPowerData(baseJson);
-        break;
-    case 3 :
-        qDebug() << "JsonForwarder: Forwarding vehicle data";
-        vehicleJsonForwarder_->forwardVehicleData(baseJson);
-        break;
+        case 0:
+            qDebug() << "JsonForwarder: Forwarding battery data";
+            batteryJsonForwarder_->forwardBatteryData(baseJson);
+            break;
+
+        case 1:
+            qDebug() << "JsonForwarder: Forwarding faults data";
+            faultsJsonForwarder_->forwardFaultsData(baseJson);
+            break;
+
+        case 2:
+            qDebug() << "JsonForwarder: Forwarding power data";
+            powerJsonForwarder_->forwardPowerData(baseJson);
+            break;
+
+        case 3 :
+            qDebug() << "JsonForwarder: Forwarding vehicle data";
+            vehicleJsonForwarder_->forwardVehicleData(baseJson);
+            break;
     }
 
     if (dataToReadCount_ >= 3)

@@ -6,14 +6,14 @@
 
 class BatteryPopulator : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   BatteryPopulator(I_PacketDecoder& packetDecoder,
-                I_BatteryData& batteryData);
+    BatteryPopulator(I_PacketDecoder& packetDecoder,
+                     I_BatteryData& batteryData);
 public slots:
-   void populateData(const BatteryDataMessage);
+    void populateData(const BatteryDataMessage);
 
 private:
-   I_PacketDecoder& packetDecoder_;
-   I_BatteryData& batteryData_;
+    I_PacketDecoder& packetDecoder_;
+    I_BatteryData& batteryData_;
 };

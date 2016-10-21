@@ -4,12 +4,12 @@
 
 class FakePacketSynchronizer : public I_PacketSynchronizer
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   FakePacketSynchronizer();
-   virtual ~FakePacketSynchronizer();
+    FakePacketSynchronizer();
+    virtual ~FakePacketSynchronizer();
 
-   void setIoDevice(QIODevice& ioDevice);
+    void setIoDevice(QIODevice& ioDevice);
 
-   void emitFramedPacket(const QByteArray& packet);
+    void emitFramedPacket(const QByteArray& packet);
 };

@@ -9,19 +9,19 @@
 class FaultsMessage
 {
 public:
-   FaultsMessage(const QByteArray& messageData);
+    FaultsMessage(const QByteArray& messageData);
 
-   MotorFaults motorOneFaults() const;
-   LimitFlags motorOneLimitFlags() const;
-   MotorFaults motorTwoFaults() const;
-   LimitFlags motorTwoLimitFlags() const;
-   BatteryFaults batteryFaults() const;
+    MotorFaults motorOneFaults() const;
+    LimitFlags motorOneLimitFlags() const;
+    MotorFaults motorTwoFaults() const;
+    LimitFlags motorTwoLimitFlags() const;
+    BatteryFaults batteryFaults() const;
 
-   quint8 canReceivedErrorCounts() const;
-   quint8 canTransmittedErrorCounts() const;
+    quint8 canReceivedErrorCounts() const;
+    quint8 canTransmittedErrorCounts() const;
 
-   QString toString() const;
+    QString toString() const;
 
 private:
-   const QByteArray messageData_;
+    const QByteArray messageData_;
 };

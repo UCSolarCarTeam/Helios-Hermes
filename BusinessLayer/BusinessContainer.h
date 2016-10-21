@@ -12,15 +12,15 @@ class LoggerService;
 class BusinessContainer
 {
 public:
-   explicit BusinessContainer(InfrastructureContainer& infrastructureContainer,
-                              CommunicationContainer& communicationContainer,
-                              DataContainer& dataContainer);
-   ~BusinessContainer();
+    explicit BusinessContainer(InfrastructureContainer& infrastructureContainer,
+                               CommunicationContainer& communicationContainer,
+                               DataContainer& dataContainer);
+    ~BusinessContainer();
 
-   I_CommunicationsMonitoringService& communicationsMonitoringService();
+    I_CommunicationsMonitoringService& communicationsMonitoringService();
 
 private:
-   QScopedPointer<LoggerService> loggerService_;
-   QScopedPointer<I_CommunicationsMonitoringService> communicationsMonitoringService_;
-   QScopedPointer<I_JsonForwarder> jsonForwarder_;
+    QScopedPointer<LoggerService> loggerService_;
+    QScopedPointer<I_CommunicationsMonitoringService> communicationsMonitoringService_;
+    QScopedPointer<I_JsonForwarder> jsonForwarder_;
 };

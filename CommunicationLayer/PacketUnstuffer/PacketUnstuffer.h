@@ -6,17 +6,17 @@ class I_PacketSynchronizer;
 
 class PacketUnstuffer : public I_PacketUnstuffer, public I_DataInjectionService
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   explicit PacketUnstuffer(const I_PacketSynchronizer& packetSynchronizer);
-   virtual ~PacketUnstuffer();
+    explicit PacketUnstuffer(const I_PacketSynchronizer& packetSynchronizer);
+    virtual ~PacketUnstuffer();
 
-   void injectFramedData(const QByteArray& data);
+    void injectFramedData(const QByteArray& data);
 
 private slots:
-   void handleFramedPacket(QByteArray packet);
+    void handleFramedPacket(QByteArray packet);
 
 private:
-   bool isPacketAtLeastMinimumSize(const QByteArray& packet);
-   QByteArray unstuffPacket(const QByteArray& encodedData);
+    bool isPacketAtLeastMinimumSize(const QByteArray& packet);
+    QByteArray unstuffPacket(const QByteArray& encodedData);
 };

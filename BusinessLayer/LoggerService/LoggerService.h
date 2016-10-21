@@ -14,30 +14,30 @@ class I_PacketSynchronizer;
 
 class LoggerService : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   LoggerService(const I_PacketSynchronizer& packetSynchronizer,
-      const I_PacketDecoder& packetDecoder);
-   virtual ~LoggerService();
+    LoggerService(const I_PacketSynchronizer& packetSynchronizer,
+                  const I_PacketDecoder& packetDecoder);
+    virtual ~LoggerService();
 
 private slots:
-   void handleFramedPacket(QByteArray packet);
-   void handlePacketDecoded(const KeyDriverControlTelemetry message);
-   void handlePacketDecoded(const DriverControlDetails message);
-   void handlePacketDecoded(const FaultsMessage message);
-   void handlePacketDecoded(const BatteryDataMessage message);
-   void handlePacketDecoded(const CmuDataMessage message);
+    void handleFramedPacket(QByteArray packet);
+    void handlePacketDecoded(const KeyDriverControlTelemetry message);
+    void handlePacketDecoded(const DriverControlDetails message);
+    void handlePacketDecoded(const FaultsMessage message);
+    void handlePacketDecoded(const BatteryDataMessage message);
+    void handlePacketDecoded(const CmuDataMessage message);
 
 private:
-   void connectToPacketDecoder(const I_PacketDecoder& decoder);
-   template <class T>
-   void printReceivedMessage(const T& message);
-   void markStartOfDebugLog() const;
-   void markEndOfDebugLog() const;
+    void connectToPacketDecoder(const I_PacketDecoder& decoder);
+    template <class T>
+    void printReceivedMessage(const T& message);
+    void markStartOfDebugLog() const;
+    void markEndOfDebugLog() const;
 
-   QFile logCsvFile_;
-   QTextStream csvFileWriter_;
+    QFile logCsvFile_;
+    QTextStream csvFileWriter_;
 
-   QFile rawDataFile_;
-   QDataStream dataWriter_;
+    QFile rawDataFile_;
+    QDataStream dataWriter_;
 };

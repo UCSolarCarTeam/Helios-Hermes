@@ -4,10 +4,10 @@
 
 class FakePacketUnstuffer : public I_PacketUnstuffer
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   FakePacketUnstuffer();
-   virtual ~FakePacketUnstuffer();
+    FakePacketUnstuffer();
+    virtual ~FakePacketUnstuffer();
 
-   void emitPacketUnstuffed(QByteArray decodedData);
+    void emitPacketUnstuffed(QByteArray decodedData);
 };

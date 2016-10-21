@@ -6,16 +6,16 @@
 
 class CmuPopulator : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   CmuPopulator(I_PacketDecoder& packetDecoder,
-      I_BatteryData& batteryData);
+    CmuPopulator(I_PacketDecoder& packetDecoder,
+                 I_BatteryData& batteryData);
 
 public slots:
-   void populateData(const CmuDataMessage);
+    void populateData(const CmuDataMessage);
 
 private:
-   QList<double> convertFloatListToDouble(QList<float> floatList);
-   I_PacketDecoder& packetDecoder_;
-   I_BatteryData& batteryData_;
+    QList<double> convertFloatListToDouble(QList<float> floatList);
+    I_PacketDecoder& packetDecoder_;
+    I_BatteryData& batteryData_;
 };

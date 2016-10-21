@@ -6,16 +6,16 @@
 class KeyDriverControlTelemetry
 {
 public:
-   KeyDriverControlTelemetry(const QByteArray& messageData);
+    KeyDriverControlTelemetry(const QByteArray& messageData);
 
-   float setSpeed() const;
-   float setCurrent() const;
-   float busCurrent() const;
-   float busVoltage() const;
-   float speed() const;
+    float setSpeed() const;
+    float setCurrent() const;
+    float busCurrent() const;
+    float busVoltage() const;
+    float speed() const;
 
-   QString toString() const;
+    QString toString() const;
 
 private:
-   const QByteArray messageData_;
+    const QByteArray messageData_;
 };

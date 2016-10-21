@@ -9,16 +9,16 @@ public:
     /*BatteryData "Gets"*/
     MOCK_CONST_METHOD0(mod0PcbTemperature, double()); // double mod0PcbTemperature() const;
     MOCK_CONST_METHOD0(mod0CellTemperature, double()); // double mod0CellTemperature() const;
-    MOCK_CONST_METHOD0(mod0CellVoltages,QList<double>()); // QList<double> mod0CellVoltages() const;
+    MOCK_CONST_METHOD0(mod0CellVoltages, QList<double>()); // QList<double> mod0CellVoltages() const;
     MOCK_CONST_METHOD0(mod1PcbTemperature, double()); // double mod1PcbTemperature() const;
     MOCK_CONST_METHOD0(mod1CellTemperature, double()); // double mod1CellTemperature() const;
-    MOCK_CONST_METHOD0(mod1CellVoltages,QList<double>()); // QList<double> mod1CellVoltages() const;
+    MOCK_CONST_METHOD0(mod1CellVoltages, QList<double>()); // QList<double> mod1CellVoltages() const;
     MOCK_CONST_METHOD0(mod2PcbTemperature, double()); // double mod2PcbTemperature() const;
     MOCK_CONST_METHOD0(mod2CellTemperature, double()); // double mod2CellTemperature() const;
-    MOCK_CONST_METHOD0(mod2CellVoltages,QList<double>()); // QList<double> mod2CellVoltages() const;
+    MOCK_CONST_METHOD0(mod2CellVoltages, QList<double>()); // QList<double> mod2CellVoltages() const;
     MOCK_CONST_METHOD0(mod3PcbTemperature, double()); // double mod3PcbTemperature() const;
     MOCK_CONST_METHOD0(mod3CellTemperature, double()); // double mod3CellTemperature() const;
-    MOCK_CONST_METHOD0(mod3CellVoltages,QList<double>()); // QList<double> mod3CellVoltages() const;
+    MOCK_CONST_METHOD0(mod3CellVoltages, QList<double>()); // QList<double> mod3CellVoltages() const;
     MOCK_CONST_METHOD0(batteryVoltage, double()); // double batteryVoltage() const;
     MOCK_CONST_METHOD0(batteryCurrent, double()); // double batteryCurrent() const;
 

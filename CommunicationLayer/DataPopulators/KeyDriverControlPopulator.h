@@ -8,17 +8,17 @@
 
 class KeyDriverControlPopulator : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   KeyDriverControlPopulator(I_PacketDecoder& packetDecoder,
-                       I_VehicleData& vehicleData,
-                       I_PowerData& powerData);
+    KeyDriverControlPopulator(I_PacketDecoder& packetDecoder,
+                              I_VehicleData& vehicleData,
+                              I_PowerData& powerData);
 
 public slots:
-   void populateData(const KeyDriverControlTelemetry);
+    void populateData(const KeyDriverControlTelemetry);
 
 private:
-   I_PacketDecoder& packetDecoder_;
-   I_VehicleData& vehicleData_;
-   I_PowerData& powerData_;
+    I_PacketDecoder& packetDecoder_;
+    I_VehicleData& vehicleData_;
+    I_PowerData& powerData_;
 };

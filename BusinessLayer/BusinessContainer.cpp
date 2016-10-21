@@ -10,16 +10,16 @@
 BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureContainer,
                                      CommunicationContainer& communicationContainer,
                                      DataContainer& dataContainer)
-: loggerService_(new LoggerService(communicationContainer.packetSynchronizer(),
-                                   communicationContainer.packetDecoder()))
-, communicationsMonitoringService_(new CommunicationsMonitoringService(
-   communicationContainer.packetChecksumChecker()))
-, jsonForwarder_(new JsonForwarder(dataContainer.batteryData(),
-                                   dataContainer.faultsData(),
-                                   dataContainer.powerData(),
-                                   dataContainer.vehicleData(),
-                                   communicationContainer.udpMessageForwarder(),
-                                   infrastructureContainer.settings()))
+    : loggerService_(new LoggerService(communicationContainer.packetSynchronizer(),
+                                       communicationContainer.packetDecoder()))
+    , communicationsMonitoringService_(new CommunicationsMonitoringService(
+                                           communicationContainer.packetChecksumChecker()))
+    , jsonForwarder_(new JsonForwarder(dataContainer.batteryData(),
+                                       dataContainer.faultsData(),
+                                       dataContainer.powerData(),
+                                       dataContainer.vehicleData(),
+                                       communicationContainer.udpMessageForwarder(),
+                                       infrastructureContainer.settings()))
 {
     jsonForwarder_->startForwardingData();
 }

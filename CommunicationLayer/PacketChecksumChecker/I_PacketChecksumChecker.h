@@ -5,11 +5,11 @@
 
 class I_PacketChecksumChecker : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   virtual ~I_PacketChecksumChecker() {}
+    virtual ~I_PacketChecksumChecker() {}
 
 signals:
-   void validDataReceived(QByteArray data);
-   void invalidDataReceived();
+    void validDataReceived(QByteArray data);
+    void invalidDataReceived();
 };

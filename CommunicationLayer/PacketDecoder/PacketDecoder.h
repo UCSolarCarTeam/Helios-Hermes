@@ -6,11 +6,11 @@ class I_PacketChecksumChecker;
 
 class PacketDecoder : public I_PacketDecoder
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   explicit PacketDecoder(const I_PacketChecksumChecker& checksumChecker);
-   virtual ~PacketDecoder();
+    explicit PacketDecoder(const I_PacketChecksumChecker& checksumChecker);
+    virtual ~PacketDecoder();
 
 private slots:
-   void handleValidData(QByteArray messageData);
+    void handleValidData(QByteArray messageData);
 };
