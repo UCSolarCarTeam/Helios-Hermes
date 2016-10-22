@@ -48,9 +48,8 @@ install:
     - cd ../..
 
 script:
+    - "! (astyle *.h *.cpp -r --dry-run --options=astylerc --exclude=googletest --exclude=SimpleAmqpClient --exclude=rabbitmq-c | grep Formatted)"
     - qmake
     - make
-    - ls
-    - "! (astyle *.h *.cpp -r --dry-run --options=astylerc | grep Formatted)"
 
 language: cpp
