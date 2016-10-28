@@ -4,5 +4,5 @@
 
 namespace MessageDecodingHelpers
 {
-   float getFloat(const QByteArray& data, int startIndex);
+    float getFloat(const QByteArray& data, int startIndex);
 }

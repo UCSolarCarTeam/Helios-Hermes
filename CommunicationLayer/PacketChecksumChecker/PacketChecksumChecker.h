@@ -5,14 +5,14 @@ class I_PacketUnstuffer;
 
 class PacketChecksumChecker : public I_PacketChecksumChecker
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   explicit PacketChecksumChecker(const I_PacketUnstuffer& unstuffer);
-   virtual ~PacketChecksumChecker();
+    explicit PacketChecksumChecker(const I_PacketUnstuffer& unstuffer);
+    virtual ~PacketChecksumChecker();
 
 private slots:
-   void checkChecksum(QByteArray decodedData);
+    void checkChecksum(QByteArray decodedData);
 
 private:
-   quint16 retrieveChecksumFromPacket(const QByteArray& decodedData);
+    quint16 retrieveChecksumFromPacket(const QByteArray& decodedData);
 };

@@ -8,7 +8,8 @@
 #include "UdpMessageForwarder.h"
 
 
-namespace {
+namespace
+{
     quint32 TIMEOUT = 120;
     quint32 SLEEP_TIME = 2;
 }
@@ -29,28 +30,39 @@ UdpMessageForwarder::~UdpMessageForwarder()
 void UdpMessageForwarder::setupChannel()
 {
     quint32 i = 0;
-    do {
-        if (i++) {
+
+    do
+    {
+        if (i++)
+        {
             qWarning() << "UdpMessageForwarder: Attempting to reconnect";
         }
-        try {
+
+        try
+        {
             channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), udpPort_);
-        } catch (std::exception&) {
-            if (channel_ == NULL) {
-                if (i == (TIMEOUT / SLEEP_TIME)) {
+        }
+        catch (std::exception&)
+        {
+            if (channel_ == NULL)
+            {
+                if (i == (TIMEOUT / SLEEP_TIME))
+                {
                     qWarning() << "UdpMessageForwarder timed out waiting for connection to broker";
                     throw;
                 }
+
                 qWarning() << "UdpMessageForwarder: error creating channel";
                 QThread::sleep(SLEEP_TIME);
             }
-            else {
+            else
+            {
                 throw;
             }
         }
+    }
+    while (channel_ == NULL);
 
-
-    } while (channel_ == NULL);
     channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
 }
 
@@ -58,11 +70,17 @@ void UdpMessageForwarder::forwardData(QByteArray data)
 {
     qDebug() << "UdpMessageForwarder: Forwarding data";
     AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
-    try {
+
+    try
+    {
         channel_->BasicPublish(exchangeName_.toStdString(), "", mq_msg);
-    } catch (AmqpClient::ChannelException& ex) {
+    }
+    catch (AmqpClient::ChannelException& ex)
+    {
         qWarning() << "UdpMessageForwarder: Failed to forward data";
-    } catch (AmqpClient::ConnectionException& ex) {
+    }
+    catch (AmqpClient::ConnectionException& ex)
+    {
         qWarning() << "UdpMessageForwarder: Connection to broker terminated";
         setupChannel();
     }

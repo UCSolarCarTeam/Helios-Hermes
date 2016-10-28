@@ -5,10 +5,10 @@
 
 class I_PacketSynchronizer : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   virtual ~I_PacketSynchronizer() {}
+    virtual ~I_PacketSynchronizer() {}
 
 signals:
-   void framedPacket(QByteArray packet);
+    void framedPacket(QByteArray packet);
 };

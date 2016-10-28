@@ -3,7 +3,8 @@
 
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
-class MockMessageForwarder : public I_MessageForwarder {
+class MockMessageForwarder : public I_MessageForwarder
+{
 public:
     MOCK_METHOD1(forwardData, void(QByteArray));
 };

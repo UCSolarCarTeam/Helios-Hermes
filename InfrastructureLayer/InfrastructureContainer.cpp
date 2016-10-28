@@ -3,16 +3,16 @@
 
 namespace
 {
-QString SETTINGS_FILE_NAME = "config.ini";
+    QString SETTINGS_FILE_NAME = "config.ini";
 }
 
 InfrastructureContainer::InfrastructureContainer()
-: settings_(new Settings(SETTINGS_FILE_NAME))
+    : settings_(new Settings(SETTINGS_FILE_NAME))
 {
 }
 
 InfrastructureContainer::~InfrastructureContainer()
-{   
+{
 }
 
 I_Settings& InfrastructureContainer::settings()

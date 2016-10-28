@@ -11,12 +11,12 @@ class BusinessContainer;
 class SchulichDeltaHermes : public QApplication
 {
 public:
-   SchulichDeltaHermes(int &argc, char **argv);
-   ~SchulichDeltaHermes();
+    SchulichDeltaHermes(int& argc, char** argv);
+    ~SchulichDeltaHermes();
 
 private:
-   QScopedPointer<InfrastructureContainer> infrastructureContainer_;
-   QScopedPointer<DataContainer> dataContainer_;
-   QScopedPointer<CommunicationContainer> communicationContainer_;
-   QScopedPointer<BusinessContainer> businessContainer_;
+    QScopedPointer<InfrastructureContainer> infrastructureContainer_;
+    QScopedPointer<DataContainer> dataContainer_;
+    QScopedPointer<CommunicationContainer> communicationContainer_;
+    QScopedPointer<BusinessContainer> businessContainer_;
 };

@@ -5,12 +5,12 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 
 RadioCommDevice::RadioCommDevice(QSerialPort& serialPort, I_Settings& settings)
-: serialPort_(serialPort)
+    : serialPort_(serialPort)
 {
-   setSerialParameters(settings.serialPortName(), settings.baudrate());
-   // This makes sure that it is connected after everything is created.
-   // Otherwise the error messages won't be sent to the GUI
-   QTimer::singleShot(0, this, SLOT(connectToDataSource()));
+    setSerialParameters(settings.serialPortName(), settings.baudrate());
+    // This makes sure that it is connected after everything is created.
+    // Otherwise the error messages won't be sent to the GUI
+    QTimer::singleShot(0, this, SLOT(connectToDataSource()));
 }
 
 RadioCommDevice::~RadioCommDevice()
@@ -19,35 +19,37 @@ RadioCommDevice::~RadioCommDevice()
 
 void RadioCommDevice::setSerialParameters(QString serialPortName, int baudRate)
 {
-   serialPort_.setPortName(serialPortName);
-   serialPort_.setBaudRate(baudRate);
+    serialPort_.setPortName(serialPortName);
+    serialPort_.setBaudRate(baudRate);
 }
 
 bool RadioCommDevice::connectToDataSource()
 {
-   if (serialPort_.open(QIODevice::ReadWrite))
-   {
-      connect(&serialPort_, SIGNAL(readyRead()),
-         this, SLOT(handleSerialDataIncoming()), Qt::UniqueConnection);
-      emit connectionSucceeded();
-      return true;
-   }
-   else
-   {
-      qDebug() << serialPort_.errorString();
-      emit connectionFailed(serialPort_.errorString());
-      return false;
-   }
+    if (serialPort_.open(QIODevice::ReadWrite))
+    {
+        connect(&serialPort_, SIGNAL(readyRead()),
+                this, SLOT(handleSerialDataIncoming()), Qt::UniqueConnection);
+        emit connectionSucceeded();
+        return true;
+    }
+    else
+    {
+        qDebug() << serialPort_.errorString();
+        emit connectionFailed(serialPort_.errorString());
+        return false;
+    }
 }
 
 void RadioCommDevice::handleSerialDataIncoming()
 {
-   qDebug() << "Serial port received data";
-   QByteArray incomingData = serialPort_.readAll();
-   if (incomingData.isEmpty())
-   {
-      qWarning() <<"Incoming data empty";
-      return;
-   }
-   emit dataReceived(incomingData);
+    qDebug() << "Serial port received data";
+    QByteArray incomingData = serialPort_.readAll();
+
+    if (incomingData.isEmpty())
+    {
+        qWarning() << "Incoming data empty";
+        return;
+    }
+
+    emit dataReceived(incomingData);
 }

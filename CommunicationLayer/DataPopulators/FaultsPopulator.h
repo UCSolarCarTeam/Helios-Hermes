@@ -6,15 +6,15 @@
 
 class FaultsPopulator : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   FaultsPopulator(I_PacketDecoder& packetDecoder,
-      I_FaultsData& faultsData);
+    FaultsPopulator(I_PacketDecoder& packetDecoder,
+                    I_FaultsData& faultsData);
 
 public slots:
-   void populateData(const FaultsMessage&);
+    void populateData(const FaultsMessage&);
 
 private:
-   I_PacketDecoder& packetDecoder_;
-   I_FaultsData& faultsData_;
+    I_PacketDecoder& packetDecoder_;
+    I_FaultsData& faultsData_;
 };
