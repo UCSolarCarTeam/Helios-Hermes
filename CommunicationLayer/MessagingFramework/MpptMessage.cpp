@@ -1,4 +1,4 @@
-#include "MpptDataMessage.h"
+#include "MpptMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
@@ -13,32 +13,32 @@ namespace
     const int TEMPERATURE = 8;
 }
 
-unsigned char MpptDataMessage::mpptStatus() const
+unsigned char MpptMessage::mpptStatus() const
 {
     return getUnsignedChar(messageData_, MPPT_STATUS);
 }
 
-unsigned short MpptDataMessage::arrayVoltage() const
+unsigned short MpptMessage::arrayVoltage() const
 {
     return getUnsignedShort(messageData_, ARRAY_VOLTAGE);
 }
 
-unsigned short MpptDataMessage::arrayCurrent() const
+unsigned short MpptMessage::arrayCurrent() const
 {
     return getUnsignedShort(messageData_, ARRAY_CURRENT);
 }
 
-unsigned short MpptDataMessage::batteryVoltage() const
+unsigned short MpptMessage::batteryVoltage() const
 {
     return getUnsignedShort(messageData_, BATTERY_VOLTAGE);
 }
 
-unsigned short MpptDataMessage::temperature() const
+unsigned short MpptMessage::temperature() const
 {
     return getUnsignedShort(messageData_, TEMPERATURE);
 }
 
-QString MpptDataMessage::toString() const
+QString MpptMessage::toString() const
 {
     QString messageString;
     messageString += QString::number(mpptStatus()) + ", ";

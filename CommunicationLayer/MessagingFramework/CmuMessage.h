@@ -29,10 +29,10 @@
 #include <QList>
 #include <QString>
 
-class CmuDataMessage
+class CmuMessage
 {
 public:
-   CmuDataMessage(const QByteArray& messageData);
+   CmuMessage(const QByteArray& messageData);
 
    unsigned char cellNumber() const;
    QList<unsigned short> cellVoltages() const;

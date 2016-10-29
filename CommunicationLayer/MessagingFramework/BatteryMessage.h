@@ -28,10 +28,10 @@
 #include <QByteArray>
 #include <QString>
 
-class BatteryDataMessage
+class BatteryMessage
 {
 public:
-    BatteryDataMessage(const QByteArray& messageData);
+    BatteryMessage(const QByteArray& messageData);
 
     bool alive() const;
     float packSocAmpHours() const;

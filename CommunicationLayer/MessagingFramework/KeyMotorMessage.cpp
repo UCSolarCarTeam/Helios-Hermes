@@ -6,18 +6,18 @@ using namespace MessageDecodingHelpers;
 
 namespace
 {
-    const int M_0_ALIVE = ''
-    const int M_0_SET_CURRENT = ''
-    const int M_0_SET_VELOCITY = ''
-    const int M_0_BUS_CURRENT = ''
-    const int M_0_BUS_VOLTAGE = ''
-    const int M_0_VEHICLE_VELOCITY = ''
-    const int M_1_ALIVE = ''
-    const int M_1_SET_CURRENT = ''
-    const int M_1_SET_VELOCITY = ''
-    const int M_1_BUS_CURRENT = ''
-    const int M_1_BUS_VOLTAGE = ''
-    const int M_1_VEHICLE_VELOCITY = ''
+    const int M_0_ALIVE = 1;
+    const int M_0_SET_CURRENT = 2;
+    const int M_0_SET_VELOCITY = 6;
+    const int M_0_BUS_CURRENT = 10;
+    const int M_0_BUS_VOLTAGE = 14;
+    const int M_0_VEHICLE_VELOCITY = 18;
+    const int M_1_ALIVE = 22;
+    const int M_1_SET_CURRENT = 23;
+    const int M_1_SET_VELOCITY = 27;
+    const int M_1_BUS_CURRENT = 31;
+    const int M_1_BUS_VOLTAGE = 35;
+    const int M_1_VEHICLE_VELOCITY = 39;
 }
 
 KeyMotorMessage::KeyMotorMessage(const QByteArray& messageData)

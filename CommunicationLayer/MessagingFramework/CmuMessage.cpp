@@ -23,7 +23,7 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#include "CmuDataMessage.h"
+#include "CmuMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
@@ -41,17 +41,17 @@ namespace
    const int NUMBER_OF_BYTES_IN_UNSIGNED_SHORT = 2;
 }
 
-CmuDataMessage::CmuDataMessage(const QByteArray& messageData)
+CmuMessage::CmuMessage(const QByteArray& messageData)
 : messageData_(messageData)
 {
 }
 
-unsigned char CmuDataMessage::cellNumber() const
+unsigned char CmuMessage::cellNumber() const
 {
    return messageData_.at(CELL_NUMBER_INDEX);
 }
 
-QList<unsigned short> CmuDataMessage::cellVoltages() const
+QList<unsigned short> CmuMessage::cellVoltages() const
 {
    QList<unsigned short> cellVoltagesData;
    for (int i = 0; i < NUMBER_OF_CELLS; i++)
@@ -62,12 +62,12 @@ QList<unsigned short> CmuDataMessage::cellVoltages() const
    return cellVoltagesData;
 }
 
-unsigned short CmuDataMessage::pcbTemperature() const
+unsigned short CmuMessage::pcbTemperature() const
 {
    return getUnsignedShort(messageData_, PCB_TEMPERATURE_INDEX);
 }
 
-unsigned short CmuDataMessage::cellTemperatures() const
+unsigned short CmuMessage::cellTemperatures() const
 {
    QList<unsigned short> cellTemperatureData;
    for (int i = 0; i < NUMBER_OF_TEMPERATURES; i++)
@@ -78,7 +78,7 @@ unsigned short CmuDataMessage::cellTemperatures() const
    return cellTemperatureData;
 }
 
-QString CmuDataMessage::toString() const
+QString CmuMessage::toString() const
 {
    QString messageString;
    messageString += QString::number(SerialDefines::CmuData) + ", ";

@@ -3,10 +3,10 @@
 #include <QByteArray>
 #include <QString>
 
-class MpptDataMessage
+class MpptMessage
 {
 public:
-    MpptDataMessage(const QByteArray& messageData);
+    MpptMessage(const QByteArray& messageData);
 
     unsigned char mpptStatus() const;
     unsigned short arrayVoltage() const;
