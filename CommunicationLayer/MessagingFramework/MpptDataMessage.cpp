@@ -46,5 +46,6 @@ QString MpptDataMessage::toString() const
     messageString += QString::number(arrayCurrent()) + ", ";
     messageString += QString::number(batteryVoltage()) + ", ";
     messageString += QString::number(temperature()) + ", ";
+    return messageString;
 }
 
