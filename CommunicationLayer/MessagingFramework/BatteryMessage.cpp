@@ -211,9 +211,9 @@ bool BatteryMessage::bmsCanLockedOut() const
 
 QString BatteryMessage::toString() const
 {
-    // TODO fix
+    // TODO chars don't need QString::number
     QString messageString;
-    messageString += QString::number(MessageDefines::BATTERY_SERIAL_ID) + ", ";
+    messageString += QString::number(MessageDefines::BatteryData) + ", ";
     messageString += QString::number(alive()) + ", ";
     messageString += QString::number(packSocAmpHours()) + ", ";
     messageString += QString::number(packSocPercentage()) + ", ";

@@ -5,5 +5,13 @@
 
 class LightsMessage
 {
-    
+public:
+    LightsMessage(const QByteArray& messageData);
+
+    unsigned char lightStatus() const;
+
+    QString toString() const;
+
+private:
+    const QByteArray messageData_;
 }
