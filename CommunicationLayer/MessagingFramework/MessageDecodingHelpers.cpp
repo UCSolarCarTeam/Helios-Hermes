@@ -33,6 +33,7 @@ namespace
     {
         unsigned short unsignedShortData;
         float floatData;
+        unsigned char unsignedCharData;
         char charData[MessageDecodingHelpers::numberOfBytesInData(UNION_SIZE)];
     }
 }
@@ -45,6 +46,11 @@ float MessageDecodingHelpers::getFloat(const QByteArray& data, int startIndex)
 unsigned short MessageDecodingHelpers::getUnsignedShort(const QByteArray& data, int startIndex)
 {
     return getData(data, startIndex, TYPE::UNSIGNED_SHORT).unsignedShortData;
+}
+
+unsigned char MessageDecodingHelpers::getUnsignedChar(const QByteArray& data, int startIndex)
+{
+    return getData(data, startIndex, TYPE::UNSIGNED_CHAR).unsignedCharData;
 }
 
 void MessageDecodingHelpers::getData(const QByteArray& data, int startIndex, Type type)
@@ -66,6 +72,9 @@ const int MessageDecodingHelpers::numberOfBytesInData(const Type& type)
         break;
     case UNSIGNED_SHORT:
         return sizeof(unsigned short);
+        break;
+    case UNSIGNED_CHAR:
+        return sizeof(unsigned char);
         break;
     default:
         throw "Unhandled data type!";

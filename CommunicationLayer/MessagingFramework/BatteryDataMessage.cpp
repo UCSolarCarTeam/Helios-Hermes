@@ -68,7 +68,7 @@ BatteryDataMessage::BatteryDataMessage(const QByteArray& messageData)
 {
 }
 
-unsigned char BatteryDataMessage::alive() const
+bool BatteryDataMessage::alive() const
 {
     return static_cast<bool>(messageData_.at(BMU_ALIVE));
 }
@@ -115,17 +115,17 @@ unsigned short BatteryDataMessage::totalPackCapacity() const
 
 unsigned char BatteryDataMessage::prechargeContactorDriverStatus() const
 {
-    return static_cast<bool>(messageData_.at(PRECHARGE_CONTACTOR_DRIVER_STATUS));
+    return getUnsignedChar(messageData_, PRECHARGE_CONTACTOR_DRIVER_STATUS);
 }
 
 unsigned char BatteryDataMessage::prechargeState() const
 {
-    return static_cast<bool>(messageData_.at(PRECHARGE_STATE));
+    return getUnsignedChar(messageData_, PRECHARGE_STATE);
 }
 
 unsigned char BatteryDataMessage::prechargeTimerElapsed() const
 {
-    return static_cast<bool>(messageData_.at(PRECHARGE_TIMER_ELAPSED));
+    return getUnsignedChar(messageData_, PRECHARGE_TIMER_ELAPSED);
 }
 
 unsigned short BatteryDataMessage::prechargeTimerCount() const
@@ -140,7 +140,7 @@ unsigned short BatteryDataMessage::lowestCellVoltage() const
 
 unsigned char BatteryDataMessage::lowestCellVoltageNumber() const
 {
-    return static_cast<bool>(messageData_.at(LOWEST_CELL_VOLTAGE_NUMBER));
+    return getUnsignedChar(messageData_, LOWEST_CELL_VOLTAGE_NUMBER);
 }
 
 unsigned short BatteryDataMessage::highestCellVoltage() const
@@ -150,7 +150,7 @@ unsigned short BatteryDataMessage::highestCellVoltage() const
 
 unsigned char BatteryDataMessage::highestCellVoltageNumber() const
 {
-    return static_cast<bool>(messageData_.at(HIGHEST_CELL_VOLTAGE_NUMBER));
+    return getUnsignedChar(messageData_, HIGHEST_CELL_VOLTAGE_NUMBER);
 }
 
 unsigned short BatteryDataMessage::lowestCellTemperature() const
@@ -160,7 +160,7 @@ unsigned short BatteryDataMessage::lowestCellTemperature() const
 
 unsigned char BatteryDataMessage::lowestCellTemperatureNumber() const
 {
-    return static_cast<bool>(messageData_.at(LOWEST_CELL_TEMPERATURE_NUMBER));
+    return getUnsignedChar(messageData_, LOWEST_CELL_TEMPERATURE_NUMBER);
 }
 
 unsigned short BatteryDataMessage::highestCellTemperature() const
@@ -170,7 +170,7 @@ unsigned short BatteryDataMessage::highestCellTemperature() const
 
 unsigned char BatteryDataMessage::highestCellTemperatureNumber() const
 {
-    return static_cast<bool>(messageData_.at(HIGHEST_CELL_TEMPERATURE_NUMBER));
+    return getUnsignedChar(messageData_, HIGHEST_CELL_TEMPERATURE_NUMBER);
 }
 
 unsigned int BatteryDataMessage::voltage() const
@@ -203,7 +203,7 @@ unsigned short BatteryDataMessage::cmu12VCurrentConsumption() const
     return getUnsignedShort(messageData_, CMU_12V_CURRENT_CONSUMPTION);
 }
 
-unsigned char BatteryDataMessage::bmsCanLockedOut() const
+bool BatteryDataMessage::bmsCanLockedOut() const
 {
     return static_cast<bool>(messageData_.at(BMS_CAN_LOCKED_OUT));
 }
@@ -242,6 +242,5 @@ QString BatteryDataMessage::toString() const
     messageString += QString::number(fanContactors12VCurrentConsumption()) + ", ";
     messageString += QString::number(cmu12VCurrentConsumption()) + ", ";
     messageString += QString::number(bmsCanLockedOut()) + ", ";
-    // TODO fix the termination of string
     return messageString;
 }
