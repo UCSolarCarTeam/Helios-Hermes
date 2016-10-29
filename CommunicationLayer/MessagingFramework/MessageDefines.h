@@ -36,8 +36,8 @@ namespace MessageDefines
       MotorFaults = 5,
       BatteryFaults = 6,
       Battery = 7,
-      CMU = 8,
-      MPPT = 9,
+      Cmu = 8,
+      Mppt = 9,
       Lights = 10,
       Other = 11
    };

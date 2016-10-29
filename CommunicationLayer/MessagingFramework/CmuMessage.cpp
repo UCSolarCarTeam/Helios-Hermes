@@ -81,7 +81,7 @@ unsigned short CmuMessage::cellTemperatures() const
 QString CmuMessage::toString() const
 {
    QString messageString;
-   messageString += QString::number(SerialDefines::CmuData) + ", ";
+   messageString += QString::number(MessageDefines::Cmu) + ", ";
    messageString += QString::number(cellNumber()) + ", ";
    foreach(const float& cellVoltage, cellVoltages())
    {

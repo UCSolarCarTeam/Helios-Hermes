@@ -2,6 +2,8 @@
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
+#include <QDebug>
+
 using namespace MessageDecodingHelpers;
 
 namespace
@@ -25,8 +27,9 @@ namespace
     const int SLIP_SPEED = 65;
 }
 
-MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData)
+MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData, unsigned char motorNumber)
 : messageData_(messageData)
+, motorNumber_(motorNumber)
 {
 }
 
@@ -118,7 +121,17 @@ float MotorDetailsMessage::slipSpeed() const
 QString MotorDetailsMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::MOTOR_DETAILS_MESSAGE_ID) + ", ";
+    if (motorNumber_ == 0x0) {
+        messageString += QString::number(MessageDefines::Motor0Details) + ", ";
+    }
+    else {
+        // For the sake of not halting programs execution, treat all other cases as motor one
+        if (motorNumber != 0x1) {
+            // Log that this was used incorrectly
+            qDebug() << "Invalid motor number, defaulting to motor 1";
+        }
+        messageString += QString::number(MessageDefines::Motor1Details) + ", ";
+    }
     messageString += QString::number(phaseCCurrent()) + ", "; 
     messageString += QString::number(phaseBCurrent()) + ", "; 
     messageString += QString::number(motorVoltageReal()) + ", "; 
@@ -135,7 +148,6 @@ QString MotorDetailsMessage::toString() const
     messageString += QString::number(dspBoardTemperature()) + ", "; 
     messageString += QString::number(dcBusAmpHours()) + ", "; 
     messageString += QString::number(odometer()) + ", "; 
-    messageString += QString::number(slipSpeed());
-    // TODO how is the message going to be terminated?
+    messageString += QString::number(slipSpeed()) + ", ";
     return messageString;
 }

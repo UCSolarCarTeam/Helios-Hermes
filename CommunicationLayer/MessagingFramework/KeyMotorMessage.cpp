@@ -88,6 +88,7 @@ float KeyMotorMessage::m1VehicleVelocity() const
 QString KeyMotorMessage::toString() const
 {
     QString messageString;
+    messageString += QString::number(MessageDefines::KeyMotor) + ", ";
     messageString += QString::number(m0Alive()) + ", ";
     messageString += QString::number(m0SetCurrent()) + ", ";
     messageString += QString::number(m0SetVelocity()) + ", ";

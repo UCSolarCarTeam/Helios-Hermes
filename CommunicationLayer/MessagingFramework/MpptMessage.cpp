@@ -41,6 +41,7 @@ unsigned short MpptMessage::temperature() const
 QString MpptMessage::toString() const
 {
     QString messageString;
+    messageString += QString::number(MessageDefines::Mppt) + ", ";
     messageString += QString::number(mpptStatus()) + ", ";
     messageString += QString::number(arrayVoltage()) + ", ";
     messageString += QString::number(arrayCurrent()) + ", ";

@@ -28,4 +28,5 @@ public:
 
 private:
     const QByteArray messageData_;
+    const unsigned char motorNumber_;
 }

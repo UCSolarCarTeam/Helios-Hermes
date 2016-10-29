@@ -52,7 +52,7 @@ unsigned char DriverControlsMessage::driverInputs() const
 QString DriverControlsMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::DRIVER_CONTROLS_MESSAGE) + ", ";
+    messageString += QString::number(MessageDefines::DriverControls) + ", ";
     messageString += QString::number(driverControlsBoardAlive()) + ", ";
     messageString += QString::number(lightsInputs()) + ", ";
     messageString += QString::number(musicInputs()) + ", ";
