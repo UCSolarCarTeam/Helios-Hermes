@@ -1,85 +1,116 @@
-/**
- *  Schulich Delta Hermes
- *  Copyright (C) 2015 University of Calgary Solar Car Team
- *
- *  This file is part of Schulich Delta Hermes
- *
- *  Schulich Delta Hermes is free software: 
- *  you can redistribute it and/or modify it under the terms 
- *  of the GNU Affero General Public License as published by 
- *  the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  Schulich Delta Hermes is distributed 
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or 
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
- *  General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General 
- *  Public License along with Schulich Delta Hermes.
- *  If not, see <http://www.gnu.org/licenses/>.
- *
- *  For further contact, email <software@calgarysolarcar.ca>
- */
+#include "FakeMotorDetails.h"
 
-// TODO fix this
-
-#include "FakeMotorDetailsData.h"
-
-FakeMotorDetailsData::FakeMotorDetailsData()
+FakeMotorDetails::FakeMotorDetails()
 {
 }
 
-FakeMotorDetailsData::~FakeMotorDetailsData()
+FakeMotorDetails::~FakeMotorDetails()
 {
 }
 
-/*PowerData "Gets"*/
-double FakeMotorDetailsData::driverSetSpeedMetersPerSecond() const
-{   
-   return 1;
+
+/*MotorDetailsData "Gets"*/
+float FakeMotorDetailsData::getPhaseCCurrent() const
+{
+    return 1;
 }
 
-double FakeMotorDetailsData::driverSetCurrent() const
+float FakeMotorDetailsData::getPhaseBCurrent() const
 {
-   return 2;
+    return 2;
 }
 
-double FakeMotorDetailsData::vehicleVelocityMetersPerSecond() const
+float FakeMotorDetailsData::getMotorVoltageReal() const
 {
-   return 3;
+    return 3;
 }
 
-double FakeMotorDetailsData::motorVelocityRpm() const
+float FakeMotorDetailsData::getMotorVoltageImaginary() const
 {
-   return 4;
+    return 4;
 }
 
-double FakeMotorDetailsData::ipmHeatSinkTemp() const
+float FakeMotorDetailsData::getMotorCurrentReal() const
 {
-   return 5;
-}
-double FakeMotorDetailsData::dspBoardTemp() const
-{
-   return 6;
+    return 5;
 }
 
-double FakeMotorDetailsData::receivedErrorCount() const
+float FakeMotorDetailsData::getMotorCurrentImaginary() const
 {
-   return 7;
-}
-double FakeMotorDetailsData::transmittedErrorCount() const
-{
-   return 8;
+    return 6;
 }
 
-/*PowerData "Sets"*/
-void FakeMotorDetailsData::setDriverSetSpeedMetersPerSecond(double driverSetSpeedMetersPerSecond){}
-void FakeMotorDetailsData::setDriverSetCurrent(double driverSetCurrent){}
-void FakeMotorDetailsData::setVehicleVelocityMetersPerSecond(double vehicleVelocityMetersPerSecond){}
-void FakeMotorDetailsData::setMotorVelocityRpm(double motorVelocityRpm){}
-void FakeMotorDetailsData::setIpmHeatSinkTemp(double ipmHeatSinkTemp){}
-void FakeMotorDetailsData::setDspBoardTemp(double dspBoardTemp){}
-void FakeMotorDetailsData::setReceivedErrorCount(double receivedErrorCount){}
-void FakeMotorDetailsData::setTransmittedErrorCount(double transmittedErrorCount){}
+float FakeMotorDetailsData::getBackEmfReal() const
+{
+    return 7;
+}
+
+float FakeMotorDetailsData::getBackEmfImaginary() const
+{
+    return 8;
+}
+
+float FakeMotorDetailsData::getVoltageRailSuppply15V() const
+{
+    return 9;
+}
+
+float FakeMotorDetailsData::getVoltageRailSupply33V() const
+{
+    return 10;
+}
+
+float FakeMotorDetailsData::getVoltageRailSupply19V() const
+{
+    return 11;
+}
+
+float FakeMotorDetailsData::getHeatSinkTemperature() const
+{
+    return 12;
+}
+
+float FakeMotorDetailsData::getMotorTempterature() const
+{
+    return 13;
+}
+
+float FakeMotorDetailsData::getDspBoardTemperature() const
+{
+    return 14;
+}
+
+float FakeMotorDetailsData::getDcBusAmpHours() const
+{
+    return 15;
+}
+
+float FakeMotorDetailsData::getOdometer() const
+{
+    return 16;
+}
+
+float FakeMotorDetailsData::getSlipSpeed() const
+{
+    return 17;
+}
+
+
+/*MotorDetailsData "Sets"*/
+void FakeMotorDetailsData::setPhaseCCurrent(const float& phaseCCurrent) {}
+void FakeMotorDetailsData::setPhaseBCurrent(const float& phaseBCurrent) {}
+void FakeMotorDetailsData::setMotorVoltageReal(const float& motorVoltageReal) {}
+void FakeMotorDetailsData::setMotorVoltageImaginary(const float& motorVoltageImaginary) {}
+void FakeMotorDetailsData::setMotorCurrentReal(const float& motorCurrentReal) {}
+void FakeMotorDetailsData::setMotorCurrentImaginary(const float& motorCurrentImaginary) {}
+void FakeMotorDetailsData::setBackEmfReal(const float& backEmfReal) {}
+void FakeMotorDetailsData::setBackEmfImaginary(const float& backEmfImaginary) {}
+void FakeMotorDetailsData::setVoltageRailSuppply15V(const float& voltageRailSuppply15V) {}
+void FakeMotorDetailsData::setVoltageRailSupply33V(const float& voltageRailSupply33V) {}
+void FakeMotorDetailsData::setVoltageRailSupply19V(const float& voltageRailSupply19V) {}
+void FakeMotorDetailsData::setHeatSinkTemperature(const float& heatSinkTemperature) {}
+void FakeMotorDetailsData::setMotorTempterature(const float& motorTempterature) {}
+void FakeMotorDetailsData::setDspBoardTemperature(const float& dspBoardTemperature) {}
+void FakeMotorDetailsData::setDcBusAmpHours(const float& dcBusAmpHours) {}
+void FakeMotorDetailsData::setOdometer(const float& odometer) {}
+void FakeMotorDetailsData::setSlipSpeed(const float& slipSpeed) {}

@@ -34,42 +34,42 @@ public:
     virtual ~MotorDetailsData();
 
     /*MotorDetailsData "Gets"*/
-    float MotorDetailsData::getPhaseCCurrent() const;
-    float MotorDetailsData::getPhaseBCurrent() const;
-    float MotorDetailsData::getMotorVoltageReal() const;
-    float MotorDetailsData::getMotorVoltageImaginary() const;
-    float MotorDetailsData::getMotorCurrentReal() const;
-    float MotorDetailsData::getMotorCurrentImaginary() const;
-    float MotorDetailsData::getBackEmfReal() const;
-    float MotorDetailsData::getBackEmfImaginary() const;
-    float MotorDetailsData::getVoltageRailSuppply15V() const;
-    float MotorDetailsData::getVoltageRailSupply33V() const;
-    float MotorDetailsData::getVoltageRailSupply19V() const;
-    float MotorDetailsData::getHeatSinkTemperature() const;
-    float MotorDetailsData::getMotorTempterature() const;
-    float MotorDetailsData::getDspBoardTemperature() const;
-    float MotorDetailsData::getDcBusAmpHours() const;
-    float MotorDetailsData::getOdometer() const;
-    float MotorDetailsData::getSlipSpeed() const;
+    float getPhaseCCurrent() const;
+    float getPhaseBCurrent() const;
+    float getMotorVoltageReal() const;
+    float getMotorVoltageImaginary() const;
+    float getMotorCurrentReal() const;
+    float getMotorCurrentImaginary() const;
+    float getBackEmfReal() const;
+    float getBackEmfImaginary() const;
+    float getVoltageRailSuppply15V() const;
+    float getVoltageRailSupply33V() const;
+    float getVoltageRailSupply19V() const;
+    float getHeatSinkTemperature() const;
+    float getMotorTempterature() const;
+    float getDspBoardTemperature() const;
+    float getDcBusAmpHours() const;
+    float getOdometer() const;
+    float getSlipSpeed() const;
 
     /*MotorDetailsData "Sets"*/
-    void MotorDetailsData::setPhaseCCurrent(const float& phaseCCurrent);
-    void MotorDetailsData::setPhaseBCurrent(const float& phaseBCurrent);
-    void MotorDetailsData::setMotorVoltageReal(const float& motorVoltageReal);
-    void MotorDetailsData::setMotorVoltageImaginary(const float& motorVoltageImaginary);
-    void MotorDetailsData::setMotorCurrentReal(const float& motorCurrentReal);
-    void MotorDetailsData::setMotorCurrentImaginary(const float& motorCurrentImaginary);
-    void MotorDetailsData::setBackEmfReal(const float& backEmfReal);
-    void MotorDetailsData::setBackEmfImaginary(const float& backEmfImaginary);
-    void MotorDetailsData::setVoltageRailSuppply15V(const float& voltageRailSuppply15V);
-    void MotorDetailsData::setVoltageRailSupply33V(const float& voltageRailSupply33V);
-    void MotorDetailsData::setVoltageRailSupply19V(const float& voltageRailSupply19V);
-    void MotorDetailsData::setHeatSinkTemperature(const float& heatSinkTemperature);
-    void MotorDetailsData::setMotorTempterature(const float& motorTempterature);
-    void MotorDetailsData::setDspBoardTemperature(const float& dspBoardTemperature);
-    void MotorDetailsData::setDcBusAmpHours(const float& dcBusAmpHours);
-    void MotorDetailsData::setOdometer(const float& odometer);
-    void MotorDetailsData::setSlipSpeed(const float& slipSpeed);
+    void setPhaseCCurrent(const float& phaseCCurrent);
+    void setPhaseBCurrent(const float& phaseBCurrent);
+    void setMotorVoltageReal(const float& motorVoltageReal);
+    void setMotorVoltageImaginary(const float& motorVoltageImaginary);
+    void setMotorCurrentReal(const float& motorCurrentReal);
+    void setMotorCurrentImaginary(const float& motorCurrentImaginary);
+    void setBackEmfReal(const float& backEmfReal);
+    void setBackEmfImaginary(const float& backEmfImaginary);
+    void setVoltageRailSuppply15V(const float& voltageRailSuppply15V);
+    void setVoltageRailSupply33V(const float& voltageRailSupply33V);
+    void setVoltageRailSupply19V(const float& voltageRailSupply19V);
+    void setHeatSinkTemperature(const float& heatSinkTemperature);
+    void setMotorTempterature(const float& motorTempterature);
+    void setDspBoardTemperature(const float& dspBoardTemperature);
+    void setDcBusAmpHours(const float& dcBusAmpHours);
+    void setOdometer(const float& odometer);
+    void setSlipSpeed(const float& slipSpeed);
 
 private:
     float phaseCCurrent_;

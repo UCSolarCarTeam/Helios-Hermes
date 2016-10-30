@@ -6,7 +6,7 @@ class FakeDriverControlsData : public I_DriverControlsData
 {
 public:
     FakeDriverControlsData();
-    ~FakeDriverControlsData();
+    virtual ~FakeDriverControlsData();
 
     /*Data "Gets"*/
     unsigned char getDriverControlsBoardAlive() const;
