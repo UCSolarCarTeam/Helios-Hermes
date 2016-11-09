@@ -1,28 +1,3 @@
-/**
- *  Schulich Delta Hermes
- *  Copyright (C) 2015 University of Calgary Solar Car Team
- *
- *  This file is part of Schulich Delta Hermes
- *
- *  Schulich Delta Hermes is free software: 
- *  you can redistribute it and/or modify it under the terms 
- *  of the GNU Affero General Public License as published by 
- *  the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  Schulich Delta Hermes is distributed 
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- *  without even the implied warranty of MERCHANTABILITY or 
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero 
- *  General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General 
- *  Public License along with Schulich Delta Hermes.
- *  If not, see <http://www.gnu.org/licenses/>.
- *
- *  For further contact, email <software@calgarysolarcar.ca>
- */
-
 #include "BatteryFaults.h"
 
 namespace
@@ -43,82 +18,82 @@ namespace
 }
 
 BatteryFaults::BatteryFaults(quint16 flags)
-: flags_(flags)
+    : flags_(flags)
 {
 }
 
 bool BatteryFaults::cellOverVoltage() const
 {
-   return static_cast<bool>(flags_ & CELL_OVER_VOLTAGE_MASK);
+    return static_cast<bool>(flags_ & CELL_OVER_VOLTAGE_MASK);
 }
 
 bool BatteryFaults::cellUnderVoltage() const
 {
-   return static_cast<bool>(flags_ & CELL_UNDER_VOLTAGE_MASK);
+    return static_cast<bool>(flags_ & CELL_UNDER_VOLTAGE_MASK);
 }
 
 bool BatteryFaults::cellOverTemperature() const
 {
-   return static_cast<bool>(flags_ & CELL_OVER_TEMP_MASK);
+    return static_cast<bool>(flags_ & CELL_OVER_TEMP_MASK);
 }
 
 bool BatteryFaults::measurementUntrusted() const
 {
-   return static_cast<bool>(flags_ & MEASUREMENT_UNTRUSTED_MASK);
+    return static_cast<bool>(flags_ & MEASUREMENT_UNTRUSTED_MASK);
 }
 
 bool BatteryFaults::cmuCommTimeout() const
 {
-   return static_cast<bool>(flags_ & CMU_COMM_TIMEOUT_MASK);
+    return static_cast<bool>(flags_ & CMU_COMM_TIMEOUT_MASK);
 }
 
 bool BatteryFaults::vehicleCommTimeout() const
 {
-   return static_cast<bool>(flags_ & VEHICLE_COMM_TIMEOUT_MASK);
+    return static_cast<bool>(flags_ & VEHICLE_COMM_TIMEOUT_MASK);
 }
 
 bool BatteryFaults::bmuIsInSetupMode() const
 {
-   return static_cast<bool>(flags_ & BMU_IN_SETUP_MODE_MASK);
+    return static_cast<bool>(flags_ & BMU_IN_SETUP_MODE_MASK);
 }
 
 bool BatteryFaults::cmuCanBusPowerStatus() const
 {
-   // Note: This fault flag actually means everything is okay.
-   return !static_cast<bool>(flags_ & CMU_CAN_BUS_POWER_STATUS_MASK);
+    // Note: This fault flag actually means everything is okay.
+    return !static_cast<bool>(flags_ & CMU_CAN_BUS_POWER_STATUS_MASK);
 }
 
 bool BatteryFaults::packIsolationTestFailure() const
 {
-   return static_cast<bool>(flags_ & PACK_ISOLATION_TEST_FAILURE_MASK);
+    return static_cast<bool>(flags_ & PACK_ISOLATION_TEST_FAILURE_MASK);
 }
 
 bool BatteryFaults::softwareOverCurrentMeasured() const
 {
-   return static_cast<bool>(flags_ & SOFTWARE_OVER_CURRENT_MASK);
+    return static_cast<bool>(flags_ & SOFTWARE_OVER_CURRENT_MASK);
 }
 
 bool BatteryFaults::canSupplyIsLow() const
 {
-   return static_cast<bool>(flags_ & CAN_SUPPLY_LOW_MASK);
+    return static_cast<bool>(flags_ & CAN_SUPPLY_LOW_MASK);
 }
 
 bool BatteryFaults::contactorIsStuck() const
 {
-   return static_cast<bool>(flags_ & CONTACTOR_STUCK_MASK);
+    return static_cast<bool>(flags_ & CONTACTOR_STUCK_MASK);
 }
 
 bool BatteryFaults::cmuDetectedExtraCellPresent() const
 {
-   return static_cast<bool>(flags_ & CMU_DETECTED_EXTRA_CELL_MASK);
+    return static_cast<bool>(flags_ & CMU_DETECTED_EXTRA_CELL_MASK);
 }
 
 bool BatteryFaults::operator==(const BatteryFaults& other) const
 {
-   return flags_ == other.flags_;
+    return flags_ == other.flags_;
 }
 
 QString BatteryFaults::toString() const
 {
-   return "0x" + QString::number(flags_, 16);
+    return "0x" + QString::number(flags_, 16);
 }

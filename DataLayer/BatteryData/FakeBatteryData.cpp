@@ -149,33 +149,32 @@ unsigned char FakeBatteryData::getBmsCanLockedOut() const
   return 1;
 }
 
-
-    /*BatteryData "Sets"*/
-    void FakeBatteryData::setAlive(const unsigned char& alive) {}
-    void FakeBatteryData::setPackSocAmpHours(const float& packSocAmpHours) {}
-    void FakeBatteryData::setPackSocPercentage(const float& packSocPercentage) {}
-    void FakeBatteryData::setPackBalanceSoc(const float& packBalanceSoc) {}
-    void FakeBatteryData::setPackBalanceSocPercentage(const float& packBalanceSocPercentage) {}
-    void FakeBatteryData::setChargingCellVoltageError(const unsigned short& chargingCellVoltageError) {}
-    void FakeBatteryData::setCellTemperatureMargin(const unsigned short& cellTemperatureMargin) {}
-    void FakeBatteryData::setDischargingCellVoltageError(const unsigned short& dischargingCellVoltageError) {}
-    void FakeBatteryData::setTotalPackCapacity(const unsigned short& totalPackCapacity) {}
-    void FakeBatteryData::setPrechargeContactorDriverStatus(const unsigned char& prechargeContactorDriverStatus) {}
-    void FakeBatteryData::setPrechargeState(const unsigned char& prechargeState) {}
-    void FakeBatteryData::setPrechargeTimerElapsed(const unsigned char& prechargeTimerElapsed) {}
-    void FakeBatteryData::setPrechargeTimerCount(const unsigned short& prechargeTimerCount) {}
-    void FakeBatteryData::setLowestCellVoltage(const unsigned short& lowestCellVoltage) {}
-    void FakeBatteryData::setLowestCellVoltageNumber(const unsigned char& lowestCellVoltageNumber) {}
-    void FakeBatteryData::setHighestCellVoltage(const unsigned short& highestCellVoltage) {}
-    void FakeBatteryData::setHighestCellVoltageNumber(const unsigned char& highestCellVoltageNumber) {}
-    void FakeBatteryData::setLowestCellTemperature(const unsigned short& lowestCellTemperature) {}
-    void FakeBatteryData::setLowestCellTemperatureNumber(const unsigned char& lowestCellTemperatureNumber) {}
-    void FakeBatteryData::setHighestCellTemperature(const unsigned short& highestCellTemperature) {}
-    void FakeBatteryData::setHighestCellTemperatureNumber(const unsigned char& highestCellTemperatureNumber) {}
-    void FakeBatteryData::setVoltage(const unsigned int& voltage) {}
-    void FakeBatteryData::setCurrent(const unsigned int& current) {}
-    void FakeBatteryData::setFan0Speed(const unsigned short& fan0Speed) {}
-    void FakeBatteryData::setFan1Speed(const unsigned short& fan1Speed) {}
-    void setFanContactors12VCurrentConsumption(const unsigned short& fanCoFakeBatteryData::ntactors12VcurrentConsumption) {}
-    void FakeBatteryData::setCmu12VCurrentConsumption(const unsigned short& cmu12VcurrentConsumption) {}
-    void FakeBatteryData::setBmsCanLockedOut(const unsigned char& bmsCanLockedOut) {}
+/*BatteryData "Sets"*/
+void FakeBatteryData::setAlive(const unsigned char& alive) {}
+void FakeBatteryData::setPackSocAmpHours(const float& packSocAmpHours) {}
+void FakeBatteryData::setPackSocPercentage(const float& packSocPercentage) {}
+void FakeBatteryData::setPackBalanceSoc(const float& packBalanceSoc) {}
+void FakeBatteryData::setPackBalanceSocPercentage(const float& packBalanceSocPercentage) {}
+void FakeBatteryData::setChargingCellVoltageError(const unsigned short& chargingCellVoltageError) {}
+void FakeBatteryData::setCellTemperatureMargin(const unsigned short& cellTemperatureMargin) {}
+void FakeBatteryData::setDischargingCellVoltageError(const unsigned short& dischargingCellVoltageError) {}
+void FakeBatteryData::setTotalPackCapacity(const unsigned short& totalPackCapacity) {}
+void FakeBatteryData::setPrechargeContactorDriverStatus(const unsigned char& prechargeContactorDriverStatus) {}
+void FakeBatteryData::setPrechargeState(const unsigned char& prechargeState) {}
+void FakeBatteryData::setPrechargeTimerElapsed(const unsigned char& prechargeTimerElapsed) {}
+void FakeBatteryData::setPrechargeTimerCount(const unsigned short& prechargeTimerCount) {}
+void FakeBatteryData::setLowestCellVoltage(const unsigned short& lowestCellVoltage) {}
+void FakeBatteryData::setLowestCellVoltageNumber(const unsigned char& lowestCellVoltageNumber) {}
+void FakeBatteryData::setHighestCellVoltage(const unsigned short& highestCellVoltage) {}
+void FakeBatteryData::setHighestCellVoltageNumber(const unsigned char& highestCellVoltageNumber) {}
+void FakeBatteryData::setLowestCellTemperature(const unsigned short& lowestCellTemperature) {}
+void FakeBatteryData::setLowestCellTemperatureNumber(const unsigned char& lowestCellTemperatureNumber) {}
+void FakeBatteryData::setHighestCellTemperature(const unsigned short& highestCellTemperature) {}
+void FakeBatteryData::setHighestCellTemperatureNumber(const unsigned char& highestCellTemperatureNumber) {}
+void FakeBatteryData::setVoltage(const unsigned int& voltage) {}
+void FakeBatteryData::setCurrent(const unsigned int& current) {}
+void FakeBatteryData::setFan0Speed(const unsigned short& fan0Speed) {}
+void FakeBatteryData::setFan1Speed(const unsigned short& fan1Speed) {}
+void setFanContactors12VCurrentConsumption(const unsigned short& fanCoFakeBatteryData::ntactors12VcurrentConsumption) {}
+void FakeBatteryData::setCmu12VCurrentConsumption(const unsigned short& cmu12VcurrentConsumption) {}
+void FakeBatteryData::setBmsCanLockedOut(const unsigned char& bmsCanLockedOut) {}
