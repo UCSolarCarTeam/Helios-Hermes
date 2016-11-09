@@ -38,6 +38,7 @@ DESTDIR = ../../build/.lib
 
 HEADERS += \
    DataContainer.h \
+   SerialDefines.h \
    BatteryData/BatteryData.h \
    BatteryData/I_BatteryData.h \
    BatteryFaultsData/BatteryFaultsData.h \
@@ -55,7 +56,9 @@ HEADERS += \
    CmuData/CmuData.h \
    CmuData/I_CmuData.h \
    MpptData/MpptData.h \
-   MpptData/I_MpptData.h
+   MpptData/I_MpptData.h \
+   OtherData/I_OtherData.h \
+   OtherData/OtherData.h
 
 SOURCES += \
    DataContainer.cpp \
@@ -67,4 +70,5 @@ SOURCES += \
    KeyMotorData/KeyMotorData.cpp \
    DriverControlsData/DriverControlsData.cpp \
    CmuData/CmuData.cpp \
-   MpptData/MpptData.cpp
+   MpptData/MpptData.cpp \
+   OtherData/OtherData.cpp
