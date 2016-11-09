@@ -11,7 +11,7 @@ public:
     BatteryPopulator(I_PacketDecoder& packetDecoder,
                      I_BatteryData& batteryData);
 public slots:
-    void populateData(const BatteryDataMessage);
+    void populateData(const BatteryMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;
