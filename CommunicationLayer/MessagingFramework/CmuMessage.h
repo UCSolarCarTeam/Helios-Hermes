@@ -9,7 +9,7 @@ class CmuMessage
 public:
    CmuMessage(const QByteArray& messageData);
 
-   unsigned char cellNumber() const;
+   unsigned char cmuNumber() const;
    QList<unsigned short> cellVoltages() const;
    unsigned short pcbTemperature() const;
    QList<unsigned short> cellTemperatures() const;

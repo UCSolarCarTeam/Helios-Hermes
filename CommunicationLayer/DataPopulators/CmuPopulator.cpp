@@ -1,57 +1,38 @@
 #include "CmuPopulator.h"
-#include <QDebug>
 
-CmuPopulator::CmuPopulator(I_PacketDecoder& packetDecoder,
-                           I_BatteryData& batteryData)
-    : packetDecoder_(packetDecoder)
-    , batteryData_(batteryData)
+CmuPopulator::CmuPopulator(I_PacketDecoder& packetDecoder, I_CmuData& cmuData)
+: packetDecoder_(packetDecoder), cmuData_(cmuData)
 {
-    connect(&packetDecoder_, SIGNAL(packetDecoded(const CmuDataMessage)),
-            this, SLOT(populateData(const CmuDataMessage)));
+    connect(&packetDecoder_ SIGNAL(packetDecoded(const CmuMessage)), this, SLOT(populateData(const CmuMessage)));
 }
 
-void CmuPopulator::populateData(const CmuDataMessage message)
+void CmuPopulator::populateData(const CmuMessage message)
 {
-    switch (message.cellNumber())
-    {
-        case 0:
-            batteryData_.setMod0PcbTemperature(message.pcbTemperature());
-            batteryData_.setMod0CellTemperature(message.cellTemperature());
-            batteryData_.setMod0CellVoltages(
-                convertFloatListToDouble(message.cellVoltages()));
-            break;
-
-        case 1:
-            batteryData_.setMod1PcbTemperature(message.pcbTemperature());
-            batteryData_.setMod1CellTemperature(message.cellTemperature());
-            batteryData_.setMod1CellVoltages(
-                convertFloatListToDouble(message.cellVoltages()));
-            break;
-
-        case 2:
-            batteryData_.setMod2PcbTemperature(message.pcbTemperature());
-            batteryData_.setMod2CellTemperature(message.cellTemperature());
-            batteryData_.setMod2CellVoltages(
-                convertFloatListToDouble(message.cellVoltages()));
-            break;
-
-        case 3:
-            batteryData_.setMod3PcbTemperature(message.pcbTemperature());
-            batteryData_.setMod3CellTemperature(message.cellTemperature());
-            batteryData_.setMod3CellVoltages(
-                convertFloatListToDouble(message.cellVoltages()));
-            break;
-    }
-}
-
-QList<double> CmuPopulator::convertFloatListToDouble(QList<float> floatList)
-{
-    QList<double> doubleList;
-
-    for (int i = 0; i < floatList.length(); i++)
-    {
-        doubleList.append((double)floatList[i]);
-    }
-
-    return doubleList;
+    I_CmuUnit* cmuUnit = cmuData_.getCmuUnit(message.cmuNumber());
+    QList<unsigned short> cellVoltages = message.cellVoltages();
+    QList<unsigned short> cellTemperatures = message.cellTemperatures();
+    cmuUnit->setCell0Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell1Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell2Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell3Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell4Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell5Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell6Voltage(cellVoltage.pop_front());
+    cmuUnit->setCell7Voltage(cellVoltage.pop_front());
+    cmuUnit->setPcbTemp(message.pcbTemperature());
+    cmuUnit->setCellTemp0(cellTemperature.pop_front());
+    cmuUnit->setCellTemp1(cellTemperature.pop_front());
+    cmuUnit->setCellTemp2(cellTemperature.pop_front());
+    cmuUnit->setCellTemp3(cellTemperature.pop_front());
+    cmuUnit->setCellTemp4(cellTemperature.pop_front());
+    cmuUnit->setCellTemp5(cellTemperature.pop_front());
+    cmuUnit->setCellTemp6(cellTemperature.pop_front());
+    cmuUnit->setCellTemp7(cellTemperature.pop_front());
+    cmuUnit->setCellTemp8(cellTemperature.pop_front());
+    cmuUnit->setCellTemp9(cellTemperature.pop_front());
+    cmuUnit->setCellTemp10(cellTemperature.pop_front());
+    cmuUnit->setCellTemp11(cellTemperature.pop_front());
+    cmuUnit->setCellTemp12(cellTemperature.pop_front());
+    cmuUnit->setCellTemp13(cellTemperature.pop_front());
+    cmuUnit->setCellTemp14(cellTemperature.pop_front());
 }

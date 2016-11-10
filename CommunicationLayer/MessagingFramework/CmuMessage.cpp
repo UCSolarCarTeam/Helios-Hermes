@@ -10,7 +10,7 @@ namespace
    const int CELL_VOLTAGE_0_INDEX = 2;
    const int PCB_TEMPERATURE_INDEX = 18;
    const int CELL_TEMPERATURE_0_INDEX = 20;
-   const int NUMBER_OF_CELLS = 8;
+   const int NUMBER_OF_VOLTAGES = 8;
    const int NUMBER_OF_TEMPERATURES = 15;
    const int NUMBER_OF_BYTES_IN_UNSIGNED_SHORT = 2;
 }
@@ -20,7 +20,7 @@ CmuMessage::CmuMessage(const QByteArray& messageData)
 {
 }
 
-unsigned char CmuMessage::cellNumber() const
+unsigned char CmuMessage::cmuNumber() const
 {
     return messageData_.at(CELL_NUMBER_INDEX);
 }
@@ -28,7 +28,7 @@ unsigned char CmuMessage::cellNumber() const
 QList<unsigned short> CmuMessage::cellVoltages() const
 {
    QList<unsigned short> cellVoltagesData;
-   for (int i = 0; i < NUMBER_OF_CELLS; i++)
+   for (int i = 0; i < NUMBER_OF_VOLTAGES; i++)
    {
       const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
       cellVoltagesData << getUnsignedShort(messageData_, indexOfCell);

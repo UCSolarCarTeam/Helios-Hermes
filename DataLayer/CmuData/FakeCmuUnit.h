@@ -1,14 +1,14 @@
 #pragma once
 
-#include "I_CmuData.h"
+#include "I_CmuUnit.h"
 
-class FakeCmuData : public I_CmuData
+class FakeCmuUnit : public I_CmuUnit
 {
 public:
-    FakeCmuData();
-    virtual ~FakeCmuData();
+    FakeCmuUnit();
+    virtual ~FakeCmuUnit();
 
-    /* CmuData Gets */
+    /* CmuUnit Gets */
     unsigned char getCmuNumber() const;
     unsigned short getCell0Voltage() const;
     unsigned short getCell1Voltage() const;
@@ -35,8 +35,7 @@ public:
     unsigned short getCellTemp13() const;
     unsigned short getCellTemp14() const;
 
-    /* CmuData Sets */
-    void setCmuNumber(const unsigned char&);
+    /* CmuUnit Sets */
     void setCell0Voltage(const unsigned short&);
     void setCell1Voltage(const unsigned short&);
     void setCell2Voltage(const unsigned short&);

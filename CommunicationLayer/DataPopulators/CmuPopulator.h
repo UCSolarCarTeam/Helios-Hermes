@@ -3,6 +3,7 @@
 #include <QObject>
 #include "CommunicationLayer/PacketDecoder/I_PacketDecoder.h"
 #include "DataLayer/CmuData/I_CmuData.h"
+#include "DataLayer/CmuData/I_CmuUnit.h"
 
 class CmuPopulator : public QObject
 {
