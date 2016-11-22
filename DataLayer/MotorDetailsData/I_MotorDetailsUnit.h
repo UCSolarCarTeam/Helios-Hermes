@@ -27,14 +27,14 @@
 
 #include <QObject>
 
-class I_MotorDetailsData : public QObject
+class I_MotorDetailsUnit : public QObject
 {
     Q_OBJECT
 
 public:
-    virtual ~I_MotorDetailsData() {}
+    virtual ~I_MotorDetailsUnit() {}
 
-    /*MotorDetailsData "Gets"*/
+    /*MotorDetailsUnit "Gets"*/
     virtual float getPhaseCCurrent() const;
     virtual float getPhaseBCurrent() const;
     virtual float getMotorVoltageReal() const;
@@ -53,7 +53,7 @@ public:
     virtual float getOdometer() const;
     virtual float getSlipSpeed() const;
 
-    /*MotorDetailsData "Sets"*/
+    /*MotorDetailsUnit "Sets"*/
     virtual void setPhaseCCurrent(float& phaseCCurrent);
     virtual void setPhaseBCurrent(float& phaseBCurrent);
     virtual void setMotorVoltageReal(float& motorVoltageReal);

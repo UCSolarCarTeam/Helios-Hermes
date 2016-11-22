@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QList>
+#include <QScopedArrayPointer>
 
 #include "I_CmuUnit.h"
 
