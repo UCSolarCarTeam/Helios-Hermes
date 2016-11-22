@@ -8,7 +8,7 @@ BatteryPopulator::BatteryPopulator(I_PacketDecoder& packetDecoder,
     connect(&packetDecoder_, SIGNAL(packetDecoded(const BatteryMessage)), this, SLOT(populateData(const BatteryMessage)));
 }
 
-void BatteryPopulator::populateData(const BatteryMessage message)
+void BatteryPopulator::populateData(const BatteryMessage& message)
 {
     batteryData_.setAlive(message.alive());
     batteryData_.setPackSocAmpHours(message.packSocAmpHours());
