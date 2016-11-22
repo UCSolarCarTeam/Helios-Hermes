@@ -136,11 +136,6 @@ unsigned short CmuUnit::getCellTemp14() const {
 
 /* CmuUnit Sets */
 
-void CmuUnit::setCmuNumber(const unsigned char&) {
-    cmuNumber_ = cmuNumber;
-    emit cmuNumberReceived(cmuNumber_);
-}
-
 void CmuUnit::setCell0Voltage(const unsigned short&) {
     cell0Voltage_ = cell0Voltage;
     emit cell0VoltageReceived(cell0Voltage_);

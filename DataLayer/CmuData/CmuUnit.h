@@ -36,7 +36,6 @@ public:
     unsigned short getCellTemp14() const;
 
     /* CmuUnit Sets */
-    void setCmuNumber(const unsigned char&);
     void setCell0Voltage(const unsigned short&);
     void setCell1Voltage(const unsigned short&);
     void setCell2Voltage(const unsigned short&);
