@@ -10,6 +10,11 @@ FakeMotorDetails::~FakeMotorDetails()
 
 
 /*MotorDetailsUnit "Gets"*/
+unsigned char FakeMotorDetailsUnit::getMotorNumber() const
+{
+    return 0;
+}
+
 float FakeMotorDetailsUnit::getPhaseCCurrent() const
 {
     return 1;

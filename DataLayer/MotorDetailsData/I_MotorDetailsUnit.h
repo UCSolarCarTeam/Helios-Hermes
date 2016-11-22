@@ -10,6 +10,7 @@ public:
     virtual ~I_MotorDetailsUnit() {}
 
     /*MotorDetailsUnit "Gets"*/
+    virtual unsigned char getMotorNumber() const;
     virtual float getPhaseCCurrent() const;
     virtual float getPhaseBCurrent() const;
     virtual float getMotorVoltageReal() const;

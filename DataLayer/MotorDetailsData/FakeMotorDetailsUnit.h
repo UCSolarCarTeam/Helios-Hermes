@@ -9,6 +9,7 @@ public:
     virtual ~FakeMotorDetails();
 
     /*MotorDetailsUnit "Gets"*/
+    unsigned char getMotorNumber() const;
     float getPhaseCCurrent() const;
     float getPhaseBCurrent() const;
     float getMotorVoltageReal() const;
