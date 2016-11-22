@@ -121,17 +121,10 @@ float MotorDetailsMessage::slipSpeed() const
 QString MotorDetailsMessage::toString() const
 {
     QString messageString;
-    if (motorNumber_ == 0x0) {
-        messageString += QString::number(MessageDefines::Motor0Details) + ", ";
+    if ((motorNumber & 0xe) != 0x0) {
+        qDebug() << "Invalid motor number, unexpected behaviour likely";
     }
-    else {
-        // For the sake of not halting programs execution, treat all other cases as motor one
-        if (motorNumber != 0x1) {
-            // Log that this was used incorrectly
-            qDebug() << "Invalid motor number, defaulting to motor 1";
-        }
-        messageString += QString::number(MessageDefines::Motor1Details) + ", ";
-    }
+    messageString += QString::number(MessageDefines::Motor0Details + motorNumber_) + ", ";
     messageString += QString::number(phaseCCurrent()) + ", "; 
     messageString += QString::number(phaseBCurrent()) + ", "; 
     messageString += QString::number(motorVoltageReal()) + ", "; 
