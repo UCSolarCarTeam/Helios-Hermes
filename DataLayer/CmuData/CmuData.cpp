@@ -9,6 +9,7 @@ CmuData::CmuData(const unsigned char& numberOfCmus)
     }
 }
 
-I_CmuUnit& CmuData::getCmuUnit(const unsigned char& index) {
+I_CmuUnit& CmuData::getCmuUnit(const unsigned char& index)
+{
     return cmuUnits_[static_cast<int>(index)];
 }
