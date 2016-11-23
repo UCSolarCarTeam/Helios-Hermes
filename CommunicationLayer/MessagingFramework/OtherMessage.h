@@ -8,6 +8,8 @@ class OtherMessage
 public:
     OtherMessage(const QByteArray& messageData);
 
+    unsigned char getGps() const;
+
     QString toString() const;
 
 private:

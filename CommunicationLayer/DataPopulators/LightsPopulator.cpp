@@ -2,7 +2,7 @@
 
 LightsPopulator::LightsPopulator(I_PacketDecoder& packetDecoder, I_LightsData& lightsData)
 : packetDecoder_(packetDecoder)
-, lightsData(lightsData_)
+, lightsData_(lightsData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const LightsMessage)), this, SLOT(populateData(const LightsMessage)));
 }
