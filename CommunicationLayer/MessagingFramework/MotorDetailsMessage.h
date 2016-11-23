@@ -6,6 +6,7 @@
 class MotorDetailsMessage
 {
 public:
+    unsigned char motorNumber() const;
     float phaseCCurrent() const;
     float phaseBCurrent() const;
     float motorVoltageReal() const;

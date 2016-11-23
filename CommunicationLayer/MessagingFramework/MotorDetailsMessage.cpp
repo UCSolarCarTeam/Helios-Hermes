@@ -33,6 +33,11 @@ MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData, unsigned
 {
 }
 
+unsigned char MotorDetailsMessage::motorNumber() const
+{
+    return motorNumber_;
+}
+
 float MotorDetailsMessage::phaseCCurrent() const
 {
     return getFloat(messageData_, PHASE_CCURRENT);
