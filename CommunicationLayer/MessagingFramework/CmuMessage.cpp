@@ -25,9 +25,9 @@ unsigned char CmuMessage::cmuNumber() const
     return messageData_.at(CELL_NUMBER_INDEX);
 }
 
-QList<unsigned short> CmuMessage::cellVoltages() const
+QList<short> CmuMessage::cellVoltages() const
 {
-   QList<unsigned short> cellVoltagesData;
+   QList<short> cellVoltagesData;
    for (int i = 0; i < NUMBER_OF_VOLTAGES; i++)
    {
       const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
@@ -57,7 +57,7 @@ QString CmuMessage::toString() const
    QString messageString;
    messageString += QString::number(MessageDefines::Cmu) + ", ";
    messageString += QString::number(cellNumber()) + ", ";
-   foreach(const float& cellVoltage, cellVoltages())
+   foreach(const short& cellVoltage, cellVoltages())
    {
       messageString += QString::number(cellVoltage) + ", ";
    }
