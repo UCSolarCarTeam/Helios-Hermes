@@ -1,8 +1,7 @@
 #include "MpptUnit.h"
 
-MpptUnit::MpptUnit(const unsigned char& mpptNumber)
-: mpptNumber_(mpptNumber)
-, mpptStatus_(0)
+MpptUnit::MpptUnit(const unsigned char& mpptStatus)
+, mpptStatus_(mpptStatus)
 , arrayVoltage_(0)
 , arrayCurrent_(0)
 , batteryVoltage_(0)
@@ -16,11 +15,6 @@ MpptUnit::~MpptUnit()
 }
 
 /* MpptUnit Gets */
-unsigned char MpptUnit::getMpptNumber() const
-{
-    return mpptNumber_;
-}
-
 unsigned char MpptUnit::getMpptStatus() const
 {
     return mpptStatus_;
@@ -48,12 +42,6 @@ unsigned short MpptUnit::getTemperature() const
 
 
 /* MpptUnit Sets */
-void MpptUnit::setMpptStatus(const unsigned char& mpptStatus);
-{
-    mpptStatus_ = mpptStatus;
-    emit mpptStatusReceived(mpptStatus_);
-}
-
 void MpptUnit::setArrayVoltage(const unsigned short& arrayVoltage);
 {
     arrayVoltage_ = arrayVoltage;

@@ -9,7 +9,6 @@ public:
     virtual ~MpptUnit();
 
     /* MpptUnit Gets */
-    unsigned char getMpptNumber() const;
     unsigned char getMpptStatus() const;
     unsigned short getArrayVoltage() const;
     unsigned short getArrayCurrent() const;
@@ -17,7 +16,6 @@ public:
     unsigned short getTemperature() const;
 
     /* MpptUnit Sets */
-    void setMpptStatus(const unsigned char& mpptStatus);
     void setArrayVoltage(const unsigned short& arrayVoltage);
     void setArrayCurrent(const unsigned short& arrayCurrent);
     void setBatteryVoltage(const unsigned short& batteryVoltage);
@@ -25,7 +23,6 @@ public:
 
 
 private:
-    unsigned char mpptNumber_;
     unsigned char mpptStatus_;
     unsigned short arrayVoltage_;
     unsigned short arrayCurrent_;
