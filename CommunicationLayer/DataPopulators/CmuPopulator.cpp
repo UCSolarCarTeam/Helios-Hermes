@@ -1,7 +1,8 @@
 #include "CmuPopulator.h"
 
 CmuPopulator::CmuPopulator(I_PacketDecoder& packetDecoder, I_CmuData& cmuData)
-: packetDecoder_(packetDecoder), cmuData_(cmuData)
+: packetDecoder_(packetDecoder)
+, cmuData_(cmuData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const CmuMessage)), this, SLOT(populateData(const CmuMessage)));
 }
