@@ -1,28 +1,3 @@
-/**
- *  Schulich Delta Hermes
- *  Copyright (C) 2015 University of Calgary Solar Car Team
- *
- *  This file is part of Schulich Delta Hermes
- *
- *  Schulich Delta Hermes is free software:
- *  you can redistribute it and/or modify it under the terms
- *  of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  Schulich Delta Hermes is distributed
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- *  without even the implied warranty of MERCHANTABILITY or
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
- *  General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General
- *  Public License along with Schulich Delta Hermes.
- *  If not, see <http://www.gnu.org/licenses/>.
- *
- *  For further contact, email <software@calgarysolarcar.ca>
- */
-
 #pragma once
 
 #include "I_MotorFaultsData.h"
@@ -33,6 +8,8 @@ public:
     MotorFaultsData();
     virtual ~MotorFaultsData();
 
+    QString toString() const;
+
     /* MotorFaults Gets */
     unsigned char getM0ErrorFlags() const;
     unsigned char getM1ErrorFlags() const;
@@ -42,6 +19,40 @@ public:
     unsigned char getM0CanTxErrorCount() const;
     unsigned char getM1CanRxErrorCount() const;
     unsigned char getM1CanTxErrorCount() const;
+
+    // Errors
+    bool m0MotorOverSpeed() const;
+    bool m0SoftwareOverCurrent() const;
+    bool m0DcBusOverVoltage() const;
+    bool m0BadMotorPositionHallSequence() const;
+    bool m0WatchdogCausedLastReset() const;
+    bool m0ConfigReadError() const;
+    bool m0RailUnderVoltageLockOut() const;
+    bool m0DesaturationFault() const;
+    bool m1MotorOverSpeed() const;
+    bool m1SoftwareOverCurrent() const;
+    bool m1DcBusOverVoltage() const;
+    bool m1BadMotorPositionHallSequence() const;
+    bool m1WatchdogCausedLastReset() const;
+    bool m1ConfigReadError() const;
+    bool m1RailUnderVoltageLockOut() const;
+    bool m1DesaturationFault() const;
+
+    // Limits
+    bool m0OutputVoltagePwmLimit() const;
+    bool m0MotorCurrentLimit() const;
+    bool m0VelocityLimit() const;
+    bool m0BusCurrentLimit() const;
+    bool m0BusVoltageUpperLimit() const;
+    bool m0BusVoltageLowerLimit() const;
+    bool m0IpmOrMotorTelemetryLimit() const;
+    bool m1OutputVoltagePwmLimit() const;
+    bool m1MotorCurrentLimit() const;
+    bool m1VelocityLimit() const;
+    bool m1BusCurrentLimit() const;
+    bool m1BusVoltageUpperLimit() const;
+    bool m1BusVoltageLowerLimit() const;
+    bool m1IpmOrMotorTelemetryLimit() const;
 
     /* MotorFaults Sets */
     void getM0ErrorFlags(const unsigned char&);

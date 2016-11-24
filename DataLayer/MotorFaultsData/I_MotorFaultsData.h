@@ -1,37 +1,15 @@
-/**
- *  Schulich Delta Hermes
- *  Copyright (C) 2015 University of Calgary Solar Car Team
- *
- *  This file is part of Schulich Delta Hermes
- *
- *  Schulich Delta Hermes is free software:
- *  you can redistribute it and/or modify it under the terms
- *  of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  Schulich Delta Hermes is distributed
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- *  without even the implied warranty of MERCHANTABILITY or
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
- *  General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General
- *  Public License along with Schulich Delta Hermes.
- *  If not, see <http://www.gnu.org/licenses/>.
- *
- *  For further contact, email <software@calgarysolarcar.ca>
- */
-
 #pragma once
 
 #include <QObject>
+#include <QString>
 
 class I_MotorFaultsData : public QObject
 {
     Q_OBJECT
 public:
     virtual ~I_MotorFaultsData() {}
+
+    QString toString() const;
 
     /* MotorFaults Gets */
     virtual unsigned char getM0ErrorFlags() const;
@@ -42,6 +20,40 @@ public:
     virtual unsigned char getM0CanTxErrorCount() const;
     virtual unsigned char getM1CanRxErrorCount() const;
     virtual unsigned char getM1CanTxErrorCount() const;
+
+    // Errors
+    virtual bool m0MotorOverSpeed() const;
+    virtual bool m0SoftwareOverCurrent() const;
+    virtual bool m0DcBusOverVoltage() const;
+    virtual bool m0BadMotorPositionHallSequence() const;
+    virtual bool m0WatchdogCausedLastReset() const;
+    virtual bool m0ConfigReadError() const;
+    virtual bool m0RailUnderVoltageLockOut() const;
+    virtual bool m0DesaturationFault() const;
+    virtual bool m1MotorOverSpeed() const;
+    virtual bool m1SoftwareOverCurrent() const;
+    virtual bool m1DcBusOverVoltage() const;
+    virtual bool m1BadMotorPositionHallSequence() const;
+    virtual bool m1WatchdogCausedLastReset() const;
+    virtual bool m1ConfigReadError() const;
+    virtual bool m1RailUnderVoltageLockOut() const;
+    virtual bool m1DesaturationFault() const;
+
+    // Limits
+    virtual bool m0OutputVoltagePwmLimit() const;
+    virtual bool m0MotorCurrentLimit() const;
+    virtual bool m0VelocityLimit() const;
+    virtual bool m0BusCurrentLimit() const;
+    virtual bool m0BusVoltageUpperLimit() const;
+    virtual bool m0BusVoltageLowerLimit() const;
+    virtual bool m0IpmOrMotorTelemetryLimit() const;
+    virtual bool m1OutputVoltagePwmLimit() const;
+    virtual bool m1MotorCurrentLimit() const;
+    virtual bool m1VelocityLimit() const;
+    virtual bool m1BusCurrentLimit() const;
+    virtual bool m1BusVoltageUpperLimit() const;
+    virtual bool m1BusVoltageLowerLimit() const;
+    virtual bool m1IpmOrMotorTelemetryLimit() const;
 
     /* MotorFaults Sets */
     virtual void setM0ErrorFlags(const unsigned char& m0ErrorFlags;

@@ -1,31 +1,7 @@
-/**
- *  Schulich Delta Hermes
- *  Copyright (C) 2015 University of Calgary Solar Car Team
- *
- *  This file is part of Schulich Delta Hermes
- *
- *  Schulich Delta Hermes is free software:
- *  you can redistribute it and/or modify it under the terms
- *  of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the
- *  License, or (at your option) any later version.
- *
- *  Schulich Delta Hermes is distributed
- *  in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- *  without even the implied warranty of MERCHANTABILITY or
- *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero
- *  General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General
- *  Public License along with Schulich Delta Hermes.
- *  If not, see <http://www.gnu.org/licenses/>.
- *
- *  For further contact, email <software@calgarysolarcar.ca>
- */
-
 #pragma once
 
 #include <QObject>
+#include <QString>
 
 class I_BatteryFaultsData : public QObject
 {
@@ -35,6 +11,23 @@ public:
 
     /* BatterFaults Gets */
     virtual unsigned short getErrorFlag() const = 0;
+
+    /* BatteryFaultsData status */
+    virtual bool cellOverVoltage() const;
+    virtual bool cellUnderVoltage() const;
+    virtual bool cellOverTemperature() const;
+    virtual bool measurementUntrusted() const;
+    virtual bool cmuCommTimeout() const;
+    virtual bool vehicleCommTimeout() const;
+    virtual bool bmuIsInSetupMode() const;
+    virtual bool cmuCanBusPowerStatus() const;
+    virtual bool packIsolationTestFailure() const;
+    virtual bool softwareOverCurrentMeasured() const;
+    virtual bool canSupplyIsLow() const;
+    virtual bool contactorIsStuck() const;
+    virtual bool cmuDetectedExtraCellPresent() const;
+
+    virtual bool operator==(const BatteryFaults& other) const;
 
     /* BatteryFaults Sets */
     virtual void setErrorFlag(const unsigned char& errorFlag) = 0;
