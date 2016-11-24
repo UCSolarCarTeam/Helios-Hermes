@@ -13,5 +13,5 @@ public:
     virtual I_CmuUnit& getCmuUnit(const unsigned char& index);
     
 signals:
-    // TODO research this
+    // TODO Do we need signals here?
 }

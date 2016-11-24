@@ -58,8 +58,7 @@ QString DriverControlsMessage::toString() const
     messageString += QString::number(musicInputs()) + ", ";
     messageString += QString::number(acceleration()) + ", ";
     messageString += QString::number(regenBraking()) + ", ";
-    messageString += QString::number(driverInputs());
+    messageString += QString::number(driverInputs()) + ", ";
     return messageString;
-    // TODO check this 
 }
 

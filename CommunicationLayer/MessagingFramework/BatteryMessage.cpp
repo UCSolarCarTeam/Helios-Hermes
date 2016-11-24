@@ -1,5 +1,3 @@
-// TODO check these includes
-// TODO delete the files in MessagingFramework that are not being used
 #include "BatteryMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
@@ -186,7 +184,6 @@ bool BatteryMessage::bmsCanLockedOut() const
 
 QString BatteryMessage::toString() const
 {
-    // TODO chars don't need QString::number
     QString messageString;
     messageString += QString::number(MessageDefines::Battery) + ", ";
     messageString += QString::number(alive()) + ", ";
