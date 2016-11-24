@@ -2,7 +2,7 @@
 
 #include <QScopedArrayPointer>
 
-#include "I_MotorDetailsUnit.h"
+#include "I_MotorDetailsData.h"
 
 class MotorDetailsData: I_MotorDetailsData
 {
