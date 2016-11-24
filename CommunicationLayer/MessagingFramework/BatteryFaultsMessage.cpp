@@ -7,15 +7,15 @@ namespace
     const int ERROR_FLAGS = 1;
 }
 
-BatteryFaultsMessage::BatteryFaultsMessage(unsigned char flags)
+BatteryFaultsMessage::BatteryFaultsMessage(QByteArray& messageData)
 : messageData_(messageData)
 {
     // Initialize messageData
 }
 
-unsigned char BatteryFaultsMessage::batteryFaultsFlags(const QByteArray& messageData) const
+unsigned char BatteryFaultsMessage::batteryFaultsFlags() const
 {
-    return getUnsignedChar(messageData_.at(ERROR_FLAGS));
+    return getUnsignedChar(messageData_, ERROR_FLAGS);
 }
 
 QString BatteryFaultsMessage::toString() const

@@ -1,17 +1,24 @@
 #pragma once
 
 #include <QString>
+#include <QByteArray>
 
 class MotorFaults
 {
 public:
-   MotorFaults(unsigned char errorFlags, unsigned char limitFlags);
+    MotorFaults(QByteArray& messageData);
 
-   // TODO implement this (look at file history, accidently deleted before implemented)
-   bool operator==(const MotorFaults& other) const;
-   QString toString() const;
+    unsigned char M0ErrorFlags() const;
+    unsigned char M1ErrorFlags() const;
+    unsigned char M0LimitFlags() const;
+    unsigned char M1LimitFlags() const;
+    unsigned char M0CanRxErrorCount() const;
+    unsigned char M0CanTxErrorCount() const;
+    unsigned char M1CanRxErrorCount() const;
+    unsigned char M1CanTxErrorCount() const;
+
+    QString toString() const;
 
 private:
-   unsigned char errorFlags_;
-   unsigned char limitFlags_;
+    const QByteArray messageData_;
 };

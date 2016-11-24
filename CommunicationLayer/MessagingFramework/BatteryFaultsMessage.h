@@ -6,9 +6,9 @@
 class BatteryFaultsMessage
 {
 public:
-    BatteryFaults(unsigned char flags);
+    BatteryFaults(QByteArray& messageData);
 
-    unsigned char batteryFaultsFlags(const QByteArray& messageData) const;
+    unsigned char batteryFaultsFlags() const;
 
     QString toString() const;
 
