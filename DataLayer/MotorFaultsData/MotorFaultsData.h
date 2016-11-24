@@ -55,14 +55,14 @@ public:
     bool m1IpmOrMotorTelemetryLimit() const;
 
     /* MotorFaults Sets */
-    void getM0ErrorFlags(const unsigned char&);
-    void getM1ErrorFlags(const unsigned char&);
-    void getM0LimitFlags(const unsigned char&);
-    void getM1LimitFlags(const unsigned char&);
-    void getM0CanRxErrorCount(const unsigned char&);
-    void getM0CanTxErrorCount(const unsigned char&);
-    void getM1CanRxErrorCount(const unsigned char&);
-    void getM1CanTxErrorCount(const unsigned char&);
+    void setM0ErrorFlags(const unsigned char&);
+    void setM1ErrorFlags(const unsigned char&);
+    void setM0LimitFlags(const unsigned char&);
+    void setM1LimitFlags(const unsigned char&);
+    void setM0CanRxErrorCount(const unsigned char&);
+    void setM0CanTxErrorCount(const unsigned char&);
+    void setM1CanRxErrorCount(const unsigned char&);
+    void setM1CanTxErrorCount(const unsigned char&);
 
 
 private:

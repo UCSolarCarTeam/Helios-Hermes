@@ -4,10 +4,10 @@ BatteryFaultsPopulator::BatteryFaultsPopulator(I_PacketDecoder& packetDecoder, I
 : packetDecoder_(packetDecoder)
 , batteryFaultsData_(batteryFaultsData)
 {
-    connect(&packetDecoder&, SIGNAL(packetDecoded(const BatteryFaultsMessage)), this, SLOT(populateData(const BatteryFaultsMessage)));
+    connect(&packetDecoder_, SIGNAL(packetDecoded(const BatteryFaultsMessage)), this, SLOT(populateData(const BatteryFaultsMessage)));
 }
 
-void BatteryFaultsPopulator::populateData(const BatteryFaultsMessage)
+void BatteryFaultsPopulator::populateData(const BatteryFaultsMessage message)
 {
     batteryFaultsData_.setErrorFlag(message.errorFlag());
 }

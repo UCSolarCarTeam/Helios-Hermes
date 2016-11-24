@@ -71,7 +71,7 @@ unsigned char MotorFaultsData::getM1CanTxErrorCount() const {
 }
 
 
-    // Errors
+// Errors
 bool MotorFaultsData::m0MotorOverSpeed() const
 {
     return static_cast<bool>(m0ErrorFlags_ & MOTOR_OVER_SPEED_FLAG);
