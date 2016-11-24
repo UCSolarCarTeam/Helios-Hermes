@@ -9,7 +9,7 @@ class I_BatteryFaultsData : public QObject
 public:
     virtual ~I_BatteryFaultsData() {}
 
-    /* BatterFaults Gets */
+    /* BatteryFaultsData Gets */
     virtual unsigned short getErrorFlag() const = 0;
 
     /* BatteryFaultsData status */
@@ -27,7 +27,7 @@ public:
     virtual bool contactorIsStuck() const;
     virtual bool cmuDetectedExtraCellPresent() const;
 
-    virtual bool operator==(const BatteryFaults& other) const;
+    virtual bool operator==(const I_BatteryFaultsData& other) const;
 
     /* BatteryFaults Sets */
     virtual void setErrorFlag(const unsigned char& errorFlag) = 0;

@@ -56,14 +56,14 @@ public:
     virtual bool m1IpmOrMotorTelemetryLimit() const;
 
     /* MotorFaults Sets */
-    virtual void setM0ErrorFlags(const unsigned char& m0ErrorFlags;
-    virtual void setM1ErrorFlags(const unsigned char& m1ErrorFlags;
-    virtual void setM0LimitFlags(const unsigned char& m0LimitFlags;
-    virtual void setM1LimitFlags(const unsigned char& m1LimitFlags;
-    virtual void setM0CanRxErrorCount(const unsigned char& m0CanRxErrorCount;
-    virtual void setM0CanTxErrorCount(const unsigned char& m0CanTxErrorCount;
-    virtual void setM1CanRxErrorCount(const unsigned char& m1CanRxErrorCount;
-    virtual void setM1CanTxErrorCount(const unsigned char& m1CanTxErrorCount;
+    virtual void setM0ErrorFlags(const unsigned char& m0ErrorFlags);
+    virtual void setM1ErrorFlags(const unsigned char& m1ErrorFlags);
+    virtual void setM0LimitFlags(const unsigned char& m0LimitFlags);
+    virtual void setM1LimitFlags(const unsigned char& m1LimitFlags);
+    virtual void setM0CanRxErrorCount(const unsigned char& m0CanRxErrorCount);
+    virtual void setM0CanTxErrorCount(const unsigned char& m0CanTxErrorCount);
+    virtual void setM1CanRxErrorCount(const unsigned char& m1CanRxErrorCount);
+    virtual void setM1CanTxErrorCount(const unsigned char& m1CanTxErrorCount);
 
 signals:
     void m0ErrorFlagsReceived(const unsigned char& m0ErrorFlags);

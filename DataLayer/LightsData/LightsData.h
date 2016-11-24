@@ -16,4 +16,4 @@ public:
 
 private:
     unsigned char lightStatus_;
-}
+};

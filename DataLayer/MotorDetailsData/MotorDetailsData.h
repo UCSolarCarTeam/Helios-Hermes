@@ -13,4 +13,4 @@ public:
 
 private:
     QScopedArrayPointer<I_MotorDetailsUnit> motorDetailsUnits_;
-}
+};

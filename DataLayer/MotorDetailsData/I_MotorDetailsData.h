@@ -12,4 +12,4 @@ public:
 
     /* MotorDetailsData gets */
     virtual I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index);
-}
+};

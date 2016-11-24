@@ -2,12 +2,12 @@
 
 #include <QObject>
 
-class I_BatteryData : public QObject
+class I_DriverControlsData : public QObject
 {
     Q_OBJECT
 
 public:
-    virtual ~I_BatteryData() {}
+    virtual ~I_DriverControlsData() {}
 
     /*Data "Gets"*/
     virtual unsigned char getDriverControlsBoardAlive() const = 0;
@@ -17,7 +17,7 @@ public:
     virtual unsigned short getRegenBraking() const = 0;
     virtual unsigned char getDriverInputs() const = 0;
 
-    /*BatteryData "Sets"*/
+    /*DriverControlsData "Sets"*/
     virtual void setSetDriverControlsBoardAlive(const unsigned char& getDriverControlsBoardAlive) = 0;
     virtual void setSetLightsInputs(const unsigned char& getLightsInputs) = 0;
     virtual void setSetMusicInputs(const unsigned char& getMusicInputs) = 0;

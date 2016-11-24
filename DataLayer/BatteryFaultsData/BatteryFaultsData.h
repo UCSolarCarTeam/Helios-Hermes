@@ -26,7 +26,7 @@ public:
     bool contactorIsStuck() const;
     bool cmuDetectedExtraCellPresent() const;
 
-    bool operator==(const BatteryFaults& other) const;
+    bool operator==(const I_BatteryFaultsData& other) const;
 
     QString toString() const;
 
