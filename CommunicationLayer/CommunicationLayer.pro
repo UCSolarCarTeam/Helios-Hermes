@@ -14,21 +14,29 @@ HEADERS += \
    CommDeviceControl/UdpMessageForwarder.h \
    CommDeviceControl/I_MessageForwarder.h \
    CommunicationContainer.h \
+   DataPopulators/BatteryFaultsPopulator.h \
    DataPopulators/BatteryPopulator.h \
    DataPopulators/CmuPopulator.h \
-   DataPopulators/DriverDetailsPopulator.h \
-   DataPopulators/FaultsPopulator.h \
-   DataPopulators/KeyDriverControlPopulator.h \
-   MessagingFramework/BatteryDataMessage.h \
-   MessagingFramework/BatteryFaults.h \
-   MessagingFramework/CmuDataMessage.h \
-   MessagingFramework/DriverControlDetails.h \
-   MessagingFramework/FaultsMessage.h \
+   DataPopulators/DriverControlsPopulator.h \
+   DataPopulators/KeyMotorPopulator.h \
+   DataPopulators/LightsPopulator.h \
+   DataPopulators/MotorDetailsPopulator.h \
+   DataPopulators/MotorFaultsPopulator.h \
+   DataPopulators/MpptPopulator.h \
+   DataPopulators/OtherPopulator.h \
+   MessagingFramework/BatteryFaultsMessage.h \
+   MessagingFramework/BatteryMessage.h \
+   MessagingFramework/CmuMessage.h \
+   MessagingFramework/DriverControlMessage.h \
+   MessagingFramework/KeyMotorMessage.h \
+   MessagingFramework/LightsMessage.h \
+   MessagingFramework/MotorDetailsMessage.h \
+   MessagingFramework/MotorFaultsMessage.h \
+   MessagingFramework/MpptMessage.h \
+   MessagingFramework/OtherMessage.h \
    MessagingFramework/KeyDriverControlTelemetry.h \
-   MessagingFramework/LimitFlags.h \
    MessagingFramework/MessageDecodingHelpers.h \
    MessagingFramework/MessageDefines.h \
-   MessagingFramework/MotorFaults.h \
    PacketChecksumChecker/I_PacketChecksumChecker.h \
    PacketChecksumChecker/PacketChecksumChecker.h \
    PacketDecoder/I_PacketDecoder.h \
@@ -43,21 +51,29 @@ SOURCES += \
    CommDeviceControl/RadioCommDevice.cpp \
    CommDeviceControl/UdpMessageForwarder.cpp \
    CommunicationContainer.cpp \
+   DataPopulators/BatteryFaultsPopulator.cpp \
    DataPopulators/BatteryPopulator.cpp \
    DataPopulators/CmuPopulator.cpp \
-   DataPopulators/DriverDetailsPopulator.cpp \
-   DataPopulators/FaultsPopulator.cpp \
-   DataPopulators/KeyDriverControlPopulator.cpp \
-   MessagingFramework/BatteryDataMessage.cpp \
-   MessagingFramework/BatteryFaults.cpp \
-   MessagingFramework/CmuDataMessage.cpp \
-   MessagingFramework/DriverControlDetails.cpp \
-   MessagingFramework/FaultsMessage.cpp \
+   DataPopulators/DriverControlsPopulator.cpp \
+   DataPopulators/KeyMotorPopulator.cpp \
+   DataPopulators/LightsPopulator.cpp \
+   DataPopulators/MotorDetailsPopulator.cpp \
+   DataPopulators/MotorFaultsPopulator.cpp \
+   DataPopulators/MpptPopulator.cpp \
+   DataPopulators/OtherPopulator.cpp \
+   MessagingFramework/BatteryFaultsMessage.cpp \
+   MessagingFramework/BatteryMessage.cpp \
+   MessagingFramework/CmuMessage.cpp \
+   MessagingFramework/DriverControlMessage.cpp \
+   MessagingFramework/KeyMotorMessage.cpp \
+   MessagingFramework/LightsMessage.cpp \
+   MessagingFramework/MotorDetailsMessage.cpp \
+   MessagingFramework/MotorFaultsMessage.cpp \
+   MessagingFramework/MpptMessage.cpp \
+   MessagingFramework/OtherMessage.cpp \
    MessagingFramework/KeyDriverControlTelemetry.cpp \
-   MessagingFramework/LimitFlags.cpp \
    MessagingFramework/MessageDecodingHelpers.cpp \
    MessagingFramework/MessageDefines.cpp \
-   MessagingFramework/MotorFaults.cpp \
    PacketChecksumChecker/PacketChecksumChecker.cpp \
    PacketDecoder/PacketDecoder.cpp \
    PacketSynchronizer/PacketSynchronizer.cpp \
