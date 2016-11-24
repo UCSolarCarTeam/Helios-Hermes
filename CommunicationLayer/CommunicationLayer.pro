@@ -27,14 +27,13 @@ HEADERS += \
    MessagingFramework/BatteryFaultsMessage.h \
    MessagingFramework/BatteryMessage.h \
    MessagingFramework/CmuMessage.h \
-   MessagingFramework/DriverControlMessage.h \
+   MessagingFramework/DriverControlsMessage.h \
    MessagingFramework/KeyMotorMessage.h \
    MessagingFramework/LightsMessage.h \
    MessagingFramework/MotorDetailsMessage.h \
    MessagingFramework/MotorFaultsMessage.h \
    MessagingFramework/MpptMessage.h \
    MessagingFramework/OtherMessage.h \
-   MessagingFramework/KeyDriverControlTelemetry.h \
    MessagingFramework/MessageDecodingHelpers.h \
    MessagingFramework/MessageDefines.h \
    PacketChecksumChecker/I_PacketChecksumChecker.h \
@@ -64,14 +63,13 @@ SOURCES += \
    MessagingFramework/BatteryFaultsMessage.cpp \
    MessagingFramework/BatteryMessage.cpp \
    MessagingFramework/CmuMessage.cpp \
-   MessagingFramework/DriverControlMessage.cpp \
+   MessagingFramework/DriverControlsMessage.cpp \
    MessagingFramework/KeyMotorMessage.cpp \
    MessagingFramework/LightsMessage.cpp \
    MessagingFramework/MotorDetailsMessage.cpp \
    MessagingFramework/MotorFaultsMessage.cpp \
    MessagingFramework/MpptMessage.cpp \
    MessagingFramework/OtherMessage.cpp \
-   MessagingFramework/KeyDriverControlTelemetry.cpp \
    MessagingFramework/MessageDecodingHelpers.cpp \
    MessagingFramework/MessageDefines.cpp \
    PacketChecksumChecker/PacketChecksumChecker.cpp \

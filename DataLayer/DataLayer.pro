@@ -33,12 +33,12 @@ HEADERS += \
    DriverControlsData/FakeDriverControlsData.h \
    CmuData/CmuData.h \
    CmuData/I_CmuData.h \
-   CmuData/FakeCmuData.h \
+   CmuData/FakeCmuUnit.h \
    CmuData/I_CmuUnit.h \
    CmuData/CmuUnit.h \
    MpptData/MpptData.h \
    MpptData/I_MpptData.h \
-   MpptData/FakeMpptData.h \
+   MpptData/FakeMpptUnit.h \
    MpptData/I_MpptUnit.h \
    MpptData/MpptUnit.h \
    OtherData/I_OtherData.h \
@@ -52,7 +52,7 @@ SOURCES += \
    BatteryFaultsData/BatteryFaultsData.cpp \
    MotorFaultsData/MotorFaultsData.cpp \
    MotorDetailsData/MotorDetailsData.cpp \
-   MotorDetailsData/FakeMotorDetailsData.cpp \
+   MotorDetailsData/FakeMotorDetailsUnit.cpp \
    MotorDetailsData/MotorDetailsUnit.cpp \
    LightsData/LightsData.cpp \
    LightsData/FakeLightsData.cpp \
@@ -61,10 +61,10 @@ SOURCES += \
    DriverControlsData/DriverControlsData.cpp \
    DriverControlsData/FakeDriverControlsData.cpp \
    CmuData/CmuData.cpp \
-   CmuData/FakeCmuData.cpp \
+   CmuData/FakeCmuUnit.cpp \
    CmuData/CmuUnit.cpp \
    MpptData/MpptData.cpp \
-   MpptData/FakeMpptData.cpp \
+   MpptData/FakeMpptUnit.cpp \
    MpptData/MpptUnit.cpp \
    OtherData/OtherData.cpp \
    OtherData/FakeOtherData.cpp
