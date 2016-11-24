@@ -11,6 +11,25 @@ public:
     /* BatteryFaults Gets */
     unsigned short getErrorFlag() const;
 
+    /* BatteryFaultsData status */
+    bool cellOverVoltage() const;
+    bool cellUnderVoltage() const;
+    bool cellOverTemperature() const;
+    bool measurementUntrusted() const;
+    bool cmuCommTimeout() const;
+    bool vehicleCommTimeout() const;
+    bool bmuIsInSetupMode() const;
+    bool cmuCanBusPowerStatus() const;
+    bool packIsolationTestFailure() const;
+    bool softwareOverCurrentMeasured() const;
+    bool canSupplyIsLow() const;
+    bool contactorIsStuck() const;
+    bool cmuDetectedExtraCellPresent() const;
+
+    bool operator==(const BatteryFaults& other) const;
+
+    QString toString() const;
+
     /* BatteryFaults Sets */
     void setErrorFlag(const unsigned short&);
 
