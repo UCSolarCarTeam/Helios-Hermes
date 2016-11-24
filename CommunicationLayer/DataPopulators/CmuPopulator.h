@@ -13,7 +13,7 @@ public:
                  I_CmuData& cmuData);
 
 public slots:
-    void populateData(const CmuDataMessage);
+    void populateData(const CmuMessage);
 
 private:
     QList<double> convertFloatListToDouble(QList<float> floatList);

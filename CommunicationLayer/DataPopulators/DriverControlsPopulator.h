@@ -8,12 +8,12 @@ class DriverControlsPopulator : public QObject
 {
     Q_OBJECT
 public:
-    DriverControlsPopulator(I_PacketDecoder& packetDecoder, I_DriverControlsData& DriverControlsData);
+    DriverControlsPopulator(I_PacketDecoder& packetDecoder, I_DriverControlsData& driverControlsData);
 
 public slots:
     void populateData(const DriverControlsMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;
-    I_DriverControlsData& DriverControlsData_;
+    I_DriverControlsData& driverControlsData_;
 }

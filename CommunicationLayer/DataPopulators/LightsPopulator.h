@@ -8,12 +8,12 @@ class LightsPopulator : public QObject
 {
     Q_OBJECT
 public:
-    LightsPopulator(I_PacketDecoder& packetDecoder, I_LightsData& LightsData);
+    LightsPopulator(I_PacketDecoder& packetDecoder, I_LightsData& lightsData);
 
 public slots:
     void populateData(const LightsMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;
-    I_LightsData& LightsData_;
+    I_LightsData& lightsData_;
 }

@@ -8,12 +8,12 @@ class MotorDetailsPopulator : public QObject
 {
     Q_OBJECT
 public:
-    MotorDetailsPopulator(I_PacketDecoder& packetDecoder, I_MotorDetailsData& MotorDetailsData);
+    MotorDetailsPopulator(I_PacketDecoder& packetDecoder, I_MotorDetailsData& motorDetailsData);
 
 public slots:
     void populateData(const MotorDetailsMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;
-    I_MotorDetailsData& MotorDetailsData_;
+    I_MotorDetailsData& motorDetailsData_;
 }
