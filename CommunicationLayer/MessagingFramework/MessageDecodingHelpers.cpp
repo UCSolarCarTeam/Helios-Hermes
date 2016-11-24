@@ -52,6 +52,6 @@ const int MessageDecodingHelpers::numberOfBytesInData(const Type& type)
         return sizeof(unsigned char);
         break;
     default:
-        throw "Unhandled data type!";
+        qDebug() << "MessageDecodingHelpers: Invalid type";
     }
 }
