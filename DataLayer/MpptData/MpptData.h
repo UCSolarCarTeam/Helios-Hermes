@@ -3,8 +3,9 @@
 #include <QScopedArrayPointer>
 
 #include "I_MpptUnit.h"
+#include "I_MpptData.h"
 
-class MpptData: I_CmuData
+class MpptData: public I_MpptData
 {
 public:
     MpptData(const unsigned char& numberOfMppts);

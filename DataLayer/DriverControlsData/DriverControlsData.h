@@ -17,12 +17,12 @@ public:
     unsigned char getDriverInputs() const;
 
     /*DriverControlsData "Sets"*/
-    void setDriverControlsBoardAlive(const unsigned char driverControlsBoardAlive);
-    void setLightsInputs(const unsigned char lightsInputs);
-    void setMusicInputs(const unsigned char musicInputs);
-    void setAcceleration(const unsigned short acceleration);
-    void setRegenBraking(const unsigned short regenBraking);
-    void setDriverInputs(const unsigned char driverInputs);
+    void setDriverControlsBoardAlive(const unsigned char& driverControlsBoardAlive);
+    void setLightsInputs(const unsigned char& lightsInputs);
+    void setMusicInputs(const unsigned char& musicInputs);
+    void setAcceleration(const unsigned short& acceleration);
+    void setRegenBraking(const unsigned short& regenBraking);
+    void setDriverInputs(const unsigned char& driverInputs);
 
 private:
     unsigned char driverControlsBoardAlive_;

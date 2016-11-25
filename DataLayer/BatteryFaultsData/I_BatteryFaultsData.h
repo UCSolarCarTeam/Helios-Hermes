@@ -30,7 +30,7 @@ public:
     virtual bool operator==(const I_BatteryFaultsData& other) const = 0;
 
     /* BatteryFaults Sets */
-    virtual void setErrorFlag(const unsigned char& errorFlag) = 0;
+    virtual void setErrorFlag(const unsigned short& errorFlag) = 0;
 
 signals:
     void errorFlagRecieved(const unsigned short errorFlag);

@@ -14,4 +14,4 @@ public:
 
 signals:
     // TODO Do we need signals here?
-}
+};

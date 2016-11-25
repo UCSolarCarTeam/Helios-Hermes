@@ -9,7 +9,7 @@ class I_MotorFaultsData : public QObject
 public:
     virtual ~I_MotorFaultsData() {}
 
-    QString toString() const = 0;
+    virtual QString toString() const = 0;
 
     /* MotorFaults Gets */
     virtual unsigned char getM0ErrorFlags() const = 0;

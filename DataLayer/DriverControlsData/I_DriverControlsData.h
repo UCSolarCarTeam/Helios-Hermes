@@ -18,12 +18,12 @@ public:
     virtual unsigned char getDriverInputs() const = 0;
 
     /*DriverControlsData "Sets"*/
-    virtual void setSetDriverControlsBoardAlive(const unsigned char& getDriverControlsBoardAlive) = 0;
-    virtual void setSetLightsInputs(const unsigned char& getLightsInputs) = 0;
-    virtual void setSetMusicInputs(const unsigned char& getMusicInputs) = 0;
-    virtual void setSetAcceleration(const unsigned short& getAcceleration) = 0;
-    virtual void setSetRegenBraking(const unsigned short& getRegenBraking) = 0;
-    virtual void setSetDriverInputs(const unsigned char& getDriverInputs) = 0;
+    virtual void setDriverControlsBoardAlive(const unsigned char& getDriverControlsBoardAlive) = 0;
+    virtual void setLightsInputs(const unsigned char& getLightsInputs) = 0;
+    virtual void setMusicInputs(const unsigned char& getMusicInputs) = 0;
+    virtual void setAcceleration(const unsigned short& getAcceleration) = 0;
+    virtual void setRegenBraking(const unsigned short& getRegenBraking) = 0;
+    virtual void setDriverInputs(const unsigned char& getDriverInputs) = 0;
 
 signals:
     void driverControlsBoardAliveReceived(unsigned char getDriverControlsBoardAlive);

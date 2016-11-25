@@ -13,10 +13,12 @@ class I_MotorFaultsData;
 class I_MpptData;
 class I_OtherData;
 
+class I_Settings;
+
 class DataContainer
 {
 public:
-    DataContainer();
+    DataContainer(const I_Settings& settings);
     ~DataContainer();
 
     I_BatteryData& batteryData();
