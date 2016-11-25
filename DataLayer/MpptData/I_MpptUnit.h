@@ -9,17 +9,17 @@ public:
     virtual ~I_MpptUnit() {}
 
     /* MpptUnit Gets */
-    virtual unsigned char getMpptStatus() const;
-    virtual unsigned short getArrayVoltage() const;
-    virtual unsigned short getArrayCurrent() const;
-    virtual unsigned short getBatteryVoltage() const;
-    virtual unsigned short getTemperature() const;
+    virtual unsigned char getMpptStatus() const = 0;
+    virtual unsigned short getArrayVoltage() const = 0;
+    virtual unsigned short getArrayCurrent() const = 0;
+    virtual unsigned short getBatteryVoltage() const = 0;
+    virtual unsigned short getTemperature() const = 0;
 
     /* MpptUnit Sets */;
-    virtual void setArrayVoltage(const unsigned short& arrayVoltage);
-    virtual void setArrayCurrent(const unsigned short& arrayCurrent);
-    virtual void setBatteryVoltage(const unsigned short& batteryVoltage);
-    virtual void setTemperature(const unsigned short& temperature);
+    virtual void setArrayVoltage(const unsigned short& arrayVoltage) = 0;
+    virtual void setArrayCurrent(const unsigned short& arrayCurrent) = 0;
+    virtual void setBatteryVoltage(const unsigned short& batteryVoltage) = 0;
+    virtual void setTemperature(const unsigned short& temperature) = 0;
 
 signals:
     void arrayVoltageReceived(const unsigned short& arrayVoltage);

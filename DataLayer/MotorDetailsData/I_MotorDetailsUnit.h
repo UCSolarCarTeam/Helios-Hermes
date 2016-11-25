@@ -10,43 +10,43 @@ public:
     virtual ~I_MotorDetailsUnit() {}
 
     /*MotorDetailsUnit "Gets"*/
-    virtual unsigned char getMotorNumber() const;
-    virtual float getPhaseCCurrent() const;
-    virtual float getPhaseBCurrent() const;
-    virtual float getMotorVoltageReal() const;
-    virtual float getMotorVoltageImaginary() const;
-    virtual float getMotorCurrentReal() const;
-    virtual float getMotorCurrentImaginary() const;
-    virtual float getBackEmfReal() const;
-    virtual float getBackEmfImaginary() const;
-    virtual float getVoltageRailSuppply15V() const;
-    virtual float getVoltageRailSupply33V() const;
-    virtual float getVoltageRailSupply19V() const;
-    virtual float getHeatSinkTemperature() const;
-    virtual float getMotorTempterature() const;
-    virtual float getDspBoardTemperature() const;
-    virtual float getDcBusAmpHours() const;
-    virtual float getOdometer() const;
-    virtual float getSlipSpeed() const;
+    virtual unsigned char getMotorNumber() const = 0;
+    virtual float getPhaseCCurrent() const = 0;
+    virtual float getPhaseBCurrent() const = 0;
+    virtual float getMotorVoltageReal() const = 0;
+    virtual float getMotorVoltageImaginary() const = 0;
+    virtual float getMotorCurrentReal() const = 0;
+    virtual float getMotorCurrentImaginary() const = 0;
+    virtual float getBackEmfReal() const = 0;
+    virtual float getBackEmfImaginary() const = 0;
+    virtual float getVoltageRailSuppply15V() const = 0;
+    virtual float getVoltageRailSupply33V() const = 0;
+    virtual float getVoltageRailSupply19V() const = 0;
+    virtual float getHeatSinkTemperature() const = 0;
+    virtual float getMotorTempterature() const = 0;
+    virtual float getDspBoardTemperature() const = 0;
+    virtual float getDcBusAmpHours() const = 0;
+    virtual float getOdometer() const = 0;
+    virtual float getSlipSpeed() const = 0;
 
     /*MotorDetailsUnit "Sets"*/
-    virtual void setPhaseCCurrent(float& phaseCCurrent);
-    virtual void setPhaseBCurrent(float& phaseBCurrent);
-    virtual void setMotorVoltageReal(float& motorVoltageReal);
-    virtual void setMotorVoltageImaginary(float& motorVoltageImaginary);
-    virtual void setMotorCurrentReal(float& motorCurrentReal);
-    virtual void setMotorCurrentImaginary(float& motorCurrentImaginary);
-    virtual void setBackEmfReal(float& backEmfReal);
-    virtual void setBackEmfImaginary(float& backEmfImaginary);
-    virtual void setVoltageRailSuppply15V(float& voltageRailSuppply15V);
-    virtual void setVoltageRailSupply33V(float& voltageRailSupply33V);
-    virtual void setVoltageRailSupply19V(float& voltageRailSupply19V);
-    virtual void setHeatSinkTemperature(float& heatSinkTemperature);
-    virtual void setMotorTempterature(float& motorTempterature);
-    virtual void setDspBoardTemperature(float& dspBoardTemperature);
-    virtual void setDcBusAmpHours(float& dcBusAmpHours);
-    virtual void setOdometer(float& odometer);
-    virtual void setSlipSpeed(float& slipSpeed);
+    virtual void setPhaseCCurrent(float& phaseCCurrent) = 0;
+    virtual void setPhaseBCurrent(float& phaseBCurrent) = 0;
+    virtual void setMotorVoltageReal(float& motorVoltageReal) = 0;
+    virtual void setMotorVoltageImaginary(float& motorVoltageImaginary) = 0;
+    virtual void setMotorCurrentReal(float& motorCurrentReal) = 0;
+    virtual void setMotorCurrentImaginary(float& motorCurrentImaginary) = 0;
+    virtual void setBackEmfReal(float& backEmfReal) = 0;
+    virtual void setBackEmfImaginary(float& backEmfImaginary) = 0;
+    virtual void setVoltageRailSuppply15V(float& voltageRailSuppply15V) = 0;
+    virtual void setVoltageRailSupply33V(float& voltageRailSupply33V) = 0;
+    virtual void setVoltageRailSupply19V(float& voltageRailSupply19V) = 0;
+    virtual void setHeatSinkTemperature(float& heatSinkTemperature) = 0;
+    virtual void setMotorTempterature(float& motorTempterature) = 0;
+    virtual void setDspBoardTemperature(float& dspBoardTemperature) = 0;
+    virtual void setDcBusAmpHours(float& dcBusAmpHours) = 0;
+    virtual void setOdometer(float& odometer) = 0;
+    virtual void setSlipSpeed(float& slipSpeed) = 0;
 
 signals:
     void phaseCCurrentReceived(const float& phaseCCurrent);

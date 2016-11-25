@@ -25,18 +25,18 @@ public:
 
 
     /*KeyMotorData "Sets"*/
-    virtual unsigned char setM0Alive(unsigned char& m0Alive);
-    virtual float setM0SetCurrent(float& m0SetCurrent);
-    virtual float setM0SetVelocity(float& m0SetVelocity);
-    virtual float setM0BusCurrent(float& m0BusCurrent);
-    virtual float setM0BusVoltage(float& m0BusVoltage);
-    virtual float setM0VehicleVelocity(float& m0VehicleVelocity);
-    virtual unsigned char setM1Alive(unsigned char& m1Alive);
-    virtual float setM1SetCurrent(float& m1SetCurrent);
-    virtual float setM1SetVelocity(float& m1SetVelocity);
-    virtual float setM1BusCurrent(float& m1BusCurrent);
-    virtual float setM1BusVoltage(float& m1BusVoltage);
-    virtual float setM1VehicleVelocity(float& m1VehicleVelocity);
+    virtual unsigned char setM0Alive(unsigned char& m0Alive) = 0;
+    virtual float setM0SetCurrent(float& m0SetCurrent) = 0;
+    virtual float setM0SetVelocity(float& m0SetVelocity) = 0;
+    virtual float setM0BusCurrent(float& m0BusCurrent) = 0;
+    virtual float setM0BusVoltage(float& m0BusVoltage) = 0;
+    virtual float setM0VehicleVelocity(float& m0VehicleVelocity) = 0;
+    virtual unsigned char setM1Alive(unsigned char& m1Alive) = 0;
+    virtual float setM1SetCurrent(float& m1SetCurrent) = 0;
+    virtual float setM1SetVelocity(float& m1SetVelocity) = 0;
+    virtual float setM1BusCurrent(float& m1BusCurrent) = 0;
+    virtual float setM1BusVoltage(float& m1BusVoltage) = 0;
+    virtual float setM1VehicleVelocity(float& m1VehicleVelocity) = 0;
 
 signals:
 

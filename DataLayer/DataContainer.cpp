@@ -20,7 +20,7 @@ DataContainer::DataContainer()
 , motorDetailsData_(new MotorDetailsData())
 , motorFaultsData_(new MotorFaultsData())
 , mpptData_(new MpptData())
-, otherData(new OtherData())
+, otherData_(new OtherData())
 {
 }
 

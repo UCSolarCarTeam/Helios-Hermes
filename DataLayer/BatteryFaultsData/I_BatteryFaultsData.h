@@ -13,21 +13,21 @@ public:
     virtual unsigned short getErrorFlag() const = 0;
 
     /* BatteryFaultsData status */
-    virtual bool cellOverVoltage() const;
-    virtual bool cellUnderVoltage() const;
-    virtual bool cellOverTemperature() const;
-    virtual bool measurementUntrusted() const;
-    virtual bool cmuCommTimeout() const;
-    virtual bool vehicleCommTimeout() const;
-    virtual bool bmuIsInSetupMode() const;
-    virtual bool cmuCanBusPowerStatus() const;
-    virtual bool packIsolationTestFailure() const;
-    virtual bool softwareOverCurrentMeasured() const;
-    virtual bool canSupplyIsLow() const;
-    virtual bool contactorIsStuck() const;
-    virtual bool cmuDetectedExtraCellPresent() const;
+    virtual bool cellOverVoltage() const = 0;
+    virtual bool cellUnderVoltage() const = 0;
+    virtual bool cellOverTemperature() const = 0;
+    virtual bool measurementUntrusted() const = 0;
+    virtual bool cmuCommTimeout() const = 0;
+    virtual bool vehicleCommTimeout() const = 0;
+    virtual bool bmuIsInSetupMode() const = 0;
+    virtual bool cmuCanBusPowerStatus() const = 0;
+    virtual bool packIsolationTestFailure() const = 0;
+    virtual bool softwareOverCurrentMeasured() const = 0;
+    virtual bool canSupplyIsLow() const = 0;
+    virtual bool contactorIsStuck() const = 0;
+    virtual bool cmuDetectedExtraCellPresent() const = 0;
 
-    virtual bool operator==(const I_BatteryFaultsData& other) const;
+    virtual bool operator==(const I_BatteryFaultsData& other) const = 0;
 
     /* BatteryFaults Sets */
     virtual void setErrorFlag(const unsigned char& errorFlag) = 0;
