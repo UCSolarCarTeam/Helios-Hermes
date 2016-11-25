@@ -4,7 +4,7 @@
 
 #include "I_MotorDetailsData.h"
 
-class MotorDetailsData: I_MotorDetailsData
+class MotorDetailsData: public I_MotorDetailsData
 {
 public:
     MotorDetailsData(const unsigned char& numberOfMotors);

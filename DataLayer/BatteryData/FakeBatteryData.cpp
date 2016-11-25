@@ -175,6 +175,6 @@ void FakeBatteryData::setVoltage(const unsigned int& voltage) {}
 void FakeBatteryData::setCurrent(const unsigned int& current) {}
 void FakeBatteryData::setFan0Speed(const unsigned short& fan0Speed) {}
 void FakeBatteryData::setFan1Speed(const unsigned short& fan1Speed) {}
-void setFanContactors12VCurrentConsumption(const unsigned short& fanCoFakeBatteryData::ntactors12VcurrentConsumption) {}
-void FakeBatteryData::setCmu12VCurrentConsumption(const unsigned short& cmu12VcurrentConsumption) {}
+void FakeBatteryData::setFanContactors12VCurrentConsumption(const unsigned short& fanContactors12VCurrentConsumption) {}
+void FakeBatteryData::setCmu12VCurrentConsumption(const unsigned short& cmu12VCurrentConsumption) {}
 void FakeBatteryData::setBmsCanLockedOut(const unsigned char& bmsCanLockedOut) {}

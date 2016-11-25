@@ -338,7 +338,7 @@ void BatteryData::setFanContactors12VCurrentConsumption(const unsigned short& fa
 
 void BatteryData::setCmu12VCurrentConsumption(const unsigned short& cmu12VCurrentConsumption) 
 {
-    cmu12VCurrentConsumption_ cmu12VCurrentConsumption;
+    cmu12VCurrentConsumption_ = cmu12VCurrentConsumption;
     emit cmu12VCurrentConsumptionReceived(cmu12VCurrentConsumption_);
 }
 
