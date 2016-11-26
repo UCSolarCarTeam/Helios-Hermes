@@ -6,7 +6,7 @@
 class CmuUnit : public I_CmuUnit
 {
 public:
-    CmuUnit(const unsigned char& cmuNumber);
+    CmuUnit();
     virtual ~CmuUnit();
 
     /* CmuUnit Gets */
@@ -22,6 +22,7 @@ public:
 
 
 private:
+    static unsigned char newCmuNumber_;
     unsigned char cmuNumber_;
     QList<short> cellVoltages_;
     unsigned short pcbTemp_;

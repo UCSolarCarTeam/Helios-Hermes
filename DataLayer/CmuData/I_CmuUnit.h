@@ -15,14 +15,13 @@ public:
     virtual unsigned short getCellTemp(const int&) const = 0;
 
     /* CmuUnit Sets */
-    virtual void setCmuNumber(const unsigned char&) = 0;
-    virtual void setCell0Voltage(const int&, const short&) = 0;
+    virtual void setCellVoltage(const int&, const short&) = 0;
     virtual void setPcbTemp(const unsigned short&) = 0;
-    virtual void setCellTemp0(const int&, const unsigned short&) = 0;
+    virtual void setCellTemp(const int&, const unsigned short&) = 0;
 
 signals:
     void cmuNumberReceived(const unsigned char& cmuNumber);
     void cellVoltageReceived(const int& index, const short& value);
     void pcbTempReceived(const unsigned short& pcbTemp);
-    void cellTemp0Received(const int& index, const unsigned short& value);
+    void cellTempReceived(const int& index, const unsigned short& value);
 };

@@ -2,7 +2,7 @@
 
 #include <QScopedArrayPointer>
 
-#include "I_CmuUnit.h"
+#include "CmuUnit.h"
 #include "I_CmuData.h"
 
 class CmuData: public I_CmuData
@@ -13,5 +13,5 @@ public:
     I_CmuUnit& getCmuUnit(const unsigned char& index);
 
 private: 
-    QScopedArrayPointer<I_CmuUnit> cmuUnits_;
+    QScopedArrayPointer<CmuUnit> cmuUnits_;
 };

@@ -1,13 +1,18 @@
 #include "CmuUnit.h"
 
-CmuUnit::CmuUnit(const unsigned char& cmuNumber)
-: cmuNumber_(cmuNumber)
-, cellVoltages_(QList<short>())
+#include <QDebug>
+
+unsigned char CmuUnit::newCmuNumber_ = 0;
+
+CmuUnit::CmuUnit()
+: cellVoltages_(QList<short>())
 , pcbTemp_(0)
 , cellTemps_(QList<unsigned short>())
 {
+    cmuNumber_ = newCmuNumber_++;
     // Initialize to 0
 }
+
 CmuUnit::~CmuUnit()
 {
 }
@@ -17,21 +22,21 @@ unsigned char CmuUnit::getCmuNumber() const {
     return cmuNumber_;
 }
 
-unsigned short CmuUnit::getCellVoltage(const int& index) const {
-    return cellVoltage_[index];
+short CmuUnit::getCellVoltage(const int& index) const {
+    return cellVoltages_[index];
 }
 
 unsigned short CmuUnit::getPcbTemp() const {
     return pcbTemp_;
 }
 
-unsigned short CmuUnit::getCellTemp0(const int& index) const {
+unsigned short CmuUnit::getCellTemp(const int& index) const {
     return cellTemps_[index];
 }
 
 /* CmuUnit Sets */
 
-void CmuUnit::setCellVoltage(const int& index, const unsigned short& value) {
+void CmuUnit::setCellVoltage(const int& index, const short& value) {
     if (index < 0 || index > 7) 
     {
         qDebug() << "Cell voltage index out of bounds";

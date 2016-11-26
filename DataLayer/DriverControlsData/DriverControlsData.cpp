@@ -48,37 +48,37 @@ unsigned char DriverControlsData::getDriverInputs() const
 
 
 /*DriverControlsData "Sets"*/
-void DriverControlsData::setDriverControlsBoardAlive(unsigned char& driverControlsBoardAlive)
+void DriverControlsData::setDriverControlsBoardAlive(const unsigned char& driverControlsBoardAlive)
 {
     driverControlsBoardAlive_ = driverControlsBoardAlive;
     emit driverControlsBoardAliveReceived(driverControlsBoardAlive_);
 }
 
-void DriverControlsData::setLightsInputs(unsigned char& lightsInputs)
+void DriverControlsData::setLightsInputs(const unsigned char& lightsInputs)
 {
     lightsInputs_ = lightsInputs;
     emit lightsInputsReceived(lightsInputs_);
 }
 
-void DriverControlsData::setMusicInputs(unsigned char& musicInputs)
+void DriverControlsData::setMusicInputs(const unsigned char& musicInputs)
 {
     musicInputs_ = musicInputs;
     emit musicInputsReceived(musicInputs_);
 }
 
-void DriverControlsData::setAcceleration(unsigned short& acceleration)
+void DriverControlsData::setAcceleration(const unsigned short& acceleration)
 {
     acceleration_ = acceleration;
     emit accelerationReceived(acceleration_);
 }
 
-void DriverControlsData::setRegenBraking(unsigned short& regenBraking)
+void DriverControlsData::setRegenBraking(const unsigned short& regenBraking)
 {
     regenBraking_ = regenBraking;
     emit regenBrakingReceived(regenBraking_);
 }
 
-void DriverControlsData::setDriverInputs(unsigned char& driverInputs)
+void DriverControlsData::setDriverInputs(const unsigned char& driverInputs)
 {
     driverInputs_ = driverInputs;
     emit driverInputsReceived(driverInputs_);

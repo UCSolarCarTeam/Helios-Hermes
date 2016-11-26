@@ -1,7 +1,7 @@
 #include "LightsData.h"
 
 LightsData::LightsData()
-    : lightStatus_(0);
+    : lightStatus_(0)
 {   
 //    Initialize to 0
 }

@@ -3,6 +3,7 @@
 #include <QScopedArrayPointer>
 
 #include "I_MotorDetailsData.h"
+#include "MotorDetailsUnit.h"
 
 class MotorDetailsData: public I_MotorDetailsData
 {
@@ -12,5 +13,5 @@ public:
     I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index);
 
 private:
-    QScopedArrayPointer<I_MotorDetailsUnit> motorDetailsUnits_;
+    QScopedArrayPointer<MotorDetailsUnit> motorDetailsUnits_;
 };
