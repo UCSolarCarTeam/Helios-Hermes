@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QObject>
-#include <QString>
 
 class I_BatteryFaultsData : public QObject
 {

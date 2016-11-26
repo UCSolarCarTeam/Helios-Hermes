@@ -34,6 +34,6 @@ public:
     void setErrorFlag(const unsigned short&);
 
 
-private:
+protected:
     unsigned short errorFlag_;
 };

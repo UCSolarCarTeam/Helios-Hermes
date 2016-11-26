@@ -1,8 +1,7 @@
 #include "MotorDetailsUnit.h"
 
-MotorDetailsUnit::MotorDetailsUnit(unsigned char motorNumber)
-: motorNumber_(motorNumber)
-, phaseCCurrent_(0)
+MotorDetailsUnit::MotorDetailsUnit()
+: phaseCCurrent_(0)
 , phaseBCurrent_(0)
 , motorVoltageReal_(0)
 , motorVoltageImaginary_(0)
@@ -20,11 +19,14 @@ MotorDetailsUnit::MotorDetailsUnit(unsigned char motorNumber)
 , odometer_(0)
 , slipSpeed_(0)
 {
-    // initialize to 0
+    motorNumber_ = newMotorNumber_++;
 }
+
+unsigned char MotorDetailsUnit::newMotorNumber_ = 0;
 
 MotorDetailsUnit::~MotorDetailsUnit()
 {
+
 }
 
 /* MotorDetailsUnit Gets*/

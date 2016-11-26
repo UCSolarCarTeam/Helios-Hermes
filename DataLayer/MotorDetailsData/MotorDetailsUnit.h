@@ -5,7 +5,7 @@
 class MotorDetailsUnit : public I_MotorDetailsUnit
 {
 public:
-    MotorDetailsUnit(const unsigned char& motorNumber);
+    MotorDetailsUnit();
     virtual ~MotorDetailsUnit();
 
     /*MotorDetailsUnit "Gets"*/
@@ -48,6 +48,7 @@ public:
     void setSlipSpeed(const float& slipSpeed);
 
 private:
+    static unsigned char newMotorNumber_;
     unsigned char motorNumber_;
     float phaseCCurrent_;
     float phaseBCurrent_;

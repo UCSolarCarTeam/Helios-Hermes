@@ -15,5 +15,5 @@ public:
     virtual void setLightStatus(const unsigned char&) = 0;
 
 signals:
-    void lightStatusReceived(const unsigned char& lightStatus);
+    void lightStatusReceived(const unsigned char lightStatus);
 };
