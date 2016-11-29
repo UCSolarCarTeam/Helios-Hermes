@@ -1,6 +1,6 @@
 #include "DriverControlsPopulator.h"
 
-DriverControlsPopulator::DriverControlsPopulator
+DriverControlsPopulator::DriverControlsPopulator(I_PacketDecoder& packetDecoder, I_DriverControlsData& driverControlsData)
 : packetDecoder_(packetDecoder)
 , driverControlsData_(driverControlsData)
 {

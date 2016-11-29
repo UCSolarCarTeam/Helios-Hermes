@@ -3,10 +3,10 @@
 #include <QString>
 #include <QByteArray>
 
-class MotorFaults
+class MotorFaultsMessage
 {
 public:
-    MotorFaults(QByteArray& messageData);
+    MotorFaultsMessage(QByteArray& messageData);
 
     unsigned char M0ErrorFlags() const;
     unsigned char M1ErrorFlags() const;

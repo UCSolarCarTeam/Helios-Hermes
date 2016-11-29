@@ -18,5 +18,5 @@ public slots:
 private:
     QList<double> convertFloatListToDouble(QList<float> floatList);
     I_PacketDecoder& packetDecoder_;
-    I_CmuData& cmuData;
+    I_CmuData& cmuData_;
 };

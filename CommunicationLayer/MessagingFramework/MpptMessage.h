@@ -18,4 +18,4 @@ public:
 
 private:
     const QByteArray messageData_;
-}
+};

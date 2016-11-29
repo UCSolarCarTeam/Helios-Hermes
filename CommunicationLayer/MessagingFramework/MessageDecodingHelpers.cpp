@@ -38,7 +38,7 @@ void MessageDecodingHelpers::getData(const QByteArray& data, int startIndex, Typ
     return dataUnion;
 }
 
-const int MessageDecodingHelpers::numberOfBytesInData(const Type& type)
+int MessageDecodingHelpers::numberOfBytesInData(Type type) const
 {
     switch (type)
     {

@@ -4,11 +4,11 @@
 #include "CommunicationLayer/PacketDecoder/I_PacketDecoder.h"
 #include "DataLayer/MotorFaultsData/I_MotorFaultsData.h"
 
-class MotorFaultsData : public QObject
+class MotorFaultsPopulator : public QObject
 {
     Q_OBJECT
 public:
-    MotorFaultsData(I_PacketDecoder& packetDecoder,
+    MotorFaultsPopulator(I_PacketDecoder& packetDecoder,
                      I_MotorFaultsData& motorFaultsData);
 public slots:
     void populateData(const MotorFaultsMessage);

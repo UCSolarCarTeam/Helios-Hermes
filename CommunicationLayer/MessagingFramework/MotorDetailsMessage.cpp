@@ -8,6 +8,7 @@ using namespace MessageDecodingHelpers;
 
 namespace
 {
+    const int PACKAGE_ID = 0;
     const int PHASE_CCURRENT = 1;
     const int PHASE_BCURRENT = 5;
     const int MOTOR_VOLTAGE_REAL = 9;
@@ -27,15 +28,16 @@ namespace
     const int SLIP_SPEED = 65;
 }
 
-MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData, unsigned char motorNumber)
+MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData)
 : messageData_(messageData)
-, motorNumber_(motorNumber)
 {
 }
 
 unsigned char MotorDetailsMessage::motorNumber() const
 {
-    return motorNumber_;
+    const unsigned char packageID = getUnsignedChar(messageData_, PACKAGE_ID);
+    // ID of motor 0 == 2, ID of motor 1 == 3
+    return packageID - 2;
 }
 
 float MotorDetailsMessage::phaseCCurrent() const

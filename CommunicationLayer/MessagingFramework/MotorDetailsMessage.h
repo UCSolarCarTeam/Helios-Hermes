@@ -6,6 +6,8 @@
 class MotorDetailsMessage
 {
 public:
+    MotorDetailsMessage(const QByteArray& messageData);
+
     unsigned char motorNumber() const;
     float phaseCCurrent() const;
     float phaseBCurrent() const;
@@ -29,5 +31,4 @@ public:
 
 private:
     const QByteArray messageData_;
-    const unsigned char motorNumber_;
-}
+};

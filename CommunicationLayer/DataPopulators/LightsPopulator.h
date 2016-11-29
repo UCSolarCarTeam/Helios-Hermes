@@ -11,9 +11,9 @@ public:
     LightsPopulator(I_PacketDecoder& packetDecoder, I_LightsData& lightsData);
 
 public slots:
-    void populateData(const LightsMessage);
+    void populateData(const LightsMessage&);
 
 private:
     I_PacketDecoder& packetDecoder_;
     I_LightsData& lightsData_;
-}
+};

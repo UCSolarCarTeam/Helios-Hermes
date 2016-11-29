@@ -22,8 +22,9 @@ public:
     virtual void setTemperature(const unsigned short& temperature) = 0;
 
 signals:
-    void arrayVoltageReceived(const unsigned short& arrayVoltage);
-    void arrayCurrentReceived(const unsigned short& arrayCurrent);
-    void batteryVoltageReceived(const unsigned short& batteryVoltage);
-    void temperatureReceived(const unsigned short& temperature);
+    void mpptStatusReceived(const unsigned char mpptStatus);
+    void arrayVoltageReceived(const unsigned short arrayVoltage);
+    void arrayCurrentReceived(const unsigned short arrayCurrent);
+    void batteryVoltageReceived(const unsigned short batteryVoltage);
+    void temperatureReceived(const unsigned short temperature);
 };

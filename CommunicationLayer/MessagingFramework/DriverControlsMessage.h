@@ -3,7 +3,7 @@
 #include <QByteArray>
 #include <QString>
 
-class DriverControlMessage
+class DriverControlsMessage
 {
 public:
     DriverControlsMessage(const QByteArray& messageData);
@@ -19,4 +19,4 @@ public:
 
 private:
     const QByteArray messageData_;
-}
+};

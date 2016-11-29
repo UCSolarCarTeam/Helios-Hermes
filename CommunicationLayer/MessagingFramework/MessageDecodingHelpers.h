@@ -10,7 +10,7 @@ public:
     unsigned char getUnsignedChar(const QByteArray& data, int startIndex);
 
 private:
-    static const int numberOfBytesInData(const Type&);
-    void getData(const QByteArray& data, int startIndex, void* output);
     enum Type { FLOAT = 1, UNSIGNED_SHORT = 2, UNSIGNED_CHAR = 3 };
-}
+    int numberOfBytesInData(Type) const;
+    void getData(const QByteArray& data, int startIndex, void* output);
+};

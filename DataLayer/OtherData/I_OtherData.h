@@ -16,5 +16,5 @@ public:
     virtual void setGps(const unsigned char& gps) = 0;
 
 signals:
-    virtual void gpsReceived(const unsigned char& gps);
+    void gpsReceived(const unsigned char& gps);
 };

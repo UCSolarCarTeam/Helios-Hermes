@@ -2,7 +2,7 @@
 
 #include <QScopedArrayPointer>
 
-#include "I_MpptUnit.h"
+#include "MpptUnit.h"
 #include "I_MpptData.h"
 
 class MpptData: public I_MpptData
@@ -13,5 +13,5 @@ public:
     I_MpptUnit& getMpptUnit(const unsigned char& index);
 
 private:
-    QScopedArrayPointer<I_MpptUnit> mpptUnits_;
+    QScopedArrayPointer<MpptUnit> mpptUnits_;
 };

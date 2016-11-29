@@ -16,4 +16,4 @@ public slots:
 private:
     I_PacketDecoder& packetDecoder_;
     I_KeyMotorData& keyMotorData_;
-}
+};

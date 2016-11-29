@@ -9,16 +9,16 @@ CmuPopulator::CmuPopulator(I_PacketDecoder& packetDecoder, I_CmuData& cmuData)
 
 void CmuPopulator::populateData(const CmuMessage message)
 {
-    I_CmuUnit* cmuUnit = cmuData_.getCmuUnit(message.cmuNumber());
-    QList<unsigned short> cellVoltages = message.cellVoltages();
+    I_CmuUnit& cmuUnit = cmuData_.getCmuUnit(message.cmuNumber());
+    QList<short> cellVoltages = message.cellVoltages();
     QList<unsigned short> cellTemperatures = message.cellTemperatures();
     for (int i = 0; i < cellVoltages.size(); i++)
     {
-        cmuUnit->setCellVoltage(i, cellVoltages.pop_front());
+        cmuUnit.setCellVoltage(i, cellVoltages.takeFirst());
     }
-    cmuUnit->setPcbTemp(message.pcbTemperature());
+    cmuUnit.setPcbTemp(message.pcbTemperature());
     for (int i = 0; i < cellTemperatures.size(); i++)
     {
-        cmuUnit->setCellTemp(i, cellTemperatures.pop_front());
+        cmuUnit.setCellTemp(i, cellTemperatures.takeFirst());
     }
 }

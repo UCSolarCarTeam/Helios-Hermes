@@ -31,7 +31,7 @@ public:
         , packetUnstuffer(packetSynchronizer)
         , packetChecksumChecker(packetUnstuffer)
         , packetDecoder(packetChecksumChecker)
-        , BatteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
+        , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
         , batteryPopulator(packetDecoder, dataContainer.batteryData())
         , cmuPopulator(packetDecoder, dataContainer.cmuData())
         , driverControlsPopulator(packetDecoder, dataContainer.driverControlsData())

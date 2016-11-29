@@ -2,6 +2,8 @@
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
+using namespace MessageDecodingHelpers;
+
 namespace
 {
     const int ERROR_FLAGS = 1;

@@ -7,7 +7,7 @@ OtherPopulator::OtherPopulator(I_PacketDecoder& packetDecoder, I_OtherData& othe
     connect(&packetDecoder_, SIGNAL(packetDecoded(const OtherMessage)), this, SLOT(populateData(const OtherMessage)));
 }
 
-void OtherPopulator::populateData(const OtherMessage& message)
+void OtherPopulator::populateData(const OtherMessage message)
 {
     otherData_.setGps(message.getGps());
 }

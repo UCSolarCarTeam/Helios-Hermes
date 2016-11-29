@@ -16,6 +16,7 @@ public:
     unsigned short getTemperature() const;
 
     /* MpptUnit Sets */
+    void setMpptStatus(const unsigned char& mpptStatus);
     void setArrayVoltage(const unsigned short& arrayVoltage);
     void setArrayCurrent(const unsigned short& arrayCurrent);
     void setBatteryVoltage(const unsigned short& batteryVoltage);
