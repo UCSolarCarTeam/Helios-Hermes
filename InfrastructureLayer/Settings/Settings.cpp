@@ -50,15 +50,15 @@ QString Settings::exchangeName() const
 
 int Settings::numberOfCmus() const
 {
-    return settings_.value("numberOfCmus").toInt();
+    return settings_.value("UnitNumbers/numberOfCmus").toInt();
 }
 
 int Settings::numberOfMotors() const
 {
-    return settings_.value("numberOfMotors").toInt();
+    return settings_.value("UnitNumbers/numberOfMotors").toInt();
 }
 
 int Settings::numberOfMppts() const
 {
-    return settings_.value("numberOfMppts").toInt();
+    return settings_.value("UnitNumbers/numberOfMppts").toInt();
 }
