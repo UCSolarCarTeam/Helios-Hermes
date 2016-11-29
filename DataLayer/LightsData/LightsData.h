@@ -2,7 +2,7 @@
 
 #include "I_LightsData.h"
 
-class LightsData : public I_LightsData 
+class LightsData : public I_LightsData
 {
 public:
     LightsData();

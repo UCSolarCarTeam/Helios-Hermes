@@ -1,11 +1,11 @@
 #include "MpptUnit.h"
 
 MpptUnit::MpptUnit()
-: mpptStatus_(0)
-, arrayVoltage_(0)
-, arrayCurrent_(0)
-, batteryVoltage_(0)
-, temperature_(0)
+    : mpptStatus_(0)
+    , arrayVoltage_(0)
+    , arrayCurrent_(0)
+    , batteryVoltage_(0)
+    , temperature_(0)
 {
     //  Initialize to 0
 }

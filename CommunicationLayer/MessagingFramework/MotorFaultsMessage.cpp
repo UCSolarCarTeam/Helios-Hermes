@@ -17,7 +17,7 @@ namespace
 }
 
 MotorFaultsMessage::MotorFaultsMessage(QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 

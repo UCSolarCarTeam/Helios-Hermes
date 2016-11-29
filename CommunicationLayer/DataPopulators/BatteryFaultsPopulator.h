@@ -9,7 +9,7 @@ class BatteryFaultsPopulator : public QObject
     Q_OBJECT
 public:
     BatteryFaultsPopulator(I_PacketDecoder& packetDecoder,
-                     I_BatteryFaultsData& batteryFaultsData);
+                           I_BatteryFaultsData& batteryFaultsData);
 public slots:
     void populateData(const BatteryFaultsMessage);
 

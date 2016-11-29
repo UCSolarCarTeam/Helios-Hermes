@@ -1,8 +1,8 @@
 #include "KeyMotorPopulator.h"
 
 KeyMotorPopulator::KeyMotorPopulator(I_PacketDecoder& packetDecoder, I_KeyMotorData& keyMotorData)
-: packetDecoder_(packetDecoder)
-, keyMotorData_(keyMotorData)
+    : packetDecoder_(packetDecoder)
+    , keyMotorData_(keyMotorData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const KeyMotorPopulator)), this, SLOT(populateData(const KeyMotorPopulator)));
 }

@@ -4,19 +4,19 @@
 
 namespace
 {
-   const unsigned short CELL_OVER_VOLTAGE_MASK = 0x0001;
-   const unsigned short CELL_UNDER_VOLTAGE_MASK = 0x0002;
-   const unsigned short CELL_OVER_TEMP_MASK = 0x0004;
-   const unsigned short MEASUREMENT_UNTRUSTED_MASK = 0x0008;
-   const unsigned short CMU_COMM_TIMEOUT_MASK = 0x0010;
-   const unsigned short VEHICLE_COMM_TIMEOUT_MASK = 0x0020;
-   const unsigned short BMU_IN_SETUP_MODE_MASK = 0x0040;
-   const unsigned short CMU_CAN_BUS_POWER_STATUS_MASK = 0x0080;
-   const unsigned short PACK_ISOLATION_TEST_FAILURE_MASK = 0x0100;
-   const unsigned short SOFTWARE_OVER_CURRENT_MASK = 0x0200;
-   const unsigned short CAN_SUPPLY_LOW_MASK = 0x0400;
-   const unsigned short CONTACTOR_STUCK_MASK = 0x0800;
-   const unsigned short CMU_DETECTED_EXTRA_CELL_MASK = 0x1000;
+    const unsigned short CELL_OVER_VOLTAGE_MASK = 0x0001;
+    const unsigned short CELL_UNDER_VOLTAGE_MASK = 0x0002;
+    const unsigned short CELL_OVER_TEMP_MASK = 0x0004;
+    const unsigned short MEASUREMENT_UNTRUSTED_MASK = 0x0008;
+    const unsigned short CMU_COMM_TIMEOUT_MASK = 0x0010;
+    const unsigned short VEHICLE_COMM_TIMEOUT_MASK = 0x0020;
+    const unsigned short BMU_IN_SETUP_MODE_MASK = 0x0040;
+    const unsigned short CMU_CAN_BUS_POWER_STATUS_MASK = 0x0080;
+    const unsigned short PACK_ISOLATION_TEST_FAILURE_MASK = 0x0100;
+    const unsigned short SOFTWARE_OVER_CURRENT_MASK = 0x0200;
+    const unsigned short CAN_SUPPLY_LOW_MASK = 0x0400;
+    const unsigned short CONTACTOR_STUCK_MASK = 0x0800;
+    const unsigned short CMU_DETECTED_EXTRA_CELL_MASK = 0x1000;
 }
 
 BatteryFaultsData::BatteryFaultsData()
@@ -29,7 +29,8 @@ BatteryFaultsData::~BatteryFaultsData()
 }
 
 /* BatteryFaults Gets */
-unsigned short BatteryFaultsData::getErrorFlag() const {
+unsigned short BatteryFaultsData::getErrorFlag() const
+{
     return errorFlag_;
 }
 
@@ -107,7 +108,8 @@ bool BatteryFaultsData::operator==(const I_BatteryFaultsData& other) const
 
 /* BatteryFaults Sets */
 
-void BatteryFaultsData::setErrorFlag(const unsigned short& errorFlag) {
+void BatteryFaultsData::setErrorFlag(const unsigned short& errorFlag)
+{
     errorFlag_ = errorFlag;
     emit errorFlagRecieved(errorFlag_);
 }

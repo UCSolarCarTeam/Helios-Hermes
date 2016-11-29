@@ -1,8 +1,8 @@
 #include "MotorDetailsPopulator.h"
 
 MotorDetailsPopulator::MotorDetailsPopulator(I_PacketDecoder& packetDecoder, I_MotorDetailsData& motorDetailsData)
-: packetDecoder_(packetDecoder)
-, motorDetailsData_(motorDetailsData)
+    : packetDecoder_(packetDecoder)
+    , motorDetailsData_(motorDetailsData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const MotorDetailsMessage)), this, SLOT(populateData(const MotorDetailsData)));
 }

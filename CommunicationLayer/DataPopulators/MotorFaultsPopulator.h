@@ -9,7 +9,7 @@ class MotorFaultsPopulator : public QObject
     Q_OBJECT
 public:
     MotorFaultsPopulator(I_PacketDecoder& packetDecoder,
-                     I_MotorFaultsData& motorFaultsData);
+                         I_MotorFaultsData& motorFaultsData);
 public slots:
     void populateData(const MotorFaultsMessage);
 

@@ -29,7 +29,7 @@ namespace
 }
 
 MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 
@@ -128,26 +128,29 @@ float MotorDetailsMessage::slipSpeed() const
 QString MotorDetailsMessage::toString() const
 {
     QString messageString;
-    if ((motorNumber() & 0xe) != 0x0) {
+
+    if ((motorNumber() & 0xe) != 0x0)
+    {
         qDebug() << "Invalid motor number, unexpected behaviour likely";
     }
+
     messageString += QString::number(MessageDefines::Motor0Details + motorNumber()) + ", ";
-    messageString += QString::number(phaseCCurrent()) + ", "; 
-    messageString += QString::number(phaseBCurrent()) + ", "; 
-    messageString += QString::number(motorVoltageReal()) + ", "; 
-    messageString += QString::number(motorVoltageImaginary()) + ", "; 
-    messageString += QString::number(motorCurrentReal()) + ", "; 
-    messageString += QString::number(motorCurrentImaginary()) + ", "; 
-    messageString += QString::number(backEmfReal()) + ", "; 
-    messageString += QString::number(backEmfImaginary()) + ", "; 
-    messageString += QString::number(voltageRailSuppply15V()) + ", "; 
-    messageString += QString::number(voltageRailSupply33V()) + ", "; 
-    messageString += QString::number(voltageRailSupply19V()) + ", "; 
-    messageString += QString::number(heatSinkTemperature()) + ", "; 
-    messageString += QString::number(motorTempterature()) + ", "; 
-    messageString += QString::number(dspBoardTemperature()) + ", "; 
-    messageString += QString::number(dcBusAmpHours()) + ", "; 
-    messageString += QString::number(odometer()) + ", "; 
+    messageString += QString::number(phaseCCurrent()) + ", ";
+    messageString += QString::number(phaseBCurrent()) + ", ";
+    messageString += QString::number(motorVoltageReal()) + ", ";
+    messageString += QString::number(motorVoltageImaginary()) + ", ";
+    messageString += QString::number(motorCurrentReal()) + ", ";
+    messageString += QString::number(motorCurrentImaginary()) + ", ";
+    messageString += QString::number(backEmfReal()) + ", ";
+    messageString += QString::number(backEmfImaginary()) + ", ";
+    messageString += QString::number(voltageRailSuppply15V()) + ", ";
+    messageString += QString::number(voltageRailSupply33V()) + ", ";
+    messageString += QString::number(voltageRailSupply19V()) + ", ";
+    messageString += QString::number(heatSinkTemperature()) + ", ";
+    messageString += QString::number(motorTempterature()) + ", ";
+    messageString += QString::number(dspBoardTemperature()) + ", ";
+    messageString += QString::number(dcBusAmpHours()) + ", ";
+    messageString += QString::number(odometer()) + ", ";
     messageString += QString::number(slipSpeed()) + ", ";
     return messageString;
 }

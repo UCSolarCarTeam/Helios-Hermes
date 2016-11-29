@@ -3,7 +3,7 @@
 #include "MessageDefines.h"
 
 OtherMessage::OtherMessage(const QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 

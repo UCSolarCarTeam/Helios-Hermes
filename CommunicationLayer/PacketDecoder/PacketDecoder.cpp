@@ -68,7 +68,6 @@ void PacketDecoder::handleValidData(QByteArray messageData)
             case MessageDefines::Other:
                 emit packetDecoded(OtherMessage(messageData));
                 return;
-
         }
     }
     else

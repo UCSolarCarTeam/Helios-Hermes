@@ -1,7 +1,7 @@
 #include "MpptData.h"
 
 MpptData::MpptData(const unsigned char& numberOfMppts)
-: mpptUnits_(new MpptUnit[numberOfMppts])
+    : mpptUnits_(new MpptUnit[numberOfMppts])
 {
 }
 

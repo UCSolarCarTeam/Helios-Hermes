@@ -16,32 +16,32 @@ DriverControlsData::~DriverControlsData()
 }
 
 /*Data "Gets"*/
-unsigned char DriverControlsData::getDriverControlsBoardAlive() const 
+unsigned char DriverControlsData::getDriverControlsBoardAlive() const
 {
     return driverControlsBoardAlive_;
 }
 
-unsigned char DriverControlsData::getLightsInputs() const 
+unsigned char DriverControlsData::getLightsInputs() const
 {
     return lightsInputs_;
 }
 
-unsigned char DriverControlsData::getMusicInputs() const 
+unsigned char DriverControlsData::getMusicInputs() const
 {
     return musicInputs_;
 }
 
-unsigned short DriverControlsData::getAcceleration() const 
+unsigned short DriverControlsData::getAcceleration() const
 {
     return acceleration_;
 }
 
-unsigned short DriverControlsData::getRegenBraking() const 
+unsigned short DriverControlsData::getRegenBraking() const
 {
     return regenBraking_;
 }
 
-unsigned char DriverControlsData::getDriverInputs() const 
+unsigned char DriverControlsData::getDriverInputs() const
 {
     return driverInputs_;
 }

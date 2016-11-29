@@ -134,12 +134,10 @@ TEST_F(BatteryJsonForwarderTest, mod0DataForwarded)
     QString mod0CellTemperatureString = QString::number(mod0CellTemperature, 'f', JsonFormat::DECIMAL_PRECISION);
     QList<double> mod0CellVoltages =  {3.1f, 3.2f, 3.3f, 3.4f, 3.5f, 3.6f, 3.7f, 3.8f};
     QList<QString> mod0CellVoltagesString = QList<QString>(); //  {"3.10", "3.20", "3.30", "3.40", "3.50", "3.60", "3.70", "3.80"};
-
     foreach (double val, mod0CellVoltages)
     {
         mod0CellVoltagesString.append(QString::number(val, 'f', JsonFormat::DECIMAL_PRECISION));
     }
-
     EXPECT_CALL(*batteryData_, mod0PcbTemperature())
     .WillRepeatedly(Return(mod0PcbTemperature));
     EXPECT_CALL(*batteryData_, mod0CellTemperature())
@@ -168,12 +166,10 @@ TEST_F(BatteryJsonForwarderTest, mod1DataForwarded)
     QString mod1CellTemperatureString = QString::number(mod1CellTemperature, 'f', JsonFormat::DECIMAL_PRECISION);
     QList<double> mod1CellVoltages = {13.1f, 13.2f, 13.3f, 13.4f, 13.5f, 13.6f, 13.7f, 13.8f};
     QList<QString> mod1CellVoltagesString = QList<QString>(); // {"13.10", "13.20", "13.30", "13.40", "13.50", "13.60", "13.70", "13.80"};
-
     foreach (double val, mod1CellVoltages)
     {
         mod1CellVoltagesString.append(QString::number(val, 'f', JsonFormat::DECIMAL_PRECISION));
     }
-
     EXPECT_CALL(*batteryData_, mod1PcbTemperature())
     .WillRepeatedly(Return(mod1PcbTemperature));
     EXPECT_CALL(*batteryData_, mod1CellTemperature())
@@ -202,12 +198,10 @@ TEST_F(BatteryJsonForwarderTest, mod2DataForwarded)
     QString mod2CellTemperatureString = QString::number(mod2CellTemperature, 'f', JsonFormat::DECIMAL_PRECISION);
     QList<double> mod2CellVoltages = {23.1f, 23.2f, 23.3f, 23.4f, 23.5f, 23.6f, 23.7f, 23.8f};
     QList<QString> mod2CellVoltagesString = QList<QString>(); // {"23.10", "23.20", "23.30", "23.40", "23.50", "23.60", "23.70", "23.80"};
-
     foreach (double val, mod2CellVoltages)
     {
         mod2CellVoltagesString.append(QString::number(val, 'f', JsonFormat::DECIMAL_PRECISION));
     }
-
     EXPECT_CALL(*batteryData_, mod2PcbTemperature())
     .WillRepeatedly(Return(mod2PcbTemperature));
     EXPECT_CALL(*batteryData_, mod2CellTemperature())
@@ -236,12 +230,10 @@ TEST_F(BatteryJsonForwarderTest, mod3DataForwarded)
     QString mod3CellTemperatureString = QString::number(mod3CellTemperature, 'f', JsonFormat::DECIMAL_PRECISION);
     QList<double> mod3CellVoltages = {33.1f, 33.2f, 33.3f, 33.4f, 33.5f, 33.6f, 33.7f, 33.8f};
     QList<QString> mod3CellVoltagesString = QList<QString>(); // {"33.10", "33.20", "33.30", "33.40", "33.50", "33.60", "33.70", "33.80"};
-
     foreach (double val, mod3CellVoltages)
     {
         mod3CellVoltagesString.append(QString::number(val, 'f', JsonFormat::DECIMAL_PRECISION));
     }
-
     EXPECT_CALL(*batteryData_, mod3PcbTemperature())
     .WillRepeatedly(Return(mod3PcbTemperature));
     EXPECT_CALL(*batteryData_, mod3CellTemperature())

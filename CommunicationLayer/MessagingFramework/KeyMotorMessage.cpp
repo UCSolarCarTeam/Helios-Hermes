@@ -19,7 +19,7 @@ namespace
 }
 
 KeyMotorMessage::KeyMotorMessage(const QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 

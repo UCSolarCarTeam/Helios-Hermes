@@ -2,7 +2,7 @@
 
 LightsData::LightsData()
     : lightStatus_(0)
-{   
+{
 //    Initialize to 0
 }
 

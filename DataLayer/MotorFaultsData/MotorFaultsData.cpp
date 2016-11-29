@@ -3,34 +3,34 @@
 namespace
 {
     // Error Flags
-   const unsigned char MOTOR_OVER_SPEED_FLAG = 0x01;
-   const unsigned char SOFTWARE_OVER_CURRENT_FLAG = 0x02;
-   const unsigned char DC_BUS_OVER_VOLTAGE_FLAG = 0x04;
-   const unsigned char BAD_MOTOR_POSITION_HALL_SEQUENCE_FLAG = 0x08;
-   const unsigned char WATCHDOG_CAUSED_LAST_RESET_FLAG = 0x10;
-   const unsigned char CONFIG_READ_ERROR_FLAG = 0x20;
-   const unsigned char RAIL_UNDER_VOLTAGE_LOCK_OUT_FLAG = 0x40;
-   const unsigned char DESATURATION_FAULT_FLAG = 0x80;
+    const unsigned char MOTOR_OVER_SPEED_FLAG = 0x01;
+    const unsigned char SOFTWARE_OVER_CURRENT_FLAG = 0x02;
+    const unsigned char DC_BUS_OVER_VOLTAGE_FLAG = 0x04;
+    const unsigned char BAD_MOTOR_POSITION_HALL_SEQUENCE_FLAG = 0x08;
+    const unsigned char WATCHDOG_CAUSED_LAST_RESET_FLAG = 0x10;
+    const unsigned char CONFIG_READ_ERROR_FLAG = 0x20;
+    const unsigned char RAIL_UNDER_VOLTAGE_LOCK_OUT_FLAG = 0x40;
+    const unsigned char DESATURATION_FAULT_FLAG = 0x80;
 
-   // Limit Flags
-   const unsigned char OUTPUT_VOLTAGE_PWM_LIMIT_FLAG = 0x01;
-   const unsigned char MOTOR_CURRENT_LIMIT_FLAG = 0x02;
-   const unsigned char VELOCITY_LIMIT_FLAG = 0x04;
-   const unsigned char BUS_CURRENT_LIMIT_FLAG = 0x08;
-   const unsigned char BUS_VOLTAGE_UPPER_LIMIT_FLAG = 0x10;
-   const unsigned char BUS_VOLTAGE_LOWER_LIMIT_FLAG = 0x20;
-   const unsigned char IPM_OR_MOTOR_TELEMETRY_LIMIT_FLAG = 0x40;
+    // Limit Flags
+    const unsigned char OUTPUT_VOLTAGE_PWM_LIMIT_FLAG = 0x01;
+    const unsigned char MOTOR_CURRENT_LIMIT_FLAG = 0x02;
+    const unsigned char VELOCITY_LIMIT_FLAG = 0x04;
+    const unsigned char BUS_CURRENT_LIMIT_FLAG = 0x08;
+    const unsigned char BUS_VOLTAGE_UPPER_LIMIT_FLAG = 0x10;
+    const unsigned char BUS_VOLTAGE_LOWER_LIMIT_FLAG = 0x20;
+    const unsigned char IPM_OR_MOTOR_TELEMETRY_LIMIT_FLAG = 0x40;
 }
 
 MotorFaultsData::MotorFaultsData()
-: m0ErrorFlags_(0)
-, m1ErrorFlags_(0)
-, m0LimitFlags_(0)
-, m1LimitFlags_(0)
-, m0CanRxErrorCount_(0)
-, m0CanTxErrorCount_(0)
-, m1CanRxErrorCount_(0)
-, m1CanTxErrorCount_(0)
+    : m0ErrorFlags_(0)
+    , m1ErrorFlags_(0)
+    , m0LimitFlags_(0)
+    , m1LimitFlags_(0)
+    , m0CanRxErrorCount_(0)
+    , m0CanTxErrorCount_(0)
+    , m1CanRxErrorCount_(0)
+    , m1CanTxErrorCount_(0)
 {
 }
 MotorFaultsData::~MotorFaultsData()
@@ -38,35 +38,43 @@ MotorFaultsData::~MotorFaultsData()
 }
 
 /* MotorFaults Gets */
-unsigned char MotorFaultsData::getM0ErrorFlags() const {
+unsigned char MotorFaultsData::getM0ErrorFlags() const
+{
     return m0ErrorFlags_;
 }
 
-unsigned char MotorFaultsData::getM1ErrorFlags() const {
+unsigned char MotorFaultsData::getM1ErrorFlags() const
+{
     return m1ErrorFlags_;
 }
 
-unsigned char MotorFaultsData::getM0LimitFlags() const {
+unsigned char MotorFaultsData::getM0LimitFlags() const
+{
     return m0LimitFlags_;
 }
 
-unsigned char MotorFaultsData::getM1LimitFlags() const {
+unsigned char MotorFaultsData::getM1LimitFlags() const
+{
     return m1LimitFlags_;
 }
 
-unsigned char MotorFaultsData::getM0CanRxErrorCount() const {
+unsigned char MotorFaultsData::getM0CanRxErrorCount() const
+{
     return m0CanRxErrorCount_;
 }
 
-unsigned char MotorFaultsData::getM0CanTxErrorCount() const {
+unsigned char MotorFaultsData::getM0CanTxErrorCount() const
+{
     return m0CanTxErrorCount_;
 }
 
-unsigned char MotorFaultsData::getM1CanRxErrorCount() const {
+unsigned char MotorFaultsData::getM1CanRxErrorCount() const
+{
     return m1CanRxErrorCount_;
 }
 
-unsigned char MotorFaultsData::getM1CanTxErrorCount() const {
+unsigned char MotorFaultsData::getM1CanTxErrorCount() const
+{
     return m1CanTxErrorCount_;
 }
 
@@ -277,5 +285,5 @@ void MotorFaultsData::setM1CanTxErrorCount(const unsigned char& m1CanTxErrorCoun
 
 QString MotorFaultsData::toString() const
 {
-   return "0x" + QString::number(m0ErrorFlags_, 16) + " 0x" + QString::number(m0LimitFlags_, 16) + " 0x" + QString::number(m1ErrorFlags_, 16) + " 0x" + QString::number(m1LimitFlags_, 16);
+    return "0x" + QString::number(m0ErrorFlags_, 16) + " 0x" + QString::number(m0LimitFlags_, 16) + " 0x" + QString::number(m1ErrorFlags_, 16) + " 0x" + QString::number(m1LimitFlags_, 16);
 }

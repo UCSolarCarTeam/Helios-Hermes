@@ -1,8 +1,8 @@
 #include "MpptPopulator.h"
 
 MpptPopulator::MpptPopulator(I_PacketDecoder& packetDecoder, I_MpptData& mpptData)
-: packetDecoder_(packetDecoder)
-, mpptData_(mpptData)
+    : packetDecoder_(packetDecoder)
+    , mpptData_(mpptData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const MpptMessage)), this, SLOT(populateData(const MpptMessage)));
 }

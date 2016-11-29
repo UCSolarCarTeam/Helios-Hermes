@@ -3,30 +3,29 @@
 unsigned char MotorDetailsUnit::newMotorNumber_ = 0;
 
 MotorDetailsUnit::MotorDetailsUnit()
-: phaseCCurrent_(0)
-, phaseBCurrent_(0)
-, motorVoltageReal_(0)
-, motorVoltageImaginary_(0)
-, motorCurrentReal_(0)
-, motorCurrentImaginary_(0)
-, backEmfReal_(0)
-, backEmfImaginary_(0)
-, voltageRailSuppply15V_(0)
-, voltageRailSupply33V_(0)
-, voltageRailSupply19V_(0)
-, heatSinkTemperature_(0)
-, motorTempterature_(0)
-, dspBoardTemperature_(0)
-, dcBusAmpHours_(0)
-, odometer_(0)
-, slipSpeed_(0)
+    : phaseCCurrent_(0)
+    , phaseBCurrent_(0)
+    , motorVoltageReal_(0)
+    , motorVoltageImaginary_(0)
+    , motorCurrentReal_(0)
+    , motorCurrentImaginary_(0)
+    , backEmfReal_(0)
+    , backEmfImaginary_(0)
+    , voltageRailSuppply15V_(0)
+    , voltageRailSupply33V_(0)
+    , voltageRailSupply19V_(0)
+    , heatSinkTemperature_(0)
+    , motorTempterature_(0)
+    , dspBoardTemperature_(0)
+    , dcBusAmpHours_(0)
+    , odometer_(0)
+    , slipSpeed_(0)
 {
     motorNumber_ = newMotorNumber_++;
 }
 
 MotorDetailsUnit::~MotorDetailsUnit()
 {
-
 }
 
 /* MotorDetailsUnit Gets*/

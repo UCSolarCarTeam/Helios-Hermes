@@ -1,8 +1,8 @@
 #include "BatteryPopulator.h"
 
 BatteryPopulator::BatteryPopulator(I_PacketDecoder& packetDecoder, I_BatteryData& batteryData)
-: packetDecoder_(packetDecoder)
-, batteryData_(batteryData)
+    : packetDecoder_(packetDecoder)
+    , batteryData_(batteryData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const BatteryMessage)), this, SLOT(populateData(const BatteryMessage)));
 }

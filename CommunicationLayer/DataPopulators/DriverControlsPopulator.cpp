@@ -1,8 +1,8 @@
 #include "DriverControlsPopulator.h"
 
 DriverControlsPopulator::DriverControlsPopulator(I_PacketDecoder& packetDecoder, I_DriverControlsData& driverControlsData)
-: packetDecoder_(packetDecoder)
-, driverControlsData_(driverControlsData)
+    : packetDecoder_(packetDecoder)
+    , driverControlsData_(driverControlsData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const DriverControlsMessage)), this, SLOT(populateData(const DriverControlsMessage)));
 }

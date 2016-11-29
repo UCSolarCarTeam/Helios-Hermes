@@ -37,7 +37,7 @@ namespace
 }
 
 BatteryMessage::BatteryMessage(const QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 

@@ -12,16 +12,16 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 
 DataContainer::DataContainer(const I_Settings& settings)
-: batteryData_(new BatteryData())
-, batteryFaultsData_(new BatteryFaultsData())
-, cmuData_(new CmuData(settings.numberOfCmus()))
-, driverControlsData_(new DriverControlsData())
-, keyMotorData_(new KeyMotorData())
-, lightsData_(new LightsData())
-, motorDetailsData_(new MotorDetailsData(settings.numberOfMotors()))
-, motorFaultsData_(new MotorFaultsData())
-, mpptData_(new MpptData(settings.numberOfMppts()))
-, otherData_(new OtherData())
+    : batteryData_(new BatteryData())
+    , batteryFaultsData_(new BatteryFaultsData())
+    , cmuData_(new CmuData(settings.numberOfCmus()))
+    , driverControlsData_(new DriverControlsData())
+    , keyMotorData_(new KeyMotorData())
+    , lightsData_(new LightsData())
+    , motorDetailsData_(new MotorDetailsData(settings.numberOfMotors()))
+    , motorFaultsData_(new MotorFaultsData())
+    , mpptData_(new MpptData(settings.numberOfMppts()))
+    , otherData_(new OtherData())
 {
 }
 

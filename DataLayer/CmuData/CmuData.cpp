@@ -1,7 +1,7 @@
 #include "CmuData.h"
 
 CmuData::CmuData(const unsigned char& numberOfCmus)
-: cmuUnits_(new CmuUnit[numberOfCmus])
+    : cmuUnits_(new CmuUnit[numberOfCmus])
 {
 }
 

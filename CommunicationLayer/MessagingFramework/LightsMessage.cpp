@@ -10,7 +10,7 @@ namespace
 }
 
 LightsMessage::LightsMessage(const QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 

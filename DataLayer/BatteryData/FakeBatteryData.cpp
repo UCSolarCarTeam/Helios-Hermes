@@ -11,142 +11,142 @@ FakeBatteryData::~FakeBatteryData()
 /*Data "Gets"*/
 unsigned char FakeBatteryData::getAlive() const
 {
-  return 1;
+    return 1;
 }
 
 float FakeBatteryData::getPackSocAmpHours() const
 {
-  return 2;
+    return 2;
 }
 
 float FakeBatteryData::getPackSocPercentage() const
 {
-  return 3;
+    return 3;
 }
 
 float FakeBatteryData::getPackBalanceSoc() const
 {
-  return 4;
+    return 4;
 }
 
 float FakeBatteryData::getPackBalanceSocPercentage() const
 {
-  return 5;
+    return 5;
 }
 
 unsigned short FakeBatteryData::getChargingCellVoltageError() const
 {
-  return 6;
+    return 6;
 }
 
 unsigned short FakeBatteryData::getCellTemperatureMargin() const
 {
-  return 7;
+    return 7;
 }
 
 unsigned short FakeBatteryData::getDischargingCellVoltageError() const
 {
-  return 8;
+    return 8;
 }
 
 unsigned short FakeBatteryData::getTotalPackCapacity() const
 {
-  return 9;
+    return 9;
 }
 
 unsigned char FakeBatteryData::getPrechargeContactorDriverStatus() const
 {
-  return 10;
+    return 10;
 }
 
 unsigned char FakeBatteryData::getPrechargeState() const
 {
-  return 11;
+    return 11;
 }
 
 unsigned char FakeBatteryData::getPrechargeTimerElapsed() const
 {
-  return 12;
+    return 12;
 }
 
 unsigned short FakeBatteryData::getPrechargeTimerCount() const
 {
-  return 13;
+    return 13;
 }
 
 unsigned short FakeBatteryData::getLowestCellVoltage() const
 {
-  return 14;
+    return 14;
 }
 
 unsigned char FakeBatteryData::getLowestCellVoltageNumber() const
 {
-  return 15;
+    return 15;
 }
 
 unsigned short FakeBatteryData::getHighestCellVoltage() const
 {
-  return 16;
+    return 16;
 }
 
 unsigned char FakeBatteryData::getHighestCellVoltageNumber() const
 {
-  return 17;
+    return 17;
 }
 
 unsigned short FakeBatteryData::getLowestCellTemperature() const
 {
-  return 18;
+    return 18;
 }
 
 unsigned char FakeBatteryData::getLowestCellTemperatureNumber() const
 {
-  return 19;
+    return 19;
 }
 
 unsigned short FakeBatteryData::getHighestCellTemperature() const
 {
-  return 20;
+    return 20;
 }
 
 unsigned char FakeBatteryData::getHighestCellTemperatureNumber() const
 {
-  return 21;
+    return 21;
 }
 
 unsigned int FakeBatteryData::getVoltage() const
 {
-  return 22;
+    return 22;
 }
 
 unsigned int FakeBatteryData::getCurrent() const
 {
-  return 23;
+    return 23;
 }
 
 unsigned short FakeBatteryData::getFan0Speed() const
 {
-  return 24;
+    return 24;
 }
 
 unsigned short FakeBatteryData::getFan1Speed() const
 {
-  return 25;
+    return 25;
 }
 
 unsigned short FakeBatteryData::getFanContactors12VCurrentConsumption() const
 {
-  return 26;
+    return 26;
 }
 
 unsigned short FakeBatteryData::getCmu12VCurrentConsumption() const
 {
-  return 27;
+    return 27;
 }
 
 unsigned char FakeBatteryData::getBmsCanLockedOut() const
 {
-  return 1;
+    return 1;
 }
 
 /*BatteryData "Sets"*/

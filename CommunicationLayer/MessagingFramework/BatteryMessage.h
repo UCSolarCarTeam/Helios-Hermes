@@ -40,5 +40,5 @@ public:
     QString toString() const;
 
 private:
-   const QByteArray messageData_;
+    const QByteArray messageData_;
 };

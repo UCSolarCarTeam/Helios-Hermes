@@ -10,7 +10,7 @@ public:
 
     /* LightsData Gets */
     virtual unsigned char getLightStatus() const = 0;
-    
+
     /* LightsData Sets */
     virtual void setLightStatus(const unsigned char&) = 0;
 

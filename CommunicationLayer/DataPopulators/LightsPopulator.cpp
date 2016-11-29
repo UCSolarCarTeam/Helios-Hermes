@@ -1,8 +1,8 @@
 #include "LightsPopulator.h"
 
 LightsPopulator::LightsPopulator(I_PacketDecoder& packetDecoder, I_LightsData& lightsData)
-: packetDecoder_(packetDecoder)
-, lightsData_(lightsData)
+    : packetDecoder_(packetDecoder)
+    , lightsData_(lightsData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const LightsMessage)), this, SLOT(populateData(const LightsMessage)));
 }

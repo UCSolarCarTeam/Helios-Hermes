@@ -15,7 +15,7 @@ namespace
 }
 
 DriverControlsMessage::DriverControlsMessage(const QByteArray& messageData)
-: messageData_(messageData)
+    : messageData_(messageData)
 {
 }
 
@@ -47,7 +47,7 @@ unsigned short DriverControlsMessage::regenBraking() const
 unsigned char DriverControlsMessage::driverInputs() const
 {
     return getUnsignedChar(messageData_, DRIVER_INPUTS);
-}   
+}
 
 QString DriverControlsMessage::toString() const
 {

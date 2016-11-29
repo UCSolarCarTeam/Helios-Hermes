@@ -1,8 +1,8 @@
 #include "MotorFaultsPopulator.h"
 
 MotorFaultsPopulator::MotorFaultsPopulator(I_PacketDecoder& packetDecoder, I_MotorFaultsData& motorFaultsData)
-: packetDecoder_(packetDecoder)
-, motorFaultsData_(motorFaultsData)
+    : packetDecoder_(packetDecoder)
+    , motorFaultsData_(motorFaultsData)
 {
     connect(&packetDecoder_, SIGNAL(packetDecoded(const MotorFaultsMessage)), this, SLOT(populateData(const MotorFaultsMessage)));
 }

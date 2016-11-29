@@ -2,7 +2,7 @@
 #include "MotorDetailsUnit.h"
 
 MotorDetailsData::MotorDetailsData(const unsigned char& numberOfMotors)
-: motorDetailsUnits_(new MotorDetailsUnit[numberOfMotors])
+    : motorDetailsUnits_(new MotorDetailsUnit[numberOfMotors])
 {
 }
 

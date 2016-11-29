@@ -12,6 +12,6 @@ public:
 
     I_CmuUnit& getCmuUnit(const unsigned char& index);
 
-private: 
+private:
     QScopedArrayPointer<CmuUnit> cmuUnits_;
 };

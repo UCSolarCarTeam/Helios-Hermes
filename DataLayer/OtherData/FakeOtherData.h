@@ -8,7 +8,7 @@ public:
     FakeOtherData();
     virtual ~FakeOtherData();
 
-        /* OtherData "Gets"*/
+    /* OtherData "Gets"*/
     unsigned char getGps() const;
 
     /*OtherData "Sets"*/
