@@ -11,7 +11,4 @@ public:
 
     /* MpptData gets */
     virtual I_MpptUnit& getMpptUnit(const unsigned char& index) = 0;
-
-signals:
-    // TODO Do we need signals here?
 };
