@@ -20,22 +20,22 @@ unsigned char MpptMessage::mpptStatus() const
 
 unsigned short MpptMessage::arrayVoltage() const
 {
-    return getUnsignedShort(messageData_, ARRAY_VOLTAGE);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, ARRAY_VOLTAGE);
 }
 
 unsigned short MpptMessage::arrayCurrent() const
 {
-    return getUnsignedShort(messageData_, ARRAY_CURRENT);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, ARRAY_CURRENT);
 }
 
 unsigned short MpptMessage::batteryVoltage() const
 {
-    return getUnsignedShort(messageData_, BATTERY_VOLTAGE);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, BATTERY_VOLTAGE);
 }
 
 unsigned short MpptMessage::temperature() const
 {
-    return getUnsignedShort(messageData_, TEMPERATURE);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, TEMPERATURE);
 }
 
 QString MpptMessage::toString() const

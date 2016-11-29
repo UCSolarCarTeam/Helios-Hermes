@@ -2,8 +2,6 @@
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
-using namespace MessageDecodingHelpers;
-
 OtherMessage::OtherMessage(const QByteArray& messageData)
 : messageData_(messageData)
 {
@@ -12,6 +10,6 @@ OtherMessage::OtherMessage(const QByteArray& messageData)
 QString OtherMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::OtherData) + ", ";
+    messageString += QString::number(MessageDefines::Other) + ", ";
     return messageString;
 }

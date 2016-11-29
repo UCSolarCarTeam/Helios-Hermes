@@ -18,25 +18,26 @@ int MessageDefines::getLengthForMessage(MessageDefines::Type type)
 {
    switch (type)
    {
-    case BatteryData:
+    case Battery:
         return BATTERY_DATA_LENGTH;
-    case BatteryFaultsData:
+    case BatteryFaults:
         return BATTERY_FAULTS_DATA_LENGTH;
-    case CmuData:
+    case Cmu:
         return CMU_DATA_LENGTH;
-    case DriverControlsData:
+    case DriverControls:
         return DRIVER_CONTROLS_DATA_LENGTH;
-    case KeyMotorData:
+    case KeyMotor:
         return KEY_MOTOR_DATA_LENGTH;
-    case LightsData:
+    case Lights:
         return LIGHTS_DATA_LENGTH;
-    case MotorDetailsData:
+    case Motor0Details:
+    case Motor1Details:
         return MOTOR_DETAILS_DATA_LENGTH;
-    case MotorFaultsData:
+    case MotorFaults:
         return MOTOR_FAULTS_DATA_LENGTH;
-    case MpptData:
+    case Mppt:
         return MPPT_DATA_LENGTH;
-    case OtherData:
+    case Other:
         return OTHER_DATA_LENGTH;
     default:
         return 0;

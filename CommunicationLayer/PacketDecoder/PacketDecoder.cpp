@@ -28,25 +28,47 @@ void PacketDecoder::handleValidData(QByteArray messageData)
     {
         switch (messageType)
         {
-            case MessageDefines::KeyDriverControlTelemetry:
-                emit packetDecoded(KeyDriverControlTelemetry(messageData));
+            case MessageDefines::KeyMotor:
+                emit packetDecoded(KeyMotorMessage(messageData));
                 return;
 
-            case MessageDefines::DriverControlDetails:
-                emit packetDecoded(DriverControlDetails(messageData));
+            case MessageDefines::Motor0Details:
+            case MessageDefines::Motor1Details:
+                emit packetDecoded(MotorDetailsMessage(messageData));
                 return;
 
-            case MessageDefines::Faults:
-                emit packetDecoded(FaultsMessage(messageData));
+            case MessageDefines::DriverControls:
+                emit packetDecoded(DriverControlsMessage(messageData));
                 return;
 
-            case MessageDefines::BatteryData:
-                emit packetDecoded(BatteryDataMessage(messageData));
+            case MessageDefines::MotorFaults:
+                emit packetDecoded(MotorFaultsMessage(messageData));
                 return;
 
-            case MessageDefines::CmuData:
-                emit packetDecoded(CmuDataMessage(messageData));
+            case MessageDefines::BatteryFaults:
+                emit packetDecoded(BatteryFaultsMessage(messageData));
                 return;
+
+            case MessageDefines::Battery:
+                emit packetDecoded(BatteryMessage(messageData));
+                return;
+
+            case MessageDefines::Cmu:
+                emit packetDecoded(CmuMessage(messageData));
+                return;
+
+            case MessageDefines::Mppt:
+                emit packetDecoded(MpptMessage(messageData));
+                return;
+
+            case MessageDefines::Lights:
+                emit packetDecoded(LightsMessage(messageData));
+                return;
+
+            case MessageDefines::Other:
+                emit packetDecoded(OtherMessage(messageData));
+                return;
+
         }
     }
     else

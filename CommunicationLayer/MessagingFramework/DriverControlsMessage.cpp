@@ -36,12 +36,12 @@ unsigned char DriverControlsMessage::musicInputs() const
 
 unsigned short DriverControlsMessage::acceleration() const
 {
-    return getUnsignedShort(messageData_, ACCELERATION);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, ACCELERATION);
 }
 
 unsigned short DriverControlsMessage::regenBraking() const
 {
-    return getUnsignedShort(messageData_, REGEN_BRAKING);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, REGEN_BRAKING);
 }
 
 unsigned char DriverControlsMessage::driverInputs() const

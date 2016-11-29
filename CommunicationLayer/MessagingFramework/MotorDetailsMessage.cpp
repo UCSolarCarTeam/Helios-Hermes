@@ -2,9 +2,9 @@
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
-#include <QDebug>
-
 using namespace MessageDecodingHelpers;
+
+#include <QDebug>
 
 namespace
 {
@@ -42,96 +42,96 @@ unsigned char MotorDetailsMessage::motorNumber() const
 
 float MotorDetailsMessage::phaseCCurrent() const
 {
-    return getFloat(messageData_, PHASE_CCURRENT);
+    return MessageDecodingHelpers::getFloat(messageData_, PHASE_CCURRENT);
 }
 
 float MotorDetailsMessage::phaseBCurrent() const
 {
-    return getFloat(messageData_, PHASE_BCURRENT);
+    return MessageDecodingHelpers::getFloat(messageData_, PHASE_BCURRENT);
 }
 
 float MotorDetailsMessage::motorVoltageReal() const
 {
-    return getFloat(messageData_, MOTOR_VOLTAGE_REAL);
+    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_VOLTAGE_REAL);
 }
 
 float MotorDetailsMessage::motorVoltageImaginary() const
 {
-    return getFloat(messageData_, MOTOR_VOLTAGE_IMAGINARY);
+    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_VOLTAGE_IMAGINARY);
 }
 
 float MotorDetailsMessage::motorCurrentReal() const
 {
-    return getFloat(messageData_, MOTOR_CURRENT_REAL);
+    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_CURRENT_REAL);
 }
 
 float MotorDetailsMessage::motorCurrentImaginary() const
 {
-    return getFloat(messageData_, MOTOR_CURRENT_IMAGINARY);
+    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_CURRENT_IMAGINARY);
 }
 
 float MotorDetailsMessage::backEmfReal() const
 {
-    return getFloat(messageData_, BACK_EMF_REAL);
+    return MessageDecodingHelpers::getFloat(messageData_, BACK_EMF_REAL);
 }
 
 float MotorDetailsMessage::backEmfImaginary() const
 {
-    return getFloat(messageData_, BACK_EMF_IMAGINARY);
+    return MessageDecodingHelpers::getFloat(messageData_, BACK_EMF_IMAGINARY);
 }
 
 float MotorDetailsMessage::voltageRailSuppply15V() const
 {
-    return getFloat(messageData_, VOLTAGE_RAIL_SUPPPLY_15_V);
+    return MessageDecodingHelpers::getFloat(messageData_, VOLTAGE_RAIL_SUPPPLY_15_V);
 }
 
 float MotorDetailsMessage::voltageRailSupply33V() const
 {
-    return getFloat(messageData_, VOLTAGE_RAIL_SUPPLY_33_V);
+    return MessageDecodingHelpers::getFloat(messageData_, VOLTAGE_RAIL_SUPPLY_33_V);
 }
 
 float MotorDetailsMessage::voltageRailSupply19V() const
 {
-    return getFloat(messageData_, VOLTAGE_RAIL_SUPPLY_19_V);
+    return MessageDecodingHelpers::getFloat(messageData_, VOLTAGE_RAIL_SUPPLY_19_V);
 }
 
 float MotorDetailsMessage::heatSinkTemperature() const
 {
-    return getFloat(messageData_, HEAT_SINK_TEMPERATURE);
+    return MessageDecodingHelpers::getFloat(messageData_, HEAT_SINK_TEMPERATURE);
 }
 
 float MotorDetailsMessage::motorTempterature() const
 {
-    return getFloat(messageData_, MOTOR_TEMPTERATURE);
+    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_TEMPTERATURE);
 }
 
 float MotorDetailsMessage::dspBoardTemperature() const
 {
-    return getFloat(messageData_, DSP_BOARD_TEMPERATURE);
+    return MessageDecodingHelpers::getFloat(messageData_, DSP_BOARD_TEMPERATURE);
 }
 
 float MotorDetailsMessage::dcBusAmpHours() const
 {
-    return getFloat(messageData_, DC_BUS_AMP_HOURS);
+    return MessageDecodingHelpers::getFloat(messageData_, DC_BUS_AMP_HOURS);
 }
 
 float MotorDetailsMessage::odometer() const
 {
-    return getFloat(messageData_, ODOMETER);
+    return MessageDecodingHelpers::getFloat(messageData_, ODOMETER);
 }
 
 float MotorDetailsMessage::slipSpeed() const
 {
-    return getFloat(messageData_, SLIP_SPEED);
+    return MessageDecodingHelpers::getFloat(messageData_, SLIP_SPEED);
 }
 
 QString MotorDetailsMessage::toString() const
 {
     QString messageString;
-    if ((motorNumber & 0xe) != 0x0) {
+    if ((motorNumber() & 0xe) != 0x0) {
         qDebug() << "Invalid motor number, unexpected behaviour likely";
     }
-    messageString += QString::number(MessageDefines::Motor0Details + motorNumber_) + ", ";
+    messageString += QString::number(MessageDefines::Motor0Details + motorNumber()) + ", ";
     messageString += QString::number(phaseCCurrent()) + ", "; 
     messageString += QString::number(phaseBCurrent()) + ", "; 
     messageString += QString::number(motorVoltageReal()) + ", "; 

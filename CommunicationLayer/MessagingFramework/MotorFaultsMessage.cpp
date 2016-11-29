@@ -2,6 +2,8 @@
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
+using namespace MessageDecodingHelpers;
+
 namespace
 {
     const int M0_ERROR_FLAGS = 1;
@@ -14,7 +16,7 @@ namespace
     const int M1_CAN_TX_ERROR_COUNT = 8;
 }
 
-MotorFaults::MotorFaults(QByteArray& messageData)
+MotorFaultsMessage::MotorFaultsMessage(QByteArray& messageData)
 : messageData_(messageData)
 {
 }
@@ -60,7 +62,7 @@ unsigned char MotorFaultsMessage::M1CanTxErrorCount() const
 }
 
 
-QString MotorFaults::toString() const
+QString MotorFaultsMessage::toString() const
 {
     QString messageString;
     messageString += QString::number(MessageDefines::MotorFaults) + ", ";

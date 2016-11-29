@@ -2,8 +2,6 @@
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
-using namespace MessageDecodingHelpers;
-
 namespace
 {
    const int CELL_NUMBER_INDEX = 1;
@@ -31,23 +29,23 @@ QList<short> CmuMessage::cellVoltages() const
    for (int i = 0; i < NUMBER_OF_VOLTAGES; i++)
    {
       const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
-      cellVoltagesData << getUnsignedShort(messageData_, indexOfCell);
+      cellVoltagesData << MessageDecodingHelpers::getUnsignedShort(messageData_, indexOfCell);
    }
    return cellVoltagesData;
 }
 
 unsigned short CmuMessage::pcbTemperature() const
 {
-   return getUnsignedShort(messageData_, PCB_TEMPERATURE_INDEX);
+   return MessageDecodingHelpers::getUnsignedShort(messageData_, PCB_TEMPERATURE_INDEX);
 }
 
-unsigned short CmuMessage::cellTemperatures() const
+QList<unsigned short> CmuMessage::cellTemperatures() const
 {
    QList<unsigned short> cellTemperatureData;
    for (int i = 0; i < NUMBER_OF_TEMPERATURES; i++)
    {
       const int indexOfCell = CELL_TEMPERATURE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
-      cellTemperatureData << getUnsignedShort(messageData_, indexOfCell);
+      cellTemperatureData << MessageDecodingHelpers::getUnsignedShort(messageData_, indexOfCell);
    }
    return cellTemperatureData;
 }
@@ -56,7 +54,7 @@ QString CmuMessage::toString() const
 {
    QString messageString;
    messageString += QString::number(MessageDefines::Cmu) + ", ";
-   messageString += QString::number(cellNumber()) + ", ";
+   messageString += QString::number(cmuNumber()) + ", ";
    foreach(const short& cellVoltage, cellVoltages())
    {
       messageString += QString::number(cellVoltage) + ", ";
