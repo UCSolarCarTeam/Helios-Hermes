@@ -9,7 +9,7 @@ class PowerJsonForwarder : public QObject
 {
     Q_OBJECT
 public:
-    PowerJsonForwarder(I_PowerData& powerData,
+    PowerJsonForwarder(/*I_PowerData& powerData,*/
                        I_MessageForwarder& messageForwarder);
     virtual ~PowerJsonForwarder() {}
 
@@ -17,6 +17,6 @@ public slots:
     void forwardPowerData(const QJsonObject& baseJson);
 
 private:
-    I_PowerData& powerData_;
+//    I_PowerData& powerData_;
     I_MessageForwarder& messageForwarder_;
 };

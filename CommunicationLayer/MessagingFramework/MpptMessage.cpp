@@ -13,6 +13,12 @@ namespace
     const int TEMPERATURE = 8;
 }
 
+MpptMessage::MpptMessage(const QByteArray& messageData)
+    : messageData_(messageData)
+{
+
+}
+
 unsigned char MpptMessage::mpptStatus() const
 {
     return getUnsignedChar(messageData_, MPPT_STATUS);

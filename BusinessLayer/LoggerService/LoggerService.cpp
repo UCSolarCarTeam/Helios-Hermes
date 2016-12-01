@@ -91,30 +91,30 @@ void LoggerService::handleFramedPacket(QByteArray packet)
     dataWriter_ << QDateTime::currentDateTime() << packet;
 }
 
-void LoggerService::handlePacketDecoded(const KeyDriverControlTelemetry message)
-{
-    printReceivedMessage(message);
-}
+//void LoggerService::handlePacketDecoded(const KeyDriverControlTelemetry message)
+//{
+//    printReceivedMessage(message);
+//}
 
-void LoggerService::handlePacketDecoded(const DriverControlDetails message)
-{
-    printReceivedMessage(message);
-}
+//void LoggerService::handlePacketDecoded(const DriverControlDetails message)
+//{
+//    printReceivedMessage(message);
+//}
 
-void LoggerService::handlePacketDecoded(const FaultsMessage message)
-{
-    printReceivedMessage(message);
-}
+//void LoggerService::handlePacketDecoded(const FaultsMessage message)
+//{
+//    printReceivedMessage(message);
+//}
 
-void LoggerService::handlePacketDecoded(const BatteryDataMessage message)
-{
-    printReceivedMessage(message);
-}
+//void LoggerService::handlePacketDecoded(const BatteryDataMessage message)
+//{
+//    printReceivedMessage(message);
+//}
 
-void LoggerService::handlePacketDecoded(const CmuDataMessage message)
-{
-    printReceivedMessage(message);
-}
+//void LoggerService::handlePacketDecoded(const CmuDataMessage message)
+//{
+//    printReceivedMessage(message);
+//}
 
 template <class T>
 void LoggerService::printReceivedMessage(const T& message)

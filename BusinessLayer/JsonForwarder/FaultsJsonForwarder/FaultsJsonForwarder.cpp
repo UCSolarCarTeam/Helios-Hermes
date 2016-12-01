@@ -3,20 +3,19 @@
 
 #include "BusinessLayer/JsonForwarder/JsonDefines.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
-#include "DataLayer/FaultsData/I_FaultsData.h"
 #include "FaultsJsonForwarder.h"
 
-FaultsJsonForwarder::FaultsJsonForwarder(I_FaultsData& faultsData,
+FaultsJsonForwarder::FaultsJsonForwarder(/*I_FaultsData& faultsData,*/
         I_MessageForwarder& messageForwarder)
-    : faultsData_(faultsData)
-    , messageForwarder_(messageForwarder)
+    : /*faultsData_(faultsData)
+    , */messageForwarder_(messageForwarder)
 {
 }
 
 void FaultsJsonForwarder::forwardFaultsData(const QJsonObject& baseJson)
 {
     QJsonObject faultsJson = baseJson;
-    faultsJson[JsonFormat::DATA_TYPE] = JsonFormat::FAULTS;
+ /*   faultsJson[JsonFormat::DATA_TYPE] = JsonFormat::FAULTS;
     QJsonObject motorOneFaultsJson = QJsonObject();
     motorOneFaultsJson[JsonFormat::HARDWARE_OVER_CURRENT] = faultsData_.motorOneFaults().hardwareOverCurrent();
     motorOneFaultsJson[JsonFormat::SOFTWARE_OVER_CURRENT] = faultsData_.motorOneFaults().softwareOverCurrent();
@@ -70,5 +69,5 @@ void FaultsJsonForwarder::forwardFaultsData(const QJsonObject& baseJson)
     batteryFaultsJson[JsonFormat::CONTACTOR_IS_STUCK] = faultsData_.batteryFaults().contactorIsStuck();
     batteryFaultsJson[JsonFormat::CMU_DETECTED_EXTRA_CELL_PRESENT] = faultsData_.batteryFaults().cmuDetectedExtraCellPresent();
     faultsJson[JsonFormat::BATTERY_FAULTS] = batteryFaultsJson;
-    messageForwarder_.forwardData(QJsonDocument(faultsJson).toJson(QJsonDocument::Compact));
+    messageForwarder_.forwardData(QJsonDocument(faultsJson).toJson(QJsonDocument::Compact));*/
 }

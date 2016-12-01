@@ -48,42 +48,42 @@ bool BatteryMessage::alive() const
 
 float BatteryMessage::packSocAmpHours() const
 {
-    return MessageDecodingHelpers::getFloat(messageData_, PACK_SOC_AMP_HOURS);
+    return getFloat(messageData_, PACK_SOC_AMP_HOURS);
 }
 
 float BatteryMessage::packSocPercentage() const
 {
-    return MessageDecodingHelpers::getFloat(messageData_, PACK_SOC_PERCENTAGE);
+    return getFloat(messageData_, PACK_SOC_PERCENTAGE);
 }
 
 float BatteryMessage::packBalanceSoc() const
 {
-    return MessageDecodingHelpers::getFloat(messageData_, PACK_BALANCE_SOC);
+    return getFloat(messageData_, PACK_BALANCE_SOC);
 }
 
 float BatteryMessage::packBalanceSocPercentage() const
 {
-    return MessageDecodingHelpers::getFloat(messageData_, PACK_BALANCE_SOC_PERCENTAGE);
+    return getFloat(messageData_, PACK_BALANCE_SOC_PERCENTAGE);
 }
 
 unsigned short BatteryMessage::chargingCellVoltageError() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, CHARGING_CELL_VOLTAGE_ERROR);
+    return getUnsignedShort(messageData_, CHARGING_CELL_VOLTAGE_ERROR);
 }
 
 unsigned short BatteryMessage::cellTemperatureMargin() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, CELL_TEMPERATURE_MARGIN);
+    return getUnsignedShort(messageData_, CELL_TEMPERATURE_MARGIN);
 }
 
 unsigned short BatteryMessage::dischargingCellVoltageError() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, DISCHARGING_CELL_VOLTAGE_ERROR);
+    return getUnsignedShort(messageData_, DISCHARGING_CELL_VOLTAGE_ERROR);
 }
 
 unsigned short BatteryMessage::totalPackCapacity() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, TOTAL_PACK_CAPACITY);
+    return getUnsignedShort(messageData_, TOTAL_PACK_CAPACITY);
 }
 
 unsigned char BatteryMessage::prechargeContactorDriverStatus() const
@@ -103,12 +103,12 @@ unsigned char BatteryMessage::prechargeTimerElapsed() const
 
 unsigned short BatteryMessage::prechargeTimerCount() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, PRECHARGE_TIMER_COUNT);
+    return getUnsignedShort(messageData_, PRECHARGE_TIMER_COUNT);
 }
 
 unsigned short BatteryMessage::lowestCellVoltage() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, LOWEST_CELL_VOLTAGE);
+    return getUnsignedShort(messageData_, LOWEST_CELL_VOLTAGE);
 }
 
 unsigned char BatteryMessage::lowestCellVoltageNumber() const
@@ -118,7 +118,7 @@ unsigned char BatteryMessage::lowestCellVoltageNumber() const
 
 unsigned short BatteryMessage::highestCellVoltage() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, HIGHEST_CELL_VOLTAGE);
+    return getUnsignedShort(messageData_, HIGHEST_CELL_VOLTAGE);
 }
 
 unsigned char BatteryMessage::highestCellVoltageNumber() const
@@ -128,7 +128,7 @@ unsigned char BatteryMessage::highestCellVoltageNumber() const
 
 unsigned short BatteryMessage::lowestCellTemperature() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, LOWEST_CELL_TEMPERATURE);
+    return getUnsignedShort(messageData_, LOWEST_CELL_TEMPERATURE);
 }
 
 unsigned char BatteryMessage::lowestCellTemperatureNumber() const
@@ -138,7 +138,7 @@ unsigned char BatteryMessage::lowestCellTemperatureNumber() const
 
 unsigned short BatteryMessage::highestCellTemperature() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, HIGHEST_CELL_TEMPERATURE);
+    return getUnsignedShort(messageData_, HIGHEST_CELL_TEMPERATURE);
 }
 
 unsigned char BatteryMessage::highestCellTemperatureNumber() const
@@ -158,22 +158,22 @@ unsigned int BatteryMessage::current() const
 
 unsigned short BatteryMessage::fan0Speed() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, FAN_0_SPEED);
+    return getUnsignedShort(messageData_, FAN_0_SPEED);
 }
 
 unsigned short BatteryMessage::fan1Speed() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, FAN_1_SPEED);
+    return getUnsignedShort(messageData_, FAN_1_SPEED);
 }
 
 unsigned short BatteryMessage::fanContactors12VCurrentConsumption() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, FAN_AND_CONTACTORS_12V_CURRENT_CONSUMPTION);
+    return getUnsignedShort(messageData_, FAN_AND_CONTACTORS_12V_CURRENT_CONSUMPTION);
 }
 
 unsigned short BatteryMessage::cmu12VCurrentConsumption() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, CMU_12V_CURRENT_CONSUMPTION);
+    return getUnsignedShort(messageData_, CMU_12V_CURRENT_CONSUMPTION);
 }
 
 bool BatteryMessage::bmsCanLockedOut() const

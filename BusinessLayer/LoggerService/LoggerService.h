@@ -23,16 +23,16 @@ public:
 private slots:
     void handleFramedPacket(QByteArray packet);
 
-    void handlePacketDecoded(const KeyMotorMessage message);
-    void handlePacketDecoded(const MotorDetailsMessage message);
-    void handlePacketDecoded(const DriverControlsMessage message);
-    void handlePacketDecoded(const MotorFaultsMessage message);
-    void handlePacketDecoded(const BatteryFaultsMessage message);
-    void handlePacketDecoded(const BatteryMessage message);
-    void handlePacketDecoded(const CmuMessage message);
-    void handlePacketDecoded(const MpptMessage message);
-    void handlePacketDecoded(const LightsMessage message);
-    void handlePacketDecoded(const OtherMessage message);
+//    void handlePacketDecoded(const KeyMotorMessage message);
+//    void handlePacketDecoded(const MotorDetailsMessage message);
+//    void handlePacketDecoded(const DriverControlsMessage message);
+//    void handlePacketDecoded(const MotorFaultsMessage message);
+//    void handlePacketDecoded(const BatteryFaultsMessage message);
+//    void handlePacketDecoded(const BatteryMessage message);
+//    void handlePacketDecoded(const CmuMessage message);
+//    void handlePacketDecoded(const MpptMessage message);
+//    void handlePacketDecoded(const LightsMessage message);
+//    void handlePacketDecoded(const OtherMessage message);
 
 private:
     void connectToPacketDecoder(const I_PacketDecoder& decoder);

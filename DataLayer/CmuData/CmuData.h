@@ -9,6 +9,7 @@ class CmuData: public I_CmuData
 {
 public:
     CmuData(const unsigned char& numberOfCmus);
+    virtual ~CmuData();
 
     I_CmuUnit& getCmuUnit(const unsigned char& index);
 

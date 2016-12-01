@@ -17,16 +17,22 @@ namespace
     const QString MYSQL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }
 
-JsonForwarder::JsonForwarder(I_BatteryData& batteryData,
-                             I_FaultsData& faultsData,
-                             I_PowerData& powerData,
-                             I_VehicleData& vehicleData,
-                             I_MessageForwarder& messageForwarder,
-                             I_Settings& settings)
-    : batteryJsonForwarder_(new BatteryJsonForwarder(batteryData, messageForwarder))
-    , faultsJsonForwarder_(new FaultsJsonForwarder(faultsData, messageForwarder))
-    , powerJsonForwarder_(new PowerJsonForwarder(powerData, messageForwarder))
-    , vehicleJsonForwarder_(new VehicleJsonForwarder(vehicleData, messageForwarder))
+JsonForwarder::JsonForwarder(/*I_BatteryData& batteryData,
+                  I_BatteryFaultsData& batteryFaultsData,
+                  I_CmuData& cmuData,
+                  I_DriverControlsData& driverControlsData,
+                  I_KeyMotorData& keyMotorData,
+                  I_LightsData& lightsData,
+                  I_MotorDetailsData& motorDetailsData,
+                  I_MotorFaultsData& motorFaultsData,
+                  I_MpptData& mpptData,
+                  I_OtherData& otherData,*/
+                  I_MessageForwarder& messageForwarder,
+                  I_Settings& settings)
+    : batteryJsonForwarder_(new BatteryJsonForwarder(/*batteryData, */messageForwarder))
+    , faultsJsonForwarder_(new FaultsJsonForwarder(/*faultsData, */messageForwarder))
+    , powerJsonForwarder_(new PowerJsonForwarder(/*powerData, */messageForwarder))
+    , vehicleJsonForwarder_(new VehicleJsonForwarder(/*vehicleData, */messageForwarder))
     , readTimer_(new QTimer())
     , dataToReadCount_(0)
     , forwardPeriod_(settings.forwardPeriod())

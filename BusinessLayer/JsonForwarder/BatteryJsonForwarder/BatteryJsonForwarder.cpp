@@ -7,17 +7,17 @@
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 #include "DataLayer/BatteryData/I_BatteryData.h"
 
-BatteryJsonForwarder::BatteryJsonForwarder(I_BatteryData& batteryData,
+BatteryJsonForwarder::BatteryJsonForwarder(/*I_BatteryData& batteryData,*/
         I_MessageForwarder& messageForwarder)
-    : batteryData_(batteryData)
-    , messageForwarder_(messageForwarder)
+    :/* batteryData_(batteryData)
+    , */messageForwarder_(messageForwarder)
 {
 }
 
 void BatteryJsonForwarder::forwardBatteryData(const QJsonObject& baseJson)
 {
     QJsonObject batteryJson = baseJson;
-    batteryJson[JsonFormat::DATA_TYPE] = JsonFormat::BATTERY;
+ /*   batteryJson[JsonFormat::DATA_TYPE] = JsonFormat::BATTERY;
     QJsonObject mod0 = QJsonObject();
     mod0[JsonFormat::PCB_TEMPERATURE] = QString::number(batteryData_.mod0PcbTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
     mod0[JsonFormat::CELL_TEMPERATURE] = QString::number(batteryData_.mod0CellTemperature(), 'f', JsonFormat::DECIMAL_PRECISION);
@@ -76,5 +76,5 @@ void BatteryJsonForwarder::forwardBatteryData(const QJsonObject& baseJson)
     batteryJson[JsonFormat::MOD_3] = mod3;
     batteryJson[JsonFormat::BATTERY_VOLTAGE] = QString::number(batteryData_.batteryVoltage(), 'f', JsonFormat::DECIMAL_PRECISION);
     batteryJson[JsonFormat::BATTERY_CURRENT] = QString::number(batteryData_.batteryCurrent(), 'f', JsonFormat::DECIMAL_PRECISION);
-    messageForwarder_.forwardData(QJsonDocument(batteryJson).toJson(QJsonDocument::Compact));
+    messageForwarder_.forwardData(QJsonDocument(batteryJson).toJson(QJsonDocument::Compact));*/
 }
