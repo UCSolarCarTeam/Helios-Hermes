@@ -7,7 +7,7 @@ class I_MpptData : public QObject
 {
     Q_OBJECT
 public:
-    virtual ~I_MpptData();
+    virtual ~I_MpptData() {}
 
     /* MpptData gets */
     virtual I_MpptUnit& getMpptUnit(const unsigned char& index) = 0;
