@@ -59,14 +59,18 @@ QString CmuMessage::toString() const
     QString messageString;
     messageString += QString::number(MessageDefines::Cmu) + ", ";
     messageString += QString::number(cmuNumber()) + ", ";
-    foreach(const short & cellVoltage, cellVoltages())
+
+    foreach (const short& cellVoltage, cellVoltages())
     {
         messageString += QString::number(cellVoltage) + ", ";
     }
+
     messageString += QString::number(pcbTemperature()) + ", ";
-    foreach(const unsigned short & cellTemperature, cellTemperatures())
+
+    foreach (const unsigned short& cellTemperature, cellTemperatures())
     {
         messageString += QString::number(cellTemperature) + ", ";
     }
+
     return messageString;
 }
