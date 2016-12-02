@@ -16,7 +16,6 @@ namespace
 MpptMessage::MpptMessage(const QByteArray& messageData)
     : messageData_(messageData)
 {
-
 }
 
 unsigned char MpptMessage::mpptStatus() const

@@ -10,7 +10,7 @@ class VehicleJsonForwarder : public QObject
     Q_OBJECT
 public:
     VehicleJsonForwarder(/*I_VehicleData& vehicleData,*/
-                         I_MessageForwarder& messageForwarder);
+        I_MessageForwarder& messageForwarder);
     virtual ~VehicleJsonForwarder() {}
 
 public slots:

@@ -37,8 +37,8 @@ public:
                   I_MotorFaultsData& motorFaultsData,
                   I_MpptData& mpptData,
                   I_OtherData& otherData,*/
-                  I_MessageForwarder& messageForwarder,
-                  I_Settings& settings);
+        I_MessageForwarder& messageForwarder,
+        I_Settings& settings);
     virtual ~JsonForwarder();
     void startForwardingData();
 

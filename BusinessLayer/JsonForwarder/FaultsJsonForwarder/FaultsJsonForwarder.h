@@ -11,7 +11,7 @@ class FaultsJsonForwarder : public QObject
     Q_OBJECT
 public:
     FaultsJsonForwarder(/*I_FaultsData& faultsData,*/
-                        I_MessageForwarder& messageForwarder);
+        I_MessageForwarder& messageForwarder);
     virtual ~FaultsJsonForwarder() {}
 
 public slots:

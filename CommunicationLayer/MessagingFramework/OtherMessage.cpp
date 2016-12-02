@@ -4,7 +4,8 @@
 
 using namespace MessageDecodingHelpers;
 
-namespace {
+namespace
+{
     const int GPS = 1;
 }
 
@@ -13,7 +14,8 @@ OtherMessage::OtherMessage(const QByteArray& messageData)
 {
 }
 
-unsigned char OtherMessage::getGps() const {
+unsigned char OtherMessage::getGps() const
+{
     return getUnsignedChar(messageData_, GPS);
 }
 

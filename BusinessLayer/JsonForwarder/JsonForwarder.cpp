@@ -27,8 +27,8 @@ JsonForwarder::JsonForwarder(/*I_BatteryData& batteryData,
                   I_MotorFaultsData& motorFaultsData,
                   I_MpptData& mpptData,
                   I_OtherData& otherData,*/
-                  I_MessageForwarder& messageForwarder,
-                  I_Settings& settings)
+    I_MessageForwarder& messageForwarder,
+    I_Settings& settings)
     : batteryJsonForwarder_(new BatteryJsonForwarder(/*batteryData, */messageForwarder))
     , faultsJsonForwarder_(new FaultsJsonForwarder(/*faultsData, */messageForwarder))
     , powerJsonForwarder_(new PowerJsonForwarder(/*powerData, */messageForwarder))
