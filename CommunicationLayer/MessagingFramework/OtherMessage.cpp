@@ -6,7 +6,7 @@ using namespace MessageDecodingHelpers;
 
 namespace
 {
-    const int GPS = 1;
+    const int GPS_OFFSET = 1;
 }
 
 OtherMessage::OtherMessage(const QByteArray& messageData)
@@ -16,7 +16,7 @@ OtherMessage::OtherMessage(const QByteArray& messageData)
 
 unsigned char OtherMessage::getGps() const
 {
-    return getUnsignedChar(messageData_, GPS);
+    return getUnsignedChar(messageData_, GPS_OFFSET);
 }
 
 QString OtherMessage::toString() const

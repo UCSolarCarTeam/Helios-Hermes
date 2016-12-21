@@ -22,7 +22,7 @@ public:
 
 
 private:
-    static unsigned char newCmuNumber_;
+    static unsigned char totalCmus_;
     unsigned char cmuNumber_;
     QList<short> cellVoltages_;
     unsigned short pcbTemp_;

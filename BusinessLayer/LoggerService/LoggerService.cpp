@@ -91,30 +91,55 @@ void LoggerService::handleFramedPacket(QByteArray packet)
     dataWriter_ << QDateTime::currentDateTime() << packet;
 }
 
-//void LoggerService::handlePacketDecoded(const KeyDriverControlTelemetry message)
-//{
-//    printReceivedMessage(message);
-//}
+void LoggerService::handlePacketDecoded(const KeyMotorMessage message)
+{
+    printReceivedMessage(message);
+}
 
-//void LoggerService::handlePacketDecoded(const DriverControlDetails message)
-//{
-//    printReceivedMessage(message);
-//}
+void LoggerService::handlePacketDecoded(const MotorDetailsMessage message)
+{
+    printReceivedMessage(message);
+}
 
-//void LoggerService::handlePacketDecoded(const FaultsMessage message)
-//{
-//    printReceivedMessage(message);
-//}
+void LoggerService::handlePacketDecoded(const DriverControlsMessage message)
+{
+    printReceivedMessage(message);
+}
 
-//void LoggerService::handlePacketDecoded(const BatteryDataMessage message)
-//{
-//    printReceivedMessage(message);
-//}
+void LoggerService::handlePacketDecoded(const MotorFaultsMessage message)
+{
+    printReceivedMessage(message);
+}
 
-//void LoggerService::handlePacketDecoded(const CmuDataMessage message)
-//{
-//    printReceivedMessage(message);
-//}
+void LoggerService::handlePacketDecoded(const BatteryFaultsMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const BatteryMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const CmuMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const MpptMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const LightsMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const OtherMessage message)
+{
+    printReceivedMessage(message);
+}
 
 template <class T>
 void LoggerService::printReceivedMessage(const T& message)

@@ -6,11 +6,11 @@ using namespace MessageDecodingHelpers;
 
 namespace
 {
-    const int MPPT_STATUS = 1;
-    const int ARRAY_VOLTAGE = 2;
-    const int ARRAY_CURRENT = 4;
-    const int BATTERY_VOLTAGE = 6;
-    const int TEMPERATURE = 8;
+    const int MPPT_STATUS_OFFSET = 1;
+    const int ARRAY_VOLTAGE_OFFSET = 2;
+    const int ARRAY_CURRENT_OFFSET = 4;
+    const int BATTERY_VOLTAGE_OFFSET = 6;
+    const int TEMPERATURE_OFFSET = 8;
 }
 
 MpptMessage::MpptMessage(const QByteArray& messageData)
@@ -20,27 +20,27 @@ MpptMessage::MpptMessage(const QByteArray& messageData)
 
 unsigned char MpptMessage::mpptStatus() const
 {
-    return getUnsignedChar(messageData_, MPPT_STATUS);
+    return getUnsignedChar(messageData_, MPPT_STATUS_OFFSET);
 }
 
 unsigned short MpptMessage::arrayVoltage() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, ARRAY_VOLTAGE);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, ARRAY_VOLTAGE_OFFSET);
 }
 
 unsigned short MpptMessage::arrayCurrent() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, ARRAY_CURRENT);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, ARRAY_CURRENT_OFFSET);
 }
 
 unsigned short MpptMessage::batteryVoltage() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, BATTERY_VOLTAGE);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, BATTERY_VOLTAGE_OFFSET);
 }
 
 unsigned short MpptMessage::temperature() const
 {
-    return MessageDecodingHelpers::getUnsignedShort(messageData_, TEMPERATURE);
+    return MessageDecodingHelpers::getUnsignedShort(messageData_, TEMPERATURE_OFFSET);
 }
 
 QString MpptMessage::toString() const

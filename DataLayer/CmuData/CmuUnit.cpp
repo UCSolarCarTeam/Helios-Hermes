@@ -2,14 +2,14 @@
 
 #include <QDebug>
 
-unsigned char CmuUnit::newCmuNumber_ = 0;
+unsigned char CmuUnit::totalCmus_ = 0;
 
 CmuUnit::CmuUnit()
     : cellVoltages_(QList<short>())
     , pcbTemp_(0)
     , cellTemps_(QList<unsigned short>())
 {
-    cmuNumber_ = newCmuNumber_++;
+    cmuNumber_ = totalCmus_++;
     // Initialize to 0
 }
 

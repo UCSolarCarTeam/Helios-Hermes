@@ -8,7 +8,6 @@
 #include "MotorDetailsData/MotorDetailsData.h"
 #include "MotorFaultsData/MotorFaultsData.h"
 #include "MpptData/MpptData.h"
-#include "OtherData/OtherData.h"
 #include "InfrastructureLayer/Settings/I_Settings.h"
 
 DataContainer::DataContainer(const I_Settings& settings)
@@ -21,7 +20,6 @@ DataContainer::DataContainer(const I_Settings& settings)
     , motorDetailsData_(new MotorDetailsData(settings.numberOfMotors()))
     , motorFaultsData_(new MotorFaultsData())
     , mpptData_(new MpptData(settings.numberOfMppts()))
-    , otherData_(new OtherData())
 {
 }
 
@@ -73,9 +71,3 @@ I_MpptData& DataContainer::mpptData()
 {
     return *mpptData_;
 }
-
-I_OtherData& DataContainer::otherData()
-{
-    return *otherData_;
-}
-

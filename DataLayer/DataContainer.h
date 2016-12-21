@@ -11,7 +11,6 @@ class I_LightsData;
 class I_MotorDetailsData;
 class I_MotorFaultsData;
 class I_MpptData;
-class I_OtherData;
 
 class I_Settings;
 
@@ -30,7 +29,6 @@ public:
     I_MotorDetailsData& motorDetailsData();
     I_MotorFaultsData& motorFaultsData();
     I_MpptData& mpptData();
-    I_OtherData& otherData();
 
 private:
     QScopedPointer<I_BatteryData> batteryData_;
@@ -42,5 +40,4 @@ private:
     QScopedPointer<I_MotorDetailsData> motorDetailsData_;
     QScopedPointer<I_MotorFaultsData> motorFaultsData_;
     QScopedPointer<I_MpptData> mpptData_;
-    QScopedPointer<I_OtherData> otherData_;
 };
