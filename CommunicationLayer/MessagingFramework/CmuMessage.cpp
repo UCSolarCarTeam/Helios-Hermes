@@ -10,7 +10,7 @@ namespace
     const int CELL_TEMPERATURE_0_INDEX = 20;
     const int NUMBER_OF_VOLTAGES = 8;
     const int NUMBER_OF_TEMPERATURES = 15;
-    const int NUMBER_OF_BYTES_IN_UNSIGNED_SHORT = 2;
+    const int UNSIGNED_SHORT_LEN = 2;
 }
 
 CmuMessage::CmuMessage(const QByteArray& messageData)
@@ -29,7 +29,7 @@ QList<short> CmuMessage::cellVoltages() const
 
     for (int i = 0; i < NUMBER_OF_VOLTAGES; i++)
     {
-        const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
+        const int indexOfCell = CELL_VOLTAGE_0_INDEX + i * UNSIGNED_SHORT_LEN;
         cellVoltagesData << MessageDecodingHelpers::getUnsignedShort(messageData_, indexOfCell);
     }
 
@@ -47,7 +47,7 @@ QList<unsigned short> CmuMessage::cellTemperatures() const
 
     for (int i = 0; i < NUMBER_OF_TEMPERATURES; i++)
     {
-        const int indexOfCell = CELL_TEMPERATURE_0_INDEX + i * NUMBER_OF_BYTES_IN_UNSIGNED_SHORT;
+        const int indexOfCell = CELL_TEMPERATURE_0_INDEX + i * UNSIGNED_SHORT_LEN;
         cellTemperatureData << MessageDecodingHelpers::getUnsignedShort(messageData_, indexOfCell);
     }
 

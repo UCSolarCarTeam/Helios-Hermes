@@ -28,24 +28,24 @@ void PacketDecoder::handleValidData(QByteArray messageData)
     {
         switch (messageType)
         {
-            case MessageDefines::KeyMotor:
+            case MessageDefines::KEY_MOTOR:
                 emit packetDecoded(KeyMotorMessage(messageData));
                 return;
 
-            case MessageDefines::Motor0Details:
-            case MessageDefines::Motor1Details:
+            case MessageDefines::MOTOR_0_DETAILS:
+            case MessageDefines::MOTOR_1_DETAILS:
                 emit packetDecoded(MotorDetailsMessage(messageData));
                 return;
 
-            case MessageDefines::DriverControls:
+            case MessageDefines::DRIVER_CONTROLS:
                 emit packetDecoded(DriverControlsMessage(messageData));
                 return;
 
-            case MessageDefines::MotorFaults:
+            case MessageDefines::MOTOR_FAULTS:
                 emit packetDecoded(MotorFaultsMessage(messageData));
                 return;
 
-            case MessageDefines::BatteryFaults:
+            case MessageDefines::BATTERY_FAULTS:
                 emit packetDecoded(BatteryFaultsMessage(messageData));
                 return;
 

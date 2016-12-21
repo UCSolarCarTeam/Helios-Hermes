@@ -6,7 +6,7 @@ using namespace MessageDecodingHelpers;
 
 namespace
 {
-    const int LIGHT_STATUS = 1;
+    const int LIGHT_STATUS_OFFSET = 1;
 }
 
 LightsMessage::LightsMessage(const QByteArray& messageData)
@@ -16,7 +16,7 @@ LightsMessage::LightsMessage(const QByteArray& messageData)
 
 unsigned char LightsMessage::lightStatus() const
 {
-    return getUnsignedChar(messageData_, LIGHT_STATUS);
+    return getUnsignedChar(messageData_, LIGHT_STATUS_OFFSET);
 }
 
 QString LightsMessage::toString() const

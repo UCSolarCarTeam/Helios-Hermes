@@ -65,7 +65,7 @@ unsigned char MotorFaultsMessage::M1CanTxErrorCount() const
 QString MotorFaultsMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::MotorFaults) + ", ";
+    messageString += QString::number(MessageDefines::MOTOR_FAULTS) + ", ";
     messageString += QString::number(M0ErrorFlags()) + ", ";
     messageString += QString::number(M1ErrorFlags()) + ", ";
     messageString += QString::number(M0LimitFlags()) + ", ";

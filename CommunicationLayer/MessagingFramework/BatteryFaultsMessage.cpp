@@ -23,7 +23,7 @@ unsigned char BatteryFaultsMessage::batteryFaultsFlags() const
 QString BatteryFaultsMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::BatteryFaults) + ", ";
+    messageString += QString::number(MessageDefines::BATTERY_FAULTS) + ", ";
     messageString += QString::number(batteryFaultsFlags()) + ", ";
     return messageString;
 }
