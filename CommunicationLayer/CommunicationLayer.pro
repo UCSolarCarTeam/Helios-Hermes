@@ -23,7 +23,6 @@ HEADERS += \
    DataPopulators/MotorDetailsPopulator.h \
    DataPopulators/MotorFaultsPopulator.h \
    DataPopulators/MpptPopulator.h \
-   DataPopulators/OtherPopulator.h \
    MessagingFramework/BatteryFaultsMessage.h \
    MessagingFramework/BatteryMessage.h \
    MessagingFramework/CmuMessage.h \
@@ -33,7 +32,6 @@ HEADERS += \
    MessagingFramework/MotorDetailsMessage.h \
    MessagingFramework/MotorFaultsMessage.h \
    MessagingFramework/MpptMessage.h \
-   MessagingFramework/OtherMessage.h \
    MessagingFramework/MessageDecodingHelpers.h \
    MessagingFramework/MessageDefines.h \
    PacketChecksumChecker/I_PacketChecksumChecker.h \
@@ -59,7 +57,6 @@ SOURCES += \
    DataPopulators/MotorDetailsPopulator.cpp \
    DataPopulators/MotorFaultsPopulator.cpp \
    DataPopulators/MpptPopulator.cpp \
-   DataPopulators/OtherPopulator.cpp \
    MessagingFramework/BatteryFaultsMessage.cpp \
    MessagingFramework/BatteryMessage.cpp \
    MessagingFramework/CmuMessage.cpp \
@@ -69,7 +66,6 @@ SOURCES += \
    MessagingFramework/MotorDetailsMessage.cpp \
    MessagingFramework/MotorFaultsMessage.cpp \
    MessagingFramework/MpptMessage.cpp \
-   MessagingFramework/OtherMessage.cpp \
    MessagingFramework/MessageDecodingHelpers.cpp \
    MessagingFramework/MessageDefines.cpp \
    PacketChecksumChecker/PacketChecksumChecker.cpp \

@@ -11,7 +11,6 @@ namespace
     const int MOTOR_DETAILS_DATA_LENGTH = 73;
     const int MOTOR_FAULTS_DATA_LENGTH = 13;
     const int MPPT_DATA_LENGTH = 14;
-    const int OTHER_DATA_LENGTH = 21;
 }
 
 int MessageDefines::getLengthForMessage(MessageDefines::Type type)
@@ -53,10 +52,6 @@ int MessageDefines::getLengthForMessage(MessageDefines::Type type)
 
         case MPPT:
             return MPPT_DATA_LENGTH;
-            break;
-
-        case OTHER:
-            return OTHER_DATA_LENGTH;
             break;
 
         default:

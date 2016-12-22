@@ -15,7 +15,6 @@
 #include "DataPopulators/MotorDetailsPopulator.h"
 #include "DataPopulators/MotorFaultsPopulator.h"
 #include "DataPopulators/MpptPopulator.h"
-#include "DataPopulators/OtherPopulator.h"
 #include "PacketChecksumChecker/PacketChecksumChecker.h"
 #include "PacketDecoder/PacketDecoder.h"
 #include "PacketSynchronizer/PacketSynchronizer.h"
@@ -40,7 +39,6 @@ public:
         , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
         , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
         , mpptPopulator(packetDecoder, dataContainer.mpptData())
-        , otherPopulator(packetDecoder, dataContainer.otherData())
     {
     }
 
@@ -60,7 +58,6 @@ public:
     MotorDetailsPopulator motorDetailsPopulator;
     MotorFaultsPopulator motorFaultsPopulator;
     MpptPopulator mpptPopulator;
-    OtherPopulator otherPopulator;
 };
 
 CommunicationContainer::CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)

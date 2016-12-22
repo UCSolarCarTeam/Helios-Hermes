@@ -136,11 +136,6 @@ void LoggerService::handlePacketDecoded(const LightsMessage message)
     printReceivedMessage(message);
 }
 
-void LoggerService::handlePacketDecoded(const OtherMessage message)
-{
-    printReceivedMessage(message);
-}
-
 template <class T>
 void LoggerService::printReceivedMessage(const T& message)
 {

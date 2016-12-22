@@ -19,7 +19,6 @@ class I_LightsData;
 class I_MotorDetailsData;
 class I_MotorFaultsData;
 class I_MpptData;
-class I_OtherData;
 class I_MessageForwarder;
 class I_Settings;
 

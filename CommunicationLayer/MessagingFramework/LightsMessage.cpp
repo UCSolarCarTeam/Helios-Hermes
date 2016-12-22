@@ -22,7 +22,7 @@ unsigned char LightsMessage::lightStatus() const
 QString LightsMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::Lights) + ", ";
+    messageString += QString::number(MessageDefines::LIGHTS) + ", ";
     messageString += QString::number(lightStatus()) + ", ";
     return messageString;
 }

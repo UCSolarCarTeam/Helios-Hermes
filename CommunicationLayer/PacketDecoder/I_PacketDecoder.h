@@ -10,7 +10,6 @@
 #include "../MessagingFramework/MotorDetailsMessage.h"
 #include "../MessagingFramework/MotorFaultsMessage.h"
 #include "../MessagingFramework/MpptMessage.h"
-#include "../MessagingFramework/OtherMessage.h"
 
 class I_PacketDecoder : public QObject
 {
@@ -28,5 +27,4 @@ signals:
     void packetDecoded(const MotorDetailsMessage);
     void packetDecoded(const MotorFaultsMessage);
     void packetDecoded(const MpptMessage);
-    void packetDecoded(const OtherMessage);
 };

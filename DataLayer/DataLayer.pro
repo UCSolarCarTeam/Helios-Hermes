@@ -33,9 +33,7 @@ HEADERS += \
    MpptData/MpptData.h \
    MpptData/I_MpptData.h \
    MpptData/I_MpptUnit.h \
-   MpptData/MpptUnit.h \
-   OtherData/I_OtherData.h \
-   OtherData/OtherData.h
+   MpptData/MpptUnit.h
 
 SOURCES += \
    DataContainer.cpp \
@@ -50,5 +48,4 @@ SOURCES += \
    CmuData/CmuData.cpp \
    CmuData/CmuUnit.cpp \
    MpptData/MpptData.cpp \
-   MpptData/MpptUnit.cpp \
-   OtherData/OtherData.cpp \
+   MpptData/MpptUnit.cpp

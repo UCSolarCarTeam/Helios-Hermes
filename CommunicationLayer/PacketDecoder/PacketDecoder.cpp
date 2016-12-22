@@ -49,24 +49,20 @@ void PacketDecoder::handleValidData(QByteArray messageData)
                 emit packetDecoded(BatteryFaultsMessage(messageData));
                 return;
 
-            case MessageDefines::Battery:
+            case MessageDefines::BATTERY:
                 emit packetDecoded(BatteryMessage(messageData));
                 return;
 
-            case MessageDefines::Cmu:
+            case MessageDefines::CMU:
                 emit packetDecoded(CmuMessage(messageData));
                 return;
 
-            case MessageDefines::Mppt:
+            case MessageDefines::MPPT:
                 emit packetDecoded(MpptMessage(messageData));
                 return;
 
-            case MessageDefines::Lights:
+            case MessageDefines::LIGHTS:
                 emit packetDecoded(LightsMessage(messageData));
-                return;
-
-            case MessageDefines::Other:
-                emit packetDecoded(OtherMessage(messageData));
                 return;
         }
     }

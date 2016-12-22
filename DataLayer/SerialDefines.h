@@ -10,5 +10,4 @@ namespace SerialDefines
     const unsigned char CMU_SERIAL_ID = 8;
     const unsigned char MPPT_SERIAL_ID = 9;
     const unsigned char LIGHTS_SERIAL_ID = 10;
-    const unsigned char OTHER_SERIAL_ID = 11;
 }

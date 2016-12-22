@@ -57,7 +57,7 @@ QList<unsigned short> CmuMessage::cellTemperatures() const
 QString CmuMessage::toString() const
 {
     QString messageString;
-    messageString += QString::number(MessageDefines::Cmu) + ", ";
+    messageString += QString::number(MessageDefines::CMU) + ", ";
     messageString += QString::number(cmuNumber()) + ", ";
 
     foreach (const short& cellVoltage, cellVoltages())
