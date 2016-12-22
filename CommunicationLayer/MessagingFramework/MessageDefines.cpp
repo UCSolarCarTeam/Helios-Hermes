@@ -19,43 +19,33 @@ int MessageDefines::getLengthForMessage(MessageDefines::Type type)
     {
         case BATTERY:
             return BATTERY_DATA_LENGTH;
-            break;
 
         case BATTERY_FAULTS:
             return BATTERY_FAULTS_DATA_LENGTH;
-            break;
 
         case CMU:
             return CMU_DATA_LENGTH;
-            break;
 
         case DRIVER_CONTROLS:
             return DRIVER_CONTROLS_DATA_LENGTH;
-            break;
 
         case KEY_MOTOR:
             return KEY_MOTOR_DATA_LENGTH;
-            break;
 
         case LIGHTS:
             return LIGHTS_DATA_LENGTH;
-            break;
 
         case MOTOR_0_DETAILS:
         case MOTOR_1_DETAILS:
             return MOTOR_DETAILS_DATA_LENGTH;
-            break;
 
         case MOTOR_FAULTS:
             return MOTOR_FAULTS_DATA_LENGTH;
-            break;
 
         case MPPT:
             return MPPT_DATA_LENGTH;
-            break;
 
         default:
             return 0;
-            break;
     }
 }

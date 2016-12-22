@@ -8,6 +8,7 @@ class MpptMessage
 public:
     MpptMessage(const QByteArray& messageData);
 
+    unsigned char mpptNumber() const;
     unsigned char mpptStatus() const;
     unsigned short arrayVoltage() const;
     unsigned short arrayCurrent() const;

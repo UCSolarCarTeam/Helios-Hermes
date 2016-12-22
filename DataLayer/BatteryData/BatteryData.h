@@ -2,6 +2,8 @@
 
 #include "I_BatteryData.h"
 
+#include <QPair>
+
 class BatteryData : public I_BatteryData
 {
 public:
@@ -22,14 +24,10 @@ public:
     unsigned char getPrechargeState() const;
     unsigned char getPrechargeTimerElapsed() const;
     unsigned short getPrechargeTimerCount() const;
-    unsigned short getLowestCellVoltage() const;
-    unsigned char getLowestCellVoltageNumber() const;
-    unsigned short getHighestCellVoltage() const;
-    unsigned char getHighestCellVoltageNumber() const;
-    unsigned short getLowestCellTemperature() const;
-    unsigned char getLowestCellTemperatureNumber() const;
-    unsigned short getHighestCellTemperature() const;
-    unsigned char getHighestCellTemperatureNumber() const;
+    QPair<unsigned char, unsigned short>& getLowestCellVoltage() const;
+    QPair<unsigned char, unsigned short>& getHighestCellVoltage() const;
+    QPair<unsigned char, unsigned short>& getLowestCellTemperature() const;
+    QPair<unsigned char, unsigned short>& getHighestCellTemperature() const;
     unsigned int getVoltage() const;
     unsigned int getCurrent() const;
     unsigned short getFan0Speed() const;
@@ -52,14 +50,10 @@ public:
     void setPrechargeState(const unsigned char&);
     void setPrechargeTimerElapsed(const unsigned char&);
     void setPrechargeTimerCount(const unsigned short&);
-    void setLowestCellVoltage(const unsigned short&);
-    void setLowestCellVoltageNumber(const unsigned char&);
-    void setHighestCellVoltage(const unsigned short&);
-    void setHighestCellVoltageNumber(const unsigned char&);
-    void setLowestCellTemperature(const unsigned short&);
-    void setLowestCellTemperatureNumber(const unsigned char&);
-    void setHighestCellTemperature(const unsigned short&);
-    void setHighestCellTemperatureNumber(const unsigned char&);
+    void setLowestCellVoltage(const QPair<unsigned char, unsigned short>&);
+    void setHighestCellVoltage(const QPair<unsigned char, unsigned short>&);
+    void setLowestCellTemperature(const QPair<unsigned char, unsigned short>&);
+    void setHighestCellTemperature(const QPair<unsigned char, unsigned short>&);
     void setVoltage(const unsigned int&);
     void setCurrent(const unsigned int&);
     void setFan0Speed(const unsigned short&);
@@ -83,14 +77,10 @@ private:
     unsigned char prechargeState_;
     unsigned char prechargeTimerElapsed_;
     unsigned short prechargeTimerCount_;
-    unsigned short lowestCellVoltage_;
-    unsigned char lowestCellVoltageNumber_;
-    unsigned short highestCellVoltage_;
-    unsigned char highestCellVoltageNumber_;
-    unsigned short lowestCellTemperature_;
-    unsigned char lowestCellTemperatureNumber_;
-    unsigned short highestCellTemperature_;
-    unsigned char highestCellTemperatureNumber_;
+    QPair<unsigned char, unsigned short> lowestCellVoltage_;
+    QPair<unsigned char, unsigned short> highestCellVoltage_;
+    QPair<unsigned char, unsigned short> lowestCellTemperature_;
+    QPair<unsigned char, unsigned short> highestCellTemperature_;
     unsigned int voltage_;
     unsigned int current_;
     unsigned short fan0Speed_;

@@ -11,11 +11,18 @@ namespace
     const int ARRAY_CURRENT_OFFSET = 4;
     const int BATTERY_VOLTAGE_OFFSET = 6;
     const int TEMPERATURE_OFFSET = 8;
+
+    const unsigned char NUMBER_MASK = 0x3;
 }
 
 MpptMessage::MpptMessage(const QByteArray& messageData)
     : messageData_(messageData)
 {
+}
+
+unsigned char MpptMessage::mpptNumber() const
+{
+    return getUnsignedChar(messageData_, MPPT_STATUS_OFFSET) & NUMBER_MASK;
 }
 
 unsigned char MpptMessage::mpptStatus() const

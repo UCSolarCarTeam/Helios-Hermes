@@ -74,45 +74,26 @@ unsigned short FakeBatteryData::getPrechargeTimerCount() const
     return 13;
 }
 
-unsigned short FakeBatteryData::getLowestCellVoltage() const
+QPair<unsigned char, unsigned short>& FakeBatteryData::getLowestCellVoltage() const
 {
-    return 14;
+    return QPair<unsigned char, unsigned short>(0, 0);
 }
 
-unsigned char FakeBatteryData::getLowestCellVoltageNumber() const
+QPair<unsigned char, unsigned short>& FakeBatteryData::getHighestCellVoltage() const
 {
-    return 15;
+    return QPair<unsigned char, unsigned short>(0, 0);
 }
 
-unsigned short FakeBatteryData::getHighestCellVoltage() const
+QPair<unsigned char, unsigned short>& FakeBatteryData::getLowestCellTemperature() const
 {
-    return 16;
+    return QPair<unsigned char, unsigned short>(0, 0);
 }
 
-unsigned char FakeBatteryData::getHighestCellVoltageNumber() const
+QPair<unsigned char, unsigned short>& FakeBatteryData::getHighestCellTemperature() const
 {
-    return 17;
+    return QPair<unsigned char, unsigned short>(0, 0);
 }
 
-unsigned short FakeBatteryData::getLowestCellTemperature() const
-{
-    return 18;
-}
-
-unsigned char FakeBatteryData::getLowestCellTemperatureNumber() const
-{
-    return 19;
-}
-
-unsigned short FakeBatteryData::getHighestCellTemperature() const
-{
-    return 20;
-}
-
-unsigned char FakeBatteryData::getHighestCellTemperatureNumber() const
-{
-    return 21;
-}
 
 unsigned int FakeBatteryData::getVoltage() const
 {
@@ -163,14 +144,10 @@ void FakeBatteryData::setPrechargeContactorDriverStatus(const unsigned char& pre
 void FakeBatteryData::setPrechargeState(const unsigned char& prechargeState) {}
 void FakeBatteryData::setPrechargeTimerElapsed(const unsigned char& prechargeTimerElapsed) {}
 void FakeBatteryData::setPrechargeTimerCount(const unsigned short& prechargeTimerCount) {}
-void FakeBatteryData::setLowestCellVoltage(const unsigned short& lowestCellVoltage) {}
-void FakeBatteryData::setLowestCellVoltageNumber(const unsigned char& lowestCellVoltageNumber) {}
-void FakeBatteryData::setHighestCellVoltage(const unsigned short& highestCellVoltage) {}
-void FakeBatteryData::setHighestCellVoltageNumber(const unsigned char& highestCellVoltageNumber) {}
-void FakeBatteryData::setLowestCellTemperature(const unsigned short& lowestCellTemperature) {}
-void FakeBatteryData::setLowestCellTemperatureNumber(const unsigned char& lowestCellTemperatureNumber) {}
-void FakeBatteryData::setHighestCellTemperature(const unsigned short& highestCellTemperature) {}
-void FakeBatteryData::setHighestCellTemperatureNumber(const unsigned char& highestCellTemperatureNumber) {}
+void FakeBatteryData::setLowestCellVoltage(const QPair<unsigned short, unsigned char>& lowestCellVoltage) {}
+void FakeBatteryData::setHighestCellVoltage(const QPair<unsigned short, unsigned char>& highestCellVoltage) {}
+void FakeBatteryData::setLowestCellTemperature(const QPair<unsigned short, unsigned char>& lowestCellTemperature) {}
+void FakeBatteryData::setHighestCellTemperature(const QPair<unsigned short, unsigned char>& highestCellTemperature) {}
 void FakeBatteryData::setVoltage(const unsigned int& voltage) {}
 void FakeBatteryData::setCurrent(const unsigned int& current) {}
 void FakeBatteryData::setFan0Speed(const unsigned short& fan0Speed) {}

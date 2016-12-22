@@ -14,14 +14,10 @@ BatteryData::BatteryData()
     , prechargeState_(0)
     , prechargeTimerElapsed_(0)
     , prechargeTimerCount_(0)
-    , lowestCellVoltage_(0)
-    , lowestCellVoltageNumber_(0)
-    , highestCellVoltage_(0)
-    , highestCellVoltageNumber_(0)
-    , lowestCellTemperature_(0)
-    , lowestCellTemperatureNumber_(0)
-    , highestCellTemperature_(0)
-    , highestCellTemperatureNumber_(0)
+    , lowestCellVoltage_(0, 0)
+    , highestCellVoltage_(0, 0)
+    , lowestCellTemperature_(0, 0)
+    , highestCellTemperature_(0, 0)
     , voltage_(0)
     , current_(0)
     , fan0Speed_(0)
@@ -104,45 +100,26 @@ unsigned short BatteryData::getPrechargeTimerCount() const
     return prechargeTimerCount_;
 }
 
-unsigned short BatteryData::getLowestCellVoltage() const
+QPair<unsigned char, unsigned short>& BatteryData::getLowestCellVoltage() const
 {
     return lowestCellVoltage_;
 }
 
-unsigned char BatteryData::getLowestCellVoltageNumber() const
-{
-    return lowestCellVoltageNumber_;
-}
-
-unsigned short BatteryData::getHighestCellVoltage() const
+QPair<unsigned char, unsigned short>& BatteryData::getHighestCellVoltage() const
 {
     return highestCellVoltage_;
 }
 
-unsigned char BatteryData::getHighestCellVoltageNumber() const
-{
-    return highestCellVoltageNumber_;
-}
-
-unsigned short BatteryData::getLowestCellTemperature() const
+QPair<unsigned char, unsigned short>& BatteryData::getLowestCellTemperature() const
 {
     return lowestCellTemperature_;
 }
 
-unsigned char BatteryData::getLowestCellTemperatureNumber() const
-{
-    return lowestCellTemperatureNumber_;
-}
-
-unsigned short BatteryData::getHighestCellTemperature() const
+QPair<unsigned char, unsigned short>& BatteryData::getHighestCellTemperature() const
 {
     return highestCellTemperature_;
 }
 
-unsigned char BatteryData::getHighestCellTemperatureNumber() const
-{
-    return highestCellTemperatureNumber_;
-}
 
 unsigned int BatteryData::getVoltage() const
 {
@@ -258,52 +235,28 @@ void BatteryData::setPrechargeTimerCount(const unsigned short& prechargeTimerCou
     emit prechargeTimerCountReceived(prechargeTimerCount_);
 }
 
-void BatteryData::setLowestCellVoltage(const unsigned short& lowestCellVoltage)
+void BatteryData::setLowestCellVoltage(const QPair<unsigned char, unsigned short>& lowestCellVoltage)
 {
     lowestCellVoltage_ = lowestCellVoltage;
     emit lowestCellVoltageReceived(lowestCellVoltage_);
 }
 
-void BatteryData::setLowestCellVoltageNumber(const unsigned char& lowestCellVoltageNumber)
-{
-    lowestCellVoltageNumber_ = lowestCellVoltageNumber;
-    emit lowestCellVoltageNumberReceived(lowestCellVoltageNumber_);
-}
-
-void BatteryData::setHighestCellVoltage(const unsigned short& highestCellVoltage)
+void BatteryData::setHighestCellVoltage(const QPair<unsigned char, unsigned short>& highestCellVoltage)
 {
     highestCellVoltage_ = highestCellVoltage;
     emit highestCellVoltageReceived(highestCellVoltage_);
 }
 
-void BatteryData::setHighestCellVoltageNumber(const unsigned char& highestCellVoltageNumber)
-{
-    highestCellVoltageNumber_ = highestCellVoltageNumber;
-    emit highestCellVoltageNumberReceived(highestCellVoltageNumber_);
-}
-
-void BatteryData::setLowestCellTemperature(const unsigned short& lowestCellTemperature)
+void BatteryData::setLowestCellTemperature(const QPair<unsigned char, unsigned short>& lowestCellTemperature)
 {
     lowestCellTemperature_ = lowestCellTemperature;
     emit lowestCellTemperatureReceived(lowestCellTemperature_);
 }
 
-void BatteryData::setLowestCellTemperatureNumber(const unsigned char& lowestCellTemperatureNumber)
-{
-    lowestCellTemperatureNumber_ = lowestCellTemperatureNumber;
-    emit lowestCellTemperatureNumberReceived(lowestCellTemperatureNumber_);
-}
-
-void BatteryData::setHighestCellTemperature(const unsigned short& highestCellTemperature)
+void BatteryData::setHighestCellTemperature(const QPair<unsigned char, unsigned short>& highestCellTemperature)
 {
     highestCellTemperature_ = highestCellTemperature;
     emit highestCellTemperatureReceived(highestCellTemperature_);
-}
-
-void BatteryData::setHighestCellTemperatureNumber(const unsigned char& highestCellTemperatureNumber)
-{
-    highestCellTemperatureNumber_ = highestCellTemperatureNumber;
-    emit highestCellTemperatureNumberReceived(highestCellTemperatureNumber_);
 }
 
 void BatteryData::setVoltage(const unsigned int& voltage)
