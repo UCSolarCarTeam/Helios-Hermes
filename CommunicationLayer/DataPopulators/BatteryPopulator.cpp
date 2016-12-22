@@ -22,14 +22,10 @@ void BatteryPopulator::populateData(const BatteryMessage message)
     batteryData_.setPrechargeState(message.prechargeState());
     batteryData_.setPrechargeTimerElapsed(message.prechargeTimerElapsed());
     batteryData_.setPrechargeTimerCount(message.prechargeTimerCount());
-    batteryData_.setLowestCellVoltage(message.lowestCellVoltage());
-    batteryData_.setLowestCellVoltageNumber(message.lowestCellVoltageNumber());
-    batteryData_.setHighestCellVoltage(message.highestCellVoltage());
-    batteryData_.setHighestCellVoltageNumber(message.highestCellVoltageNumber());
-    batteryData_.setLowestCellTemperature(message.lowestCellTemperature());
-    batteryData_.setLowestCellTemperatureNumber(message.lowestCellTemperatureNumber());
-    batteryData_.setHighestCellTemperature(message.highestCellTemperature());
-    batteryData_.setHighestCellTemperatureNumber(message.highestCellTemperatureNumber());
+    batteryData_.setLowestCellVoltage(message.lowestCellVoltageNumber(), message.lowestCellVoltage());
+    batteryData_.setHighestCellVoltage(message.highestCellVoltageNumber(), message.highestCellVoltage());
+    batteryData_.setLowestCellTemperature(message.lowestCellTemperatureNumber(), message.lowestCellTemperature());
+    batteryData_.setHighestCellTemperature(message.highestCellTemperatureNumber(), message.highestCellTemperature());
     batteryData_.setVoltage(message.voltage());
     batteryData_.setCurrent(message.current());
     batteryData_.setFan0Speed(message.fan0Speed());
