@@ -1,6 +1,7 @@
 #include "MessageDecodingHelpers.h"
 
 #include <QDebug>
+#include <QDataStream>
 
 namespace
 {
@@ -33,47 +34,26 @@ namespace
                 return -1;
         }
     }
-
-    union DataFromCharTranslator
-    {
-        unsigned short unsignedShortData;
-        float floatData;
-        unsigned char unsignedCharData;
-        unsigned char intData;
-        char charData[UNION_SIZE];
-    };
-
-    DataFromCharTranslator getData(const QByteArray& data, int startIndex, Type type)
-    {
-        DataFromCharTranslator dataUnion;
-
-        for (int i = 0; i < numberOfBytesInData(type); i++)
-        {
-            dataUnion.charData[i] = data.at(i + startIndex);
-        }
-
-        return dataUnion;
-    }
 }
 
 float MessageDecodingHelpers::getFloat(const QByteArray& data, int startIndex)
 {
-    return getData(data, startIndex, Type::FLOAT).floatData;
+    return data.mid(startIndex, numberOfBytesInData(Type::FLOAT)).toFloat();
 }
 
 unsigned short MessageDecodingHelpers::getUnsignedShort(const QByteArray& data, int startIndex)
 {
-    return getData(data, startIndex, Type::UNSIGNED_SHORT).unsignedShortData;
+    return data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_SHORT)).toUShort();
 }
 
 unsigned char MessageDecodingHelpers::getUnsignedChar(const QByteArray& data, int startIndex)
 {
-    return getData(data, startIndex, Type::UNSIGNED_CHAR).unsignedCharData;
+    return static_cast<unsigned char>(data.at(startIndex));
 }
 
 unsigned int MessageDecodingHelpers::getUnsignedInt(const QByteArray& data, int startIndex)
 {
-    return getData(data, startIndex, Type::UNSIGNED_INT).intData;
+    return data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_INT)).toUInt();
 }
 
 
