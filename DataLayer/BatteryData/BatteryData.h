@@ -7,6 +7,7 @@
 class BatteryData : public I_BatteryData
 {
 public:
+
     BatteryData();
     virtual ~BatteryData();
 
@@ -21,7 +22,7 @@ public:
     unsigned short getDischargingCellVoltageError() const;
     unsigned short getTotalPackCapacity() const;
     unsigned char getPrechargeContactorDriverStatus() const;
-    unsigned char getPrechargeState() const;
+    PrechargeState getPrechargeState() const;
     unsigned char getPrechargeTimerElapsed() const;
     unsigned short getPrechargeTimerCount() const;
     QPair<unsigned char, unsigned short>& getLowestCellVoltage();
@@ -74,7 +75,7 @@ private:
     unsigned short dischargingCellVoltageError_;
     unsigned short totalPackCapacity_;
     unsigned char prechargeContactorDriverStatus_;
-    unsigned char prechargeState_;
+    PrechargeState prechargeState_;
     unsigned char prechargeTimerElapsed_;
     unsigned short prechargeTimerCount_;
     QPair<unsigned char, unsigned short> lowestCellVoltage_;

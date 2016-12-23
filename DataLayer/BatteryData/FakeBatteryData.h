@@ -19,7 +19,7 @@ public:
     unsigned short getDischargingCellVoltageError() const;
     unsigned short getTotalPackCapacity() const;
     unsigned char getPrechargeContactorDriverStatus() const;
-    unsigned char getPrechargeState() const;
+    PrechargeState getPrechargeState() const;
     unsigned char getPrechargeTimerElapsed() const;
     unsigned short getPrechargeTimerCount() const;
     QPair<unsigned char, unsigned short>& getLowestCellVoltage();

@@ -11,7 +11,7 @@ BatteryData::BatteryData()
     , dischargingCellVoltageError_(0)
     , totalPackCapacity_(0)
     , prechargeContactorDriverStatus_(0)
-    , prechargeState_(0)
+    , prechargeState_(BatteryData::PrechargeState::DEFAULT)
     , prechargeTimerElapsed_(0)
     , prechargeTimerCount_(0)
     , lowestCellVoltage_(0, 0)
@@ -85,7 +85,7 @@ unsigned char BatteryData::getPrechargeContactorDriverStatus() const
     return prechargeContactorDriverStatus_;
 }
 
-unsigned char BatteryData::getPrechargeState() const
+BatteryData::PrechargeState BatteryData::getPrechargeState() const
 {
     return prechargeState_;
 }
@@ -219,7 +219,7 @@ void BatteryData::setPrechargeContactorDriverStatus(const unsigned char& prechar
 
 void BatteryData::setPrechargeState(const unsigned char& prechargeState)
 {
-    prechargeState_ = prechargeState;
+    prechargeState_ = static_cast<BatteryData::PrechargeState>(prechargeState);
     emit prechargeStateReceived(prechargeState_);
 }
 

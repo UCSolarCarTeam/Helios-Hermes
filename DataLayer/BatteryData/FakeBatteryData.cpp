@@ -59,9 +59,9 @@ unsigned char FakeBatteryData::getPrechargeContactorDriverStatus() const
     return 10;
 }
 
-unsigned char FakeBatteryData::getPrechargeState() const
+PrechargeState FakeBatteryData::getPrechargeState() const
 {
-    return 11;
+    return PrechargeState::ERROR;
 }
 
 unsigned char FakeBatteryData::getPrechargeTimerElapsed() const

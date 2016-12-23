@@ -9,6 +9,17 @@ class I_BatteryData : public QObject
 public:
     virtual ~I_BatteryData() {}
 
+    enum PrechargeState
+    {
+        ERROR = 0,
+        IDLE = 1,
+        MEASURE = 2,
+        PRECHARGE = 3,
+        RUN = 4,
+        ENABLE_PACK = 5,
+        DEFAULT = 6
+    };
+
     /*Data "Gets"*/
     virtual unsigned char getAlive() const = 0;
     virtual float getPackSocAmpHours() const = 0;
@@ -20,7 +31,7 @@ public:
     virtual unsigned short getDischargingCellVoltageError() const = 0;
     virtual unsigned short getTotalPackCapacity() const = 0;
     virtual unsigned char getPrechargeContactorDriverStatus() const = 0;
-    virtual unsigned char getPrechargeState() const = 0;
+    virtual PrechargeState getPrechargeState() const = 0;
     virtual unsigned char getPrechargeTimerElapsed() const = 0;
     virtual unsigned short getPrechargeTimerCount() const = 0;
     virtual QPair<unsigned char, unsigned short>& getLowestCellVoltage() = 0;
