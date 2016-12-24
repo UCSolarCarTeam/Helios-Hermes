@@ -1,5 +1,16 @@
 #include "BatteryData.h"
 
+namespace
+{
+    const unsigned char CONTACTOR0_ERROR_STATUS_OFFSET = 0x1;
+    const unsigned char CONTACTOR1_ERROR_STATUS_OFFSET = 0x2;
+    const unsigned char CONTACTOR0_STATUS_OFFSET = 0x4;
+    const unsigned char CONTACTOR1_STATUS_OFFSET = 0x8;
+    const unsigned char CONTACTOR_SUPPLY_OK_OFFSET = 0x10;
+    const unsigned char CONTACTOR2_ERROR_STATUS_OFFSET = 0x20;
+    const unsigned char CONTACTOR2_STATUS_OFFSET = 0x40;
+}
+
 BatteryData::BatteryData()
     : alive_(0)
     , packSocAmpHours_(0)
@@ -80,10 +91,41 @@ unsigned short BatteryData::getTotalPackCapacity() const
     return totalPackCapacity_;
 }
 
-unsigned char BatteryData::getPrechargeContactorDriverStatus() const
+bool BatteryData::getContactor0ErrorStatus() const
 {
-    return prechargeContactorDriverStatus_;
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR0_ERROR_STATUS_OFFSET);
 }
+
+bool BatteryData::getContactor1ErrorStatus() const
+{
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR1_ERROR_STATUS_OFFSET);
+}
+
+bool BatteryData::getContactor0Status() const
+{
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR0_STATUS_OFFSET);
+}
+
+bool BatteryData::getContactor1Status() const
+{
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR1_STATUS_OFFSET);
+}
+
+bool BatteryData::getContactorSupplyOk() const
+{
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR_SUPPLY_OK_OFFSET);
+}
+
+bool BatteryData::getContactor2ErrorStatus() const
+{
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR2_ERROR_STATUS_OFFSET);
+}
+
+bool BatteryData::getContactor2Status() const
+{
+    return static_cast<bool>(prechargeContactorDriverStatus_ & CONTACTOR2_STATUS_OFFSET);
+}
+
 
 BatteryData::PrechargeState BatteryData::getPrechargeState() const
 {
