@@ -9,19 +9,99 @@ FakeDriverControlsData::~FakeDriverControlsData()
 }
 
 /*Data "Gets"*/
-unsigned char FakeDriverControlsData::getDriverControlsBoardAlive() const
+bool FakeDriverControlsData::getDriverControlsBoardAlive() const
 {
-    return 1;
+    return true;
 }
 
-unsigned char FakeDriverControlsData::getLightsInputs() const
+bool FakeDriverControlsData::getHeadlightsOff() const
 {
-    return 2;
+    return true;
 }
 
-unsigned char FakeDriverControlsData::getMusicInputs() const
+bool FakeDriverControlsData::getHeadlightsLow() const
 {
-    return 3;
+    return true;
+}
+
+bool FakeDriverControlsData::getHeadlightsHigh() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getSignalRight() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getSignalLeft() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getHazard() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getInterior() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getAux() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getVolumeUp() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getVolumeDown() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getNextSong() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getPreviousSong() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getBrakes() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getForward() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getReverse() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getPushToTalk() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getHorn() const
+{
+    return true;
+}
+
+bool FakeDriverControlsData::getReset() const
+{
+    return true;
 }
 
 unsigned short FakeDriverControlsData::getAcceleration() const
@@ -32,11 +112,6 @@ unsigned short FakeDriverControlsData::getAcceleration() const
 unsigned short FakeDriverControlsData::getRegenBraking() const
 {
     return 5;
-}
-
-unsigned char FakeDriverControlsData::getDriverInputs() const
-{
-    return 6;
 }
 
 

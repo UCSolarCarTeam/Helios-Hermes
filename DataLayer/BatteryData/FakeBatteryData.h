@@ -18,7 +18,13 @@ public:
     unsigned short getCellTemperatureMargin() const;
     unsigned short getDischargingCellVoltageError() const;
     unsigned short getTotalPackCapacity() const;
-    unsigned char getPrechargeContactorDriverStatus() const;
+    bool getContactor0ErrorStatus() const;
+    bool getContactor1ErrorStatus() const;
+    bool getContactor0Status() const;
+    bool getContactor1Status() const;
+    bool getContactorSupplyOk() const;
+    bool getContactor2ErrorStatus() const;
+    bool getContactor2Status() const;
     PrechargeState getPrechargeState() const;
     unsigned char getPrechargeTimerElapsed() const;
     unsigned short getPrechargeTimerCount() const;

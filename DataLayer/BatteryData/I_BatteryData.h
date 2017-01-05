@@ -30,7 +30,13 @@ public:
     virtual unsigned short getCellTemperatureMargin() const = 0;
     virtual unsigned short getDischargingCellVoltageError() const = 0;
     virtual unsigned short getTotalPackCapacity() const = 0;
-    virtual unsigned char getPrechargeContactorDriverStatus() const = 0;
+    virtual bool getContactor0ErrorStatus() const = 0;
+    virtual bool getContactor1ErrorStatus() const = 0;
+    virtual bool getContactor0Status() const = 0;
+    virtual bool getContactor1Status() const = 0;
+    virtual bool getContactorSupplyOk() const = 0;
+    virtual bool getContactor2ErrorStatus() const = 0;
+    virtual bool getContactor2Status() const = 0;
     virtual PrechargeState getPrechargeState() const = 0;
     virtual unsigned char getPrechargeTimerElapsed() const = 0;
     virtual unsigned short getPrechargeTimerCount() const = 0;

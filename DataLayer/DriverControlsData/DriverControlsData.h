@@ -9,12 +9,27 @@ public:
     virtual ~DriverControlsData();
 
     /*Data "Gets"*/
-    unsigned char getDriverControlsBoardAlive() const;
-    unsigned char getLightsInputs() const;
-    unsigned char getMusicInputs() const;
+    bool getDriverControlsBoardAlive() const;
+    bool getHeadlightsOff() const;
+    bool getHeadlightsLow() const;
+    bool getHeadlightsHigh() const;
+    bool getSignalRight() const;
+    bool getSignalLeft() const;
+    bool getHazard() const;
+    bool getInterior() const;
+    bool getAux() const;
+    bool getVolumeUp() const;
+    bool getVolumeDown() const;
+    bool getNextSong() const;
+    bool getPreviousSong() const;
+    bool getBrakes() const;
+    bool getForward() const;
+    bool getReverse() const;
+    bool getPushToTalk() const;
+    bool getHorn() const;
+    bool getReset() const;
     unsigned short getAcceleration() const;
     unsigned short getRegenBraking() const;
-    unsigned char getDriverInputs() const;
 
     /*DriverControlsData "Sets"*/
     void setDriverControlsBoardAlive(const unsigned char& driverControlsBoardAlive);

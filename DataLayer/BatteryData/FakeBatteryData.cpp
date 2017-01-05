@@ -54,10 +54,41 @@ unsigned short FakeBatteryData::getTotalPackCapacity() const
     return 9;
 }
 
-unsigned char FakeBatteryData::getPrechargeContactorDriverStatus() const
+bool FakeBatteryData::getContactor0ErrorStatus() const
 {
-    return 10;
+    return true;
 }
+
+bool FakeBatteryData::getContactor1ErrorStatus() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor0Status() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor1Status() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactorSupplyOk() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor2ErrorStatus() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor2Status() const
+{
+    return true;
+}
+
 
 PrechargeState FakeBatteryData::getPrechargeState() const
 {

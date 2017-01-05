@@ -120,31 +120,43 @@ QString BatteryFaultsData::toString() const
     {
         case CELL_OVER_VOLTAGE_MASK:
             return QString("CELL_OVER_VOLTAGE");
+
         case CELL_UNDER_VOLTAGE_MASK:
             return QString("CELL_UNDER_VOLTAGE");
+
         case CELL_OVER_TEMP_MASK:
             return QString("CELL_OVER_TEMP");
+
         case MEASUREMENT_UNTRUSTED_MASK:
             return QString("MEASUREMENT_UNTRUSTED");
+
         case CMU_COMM_TIMEOUT_MASK:
             return QString("CMU_COMM_TIMEOUT");
+
         case VEHICLE_COMM_TIMEOUT_MASK:
             return QString("VEHICLE_COMM_TIMEOUT");
+
         case BMU_IN_SETUP_MODE_MASK:
             return QString("BMU_IN_SETUP_MODE");
+
         case CMU_CAN_BUS_POWER_STATUS_MASK:
             return QString("CMU_CAN_BUS_POWER_STATUS");
+
         case PACK_ISOLATION_TEST_FAILURE_MASK:
             return QString("PACK_ISOLATION_TEST_FAILURE");
+
         case SOFTWARE_OVER_CURRENT_MASK:
             return QString("SOFTWARE_OVER_CURRENT");
+
         case CAN_SUPPLY_LOW_MASK:
             return QString("CAN_SUPPLY_LOW");
+
         case CONTACTOR_STUCK_MASK:
             return QString("CONTACTOR_STUCK");
+
         case CMU_DETECTED_EXTRA_CELL_MASK:
             return QString("CMU_DETECTED_EXTRA_CELL");
     }
-    
+
     return QString("unknown_error_flag");
 }
