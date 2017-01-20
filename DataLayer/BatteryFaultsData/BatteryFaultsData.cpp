@@ -116,47 +116,77 @@ void BatteryFaultsData::setErrorFlag(const unsigned short& errorFlag)
 
 QString BatteryFaultsData::toString() const
 {
-    switch (errorFlag_)
+    QString messageString;
+
+    if (static_cast<bool>(errorFlag_ & CELL_OVER_VOLTAGE_MASK))
     {
-        case CELL_OVER_VOLTAGE_MASK:
-            return QString("CELL_OVER_VOLTAGE");
-
-        case CELL_UNDER_VOLTAGE_MASK:
-            return QString("CELL_UNDER_VOLTAGE");
-
-        case CELL_OVER_TEMP_MASK:
-            return QString("CELL_OVER_TEMP");
-
-        case MEASUREMENT_UNTRUSTED_MASK:
-            return QString("MEASUREMENT_UNTRUSTED");
-
-        case CMU_COMM_TIMEOUT_MASK:
-            return QString("CMU_COMM_TIMEOUT");
-
-        case VEHICLE_COMM_TIMEOUT_MASK:
-            return QString("VEHICLE_COMM_TIMEOUT");
-
-        case BMU_IN_SETUP_MODE_MASK:
-            return QString("BMU_IN_SETUP_MODE");
-
-        case CMU_CAN_BUS_POWER_STATUS_MASK:
-            return QString("CMU_CAN_BUS_POWER_STATUS");
-
-        case PACK_ISOLATION_TEST_FAILURE_MASK:
-            return QString("PACK_ISOLATION_TEST_FAILURE");
-
-        case SOFTWARE_OVER_CURRENT_MASK:
-            return QString("SOFTWARE_OVER_CURRENT");
-
-        case CAN_SUPPLY_LOW_MASK:
-            return QString("CAN_SUPPLY_LOW");
-
-        case CONTACTOR_STUCK_MASK:
-            return QString("CONTACTOR_STUCK");
-
-        case CMU_DETECTED_EXTRA_CELL_MASK:
-            return QString("CMU_DETECTED_EXTRA_CELL");
+        messageString += "CELL_OVER_VOLTAGE ";
     }
 
-    return QString("unknown_error_flag");
+    if (static_cast<bool>(errorFlag_ & CELL_UNDER_VOLTAGE_MASK))
+    {
+        messageString += "CELL_UNDER_VOLTAGE ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & CELL_OVER_TEMP_MASK))
+    {
+        messageString += "CELL_OVER_TEMP ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & MEASUREMENT_UNTRUSTED_MASK))
+    {
+        messageString += "MEASUREMENT_UNTRUSTED ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & CMU_COMM_TIMEOUT_MASK))
+    {
+        messageString += "CMU_COMM_TIMEOUT ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & VEHICLE_COMM_TIMEOUT_MASK))
+    {
+        messageString += "VEHICLE_COMM_TIMEOUT ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & BMU_IN_SETUP_MODE_MASK))
+    {
+        messageString += "BMU_IN_SETUP_MODE ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & CMU_CAN_BUS_POWER_STATUS_MASK))
+    {
+        messageString += "CMU_CAN_BUS_POWER_STATUS ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & PACK_ISOLATION_TEST_FAILURE_MASK))
+    {
+        messageString += "PACK_ISOLATION_TEST_FAILURE ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & SOFTWARE_OVER_CURRENT_MASK))
+    {
+        messageString += "SOFTWARE_OVER_CURRENT ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & CAN_SUPPLY_LOW_MASK))
+    {
+        messageString += "CAN_SUPPLY_LOW ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & CONTACTOR_STUCK_MASK))
+    {
+        messageString += "CONTACTOR_STUCK ";
+    }
+
+    if (static_cast<bool>(errorFlag_ & CMU_DETECTED_EXTRA_CELL_MASK))
+    {
+        messageString += "CMU_DETECTED_EXTRA_CELL ";
+    }
+
+    if (!static_cast<bool>(errorFlag_))
+    {
+        messageString += "NO_ERROR";
+    }
+
+    return messageString;
 }

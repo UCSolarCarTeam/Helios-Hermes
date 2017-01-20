@@ -9,7 +9,13 @@ public:
     virtual ~LightsData();
 
     /* LightsData Gets */
-    unsigned char getLightStatus() const;
+    bool getLowBeams() const;
+    bool getHighBeams() const;
+    bool getBrakes() const;
+    bool getLeftSignal() const;
+    bool getRightSignal() const;
+    bool getBmsStrobeLight() const;
+
 
     /* LightsData Sets */
     void setLightStatus(const unsigned char&);

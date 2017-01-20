@@ -10,7 +10,6 @@ CmuUnit::CmuUnit()
     , cellTemps_(QList<unsigned short>())
 {
     cmuNumber_ = totalCmus_++;
-    // Initialize to 0
 }
 
 CmuUnit::~CmuUnit()
