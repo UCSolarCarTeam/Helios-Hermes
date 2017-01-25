@@ -15,7 +15,7 @@ before_install:
     - cd ./Epsilon-Hermes/src
 
 install:
-    - wget 'https://sourceforge.net/projects/astyle/files/astyle/astyle%202.05.1/astyle_2.05.1_linux.tar.gz/download'
+    - wget 'https://s3-us-west-2.amazonaws.com/ucsolarteam.hostedfiles/download'
     - tar -zxvf download
     - (cd astyle/build/gcc && make release && sudo make install)
     - rm astyle -rf
