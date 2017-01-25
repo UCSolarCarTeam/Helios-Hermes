@@ -8,19 +8,44 @@ CONFIG += staticlib
 DESTDIR = ../../build/.lib
 
 HEADERS += \
+   DataContainer.h \
+   SerialDefines.h \
    BatteryData/BatteryData.h \
    BatteryData/I_BatteryData.h \
-   DataContainer.h \
-   FaultsData/FaultsData.h \
-   FaultsData/I_FaultsData.h \
-   PowerData/I_PowerData.h \
-   PowerData/PowerData.h \
-   VehicleData/I_VehicleData.h \
-   VehicleData/VehicleData.h
+   BatteryFaultsData/BatteryFaultsData.h \
+   BatteryFaultsData/I_BatteryFaultsData.h \
+   MotorFaultsData/MotorFaultsData.h \
+   MotorFaultsData/I_MotorFaultsData.h \
+   MotorDetailsData/MotorDetailsData.h \
+   MotorDetailsData/I_MotorDetailsData.h \
+   MotorDetailsData/MotorDetailsUnit.h \
+   MotorDetailsData/I_MotorDetailsUnit.h \
+   LightsData/LightsData.h \
+   LightsData/I_LightsData.h \
+   KeyMotorData/KeyMotorData.h \
+   KeyMotorData/I_KeyMotorData.h \
+   DriverControlsData/DriverControlsData.h \
+   DriverControlsData/I_DriverControlsData.h \
+   CmuData/CmuData.h \
+   CmuData/I_CmuData.h \
+   CmuData/I_CmuUnit.h \
+   CmuData/CmuUnit.h \
+   MpptData/MpptData.h \
+   MpptData/I_MpptData.h \
+   MpptData/I_MpptUnit.h \
+   MpptData/MpptUnit.h
 
 SOURCES += \
-   BatteryData/BatteryData.cpp \
    DataContainer.cpp \
-   FaultsData/FaultsData.cpp \
-   PowerData/PowerData.cpp \
-   VehicleData/VehicleData.cpp
+   BatteryData/BatteryData.cpp \
+   BatteryFaultsData/BatteryFaultsData.cpp \
+   MotorFaultsData/MotorFaultsData.cpp \
+   MotorDetailsData/MotorDetailsData.cpp \
+   MotorDetailsData/MotorDetailsUnit.cpp \
+   LightsData/LightsData.cpp \
+   KeyMotorData/KeyMotorData.cpp \
+   DriverControlsData/DriverControlsData.cpp \
+   CmuData/CmuData.cpp \
+   CmuData/CmuUnit.cpp \
+   MpptData/MpptData.cpp \
+   MpptData/MpptUnit.cpp

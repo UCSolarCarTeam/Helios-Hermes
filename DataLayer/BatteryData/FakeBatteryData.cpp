@@ -8,103 +8,181 @@ FakeBatteryData::~FakeBatteryData()
 {
 }
 
-/*FakeBatteryData "Gets"*/
-double FakeBatteryData::mod0PcbTemperature() const
+/*Data "Gets"*/
+unsigned char FakeBatteryData::getAlive() const
 {
     return 1;
 }
-double FakeBatteryData::mod0CellTemperature() const
+
+float FakeBatteryData::getPackSocAmpHours() const
 {
     return 2;
 }
 
-QList<double> FakeBatteryData::mod0CellVoltages() const
+float FakeBatteryData::getPackSocPercentage() const
 {
-    QList<double> mod0CellVoltages = new QList();
-    mod0CellVoltages.append(3);
-    return mod0CellVoltages;
+    return 3;
 }
 
-double FakeBatteryData::mod1PcbTemperature() const
+float FakeBatteryData::getPackBalanceSoc() const
 {
     return 4;
 }
-double FakeBatteryData::mod1CellTemperature() const
+
+float FakeBatteryData::getPackBalanceSocPercentage() const
 {
     return 5;
 }
 
-QList<double> FakeBatteryData::mod1CellVoltages() const
+unsigned short FakeBatteryData::getChargingCellVoltageError() const
 {
-    QList<double> mod1CellVoltages = new QList();
-    mod1CellVoltages.append(6);
-    return mod1CellVoltages;
+    return 6;
 }
 
-double FakeBatteryData::mod2PcbTemperature() const
+unsigned short FakeBatteryData::getCellTemperatureMargin() const
 {
     return 7;
 }
-double FakeBatteryData::mod2CellTemperature() const
+
+unsigned short FakeBatteryData::getDischargingCellVoltageError() const
 {
     return 8;
 }
 
-QList<double> FakeBatteryData::mod2CellVoltages() const
+unsigned short FakeBatteryData::getTotalPackCapacity() const
 {
-    QList<double> mod2CellVoltages = new QList();
-    mod2CellVoltages.append(9);
-    return mod2CellVoltages;
+    return 9;
 }
 
-double FakeBatteryData::mod3PcbTemperature() const
+bool FakeBatteryData::getContactor0ErrorStatus() const
 {
-    return 10;
-}
-double FakeBatteryData::mod3CellTemperature() const
-{
-    return 11;
+    return true;
 }
 
-QList<double> FakeBatteryData::mod3CellVoltages() const
+bool FakeBatteryData::getContactor1ErrorStatus() const
 {
-    QList<double> mod3CellVoltages = new QList();
-    mod3CellVoltages.append(12);
-    return mod3CellVoltages;
+    return true;
 }
 
-double FakeBatteryData::batteryVoltage() const
+bool FakeBatteryData::getContactor0Status() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor1Status() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactorSupplyOk() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor2ErrorStatus() const
+{
+    return true;
+}
+
+bool FakeBatteryData::getContactor2Status() const
+{
+    return true;
+}
+
+
+PrechargeState FakeBatteryData::getPrechargeState() const
+{
+    return PrechargeState::ERROR;
+}
+
+unsigned char FakeBatteryData::getPrechargeTimerElapsed() const
+{
+    return 12;
+}
+
+unsigned short FakeBatteryData::getPrechargeTimerCount() const
 {
     return 13;
 }
-double FakeBatteryData::batteryCurrent() const
+
+QPair<unsigned char, unsigned short>& FakeBatteryData::getLowestCellVoltage() const
 {
-    return 14;
+    return QPair<unsigned char, unsigned short>(0, 0);
 }
 
-/*FakeBatteryData "Sets"*/
-void FakeBatteryData::setMod0PcbTemperature(double mod0PcbTemperature) {}
-void FakeBatteryData::setMod0CellTemperature(double mod0CellTemperature) {}
+QPair<unsigned char, unsigned short>& FakeBatteryData::getHighestCellVoltage() const
+{
+    return QPair<unsigned char, unsigned short>(0, 0);
+}
 
-void FakeBatteryData::setMod0CellVoltages(QList<double> mod0CellVoltages) {}
+QPair<unsigned char, unsigned short>& FakeBatteryData::getLowestCellTemperature() const
+{
+    return QPair<unsigned char, unsigned short>(0, 0);
+}
 
-void FakeBatteryData::setMod1PcbTemperature(double mod1PcbTemperature) {}
-void FakeBatteryData::setMod1CellTemperature(double mod1CellTemperature) {}
+QPair<unsigned char, unsigned short>& FakeBatteryData::getHighestCellTemperature() const
+{
+    return QPair<unsigned char, unsigned short>(0, 0);
+}
 
-void FakeBatteryData::setMod1CellVoltages(QList<double> mod1CellVoltages) {}
 
-void FakeBatteryData::setMod2PcbTemperature(double mod2PcbTemperature) {}
-void FakeBatteryData::setMod2CellTemperature(double mod2CellTemperature) {}
+unsigned int FakeBatteryData::getVoltage() const
+{
+    return 22;
+}
 
-void FakeBatteryData::setMod2CellVoltages(QList<double> mod2CellVoltages) {}
+unsigned int FakeBatteryData::getCurrent() const
+{
+    return 23;
+}
 
-void FakeBatteryData::setMod3PcbTemperature(double mod3PcbTemperature) {}
+unsigned short FakeBatteryData::getFan0Speed() const
+{
+    return 24;
+}
 
-void FakeBatteryData::setMod3CellTemperature(double mod3CellTemperature) {}
+unsigned short FakeBatteryData::getFan1Speed() const
+{
+    return 25;
+}
 
-void FakeBatteryData::setMod3CellVoltages(QList<double> mod3CellVoltages) {}
+unsigned short FakeBatteryData::getFanContactors12VCurrentConsumption() const
+{
+    return 26;
+}
 
-void FakeBatteryData::setBatteryVoltage(double batteryVoltage) {}
+unsigned short FakeBatteryData::getCmu12VCurrentConsumption() const
+{
+    return 27;
+}
 
-void FakeBatteryData::setBatteryCurrent(double batteryCurrent) {}
+unsigned char FakeBatteryData::getBmsCanLockedOut() const
+{
+    return 1;
+}
 
+/*BatteryData "Sets"*/
+void FakeBatteryData::setAlive(const unsigned char& alive) {}
+void FakeBatteryData::setPackSocAmpHours(const float& packSocAmpHours) {}
+void FakeBatteryData::setPackSocPercentage(const float& packSocPercentage) {}
+void FakeBatteryData::setPackBalanceSoc(const float& packBalanceSoc) {}
+void FakeBatteryData::setPackBalanceSocPercentage(const float& packBalanceSocPercentage) {}
+void FakeBatteryData::setChargingCellVoltageError(const unsigned short& chargingCellVoltageError) {}
+void FakeBatteryData::setCellTemperatureMargin(const unsigned short& cellTemperatureMargin) {}
+void FakeBatteryData::setDischargingCellVoltageError(const unsigned short& dischargingCellVoltageError) {}
+void FakeBatteryData::setTotalPackCapacity(const unsigned short& totalPackCapacity) {}
+void FakeBatteryData::setPrechargeContactorDriverStatus(const unsigned char& prechargeContactorDriverStatus) {}
+void FakeBatteryData::setPrechargeState(const unsigned char& prechargeState) {}
+void FakeBatteryData::setPrechargeTimerElapsed(const unsigned char& prechargeTimerElapsed) {}
+void FakeBatteryData::setPrechargeTimerCount(const unsigned short& prechargeTimerCount) {}
+void FakeBatteryData::setLowestCellVoltage(const unsigned short lowestCellVoltage&, const unsigned char& lowestCellVoltageNumber) {}
+void FakeBatteryData::setHighestCellVoltage(const unsigned short highestCellVoltage&, const unsigned char& highestCellVoltageNumber) {}
+void FakeBatteryData::setLowestCellTemperature(const unsigned short lowestCellTemperature&, const unsigned char& lowestCellTemperatureNumber) {}
+void FakeBatteryData::setHighestCellTemperature(const unsigned short highestCellTemperature&, const unsigned char& highestCellTemperatureNumber) {}
+void FakeBatteryData::setVoltage(const unsigned int& voltage) {}
+void FakeBatteryData::setCurrent(const unsigned int& current) {}
+void FakeBatteryData::setFan0Speed(const unsigned short& fan0Speed) {}
+void FakeBatteryData::setFan1Speed(const unsigned short& fan1Speed) {}
+void FakeBatteryData::setFanContactors12VCurrentConsumption(const unsigned short& fanContactors12VCurrentConsumption) {}
+void FakeBatteryData::setCmu12VCurrentConsumption(const unsigned short& cmu12VCurrentConsumption) {}
+void FakeBatteryData::setBmsCanLockedOut(const unsigned char& bmsCanLockedOut) {}

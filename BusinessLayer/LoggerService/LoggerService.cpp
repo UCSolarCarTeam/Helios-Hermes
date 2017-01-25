@@ -91,27 +91,47 @@ void LoggerService::handleFramedPacket(QByteArray packet)
     dataWriter_ << QDateTime::currentDateTime() << packet;
 }
 
-void LoggerService::handlePacketDecoded(const KeyDriverControlTelemetry message)
+void LoggerService::handlePacketDecoded(const KeyMotorMessage message)
 {
     printReceivedMessage(message);
 }
 
-void LoggerService::handlePacketDecoded(const DriverControlDetails message)
+void LoggerService::handlePacketDecoded(const MotorDetailsMessage message)
 {
     printReceivedMessage(message);
 }
 
-void LoggerService::handlePacketDecoded(const FaultsMessage message)
+void LoggerService::handlePacketDecoded(const DriverControlsMessage message)
 {
     printReceivedMessage(message);
 }
 
-void LoggerService::handlePacketDecoded(const BatteryDataMessage message)
+void LoggerService::handlePacketDecoded(const MotorFaultsMessage message)
 {
     printReceivedMessage(message);
 }
 
-void LoggerService::handlePacketDecoded(const CmuDataMessage message)
+void LoggerService::handlePacketDecoded(const BatteryFaultsMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const BatteryMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const CmuMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const MpptMessage message)
+{
+    printReceivedMessage(message);
+}
+
+void LoggerService::handlePacketDecoded(const LightsMessage message)
 {
     printReceivedMessage(message);
 }

@@ -47,3 +47,18 @@ QString Settings::exchangeName() const
 {
     return QString(settings_.value("rabbitMQ/exchangeName").toString());
 }
+
+int Settings::numberOfCmus() const
+{
+    return settings_.value("UnitNumbers/numberOfCmus").toInt();
+}
+
+int Settings::numberOfMotors() const
+{
+    return settings_.value("UnitNumbers/numberOfMotors").toInt();
+}
+
+int Settings::numberOfMppts() const
+{
+    return settings_.value("UnitNumbers/numberOfMppts").toInt();
+}

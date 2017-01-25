@@ -1,25 +1,59 @@
 #include "MessageDecodingHelpers.h"
 
+#include <QDebug>
+#include <QDataStream>
+
 namespace
 {
-    const int NUMBER_OF_BYTES_IN_FLOAT = 4;
+    const int UNION_SIZE = 4;
 
-    union FloatCharTranslator
+    enum Type { FLOAT = 1, UNSIGNED_SHORT = 2, UNSIGNED_CHAR = 3, UNSIGNED_INT = 4 };
+
+    int numberOfBytesInData(Type type)
     {
-        float floatData;
-        char charData[NUMBER_OF_BYTES_IN_FLOAT];
-    };
-}
+        switch (type)
+        {
+            case FLOAT:
+                return sizeof(float);
+                break;
 
-float MessageDecodingHelpers::getFloat(
-    const QByteArray& data, int startIndex)
-{
-    FloatCharTranslator dataUnion;
+            case UNSIGNED_SHORT:
+                return sizeof(unsigned short);
+                break;
 
-    for (int i = 0; i < NUMBER_OF_BYTES_IN_FLOAT; i++)
-    {
-        dataUnion.charData[i] = data.at(i + startIndex);
+            case UNSIGNED_CHAR:
+                return sizeof(unsigned char);
+                break;
+
+            case UNSIGNED_INT:
+                return sizeof(unsigned int);
+                break;
+
+            default:
+                qDebug() << "MessageDecodingHelpers: Invalid type";
+                return -1;
+        }
     }
-
-    return dataUnion.floatData;
 }
+
+float MessageDecodingHelpers::getFloat(const QByteArray& data, int startIndex)
+{
+    return data.mid(startIndex, numberOfBytesInData(Type::FLOAT)).toFloat();
+}
+
+unsigned short MessageDecodingHelpers::getUnsignedShort(const QByteArray& data, int startIndex)
+{
+    return data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_SHORT)).toUShort();
+}
+
+unsigned char MessageDecodingHelpers::getUnsignedChar(const QByteArray& data, int startIndex)
+{
+    return static_cast<unsigned char>(data.at(startIndex));
+}
+
+unsigned int MessageDecodingHelpers::getUnsignedInt(const QByteArray& data, int startIndex)
+{
+    return data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_INT)).toUInt();
+}
+
+

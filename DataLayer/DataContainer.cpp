@@ -1,14 +1,25 @@
-#include "BatteryData/BatteryData.h"
 #include "DataContainer.h"
-#include "FaultsData/FaultsData.h"
-#include "PowerData/PowerData.h"
-#include "VehicleData/VehicleData.h"
+#include "BatteryData/BatteryData.h"
+#include "BatteryFaultsData/BatteryFaultsData.h"
+#include "CmuData/CmuData.h"
+#include "DriverControlsData/DriverControlsData.h"
+#include "KeyMotorData/KeyMotorData.h"
+#include "LightsData/LightsData.h"
+#include "MotorDetailsData/MotorDetailsData.h"
+#include "MotorFaultsData/MotorFaultsData.h"
+#include "MpptData/MpptData.h"
+#include "InfrastructureLayer/Settings/I_Settings.h"
 
-DataContainer::DataContainer()
-    : vehicleData_(new VehicleData())
-    , powerData_(new PowerData())
-    , batteryData_(new BatteryData())
-    , faultsData_(new FaultsData())
+DataContainer::DataContainer(const I_Settings& settings)
+    : batteryData_(new BatteryData())
+    , batteryFaultsData_(new BatteryFaultsData())
+    , cmuData_(new CmuData(settings.numberOfCmus()))
+    , driverControlsData_(new DriverControlsData())
+    , keyMotorData_(new KeyMotorData())
+    , lightsData_(new LightsData())
+    , motorDetailsData_(new MotorDetailsData(settings.numberOfMotors()))
+    , motorFaultsData_(new MotorFaultsData())
+    , mpptData_(new MpptData(settings.numberOfMppts()))
 {
 }
 
@@ -16,22 +27,47 @@ DataContainer::~DataContainer()
 {
 }
 
-I_PowerData& DataContainer::powerData()
-{
-    return *powerData_;
-}
-
-I_VehicleData& DataContainer::vehicleData()
-{
-    return *vehicleData_;
-}
-
 I_BatteryData& DataContainer::batteryData()
 {
     return *batteryData_;
 }
 
-I_FaultsData& DataContainer::faultsData()
+I_BatteryFaultsData& DataContainer::batteryFaultsData()
 {
-    return *faultsData_;
+    return *batteryFaultsData_;
+}
+
+I_CmuData& DataContainer::cmuData()
+{
+    return *cmuData_;
+}
+
+I_DriverControlsData& DataContainer::driverControlsData()
+{
+    return *driverControlsData_;
+}
+
+I_KeyMotorData& DataContainer::keyMotorData()
+{
+    return *keyMotorData_;
+}
+
+I_LightsData& DataContainer::lightsData()
+{
+    return *lightsData_;
+}
+
+I_MotorDetailsData& DataContainer::motorDetailsData()
+{
+    return *motorDetailsData_;
+}
+
+I_MotorFaultsData& DataContainer::motorFaultsData()
+{
+    return *motorFaultsData_;
+}
+
+I_MpptData& DataContainer::mpptData()
+{
+    return *mpptData_;
 }

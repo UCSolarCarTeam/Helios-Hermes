@@ -13,4 +13,7 @@ public:
     MOCK_CONST_METHOD0(forwardPeriod, int());
     MOCK_CONST_METHOD0(packetTitle, QString());
     MOCK_CONST_METHOD0(exchangeName, QString());
+    MOCK_CONST_METHOD0(numberOfCmus, int());
+    MOCK_CONST_METHOD0(numberOfMotors, int());
+    MOCK_CONST_METHOD0(numberOfMppts, int());
 };

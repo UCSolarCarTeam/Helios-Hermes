@@ -1,11 +1,15 @@
 #pragma once
 
 #include <QObject>
-#include "../MessagingFramework/BatteryDataMessage.h"
-#include "../MessagingFramework/CmuDataMessage.h"
-#include "../MessagingFramework/DriverControlDetails.h"
-#include "../MessagingFramework/FaultsMessage.h"
-#include "../MessagingFramework/KeyDriverControlTelemetry.h"
+#include "../MessagingFramework/BatteryMessage.h"
+#include "../MessagingFramework/BatteryFaultsMessage.h"
+#include "../MessagingFramework/CmuMessage.h"
+#include "../MessagingFramework/DriverControlsMessage.h"
+#include "../MessagingFramework/KeyMotorMessage.h"
+#include "../MessagingFramework/LightsMessage.h"
+#include "../MessagingFramework/MotorDetailsMessage.h"
+#include "../MessagingFramework/MotorFaultsMessage.h"
+#include "../MessagingFramework/MpptMessage.h"
 
 class I_PacketDecoder : public QObject
 {
@@ -14,9 +18,13 @@ public:
     virtual ~I_PacketDecoder() {}
 
 signals:
-    void packetDecoded(const KeyDriverControlTelemetry message);
-    void packetDecoded(const DriverControlDetails message);
-    void packetDecoded(const FaultsMessage message);
-    void packetDecoded(const BatteryDataMessage message);
-    void packetDecoded(const CmuDataMessage message);
+    void packetDecoded(const BatteryMessage);
+    void packetDecoded(const BatteryFaultsMessage);
+    void packetDecoded(const CmuMessage);
+    void packetDecoded(const DriverControlsMessage);
+    void packetDecoded(const KeyMotorMessage);
+    void packetDecoded(const LightsMessage);
+    void packetDecoded(const MotorDetailsMessage);
+    void packetDecoded(const MotorFaultsMessage);
+    void packetDecoded(const MpptMessage);
 };

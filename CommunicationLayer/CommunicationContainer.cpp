@@ -6,11 +6,15 @@
 #include "CommDeviceControl/RadioCommDevice.h"
 #include "CommDeviceControl/UdpMessageForwarder.h"
 #include "CommunicationContainer.h"
+#include "DataPopulators/BatteryFaultsPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
 #include "DataPopulators/CmuPopulator.h"
-#include "DataPopulators/DriverDetailsPopulator.h"
-#include "DataPopulators/FaultsPopulator.h"
-#include "DataPopulators/KeyDriverControlPopulator.h"
+#include "DataPopulators/DriverControlsPopulator.h"
+#include "DataPopulators/KeyMotorPopulator.h"
+#include "DataPopulators/LightsPopulator.h"
+#include "DataPopulators/MotorDetailsPopulator.h"
+#include "DataPopulators/MotorFaultsPopulator.h"
+#include "DataPopulators/MpptPopulator.h"
 #include "PacketChecksumChecker/PacketChecksumChecker.h"
 #include "PacketDecoder/PacketDecoder.h"
 #include "PacketSynchronizer/PacketSynchronizer.h"
@@ -26,23 +30,15 @@ public:
         , packetUnstuffer(packetSynchronizer)
         , packetChecksumChecker(packetUnstuffer)
         , packetDecoder(packetChecksumChecker)
-        , keyDriverControlPopulator(
-              packetDecoder,
-              dataContainer.vehicleData(),
-              dataContainer.powerData())
-        , driverDetailsPopulator(
-              packetDecoder,
-              dataContainer.vehicleData(),
-              dataContainer.powerData())
-        , faultsPopulator(
-              packetDecoder,
-              dataContainer.faultsData())
-        , batteryPopulator(
-              packetDecoder,
-              dataContainer.batteryData())
-        , cmuPopulator(
-              packetDecoder,
-              dataContainer.batteryData())
+        , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
+        , batteryPopulator(packetDecoder, dataContainer.batteryData())
+        , cmuPopulator(packetDecoder, dataContainer.cmuData())
+        , driverControlsPopulator(packetDecoder, dataContainer.driverControlsData())
+        , keyMotorPopulator(packetDecoder, dataContainer.keyMotorData())
+        , lightsPopulator(packetDecoder, dataContainer.lightsData())
+        , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
+        , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
+        , mpptPopulator(packetDecoder, dataContainer.mpptData())
     {
     }
 
@@ -53,11 +49,15 @@ public:
     PacketUnstuffer packetUnstuffer;
     PacketChecksumChecker packetChecksumChecker;
     PacketDecoder packetDecoder;
-    KeyDriverControlPopulator keyDriverControlPopulator;
-    DriverDetailsPopulator driverDetailsPopulator;
-    FaultsPopulator faultsPopulator;
+    BatteryFaultsPopulator batteryFaultsPopulator;
     BatteryPopulator batteryPopulator;
     CmuPopulator cmuPopulator;
+    DriverControlsPopulator driverControlsPopulator;
+    KeyMotorPopulator keyMotorPopulator;
+    LightsPopulator lightsPopulator;
+    MotorDetailsPopulator motorDetailsPopulator;
+    MotorFaultsPopulator motorFaultsPopulator;
+    MpptPopulator mpptPopulator;
 };
 
 CommunicationContainer::CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)

@@ -11,4 +11,7 @@ public:
     virtual int forwardPeriod() const = 0;
     virtual QString packetTitle() const = 0;
     virtual QString exchangeName() const = 0;
+    virtual int numberOfCmus() const = 0;
+    virtual int numberOfMotors() const = 0;
+    virtual int numberOfMppts() const = 0;
 };

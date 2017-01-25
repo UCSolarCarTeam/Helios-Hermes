@@ -3,24 +3,41 @@
 #include <QScopedPointer>
 
 class I_BatteryData;
-class I_FaultsData;
-class I_PowerData;
-class I_VehicleData;
+class I_BatteryFaultsData;
+class I_CmuData;
+class I_DriverControlsData;
+class I_KeyMotorData;
+class I_LightsData;
+class I_MotorDetailsData;
+class I_MotorFaultsData;
+class I_MpptData;
+
+class I_Settings;
 
 class DataContainer
 {
 public:
-    DataContainer();
+    DataContainer(const I_Settings& settings);
     ~DataContainer();
 
-    I_PowerData& powerData();
-    I_VehicleData& vehicleData();
     I_BatteryData& batteryData();
-    I_FaultsData& faultsData();
+    I_BatteryFaultsData& batteryFaultsData();
+    I_CmuData& cmuData();
+    I_DriverControlsData& driverControlsData();
+    I_KeyMotorData& keyMotorData();
+    I_LightsData& lightsData();
+    I_MotorDetailsData& motorDetailsData();
+    I_MotorFaultsData& motorFaultsData();
+    I_MpptData& mpptData();
 
 private:
-    QScopedPointer<I_VehicleData> vehicleData_;
-    QScopedPointer<I_PowerData> powerData_;
     QScopedPointer<I_BatteryData> batteryData_;
-    QScopedPointer<I_FaultsData> faultsData_;
+    QScopedPointer<I_BatteryFaultsData> batteryFaultsData_;
+    QScopedPointer<I_CmuData> cmuData_;
+    QScopedPointer<I_DriverControlsData> driverControlsData_;
+    QScopedPointer<I_KeyMotorData> keyMotorData_;
+    QScopedPointer<I_LightsData> lightsData_;
+    QScopedPointer<I_MotorDetailsData> motorDetailsData_;
+    QScopedPointer<I_MotorFaultsData> motorFaultsData_;
+    QScopedPointer<I_MpptData> mpptData_;
 };

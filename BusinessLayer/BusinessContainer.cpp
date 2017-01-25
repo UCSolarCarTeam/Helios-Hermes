@@ -8,18 +8,24 @@
 #include "LoggerService/LoggerService.h"
 
 BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureContainer,
-                                     CommunicationContainer& communicationContainer,
-                                     DataContainer& dataContainer)
+                                     CommunicationContainer& communicationContainer/*,
+                                     DataContainer& dataContainer*/)
     : loggerService_(new LoggerService(communicationContainer.packetSynchronizer(),
                                        communicationContainer.packetDecoder()))
     , communicationsMonitoringService_(new CommunicationsMonitoringService(
                                            communicationContainer.packetChecksumChecker()))
-    , jsonForwarder_(new JsonForwarder(dataContainer.batteryData(),
-                                       dataContainer.faultsData(),
-                                       dataContainer.powerData(),
-                                       dataContainer.vehicleData(),
-                                       communicationContainer.udpMessageForwarder(),
-                                       infrastructureContainer.settings()))
+    , jsonForwarder_(new JsonForwarder(/*dataContainer.batteryData(),
+                                       dataContainer.batteryFaultsData(),
+                                       dataContainer.cmuData(),
+                                       dataContainer.driverControlsData(),
+                                       dataContainer.keyMotorData(),
+                                       dataContainer.lightsData(),
+                                       dataContainer.motorDetailsData(),
+                                       dataContainer.motorFaultsData(),
+                                       dataContainer.mpptData(),
+                                       dataContainer.otherData(),*/
+                         communicationContainer.udpMessageForwarder(),
+                         infrastructureContainer.settings()))
 {
     jsonForwarder_->startForwardingData();
 }
