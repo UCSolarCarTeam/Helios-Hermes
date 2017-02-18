@@ -83,6 +83,17 @@ Run the following commands to generate the libraries needed by Hermes:
 
 `make`
 
+4) Including the generated library
+
+The generated library needs to be included in the list of local libraries. To do this, first generate a directory for it:
+
+`sudo mkdir /usr/local/include/SimpleAmqpClient`
+
+Then, run the following commands to copy the library over:
+
+`sudo cp *.so* /usr/local/lib/`
+
+`sudo cp ../src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient`
 
 ### Start Server
 
