@@ -83,7 +83,7 @@ Run the following commands to generate the libraries needed by Hermes:
 
 `make`
 
-4) Including the generated library
+4) Including the generated SimpleAmqpClient library
 
 The generated library needs to be included in the list of local libraries. To do this, first generate a directory for it:
 
