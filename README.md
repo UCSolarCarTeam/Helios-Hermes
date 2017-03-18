@@ -27,14 +27,14 @@ Your new file structure should look like:
 
 ### Getting setup
 
-1) Installing rabbitMQ
+1. Installing rabbitMQ
 
 In order to send messages, you must have a rabbitMQ server to send the messages to.
 This can be installed [here](https://www.rabbitmq.com/) or via the package manager using:
 
 	. echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list && sudo apt-get update && sudo apt-get install rabbitmq-server
 
-2) Installing dependencies for SimpleAmqpClient
+2. Installing dependencies for SimpleAmqpClient
 
 First, boost and cmake is required to generate the libraries below, you may install these using your appropriate package manager (such as apt-get on debian).
 The following are the commands that could be used on a debian based distro to install these dependencies if you do not already have them.
@@ -66,7 +66,7 @@ Finally navigate back to the src folder:
 
 	. cd ../..
 
-3) Generating SimpleAmqpClient library
+3. Generating SimpleAmqpClient library
 
 SimpleAmqpClient can be downloaded and compiled from [alanxz/SimpleAmqpClient](https://github.com/alanxz/SimpleAmqpClient).
 Once again from the src directory, run the following command:
@@ -83,7 +83,7 @@ Run the following commands to generate the libraries needed by Hermes:
 
 	. make
 
-4) Including the generated SimpleAmqpClient library
+4. Including the generated SimpleAmqpClient library
 
 The generated library needs to be included in the list of local libraries. To do this, first generate a directory for it:
 
