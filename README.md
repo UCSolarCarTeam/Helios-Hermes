@@ -87,7 +87,7 @@ Run the following commands to generate the libraries needed by Hermes:
 
 The generated library needs to be included in the list of local libraries. To do this, first generate a directory for it:
 
-`sudo mkdir /usr/local/include/SimpleAmqpClient`
+. `sudo mkdir /usr/local/include/SimpleAmqpClient`
 
 Then, run the following commands to copy the library over:
 
