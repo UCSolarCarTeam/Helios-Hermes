@@ -42,11 +42,11 @@ The following are the commands that could be used on a debian based distro to in
 `sudo apt-get install cmake libboost-dev openssl libssl-dev libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev rabbitmq-server`
 
 SimpleAmqpClient requires rabbitmq-c, which can be downloaded and compiled from the repository [alanxz/rabbitmq-c](https://github.com/alanxz/rabbitmq-c).
-Start by cloning the repository from github, this is to do in the `/tmp/` directory:
+Start by cloning the repository from github, this is recommended to be done in the `/tmp/` directory:
 
 `git clone https://github.com/alanxz/rabbitmq-c`
 
-NCreate a build directory and enter it with the following command:
+Create a build directory and enter it with the following command:
 
 `mkdir rabbitmq-c/build && cd rabbitmq-c/build`
 
