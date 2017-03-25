@@ -50,7 +50,7 @@ public:
     bool bmsGetIsChargingSignalStatus() const;
 
     /*BatteryData "Sets"*/
-    void setAlive(const unsigned char&);
+    void setAlive(const bool&);
     void setBmsRelayStatus(const unsigned char&);
     void setPopulatedCells(const unsigned char&);
     void set12VInputVoltage(const float&);
@@ -75,7 +75,7 @@ public:
     void setAverageCellVoltage(const unsigned short&);
     void setPrechargeState(const unsigned char&);
     void setAuxVoltage(const unsigned char&);
-    void setAuxBmsAlive(const unsigned char&);
+    void setAuxBmsAlive(const bool&);
 
 
 private:

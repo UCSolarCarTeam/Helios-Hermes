@@ -57,7 +57,7 @@ public:
     virtual bool bmsGetIsChargingSignalStatus() const = 0;
 
     /*BatteryData "Sets"*/
-    virtual void setAlive(const unsigned char&) = 0;
+    virtual void setAlive(const bool&) = 0;
     virtual void setBmsRelayStatus(const unsigned char&) = 0;
     virtual void setPopulatedCells(const unsigned char&) = 0;
     virtual void set12VInputVoltage(const float&) = 0;
@@ -82,7 +82,7 @@ public:
     virtual void setAverageCellVoltage(const unsigned short&) = 0;
     virtual void setPrechargeState(const unsigned char&) = 0;
     virtual void setAuxVoltage(const unsigned char&) = 0;
-    virtual void setAuxBmsAlive(const unsigned char&) = 0;
+    virtual void setAuxBmsAlive(const bool&) = 0;
 
 signals:
     void aliveReceived(const bool& alive);

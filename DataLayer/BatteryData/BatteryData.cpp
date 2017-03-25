@@ -225,9 +225,9 @@ bool BatteryData::bmsGetIsChargingSignalStatus() const
 }
 
 /*BatteryData "Sets"*/
-void BatteryData::setAlive(const unsigned char& alive)
+void BatteryData::setAlive(const bool& alive)
 {
-    alive_ = static_cast<bool>(alive);
+    alive_ = alive;
     emit aliveReceived(alive_);
 }
 
@@ -375,8 +375,8 @@ void BatteryData::setAuxVoltage(const unsigned char& auxVoltage)
     emit auxVoltageReceived(auxVoltage_);
 }
 
-void BatteryData::setAuxBmsAlive(const unsigned char& auxBmsAlive)
+void BatteryData::setAuxBmsAlive(const bool& auxBmsAlive)
 {
-    auxBmsAlive_ = static_cast<bool>(auxBmsAlive);
+    auxBmsAlive_ = auxBmsAlive;
     emit auxBmsAliveReceived(auxBmsAlive_);
 }
