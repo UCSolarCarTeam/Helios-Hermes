@@ -66,6 +66,6 @@ protected:
 
     inline bool errorFlagPresent(const unsigned int errorMask) const;
     inline bool limitFlagPresent(const unsigned short limitMask) const;
-    inline void appendIfPresent(QString &messageString, const unsigned int errorMask, QString errorDescription) const;
-    inline void appendIfPresent(QString &messageString, const unsigned short limitMask, QString limitDescription) const;
+    inline void appendIfPresent(QString& messageString, const unsigned int errorMask, QString errorDescription) const;
+    inline void appendIfPresent(QString& messageString, const unsigned short limitMask, QString limitDescription) const;
 };

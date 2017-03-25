@@ -180,29 +180,29 @@ bool FakeBatteryData::bmsGetIsChargingSignalStatus() const
 }
 
 /*BatteryData "Sets"*/
-void FakeBatteryData::setAlive(const unsigned char&){}
-void FakeBatteryData::setBmsRelayStatus(const unsigned char&){}
-void FakeBatteryData::setPopulatedCells(const unsigned char&){}
-void FakeBatteryData::set12VInputVoltage(const float&){}
-void FakeBatteryData::setFanVoltage(const float&){}
-void FakeBatteryData::setPackCurrent(const float&){}
-void FakeBatteryData::setPackVoltage(const float&){}
-void FakeBatteryData::setPackStateOfCharge(const float&){}
-void FakeBatteryData::setPackAmphours(const float&){}
-void FakeBatteryData::setPackDepthOfDischarge(const float&){}
-void FakeBatteryData::setHighTemperature(const unsigned char&){}
-void FakeBatteryData::setHighThermistorId(const unsigned char&){}
-void FakeBatteryData::setLowTemperature(const unsigned char&){}
-void FakeBatteryData::setLowThermistorId(const unsigned char&){}
-void FakeBatteryData::setAverageTemperature(const unsigned char&){}
-void FakeBatteryData::setInternalTemperature(const unsigned char&){}
-void FakeBatteryData::setFanSpeed(const unsigned char&){}
-void FakeBatteryData::setRequestedFanSpeed(const unsigned char&){}
-void FakeBatteryData::setLowCellVoltage(const unsigned short&){}
-void FakeBatteryData::setLowCellVoltageId(const unsigned char&){}
-void FakeBatteryData::setHighCellVoltage(const unsigned short&){}
-void FakeBatteryData::setHighCellVoltageId(const unsigned char&){}
-void FakeBatteryData::setAverageCellVoltage(const unsigned short&){}
-void FakeBatteryData::setPrechargeState(const unsigned char&){}
-void FakeBatteryData::setAuxVoltage(const unsigned char&){}
-void FakeBatteryData::setAuxBmsAlive(const unsigned char&){}
+void FakeBatteryData::setAlive(const unsigned char&) {}
+void FakeBatteryData::setBmsRelayStatus(const unsigned char&) {}
+void FakeBatteryData::setPopulatedCells(const unsigned char&) {}
+void FakeBatteryData::set12VInputVoltage(const float&) {}
+void FakeBatteryData::setFanVoltage(const float&) {}
+void FakeBatteryData::setPackCurrent(const float&) {}
+void FakeBatteryData::setPackVoltage(const float&) {}
+void FakeBatteryData::setPackStateOfCharge(const float&) {}
+void FakeBatteryData::setPackAmphours(const float&) {}
+void FakeBatteryData::setPackDepthOfDischarge(const float&) {}
+void FakeBatteryData::setHighTemperature(const unsigned char&) {}
+void FakeBatteryData::setHighThermistorId(const unsigned char&) {}
+void FakeBatteryData::setLowTemperature(const unsigned char&) {}
+void FakeBatteryData::setLowThermistorId(const unsigned char&) {}
+void FakeBatteryData::setAverageTemperature(const unsigned char&) {}
+void FakeBatteryData::setInternalTemperature(const unsigned char&) {}
+void FakeBatteryData::setFanSpeed(const unsigned char&) {}
+void FakeBatteryData::setRequestedFanSpeed(const unsigned char&) {}
+void FakeBatteryData::setLowCellVoltage(const unsigned short&) {}
+void FakeBatteryData::setLowCellVoltageId(const unsigned char&) {}
+void FakeBatteryData::setHighCellVoltage(const unsigned short&) {}
+void FakeBatteryData::setHighCellVoltageId(const unsigned char&) {}
+void FakeBatteryData::setAverageCellVoltage(const unsigned short&) {}
+void FakeBatteryData::setPrechargeState(const unsigned char&) {}
+void FakeBatteryData::setAuxVoltage(const unsigned char&) {}
+void FakeBatteryData::setAuxBmsAlive(const unsigned char&) {}
