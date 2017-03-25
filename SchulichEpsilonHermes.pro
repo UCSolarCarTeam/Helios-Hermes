@@ -1,7 +1,7 @@
 TEMPLATE = subdirs  
 CONFIG += ordered static
 
-message(University of Calgary Solar Car Team Delta Hermes)
+message(University of Calgary Solar Car Team Epsilon Hermes)
 
 SUBDIRS = \
    InfrastructureLayer \
@@ -9,4 +9,4 @@ SUBDIRS = \
    CommunicationLayer \
    BusinessLayer \
    Tests \
-   SchulichDeltaHermes
+   SchulichEpsilonHermes

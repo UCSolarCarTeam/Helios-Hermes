@@ -1,6 +1,6 @@
 # README.md
 
-Hermes is a background process on the Schulich Delta's onboard computer.
+Hermes is a background process on the Schulich Epsilon's onboard computer.
 It rebroadcasts a data feed from the Central Communication System and also logs the data.
 
 The name is inspired by the Olympian god Hermes who is portrayed as a messenger and scribe of the gods.
@@ -100,7 +100,7 @@ On linux to refresh the contents of the server perform the following commands:
 
 ## Testing
 
-Testing the Schulich Delta Desktop Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path /usr/local/include or /usr/include.
+Testing the Schulich Epsilon Desktop Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path /usr/local/include or /usr/include.
 
 You must compile the library that has the definitions yourself.
 Meaning you need a `libgmock.a` archive file in the test directory in order to compile the tests.
