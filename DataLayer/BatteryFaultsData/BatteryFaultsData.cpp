@@ -61,7 +61,7 @@ unsigned int BatteryFaultsData::getErrorFlags() const
     return errorFlags_;
 }
 
-unsigned int BatteryFaultsData::getLimitFlags() const
+unsigned short BatteryFaultsData::getLimitFlags() const
 {
     return limitFlags_;
 }
@@ -273,7 +273,7 @@ void BatteryFaultsData::setLimitFlags(const unsigned short& limitFlags)
     emit limitFlagsRecieved(limitFlags_);
 }
 
-void appendIfPresent(QString &messageString, const unsigned int errorMask, QString errorDescription)
+void BatteryFaultsData::appendIfPresent(QString &messageString, const unsigned int errorMask, QString errorDescription) const
 {
     if (errorFlagPresent(errorMask))
     {
@@ -281,7 +281,7 @@ void appendIfPresent(QString &messageString, const unsigned int errorMask, QStri
     }
 }
 
-void appendIfPresent(QString &messageString, const unsigned short limitMask, QString limitDescription)
+void BatteryFaultsData::appendIfPresent(QString &messageString, const unsigned short limitMask, QString limitDescription) const
 {
     if (errorFlagPresent(limitMask))
     {

@@ -46,6 +46,16 @@ public:
     virtual unsigned char getAuxVoltage() const = 0;
     virtual bool getAuxBmsAlive() const = 0;
 
+    /* BMS relay status getter */
+    virtual bool bmsDischargeRelayEnabled() const = 0;
+    virtual bool bmsChargeRelayEnabaled() const = 0;
+    virtual bool bmsChargerSafetyEnabled() const = 0;
+    virtual bool bmsMalfunctionIndicatorActive() const = 0;
+    virtual bool bmsGetMultiPurposeInputSignalStatus() const = 0;
+    virtual bool bmsGetAlwaysOnSignalStatus() const = 0;
+    virtual bool bmsGetIsReadySignalStatus() const = 0;
+    virtual bool bmsGetIsChargingSignalStatus() const = 0;
+
     /*BatteryData "Sets"*/
     virtual void setAlive(const unsigned char&) = 0;
     virtual void setBmsRelayStatus(const unsigned char&) = 0;
@@ -75,7 +85,7 @@ public:
     virtual void setAuxBmsAlive(const unsigned char&) = 0;
 
 signals:
-    void aliveReceived(const unsigned char& alive);
+    void aliveReceived(const bool& alive);
     void bmsRelayStatusReceived(const unsigned char&);
     void populatedCellsReceived(const unsigned char&);
     void inputVoltage12VReceived(const float&);
@@ -100,5 +110,5 @@ signals:
     void averageCellVoltageReceived(const unsigned short&);
     void prechargeStateReceived(const unsigned char&);
     void auxVoltageReceived(const unsigned char&);
-    void auxBmsAliveReceived(const unsigned char&);
+    void auxBmsAliveReceived(const bool&);
 };
