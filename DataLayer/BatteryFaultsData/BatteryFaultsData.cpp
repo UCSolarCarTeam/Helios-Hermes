@@ -260,7 +260,6 @@ bool BatteryFaultsData::operator==(const I_BatteryFaultsData& other) const
 }
 
 /* BatteryFaults Sets */
-
 void BatteryFaultsData::setErrorFlags(const unsigned int& errorFlags)
 {
     errorFlags_ = errorFlags;
