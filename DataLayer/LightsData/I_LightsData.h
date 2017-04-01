@@ -9,6 +9,7 @@ public:
     virtual ~I_LightsData() {}
 
     /* LightsData Gets */
+    virtual bool getAlive() const = 0;
     virtual bool getLowBeams() const = 0;
     virtual bool getHighBeams() const = 0;
     virtual bool getBrakes() const = 0;
@@ -17,8 +18,10 @@ public:
     virtual bool getBmsStrobeLight() const = 0;
 
     /* LightsData Sets */
+    virtual void setAlive(const bool&) = 0;
     virtual void setLightStatus(const unsigned char&) = 0;
 
 signals:
+    void aliveReceived(const bool& alive);
     void lightStatusReceived(const unsigned char lightStatus);
 };
