@@ -56,9 +56,8 @@ bool LightsData::getBmsStrobeLight() const
     return static_cast<bool>(lightStatus_ & BMS_STROBE_LIGHT_OFFSET);
 }
 
-
 /* LightsData Sets */
-void setAlive(const bool& alive)
+void LightsData::setAlive(const bool& alive)
 {
     alive_ = alive;
     emit aliveReceived(alive_);

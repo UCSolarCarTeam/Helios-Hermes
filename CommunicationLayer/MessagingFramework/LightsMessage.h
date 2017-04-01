@@ -8,6 +8,7 @@ class LightsMessage
 public:
     LightsMessage(const QByteArray& messageData);
 
+    bool alive() const;
     unsigned char lightStatus() const;
 
     QString toString() const;

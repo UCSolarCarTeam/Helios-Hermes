@@ -6,12 +6,18 @@ using namespace MessageDecodingHelpers;
 
 namespace
 {
-    const int LIGHT_STATUS_OFFSET = 1;
+    const int ALIVE_OFFSET = 1;
+    const int LIGHT_STATUS_OFFSET = 2;
 }
 
 LightsMessage::LightsMessage(const QByteArray& messageData)
     : messageData_(messageData)
 {
+}
+
+bool LightsMessage::alive() const
+{
+    return static_cast<bool>(messageData_.at(ALIVE_OFFSET));
 }
 
 unsigned char LightsMessage::lightStatus() const
@@ -23,6 +29,7 @@ QString LightsMessage::toString() const
 {
     QString messageString;
     messageString += QString::number(MessageDefines::LIGHTS) + ", ";
+    messageString += QString::number(alive()) + ", ";
     messageString += QString::number(lightStatus()) + ", ";
     return messageString;
 }
