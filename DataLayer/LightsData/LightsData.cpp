@@ -11,7 +11,8 @@ namespace
 }
 
 LightsData::LightsData()
-    : alive_(false), lightStatus_(0)
+    : alive_(false)
+    , lightStatus_(0)
 {
 //    Initialize to 0
 }
