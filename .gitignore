@@ -1,4 +1,4 @@
-SchulichEpsilonDesktopTelemetry.pro.*
+*.pro.*
 *.autosave
 Makefile*
 *.o
