@@ -107,8 +107,7 @@ On linux to refresh the contents of the server perform the following commands:
 
 ## Testing
 
-
-Testing the Schulich Epsilon Desktop Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path /usr/local/include or /usr/include.
+Testing Hermes is done with googletest and googlemock, the gmock and gtest header files need to be in your include path `/usr/local/include` or `/usr/include`.
 
 You must compile the library that has the definitions yourself.
 Meaning you need a `libgmock.a` archive file in the test directory in order to compile the tests.
