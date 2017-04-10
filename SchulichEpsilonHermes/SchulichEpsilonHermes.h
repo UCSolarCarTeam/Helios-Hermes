@@ -8,11 +8,11 @@ class CommunicationContainer;
 class DataContainer;
 class BusinessContainer;
 
-class SchulichDeltaHermes : public QApplication
+class SchulichEpsilonHermes : public QApplication
 {
 public:
-    SchulichDeltaHermes(int& argc, char** argv);
-    ~SchulichDeltaHermes();
+    SchulichEpsilonHermes(int& argc, char** argv);
+    ~SchulichEpsilonHermes();
 
 private:
     QScopedPointer<InfrastructureContainer> infrastructureContainer_;

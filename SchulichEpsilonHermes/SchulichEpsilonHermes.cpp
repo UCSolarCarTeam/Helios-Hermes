@@ -3,9 +3,9 @@
 #include "CommunicationLayer/CommunicationContainer.h"
 #include "BusinessLayer/BusinessContainer.h"
 
-#include "SchulichDeltaHermes.h"
+#include "SchulichEpsilonHermes.h"
 
-SchulichDeltaHermes::SchulichDeltaHermes(int& argc, char** argv)
+SchulichEpsilonHermes::SchulichEpsilonHermes(int& argc, char** argv)
     : QApplication(argc, argv)
     , infrastructureContainer_(new InfrastructureContainer())
     , dataContainer_(new DataContainer(infrastructureContainer_->settings()))
@@ -17,6 +17,6 @@ SchulichDeltaHermes::SchulichDeltaHermes(int& argc, char** argv)
 {
 }
 
-SchulichDeltaHermes::~SchulichDeltaHermes()
+SchulichEpsilonHermes::~SchulichEpsilonHermes()
 {
 }
