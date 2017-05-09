@@ -11,7 +11,8 @@ namespace
 }
 
 LightsData::LightsData()
-    : lightStatus_(0)
+    : alive_(false)
+    , lightStatus_(0)
 {
 //    Initialize to 0
 }
@@ -21,6 +22,11 @@ LightsData::~LightsData()
 }
 
 /* LightsData Gets */
+bool LightsData::getAlive() const
+{
+    return alive_;
+}
+
 bool LightsData::getLowBeams() const
 {
     return static_cast<bool>(lightStatus_ & LOW_BEAMS_OFFSET);
@@ -51,8 +57,13 @@ bool LightsData::getBmsStrobeLight() const
     return static_cast<bool>(lightStatus_ & BMS_STROBE_LIGHT_OFFSET);
 }
 
-
 /* LightsData Sets */
+void LightsData::setAlive(const bool& alive)
+{
+    alive_ = alive;
+    emit aliveReceived(alive_);
+}
+
 void LightsData::setLightStatus(const unsigned char& lightStatus)
 {
     lightStatus_ = lightStatus;

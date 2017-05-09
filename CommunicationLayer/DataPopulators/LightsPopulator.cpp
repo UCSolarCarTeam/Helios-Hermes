@@ -9,5 +9,6 @@ LightsPopulator::LightsPopulator(I_PacketDecoder& packetDecoder, I_LightsData& l
 
 void LightsPopulator::populateData(const LightsMessage& message)
 {
+    lightsData_.setAlive(message.alive());
     lightsData_.setLightStatus(message.lightStatus());
 }

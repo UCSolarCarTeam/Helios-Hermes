@@ -9,6 +9,7 @@ public:
     virtual ~LightsData();
 
     /* LightsData Gets */
+    bool getAlive() const;
     bool getLowBeams() const;
     bool getHighBeams() const;
     bool getBrakes() const;
@@ -18,8 +19,10 @@ public:
 
 
     /* LightsData Sets */
+    void setAlive(const bool&);
     void setLightStatus(const unsigned char&);
 
 private:
+    bool alive_;
     unsigned char lightStatus_;
 };
