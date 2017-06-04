@@ -14,7 +14,7 @@ Originally it should look similar to this:
     - Hermes
 
 From the directory that this README is currently located in (we assume this is named Hermes), run the command:
-    `cd ../ && mv ./Hermes ./src && mkdir Hermes && mv ./src ./Hermes/`  
+    `cd ../ && mv ./Hermes ./src && mkdir Hermes && mv ./src ./Hermes/`
     (replace Hermes with the name of your cloned directory if it is different)
 This will rename the cloned directory to src and move it within a new directory called 'Hermes'.
 Your new file structure should look like:
@@ -39,28 +39,7 @@ This can be installed [here](https://www.rabbitmq.com/) or via the package manag
 First, boost and cmake is required to generate the libraries below, you may install these using your appropriate package manager (such as apt-get on debian).
 The following are the commands that could be used on a debian based distro to install these dependencies if you do not already have them.
 
-`sudo apt-get install cmake libboost-dev openssl libssl-dev libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev`
-
-SimpleAmqpClient requires rabbitmq-c, which can be downloaded and compiled from the repository [alanxz/rabbitmq-c](https://github.com/alanxz/rabbitmq-c).
-Start by cloning the repository from github, this is recommended to be done in the `/tmp/` directory:
-
-`git clone https://github.com/alanxz/rabbitmq-c`
-
-Create a build directory and enter it with the following command:
-
-`mkdir rabbitmq-c/build && cd rabbitmq-c/build`
-
-You can now use cmake to generate the library required by SimpleAmqpClient:
-
-`cmake ..`
-
-`cmake --build .`
-
-There should now be a `.a` file in your current directory, as well as multiple `*.so*` files. Use the following commands to make them visible to SimpleAmqpClient:
-
-`sudo cp librabbitmq/*.a /usr/local/lib/`
-
-`sudo cp librabbitmq/*.so* /usr/local/lib/`
+`sudo apt-get install cmake libboost-dev openssl libssl-dev libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev librabbitmq-dev`
 
 3) Generating SimpleAmqpClient library
 
@@ -112,7 +91,7 @@ Testing Hermes is done with googletest and googlemock, the gmock and gtest heade
 You must compile the library that has the definitions yourself.
 Meaning you need a `libgmock.a` archive file in the test directory in order to compile the tests.
 
-To create a `libgmock.a` file in a Linux system follow these instructions in an arbitrary dir.
+To create a `libgmock.a` file in a Linux system follow these instructions in an arbitrary directory.
 
 1. Get the googletest and googlemock source code:
     `git clone https://github.com/google/googletest.git`
@@ -131,12 +110,7 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
 
 Congratulations! You now have a `libgmock.a` archive file.
 Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go.
-Run `qmake` and then `make` in the `Hermes/src/Tests/` directory to check if you can compile the tests.
-Use `ls -a` to show all hidden files.
-
-To get the Settings test to pass, testconfig.ini from `Hermes/src/Tests/` must be copied beside the Tests binary.
-Use the following command in the root directory:
-    `cp Tests/testconfig.ini ../build/.tests/`
+Run `qmake` and then `make check` in the `Hermes/src/` directory to run the tests.
 
 Both gmock and the gtest folders located in `googletest/googlemock/include/` and `googletest/googletest/include/` need to be placed in the `/usr/local/include` system directory.
 
