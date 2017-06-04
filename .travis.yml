@@ -7,6 +7,7 @@ before_install:
     - sudo apt-get -qq --force-yes install g++-4.8 libc6-i386 qt54tools qt54svg qt54webkit qt54serialport libboost-chrono1.48-dev libboost-system1.48-dev
     - sudo cp /usr/bin/g++-4.8 /usr/bin/g++
     - PATH="/opt/qt54/bin:$PATH"
+    - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     - qt54-env.sh
     - cd ..
     - mv ./Epsilon-Hermes ./src
