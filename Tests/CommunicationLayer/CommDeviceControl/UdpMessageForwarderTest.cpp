@@ -12,6 +12,7 @@
 #include "InfrastructureLayer/Settings/MockSettings.h"
 
 using ::testing::Return;
+using ::testing::NiceMock;
 
 namespace
 {
@@ -38,7 +39,7 @@ protected:
     */
     virtual void SetUp()
     {
-        settings_.reset(new MockSettings());
+        settings_.reset(new NiceMock<MockSettings>());
         ON_CALL(*settings_, ipAddress())
         .WillByDefault(Return(MOCK_IP));
         ON_CALL(*settings_, exchangeName())

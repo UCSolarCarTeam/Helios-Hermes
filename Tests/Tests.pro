@@ -19,15 +19,28 @@ HEADERS += \
 SOURCES += \
     testmain.cpp \
     InfrastructureLayer/Settings/SettingsTest.cpp \
-	BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
-	BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp \
-	BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarderTest.cpp \
-	BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarderTest.cpp \
-	BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarderTest.cpp \
-    CommunicationLayer/CommDeviceControl/UdpMessageForwarderTest.cpp
+	 BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
+	 BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp \
+	 BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarderTest.cpp \
+	 BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarderTest.cpp \
+	 BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarderTest.cpp \
+
+TRAVIS_DEFINED = $$(TRAVIS)
+count(TRAVIS_DEFINED, 0) {
+   # udp message formatter expects rabbitMQ server located at localhost, not applicable for TravisCI.
+   SOURCES += \
+      CommunicationLayer/CommDeviceControl/UdpMessageForwarderTest.cpp
+} else {
+   message(TravisCI build)
+}
 
 !win32 {
     QMAKE_CXXFLAGS += -Werror
 }
 
-DESTDIR = ../../build/.tests
+DESTDIR = ../../build/tests
+
+copyfiles.commands = cp testconfig.ini $${DESTDIR}
+
+QMAKE_EXTRA_TARGETS += copyfiles
+POST_TARGETDEPS += copyfiles
