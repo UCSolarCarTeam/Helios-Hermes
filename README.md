@@ -11,16 +11,16 @@ You have now successfully cloned the Hermes git repo, next is ensuring that you 
 Originally it should look similar to this:
 
   - root
-    - Hermes
+    - Epsilon-Hermes
 
-From the directory that this README is currently located in (we assume this is named Hermes), run the command:
-    `cd ../ && mv ./Hermes ./src && mkdir Hermes && mv ./src ./Hermes/`
+From the directory that this README is currently located in (we assume this is named Epsilon-Hermes), run the command:
+    `cd ../ && mv ./Epsilon-Hermes ./src && mkdir Epsilon-Hermes && mv ./src ./Epsilon-Hermes/`
     (replace Hermes with the name of your cloned directory if it is different)
 This will rename the cloned directory to src and move it within a new directory called 'Hermes'.
 Your new file structure should look like:
 
   - root
-    - Hermes
+    - Epsilon-Hermes
       - src
 
 ## RabbitMQ Broker
@@ -130,8 +130,8 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
     `ar -rv libgmock.a gtest-all.o gmock-all.o`
 
 Congratulations! You now have a `libgmock.a` archive file.
-Create a `Hermes/build/.lib` directory using `mkdir -p Hermes/build/.lib` in the root directory and then place the `libmock.a` archive file in the `Hermes/build/.lib/` directory and you should be good to go.
-Run `qmake` and then `make check` in the `Hermes/src/` directory to run the tests.
+Create a `Epsilon-Hermes/build/.lib` directory using `mkdir -p Epsilon-Hermes/build/.lib` in the root directory and then place the `libgmock.a` archive file in the `Epsilon-Hermes/build/.lib/` directory and you should be good to go.
+Run `qmake` and then `make check` in the `Epsilon-Hermes/src/` directory to run the tests.
 
 Both gmock and the gtest folders located in `googletest/googlemock/include/` and `googletest/googletest/include/` need to be placed in the `/usr/local/include` system directory.
 
