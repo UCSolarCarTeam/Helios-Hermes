@@ -15,8 +15,8 @@ Originally it should look similar to this:
 
 From the directory that this README is currently located in (we assume this is named Epsilon-Hermes), run the command:
     `cd ../ && mv ./Epsilon-Hermes ./src && mkdir Epsilon-Hermes && mv ./src ./Epsilon-Hermes/`
-    (replace Hermes with the name of your cloned directory if it is different)
-This will rename the cloned directory to src and move it within a new directory called 'Hermes'.
+    (replace Epsilon-Hermes with the name of your cloned directory if it is different)
+This will rename the cloned directory to src and move it within a new directory called 'Epsilon-Hermes'.
 Your new file structure should look like:
 
   - root
