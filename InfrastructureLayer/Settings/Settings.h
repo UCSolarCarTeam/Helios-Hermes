@@ -12,7 +12,7 @@ public:
     QString serialPortName() const;
     int baudrate() const;
     QString ipAddress() const;
-    quint16 udpPort() const;
+    quint16 port() const;
     int forwardPeriod() const;
     QString packetTitle() const;
     QString exchangeName() const;

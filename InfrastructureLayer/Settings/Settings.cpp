@@ -25,12 +25,12 @@ int Settings::baudrate() const
 
 QString Settings::ipAddress() const
 {
-    return QString(settings_.value("UdpAddress/ipAddress").toString());
+    return QString(settings_.value("RabbitMq/ipAddress").toString());
 }
 
-quint16 Settings::udpPort() const
+quint16 Settings::port() const
 {
-    return (quint16)settings_.value("UdpAddress/port").toInt();
+    return (quint16)settings_.value("RabbitMq/port").toInt();
 }
 
 int Settings::forwardPeriod() const
@@ -45,7 +45,7 @@ QString Settings::packetTitle() const
 
 QString Settings::exchangeName() const
 {
-    return QString(settings_.value("rabbitMQ/exchangeName").toString());
+    return QString(settings_.value("RabbitMq/exchangeName").toString());
 }
 
 int Settings::numberOfCmus() const

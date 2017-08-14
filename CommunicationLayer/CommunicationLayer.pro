@@ -11,7 +11,7 @@ HEADERS += \
    CommDeviceControl/I_CommDevice.h \
    CommDeviceControl/I_ConnectionService.h \
    CommDeviceControl/RadioCommDevice.h \
-   CommDeviceControl/UdpMessageForwarder.h \
+   CommDeviceControl/RabbitMqMessageForwarder.h \
    CommDeviceControl/I_MessageForwarder.h \
    CommunicationContainer.h \
    DataPopulators/BatteryFaultsPopulator.h \
@@ -46,7 +46,7 @@ HEADERS += \
 
 SOURCES += \
    CommDeviceControl/RadioCommDevice.cpp \
-   CommDeviceControl/UdpMessageForwarder.cpp \
+   CommDeviceControl/RabbitMqMessageForwarder.cpp \
    CommunicationContainer.cpp \
    DataPopulators/BatteryFaultsPopulator.cpp \
    DataPopulators/BatteryPopulator.cpp \

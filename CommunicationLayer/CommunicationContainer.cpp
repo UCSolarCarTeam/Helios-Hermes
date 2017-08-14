@@ -4,7 +4,7 @@
 #include "InfrastructureLayer/InfrastructureContainer.h"
 #include "DataLayer/DataContainer.h"
 #include "CommDeviceControl/RadioCommDevice.h"
-#include "CommDeviceControl/UdpMessageForwarder.h"
+#include "CommDeviceControl/RabbitMqMessageForwarder.h"
 #include "CommunicationContainer.h"
 #include "DataPopulators/BatteryFaultsPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
@@ -44,7 +44,7 @@ public:
 
     QSerialPort serialPort;
     RadioCommDevice radioCommDevice;
-    UdpMessageForwarder messageForwarder;
+    RabbitMqMessageForwarder messageForwarder;
     PacketSynchronizer packetSynchronizer;
     PacketUnstuffer packetUnstuffer;
     PacketChecksumChecker packetChecksumChecker;
