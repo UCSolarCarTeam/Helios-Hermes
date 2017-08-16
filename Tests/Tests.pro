@@ -27,9 +27,9 @@ SOURCES += \
 
 TRAVIS_DEFINED = $$(TRAVIS)
 count(TRAVIS_DEFINED, 0) {
-   # udp message formatter expects rabbitMQ server located at localhost, not applicable for TravisCI.
+   # rabbit mq message forwarder expects rabbitMQ server located at localhost, not applicable for TravisCI.
    SOURCES += \
-      CommunicationLayer/CommDeviceControl/UdpMessageForwarderTest.cpp
+      CommunicationLayer/CommDeviceControl/RabbitMqMessageForwarderTest.cpp
 } else {
    message(TravisCI build)
 }

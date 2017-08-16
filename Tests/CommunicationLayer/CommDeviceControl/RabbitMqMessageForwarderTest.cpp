@@ -44,7 +44,7 @@ protected:
         .WillByDefault(Return(MOCK_IP));
         ON_CALL(*settings_, exchangeName())
         .WillByDefault(Return(MOCK_EXCHANGE));
-        ON_CALL(*settings_, udpPort())
+        ON_CALL(*settings_, port())
         .WillByDefault(Return(MOCK_PORT));
     }
 

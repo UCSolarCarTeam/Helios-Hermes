@@ -1,5 +1,4 @@
 #include <QtSerialPort/QSerialPort>
-#include <QUdpSocket>
 
 #include "InfrastructureLayer/InfrastructureContainer.h"
 #include "DataLayer/DataContainer.h"
@@ -94,7 +93,7 @@ I_PacketChecksumChecker& CommunicationContainer::packetChecksumChecker()
     return impl_->packetChecksumChecker;
 }
 
-I_MessageForwarder& CommunicationContainer::udpMessageForwarder()
+I_MessageForwarder& CommunicationContainer::messageForwarder()
 {
     return impl_->messageForwarder;
 }
