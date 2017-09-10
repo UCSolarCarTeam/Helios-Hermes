@@ -25,7 +25,7 @@ namespace
     const QString EXPECTED_3 = "Sp3c1a1** Ch4r4c74r5__ 7357";
 }
 
-class UdpMessageForwarderTest : public ::testing::Test
+class RabbitMqMessageForwarderTest : public ::testing::Test
 {
 protected:
 
@@ -69,14 +69,14 @@ protected:
     void cleanReceiver();
 };
 
-void UdpMessageForwarderTest::sendMessage(const QString& message)
+void RabbitMqMessageForwarderTest::sendMessage(const QString& message)
 {
     QByteArray expectedBytes = QByteArray();
     expectedBytes.append(message);
     forwarder->forwardData(expectedBytes);
 }
 
-QString UdpMessageForwarderTest::receiveMessage(bool setupConsume)
+QString RabbitMqMessageForwarderTest::receiveMessage(bool setupConsume)
 {
     // Receive message from local server
     if (setupConsume)
@@ -87,7 +87,7 @@ QString UdpMessageForwarderTest::receiveMessage(bool setupConsume)
     return QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
 }
 
-void UdpMessageForwarderTest::setupReceiver()
+void RabbitMqMessageForwarderTest::setupReceiver()
 {
     receiver = AmqpClient::Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
     // passive (false), durable (true), exclusive (false), auto_delete (false)
@@ -96,7 +96,7 @@ void UdpMessageForwarderTest::setupReceiver()
     receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), "");
 }
 
-void UdpMessageForwarderTest::cleanReceiver()
+void RabbitMqMessageForwarderTest::cleanReceiver()
 {
     receiver->PurgeQueue(MOCK_QUEUE.toStdString());
     receiver->DeleteQueue(MOCK_QUEUE.toStdString());
@@ -107,7 +107,7 @@ void UdpMessageForwarderTest::cleanReceiver()
 /**
  * Send a single message representing a JSON string via RabbitMqMessageForwarder and verify its success
  */
-TEST_F(UdpMessageForwarderTest, testSendingMessage)
+TEST_F(RabbitMqMessageForwarderTest, testSendingMessage)
 {
     setupReceiver();
     forwarder.reset(new RabbitMqMessageForwarder(*settings_));
@@ -119,7 +119,7 @@ TEST_F(UdpMessageForwarderTest, testSendingMessage)
 /**
  * Send a message before the receiver has setup
  */
-TEST_F(UdpMessageForwarderTest, testSendingNoReceiver)
+TEST_F(RabbitMqMessageForwarderTest, testSendingNoReceiver)
 {
     setupReceiver();
     forwarder.reset(new RabbitMqMessageForwarder(*settings_));
@@ -132,7 +132,7 @@ TEST_F(UdpMessageForwarderTest, testSendingNoReceiver)
 /**
  * Disconnect the receiver during delivery and ensure messages still arrive
  */
-TEST_F(UdpMessageForwarderTest, testSendingReceiverDC)
+TEST_F(RabbitMqMessageForwarderTest, testSendingReceiverDC)
 {
     setupReceiver();
     forwarder.reset(new RabbitMqMessageForwarder(*settings_));
@@ -149,7 +149,7 @@ TEST_F(UdpMessageForwarderTest, testSendingReceiverDC)
 /**
  * test sending message with special characters
  */
-TEST_F(UdpMessageForwarderTest, testSendingSpecialChars)
+TEST_F(RabbitMqMessageForwarderTest, testSendingSpecialChars)
 {
     setupReceiver();
     forwarder.reset(new RabbitMqMessageForwarder(*settings_));
