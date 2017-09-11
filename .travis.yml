@@ -1,55 +1,80 @@
 sudo: required
 
 before_install:
-    - sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
-    - sudo apt-add-repository -y ppa:beineri/opt-qt542
-    - sudo apt-get -qq update
-    - sudo apt-get -qq --force-yes install g++-4.8 libc6-i386 qt54tools qt54svg qt54webkit qt54serialport libboost-chrono1.48-dev libboost-system1.48-dev
-    - sudo cp /usr/bin/g++-4.8 /usr/bin/g++
+    - sudo apt-add-repository -y ppa:beineri/opt-qt542-trusty
+    - sudo apt-get update
+    - sudo apt-get -y install
+        g++-4.8
+        libc6-i386
+        qt54tools
+        qt54svg
+        qt54webkit
+        qt54serialport
+        libboost-chrono-dev
+        libboost-system-dev
     - PATH="/opt/qt54/bin:$PATH"
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     - qt54-env.sh
     - cd ..
-    - mv ./Epsilon-Hermes ./src
+    - mv Epsilon-Hermes ./src
     - mkdir -p Epsilon-Hermes/build/.lib/
-    - mv ./src ./Epsilon-Hermes/
-    - cd ./Epsilon-Hermes/src
+    - mv src Epsilon-Hermes/
+    - cd Epsilon-Hermes/src
 
 install:
+    # install astyle
     - wget 'https://s3-us-west-2.amazonaws.com/ucsolarteam.hostedfiles/astyle'
     - tar -zxvf astyle
     - (cd astyle/build/gcc && make release && sudo make install)
     - rm astyle -rf
+    # install googletest and googlemock
     - git clone https://github.com/google/googletest.git
-    - cd googletest
-    - sudo cp -r googletest/include/gtest /usr/local/include
-    - sudo cp -r googlemock/include/gmock /usr/local/include
-    - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googlemock/src/gmock-all.cc
-    - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googletest/src/gtest-all.cc
-    - ar -rv libgmock.a gtest-all.o gmock-all.o
-    - cp libgmock.a ../../build/.lib/
-    - cd ..
+    - sudo cp -r googletest/googletest/include/gtest /usr/local/include
+    - sudo cp -r googletest/googlemock/include/gmock /usr/local/include
+    - (cd googletest &&
+       g++ -isystem googletest/include/
+           -Igoogletest
+           -isystem googlemock/include/
+           -Igooglemock
+           -pthread
+           -c
+           googlemock/src/gmock-all.cc &&
+       g++ -isystem googletest/include/
+           -Igoogletest
+           -isystem googlemock/include/
+           -Igooglemock
+           -pthread
+           -c
+           googletest/src/gtest-all.cc &&
+       ar -rv libgmock.a gtest-all.o gmock-all.o)
+    - cp googletest/libgmock.a ../build/.lib/
+    # install rabbitmq-c
     - git clone https://github.com/alanxz/rabbitmq-c
-    - cd rabbitmq-c
-    - sudo cp librabbitmq/*.h /usr/local/include/
-    - mkdir build && cd build
-    - cmake ..
-    - cmake --build .
-    - sudo cp librabbitmq/librabbitmq.a /usr/local/lib/
-    - sudo cp librabbitmq/*.so* /usr/local/lib/
-    - cd ../..
+    - sudo cp rabbitmq-c/librabbitmq/*.h /usr/local/include/
+    - mkdir rabbitmq-c/build
+    - (cd rabbitmq-c/build && cmake .. && cmake --build .)
+    - sudo cp rabbitmq-c/build/librabbitmq/librabbitmq.a /usr/local/lib/
+    - sudo cp rabbitmq-c/build/librabbitmq/*.so* /usr/local/lib/
+    # install SimpleAmqpClient
     - git clone https://github.com/alanxz/SimpleAmqpClient
-    - cd SimpleAmqpClient
-    - mkdir build && cd build
-    - cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq -DRabbitmqc_LIBRARY=../../rabbitmq-c/build/librabbitmq ..
-    - make
+    - mkdir SimpleAmqpClient/build
+    - (cd SimpleAmqpClient/build &&
+       cmake -DRabbitmqc_INCLUDE_DIR=../../rabbitmq-c/librabbitmq
+             -DRabbitmqc_LIBRARY=../../rabbitmq-c/build/librabbitmq
+             .. &&
+       make)
     - sudo mkdir /usr/local/include/SimpleAmqpClient
-    - sudo cp *.so* /usr/local/lib/
-    - sudo cp ../src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient/
-    - cd ../..
+    - sudo cp SimpleAmqpClient/build/*.so* /usr/local/lib/
+    - sudo cp SimpleAmqpClient/src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient/
 
 script:
-    - "! (astyle *.h *.cpp -r --dry-run --options=astylerc --exclude=googletest --exclude=SimpleAmqpClient --exclude=rabbitmq-c | grep Formatted)"
+    - "! (astyle *.h *.cpp -r
+                           --dry-run
+                           --options=astylerc
+                           --exclude=googletest
+                           --exclude=SimpleAmqpClient
+                           --exclude=rabbitmq-c |
+          grep Formatted)"
     - qmake
     - make
     - make check

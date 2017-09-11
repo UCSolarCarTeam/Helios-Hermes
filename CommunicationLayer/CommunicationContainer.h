@@ -24,7 +24,7 @@ public:
     I_PacketChecksumChecker& packetChecksumChecker();
     I_DataInjectionService& dataInjectionService();
     I_CommDevice& commDevice();
-    I_MessageForwarder& udpMessageForwarder();
+    I_MessageForwarder& messageForwarder();
 
 private:
     // This is using the PIMPL design pattern, refer to http://c2.com/cgi/wiki?PimplIdiom

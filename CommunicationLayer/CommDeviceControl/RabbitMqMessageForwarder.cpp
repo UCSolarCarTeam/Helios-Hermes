@@ -5,7 +5,7 @@
 
 
 #include "InfrastructureLayer/Settings/I_Settings.h"
-#include "UdpMessageForwarder.h"
+#include "RabbitMqMessageForwarder.h"
 
 
 namespace
@@ -14,20 +14,20 @@ namespace
     quint32 SLEEP_TIME = 2;
 }
 
-UdpMessageForwarder::UdpMessageForwarder(I_Settings& settings)
+RabbitMqMessageForwarder::RabbitMqMessageForwarder(I_Settings& settings)
 {
     exchangeName_ = settings.exchangeName();
     ipAddress_ = settings.ipAddress();
-    udpPort_ = settings.udpPort();
+    port_ = settings.port();
     setupChannel();
 }
 
-UdpMessageForwarder::~UdpMessageForwarder()
+RabbitMqMessageForwarder::~RabbitMqMessageForwarder()
 {
 }
 
 
-void UdpMessageForwarder::setupChannel()
+void RabbitMqMessageForwarder::setupChannel()
 {
     quint32 i = 0;
 
@@ -35,12 +35,12 @@ void UdpMessageForwarder::setupChannel()
     {
         if (i++)
         {
-            qWarning() << "UdpMessageForwarder: Attempting to reconnect";
+            qWarning() << "RabbitMqMessageForwarder: Attempting to reconnect";
         }
 
         try
         {
-            channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), udpPort_);
+            channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), port_);
         }
         catch (std::exception&)
         {
@@ -48,11 +48,11 @@ void UdpMessageForwarder::setupChannel()
             {
                 if (i == (TIMEOUT / SLEEP_TIME))
                 {
-                    qWarning() << "UdpMessageForwarder timed out waiting for connection to broker";
+                    qWarning() << "RabbitMqMessageForwarder timed out waiting for connection to broker";
                     throw;
                 }
 
-                qWarning() << "UdpMessageForwarder: error creating channel";
+                qWarning() << "RabbitMqMessageForwarder: error creating channel";
                 QThread::sleep(SLEEP_TIME);
             }
             else
@@ -66,9 +66,9 @@ void UdpMessageForwarder::setupChannel()
     channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
 }
 
-void UdpMessageForwarder::forwardData(QByteArray data)
+void RabbitMqMessageForwarder::forwardData(QByteArray data)
 {
-    qDebug() << "UdpMessageForwarder: Forwarding data";
+    qDebug() << "RabbitMqMessageForwarder: Forwarding data";
     AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
 
     try
@@ -77,11 +77,11 @@ void UdpMessageForwarder::forwardData(QByteArray data)
     }
     catch (AmqpClient::ChannelException& ex)
     {
-        qWarning() << "UdpMessageForwarder: Failed to forward data";
+        qWarning() << "RabbitMqMessageForwarder: Failed to forward data";
     }
     catch (AmqpClient::ConnectionException& ex)
     {
-        qWarning() << "UdpMessageForwarder: Connection to broker terminated";
+        qWarning() << "RabbitMqMessageForwarder: Connection to broker terminated";
         setupChannel();
     }
 }

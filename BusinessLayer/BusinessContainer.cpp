@@ -24,7 +24,7 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                        dataContainer.motorFaultsData(),
                                        dataContainer.mpptData(),
                                        dataContainer.otherData(),*/
-                         communicationContainer.udpMessageForwarder(),
+                         communicationContainer.messageForwarder(),
                          infrastructureContainer.settings()))
 {
     jsonForwarder_->startForwardingData();

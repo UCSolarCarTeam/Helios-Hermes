@@ -1,18 +1,18 @@
 #pragma once
 
-#include <SimpleAmqpClient/SimpleAmqpClient.h>
-#include <QUdpSocket>
 #include <QThread>
+#include <SimpleAmqpClient/SimpleAmqpClient.h>
+
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
 class I_Settings;
 
-class UdpMessageForwarder : public I_MessageForwarder
+class RabbitMqMessageForwarder : public I_MessageForwarder
 {
     Q_OBJECT
 public:
-    UdpMessageForwarder(I_Settings& settings);
-    virtual ~UdpMessageForwarder();
+    RabbitMqMessageForwarder(I_Settings& settings);
+    virtual ~RabbitMqMessageForwarder();
 
 public slots:
     void forwardData(QByteArray data);
@@ -22,5 +22,5 @@ private:
     AmqpClient::Channel::ptr_t channel_;
     QString exchangeName_;
     QString ipAddress_;
-    quint16 udpPort_;
+    quint16 port_;
 };

@@ -38,7 +38,7 @@ TEST_F(SettingsTest, ipAddress)
 
 TEST_F(SettingsTest, port)
 {
-    EXPECT_EQ(settings_->udpPort(), 44550);
+    EXPECT_EQ(settings_->port(), 44550);
 }
 
 TEST_F(SettingsTest, forwardPeriod)

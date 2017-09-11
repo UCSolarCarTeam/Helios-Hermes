@@ -1,10 +1,9 @@
 #include <QtSerialPort/QSerialPort>
-#include <QUdpSocket>
 
 #include "InfrastructureLayer/InfrastructureContainer.h"
 #include "DataLayer/DataContainer.h"
 #include "CommDeviceControl/RadioCommDevice.h"
-#include "CommDeviceControl/UdpMessageForwarder.h"
+#include "CommDeviceControl/RabbitMqMessageForwarder.h"
 #include "CommunicationContainer.h"
 #include "DataPopulators/BatteryFaultsPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
@@ -44,7 +43,7 @@ public:
 
     QSerialPort serialPort;
     RadioCommDevice radioCommDevice;
-    UdpMessageForwarder messageForwarder;
+    RabbitMqMessageForwarder messageForwarder;
     PacketSynchronizer packetSynchronizer;
     PacketUnstuffer packetUnstuffer;
     PacketChecksumChecker packetChecksumChecker;
@@ -94,7 +93,7 @@ I_PacketChecksumChecker& CommunicationContainer::packetChecksumChecker()
     return impl_->packetChecksumChecker;
 }
 
-I_MessageForwarder& CommunicationContainer::udpMessageForwarder()
+I_MessageForwarder& CommunicationContainer::messageForwarder()
 {
     return impl_->messageForwarder;
 }
