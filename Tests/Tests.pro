@@ -19,11 +19,7 @@ HEADERS += \
 SOURCES += \
     testmain.cpp \
     InfrastructureLayer/Settings/SettingsTest.cpp \
-	 BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarderTest.cpp \
+	 BusinessLayer/JsonForwarder/JsonForwarderTest.cpp 
 
 TRAVIS_DEFINED = $$(TRAVIS)
 count(TRAVIS_DEFINED, 0) {

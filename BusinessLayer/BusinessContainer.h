@@ -13,8 +13,8 @@ class BusinessContainer
 {
 public:
     explicit BusinessContainer(InfrastructureContainer& infrastructureContainer,
-                               CommunicationContainer& communicationContainer/*,
-                               DataContainer& dataContainer*/);
+                               CommunicationContainer& communicationContainer,
+                               DataContainer& dataContainer);
     ~BusinessContainer();
 
     I_CommunicationsMonitoringService& communicationsMonitoringService();

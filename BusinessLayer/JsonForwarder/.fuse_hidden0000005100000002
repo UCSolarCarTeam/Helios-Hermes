@@ -1,9 +1,12 @@
 #include <QTimer>
 #include <QDebug>
 #include <QJsonObject>
-#include <QJsonDocument>
 #include <QDateTime>
 
+#include "BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarder.h"
+#include "BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarder.h"
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "JsonDefines.h"
@@ -26,19 +29,10 @@ JsonForwarder::JsonForwarder(
     I_MpptData& mpptData,
     I_MessageForwarder& messageForwarder,
     I_Settings& settings)
-: batteryData_(batteryData)
-, batteryFaultsData_(batteryFaultsData)
-, cmuData_(cmuData)
-, driverControlsData_(driverControlsData)
-, keyMotorData_(keyMotorData)
-, lightsData_(lightsData)
-, motorDetailsData_(motorDetailsData)
-, motorFaultsData_(motorFaultsData)
-, mpptData_(mpptData)
-, messageForwarder_(messageForwarder)
-, readTimer_(new QTimer())
-, forwardPeriod_(settings.forwardPeriod())
-, PACKET_TITLE_(settings.packetTitle())
+    , messageForwarder_(messageForwarder)
+    , readTimer_(new QTimer())
+    , forwardPeriod_(settings.forwardPeriod())
+    , PACKET_TITLE_(settings.packetTitle())
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
 }
@@ -59,5 +53,5 @@ void JsonForwarder::forwardData()
     QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
     baseJson[JsonFormat::TIMESTAMP] = currentTime;
 
-    messageForwarder_.forwardData(QJsonDocument(baseJson).toJson(QJsonDocument::Compact));
+    messageForwarder_.forwardData(QJsonDocument(vehicleJson).toJson(QJsonDocument::Compact));
 }

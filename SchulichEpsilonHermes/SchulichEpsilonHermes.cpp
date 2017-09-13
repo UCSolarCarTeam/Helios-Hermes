@@ -12,8 +12,8 @@ SchulichEpsilonHermes::SchulichEpsilonHermes(int& argc, char** argv)
     , communicationContainer_(new CommunicationContainer(*dataContainer_,
                               *infrastructureContainer_))
     , businessContainer_(new BusinessContainer(*infrastructureContainer_,
-                         *communicationContainer_/*,
-                         *dataContainer_*/))
+                         *communicationContainer_,
+                         *dataContainer_))
 {
 }
 
