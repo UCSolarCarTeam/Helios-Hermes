@@ -23,10 +23,10 @@ QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControl
 	return QJsonObject();
 }
 
-QJsonObject JsonMessageBuilder::buildKeyMotorMessage(const I_KeyMotorData& data)
+QJsonArray JsonMessageBuilder::buildKeyMotorMessage(const I_KeyMotorData& data)
 {
 	Q_UNUSED(data);
-	return QJsonObject();
+	return QJsonArray();
 }
 
 QJsonObject JsonMessageBuilder::buildLightsMessage(const I_LightsData& data)
@@ -35,20 +35,20 @@ QJsonObject JsonMessageBuilder::buildLightsMessage(const I_LightsData& data)
 	return QJsonObject();
 }
 
-QJsonObject JsonMessageBuilder::buildMotorDetailsMessage(const I_MotorDetailsData& data)
+QJsonArray JsonMessageBuilder::buildMotorDetailsMessage(const I_MotorDetailsData& data)
 {
 	Q_UNUSED(data);
-	return QJsonObject();
+	return QJsonArray();
 }
 
-QJsonObject JsonMessageBuilder::buildMotorFaultsMessage(const I_MotorFaultsData& data)
+QJsonArray JsonMessageBuilder::buildMotorFaultsMessage(const I_MotorFaultsData& data)
 {
 	Q_UNUSED(data);
-	return QJsonObject();
+	return QJsonArray();
 }
 
-QJsonObject JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
+QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
 {
 	Q_UNUSED(data);
-	return QJsonObject();
+	return QJsonArray();
 }
