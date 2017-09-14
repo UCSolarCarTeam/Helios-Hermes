@@ -17,7 +17,6 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
     , jsonForwarder_(new JsonForwarder(
                          dataContainer.batteryData(),
                          dataContainer.batteryFaultsData(),
-                         dataContainer.cmuData(),
                          dataContainer.driverControlsData(),
                          dataContainer.keyMotorData(),
                          dataContainer.lightsData(),

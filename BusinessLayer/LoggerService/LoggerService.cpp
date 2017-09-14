@@ -121,11 +121,6 @@ void LoggerService::handlePacketDecoded(const BatteryMessage message)
     printReceivedMessage(message);
 }
 
-void LoggerService::handlePacketDecoded(const CmuMessage message)
-{
-    printReceivedMessage(message);
-}
-
 void LoggerService::handlePacketDecoded(const MpptMessage message)
 {
     printReceivedMessage(message);
@@ -155,8 +150,6 @@ void LoggerService::connectToPacketDecoder(const I_PacketDecoder& decoder)
             this, SLOT(handlePacketDecoded(const FaultsMessage)));
     connect(&decoder, SIGNAL(packetDecoded(const BatteryDataMessage)),
             this, SLOT(handlePacketDecoded(const BatteryDataMessage)));
-    connect(&decoder, SIGNAL(packetDecoded(const CmuDataMessage)),
-            this, SLOT(handlePacketDecoded(const CmuDataMessage)));
 }
 
 void LoggerService::markStartOfDebugLog() const

@@ -17,7 +17,6 @@ namespace
 JsonForwarder::JsonForwarder(
     I_BatteryData& batteryData,
     I_BatteryFaultsData& batteryFaultsData,
-    I_CmuData& cmuData,
     I_DriverControlsData& driverControlsData,
     I_KeyMotorData& keyMotorData,
     I_LightsData& lightsData,
@@ -26,19 +25,18 @@ JsonForwarder::JsonForwarder(
     I_MpptData& mpptData,
     I_MessageForwarder& messageForwarder,
     I_Settings& settings)
-: batteryData_(batteryData)
-, batteryFaultsData_(batteryFaultsData)
-, cmuData_(cmuData)
-, driverControlsData_(driverControlsData)
-, keyMotorData_(keyMotorData)
-, lightsData_(lightsData)
-, motorDetailsData_(motorDetailsData)
-, motorFaultsData_(motorFaultsData)
-, mpptData_(mpptData)
-, messageForwarder_(messageForwarder)
-, readTimer_(new QTimer())
-, forwardPeriod_(settings.forwardPeriod())
-, PACKET_TITLE_(settings.packetTitle())
+    : batteryData_(batteryData)
+    , batteryFaultsData_(batteryFaultsData)
+    , driverControlsData_(driverControlsData)
+    , keyMotorData_(keyMotorData)
+    , lightsData_(lightsData)
+    , motorDetailsData_(motorDetailsData)
+    , motorFaultsData_(motorFaultsData)
+    , mpptData_(mpptData)
+    , messageForwarder_(messageForwarder)
+    , readTimer_(new QTimer())
+    , forwardPeriod_(settings.forwardPeriod())
+    , PACKET_TITLE_(settings.packetTitle())
 {
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
 }

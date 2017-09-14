@@ -7,7 +7,6 @@
 #include "CommunicationContainer.h"
 #include "DataPopulators/BatteryFaultsPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
-#include "DataPopulators/CmuPopulator.h"
 #include "DataPopulators/DriverControlsPopulator.h"
 #include "DataPopulators/KeyMotorPopulator.h"
 #include "DataPopulators/LightsPopulator.h"
@@ -31,7 +30,6 @@ public:
         , packetDecoder(packetChecksumChecker)
         , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
         , batteryPopulator(packetDecoder, dataContainer.batteryData())
-        , cmuPopulator(packetDecoder, dataContainer.cmuData())
         , driverControlsPopulator(packetDecoder, dataContainer.driverControlsData())
         , keyMotorPopulator(packetDecoder, dataContainer.keyMotorData())
         , lightsPopulator(packetDecoder, dataContainer.lightsData())
@@ -50,7 +48,6 @@ public:
     PacketDecoder packetDecoder;
     BatteryFaultsPopulator batteryFaultsPopulator;
     BatteryPopulator batteryPopulator;
-    CmuPopulator cmuPopulator;
     DriverControlsPopulator driverControlsPopulator;
     KeyMotorPopulator keyMotorPopulator;
     LightsPopulator lightsPopulator;

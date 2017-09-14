@@ -4,7 +4,6 @@ namespace
 {
     const int BATTERY_DATA_LENGTH = 64;
     const int BATTERY_FAULTS_DATA_LENGTH = 7;
-    const int CMU_DATA_LENGTH = 54;
     const int DRIVER_CONTROLS_DATA_LENGTH = 14;
     const int KEY_MOTOR_DATA_LENGTH = 47;
     const int LIGHTS_DATA_LENGTH = 6;
@@ -22,9 +21,6 @@ int MessageDefines::getLengthForMessage(MessageDefines::Type type)
 
         case BATTERY_FAULTS:
             return BATTERY_FAULTS_DATA_LENGTH;
-
-        case CMU:
-            return CMU_DATA_LENGTH;
 
         case DRIVER_CONTROLS:
             return DRIVER_CONTROLS_DATA_LENGTH;

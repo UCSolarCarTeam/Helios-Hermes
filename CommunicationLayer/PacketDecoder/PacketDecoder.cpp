@@ -53,10 +53,6 @@ void PacketDecoder::handleValidData(QByteArray messageData)
                 emit packetDecoded(BatteryMessage(messageData));
                 return;
 
-            case MessageDefines::CMU:
-                emit packetDecoded(CmuMessage(messageData));
-                return;
-
             case MessageDefines::MPPT:
                 emit packetDecoded(MpptMessage(messageData));
                 return;

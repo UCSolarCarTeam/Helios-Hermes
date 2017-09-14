@@ -4,7 +4,6 @@ forwardPeriod=500
 
 [UnitNumbers]
 numberOfMotors=2
-numberOfCmus=4
 numberOfMppts=3
 
 [JsonFormat]
