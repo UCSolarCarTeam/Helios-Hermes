@@ -15,10 +15,25 @@ DataContainer::DataContainer(const I_Settings& settings)
     , driverControlsData_(new DriverControlsData())
     , keyMotorData_(new KeyMotorData())
     , lightsData_(new LightsData())
-    , motorDetailsData_(new MotorDetailsData(settings.numberOfMotors()))
     , motorFaultsData_(new MotorFaultsData())
-    , mpptData_(new MpptData(settings.numberOfMppts()))
 {
+    QList<I_MotorDetailsUnit*> motorUnits;
+
+    for (int i = 0; i < settings.numberOfMotors(); ++i)
+    {
+        motorUnits.append(new MotorDetailsUnit());
+    }
+
+    motorDetailsData_.reset(new MotorDetailsData(motorUnits));
+
+    QList<I_MpptUnit*> mpptUnits;
+
+    for (int i = 0; i < settings.numberOfMppts(); ++i)
+    {
+        mpptUnits.append(new MpptUnit());
+    }
+
+    mpptData_.reset(new MpptData(mpptUnits));
 }
 
 DataContainer::~DataContainer()
