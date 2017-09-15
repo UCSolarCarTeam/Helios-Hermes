@@ -18,7 +18,7 @@ public:
     virtual ~I_JsonMessageBuilder() {}
     virtual QJsonObject buildBatteryMessage(const I_BatteryData& data) = 0;
     virtual QJsonObject buildBatteryFaultsMessage(const I_BatteryFaultsData& data) = 0;
-    virtual QJsonObject buildDriverControlsMessage(const I_BatteryFaultsData& data) = 0;
+    virtual QJsonObject buildDriverControlsMessage(const I_DriverControlsData& data) = 0;
     virtual QJsonArray buildKeyMotorMessage(const I_KeyMotorData& data) = 0;
     virtual QJsonObject buildLightsMessage(const I_LightsData& data) = 0;
     virtual QJsonArray buildMotorDetailsMessage(const I_MotorDetailsData& data) = 0;

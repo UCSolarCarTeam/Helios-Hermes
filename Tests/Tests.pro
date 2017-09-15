@@ -11,15 +11,13 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lIn
 HEADERS += \
     CommunicationLayer/CommDeviceControl/MockMessageForwarder.h \
     InfrastructureLayer/Settings/MockSettings.h \
-    DataLayer/BatteryData/MockBatteryData.h \
-    DataLayer/FaultsData/MockFaultsData.h \
-    DataLayer/PowerData/MockPowerData.h \
-    DataLayer/VehicleData/MockVehicleData.h
+    DataLayer/BatteryData/MockKeyMotorData.h \
 
 SOURCES += \
     testmain.cpp \
     InfrastructureLayer/Settings/SettingsTest.cpp \
-	 BusinessLayer/JsonForwarder/JsonForwarderTest.cpp 
+    BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
+    BusinessLayer/JsonMessageBuilder/JsonMessageBuilderTest.cpp \
 
 TRAVIS_DEFINED = $$(TRAVIS)
 count(TRAVIS_DEFINED, 0) {

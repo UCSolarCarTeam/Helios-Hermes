@@ -1,20 +1,16 @@
 namespace JsonFormat
 {
     const int DECIMAL_PRECISION = 2;
-    const QString PACKET_TITLE = "packetTitle";
-    const QString TIMESTAMP = "timestamp";
+    const QString PACKET_TITLE = "PacketTitle";
+    const QString TIMESTAMP = "Timestamp";
 
+    /* Multi-use */
+    const QString ALIVE = "Alive";
 
-
-    /* Battery */
-    const QString BATTERY = "Battery";
-    const QString MOD_0 = "mod0";
-    const QString MOD_1 = "mod1";
-    const QString MOD_2 = "mod2";
-    const QString MOD_3 = "mod3";
-    const QString PCB_TEMPERATURE = "pcbTemperature";
-    const QString CELL_TEMPERATURE = "cellTemperature";
-    const QString CELL_VOLTAGES = "cellVoltages";
-    const QString BATTERY_VOLTAGE = "batteryVoltage";
-    const QString BATTERY_CURRENT = "batteryCurrent";
+    /* KeyMotor */
+    const QString SET_CURRENT = "SetCurrent";
+    const QString SET_VELOCITY = "SetVelocity";
+    const QString BUS_CURRENT = "BusCurrent";
+    const QString BUS_VOLTAGE = "BusVoltage";
+    const QString VEHICLE_VELOCITY = "VehicleVelocity";
 }
