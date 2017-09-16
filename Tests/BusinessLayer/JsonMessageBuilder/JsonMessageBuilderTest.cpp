@@ -15,6 +15,7 @@
 #include "Tests/DataLayer/MotorDetailsData/MockMotorDetailsData.h"
 #include "Tests/DataLayer/MotorDetailsData/MockMotorDetailsUnit.h"
 #include "Tests/DataLayer/DriverControlsData/MockDriverControlsData.h"
+#include "Tests/DataLayer/MotorFaultsData/MockMotorFaultsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -28,68 +29,70 @@ TEST(JsonMessageBuilderTest, keyMotor)
 {
     JsonMessageBuilder jsonMessageBuilder_;
 
+    // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
-                                [\
-    {\
-        \"Alive\":true,\
-        \"SetCurrent\":1,\
-        \"SetVelocity\":2,\
-        \"BusCurrent\":3,\
-        \"BusVoltage\":4,\
-        \"VehicleVelocity\":5\
-    },\
-    {\
-        \"Alive\":false,\
-        \"SetCurrent\":6,\
-        \"SetVelocity\":7,\
-        \"BusCurrent\":8,\
-        \"BusVoltage\":9,\
-        \"VehicleVelocity\":10\
-    }\
-                                ]";
+    [ \
+        { \
+            \"Alive\":true, \
+            \"SetCurrent\":1, \
+            \"SetVelocity\":2, \
+            \"BusCurrent\":3, \
+            \"BusVoltage\":4, \
+            \"VehicleVelocity\":5 \
+        }, \
+        { \
+            \"Alive\":false, \
+            \"SetCurrent\":6, \
+            \"SetVelocity\":7, \
+            \"BusCurrent\":8, \
+            \"BusVoltage\":9, \
+            \"VehicleVelocity\":10 \
+        } \
+    ]";
+    // *INDENT-ON*
 
     QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
     QJsonArray EXPECTED_JSON_ARRAY = EXPECTED_JSON_DOC.array();
 
     NiceMock<MockKeyMotorData> mockKeyMotorData;
-    const unsigned char M0_ALIVE_VAL_VAL = true;
-    const float M0_SET_CURRENT_VAL_VAL = 1;
-    const float M0_SET_VELOCITY_VAL_VAL = 2;
-    const float M0_BUS_CURRENT_VAL_VAL = 3;
-    const float M0_BUS_VOLTAGE_VAL_VAL = 4;
-    const float M0_VEHICLE_VELOCITY_VAL_VAL = 5;
-    const unsigned char M1_ALIVE_VAL_VAL = false;
-    const float M1_SET_CURRENT_VAL_VAL = 6;
-    const float M1_SET_VELOCITY_VAL_VAL = 7;
-    const float M1_BUS_CURRENT_VAL_VAL = 8;
-    const float M1_BUS_VOLTAGE_VAL_VAL = 9;
-    const float M1_VEHICLE_VELOCITY_VAL_VAL = 10;
+    const unsigned char M0_ALIVE_VAL = true;
+    const float M0_SET_CURRENT_VAL = 1;
+    const float M0_SET_VELOCITY_VAL = 2;
+    const float M0_BUS_CURRENT_VAL = 3;
+    const float M0_BUS_VOLTAGE_VAL = 4;
+    const float M0_VEHICLE_VELOCITY_VAL = 5;
+    const unsigned char M1_ALIVE_VAL = false;
+    const float M1_SET_CURRENT_VAL = 6;
+    const float M1_SET_VELOCITY_VAL = 7;
+    const float M1_BUS_CURRENT_VAL = 8;
+    const float M1_BUS_VOLTAGE_VAL = 9;
+    const float M1_VEHICLE_VELOCITY_VAL = 10;
 
     ON_CALL(mockKeyMotorData, getM0Alive())
-    .WillByDefault(Return(M0_ALIVE_VAL_VAL));
+    .WillByDefault(Return(M0_ALIVE_VAL));
     ON_CALL(mockKeyMotorData, getM0SetCurrent())
-    .WillByDefault(Return(M0_SET_CURRENT_VAL_VAL));
+    .WillByDefault(Return(M0_SET_CURRENT_VAL));
     ON_CALL(mockKeyMotorData, getM0SetVelocity())
-    .WillByDefault(Return(M0_SET_VELOCITY_VAL_VAL));
+    .WillByDefault(Return(M0_SET_VELOCITY_VAL));
     ON_CALL(mockKeyMotorData, getM0BusCurrent())
-    .WillByDefault(Return(M0_BUS_CURRENT_VAL_VAL));
+    .WillByDefault(Return(M0_BUS_CURRENT_VAL));
     ON_CALL(mockKeyMotorData, getM0BusVoltage())
-    .WillByDefault(Return(M0_BUS_VOLTAGE_VAL_VAL));
+    .WillByDefault(Return(M0_BUS_VOLTAGE_VAL));
     ON_CALL(mockKeyMotorData, getM0VehicleVelocity())
-    .WillByDefault(Return(M0_VEHICLE_VELOCITY_VAL_VAL));
+    .WillByDefault(Return(M0_VEHICLE_VELOCITY_VAL));
 
     ON_CALL(mockKeyMotorData, getM1Alive())
-    .WillByDefault(Return(M1_ALIVE_VAL_VAL));
+    .WillByDefault(Return(M1_ALIVE_VAL));
     ON_CALL(mockKeyMotorData, getM1SetCurrent())
-    .WillByDefault(Return(M1_SET_CURRENT_VAL_VAL));
+    .WillByDefault(Return(M1_SET_CURRENT_VAL));
     ON_CALL(mockKeyMotorData, getM1SetVelocity())
-    .WillByDefault(Return(M1_SET_VELOCITY_VAL_VAL));
+    .WillByDefault(Return(M1_SET_VELOCITY_VAL));
     ON_CALL(mockKeyMotorData, getM1BusCurrent())
-    .WillByDefault(Return(M1_BUS_CURRENT_VAL_VAL));
+    .WillByDefault(Return(M1_BUS_CURRENT_VAL));
     ON_CALL(mockKeyMotorData, getM1BusVoltage())
-    .WillByDefault(Return(M1_BUS_VOLTAGE_VAL_VAL));
+    .WillByDefault(Return(M1_BUS_VOLTAGE_VAL));
     ON_CALL(mockKeyMotorData, getM1VehicleVelocity())
-    .WillByDefault(Return(M1_VEHICLE_VELOCITY_VAL_VAL));
+    .WillByDefault(Return(M1_VEHICLE_VELOCITY_VAL));
 
     QJsonArray ACTUAL_JSON_ARRAY =
         jsonMessageBuilder_.buildKeyMotorMessage(mockKeyMotorData);
@@ -151,7 +154,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
     QJsonArray EXPECTED_JSON_ARRAY = EXPECTED_JSON_DOC.array();
 
-    NiceMock<MockMotorDetailsData> mockMotorDetailsData;    
+    NiceMock<MockMotorDetailsData> mockMotorDetailsData;
     NiceMock<MockMotorDetailsUnit> mockMotorDetailsUnit_0;
     NiceMock<MockMotorDetailsUnit> mockMotorDetailsUnit_1;
 
@@ -271,7 +274,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M1_ODOMETER_VAL));
     ON_CALL(mockMotorDetailsUnit_1, getSlipSpeed())
     .WillByDefault(Return(M1_SLIP_SPEED_VAL));
-    
+
     QJsonArray ACTUAL_JSON_ARRAY =
         jsonMessageBuilder_.buildMotorDetailsMessage(mockMotorDetailsData);
 
@@ -288,6 +291,7 @@ TEST(JsonMessageBuilderTest, driverControls)
 {
     JsonMessageBuilder jsonMessageBuilder_;
 
+    // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
     { \
         \"Alive\": false, \
@@ -312,6 +316,7 @@ TEST(JsonMessageBuilderTest, driverControls)
         \"Horn\": true, \
         \"Reset\": false \
     }";
+    // *INDENT-ON*
 
     QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
     QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
@@ -391,5 +396,190 @@ TEST(JsonMessageBuilderTest, driverControls)
     {
         qDebug() << "Actual is " << ACTUAL_JSON;
         qDebug() << "Expected is " << EXPECTED_JSON;
+    }
+}
+
+TEST(JsonMessageBuilderTest, motorFaults)
+{
+    JsonMessageBuilder jsonMessageBuilder_;
+
+    // *INDENT-OFF*
+    QString EXPECTED_JSON_MSG = "\
+    [ \
+        { \
+            \"ErrorFlags\":{ \
+                \"MotorOverSpeed\":true, \
+                \"SoftwareOverCurrent\":false, \
+                \"DcBusOverVoltage\":true, \
+                \"BadMotorPositionHallSequence\":false, \
+                \"WatchdogCausedLastReset\":true, \
+                \"ConfigReadError\":false, \
+                \"Rail15VUnderVoltageLockOut\":true, \
+                \"DesaturationFault\":false \
+            }, \
+            \"LimitFlags\":{ \
+                \"OutputVoltagePwm\":true, \
+                \"MotorCurrent\":false, \
+                \"Velocity\":true, \
+                \"BusCurrent\":false, \
+                \"BusVoltageUpper\":true, \
+                \"BusVoltageLower\":false, \
+                \"IpmOrMotorTemperature\":true \
+            }, \
+            \"RxErrorCount\":55, \
+            \"TxErrorCount\":82 \
+        }, \
+        { \
+            \"ErrorFlags\":{ \
+                \"MotorOverSpeed\":false, \
+                \"SoftwareOverCurrent\":true, \
+                \"DcBusOverVoltage\":false, \
+                \"BadMotorPositionHallSequence\":true, \
+                \"WatchdogCausedLastReset\":false, \
+                \"ConfigReadError\":true, \
+                \"Rail15VUnderVoltageLockOut\":false, \
+                \"DesaturationFault\":true \
+            }, \
+            \"LimitFlags\":{ \
+                \"OutputVoltagePwm\":false, \
+                \"MotorCurrent\":true, \
+                \"Velocity\":false, \
+                \"BusCurrent\":true, \
+                \"BusVoltageUpper\":false, \
+                \"BusVoltageLower\":true, \
+                \"IpmOrMotorTemperature\":false \
+            }, \
+            \"RxErrorCount\":59, \
+            \"TxErrorCount\":81 \
+        } \
+    ]";
+    // *INDENT-ON*
+
+    QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
+    QJsonArray EXPECTED_JSON_ARRAY = EXPECTED_JSON_DOC.array();
+
+    NiceMock<MockMotorFaultsData> mockMotorFaultsData;
+
+    const unsigned char M0_RX_ERROR_COUNT = 55;
+    const unsigned char M0_TX_ERROR_COUNT = 82;
+    const unsigned char M1_RX_ERROR_COUNT = 59;
+    const unsigned char M1_TX_ERROR_COUNT = 81;
+    
+    const bool M0_MOTOR_OVER_SPEED = true;
+    const bool M0_SOFTWARE_OVER_CURRENT = false;
+    const bool M0_DC_BUS_OVER_VOLTAGE = true;
+    const bool M0_BAD_MOTOR_POSITION_HALL_SEQUENCE = false;
+    const bool M0_WATCHDOG_CAUSED_LAST_RESET = true;
+    const bool M0_CONFIG_READ_ERROR = false;
+    const bool M0_RAIL_15V_UNDER_VOLTAGE_LOCK_OUT = true;
+    const bool M0_DESATURATION_FAULT = false;
+
+    const bool M1_MOTOR_OVER_SPEED = false;
+    const bool M1_SOFTWARE_OVER_CURRENT = true;
+    const bool M1_DC_BUS_OVER_VOLTAGE = false;
+    const bool M1_BAD_MOTOR_POSITION_HALL_SEQUENCE = true;
+    const bool M1_WATCHDOG_CAUSED_LAST_RESET = false;
+    const bool M1_CONFIG_READ_ERROR = true;
+    const bool M1_RAIL_15V_UNDER_VOLTAGE_LOCK_OUT = false;
+    const bool M1_DESATURATION_FAULT = true;
+
+    const bool M0_OUTPUT_VOLTAGE_PWM = true;
+    const bool M0_MOTOR_CURRENT = false;
+    const bool M0_VELOCITY = true;
+    const bool M0_BUS_CURRENT = false;
+    const bool M0_BUS_VOLTAGE_UPPER = true;
+    const bool M0_BUS_VOLTAGE_LOWER = false;
+    const bool M0_IPM_OR_MOTOR_TEMPERATURE = true;
+
+    const bool M1_OUTPUT_VOLTAGE_PWM = false;
+    const bool M1_MOTOR_CURRENT = true;
+    const bool M1_VELOCITY = false;
+    const bool M1_BUS_CURRENT = true;
+    const bool M1_BUS_VOLTAGE_UPPER = false;
+    const bool M1_BUS_VOLTAGE_LOWER = true;
+    const bool M1_IPM_OR_MOTOR_TEMPERATURE = false;
+
+    ON_CALL(mockMotorFaultsData, getM0CanRxErrorCount())
+    .WillByDefault(Return(M0_RX_ERROR_COUNT));
+    ON_CALL(mockMotorFaultsData, getM0CanTxErrorCount())
+    .WillByDefault(Return(M0_TX_ERROR_COUNT));
+    ON_CALL(mockMotorFaultsData, getM1CanRxErrorCount())
+    .WillByDefault(Return(M1_RX_ERROR_COUNT));
+    ON_CALL(mockMotorFaultsData, getM1CanTxErrorCount())
+    .WillByDefault(Return(M1_TX_ERROR_COUNT));
+
+    ON_CALL(mockMotorFaultsData, m0MotorOverSpeed())
+    .WillByDefault(Return(M0_MOTOR_OVER_SPEED));
+    ON_CALL(mockMotorFaultsData, m0SoftwareOverCurrent())
+    .WillByDefault(Return(M0_SOFTWARE_OVER_CURRENT));
+    ON_CALL(mockMotorFaultsData, m0DcBusOverVoltage())
+    .WillByDefault(Return(M0_DC_BUS_OVER_VOLTAGE));
+    ON_CALL(mockMotorFaultsData, m0BadMotorPositionHallSequence())
+    .WillByDefault(Return(M0_BAD_MOTOR_POSITION_HALL_SEQUENCE));
+    ON_CALL(mockMotorFaultsData, m0WatchdogCausedLastReset())
+    .WillByDefault(Return(M0_WATCHDOG_CAUSED_LAST_RESET));
+    ON_CALL(mockMotorFaultsData, m0ConfigReadError())
+    .WillByDefault(Return(M0_CONFIG_READ_ERROR));
+    ON_CALL(mockMotorFaultsData, m0RailUnderVoltageLockOut())
+    .WillByDefault(Return(M0_RAIL_15V_UNDER_VOLTAGE_LOCK_OUT));
+    ON_CALL(mockMotorFaultsData, m0DesaturationFault())
+    .WillByDefault(Return(M0_DESATURATION_FAULT));
+
+    ON_CALL(mockMotorFaultsData, m1MotorOverSpeed())
+    .WillByDefault(Return(M1_MOTOR_OVER_SPEED));
+    ON_CALL(mockMotorFaultsData, m1SoftwareOverCurrent())
+    .WillByDefault(Return(M1_SOFTWARE_OVER_CURRENT));
+    ON_CALL(mockMotorFaultsData, m1DcBusOverVoltage())
+    .WillByDefault(Return(M1_DC_BUS_OVER_VOLTAGE));
+    ON_CALL(mockMotorFaultsData, m1BadMotorPositionHallSequence())
+    .WillByDefault(Return(M1_BAD_MOTOR_POSITION_HALL_SEQUENCE));
+    ON_CALL(mockMotorFaultsData, m1WatchdogCausedLastReset())
+    .WillByDefault(Return(M1_WATCHDOG_CAUSED_LAST_RESET));
+    ON_CALL(mockMotorFaultsData, m1ConfigReadError())
+    .WillByDefault(Return(M1_CONFIG_READ_ERROR));
+    ON_CALL(mockMotorFaultsData, m1RailUnderVoltageLockOut())
+    .WillByDefault(Return(M1_RAIL_15V_UNDER_VOLTAGE_LOCK_OUT));
+    ON_CALL(mockMotorFaultsData, m1DesaturationFault())
+    .WillByDefault(Return(M1_DESATURATION_FAULT));
+
+    ON_CALL(mockMotorFaultsData, m0OutputVoltagePwmLimit())
+    .WillByDefault(Return(M0_OUTPUT_VOLTAGE_PWM));
+    ON_CALL(mockMotorFaultsData, m0MotorCurrentLimit())
+    .WillByDefault(Return(M0_MOTOR_CURRENT));
+    ON_CALL(mockMotorFaultsData, m0VelocityLimit())
+    .WillByDefault(Return(M0_VELOCITY));
+    ON_CALL(mockMotorFaultsData, m0BusCurrentLimit())
+    .WillByDefault(Return(M0_BUS_CURRENT));
+    ON_CALL(mockMotorFaultsData, m0BusVoltageUpperLimit())
+    .WillByDefault(Return(M0_BUS_VOLTAGE_UPPER));
+    ON_CALL(mockMotorFaultsData, m0BusVoltageLowerLimit())
+    .WillByDefault(Return(M0_BUS_VOLTAGE_LOWER));
+    ON_CALL(mockMotorFaultsData, m0IpmOrMotorTelemetryLimit())
+    .WillByDefault(Return(M0_IPM_OR_MOTOR_TEMPERATURE));
+
+    ON_CALL(mockMotorFaultsData, m1OutputVoltagePwmLimit())
+    .WillByDefault(Return(M1_OUTPUT_VOLTAGE_PWM));
+    ON_CALL(mockMotorFaultsData, m1MotorCurrentLimit())
+    .WillByDefault(Return(M1_MOTOR_CURRENT));
+    ON_CALL(mockMotorFaultsData, m1VelocityLimit())
+    .WillByDefault(Return(M1_VELOCITY));
+    ON_CALL(mockMotorFaultsData, m1BusCurrentLimit())
+    .WillByDefault(Return(M1_BUS_CURRENT));
+    ON_CALL(mockMotorFaultsData, m1BusVoltageUpperLimit())
+    .WillByDefault(Return(M1_BUS_VOLTAGE_UPPER));
+    ON_CALL(mockMotorFaultsData, m1BusVoltageLowerLimit())
+    .WillByDefault(Return(M1_BUS_VOLTAGE_LOWER));
+    ON_CALL(mockMotorFaultsData, m1IpmOrMotorTelemetryLimit())
+    .WillByDefault(Return(M1_IPM_OR_MOTOR_TEMPERATURE));
+
+    QJsonArray ACTUAL_JSON_ARRAY =
+        jsonMessageBuilder_.buildMotorFaultsMessage(mockMotorFaultsData);
+
+    EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
+
+    if (HasFailure())
+    {
+        qDebug() << "Actual is " << ACTUAL_JSON_ARRAY;
+        qDebug() << "Expected is " << EXPECTED_JSON_ARRAY;
     }
 }

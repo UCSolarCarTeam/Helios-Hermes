@@ -8,7 +8,7 @@ MotorDetailsData::MotorDetailsData(QList<I_MotorDetailsUnit*> units)
 
 unsigned char MotorDetailsData::getNumberOfUnits() const
 {
-	return motorDetailsUnits_.length();
+    return motorDetailsUnits_.length();
 }
 
 I_MotorDetailsUnit& MotorDetailsData::getMotorDetailsUnit(const unsigned char& index) const
