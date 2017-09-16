@@ -14,6 +14,7 @@
 #include "Tests/DataLayer/KeyMotorData/MockKeyMotorData.h"
 #include "Tests/DataLayer/MotorDetailsData/MockMotorDetailsData.h"
 #include "Tests/DataLayer/MotorDetailsData/MockMotorDetailsUnit.h"
+#include "Tests/DataLayer/DriverControlsData/MockDriverControlsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -51,18 +52,18 @@ TEST(JsonMessageBuilderTest, keyMotor)
     QJsonArray EXPECTED_JSON_ARRAY = EXPECTED_JSON_DOC.array();
 
     NiceMock<MockKeyMotorData> mockKeyMotorData;
-    unsigned char M0_ALIVE_VAL = true;
-    float M0_SET_CURRENT_VAL = 1;
-    float M0_SET_VELOCITY_VAL = 2;
-    float M0_BUS_CURRENT_VAL = 3;
-    float M0_BUS_VOLTAGE_VAL = 4;
-    float M0_VEHICLE_VELOCITY_VAL = 5;
-    unsigned char M1_ALIVE_VAL = false;
-    float M1_SET_CURRENT_VAL = 6;
-    float M1_SET_VELOCITY_VAL = 7;
-    float M1_BUS_CURRENT_VAL = 8;
-    float M1_BUS_VOLTAGE_VAL = 9;
-    float M1_VEHICLE_VELOCITY_VAL = 10;
+    const unsigned char M0_ALIVE_VAL = true;
+    const float M0_SET_CURRENT_VAL = 1;
+    const float M0_SET_VELOCITY_VAL = 2;
+    const float M0_BUS_CURRENT_VAL = 3;
+    const float M0_BUS_VOLTAGE_VAL = 4;
+    const float M0_VEHICLE_VELOCITY_VAL = 5;
+    const unsigned char M1_ALIVE_VAL = false;
+    const float M1_SET_CURRENT_VAL = 6;
+    const float M1_SET_VELOCITY_VAL = 7;
+    const float M1_BUS_CURRENT_VAL = 8;
+    const float M1_BUS_VOLTAGE_VAL = 9;
+    const float M1_VEHICLE_VELOCITY_VAL = 10;
 
     ON_CALL(mockKeyMotorData, getM0Alive())
     .WillByDefault(Return(M0_ALIVE_VAL));
@@ -161,41 +162,41 @@ TEST(JsonMessageBuilderTest, motorDetails)
     ON_CALL(mockMotorDetailsData, getMotorDetailsUnit(1))
     .WillByDefault(ReturnRef(mockMotorDetailsUnit_1));
 
-    float M0_PHASE_C_CURRENT = 1;
-    float M0_PHASE_B_CURRENT = 2;
-    float M0_MOTOR_VOLTAGE_REAL = 3;
-    float M0_MOTOR_VOLTAGE_IMAGINARY = 4;
-    float M0_MOTOR_CURRENT_REAL = 5;
-    float M0_MOTOR_CURRENT_IMAGINARY = 6;
-    float M0_BACK_EMF_REAL = 7;
-    float M0_BACK_EMF_IMAGINARY = 8;
-    float M0_VOLTAGE_RAIL_15V_SUPPLY = 9;
-    float M0_VOLTAGE_RAIL_3V_SUPPLY = 10;
-    float M0_VOLTAGE_RAIL_1V_SUPPLY = 11;
-    float M0_HEAT_SINK_TEMP = 12;
-    float M0_MOTOR_TEMP_ = 13;
-    float M0_DSP_BOARD_TEMP = 14;
-    float M0_DC_BUS_AMPHOURS = 15;
-    float M0_ODOMETER = 16;
-    float M0_SLIP_SPEED = 17;
+    const float M0_PHASE_C_CURRENT = 1;
+    const float M0_PHASE_B_CURRENT = 2;
+    const float M0_MOTOR_VOLTAGE_REAL = 3;
+    const float M0_MOTOR_VOLTAGE_IMAGINARY = 4;
+    const float M0_MOTOR_CURRENT_REAL = 5;
+    const float M0_MOTOR_CURRENT_IMAGINARY = 6;
+    const float M0_BACK_EMF_REAL = 7;
+    const float M0_BACK_EMF_IMAGINARY = 8;
+    const float M0_VOLTAGE_RAIL_15V_SUPPLY = 9;
+    const float M0_VOLTAGE_RAIL_3V_SUPPLY = 10;
+    const float M0_VOLTAGE_RAIL_1V_SUPPLY = 11;
+    const float M0_HEAT_SINK_TEMP = 12;
+    const float M0_MOTOR_TEMP_ = 13;
+    const float M0_DSP_BOARD_TEMP = 14;
+    const float M0_DC_BUS_AMPHOURS = 15;
+    const float M0_ODOMETER = 16;
+    const float M0_SLIP_SPEED = 17;
 
-    float M1_PHASE_C_CURRENT = 18;
-    float M1_PHASE_B_CURRENT = 19;
-    float M1_MOTOR_VOLTAGE_REAL = 20;
-    float M1_MOTOR_VOLTAGE_IMAGINARY = 21;
-    float M1_MOTOR_CURRENT_REAL = 22;
-    float M1_MOTOR_CURRENT_IMAGINARY = 23;
-    float M1_BACK_EMF_REAL = 24;
-    float M1_BACK_EMF_IMAGINARY = 25;
-    float M1_VOLTAGE_RAIL_15V_SUPPLY = 26;
-    float M1_VOLTAGE_RAIL_3V_SUPPLY = 27;
-    float M1_VOLTAGE_RAIL_1V_SUPPLY = 28;
-    float M1_HEAT_SINK_TEMP = 29;
-    float M1_MOTOR_TEMP = 30;
-    float M1_DSP_BOARD_TEMP = 31;
-    float M1_DC_BUS_AMPHOURS = 32;
-    float M1_ODOMETER = 33;
-    float M1_SLIP_SPEED = 34;
+    const float M1_PHASE_C_CURRENT = 18;
+    const float M1_PHASE_B_CURRENT = 19;
+    const float M1_MOTOR_VOLTAGE_REAL = 20;
+    const float M1_MOTOR_VOLTAGE_IMAGINARY = 21;
+    const float M1_MOTOR_CURRENT_REAL = 22;
+    const float M1_MOTOR_CURRENT_IMAGINARY = 23;
+    const float M1_BACK_EMF_REAL = 24;
+    const float M1_BACK_EMF_IMAGINARY = 25;
+    const float M1_VOLTAGE_RAIL_15V_SUPPLY = 26;
+    const float M1_VOLTAGE_RAIL_3V_SUPPLY = 27;
+    const float M1_VOLTAGE_RAIL_1V_SUPPLY = 28;
+    const float M1_HEAT_SINK_TEMP = 29;
+    const float M1_MOTOR_TEMP = 30;
+    const float M1_DSP_BOARD_TEMP = 31;
+    const float M1_DC_BUS_AMPHOURS = 32;
+    const float M1_ODOMETER = 33;
+    const float M1_SLIP_SPEED = 34;
 
     ON_CALL(mockMotorDetailsUnit_0, getMotorNumber())
     .WillByDefault(Return(0));
@@ -280,5 +281,115 @@ TEST(JsonMessageBuilderTest, motorDetails)
     {
         qDebug() << "Actual is " << ACTUAL_JSON_ARRAY;
         qDebug() << "Expected is " << EXPECTED_JSON_ARRAY;
+    }
+}
+
+TEST(JsonMessageBuilderTest, driverControls)
+{
+    JsonMessageBuilder jsonMessageBuilder_;
+
+    QString EXPECTED_JSON_MSG = "\
+    { \
+        \"Alive\": false, \
+        \"HeadlightsOff\": true, \
+        \"HeadlightsLow\": false, \
+        \"HeadlightsHigh\": true, \
+        \"SignalRight\": false, \
+        \"SignalLeft\": true, \
+        \"Hazard\": false, \
+        \"Interior\": true, \
+        \"Aux\": true, \
+        \"VolumeUp\": false, \
+        \"VolumeDown\": true, \
+        \"NextSong\": false, \
+        \"PrevSong\": true, \
+        \"Acceleration\": 0.1, \
+        \"RegenBraking\": 0.2, \
+        \"Brakes\": true, \
+        \"Forward\": false, \
+        \"Reverse\": true, \
+        \"PushToTalk\": false, \
+        \"Horn\": true, \
+        \"Reset\": false \
+    }";
+
+    QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
+    QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
+
+    NiceMock<MockDriverControlsData> mockDriverControlsData;
+    const bool ALIVE = false;
+    const bool HEADLIGHTS_OFF = true;
+    const bool HEADLIGHTS_LOW = false;
+    const bool HEADLIGHTS_HIGH = true;
+    const bool SIGNAL_RIGHT = false;
+    const bool SIGNAL_LEFT = true;
+    const bool HAZARD = false;
+    const bool INTERIOR = true;
+    const bool AUX = true;
+    const bool VOLUME_UP = false;
+    const bool VOLUME_DOWN = true;
+    const bool NEXT_SONG = false;
+    const bool PREV_SONG = true;
+    const bool BRAKES = true;
+    const bool FORWARD = false;
+    const bool REVERSE = true;
+    const bool PUSH_TO_TALK = false;
+    const bool HORN = true;
+    const bool RESET = false;
+    const unsigned short ACCELERATION = 1000;
+    const unsigned short REGEN_BRAKING = 2000;
+
+    ON_CALL(mockDriverControlsData, getDriverControlsBoardAlive())
+    .WillByDefault(Return(ALIVE));
+    ON_CALL(mockDriverControlsData, getHeadlightsOff())
+    .WillByDefault(Return(HEADLIGHTS_OFF));
+    ON_CALL(mockDriverControlsData, getHeadlightsLow())
+    .WillByDefault(Return(HEADLIGHTS_LOW));
+    ON_CALL(mockDriverControlsData, getHeadlightsHigh())
+    .WillByDefault(Return(HEADLIGHTS_HIGH));
+    ON_CALL(mockDriverControlsData, getSignalRight())
+    .WillByDefault(Return(SIGNAL_RIGHT));
+    ON_CALL(mockDriverControlsData, getSignalLeft())
+    .WillByDefault(Return(SIGNAL_LEFT));
+    ON_CALL(mockDriverControlsData, getHazard())
+    .WillByDefault(Return(HAZARD));
+    ON_CALL(mockDriverControlsData, getInterior())
+    .WillByDefault(Return(INTERIOR));
+    ON_CALL(mockDriverControlsData, getAux())
+    .WillByDefault(Return(AUX));
+    ON_CALL(mockDriverControlsData, getVolumeUp())
+    .WillByDefault(Return(VOLUME_UP));
+    ON_CALL(mockDriverControlsData, getVolumeDown())
+    .WillByDefault(Return(VOLUME_DOWN));
+    ON_CALL(mockDriverControlsData, getNextSong())
+    .WillByDefault(Return(NEXT_SONG));
+    ON_CALL(mockDriverControlsData, getPreviousSong())
+    .WillByDefault(Return(PREV_SONG));
+    ON_CALL(mockDriverControlsData, getBrakes())
+    .WillByDefault(Return(BRAKES));
+    ON_CALL(mockDriverControlsData, getForward())
+    .WillByDefault(Return(FORWARD));
+    ON_CALL(mockDriverControlsData, getReverse())
+    .WillByDefault(Return(REVERSE));
+    ON_CALL(mockDriverControlsData, getPushToTalk())
+    .WillByDefault(Return(PUSH_TO_TALK));
+    ON_CALL(mockDriverControlsData, getHorn())
+    .WillByDefault(Return(HORN));
+    ON_CALL(mockDriverControlsData, getReset())
+    .WillByDefault(Return(RESET));
+    ON_CALL(mockDriverControlsData, getAcceleration())
+    .WillByDefault(Return(ACCELERATION));
+    ON_CALL(mockDriverControlsData, getRegenBraking())
+    .WillByDefault(Return(REGEN_BRAKING));
+
+    QJsonObject ACTUAL_JSON =
+        jsonMessageBuilder_.buildDriverControlsMessage(mockDriverControlsData);
+
+    EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
+
+    if (HasFailure())
+    {
+        qDebug() << "Actual is " << ACTUAL_JSON;
+        qDebug() << "Expected is " << EXPECTED_JSON;
     }
 }
