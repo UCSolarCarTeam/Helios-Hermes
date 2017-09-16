@@ -6,7 +6,12 @@ MotorDetailsData::MotorDetailsData(QList<I_MotorDetailsUnit*> units)
 {
 }
 
-I_MotorDetailsUnit& MotorDetailsData::getMotorDetailsUnit(const unsigned char& index)
+unsigned char MotorDetailsData::getNumberOfUnits() const
+{
+	return motorDetailsUnits_.length();
+}
+
+I_MotorDetailsUnit& MotorDetailsData::getMotorDetailsUnit(const unsigned char& index) const
 {
     return *motorDetailsUnits_[static_cast<int>(index)];
 }

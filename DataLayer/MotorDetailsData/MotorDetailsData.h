@@ -9,7 +9,8 @@ class MotorDetailsData : public I_MotorDetailsData
 {
 public:
     MotorDetailsData(QList<I_MotorDetailsUnit*> units);
-    I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index);
+    unsigned char getNumberOfUnits() const;
+    I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index) const;
 
 private:
     QList<I_MotorDetailsUnit*> motorDetailsUnits_;

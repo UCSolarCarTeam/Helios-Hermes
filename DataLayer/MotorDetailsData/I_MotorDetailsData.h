@@ -11,5 +11,6 @@ public:
     virtual ~I_MotorDetailsData() {}
 
     /* MotorDetailsData gets */
-    virtual I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index) = 0;
+    virtual unsigned char getNumberOfUnits() const = 0;
+    virtual I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index) const = 0;
 };
