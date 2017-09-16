@@ -3,6 +3,7 @@
 #include "DataLayer/KeyMotorData/I_KeyMotorData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsUnit.h"
+#include "DataLayer/DriverControlsData/I_DriverControlsData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
@@ -22,8 +23,30 @@ QJsonObject JsonMessageBuilder::buildBatteryFaultsMessage(const I_BatteryFaultsD
 
 QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControlsData& data)
 {
-    Q_UNUSED(data);
-    return QJsonObject();
+    QJsonObject driverControlsJson = QJsonObject();
+    driverControlsJson[JsonFormat::ALIVE] = data.getDriverControlsBoardAlive();
+    driverControlsJson[JsonFormat::HEADLIGHTS_OFF] = data.getHeadlightsOff();
+    driverControlsJson[JsonFormat::HEADLIGHTS_LOW] = data.getHeadlightsLow();
+    driverControlsJson[JsonFormat::HEADLIGHTS_HIGH] = data.getHeadlightsHigh();
+    driverControlsJson[JsonFormat::SIGNAL_RIGHT] = data.getSignalRight();
+    driverControlsJson[JsonFormat::SIGNAL_LEFT] = data.getSignalLeft();
+    driverControlsJson[JsonFormat::HAZARD] = data.getHazard();
+    driverControlsJson[JsonFormat::INTERIOR] = data.getInterior();
+    driverControlsJson[JsonFormat::AUX] = data.getAux();
+    driverControlsJson[JsonFormat::VOLUME_UP] = data.getVolumeUp();
+    driverControlsJson[JsonFormat::VOLUME_DOWN] = data.getVolumeDown();
+    driverControlsJson[JsonFormat::NEXT_SONG] = data.getNextSong();
+    driverControlsJson[JsonFormat::PREV_SONG] = data.getPreviousSong();
+    driverControlsJson[JsonFormat::BRAKES] = data.getBrakes();
+    driverControlsJson[JsonFormat::FORWARD] = data.getForward();
+    driverControlsJson[JsonFormat::REVERSE] = data.getReverse();
+    driverControlsJson[JsonFormat::PUSH_TO_TALK] = data.getPushToTalk();
+    driverControlsJson[JsonFormat::HORN] = data.getHorn();
+    driverControlsJson[JsonFormat::RESET] = data.getReset();
+    driverControlsJson[JsonFormat::ACCELERATION] = float(data.getAcceleration()) / 10000;
+    driverControlsJson[JsonFormat::REGEN_BRAKING] = float(data.getRegenBraking()) / 10000;
+
+    return driverControlsJson;
 }
 
 QJsonArray JsonMessageBuilder::buildKeyMotorMessage(const I_KeyMotorData& data)

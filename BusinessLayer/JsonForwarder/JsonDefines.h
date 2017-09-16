@@ -31,5 +31,26 @@ namespace JsonFormat
     const QString DSP_BOARD_TEMP = "DspBoardTemp"; 
     const QString DC_BUS_AMP_HOURS = "DcBusAmpHours"; 
     const QString ODOMETER_ = "Odometer"; 
-    const QString SLIP_SPEED = "SlipSpeed"; 
+    const QString SLIP_SPEED = "SlipSpeed";
+
+    const QString HEADLIGHTS_OFF = "HeadlightsOff";
+    const QString HEADLIGHTS_LOW = "HeadlightsLow";
+    const QString HEADLIGHTS_HIGH = "HeadlightsHigh";
+    const QString SIGNAL_RIGHT = "SignalRight";
+    const QString SIGNAL_LEFT = "SignalLeft";
+    const QString HAZARD = "Hazard";
+    const QString INTERIOR = "Interior";
+    const QString AUX = "Aux";
+    const QString VOLUME_UP = "VolumeUp";
+    const QString VOLUME_DOWN = "VolumeDown";
+    const QString NEXT_SONG = "NextSong";
+    const QString PREV_SONG = "PrevSong";
+    const QString BRAKES = "Brakes";
+    const QString FORWARD = "Forward";
+    const QString REVERSE = "Reverse";
+    const QString PUSH_TO_TALK = "PushToTalk";
+    const QString HORN = "Horn";
+    const QString RESET = "Reset";
+    const QString ACCELERATION = "Acceleration";
+    const QString REGEN_BRAKING = "RegenBraking";
 }
