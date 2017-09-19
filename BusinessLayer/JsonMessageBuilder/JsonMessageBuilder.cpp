@@ -5,6 +5,7 @@
 #include "DataLayer/MotorDetailsData/I_MotorDetailsUnit.h"
 #include "DataLayer/DriverControlsData/I_DriverControlsData.h"
 #include "DataLayer/MotorFaultsData/I_MotorFaultsData.h"
+#include "DataLayer/BatteryFaultsData/I_BatteryFaultsData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
@@ -18,8 +19,50 @@ QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
 
 QJsonObject JsonMessageBuilder::buildBatteryFaultsMessage(const I_BatteryFaultsData& data)
 {
-    Q_UNUSED(data);
-    return QJsonObject();
+    QJsonObject batteryFaultsJson = QJsonObject();
+    
+    QJsonObject errorFlagsJson = QJsonObject();
+    errorFlagsJson[JsonFormat::INTERNAL_COMMUNICATION_FAULT] = data.internalCommunicationFault();
+    errorFlagsJson[JsonFormat::INTERNAL_CONVERSION_FAULT] = data.internalConversionFault();
+    errorFlagsJson[JsonFormat::WEAK_CELL_FAULT] = data.weakCellFault();
+    errorFlagsJson[JsonFormat::LOW_CELL_VOLTAGE_FAULT] = data.lowCellVoltageFault();
+    errorFlagsJson[JsonFormat::OPEN_WIRING_FAULT] = data.openWiringFault();
+    errorFlagsJson[JsonFormat::CURRENT_SENSOR_FAULT] = data.currentSensorFault();
+    errorFlagsJson[JsonFormat::PACK_VOLTAGE_SENSOR_FAULT] = data.packVoltageSensorFault();
+    errorFlagsJson[JsonFormat::WEAK_PACK_FAULT] = data.weakPackFault();
+    errorFlagsJson[JsonFormat::VOLTAGE_REDUNDANCY_FAULT] = data.voltageRedundancyFault();
+    errorFlagsJson[JsonFormat::FAN_MONITOR_FAULT] = data.fanMonitorFault();
+    errorFlagsJson[JsonFormat::THERMISTOR_FAULT_] = data.thermistorFault();
+    errorFlagsJson[JsonFormat::CANBUS_COMMUNICATIONS_FAULT] = data.canbusCommunicationsFault();
+    errorFlagsJson[JsonFormat::ALWAYS_ON_SUPPLYFAULT] = data.alwaysOnSupplyFault();
+    errorFlagsJson[JsonFormat::HIGH_VOLTAGE_ISOLATION_FAULT] = data.highVoltageIsolationFault();
+    errorFlagsJson[JsonFormat::POWER_SUPPLY_12V_FAULT] = data.powerSupply12VFault();
+    errorFlagsJson[JsonFormat::CHARGE_LIMIT_ENFORCEMENT_FAULT] = data.chargeLimitEnforcementFault();
+    errorFlagsJson[JsonFormat::DISCHARGE_LIMIT_ENFORCEMENT_FAULT] = data.dischargeLimitEnforcementFault();
+    errorFlagsJson[JsonFormat::CHARGER_SAFETY_RELAY_FAULT] = data.chargerSafetyRelayFault();
+    errorFlagsJson[JsonFormat::INTERNAL_MEMORY_FAULT] = data.internalMemoryFault();
+    errorFlagsJson[JsonFormat::INTERNAL_THERMISTOR_FAULT] = data.internalThermistorFault();
+    errorFlagsJson[JsonFormat::INTERNAL_LOGIC_FAULT] = data.internalLogicFault();
+
+    QJsonObject limitFlagsJson = QJsonObject();
+    limitFlagsJson[JsonFormat::DCL_REDUCED_DUE_TO_LOW_SOC] = data.dclReducedDueToLowSoc();
+    limitFlagsJson[JsonFormat::DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE] = data.dclReducedDueToHighCellResistence();
+    limitFlagsJson[JsonFormat::DCL_REDUCED_DUE_TO_TEMPERATURE_] = data.dclReducedDueToTemperature();
+    limitFlagsJson[JsonFormat::DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE] = data.dclReducedDueToLowCellVoltage();
+    limitFlagsJson[JsonFormat::DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE] = data.dclReducedDueToLowPackVoltage();
+    limitFlagsJson[JsonFormat::DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE] = data.dclAndCclReducedDueToVoltageFailsafe();
+    limitFlagsJson[JsonFormat::DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE] = data.dclAndCclReducedDueToCommunicationFailsafe();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_SOC] = data.cclReducedDueToHighSoc();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE] = data.cclReducedDueToHighCellResistence();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_TEMPERATURE] = data.cclReducedDueToTemperature();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE] = data.cclReducedDueToHighCellVoltage();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE] = data.cclReducedDueToHighPackVoltage();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_CHARGER_LATCH] = data.cclReducedDueToChargerLatch();
+    limitFlagsJson[JsonFormat::CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT] = data.cclReducedDueToAlternateCurrentLimit();
+
+    batteryFaultsJson[JsonFormat::ERROR_FLAGS] = errorFlagsJson;
+    batteryFaultsJson[JsonFormat::LIMITS_FLAGS] = limitFlagsJson;
+    return batteryFaultsJson;
 }
 
 QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControlsData& data)

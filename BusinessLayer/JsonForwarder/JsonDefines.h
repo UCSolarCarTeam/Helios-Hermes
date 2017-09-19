@@ -56,10 +56,10 @@ namespace JsonFormat
     const QString REGEN_BRAKING = "RegenBraking";
 
     /* MotorFaults */
-    const QString RX_ERROR_COUNT = "RxErrorCount"; 
-    const QString TX_ERROR_COUNT = "TxErrorCount"; 
     const QString ERROR_FLAGS = "ErrorFlags";
     const QString LIMITS_FLAGS = "LimitFlags";
+    const QString RX_ERROR_COUNT = "RxErrorCount"; 
+    const QString TX_ERROR_COUNT = "TxErrorCount"; 
     const QString MOTOR_OVER_SPEED = "MotorOverSpeed"; 
     const QString SOFTWARE_OVER_CURRENT = "SoftwareOverCurrent"; 
     const QString DC_BUS_OVER_VOLTAGE = "DcBusOverVoltage"; 
@@ -75,4 +75,41 @@ namespace JsonFormat
     const QString BUS_VOLTAGE_UPPER = "BusVoltageUpper"; 
     const QString BUS_VOLTAGE_LOWER = "BusVoltageLower"; 
     const QString IPM_OR_MOTOR_TEMPERATURE = "IpmOrMotorTemperature"; 
+
+    /* BatteryFaults */
+    const QString INTERNAL_COMMUNICATION_FAULT = "InternalCommunicationFault";
+    const QString INTERNAL_CONVERSION_FAULT = "InternalConversionFault";
+    const QString WEAK_CELL_FAULT = "WeakCellFault";
+    const QString LOW_CELL_VOLTAGE_FAULT = "LowCellVoltageFault";
+    const QString OPEN_WIRING_FAULT = "OpenWiringFault";
+    const QString CURRENT_SENSOR_FAULT = "CurrentSensorFault";
+    const QString PACK_VOLTAGE_SENSOR_FAULT = "PackVoltageSensorFault";
+    const QString WEAK_PACK_FAULT = "WeakPackFault";
+    const QString VOLTAGE_REDUNDANCY_FAULT = "VoltageRedundancyFault";
+    const QString FAN_MONITOR_FAULT = "FanMonitorFault";
+    const QString THERMISTOR_FAULT_ = "ThermistorFault";
+    const QString CANBUS_COMMUNICATIONS_FAULT = "CANBUSCommunicationsFault";
+    const QString ALWAYS_ON_SUPPLYFAULT = "AlwaysOnSupplyFault";
+    const QString HIGH_VOLTAGE_ISOLATION_FAULT = "HighVoltageIsolationFault";
+    const QString POWER_SUPPLY_12V_FAULT = "12vPowerSupplyFault";
+    const QString CHARGE_LIMIT_ENFORCEMENT_FAULT = "ChargeLimitEnforcementFault";
+    const QString DISCHARGE_LIMIT_ENFORCEMENT_FAULT = "DischargeLimitEnforcementFault";
+    const QString CHARGER_SAFETY_RELAY_FAULT = "ChargerSafetyRelayFault";
+    const QString INTERNAL_MEMORY_FAULT = "InternalMemoryFault";
+    const QString INTERNAL_THERMISTOR_FAULT = "InternalThermistorFault";
+    const QString INTERNAL_LOGIC_FAULT = "InternalLogicFault";
+    const QString DCL_REDUCED_DUE_TO_LOW_SOC = "DclReducedDueToLowSoc";
+    const QString DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE = "DclReducedDueToHighCellResistance";
+    const QString DCL_REDUCED_DUE_TO_TEMPERATURE_ = "DclReducedDueToTemperature";
+    const QString DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE = "DclReducedDueToLowCellVoltage";
+    const QString DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE = "DclReducedDueToLowPackVoltage";
+    const QString DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE = "DclandCclReducedDueToVoltageFailsafe";
+    const QString DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE = "DclandCclReducedDueToCommunicationFailsafe";
+    const QString CCL_REDUCED_DUE_TO_HIGH_SOC = "CclReducedDueToHighSoc";
+    const QString CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE = "CclReducedDueToHighCellResistance";
+    const QString CCL_REDUCED_DUE_TO_TEMPERATURE = "CclReducedDueToTemperature";
+    const QString CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE = "CclReducedDueToHighCellVoltage";
+    const QString CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE = "CclReducedDueToHighPackVoltage";
+    const QString CCL_REDUCED_DUE_TO_CHARGER_LATCH = "CclReducedDueToChargerLatch";
+    const QString CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT = "CclReducedDueToAlternateCurrentLimit";
 }

@@ -16,6 +16,7 @@
 #include "Tests/DataLayer/MotorDetailsData/MockMotorDetailsUnit.h"
 #include "Tests/DataLayer/DriverControlsData/MockDriverControlsData.h"
 #include "Tests/DataLayer/MotorFaultsData/MockMotorFaultsData.h"
+#include "Tests/DataLayer/BatteryFaultsData/MockBatteryFaultsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -27,7 +28,7 @@ class JsonMessageBuilderTest : public ::testing::Test
 
 TEST(JsonMessageBuilderTest, keyMotor)
 {
-    JsonMessageBuilder jsonMessageBuilder_;
+    JsonMessageBuilder jsonMessageBuilder;
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -95,7 +96,7 @@ TEST(JsonMessageBuilderTest, keyMotor)
     .WillByDefault(Return(M1_VEHICLE_VELOCITY_VAL));
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder_.buildKeyMotorMessage(mockKeyMotorData);
+        jsonMessageBuilder.buildKeyMotorMessage(mockKeyMotorData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -108,7 +109,7 @@ TEST(JsonMessageBuilderTest, keyMotor)
 
 TEST(JsonMessageBuilderTest, motorDetails)
 {
-    JsonMessageBuilder jsonMessageBuilder_;
+    JsonMessageBuilder jsonMessageBuilder;
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -276,7 +277,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M1_SLIP_SPEED_VAL));
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder_.buildMotorDetailsMessage(mockMotorDetailsData);
+        jsonMessageBuilder.buildMotorDetailsMessage(mockMotorDetailsData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -289,7 +290,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
 
 TEST(JsonMessageBuilderTest, driverControls)
 {
-    JsonMessageBuilder jsonMessageBuilder_;
+    JsonMessageBuilder jsonMessageBuilder;
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -388,7 +389,7 @@ TEST(JsonMessageBuilderTest, driverControls)
     .WillByDefault(Return(REGEN_BRAKING_VAL));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder_.buildDriverControlsMessage(mockDriverControlsData);
+        jsonMessageBuilder.buildDriverControlsMessage(mockDriverControlsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 
@@ -401,7 +402,7 @@ TEST(JsonMessageBuilderTest, driverControls)
 
 TEST(JsonMessageBuilderTest, motorFaults)
 {
-    JsonMessageBuilder jsonMessageBuilder_;
+    JsonMessageBuilder jsonMessageBuilder;
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -573,7 +574,7 @@ TEST(JsonMessageBuilderTest, motorFaults)
     .WillByDefault(Return(M1_IPM_OR_MOTOR_TEMPERATURE));
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder_.buildMotorFaultsMessage(mockMotorFaultsData);
+        jsonMessageBuilder.buildMotorFaultsMessage(mockMotorFaultsData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -581,5 +582,177 @@ TEST(JsonMessageBuilderTest, motorFaults)
     {
         qDebug() << "Actual is " << ACTUAL_JSON_ARRAY;
         qDebug() << "Expected is " << EXPECTED_JSON_ARRAY;
+    }
+}
+
+TEST(JsonMessageBuilderTest, batteryFaults)
+{
+    JsonMessageBuilder jsonMessageBuilder;
+
+    // *INDENT-OFF*
+    QString EXPECTED_JSON_MSG = "\
+    { \
+        \"ErrorFlags\": { \
+            \"InternalCommunicationFault\": false, \
+            \"InternalConversionFault\": true, \
+            \"WeakCellFault\": false, \
+            \"LowCellVoltageFault\": true, \
+            \"OpenWiringFault\": false, \
+            \"CurrentSensorFault\": true, \
+            \"PackVoltageSensorFault\": false, \
+            \"WeakPackFault\": true, \
+            \"VoltageRedundancyFault\": false, \
+            \"FanMonitorFault\": true, \
+            \"ThermistorFault\": false, \
+            \"CANBUSCommunicationsFault\": true, \
+            \"AlwaysOnSupplyFault\": false, \
+            \"HighVoltageIsolationFault\": true, \
+            \"12vPowerSupplyFault\": false, \
+            \"ChargeLimitEnforcementFault\": true, \
+            \"DischargeLimitEnforcementFault\": false, \
+            \"ChargerSafetyRelayFault\": true, \
+            \"InternalMemoryFault\": false, \
+            \"InternalThermistorFault\": true, \
+            \"InternalLogicFault\": false \
+        }, \
+        \"LimitFlags\": { \
+            \"DclReducedDueToLowSoc\": true, \
+            \"DclReducedDueToHighCellResistance\": false, \
+            \"DclReducedDueToTemperature\": true, \
+            \"DclReducedDueToLowCellVoltage\": false, \
+            \"DclReducedDueToLowPackVoltage\": true, \
+            \"DclandCclReducedDueToVoltageFailsafe\": false, \
+            \"DclandCclReducedDueToCommunicationFailsafe\": true, \
+            \"CclReducedDueToHighSoc\": false, \
+            \"CclReducedDueToHighCellResistance\": true, \
+            \"CclReducedDueToTemperature\": false, \
+            \"CclReducedDueToHighCellVoltage\": true, \
+            \"CclReducedDueToHighPackVoltage\": false, \
+            \"CclReducedDueToChargerLatch\": true, \
+            \"CclReducedDueToAlternateCurrentLimit\": false \
+        } \
+    }";
+    // *INDENT-ON*
+
+    QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
+    QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
+
+    NiceMock<MockBatteryFaultsData> mockBatteryFaultsData;
+    const bool INTERNAL_COMMUNICATION_FAULT = false;
+    const bool INTERNAL_CONVERSION_FAULT = true;
+    const bool WEAK_CELL_FAULT = false;
+    const bool LOW_CELL_VOLTAGE_FAULT = true;
+    const bool OPEN_WIRING_FAULT = false;
+    const bool CURRENT_SENSOR_FAULT = true;
+    const bool PACK_VOLTAGE_SENSOR_FAULT = false;
+    const bool WEAK_PACK_FAULT = true;
+    const bool VOLTAGE_REDUNDANCY_FAULT = false;
+    const bool FAN_MONITOR_FAULT = true;
+    const bool THERMISTOR_FAULT_ = false;
+    const bool CANBUS_COMMUNICATIONS_FAULT = true;
+    const bool ALWAYS_ON_SUPPLY_FAULT = false;
+    const bool HIGH_VOLTAGE_ISOLATION_FAULT = true;
+    const bool POWER_SUPPLY12V_FAULT = false;
+    const bool CHARGE_LIMIT_ENFORCEMENT_FAULT = true;
+    const bool DISCHARGE_LIMIT_ENFORCEMENT_FAULT = false;
+    const bool CHARGER_SAFETY_RELAY_FAULT = true;
+    const bool INTERNAL_MEMORY_FAULT = false;
+    const bool INTERNAL_THERMISTOR_FAULT = true;
+    const bool INTERNAL_LOGIC_FAULT = false;
+    const bool DCL_REDUCED_DUE_TO_LOW_SOC = true;
+    const bool DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE = false;
+    const bool DCL_REDUCED_DUE_TO_TEMPERATURE = true;
+    const bool DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE = false;
+    const bool DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE = true;
+    const bool DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE = false;
+    const bool DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE = true;
+    const bool CCL_REDUCED_DUE_TO_HIGH_SOC = false;
+    const bool CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE = true;
+    const bool CCL_REDUCED_DUE_TO_TEMPERATURE = false;
+    const bool CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE = true;
+    const bool CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE = false;
+    const bool CCL_REDUCED_DUE_TO_CHARGER_LATCH = true;
+    const bool CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT = false;
+
+    ON_CALL(mockBatteryFaultsData, internalCommunicationFault())
+    .WillByDefault(Return(INTERNAL_COMMUNICATION_FAULT));
+    ON_CALL(mockBatteryFaultsData, internalConversionFault())
+    .WillByDefault(Return(INTERNAL_CONVERSION_FAULT));
+    ON_CALL(mockBatteryFaultsData, weakCellFault())
+    .WillByDefault(Return(WEAK_CELL_FAULT));
+    ON_CALL(mockBatteryFaultsData, lowCellVoltageFault())
+    .WillByDefault(Return(LOW_CELL_VOLTAGE_FAULT));
+    ON_CALL(mockBatteryFaultsData, openWiringFault())
+    .WillByDefault(Return(OPEN_WIRING_FAULT));
+    ON_CALL(mockBatteryFaultsData, currentSensorFault())
+    .WillByDefault(Return(CURRENT_SENSOR_FAULT));
+    ON_CALL(mockBatteryFaultsData, packVoltageSensorFault())
+    .WillByDefault(Return(PACK_VOLTAGE_SENSOR_FAULT));
+    ON_CALL(mockBatteryFaultsData, weakPackFault())
+    .WillByDefault(Return(WEAK_PACK_FAULT));
+    ON_CALL(mockBatteryFaultsData, voltageRedundancyFault())
+    .WillByDefault(Return(VOLTAGE_REDUNDANCY_FAULT));
+    ON_CALL(mockBatteryFaultsData, fanMonitorFault())
+    .WillByDefault(Return(FAN_MONITOR_FAULT));
+    ON_CALL(mockBatteryFaultsData, thermistorFault())
+    .WillByDefault(Return(THERMISTOR_FAULT_));
+    ON_CALL(mockBatteryFaultsData, canbusCommunicationsFault())
+    .WillByDefault(Return(CANBUS_COMMUNICATIONS_FAULT));
+    ON_CALL(mockBatteryFaultsData, alwaysOnSupplyFault())
+    .WillByDefault(Return(ALWAYS_ON_SUPPLY_FAULT));
+    ON_CALL(mockBatteryFaultsData, highVoltageIsolationFault())
+    .WillByDefault(Return(HIGH_VOLTAGE_ISOLATION_FAULT));
+    ON_CALL(mockBatteryFaultsData, powerSupply12VFault())
+    .WillByDefault(Return(POWER_SUPPLY12V_FAULT));
+    ON_CALL(mockBatteryFaultsData, chargeLimitEnforcementFault())
+    .WillByDefault(Return(CHARGE_LIMIT_ENFORCEMENT_FAULT));
+    ON_CALL(mockBatteryFaultsData, dischargeLimitEnforcementFault())
+    .WillByDefault(Return(DISCHARGE_LIMIT_ENFORCEMENT_FAULT));
+    ON_CALL(mockBatteryFaultsData, chargerSafetyRelayFault())
+    .WillByDefault(Return(CHARGER_SAFETY_RELAY_FAULT));
+    ON_CALL(mockBatteryFaultsData, internalMemoryFault())
+    .WillByDefault(Return(INTERNAL_MEMORY_FAULT));
+    ON_CALL(mockBatteryFaultsData, internalThermistorFault())
+    .WillByDefault(Return(INTERNAL_THERMISTOR_FAULT));
+    ON_CALL(mockBatteryFaultsData, internalLogicFault())
+    .WillByDefault(Return(INTERNAL_LOGIC_FAULT));
+    ON_CALL(mockBatteryFaultsData, dclReducedDueToLowSoc())
+    .WillByDefault(Return(DCL_REDUCED_DUE_TO_LOW_SOC));
+    ON_CALL(mockBatteryFaultsData, dclReducedDueToHighCellResistence())
+    .WillByDefault(Return(DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE));
+    ON_CALL(mockBatteryFaultsData, dclReducedDueToTemperature())
+    .WillByDefault(Return(DCL_REDUCED_DUE_TO_TEMPERATURE));
+    ON_CALL(mockBatteryFaultsData, dclReducedDueToLowCellVoltage())
+    .WillByDefault(Return(DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE));
+    ON_CALL(mockBatteryFaultsData, dclReducedDueToLowPackVoltage())
+    .WillByDefault(Return(DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE));
+    ON_CALL(mockBatteryFaultsData, dclAndCclReducedDueToVoltageFailsafe())
+    .WillByDefault(Return(DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE));
+    ON_CALL(mockBatteryFaultsData, dclAndCclReducedDueToCommunicationFailsafe())
+    .WillByDefault(Return(DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToHighSoc())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_HIGH_SOC));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToHighCellResistence())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToTemperature())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_TEMPERATURE ));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToHighCellVoltage())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToHighPackVoltage())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToChargerLatch())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_CHARGER_LATCH));
+    ON_CALL(mockBatteryFaultsData, cclReducedDueToAlternateCurrentLimit())
+    .WillByDefault(Return(CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT));
+
+    QJsonObject ACTUAL_JSON =
+        jsonMessageBuilder.buildBatteryFaultsMessage(mockBatteryFaultsData);
+
+    EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
+
+    if (HasFailure())
+    {
+        qDebug() << "Actual is " << ACTUAL_JSON;
+        qDebug() << "Expected is " << EXPECTED_JSON;
     }
 }
