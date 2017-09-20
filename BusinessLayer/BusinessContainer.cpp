@@ -6,6 +6,7 @@
 #include "InfrastructureLayer/InfrastructureContainer.h"
 #include "JsonForwarder/JsonForwarder.h"
 #include "LoggerService/LoggerService.h"
+#include "JsonMessageBuilder/JsonMessageBuilder.h"
 
 BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureContainer,
                                      CommunicationContainer& communicationContainer,
@@ -14,7 +15,9 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                        communicationContainer.packetDecoder()))
     , communicationsMonitoringService_(new CommunicationsMonitoringService(
                                            communicationContainer.packetChecksumChecker()))
+    , jsonMessageBuilder_(new JsonMessageBuilder())
     , jsonForwarder_(new JsonForwarder(
+                         *jsonMessageBuilder_,
                          dataContainer.batteryData(),
                          dataContainer.batteryFaultsData(),
                          dataContainer.driverControlsData(),

@@ -10,6 +10,7 @@ namespace JsonFormat
     const QString LIMITS_FLAGS = "LimitFlags";
 
     /* KeyMotor */
+    const QString KEY_MOTOR = "KeyMotor";
     const QString SET_CURRENT = "SetCurrent";
     const QString SET_VELOCITY = "SetVelocity";
     const QString BUS_CURRENT = "BusCurrent";
@@ -17,6 +18,7 @@ namespace JsonFormat
     const QString VEHICLE_VELOCITY = "VehicleVelocity";
 
     /* MotorDetails */
+    const QString MOTOR_DETAILS = "MotorDetails";
     const QString PHASE_C_CURRENT = "PhaseCCurrent";
     const QString PHASE_B_CURRENT = "PhaseBCurrent";
     const QString MOTOR_VOLTAGE_REAL = "MotorVoltageReal";
@@ -36,6 +38,7 @@ namespace JsonFormat
     const QString SLIP_SPEED = "SlipSpeed";
 
     /* DriverControls */
+    const QString DRIVER_CONTROLS = "DriverControls";
     const QString HEADLIGHTS_OFF = "HeadlightsOff";
     const QString HEADLIGHTS_LOW = "HeadlightsLow";
     const QString HEADLIGHTS_HIGH = "HeadlightsHigh";
@@ -58,6 +61,7 @@ namespace JsonFormat
     const QString REGEN_BRAKING = "RegenBraking";
 
     /* MotorFaults */
+    const QString MOTOR_FAULTS = "MotorFaults";
     const QString RX_ERROR_COUNT = "RxErrorCount"; 
     const QString TX_ERROR_COUNT = "TxErrorCount"; 
     const QString MOTOR_OVER_SPEED = "MotorOverSpeed"; 
@@ -77,6 +81,7 @@ namespace JsonFormat
     const QString IPM_OR_MOTOR_TEMPERATURE = "IpmOrMotorTemperature"; 
 
     /* BatteryFaults */
+    const QString BATTERY_FAULTS = "BatteryFaults";
     const QString INTERNAL_COMMUNICATION_FAULT = "InternalCommunicationFault";
     const QString INTERNAL_CONVERSION_FAULT = "InternalConversionFault";
     const QString WEAK_CELL_FAULT = "WeakCellFault";
@@ -114,6 +119,7 @@ namespace JsonFormat
     const QString CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT = "CclReducedDueToAlternateCurrentLimit";
 
     /* Battery */
+    const QString BATTERY = "Battery";
     const QString BMS_RELAY_STATUS_FLAGS = "BMSRelayStatusFlags";
     const QString BMS_DISCHARGE_RELAY_ENABLED = "DischargeRelayEnabled";
     const QString BMS_CHARGE_RELAY_ENABLED = "ChargeRelayEnabled";
@@ -149,6 +155,7 @@ namespace JsonFormat
     const QString AUX_BMS_ALIVE = "AuxBmsAlive";
 
     /* Mppt */
+    const QString MPPT = "Mppt";
     const QString MPPT_STATUS = "Alive"; 
     const QString ARRAY_VOLTAGE = "ArrayVoltage"; 
     const QString ARRAY_CURRENT = "ArrayCurrent"; 
@@ -156,6 +163,7 @@ namespace JsonFormat
     const QString TEMPERATURE = "Temperature"; 
 
     /* Lights */
+    const QString LIGHTS = "Lights";
     const QString LIGHTS_LOW_BEAMS = "LowBeams";
     const QString LIGHTS_HIGH_BEAMS = "HighBeams";
     const QString LIGHTS_BRAKES = "Brakes";

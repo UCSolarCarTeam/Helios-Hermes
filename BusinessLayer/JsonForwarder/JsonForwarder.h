@@ -5,11 +5,7 @@
 
 #include "I_JsonForwarder.h"
 
-class BatteryJsonForwarder;
-class FaultsJsonForwarder;
-class PowerJsonForwarder;
-class VehicleJsonForwarder;
-
+class I_JsonMessageBuilder;
 class I_BatteryData;
 class I_BatteryFaultsData;
 class I_DriverControlsData;
@@ -26,6 +22,7 @@ class JsonForwarder : public I_JsonForwarder
     Q_OBJECT
 public:
     JsonForwarder(
+        I_JsonMessageBuilder& jsonMessageBuilder,
         I_BatteryData& batteryData,
         I_BatteryFaultsData& batteryFaultsData,
         I_DriverControlsData& driverControlsData,
@@ -43,6 +40,7 @@ private slots:
     void forwardData();
 
 private:
+    I_JsonMessageBuilder& jsonMessageBuilder_;
     I_BatteryData& batteryData_;
     I_BatteryFaultsData& batteryFaultsData_;
     I_DriverControlsData& driverControlsData_;

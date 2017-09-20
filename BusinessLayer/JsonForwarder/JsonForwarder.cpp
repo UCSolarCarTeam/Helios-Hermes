@@ -8,6 +8,7 @@
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "JsonDefines.h"
 #include "JsonForwarder.h"
+#include "BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.h"
 
 namespace
 {
@@ -15,6 +16,7 @@ namespace
 }
 
 JsonForwarder::JsonForwarder(
+    I_JsonMessageBuilder& jsonMessageBuilder,
     I_BatteryData& batteryData,
     I_BatteryFaultsData& batteryFaultsData,
     I_DriverControlsData& driverControlsData,
@@ -25,7 +27,8 @@ JsonForwarder::JsonForwarder(
     I_MpptData& mpptData,
     I_MessageForwarder& messageForwarder,
     I_Settings& settings)
-    : batteryData_(batteryData)
+    : jsonMessageBuilder_(jsonMessageBuilder)
+    , batteryData_(batteryData)
     , batteryFaultsData_(batteryFaultsData)
     , driverControlsData_(driverControlsData)
     , keyMotorData_(keyMotorData)
@@ -56,6 +59,15 @@ void JsonForwarder::forwardData()
     baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
     QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
     baseJson[JsonFormat::TIMESTAMP] = currentTime;
+
+    baseJson[JsonFormat::KEY_MOTOR] = jsonMessageBuilder_.buildKeyMotorMessage(keyMotorData_);
+    baseJson[JsonFormat::MOTOR_DETAILS] = jsonMessageBuilder_.buildMotorDetailsMessage(motorDetailsData_);
+    baseJson[JsonFormat::DRIVER_CONTROLS] = jsonMessageBuilder_.buildDriverControlsMessage(driverControlsData_);
+    baseJson[JsonFormat::MOTOR_FAULTS] = jsonMessageBuilder_.buildMotorFaultsMessage(motorFaultsData_);
+    baseJson[JsonFormat::BATTERY_FAULTS] = jsonMessageBuilder_.buildBatteryFaultsMessage(batteryFaultsData_);
+    baseJson[JsonFormat::BATTERY] = jsonMessageBuilder_.buildBatteryMessage(batteryData_);
+    baseJson[JsonFormat::MPPT] = jsonMessageBuilder_.buildMpptMessage(mpptData_);
+    baseJson[JsonFormat::LIGHTS] = jsonMessageBuilder_.buildLightsMessage(lightsData_);
 
     messageForwarder_.forwardData(QJsonDocument(baseJson).toJson(QJsonDocument::Compact));
 }
