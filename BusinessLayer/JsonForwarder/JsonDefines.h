@@ -6,6 +6,8 @@ namespace JsonFormat
 
     /* Multi-use */
     const QString ALIVE = "Alive";
+    const QString ERROR_FLAGS = "ErrorFlags";
+    const QString LIMITS_FLAGS = "LimitFlags";
 
     /* KeyMotor */
     const QString SET_CURRENT = "SetCurrent";
@@ -56,8 +58,6 @@ namespace JsonFormat
     const QString REGEN_BRAKING = "RegenBraking";
 
     /* MotorFaults */
-    const QString ERROR_FLAGS = "ErrorFlags";
-    const QString LIMITS_FLAGS = "LimitFlags";
     const QString RX_ERROR_COUNT = "RxErrorCount"; 
     const QString TX_ERROR_COUNT = "TxErrorCount"; 
     const QString MOTOR_OVER_SPEED = "MotorOverSpeed"; 
@@ -112,4 +112,39 @@ namespace JsonFormat
     const QString CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE = "CclReducedDueToHighPackVoltage";
     const QString CCL_REDUCED_DUE_TO_CHARGER_LATCH = "CclReducedDueToChargerLatch";
     const QString CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT = "CclReducedDueToAlternateCurrentLimit";
+
+    /* Battery */
+    const QString BMS_RELAY_STATUS_FLAGS = "BMSRelayStatusFlags";
+    const QString BMS_DISCHARGE_RELAY_ENABLED = "DischargeRelayEnabled";
+    const QString BMS_CHARGE_RELAY_ENABLED = "ChargeRelayEnabled";
+    const QString BMS_CHARGER_SAFETY_ENABLED = "ChargerSafetyEnabled";
+    const QString BMS_MALFUNCTION_INDICATOR_ACTIVE = "MalfunctionIndicatorActive";
+    const QString BMS_GET_MULTI_PURPOSE_INPUT_SIGNAL_STATUS = "MultiPurposeInputSignalStatus";
+    const QString BMS_GET_ALWAYS_ON_SIGNAL_STATUS = "AlwaysOnSignalStatus";
+    const QString BMS_GET_IS_READY_SIGNAL_STATUS = "IsReadySignalStatus";
+    const QString BMS_GET_IS_CHARGING_SIGNAL_STATUS = "IsChargingSignalStatus";
+    const QString POPULATED_CELLS = "PopulatedCells";
+    const QString INPUT_VOLTAGE_12V = "12vInputVoltage";
+    const QString FAN_VOLTAGE = "FanVoltage";
+    const QString PACK_CURRENT = "PackCurrent";
+    const QString PACK_VOLTAGE = "PackVoltage";
+    const QString PACK_STATE_OF_CHARGE = "PackStateofCharge";
+    const QString PACK_AMPHOURS = "PackAmphours";
+    const QString PACK_DEPTH_OF_DISCHARGE = "PackDepthofDischarge";
+    const QString HIGH_TEMPERATURE = "HighTemperature";
+    const QString HIGH_THERMISTOR_ID = "HighThermistorId";
+    const QString LOW_TEMPERATURE = "LowTemperature";
+    const QString LOW_THERMISTOR_ID = "LowThermistorId";
+    const QString AVERAGE_TEMPERATURE = "AverageTemperature";
+    const QString INTERNAL_TEMPERATURE = "InternalTemperature";
+    const QString FAN_SPEED = "FanSpeed";
+    const QString REQUESTED_FAN_SPEED = "RequestedFanSpeed";
+    const QString LOW_CELL_VOLTAGE = "LowCellVoltage";
+    const QString LOW_CELL_VOLTAGE_ID = "LowCellVoltageId";
+    const QString HIGH_CELL_VOLTAGE = "HighCellVoltage";
+    const QString HIGH_CELL_VOLTAGE_ID = "HighCellVoltageId";
+    const QString AVERAGE_CELL_VOLTAGE = "AverageCellVoltage";
+    const QString PRECHARGE_STATE = "PrechargeState";
+    const QString AUX_VOLTAGE = "AuxVoltage";
+    const QString AUX_BMS_ALIVE = "AuxBmsAlive";
 }

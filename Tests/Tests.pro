@@ -16,7 +16,9 @@ HEADERS += \
     DataLayer/MotorDetailsData/MockMotorDetailsUnit.h \
     DataLayer/DriverControlsData/MockDriverControlsData.h \
     DataLayer/MotorFaultsData/MockMotorFaultsData.h \
-
+    DataLayer/BatteryFaultsData/MockBatteryFaultsData.h \
+    DataLayer/BatteryData/MockBatteryData.h \
+    
 SOURCES += \
     testmain.cpp \
     InfrastructureLayer/Settings/SettingsTest.cpp \

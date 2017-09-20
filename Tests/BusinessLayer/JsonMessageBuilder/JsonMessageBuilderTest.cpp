@@ -17,6 +17,7 @@
 #include "Tests/DataLayer/DriverControlsData/MockDriverControlsData.h"
 #include "Tests/DataLayer/MotorFaultsData/MockMotorFaultsData.h"
 #include "Tests/DataLayer/BatteryFaultsData/MockBatteryFaultsData.h"
+#include "Tests/DataLayer/BatteryData/MockBatteryData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -747,6 +748,168 @@ TEST(JsonMessageBuilderTest, batteryFaults)
 
     QJsonObject ACTUAL_JSON =
         jsonMessageBuilder.buildBatteryFaultsMessage(mockBatteryFaultsData);
+
+    EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
+
+    if (HasFailure())
+    {
+        qDebug() << "Actual is " << ACTUAL_JSON;
+        qDebug() << "Expected is " << EXPECTED_JSON;
+    }
+}
+
+TEST(JsonMessageBuilderTest, battery)
+{
+    JsonMessageBuilder jsonMessageBuilder;
+
+    // *INDENT-OFF*
+    QString EXPECTED_JSON_MSG = "\
+    { \
+        \"Alive\": true, \
+        \"BMSRelayStatusFlags\": { \
+            \"DischargeRelayEnabled\": false, \
+            \"ChargeRelayEnabled\": true, \
+            \"ChargerSafetyEnabled\": false, \
+            \"MalfunctionIndicatorActive\": true, \
+            \"MultiPurposeInputSignalStatus\": false, \
+            \"AlwaysOnSignalStatus\": true, \
+            \"IsReadySignalStatus\": false, \
+            \"IsChargingSignalStatus\": true \
+        },\
+        \"PopulatedCells\": 1, \
+        \"12vInputVoltage\": 2, \
+        \"FanVoltage\": 3, \
+        \"PackCurrent\": 4, \
+        \"PackVoltage\": 5, \
+        \"PackStateofCharge\": 6, \
+        \"PackAmphours\": 7, \
+        \"PackDepthofDischarge\": 8, \
+        \"HighTemperature\": 9, \
+        \"HighThermistorId\": 10, \
+        \"LowTemperature\": 11, \
+        \"LowThermistorId\": 12, \
+        \"AverageTemperature\": 13, \
+        \"InternalTemperature\": 14, \
+        \"FanSpeed\": 15, \
+        \"RequestedFanSpeed\": 16, \
+        \"LowCellVoltage\": 17, \
+        \"LowCellVoltageId\": 18, \
+        \"HighCellVoltage\": 19, \
+        \"HighCellVoltageId\": 20, \
+        \"AverageCellVoltage\": 21, \
+        \"PrechargeState\": \"IDLE\", \
+        \"AuxVoltage\": 22, \
+        \"AuxBmsAlive\": true \
+    }";
+    // *INDENT-ON*
+
+    QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
+    QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
+
+    NiceMock<MockBatteryData> mockBatteryData;
+    const bool ALIVE_VAL = true;
+    const bool BMS_DISCHARGE_RELAY_ENABLED_VAL = false;
+    const bool BMS_CHARGE_RELAY_ENABLED_VAL = true;
+    const bool BMS_CHARGER_SAFETY_ENABLED_VAL = false;
+    const bool BMS_MALFUNCTION_INDICATOR_ACTIVE_VAL = true;
+    const bool BMS_GET_MULTI_PURPOSE_INPUT_SIGNAL_STATUS_VAL = false;
+    const bool BMS_GET_ALWAYS_ON_SIGNAL_STATUS_VAL = true;
+    const bool BMS_GET_IS_READY_SIGNAL_STATUS_VAL = false;
+    const bool BMS_GET_IS_CHARGING_SIGNAL_STATUS_VAL = true;
+    const unsigned char POPULATED_CELLS_VAL = 1;
+    const float INPUT_VOLTAGE_12V_VAL = 2;
+    const float FAN_VOLTAGE_VAL = 3;
+    const float PACK_CURRENT_VAL = 4;
+    const float PACK_VOLTAGE_VAL = 5;
+    const float PACK_STATE_OF_CHARGE_VAL = 6;
+    const float PACK_AMPHOURS_VAL = 7;
+    const float PACK_DEPTH_OF_DISCHARGE_VAL = 8;
+    const unsigned char HIGH_TEMPERATURE_VAL = 9;
+    const unsigned char HIGH_THERMISTOR_ID_VAL = 10;
+    const unsigned char LOW_TEMPERATURE_VAL = 11;
+    const unsigned char LOW_THERMISTOR_ID_VAL = 12;
+    const unsigned char AVERAGE_TEMPERATURE_VAL = 13;
+    const unsigned char INTERNAL_TEMPERATURE_VAL = 14;
+    const unsigned char FAN_SPEED_VAL = 15;
+    const unsigned char REQUESTED_FAN_SPEED_VAL = 16;
+    const unsigned short LOW_CELL_VOLTAGE_VAL = 17;
+    const unsigned char LOW_CELL_VOLTAGE_ID_VAL = 18;
+    const unsigned short HIGH_CELL_VOLTAGE_VAL = 19;
+    const unsigned char HIGH_CELL_VOLTAGE_ID_VAL = 20;
+    const unsigned short AVERAGE_CELL_VOLTAGE_VAL = 21;
+    const I_BatteryData::PrechargeState PRECHARGE_STATE_VAL = I_BatteryData::PrechargeState::IDLE;
+    const unsigned char AUX_VOLTAGE_VAL = 22;
+    const bool AUX_BMS_ALIVE_VAL = true;
+
+    ON_CALL(mockBatteryData, getAlive())
+    .WillByDefault(Return(ALIVE_VAL));
+    ON_CALL(mockBatteryData, bmsDischargeRelayEnabled())
+    .WillByDefault(Return(BMS_DISCHARGE_RELAY_ENABLED_VAL));
+    ON_CALL(mockBatteryData, bmsChargeRelayEnabled())
+    .WillByDefault(Return(BMS_CHARGE_RELAY_ENABLED_VAL));
+    ON_CALL(mockBatteryData, bmsChargerSafetyEnabled())
+    .WillByDefault(Return(BMS_CHARGER_SAFETY_ENABLED_VAL));
+    ON_CALL(mockBatteryData, bmsMalfunctionIndicatorActive())
+    .WillByDefault(Return(BMS_MALFUNCTION_INDICATOR_ACTIVE_VAL));
+    ON_CALL(mockBatteryData, bmsGetMultiPurposeInputSignalStatus())
+    .WillByDefault(Return(BMS_GET_MULTI_PURPOSE_INPUT_SIGNAL_STATUS_VAL));
+    ON_CALL(mockBatteryData, bmsGetAlwaysOnSignalStatus())
+    .WillByDefault(Return(BMS_GET_ALWAYS_ON_SIGNAL_STATUS_VAL));
+    ON_CALL(mockBatteryData, bmsGetIsReadySignalStatus())
+    .WillByDefault(Return(BMS_GET_IS_READY_SIGNAL_STATUS_VAL));
+    ON_CALL(mockBatteryData, bmsGetIsChargingSignalStatus())
+    .WillByDefault(Return(BMS_GET_IS_CHARGING_SIGNAL_STATUS_VAL));
+    ON_CALL(mockBatteryData, getPopulatedCells())
+    .WillByDefault(Return(POPULATED_CELLS_VAL));
+    ON_CALL(mockBatteryData, get12VInputVoltage())
+    .WillByDefault(Return(INPUT_VOLTAGE_12V_VAL));
+    ON_CALL(mockBatteryData, getFanVoltage())
+    .WillByDefault(Return(FAN_VOLTAGE_VAL));
+    ON_CALL(mockBatteryData, getPackCurrent())
+    .WillByDefault(Return(PACK_CURRENT_VAL));
+    ON_CALL(mockBatteryData, getPackVoltage())
+    .WillByDefault(Return(PACK_VOLTAGE_VAL));
+    ON_CALL(mockBatteryData, getPackStateOfCharge())
+    .WillByDefault(Return(PACK_STATE_OF_CHARGE_VAL));
+    ON_CALL(mockBatteryData, getPackAmphours())
+    .WillByDefault(Return(PACK_AMPHOURS_VAL));
+    ON_CALL(mockBatteryData, getPackDepthOfDischarge())
+    .WillByDefault(Return(PACK_DEPTH_OF_DISCHARGE_VAL));
+    ON_CALL(mockBatteryData, getHighTemperature())
+    .WillByDefault(Return(HIGH_TEMPERATURE_VAL));
+    ON_CALL(mockBatteryData, getHighThermistorId())
+    .WillByDefault(Return(HIGH_THERMISTOR_ID_VAL));
+    ON_CALL(mockBatteryData, getLowTemperature())
+    .WillByDefault(Return(LOW_TEMPERATURE_VAL));
+    ON_CALL(mockBatteryData, getLowThermistorId())
+    .WillByDefault(Return(LOW_THERMISTOR_ID_VAL));
+    ON_CALL(mockBatteryData, getAverageTemperature())
+    .WillByDefault(Return(AVERAGE_TEMPERATURE_VAL));
+    ON_CALL(mockBatteryData, getInternalTemperature())
+    .WillByDefault(Return(INTERNAL_TEMPERATURE_VAL));
+    ON_CALL(mockBatteryData, getFanSpeed())
+    .WillByDefault(Return(FAN_SPEED_VAL));
+    ON_CALL(mockBatteryData, getRequestedFanSpeed())
+    .WillByDefault(Return(REQUESTED_FAN_SPEED_VAL));
+    ON_CALL(mockBatteryData, getLowCellVoltage())
+    .WillByDefault(Return(LOW_CELL_VOLTAGE_VAL));
+    ON_CALL(mockBatteryData, getLowCellVoltageId())
+    .WillByDefault(Return(LOW_CELL_VOLTAGE_ID_VAL));
+    ON_CALL(mockBatteryData, getHighCellVoltage())
+    .WillByDefault(Return(HIGH_CELL_VOLTAGE_VAL));
+    ON_CALL(mockBatteryData, getHighCellVoltageId())
+    .WillByDefault(Return(HIGH_CELL_VOLTAGE_ID_VAL));
+    ON_CALL(mockBatteryData, getAverageCellVoltage())
+    .WillByDefault(Return(AVERAGE_CELL_VOLTAGE_VAL));
+    ON_CALL(mockBatteryData, getPrechargeState())
+    .WillByDefault(Return(PRECHARGE_STATE_VAL));
+    ON_CALL(mockBatteryData, getAuxVoltage())
+    .WillByDefault(Return(AUX_VOLTAGE_VAL));
+    ON_CALL(mockBatteryData, getAuxBmsAlive())
+    .WillByDefault(Return(AUX_BMS_ALIVE_VAL));
+
+    QJsonObject ACTUAL_JSON =
+        jsonMessageBuilder.buildBatteryMessage(mockBatteryData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 

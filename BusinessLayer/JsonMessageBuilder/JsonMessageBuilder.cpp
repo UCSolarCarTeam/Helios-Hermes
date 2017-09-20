@@ -6,6 +6,7 @@
 #include "DataLayer/DriverControlsData/I_DriverControlsData.h"
 #include "DataLayer/MotorFaultsData/I_MotorFaultsData.h"
 #include "DataLayer/BatteryFaultsData/I_BatteryFaultsData.h"
+#include "DataLayer/BatteryData/I_BatteryData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
@@ -13,8 +14,62 @@ JsonMessageBuilder::JsonMessageBuilder()
 
 QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
 {
-    Q_UNUSED(data);
-    return QJsonObject();
+    QJsonObject batteryJson = QJsonObject();
+
+    QJsonObject bmsRelayStatusFlagsJson = QJsonObject();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_DISCHARGE_RELAY_ENABLED] = data.bmsDischargeRelayEnabled();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_CHARGE_RELAY_ENABLED] = data.bmsChargeRelayEnabled();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_CHARGER_SAFETY_ENABLED] = data.bmsChargerSafetyEnabled();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_MALFUNCTION_INDICATOR_ACTIVE] = data.bmsMalfunctionIndicatorActive();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_GET_MULTI_PURPOSE_INPUT_SIGNAL_STATUS] = data.bmsGetMultiPurposeInputSignalStatus();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_GET_ALWAYS_ON_SIGNAL_STATUS] = data.bmsGetAlwaysOnSignalStatus();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_GET_IS_READY_SIGNAL_STATUS] = data.bmsGetIsReadySignalStatus();
+    bmsRelayStatusFlagsJson[JsonFormat::BMS_GET_IS_CHARGING_SIGNAL_STATUS] = data.bmsGetIsChargingSignalStatus();
+
+    batteryJson[JsonFormat::ALIVE] = data.getAlive();
+    batteryJson[JsonFormat::POPULATED_CELLS] = data.getPopulatedCells();
+    batteryJson[JsonFormat::INPUT_VOLTAGE_12V] = data.get12VInputVoltage();
+    batteryJson[JsonFormat::FAN_VOLTAGE] = data.getFanVoltage();
+    batteryJson[JsonFormat::PACK_CURRENT] = data.getPackCurrent();
+    batteryJson[JsonFormat::PACK_VOLTAGE] = data.getPackVoltage();
+    batteryJson[JsonFormat::PACK_STATE_OF_CHARGE] = data.getPackStateOfCharge();
+    batteryJson[JsonFormat::PACK_AMPHOURS] = data.getPackAmphours();
+    batteryJson[JsonFormat::PACK_DEPTH_OF_DISCHARGE] = data.getPackDepthOfDischarge();
+    batteryJson[JsonFormat::HIGH_TEMPERATURE] = data.getHighTemperature();
+    batteryJson[JsonFormat::HIGH_THERMISTOR_ID] = data.getHighThermistorId();
+    batteryJson[JsonFormat::LOW_TEMPERATURE] = data.getLowTemperature();
+    batteryJson[JsonFormat::LOW_THERMISTOR_ID] = data.getLowThermistorId();
+    batteryJson[JsonFormat::AVERAGE_TEMPERATURE] = data.getAverageTemperature();
+    batteryJson[JsonFormat::INTERNAL_TEMPERATURE] = data.getInternalTemperature();
+    batteryJson[JsonFormat::FAN_SPEED] = data.getFanSpeed();
+    batteryJson[JsonFormat::REQUESTED_FAN_SPEED] = data.getRequestedFanSpeed();
+    batteryJson[JsonFormat::LOW_CELL_VOLTAGE] = data.getLowCellVoltage();
+    batteryJson[JsonFormat::LOW_CELL_VOLTAGE_ID] = data.getLowCellVoltageId();
+    batteryJson[JsonFormat::HIGH_CELL_VOLTAGE] = data.getHighCellVoltage();
+    batteryJson[JsonFormat::HIGH_CELL_VOLTAGE_ID] = data.getHighCellVoltageId();
+    batteryJson[JsonFormat::AVERAGE_CELL_VOLTAGE] = data.getAverageCellVoltage();
+    switch(data.getPrechargeState()) {
+        case I_BatteryData::PrechargeState::IDLE:
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "IDLE";    
+            break;
+        case I_BatteryData::PrechargeState::PRECHARGE:
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";    
+            break;
+        case I_BatteryData::PrechargeState::MEASURE:
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";    
+            break;
+        case I_BatteryData::PrechargeState::ENABLE_PACK:
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";    
+            break;
+        case I_BatteryData::PrechargeState::RUN:
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "RUN";    
+            break;
+    }
+    batteryJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
+    batteryJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
+
+    batteryJson[JsonFormat::BMS_RELAY_STATUS_FLAGS] = bmsRelayStatusFlagsJson;
+    return batteryJson;
 }
 
 QJsonObject JsonMessageBuilder::buildBatteryFaultsMessage(const I_BatteryFaultsData& data)
