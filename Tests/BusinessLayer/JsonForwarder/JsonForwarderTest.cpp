@@ -40,30 +40,30 @@ namespace
 class JsonForwarderTest : public ::testing::Test
 {
 protected:
-	QScopedPointer<MockBatteryData> batteryData_ ;
-	QScopedPointer<MockBatteryFaultsData> batteryFaultsData_ ;
-	QScopedPointer<MockDriverControlsData> driverControlsData_ ;
-	QScopedPointer<MockKeyMotorData> keyMotorData_ ;
-	QScopedPointer<MockLightsData> lightsData_ ;
-	QScopedPointer<MockMotorDetailsData> motorDetailsData_ ;
-	QScopedPointer<MockMotorFaultsData> motorFaultsData_ ;
-	QScopedPointer<MockMpptData> mpptData_ ;
-	QScopedPointer<NiceMock<MockJsonMessageBuilder>> jsonMessageBuilder_;
+    QScopedPointer<MockBatteryData> batteryData_ ;
+    QScopedPointer<MockBatteryFaultsData> batteryFaultsData_ ;
+    QScopedPointer<MockDriverControlsData> driverControlsData_ ;
+    QScopedPointer<MockKeyMotorData> keyMotorData_ ;
+    QScopedPointer<MockLightsData> lightsData_ ;
+    QScopedPointer<MockMotorDetailsData> motorDetailsData_ ;
+    QScopedPointer<MockMotorFaultsData> motorFaultsData_ ;
+    QScopedPointer<MockMpptData> mpptData_ ;
+    QScopedPointer<NiceMock<MockJsonMessageBuilder>> jsonMessageBuilder_;
     QScopedPointer<MockMessageForwarder> messageForwarder_;
     QScopedPointer<MockSettings> settings_;
     QScopedPointer<JsonForwarder> jsonForwarder_;
 
     virtual void SetUp()
     {
-		batteryData_.reset(new MockBatteryData());
-		batteryFaultsData_.reset(new MockBatteryFaultsData());
-		driverControlsData_.reset(new MockDriverControlsData());
-		keyMotorData_.reset(new MockKeyMotorData());
-		lightsData_.reset(new MockLightsData());
-		motorDetailsData_.reset(new MockMotorDetailsData());
-		motorFaultsData_.reset(new MockMotorFaultsData());
-		jsonMessageBuilder_.reset(new NiceMock<MockJsonMessageBuilder>());
-		mpptData_.reset(new MockMpptData());
+        batteryData_.reset(new MockBatteryData());
+        batteryFaultsData_.reset(new MockBatteryFaultsData());
+        driverControlsData_.reset(new MockDriverControlsData());
+        keyMotorData_.reset(new MockKeyMotorData());
+        lightsData_.reset(new MockLightsData());
+        motorDetailsData_.reset(new MockMotorDetailsData());
+        motorFaultsData_.reset(new MockMotorFaultsData());
+        jsonMessageBuilder_.reset(new NiceMock<MockJsonMessageBuilder>());
+        mpptData_.reset(new MockMpptData());
         messageForwarder_.reset(new MockMessageForwarder());
         settings_.reset(new MockSettings());
         EXPECT_CALL(*settings_, forwardPeriod())
@@ -71,14 +71,14 @@ protected:
         EXPECT_CALL(*settings_, packetTitle())
         .WillRepeatedly(Return(PACKET_TITLE)); // Action must be set before jsonForwarder constructor
         jsonForwarder_.reset(new JsonForwarder(*jsonMessageBuilder_,
-											   *batteryData_,
-											   *batteryFaultsData_,
-											   *driverControlsData_,
-											   *keyMotorData_,
-											   *lightsData_,
-											   *motorDetailsData_,
-											   *motorFaultsData_,
-											   *mpptData_   ,
+                                               *batteryData_,
+                                               *batteryFaultsData_,
+                                               *driverControlsData_,
+                                               *keyMotorData_,
+                                               *lightsData_,
+                                               *motorDetailsData_,
+                                               *motorFaultsData_,
+                                               *mpptData_,
                                                *messageForwarder_,
                                                *settings_));
     }

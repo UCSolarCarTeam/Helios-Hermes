@@ -50,23 +50,30 @@ QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
     batteryJson[JsonFormat::HIGH_CELL_VOLTAGE] = data.getHighCellVoltage();
     batteryJson[JsonFormat::HIGH_CELL_VOLTAGE_ID] = data.getHighCellVoltageId();
     batteryJson[JsonFormat::AVERAGE_CELL_VOLTAGE] = data.getAverageCellVoltage();
-    switch(data.getPrechargeState()) {
+
+    switch (data.getPrechargeState())
+    {
         case I_BatteryData::PrechargeState::IDLE:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "IDLE";    
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
             break;
+
         case I_BatteryData::PrechargeState::PRECHARGE:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";    
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
             break;
+
         case I_BatteryData::PrechargeState::MEASURE:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";    
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
             break;
+
         case I_BatteryData::PrechargeState::ENABLE_PACK:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";    
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
             break;
+
         case I_BatteryData::PrechargeState::RUN:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "RUN";    
+            batteryJson[JsonFormat::PRECHARGE_STATE] = "RUN";
             break;
     }
+
     batteryJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
     batteryJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
 
@@ -77,7 +84,7 @@ QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
 QJsonObject JsonMessageBuilder::buildBatteryFaultsMessage(const I_BatteryFaultsData& data)
 {
     QJsonObject batteryFaultsJson = QJsonObject();
-    
+
     QJsonObject errorFlagsJson = QJsonObject();
     errorFlagsJson[JsonFormat::INTERNAL_COMMUNICATION_FAULT] = data.internalCommunicationFault();
     errorFlagsJson[JsonFormat::INTERNAL_CONVERSION_FAULT] = data.internalConversionFault();
@@ -309,11 +316,15 @@ QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
         QJsonObject mpptJsonUnit = QJsonObject();
         const I_MpptUnit& mpptUnit = data.getMpptUnit(i);
 
-        if (mpptUnit.getMpptStatus()) {
+        if (mpptUnit.getMpptStatus())
+        {
             mpptJsonUnit[JsonFormat::MPPT_STATUS] = true;
-        } else {
+        }
+        else
+        {
             mpptJsonUnit[JsonFormat::MPPT_STATUS] = false;
         }
+
         mpptJsonUnit[JsonFormat::ARRAY_VOLTAGE] = mpptUnit.getArrayVoltage();
         mpptJsonUnit[JsonFormat::ARRAY_CURRENT] = mpptUnit.getArrayCurrent();
         mpptJsonUnit[JsonFormat::BATTERY_VOLTAGE] = mpptUnit.getBatteryVoltage();

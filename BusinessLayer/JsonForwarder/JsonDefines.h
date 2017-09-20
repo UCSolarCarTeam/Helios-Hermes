@@ -62,23 +62,23 @@ namespace JsonFormat
 
     /* MotorFaults */
     const QString MOTOR_FAULTS = "MotorFaults";
-    const QString RX_ERROR_COUNT = "RxErrorCount"; 
-    const QString TX_ERROR_COUNT = "TxErrorCount"; 
-    const QString MOTOR_OVER_SPEED = "MotorOverSpeed"; 
-    const QString SOFTWARE_OVER_CURRENT = "SoftwareOverCurrent"; 
-    const QString DC_BUS_OVER_VOLTAGE = "DcBusOverVoltage"; 
-    const QString BAD_MOTOR_POSITION_HALL_SEQUENCE = "BadMotorPositionHallSequence"; 
-    const QString WATCHDOG_CAUSED_LAST_RESET = "WatchdogCausedLastReset"; 
-    const QString CONFIG_READ_ERROR = "ConfigReadError"; 
-    const QString RAIL_15V_UNDER_VOLTAGE_LOCK_OUT = "Rail15VUnderVoltageLockOut"; 
-    const QString DESATURATION_FAULT = "DesaturationFault"; 
-    const QString OUTPUT_VOLTAGE_PWM = "OutputVoltagePwm"; 
-    const QString MOTOR_CURRENT = "MotorCurrent"; 
-    const QString VELOCITY = "Velocity"; 
+    const QString RX_ERROR_COUNT = "RxErrorCount";
+    const QString TX_ERROR_COUNT = "TxErrorCount";
+    const QString MOTOR_OVER_SPEED = "MotorOverSpeed";
+    const QString SOFTWARE_OVER_CURRENT = "SoftwareOverCurrent";
+    const QString DC_BUS_OVER_VOLTAGE = "DcBusOverVoltage";
+    const QString BAD_MOTOR_POSITION_HALL_SEQUENCE = "BadMotorPositionHallSequence";
+    const QString WATCHDOG_CAUSED_LAST_RESET = "WatchdogCausedLastReset";
+    const QString CONFIG_READ_ERROR = "ConfigReadError";
+    const QString RAIL_15V_UNDER_VOLTAGE_LOCK_OUT = "Rail15VUnderVoltageLockOut";
+    const QString DESATURATION_FAULT = "DesaturationFault";
+    const QString OUTPUT_VOLTAGE_PWM = "OutputVoltagePwm";
+    const QString MOTOR_CURRENT = "MotorCurrent";
+    const QString VELOCITY = "Velocity";
     // const QString BUS_CURRENT = "BusCurrent"; // Defined at keymotor already
-    const QString BUS_VOLTAGE_UPPER = "BusVoltageUpper"; 
-    const QString BUS_VOLTAGE_LOWER = "BusVoltageLower"; 
-    const QString IPM_OR_MOTOR_TEMPERATURE = "IpmOrMotorTemperature"; 
+    const QString BUS_VOLTAGE_UPPER = "BusVoltageUpper";
+    const QString BUS_VOLTAGE_LOWER = "BusVoltageLower";
+    const QString IPM_OR_MOTOR_TEMPERATURE = "IpmOrMotorTemperature";
 
     /* BatteryFaults */
     const QString BATTERY_FAULTS = "BatteryFaults";
@@ -156,11 +156,11 @@ namespace JsonFormat
 
     /* Mppt */
     const QString MPPT = "Mppt";
-    const QString MPPT_STATUS = "Alive"; 
-    const QString ARRAY_VOLTAGE = "ArrayVoltage"; 
-    const QString ARRAY_CURRENT = "ArrayCurrent"; 
-    const QString BATTERY_VOLTAGE = "BatteryVoltage"; 
-    const QString TEMPERATURE = "Temperature"; 
+    const QString MPPT_STATUS = "Alive";
+    const QString ARRAY_VOLTAGE = "ArrayVoltage";
+    const QString ARRAY_CURRENT = "ArrayCurrent";
+    const QString BATTERY_VOLTAGE = "BatteryVoltage";
+    const QString TEMPERATURE = "Temperature";
 
     /* Lights */
     const QString LIGHTS = "Lights";

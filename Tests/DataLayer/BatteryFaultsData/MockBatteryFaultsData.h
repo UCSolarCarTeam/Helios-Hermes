@@ -49,7 +49,10 @@ public:
     MOCK_CONST_METHOD0(cclReducedDueToAlternateCurrentLimit, bool());
 
     MOCK_CONST_METHOD1(Equals, bool(const I_BatteryFaultsData&));
-    virtual bool operator==(const I_BatteryFaultsData& rhs) const { return Equals(rhs); }
+    virtual bool operator==(const I_BatteryFaultsData& rhs) const
+    {
+        return Equals(rhs);
+    }
 
     /* BatteryFaults Sets */
     MOCK_METHOD1(setErrorFlags, void(const unsigned int& errorFlags));

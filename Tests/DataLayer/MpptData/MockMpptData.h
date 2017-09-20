@@ -8,5 +8,5 @@ public:
 
     /*MpptData "Gets"*/
     MOCK_CONST_METHOD0(getNumberOfUnits, unsigned char());
-    MOCK_CONST_METHOD1(getMpptUnit, I_MpptUnit&(const unsigned char&));
+    MOCK_CONST_METHOD1(getMpptUnit, I_MpptUnit & (const unsigned char&));
 };

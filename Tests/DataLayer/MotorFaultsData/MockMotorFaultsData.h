@@ -6,7 +6,7 @@ class MockMotorFaultsData : public I_MotorFaultsData
 {
 public:
     MOCK_CONST_METHOD0(toString, QString());
-    
+
     /*MotorFaultsData "Gets"*/
     MOCK_CONST_METHOD0(getM0ErrorFlags, unsigned char());
     MOCK_CONST_METHOD0(getM1ErrorFlags, unsigned char());
