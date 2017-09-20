@@ -10,5 +10,6 @@ public:
     virtual ~I_MpptData() {}
 
     /* MpptData gets */
-    virtual I_MpptUnit& getMpptUnit(const unsigned char& index) = 0;
+    virtual unsigned char getNumberOfUnits() const = 0;
+    virtual I_MpptUnit& getMpptUnit(const unsigned char& index) const = 0;
 };

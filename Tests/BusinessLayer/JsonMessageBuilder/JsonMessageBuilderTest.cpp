@@ -18,6 +18,8 @@
 #include "Tests/DataLayer/MotorFaultsData/MockMotorFaultsData.h"
 #include "Tests/DataLayer/BatteryFaultsData/MockBatteryFaultsData.h"
 #include "Tests/DataLayer/BatteryData/MockBatteryData.h"
+#include "Tests/DataLayer/MpptData/MockMpptData.h"
+#include "Tests/DataLayer/MpptData/MockMpptUnit.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -466,7 +468,7 @@ TEST(JsonMessageBuilderTest, motorFaults)
     const unsigned char M0_TX_ERROR_COUNT = 82;
     const unsigned char M1_RX_ERROR_COUNT = 59;
     const unsigned char M1_TX_ERROR_COUNT = 81;
-    
+
     const bool M0_MOTOR_OVER_SPEED = true;
     const bool M0_SOFTWARE_OVER_CURRENT = false;
     const bool M0_DC_BUS_OVER_VOLTAGE = true;
@@ -917,5 +919,117 @@ TEST(JsonMessageBuilderTest, battery)
     {
         qDebug() << "Actual is " << ACTUAL_JSON;
         qDebug() << "Expected is " << EXPECTED_JSON;
+    }
+}
+
+TEST(JsonMessageBuilderTest, mppt)
+{
+    JsonMessageBuilder jsonMessageBuilder;
+
+    // *INDENT-OFF*
+    QString EXPECTED_JSON_MSG = "\
+    [ \
+        { \
+            \"Alive\":true, \
+            \"ArrayVoltage\": 1, \
+            \"ArrayCurrent\": 2, \
+            \"BatteryVoltage\": 3, \
+            \"Temperature\": 4 \
+        }, \
+        { \
+            \"Alive\":true, \
+            \"ArrayVoltage\": 5, \
+            \"ArrayCurrent\": 6, \
+            \"BatteryVoltage\": 7, \
+            \"Temperature\": 8 \
+        }, \
+        { \
+            \"Alive\":true, \
+            \"ArrayVoltage\": 9, \
+            \"ArrayCurrent\": 10, \
+            \"BatteryVoltage\": 11, \
+            \"Temperature\": 12 \
+        } \
+    ]";
+    // *INDENT-ON*
+
+    QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
+    QJsonArray EXPECTED_JSON_ARRAY = EXPECTED_JSON_DOC.array();
+
+    NiceMock<MockMpptData> mockMpptData;
+    NiceMock<MockMpptUnit> mockMpptUnit_0;
+    NiceMock<MockMpptUnit> mockMpptUnit_1;
+    NiceMock<MockMpptUnit> mockMpptUnit_2;
+
+    ON_CALL(mockMpptData, getNumberOfUnits())
+    .WillByDefault(Return(3));
+    ON_CALL(mockMpptData, getMpptUnit(0))
+    .WillByDefault(ReturnRef(mockMpptUnit_0));
+    ON_CALL(mockMpptData, getMpptUnit(1))
+    .WillByDefault(ReturnRef(mockMpptUnit_1));
+    ON_CALL(mockMpptData, getMpptUnit(2))
+    .WillByDefault(ReturnRef(mockMpptUnit_2));
+
+    const unsigned short MPPT0_ALIVE_VAL = true;
+    const unsigned short MPPT0_ARRAY_VOLTAGE_VAL = 1;
+    const unsigned short MPPT0_ARRAY_CURRENT_VAL = 2;
+    const unsigned short MPPT0_BATTERY_VOLTAGE_VAL = 3;
+    const unsigned short MPPT0_TEMPERATURE_VAL = 4;
+
+    const unsigned short MPPT1_ALIVE_VAL = true;
+    const unsigned short MPPT1_ARRAY_VOLTAGE_VAL = 5;
+    const unsigned short MPPT1_ARRAY_CURRENT_VAL = 6;
+    const unsigned short MPPT1_BATTERY_VOLTAGE_VAL = 7;
+    const unsigned short MPPT1_TEMPERATURE_VAL = 8;
+
+    const unsigned short MPPT2_ALIVE_VAL = true;
+    const unsigned short MPPT2_ARRAY_VOLTAGE_VAL = 9;
+    const unsigned short MPPT2_ARRAY_CURRENT_VAL = 10;
+    const unsigned short MPPT2_BATTERY_VOLTAGE_VAL = 11;
+    const unsigned short MPPT2_TEMPERATURE_VAL = 12;
+
+    ON_CALL(mockMpptUnit_0, getMpptStatus())
+    .WillByDefault(Return(MPPT0_ALIVE_VAL));
+    ON_CALL(mockMpptUnit_0, getArrayVoltage())
+    .WillByDefault(Return(MPPT0_ARRAY_VOLTAGE_VAL));
+    ON_CALL(mockMpptUnit_0, getArrayCurrent())
+    .WillByDefault(Return(MPPT0_ARRAY_CURRENT_VAL));
+    ON_CALL(mockMpptUnit_0, getBatteryVoltage())
+    .WillByDefault(Return(MPPT0_BATTERY_VOLTAGE_VAL));
+    ON_CALL(mockMpptUnit_0, getTemperature())
+    .WillByDefault(Return(MPPT0_TEMPERATURE_VAL));
+
+    ON_CALL(mockMpptUnit_1, getMpptStatus())
+    .WillByDefault(Return(MPPT1_ALIVE_VAL));
+    ON_CALL(mockMpptUnit_1, getArrayVoltage())
+    .WillByDefault(Return(MPPT1_ARRAY_VOLTAGE_VAL));
+    ON_CALL(mockMpptUnit_1, getArrayCurrent())
+    .WillByDefault(Return(MPPT1_ARRAY_CURRENT_VAL));
+    ON_CALL(mockMpptUnit_1, getBatteryVoltage())
+    .WillByDefault(Return(MPPT1_BATTERY_VOLTAGE_VAL));
+    ON_CALL(mockMpptUnit_1, getTemperature())
+    .WillByDefault(Return(MPPT1_TEMPERATURE_VAL));
+
+    ON_CALL(mockMpptUnit_2, getMpptStatus())
+    .WillByDefault(Return(MPPT2_ALIVE_VAL));
+    ON_CALL(mockMpptUnit_2, getArrayVoltage())
+    .WillByDefault(Return(MPPT2_ARRAY_VOLTAGE_VAL));
+    ON_CALL(mockMpptUnit_2, getArrayCurrent())
+    .WillByDefault(Return(MPPT2_ARRAY_CURRENT_VAL));
+    ON_CALL(mockMpptUnit_2, getBatteryVoltage())
+    .WillByDefault(Return(MPPT2_BATTERY_VOLTAGE_VAL));
+    ON_CALL(mockMpptUnit_2, getTemperature())
+    .WillByDefault(Return(MPPT2_TEMPERATURE_VAL));
+
+
+    QJsonArray ACTUAL_JSON_ARRAY =
+        jsonMessageBuilder.buildMpptMessage(mockMpptData);
+
+    EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
+
+    if (HasFailure())
+    {
+        qDebug() << "Actual is " << ACTUAL_JSON_ARRAY;
+        qDebug() << "Expected is " << EXPECTED_JSON_ARRAY;
     }
 }

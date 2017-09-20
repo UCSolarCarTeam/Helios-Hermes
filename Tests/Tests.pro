@@ -18,6 +18,8 @@ HEADERS += \
     DataLayer/MotorFaultsData/MockMotorFaultsData.h \
     DataLayer/BatteryFaultsData/MockBatteryFaultsData.h \
     DataLayer/BatteryData/MockBatteryData.h \
+    DataLayer/MpptData/MockMpptData.h \
+    DataLayer/MpptData/MockMpptUnit.h \
     
 SOURCES += \
     testmain.cpp \

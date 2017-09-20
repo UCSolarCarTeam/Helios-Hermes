@@ -7,6 +7,7 @@
 #include "DataLayer/MotorFaultsData/I_MotorFaultsData.h"
 #include "DataLayer/BatteryFaultsData/I_BatteryFaultsData.h"
 #include "DataLayer/BatteryData/I_BatteryData.h"
+#include "DataLayer/MpptData/I_MpptData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
@@ -290,6 +291,27 @@ QJsonArray JsonMessageBuilder::buildMotorFaultsMessage(const I_MotorFaultsData& 
 
 QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
 {
-    Q_UNUSED(data);
-    return QJsonArray();
+    QJsonArray mpptJson = QJsonArray();
+
+    data.getNumberOfUnits();
+
+    for (int i = 0; i < data.getNumberOfUnits(); i++)
+    {
+        QJsonObject mpptJsonUnit = QJsonObject();
+        const I_MpptUnit& mpptUnit = data.getMpptUnit(i);
+
+        if (mpptUnit.getMpptStatus()) {
+            mpptJsonUnit[JsonFormat::MPPT_STATUS] = true;
+        } else {
+            mpptJsonUnit[JsonFormat::MPPT_STATUS] = false;
+        }
+        mpptJsonUnit[JsonFormat::ARRAY_VOLTAGE] = mpptUnit.getArrayVoltage();
+        mpptJsonUnit[JsonFormat::ARRAY_CURRENT] = mpptUnit.getArrayCurrent();
+        mpptJsonUnit[JsonFormat::BATTERY_VOLTAGE] = mpptUnit.getBatteryVoltage();
+        mpptJsonUnit[JsonFormat::TEMPERATURE] = mpptUnit.getTemperature();
+
+        mpptJson.append(mpptJsonUnit);
+    }
+
+    return mpptJson;
 }

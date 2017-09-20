@@ -9,8 +9,8 @@ class MpptData: public I_MpptData
 {
 public:
     MpptData(QList<I_MpptUnit*> units);
-
-    I_MpptUnit& getMpptUnit(const unsigned char& index);
+    unsigned char getNumberOfUnits() const;
+    I_MpptUnit& getMpptUnit(const unsigned char& index) const;
 
 private:
     QList<I_MpptUnit*> mpptUnits_;
