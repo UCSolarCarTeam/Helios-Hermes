@@ -20,6 +20,7 @@ HEADERS += \
     DataLayer/BatteryData/MockBatteryData.h \
     DataLayer/MpptData/MockMpptData.h \
     DataLayer/MpptData/MockMpptUnit.h \
+    DataLayer/LightsData/MockLightsData.h \
     
 SOURCES += \
     testmain.cpp \

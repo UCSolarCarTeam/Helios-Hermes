@@ -20,6 +20,7 @@
 #include "Tests/DataLayer/BatteryData/MockBatteryData.h"
 #include "Tests/DataLayer/MpptData/MockMpptData.h"
 #include "Tests/DataLayer/MpptData/MockMpptUnit.h"
+#include "Tests/DataLayer/LightsData/MockLightsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -1031,5 +1032,61 @@ TEST(JsonMessageBuilderTest, mppt)
     {
         qDebug() << "Actual is " << ACTUAL_JSON_ARRAY;
         qDebug() << "Expected is " << EXPECTED_JSON_ARRAY;
+    }
+}
+
+TEST(JsonMessageBuilderTest, lights)
+{
+    JsonMessageBuilder jsonMessageBuilder;
+
+    // *INDENT-OFF*
+    QString EXPECTED_JSON_MSG = "\
+    { \
+        \"LowBeams\":true, \
+        \"HighBeams\":false, \
+        \"Brakes\":true, \
+        \"LeftSignal\":false, \
+        \"RightSignal\":true, \
+        \"BmsStrobeLight\":false, \
+        \"LightsAlive\":false \
+    }";
+    // *INDENT-ON*
+
+    QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
+    QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
+
+    NiceMock<MockLightsData> mockLightsData;
+    const bool LOW_BEAMS_VAL = true;
+    const bool HIGH_BEAMS_VAL = false;
+    const bool BRAKES_VAL = true;
+    const bool LEFT_SIGNAL_VAL = false;
+    const bool RIGHT_SIGNAL_VAL = true;
+    const bool BMS_STROBE_LIGHT_VAL = false;
+    const bool ALIVE_VAL = false;
+
+    ON_CALL(mockLightsData, getAlive())
+    .WillByDefault(Return(ALIVE_VAL));
+    ON_CALL(mockLightsData, getLowBeams())
+    .WillByDefault(Return(LOW_BEAMS_VAL));
+    ON_CALL(mockLightsData, getHighBeams())
+    .WillByDefault(Return(HIGH_BEAMS_VAL));
+    ON_CALL(mockLightsData, getBrakes())
+    .WillByDefault(Return(BRAKES_VAL));
+    ON_CALL(mockLightsData, getLeftSignal())
+    .WillByDefault(Return(LEFT_SIGNAL_VAL));
+    ON_CALL(mockLightsData, getRightSignal())
+    .WillByDefault(Return(RIGHT_SIGNAL_VAL));
+    ON_CALL(mockLightsData, getBmsStrobeLight())
+    .WillByDefault(Return(BMS_STROBE_LIGHT_VAL));
+
+    QJsonObject ACTUAL_JSON =
+        jsonMessageBuilder.buildLightsMessage(mockLightsData);
+
+    EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
+
+    if (HasFailure())
+    {
+        qDebug() << "Actual is " << ACTUAL_JSON;
+        qDebug() << "Expected is " << EXPECTED_JSON;
     }
 }

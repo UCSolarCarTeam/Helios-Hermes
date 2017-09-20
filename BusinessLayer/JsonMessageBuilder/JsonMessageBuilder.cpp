@@ -8,6 +8,7 @@
 #include "DataLayer/BatteryFaultsData/I_BatteryFaultsData.h"
 #include "DataLayer/BatteryData/I_BatteryData.h"
 #include "DataLayer/MpptData/I_MpptData.h"
+#include "DataLayer/LightsData/I_LightsData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
@@ -192,8 +193,16 @@ QJsonArray JsonMessageBuilder::buildKeyMotorMessage(const I_KeyMotorData& data)
 
 QJsonObject JsonMessageBuilder::buildLightsMessage(const I_LightsData& data)
 {
-    Q_UNUSED(data);
-    return QJsonObject();
+    QJsonObject lightsJson = QJsonObject();
+    lightsJson[JsonFormat::LIGHTS_ALIVE] = data.getAlive();
+    lightsJson[JsonFormat::LIGHTS_LOW_BEAMS] = data.getLowBeams();
+    lightsJson[JsonFormat::LIGHTS_HIGH_BEAMS] = data.getHighBeams();
+    lightsJson[JsonFormat::LIGHTS_BRAKES] = data.getBrakes();
+    lightsJson[JsonFormat::LIGHTS_LEFT_SIGNAL] = data.getLeftSignal();
+    lightsJson[JsonFormat::LIGHTS_RIGHT_SIGNAL] = data.getRightSignal();
+    lightsJson[JsonFormat::LIGHTS_BMS_STROBE_LIGHT] = data.getBmsStrobeLight();
+
+    return lightsJson;
 }
 
 QJsonArray JsonMessageBuilder::buildMotorDetailsMessage(const I_MotorDetailsData& data)

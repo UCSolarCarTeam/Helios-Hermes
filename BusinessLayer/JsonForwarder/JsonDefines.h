@@ -154,4 +154,13 @@ namespace JsonFormat
     const QString ARRAY_CURRENT = "ArrayCurrent"; 
     const QString BATTERY_VOLTAGE = "BatteryVoltage"; 
     const QString TEMPERATURE = "Temperature"; 
+
+    /* Lights */
+    const QString LIGHTS_LOW_BEAMS = "LowBeams";
+    const QString LIGHTS_HIGH_BEAMS = "HighBeams";
+    const QString LIGHTS_BRAKES = "Brakes";
+    const QString LIGHTS_LEFT_SIGNAL = "LeftSignal";
+    const QString LIGHTS_RIGHT_SIGNAL = "RightSignal";
+    const QString LIGHTS_BMS_STROBE_LIGHT = "BmsStrobeLight";
+    const QString LIGHTS_ALIVE = "LightsAlive";
 }
