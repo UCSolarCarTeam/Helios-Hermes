@@ -1,8 +1,10 @@
+#pragma once
+
 namespace JsonFormat
 {
     const int DECIMAL_PRECISION = 2;
     const QString PACKET_TITLE = "PacketTitle";
-    const QString TIMESTAMP = "Timestamp";
+    const QString TIMESTAMP = "TimeStamp";
 
     /* Multi-use */
     const QString ALIVE = "Alive";
@@ -25,8 +27,7 @@ namespace JsonFormat
     const QString MOTOR_VOLTAGE_IMAGINARY = "MotorVoltageImaginary";
     const QString MOTOR_CURRENT_REAL = "MotorCurrentReal";
     const QString MOTOR_CURRENT_IMAGINARY = "MotorCurrentImaginary";
-    const QString BACK_EMF_REAL = "BackEmfReal";
-    const QString BACK_EMF_IMAGINARY = "BackEmfImaginary";
+    const QString BACK_EMF = "BackEmf";
     const QString VOLTAGE_RAIL_15V_SUPPLY = "VoltageRail15VSupply";
     const QString VOLTAGE_RAIL_3V_SUPPLY = "VoltageRail3VSupply";
     const QString VOLTAGE_RAIL_1V_SUPPLY = "VoltageRail1VSupply";
@@ -155,8 +156,7 @@ namespace JsonFormat
     const QString AUX_BMS_ALIVE = "AuxBmsAlive";
 
     /* Mppt */
-    const QString MPPT = "Mppt";
-    const QString MPPT_STATUS = "Alive";
+    const QString MPPT = "MPPT";
     const QString ARRAY_VOLTAGE = "ArrayVoltage";
     const QString ARRAY_CURRENT = "ArrayCurrent";
     const QString BATTERY_VOLTAGE = "BatteryVoltage";

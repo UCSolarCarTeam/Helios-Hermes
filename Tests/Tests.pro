@@ -11,6 +11,7 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lIn
 HEADERS += \
     CommunicationLayer/CommDeviceControl/MockMessageForwarder.h \
     InfrastructureLayer/Settings/MockSettings.h \
+    BusinessLayer/JsonMessageBuilder/MockJsonMessageBuilder.h \
     DataLayer/KeyMotorData/MockKeyMotorData.h \
     DataLayer/MotorDetailsData/MockMotorDetailsData.h \
     DataLayer/MotorDetailsData/MockMotorDetailsUnit.h \
@@ -21,7 +22,7 @@ HEADERS += \
     DataLayer/MpptData/MockMpptData.h \
     DataLayer/MpptData/MockMpptUnit.h \
     DataLayer/LightsData/MockLightsData.h \
-    
+
 SOURCES += \
     testmain.cpp \
     InfrastructureLayer/Settings/SettingsTest.cpp \
@@ -47,6 +48,3 @@ copyfiles.commands = cp testconfig.ini $${DESTDIR}
 
 QMAKE_EXTRA_TARGETS += copyfiles
 POST_TARGETDEPS += copyfiles
-
-
-

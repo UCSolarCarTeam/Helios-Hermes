@@ -15,6 +15,7 @@ public:
 
 
     /*MpptUnit "Gets"*/
+    MOCK_METHOD1(setMpptStatus, void(const unsigned char&));
     MOCK_METHOD1(setArrayVoltage, void(const unsigned short&));
     MOCK_METHOD1(setArrayCurrent, void(const unsigned short&));
     MOCK_METHOD1(setBatteryVoltage, void(const unsigned short&));

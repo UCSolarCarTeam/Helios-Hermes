@@ -216,8 +216,6 @@ QJsonArray JsonMessageBuilder::buildMotorDetailsMessage(const I_MotorDetailsData
 {
     QJsonArray motorDetailsJson = QJsonArray();
 
-    data.getNumberOfUnits();
-
     for (int i = 0; i < data.getNumberOfUnits(); i++)
     {
         QJsonObject motorDetailsJsonUnit = QJsonObject();
@@ -229,8 +227,8 @@ QJsonArray JsonMessageBuilder::buildMotorDetailsMessage(const I_MotorDetailsData
         motorDetailsJsonUnit[JsonFormat::MOTOR_VOLTAGE_IMAGINARY] = motorDetailsUnit.getMotorVoltageImaginary();
         motorDetailsJsonUnit[JsonFormat::MOTOR_CURRENT_REAL] = motorDetailsUnit.getMotorCurrentReal();
         motorDetailsJsonUnit[JsonFormat::MOTOR_CURRENT_IMAGINARY] = motorDetailsUnit.getMotorCurrentImaginary();
-        motorDetailsJsonUnit[JsonFormat::BACK_EMF_REAL] = motorDetailsUnit.getBackEmfReal();
-        motorDetailsJsonUnit[JsonFormat::BACK_EMF_IMAGINARY] = motorDetailsUnit.getBackEmfImaginary();
+        motorDetailsJsonUnit[JsonFormat::BACK_EMF] = motorDetailsUnit.getBackEmfReal();
+        // motorDetailsJsonUnit[JsonFormat::BACK_EMF_IMAGINARY] = motorDetailsUnit.getBackEmfImaginary(); // mistake made in original protcol, should ignore this
         motorDetailsJsonUnit[JsonFormat::VOLTAGE_RAIL_15V_SUPPLY] = motorDetailsUnit.getVoltageRailSuppply15V();
         motorDetailsJsonUnit[JsonFormat::VOLTAGE_RAIL_3V_SUPPLY] = motorDetailsUnit.getVoltageRailSupply33V();
         motorDetailsJsonUnit[JsonFormat::VOLTAGE_RAIL_1V_SUPPLY] = motorDetailsUnit.getVoltageRailSupply19V();
@@ -309,8 +307,6 @@ QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
 {
     QJsonArray mpptJson = QJsonArray();
 
-    data.getNumberOfUnits();
-
     for (int i = 0; i < data.getNumberOfUnits(); i++)
     {
         QJsonObject mpptJsonUnit = QJsonObject();
@@ -318,11 +314,11 @@ QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
 
         if (mpptUnit.getMpptStatus())
         {
-            mpptJsonUnit[JsonFormat::MPPT_STATUS] = true;
+            mpptJsonUnit[JsonFormat::ALIVE] = true;
         }
         else
         {
-            mpptJsonUnit[JsonFormat::MPPT_STATUS] = false;
+            mpptJsonUnit[JsonFormat::ALIVE] = false;
         }
 
         mpptJsonUnit[JsonFormat::ARRAY_VOLTAGE] = mpptUnit.getArrayVoltage();

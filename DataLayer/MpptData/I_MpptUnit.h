@@ -16,6 +16,7 @@ public:
     virtual unsigned short getTemperature() const = 0;
 
     /* MpptUnit Sets */;
+    virtual void setMpptStatus(const unsigned char& mpptStatus) = 0;
     virtual void setArrayVoltage(const unsigned short& arrayVoltage) = 0;
     virtual void setArrayCurrent(const unsigned short& arrayCurrent) = 0;
     virtual void setBatteryVoltage(const unsigned short& batteryVoltage) = 0;

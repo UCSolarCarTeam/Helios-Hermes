@@ -124,8 +124,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
         \"MotorVoltageImaginary\": 4, \
         \"MotorCurrentReal\": 5, \
         \"MotorCurrentImaginary\": 6, \
-        \"BackEmfReal\": 7, \
-        \"BackEmfImaginary\": 8, \
+        \"BackEmf\": 7, \
         \"VoltageRail15VSupply\": 9, \
         \"VoltageRail3VSupply\": 10, \
         \"VoltageRail1VSupply\": 11, \
@@ -142,8 +141,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
         \"MotorVoltageImaginary\": 21, \
         \"MotorCurrentReal\": 22, \
         \"MotorCurrentImaginary\": 23, \
-        \"BackEmfReal\": 24, \
-        \"BackEmfImaginary\": 25, \
+        \"BackEmf\": 24, \
         \"VoltageRail15VSupply\": 26, \
         \"VoltageRail3VSupply\": 27, \
         \"VoltageRail1VSupply\": 28, \

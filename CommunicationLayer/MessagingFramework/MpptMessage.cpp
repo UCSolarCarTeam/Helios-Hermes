@@ -13,6 +13,7 @@ namespace
     const int TEMPERATURE_OFFSET = 8;
 
     const unsigned char NUMBER_MASK = 0x3;
+    const unsigned char STATUS_MASK = 0x80;
 }
 
 MpptMessage::MpptMessage(const QByteArray& messageData)
@@ -27,7 +28,7 @@ unsigned char MpptMessage::mpptNumber() const
 
 unsigned char MpptMessage::mpptStatus() const
 {
-    return getUnsignedChar(messageData_, MPPT_STATUS_OFFSET);
+    return getUnsignedChar(messageData_, MPPT_STATUS_OFFSET) & STATUS_MASK;
 }
 
 unsigned short MpptMessage::arrayVoltage() const
