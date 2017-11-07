@@ -1,11 +1,17 @@
 #include "MpptData.h"
 
-MpptData::MpptData(const unsigned char& numberOfMppts)
-    : mpptUnits_(new MpptUnit[numberOfMppts])
+MpptData::MpptData(QList<I_MpptUnit*> units)
+    : mpptUnits_(units)
 {
 }
 
-I_MpptUnit& MpptData::getMpptUnit(const unsigned char& index)
+unsigned char MpptData::getNumberOfUnits() const
 {
-    return mpptUnits_[static_cast<int>(index)];
+    return mpptUnits_.length();
+}
+
+
+I_MpptUnit& MpptData::getMpptUnit(const unsigned char& index) const
+{
+    return *mpptUnits_[static_cast<int>(index)];
 }

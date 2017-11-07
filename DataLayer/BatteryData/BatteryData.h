@@ -41,7 +41,7 @@ public:
 
     /* BMS relay status getter */
     bool bmsDischargeRelayEnabled() const;
-    bool bmsChargeRelayEnabaled() const;
+    bool bmsChargeRelayEnabled() const;
     bool bmsChargerSafetyEnabled() const;
     bool bmsMalfunctionIndicatorActive() const;
     bool bmsGetMultiPurposeInputSignalStatus() const;

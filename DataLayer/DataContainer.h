@@ -4,7 +4,6 @@
 
 class I_BatteryData;
 class I_BatteryFaultsData;
-class I_CmuData;
 class I_DriverControlsData;
 class I_KeyMotorData;
 class I_LightsData;
@@ -22,7 +21,6 @@ public:
 
     I_BatteryData& batteryData();
     I_BatteryFaultsData& batteryFaultsData();
-    I_CmuData& cmuData();
     I_DriverControlsData& driverControlsData();
     I_KeyMotorData& keyMotorData();
     I_LightsData& lightsData();
@@ -33,7 +31,6 @@ public:
 private:
     QScopedPointer<I_BatteryData> batteryData_;
     QScopedPointer<I_BatteryFaultsData> batteryFaultsData_;
-    QScopedPointer<I_CmuData> cmuData_;
     QScopedPointer<I_DriverControlsData> driverControlsData_;
     QScopedPointer<I_KeyMotorData> keyMotorData_;
     QScopedPointer<I_LightsData> lightsData_;

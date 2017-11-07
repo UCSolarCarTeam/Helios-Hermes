@@ -3,5 +3,5 @@
 
 qmake
 make clean
-make all
+make all -j8
 make check

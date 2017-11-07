@@ -26,10 +26,6 @@ HEADERS += \
    KeyMotorData/I_KeyMotorData.h \
    DriverControlsData/DriverControlsData.h \
    DriverControlsData/I_DriverControlsData.h \
-   CmuData/CmuData.h \
-   CmuData/I_CmuData.h \
-   CmuData/I_CmuUnit.h \
-   CmuData/CmuUnit.h \
    MpptData/MpptData.h \
    MpptData/I_MpptData.h \
    MpptData/I_MpptUnit.h \
@@ -45,7 +41,5 @@ SOURCES += \
    LightsData/LightsData.cpp \
    KeyMotorData/KeyMotorData.cpp \
    DriverControlsData/DriverControlsData.cpp \
-   CmuData/CmuData.cpp \
-   CmuData/CmuUnit.cpp \
    MpptData/MpptData.cpp \
    MpptData/MpptUnit.cpp

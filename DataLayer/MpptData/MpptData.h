@@ -8,10 +8,10 @@
 class MpptData: public I_MpptData
 {
 public:
-    MpptData(const unsigned char& numberOfMppts);
-
-    I_MpptUnit& getMpptUnit(const unsigned char& index);
+    MpptData(QList<I_MpptUnit*> units);
+    unsigned char getNumberOfUnits() const;
+    I_MpptUnit& getMpptUnit(const unsigned char& index) const;
 
 private:
-    QScopedArrayPointer<MpptUnit> mpptUnits_;
+    QList<I_MpptUnit*> mpptUnits_;
 };

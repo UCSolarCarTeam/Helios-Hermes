@@ -11,19 +11,23 @@ LIBS += -L../../build/.lib -lBusinessLayer -lCommunicationLayer -lDataLayer -lIn
 HEADERS += \
     CommunicationLayer/CommDeviceControl/MockMessageForwarder.h \
     InfrastructureLayer/Settings/MockSettings.h \
+    BusinessLayer/JsonMessageBuilder/MockJsonMessageBuilder.h \
+    DataLayer/KeyMotorData/MockKeyMotorData.h \
+    DataLayer/MotorDetailsData/MockMotorDetailsData.h \
+    DataLayer/MotorDetailsData/MockMotorDetailsUnit.h \
+    DataLayer/DriverControlsData/MockDriverControlsData.h \
+    DataLayer/MotorFaultsData/MockMotorFaultsData.h \
+    DataLayer/BatteryFaultsData/MockBatteryFaultsData.h \
     DataLayer/BatteryData/MockBatteryData.h \
-    DataLayer/FaultsData/MockFaultsData.h \
-    DataLayer/PowerData/MockPowerData.h \
-    DataLayer/VehicleData/MockVehicleData.h
+    DataLayer/MpptData/MockMpptData.h \
+    DataLayer/MpptData/MockMpptUnit.h \
+    DataLayer/LightsData/MockLightsData.h \
 
 SOURCES += \
     testmain.cpp \
     InfrastructureLayer/Settings/SettingsTest.cpp \
-	 BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/BatteryJsonForwarder/BatteryJsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/FaultsJsonForwarder/FaultsJsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/PowerJsonForwarder/PowerJsonForwarderTest.cpp \
-	 BusinessLayer/JsonForwarder/VehicleJsonForwarder/VehicleJsonForwarderTest.cpp \
+    BusinessLayer/JsonForwarder/JsonForwarderTest.cpp \
+    BusinessLayer/JsonMessageBuilder/JsonMessageBuilderTest.cpp \
 
 TRAVIS_DEFINED = $$(TRAVIS)
 count(TRAVIS_DEFINED, 0) {

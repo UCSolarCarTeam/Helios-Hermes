@@ -3,7 +3,6 @@
 #include <QObject>
 #include "../MessagingFramework/BatteryMessage.h"
 #include "../MessagingFramework/BatteryFaultsMessage.h"
-#include "../MessagingFramework/CmuMessage.h"
 #include "../MessagingFramework/DriverControlsMessage.h"
 #include "../MessagingFramework/KeyMotorMessage.h"
 #include "../MessagingFramework/LightsMessage.h"
@@ -20,7 +19,6 @@ public:
 signals:
     void packetDecoded(const BatteryMessage);
     void packetDecoded(const BatteryFaultsMessage);
-    void packetDecoded(const CmuMessage);
     void packetDecoded(const DriverControlsMessage);
     void packetDecoded(const KeyMotorMessage);
     void packetDecoded(const LightsMessage);

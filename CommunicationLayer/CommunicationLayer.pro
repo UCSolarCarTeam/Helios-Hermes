@@ -16,7 +16,6 @@ HEADERS += \
    CommunicationContainer.h \
    DataPopulators/BatteryFaultsPopulator.h \
    DataPopulators/BatteryPopulator.h \
-   DataPopulators/CmuPopulator.h \
    DataPopulators/DriverControlsPopulator.h \
    DataPopulators/KeyMotorPopulator.h \
    DataPopulators/LightsPopulator.h \
@@ -25,7 +24,6 @@ HEADERS += \
    DataPopulators/MpptPopulator.h \
    MessagingFramework/BatteryFaultsMessage.h \
    MessagingFramework/BatteryMessage.h \
-   MessagingFramework/CmuMessage.h \
    MessagingFramework/DriverControlsMessage.h \
    MessagingFramework/KeyMotorMessage.h \
    MessagingFramework/LightsMessage.h \
@@ -50,7 +48,6 @@ SOURCES += \
    CommunicationContainer.cpp \
    DataPopulators/BatteryFaultsPopulator.cpp \
    DataPopulators/BatteryPopulator.cpp \
-   DataPopulators/CmuPopulator.cpp \
    DataPopulators/DriverControlsPopulator.cpp \
    DataPopulators/KeyMotorPopulator.cpp \
    DataPopulators/LightsPopulator.cpp \
@@ -59,7 +56,6 @@ SOURCES += \
    DataPopulators/MpptPopulator.cpp \
    MessagingFramework/BatteryFaultsMessage.cpp \
    MessagingFramework/BatteryMessage.cpp \
-   MessagingFramework/CmuMessage.cpp \
    MessagingFramework/DriverControlsMessage.cpp \
    MessagingFramework/KeyMotorMessage.cpp \
    MessagingFramework/LightsMessage.cpp \

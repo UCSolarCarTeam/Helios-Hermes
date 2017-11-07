@@ -1,12 +1,17 @@
 #include "MotorDetailsData.h"
 #include "MotorDetailsUnit.h"
 
-MotorDetailsData::MotorDetailsData(const unsigned char& numberOfMotors)
-    : motorDetailsUnits_(new MotorDetailsUnit[numberOfMotors])
+MotorDetailsData::MotorDetailsData(QList<I_MotorDetailsUnit*> units)
+    : motorDetailsUnits_(units)
 {
 }
 
-I_MotorDetailsUnit& MotorDetailsData::getMotorDetailsUnit(const unsigned char& index)
+unsigned char MotorDetailsData::getNumberOfUnits() const
 {
-    return motorDetailsUnits_[static_cast<int>(index)];
+    return motorDetailsUnits_.length();
+}
+
+I_MotorDetailsUnit& MotorDetailsData::getMotorDetailsUnit(const unsigned char& index) const
+{
+    return *motorDetailsUnits_[static_cast<int>(index)];
 }

@@ -29,7 +29,6 @@ private slots:
     void handlePacketDecoded(const MotorFaultsMessage message);
     void handlePacketDecoded(const BatteryFaultsMessage message);
     void handlePacketDecoded(const BatteryMessage message);
-    void handlePacketDecoded(const CmuMessage message);
     void handlePacketDecoded(const MpptMessage message);
     void handlePacketDecoded(const LightsMessage message);
 

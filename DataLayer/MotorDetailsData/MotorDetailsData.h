@@ -5,13 +5,13 @@
 #include "I_MotorDetailsData.h"
 #include "MotorDetailsUnit.h"
 
-class MotorDetailsData: public I_MotorDetailsData
+class MotorDetailsData : public I_MotorDetailsData
 {
 public:
-    MotorDetailsData(const unsigned char& numberOfMotors);
-
-    I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index);
+    MotorDetailsData(QList<I_MotorDetailsUnit*> units);
+    unsigned char getNumberOfUnits() const;
+    I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index) const;
 
 private:
-    QScopedArrayPointer<MotorDetailsUnit> motorDetailsUnits_;
+    QList<I_MotorDetailsUnit*> motorDetailsUnits_;
 };

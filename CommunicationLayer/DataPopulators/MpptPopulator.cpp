@@ -9,7 +9,8 @@ MpptPopulator::MpptPopulator(I_PacketDecoder& packetDecoder, I_MpptData& mpptDat
 
 void MpptPopulator::populateData(const MpptMessage message)
 {
-    I_MpptUnit& mpptUnit = mpptData_.getMpptUnit(message.mpptStatus());
+    I_MpptUnit& mpptUnit = mpptData_.getMpptUnit(message.mpptNumber());
+    mpptUnit.setMpptStatus(message.mpptStatus());
     mpptUnit.setArrayVoltage(message.arrayVoltage());
     mpptUnit.setArrayCurrent(message.arrayCurrent());
     mpptUnit.setBatteryVoltage(message.batteryVoltage());

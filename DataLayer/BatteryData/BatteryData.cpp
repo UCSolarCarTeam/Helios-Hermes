@@ -189,7 +189,7 @@ bool BatteryData::bmsDischargeRelayEnabled() const
     return bmsRelayStatusFlagPresent(BMS_DISCHARGE_RELAY_OFFSET);
 }
 
-bool BatteryData::bmsChargeRelayEnabaled() const
+bool BatteryData::bmsChargeRelayEnabled() const
 {
     return bmsRelayStatusFlagPresent(BMS_CHARGE_RELAY_OFFSET);
 }

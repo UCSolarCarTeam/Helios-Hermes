@@ -16,7 +16,6 @@ public:
     int forwardPeriod() const;
     QString packetTitle() const;
     QString exchangeName() const;
-    int numberOfCmus() const;
     int numberOfMotors() const;
     int numberOfMppts() const;
 

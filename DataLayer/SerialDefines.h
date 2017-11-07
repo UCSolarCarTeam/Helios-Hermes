@@ -7,7 +7,6 @@ namespace SerialDefines
     const unsigned char MOTOR_FAULTS_SERIAL_ID = 5;
     const unsigned char BATTERY_FAULTS_SERIAL_ID = 6;
     const unsigned char BATTERY_SERIAL_ID = 7;
-    const unsigned char CMU_SERIAL_ID = 8;
     const unsigned char MPPT_SERIAL_ID = 9;
     const unsigned char LIGHTS_SERIAL_ID = 10;
 }

@@ -48,7 +48,7 @@ public:
 
     /* BMS relay status getter */
     virtual bool bmsDischargeRelayEnabled() const = 0;
-    virtual bool bmsChargeRelayEnabaled() const = 0;
+    virtual bool bmsChargeRelayEnabled() const = 0;
     virtual bool bmsChargerSafetyEnabled() const = 0;
     virtual bool bmsMalfunctionIndicatorActive() const = 0;
     virtual bool bmsGetMultiPurposeInputSignalStatus() const = 0;
