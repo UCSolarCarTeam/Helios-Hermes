@@ -60,7 +60,7 @@ void Logging::init(int level)
     QString logName = LOG_DIR + LOG_NAME + todayStr + LOG_EXT;
     logFile_.setFileName(logName);
 
-    if (logFile_.open(QIODevice::ReadWrite))
+    if (logFile_.open(QIODevice::WriteOnly | QIODevice::Append))
     {
         logStream_.setDevice(&logFile_);
         qInfo() << "Logging Initialized";
@@ -179,6 +179,7 @@ void Logging::logMessageHandler(
 
     // Finally print to file, and also to stderr if DEBUG
     instance()->logStream() << logMsg;
+    instance()->logStream().flush();
     fprintf(stderr, "%s", logMsg.toLocal8Bit().constData());
 
     // Abort program is FATAl call
