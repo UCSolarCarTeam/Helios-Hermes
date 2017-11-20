@@ -30,7 +30,7 @@ namespace
                 break;
 
             default:
-                qDebug() << "MessageDecodingHelpers: Invalid type";
+                qCritical() << "MessageDecodingHelpers: Invalid type";
                 return -1;
         }
     }

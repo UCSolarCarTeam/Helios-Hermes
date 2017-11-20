@@ -27,7 +27,7 @@ void PacketUnstuffer::handleFramedPacket(QByteArray packet)
 {
     if (!isPacketAtLeastMinimumSize(packet))
     {
-        qDebug() << "Incoming packet is less that " << MINIMUM_LENGTH_OF_A_PACKET << " bytes";
+        qWarning() << "Incoming packet is less that " << MINIMUM_LENGTH_OF_A_PACKET << " bytes";
         return;
     }
 
