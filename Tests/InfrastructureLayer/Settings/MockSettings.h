@@ -8,7 +8,7 @@ class MockSettings : public I_Settings
 public:
     MOCK_CONST_METHOD0(forwardPeriod, int());
 
-	// UnitNumbers
+    // UnitNumbers
     MOCK_CONST_METHOD0(numberOfMotors, int());
     MOCK_CONST_METHOD0(numberOfMppts, int());
 

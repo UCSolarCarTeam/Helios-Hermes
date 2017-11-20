@@ -12,7 +12,9 @@ HEADERS += \
     InfrastructureContainer.h \
     Settings/Settings.h \
     Settings/I_Settings.h \
+    Logging/Logging.h \
 
 SOURCES += \
     InfrastructureContainer.cpp \
     Settings/Settings.cpp \
+    Logging/Logging.cpp \
