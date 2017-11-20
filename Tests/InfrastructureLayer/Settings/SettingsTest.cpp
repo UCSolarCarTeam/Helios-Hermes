@@ -51,7 +51,12 @@ TEST_F(SettingsTest, packetTitle)
     EXPECT_EQ(settings_->packetTitle(), "Gen5");
 }
 
-TEST_F(SettingsTest, exchangeName)
+TEST_F(SettingsTest, logLevel)
 {
-    EXPECT_EQ(settings_->exchangeName(), "hermesExchange");
+    EXPECT_EQ(settings_->logLevel(), 4);
+}
+
+TEST_F(SettingsTest, loggingEnabled)
+{
+    EXPECT_EQ(settings_->loggingEnabled(), true);
 }
