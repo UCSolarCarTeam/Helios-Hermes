@@ -1,8 +1,22 @@
 #include "Logging.h"
 
 #include <QDebug>
+#include <QFile>
+#include <QDate>
 
 Logging* Logging::instance_ = new Logging;
+
+namespace
+{
+    QString LOG_DIR = "log/";
+    QString LOG_NAME = "epsilon-hermes-";
+    QString LOG_DATE_FORMAT = "yyyy-MM-dd";
+    QString LOG_EXT = ".log";
+
+    QString LOG_DATETIME_FORMAT = "yyyy-MM-dd-hh-mm-ss-zzz-t";
+    QString DEBUG_MSG_FORMAT = "[%1] (%2, %3:%4) %5\n"; // datetime, file, function, line, msg
+    QString NON_DEBUG_MSG_FORMAT = "[%1] (%2) %3\n"; // datetime, file, msg
+}
 
 void Logging::init(int level)
 {
@@ -37,6 +51,35 @@ void Logging::init(int level)
                        << "Defaulting to DEBUG.";
             break;
     }
+
+    // Because Epsilon Hermes is meant for a solar car
+    // and competitions do not include night racing
+    // It is quite unlikely to for the date to change while the car is running
+    // So this assumes the date will not change while Epsilon Hermes is running
+    QString todayStr = QDate::currentDate().toString(LOG_DATE_FORMAT);
+    QString logName = LOG_DIR + LOG_NAME + todayStr + LOG_EXT;
+    logFile_.setFileName(logName);
+
+    if (logFile_.open(QIODevice::ReadWrite))
+    {
+        logStream_.setDevice(&logFile_);
+        qInfo() << "Logging Initialized";
+    }
+    else
+    {
+        qFatal("Logging initalization failed");
+    }
+
+}
+
+QTextStream& Logging::logStream()
+{
+    return logStream_;
+}
+
+Logging::LogLevel Logging::logLevel()
+{
+    return logLevel_;
 }
 
 Logging* Logging::instance()
@@ -49,9 +92,16 @@ Logging* Logging::instance()
     return instance_;
 }
 
+// private
+
 Logging::Logging()
     : logLevel_(LogLevel::INFO)
 {
+}
+
+Logging::~Logging()
+{
+    logFile_.close();
 }
 
 void Logging::logMessageHandler(
@@ -59,38 +109,81 @@ void Logging::logMessageHandler(
     const QMessageLogContext& ctx,
     const QString& msg)
 {
-    QByteArray localMsg = msg.toLocal8Bit();
+    // Construct string for current date time in UTC
+    QDateTime nowDateTime = QDateTime::currentDateTimeUtc();
+    QString nowStr = nowDateTime.toString(LOG_DATETIME_FORMAT);
 
+    // Construct message
+    QString logMsg;
+
+    if (instance()->logLevel() == LogLevel::DEBUG)
+    {
+        logMsg = QString(DEBUG_MSG_FORMAT).arg(
+                     nowStr,
+                     ctx.file,
+                     ctx.function,
+                     QString::number(ctx.line),
+                     msg);
+    }
+    else
+    {
+        logMsg = QString(NON_DEBUG_MSG_FORMAT).arg(
+                     nowStr,
+                     ctx.file,
+                     msg);
+    }
+
+    // Prepend log level
     switch (type)
     {
         case QtDebugMsg:
-            fprintf(
-                stderr, "Debug: %s (%s:%u, %s)\n",
-                localMsg.constData(), ctx.file, ctx.line, ctx.function);
+            if (instance()->logLevel() > LogLevel::DEBUG)
+            {
+                return;
+            }
+
+            logMsg = "DEBUG: " + logMsg;
             break;
 
         case QtInfoMsg:
-            fprintf(
-                stderr, "Info: %s (%s:%u, %s)\n",
-                localMsg.constData(), ctx.file, ctx.line, ctx.function);
+            if (instance()->logLevel() > LogLevel::INFO)
+            {
+                return;
+            }
+
+            logMsg = "INFO: " + logMsg;
             break;
 
         case QtWarningMsg:
-            fprintf(
-                stderr, "Warning: %s (%s:%u, %s)\n",
-                localMsg.constData(), ctx.file, ctx.line, ctx.function);
+            if (instance()->logLevel() > LogLevel::WARNING)
+            {
+                return;
+            }
+
+            logMsg = "WARNING: " + logMsg;
             break;
 
         case QtCriticalMsg:
-            fprintf(
-                stderr, "Critical: %s (%s:%u, %s)\n",
-                localMsg.constData(), ctx.file, ctx.line, ctx.function);
+            if (instance()->logLevel() > LogLevel::CRITICAL)
+            {
+                return;
+            }
+
+            logMsg = "CRITICAL: " + logMsg;
             break;
 
         case QtFatalMsg:
-            fprintf(
-                stderr, "Fatal: %s (%s:%u, %s)\n",
-                localMsg.constData(), ctx.file, ctx.line, ctx.function);
-            abort();
+            logMsg = "FATAL: " + logMsg;
+            break;
+    }
+
+    // Finally print to file, and also to stderr if DEBUG
+    instance()->logStream() << logMsg;
+    fprintf(stderr, "%s", logMsg.toLocal8Bit().constData());
+
+    // Abort program is FATAl call
+    if (type == QtFatalMsg)
+    {
+        abort();
     }
 }
