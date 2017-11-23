@@ -67,7 +67,8 @@ void Logging::init(int level)
     }
     else
     {
-        qFatal("Logging initalization failed");
+        std::cerr << "Logging initalization failed" << std::endl;;
+        abort();
     }
 
 }
