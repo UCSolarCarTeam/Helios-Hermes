@@ -9,7 +9,7 @@ namespace
 
 InfrastructureContainer::InfrastructureContainer()
     : settings_(new Settings(SETTINGS_FILE_NAME))
-    , logging_(*Logging::instance())
+    , logging_(Logging::instance())
 {
     if (settings_->loggingEnabled())
     {

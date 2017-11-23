@@ -1,10 +1,10 @@
-#include "Logging.h"
+#include <iostream>
 
 #include <QDebug>
 #include <QFile>
 #include <QDate>
 
-Logging* Logging::instance_ = new Logging;
+#include "Logging.h"
 
 namespace
 {
@@ -83,13 +83,9 @@ Logging::LogLevel Logging::logLevel()
     return logLevel_;
 }
 
-Logging* Logging::instance()
+Logging& Logging::instance()
 {
-    if (!instance_)
-    {
-        instance_ = new Logging;
-    }
-
+    static Logging instance_;
     return instance_;
 }
 
@@ -117,7 +113,7 @@ void Logging::logMessageHandler(
     // Construct message
     QString logMsg;
 
-    if (instance()->logLevel() == LogLevel::DEBUG)
+    if (instance().logLevel() == LogLevel::DEBUG)
     {
         logMsg = QString(DEBUG_MSG_FORMAT).arg(
                      nowStr,
@@ -138,7 +134,7 @@ void Logging::logMessageHandler(
     switch (type)
     {
         case QtDebugMsg:
-            if (instance()->logLevel() > LogLevel::DEBUG)
+            if (instance().logLevel() > LogLevel::DEBUG)
             {
                 return;
             }
@@ -147,7 +143,7 @@ void Logging::logMessageHandler(
             break;
 
         case QtInfoMsg:
-            if (instance()->logLevel() > LogLevel::INFO)
+            if (instance().logLevel() > LogLevel::INFO)
             {
                 return;
             }
@@ -156,7 +152,7 @@ void Logging::logMessageHandler(
             break;
 
         case QtWarningMsg:
-            if (instance()->logLevel() > LogLevel::WARNING)
+            if (instance().logLevel() > LogLevel::WARNING)
             {
                 return;
             }
@@ -165,7 +161,7 @@ void Logging::logMessageHandler(
             break;
 
         case QtCriticalMsg:
-            if (instance()->logLevel() > LogLevel::CRITICAL)
+            if (instance().logLevel() > LogLevel::CRITICAL)
             {
                 return;
             }
@@ -179,8 +175,8 @@ void Logging::logMessageHandler(
     }
 
     // Finally print to file, and also to stderr if DEBUG
-    instance()->logStream() << logMsg;
-    instance()->logStream().flush();
+    instance().logStream() << logMsg;
+    instance().logStream().flush();
     fprintf(stderr, "%s", logMsg.toLocal8Bit().constData());
 
     // Abort program is FATAl call

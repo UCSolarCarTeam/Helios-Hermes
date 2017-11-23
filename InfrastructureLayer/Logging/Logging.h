@@ -21,11 +21,11 @@ public:
     void init(int level);
     QTextStream& logStream();
     LogLevel logLevel();
-    static Logging* instance();
+    static Logging& instance();
 private:
     Logging();
     ~Logging();
-    static Logging* instance_;
+    static Logging instance_;
 
     LogLevel logLevel_;
     QFile logFile_;
