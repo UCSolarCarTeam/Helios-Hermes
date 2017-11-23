@@ -24,11 +24,11 @@ void Logging::init(int level)
 
     switch (level)
     {
-        case 0:
+        case 4:
             logLevel_ = Logging::DEBUG;
             break;
 
-        case 1:
+        case 3:
             logLevel_ = Logging::INFO;
             break;
 
@@ -36,11 +36,11 @@ void Logging::init(int level)
             logLevel_ = Logging::WARNING;
             break;
 
-        case 3:
+        case 1:
             logLevel_ = Logging::CRITICAL;
             break;
 
-        case 4:
+        case 0:
             logLevel_ = Logging::FATAL;
             break;
 

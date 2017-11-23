@@ -12,11 +12,11 @@ public:
 
     enum LogLevel
     {
-        DEBUG = 0,
-        INFO = 1,
+        DEBUG = 4,
+        INFO = 3,
         WARNING = 2,
-        CRITICAL = 3,
-        FATAL = 4,
+        CRITICAL = 1,
+        FATAL = 0,
     };
     void init(int level);
     QTextStream& logStream();
