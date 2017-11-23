@@ -174,7 +174,7 @@ void Logging::logMessageHandler(
             break;
     }
 
-    // Finally print to file, and also to stderr if DEBUG
+    // Finally print to file and also to stderr
     instance().logStream() << logMsg;
     instance().logStream().flush();
     fprintf(stderr, "%s", logMsg.toLocal8Bit().constData());
