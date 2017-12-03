@@ -179,7 +179,7 @@ void Logging::logMessageHandler(
     instance().logStream().flush();
     fprintf(stderr, "%s", logMsg.toLocal8Bit().constData());
 
-    // Abort program is FATAl call
+    // Abort program if FATAL call
     if (type == QtFatalMsg)
     {
         abort();

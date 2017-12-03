@@ -34,7 +34,7 @@ bool RadioCommDevice::connectToDataSource()
     }
     else
     {
-        qInfo() << serialPort_.errorString();
+        qWarning() << serialPort_.errorString();
         emit connectionFailed(serialPort_.errorString());
         return false;
     }
