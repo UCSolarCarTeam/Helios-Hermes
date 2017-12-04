@@ -131,7 +131,7 @@ QString MotorDetailsMessage::toString() const
 
     if ((motorNumber() & 0xe) != 0x0)
     {
-        qDebug() << "Invalid motor number, unexpected behaviour likely";
+        qCritical() << "Invalid motor number, unexpected behaviour likely";
     }
 
     messageString += QString::number(MessageDefines::MOTOR_0_DETAILS + motorNumber()) + ", ";

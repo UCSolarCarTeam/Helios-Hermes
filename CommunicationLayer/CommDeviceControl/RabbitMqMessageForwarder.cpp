@@ -35,7 +35,7 @@ void RabbitMqMessageForwarder::setupChannel()
     {
         if (i++)
         {
-            qWarning() << "RabbitMqMessageForwarder: Attempting to reconnect";
+            qInfo() << "RabbitMqMessageForwarder: Attempting to reconnect";
         }
 
         try
@@ -77,7 +77,7 @@ void RabbitMqMessageForwarder::forwardData(QByteArray data)
     }
     catch (AmqpClient::ChannelException& ex)
     {
-        qWarning() << "RabbitMqMessageForwarder: Failed to forward data";
+        qCritical() << "RabbitMqMessageForwarder: Failed to forward data";
     }
     catch (AmqpClient::ConnectionException& ex)
     {

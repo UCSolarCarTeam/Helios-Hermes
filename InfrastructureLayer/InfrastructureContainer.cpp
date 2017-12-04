@@ -1,5 +1,6 @@
 #include "InfrastructureContainer.h"
 #include "Settings/Settings.h"
+#include "Logging/Logging.h"
 
 namespace
 {
@@ -8,7 +9,12 @@ namespace
 
 InfrastructureContainer::InfrastructureContainer()
     : settings_(new Settings(SETTINGS_FILE_NAME))
+    , logging_(Logging::instance())
 {
+    if (settings_->loggingEnabled())
+    {
+        logging_.init(settings_->logLevel());
+    }
 }
 
 InfrastructureContainer::~InfrastructureContainer()

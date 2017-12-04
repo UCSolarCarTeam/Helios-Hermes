@@ -25,9 +25,9 @@ void PacketChecksumChecker::checkChecksum(QByteArray decodedData)
     }
     else
     {
-        qDebug() << "Calculated =" << QByteArray::number(calculatedChecksum, 16) << "retrieved ="
-                 << QByteArray::number(checksum, 16);
-        qDebug() << "Error decoding data, checksum doesn't match. Data is: " << decodedData;
+        qWarning() << "Calculated =" << QByteArray::number(calculatedChecksum, 16) << "retrieved ="
+                   << QByteArray::number(checksum, 16);
+        qWarning() << "Error decoding data, checksum doesn't match. Data is: " << decodedData;
         emit invalidDataReceived();
     }
 }

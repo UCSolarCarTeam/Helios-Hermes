@@ -16,11 +16,9 @@ HEADERS += \
    JsonMessageBuilder/JsonMessageBuilder.h \
    JsonMessageBuilder/I_JsonMessageBuilder.h \
    JsonForwarder/JsonDefines.h \
-   LoggerService/LoggerService.h \
 
 SOURCES += \
    BusinessContainer.cpp \
    CommunicationsMonitoringService/CommunicationsMonitoringService.cpp \
    JsonMessageBuilder/JsonMessageBuilder.cpp \
    JsonForwarder/JsonForwarder.cpp \
-   LoggerService/LoggerService.cpp \

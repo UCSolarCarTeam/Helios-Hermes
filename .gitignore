@@ -11,3 +11,4 @@ logs/
 Tests/target_wrapper.sh
 .qmake.stash
 *.gch
+.fuse_hidden*

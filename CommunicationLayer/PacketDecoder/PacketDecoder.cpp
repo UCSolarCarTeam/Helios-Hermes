@@ -64,7 +64,7 @@ void PacketDecoder::handleValidData(QByteArray messageData)
     }
     else
     {
-        qDebug() << "Message length is not correct for type" << static_cast<quint8>(messageType);
-        qDebug() << "Actual" << messageData.size() << "Expected" << MessageDefines::getLengthForMessage(messageType);
+        qWarning() << "Message length is not correct for type" << static_cast<quint8>(messageType);
+        qWarning() << "Actual" << messageData.size() << "Expected" << MessageDefines::getLengthForMessage(messageType);
     }
 }

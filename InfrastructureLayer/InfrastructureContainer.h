@@ -3,6 +3,7 @@
 #include <QScopedPointer>
 
 class I_Settings;
+class Logging;
 
 class InfrastructureContainer
 {
@@ -14,4 +15,5 @@ public:
 
 private:
     QScopedPointer<I_Settings> settings_;
+    Logging& logging_;
 };

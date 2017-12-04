@@ -55,3 +55,13 @@ TEST_F(SettingsTest, exchangeName)
 {
     EXPECT_EQ(settings_->exchangeName(), "hermesExchange");
 }
+
+TEST_F(SettingsTest, logLevel)
+{
+    EXPECT_EQ(settings_->logLevel(), 4);
+}
+
+TEST_F(SettingsTest, loggingEnabled)
+{
+    EXPECT_EQ(settings_->loggingEnabled(), true);
+}
