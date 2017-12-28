@@ -110,7 +110,7 @@ TEST_F(JsonForwarderTest, dataForwarded)
     EXPECT_CALL(*messageForwarder_, forwardData(_))
     .Times(FORWARD_ITERATIONS);
     jsonForwarder_->startForwardingData();
-    QTest::qWait(FORWARD_INTERVAL_MSEC + FORWARD_INTERVAL_MSEC / 2) * FORWARD_ITERATIONS;
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC * 0.75);
 }
 
 TEST_F(JsonForwarderTest, correctTimeStamp)
@@ -118,8 +118,8 @@ TEST_F(JsonForwarderTest, correctTimeStamp)
     QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::TIMESTAMP, currentTime)))
     .Times(AtLeast(1));
-    jsonForwarder_->startForwardingData();
-    QTest::qWait(FORWARD_INTERVAL_MSEC + FORWARD_INTERVAL_MSEC / 2);
+    jsonForwarder_->forwardData(currentTime);
+    // QTest::qWait(FORWARD_INTERVAL_MSEC + FORWARD_INTERVAL_MSEC / 2);
 }
 
 TEST_F(JsonForwarderTest, packetTitle)

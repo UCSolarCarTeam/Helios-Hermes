@@ -41,7 +41,7 @@ JsonForwarder::JsonForwarder(
     , forwardPeriod_(settings.forwardPeriod())
     , PACKET_TITLE_(settings.packetTitle())
 {
-    connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(forwardData()));
+    connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(handleTimeout()));
 }
 
 JsonForwarder::~JsonForwarder()
@@ -53,11 +53,16 @@ void JsonForwarder::startForwardingData()
     readTimer_->start();
 }
 
-void JsonForwarder::forwardData()
+void JsonForwarder::handleTimeout()
+{
+    QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
+    forwardData(currentTime);
+}
+
+void JsonForwarder::forwardData(QString& currentTime)
 {
     QJsonObject baseJson = QJsonObject();
     baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
-    QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
     baseJson[JsonFormat::TIMESTAMP] = currentTime;
 
     baseJson[JsonFormat::KEY_MOTOR] = jsonMessageBuilder_.buildKeyMotorMessage(keyMotorData_);
