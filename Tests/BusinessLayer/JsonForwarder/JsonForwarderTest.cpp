@@ -119,7 +119,6 @@ TEST_F(JsonForwarderTest, correctTimeStamp)
     EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::TIMESTAMP, currentTime)))
     .Times(AtLeast(1));
     jsonForwarder_->forwardData(currentTime);
-    // QTest::qWait(FORWARD_INTERVAL_MSEC + FORWARD_INTERVAL_MSEC / 2);
 }
 
 TEST_F(JsonForwarderTest, packetTitle)
