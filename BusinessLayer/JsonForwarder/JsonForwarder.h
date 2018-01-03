@@ -35,9 +35,10 @@ public:
         I_Settings& settings);
     virtual ~JsonForwarder();
     void startForwardingData();
+    void forwardData(QDateTime& currentTime);
 
 private slots:
-    void forwardData();
+    void handleTimeout();
 
 private:
     I_JsonMessageBuilder& jsonMessageBuilder_;
