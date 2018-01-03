@@ -55,15 +55,15 @@ void JsonForwarder::startForwardingData()
 
 void JsonForwarder::handleTimeout()
 {
-    QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
+    QDateTime currentTime = QDateTime::currentDateTime();
     forwardData(currentTime);
 }
 
-void JsonForwarder::forwardData(QString& currentTime)
+void JsonForwarder::forwardData(QDateTime& currentTime)
 {
     QJsonObject baseJson = QJsonObject();
     baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
-    baseJson[JsonFormat::TIMESTAMP] = currentTime;
+    baseJson[JsonFormat::TIMESTAMP] = currentTime.toUTC().toString(MYSQL_DATE_FORMAT);
 
     baseJson[JsonFormat::KEY_MOTOR] = jsonMessageBuilder_.buildKeyMotorMessage(keyMotorData_);
     baseJson[JsonFormat::MOTOR_DETAILS] = jsonMessageBuilder_.buildMotorDetailsMessage(motorDetailsData_);

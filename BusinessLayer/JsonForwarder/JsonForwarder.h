@@ -35,7 +35,7 @@ public:
         I_Settings& settings);
     virtual ~JsonForwarder();
     void startForwardingData();
-    void forwardData(QString& currentTime);
+    void forwardData(QDateTime& currentTime);
 
 private slots:
     void handleTimeout();

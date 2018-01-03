@@ -115,8 +115,8 @@ TEST_F(JsonForwarderTest, dataForwarded)
 
 TEST_F(JsonForwarderTest, correctTimeStamp)
 {
-    QString currentTime = QDateTime::currentDateTime().toUTC().toString(MYSQL_DATE_FORMAT);
-    EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::TIMESTAMP, currentTime)))
+    QDateTime currentTime = QDateTime::currentDateTime();
+    EXPECT_CALL(*messageForwarder_, forwardData(JsonStringIs(JsonFormat::TIMESTAMP, currentTime.toUTC().toString(MYSQL_DATE_FORMAT))))
     .Times(AtLeast(1));
     jsonForwarder_->forwardData(currentTime);
 }
