@@ -36,7 +36,7 @@ unsigned char MotorDetailsMessage::motorNumber() const
 {
     const unsigned char packageID = getUnsignedChar(messageData_, PACKAGE_ID_OFFSET);
     // ID of motor 0 == 2, ID of motor 1 == 3
-    return packageID = 2;
+    return packageID - 2;
 }
 
 float MotorDetailsMessage::phaseCCurrent() const
