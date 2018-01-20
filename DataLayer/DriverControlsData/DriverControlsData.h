@@ -17,7 +17,6 @@ public:
     bool getSignalLeft() const;
     bool getHazard() const;
     bool getInterior() const;
-    bool getAux() const;
     bool getVolumeUp() const;
     bool getVolumeDown() const;
     bool getNextSong() const;
@@ -28,6 +27,7 @@ public:
     bool getPushToTalk() const;
     bool getHorn() const;
     bool getReset() const;
+    bool getAux() const;
     unsigned short getAcceleration() const;
     unsigned short getRegenBraking() const;
 

@@ -45,14 +45,14 @@ public:
     bool m0BusCurrentLimit() const;
     bool m0BusVoltageUpperLimit() const;
     bool m0BusVoltageLowerLimit() const;
-    bool m0IpmOrMotorTelemetryLimit() const;
+    bool m0IpmOrMotorTemperatureLimit() const;
     bool m1OutputVoltagePwmLimit() const;
     bool m1MotorCurrentLimit() const;
     bool m1VelocityLimit() const;
     bool m1BusCurrentLimit() const;
     bool m1BusVoltageUpperLimit() const;
     bool m1BusVoltageLowerLimit() const;
-    bool m1IpmOrMotorTelemetryLimit() const;
+    bool m1IpmOrMotorTemperatureLimit() const;
 
     /* MotorFaults Sets */
     void setM0ErrorFlags(const unsigned char& m0ErrorFlags);

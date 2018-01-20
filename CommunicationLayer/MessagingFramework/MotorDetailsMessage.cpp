@@ -15,17 +15,16 @@ namespace
     const int MOTOR_VOLTAGE_IMAGINARY_OFFSET = 13;
     const int MOTOR_CURRENT_REAL_OFFSET = 17;
     const int MOTOR_CURRENT_IMAGINARY_OFFSET = 21;
-    const int BACK_EMF_REAL_OFFSET = 25;
-    const int BACK_EMF_IMAGINARY_OFFSET = 29;
-    const int VOLTAGE_RAIL_SUPPPLY_15_V_OFFSET = 33;
-    const int VOLTAGE_RAIL_SUPPLY_33_V_OFFSET = 37;
-    const int VOLTAGE_RAIL_SUPPLY_19_V_OFFSET = 41;
-    const int HEAT_SINK_TEMPERATURE_OFFSET = 45;
-    const int MOTOR_TEMPTERATURE_OFFSET = 49;
-    const int DSP_BOARD_TEMPERATURE_OFFSET = 53;
-    const int DC_BUS_AMP_HOURS_OFFSET = 57;
-    const int ODOMETER_OFFSET = 61;
-    const int SLIP_SPEED_OFFSET = 65;
+    const int BACK_EMF_OFFSET = 25;
+    const int VOLTAGE_RAIL_SUPPPLY_15_V_OFFSET = 29;
+    const int VOLTAGE_RAIL_SUPPLY_33_V_OFFSET = 33;
+    const int VOLTAGE_RAIL_SUPPLY_19_V_OFFSET = 37;
+    const int HEAT_SINK_TEMPERATURE_OFFSET = 41;
+    const int MOTOR_TEMPERATURE_OFFSET = 45;
+    const int DSP_BOARD_TEMPERATURE_OFFSET = 49;
+    const int DC_BUS_AMP_HOURS_OFFSET = 53;
+    const int ODOMETER_OFFSET = 57;
+    const int SLIP_SPEED_OFFSET = 61;
 }
 
 MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData)
@@ -37,7 +36,7 @@ unsigned char MotorDetailsMessage::motorNumber() const
 {
     const unsigned char packageID = getUnsignedChar(messageData_, PACKAGE_ID_OFFSET);
     // ID of motor 0 == 2, ID of motor 1 == 3
-    return packageID - 2;
+    return packageID = 2;
 }
 
 float MotorDetailsMessage::phaseCCurrent() const
@@ -70,14 +69,9 @@ float MotorDetailsMessage::motorCurrentImaginary() const
     return MessageDecodingHelpers::getFloat(messageData_, MOTOR_CURRENT_IMAGINARY_OFFSET);
 }
 
-float MotorDetailsMessage::backEmfReal() const
+float MotorDetailsMessage::backEmf() const
 {
-    return MessageDecodingHelpers::getFloat(messageData_, BACK_EMF_REAL_OFFSET);
-}
-
-float MotorDetailsMessage::backEmfImaginary() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, BACK_EMF_IMAGINARY_OFFSET);
+    return MessageDecodingHelpers::getFloat(messageData_, BACK_EMF_OFFSET);
 }
 
 float MotorDetailsMessage::voltageRailSuppply15V() const
@@ -100,9 +94,9 @@ float MotorDetailsMessage::heatSinkTemperature() const
     return MessageDecodingHelpers::getFloat(messageData_, HEAT_SINK_TEMPERATURE_OFFSET);
 }
 
-float MotorDetailsMessage::motorTempterature() const
+float MotorDetailsMessage::motorTemperature() const
 {
-    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_TEMPTERATURE_OFFSET);
+    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_TEMPERATURE_OFFSET);
 }
 
 float MotorDetailsMessage::dspBoardTemperature() const
@@ -141,13 +135,12 @@ QString MotorDetailsMessage::toString() const
     messageString += QString::number(motorVoltageImaginary()) + ", ";
     messageString += QString::number(motorCurrentReal()) + ", ";
     messageString += QString::number(motorCurrentImaginary()) + ", ";
-    messageString += QString::number(backEmfReal()) + ", ";
-    messageString += QString::number(backEmfImaginary()) + ", ";
+    messageString += QString::number(backEmf()) + ", ";
     messageString += QString::number(voltageRailSuppply15V()) + ", ";
     messageString += QString::number(voltageRailSupply33V()) + ", ";
     messageString += QString::number(voltageRailSupply19V()) + ", ";
     messageString += QString::number(heatSinkTemperature()) + ", ";
-    messageString += QString::number(motorTempterature()) + ", ";
+    messageString += QString::number(motorTemperature()) + ", ";
     messageString += QString::number(dspBoardTemperature()) + ", ";
     messageString += QString::number(dcBusAmpHours()) + ", ";
     messageString += QString::number(odometer()) + ", ";

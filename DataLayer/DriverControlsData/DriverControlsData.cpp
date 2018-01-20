@@ -10,11 +10,10 @@ namespace
     const unsigned char HAZARD_OFFSET = 0x20;
     const unsigned char INTERIOR_OFFSET = 0x40;
 
-    const unsigned char AUX_OFFSET = 0x1;
-    const unsigned char VOLUME_UP_OFFSET = 0x2;
-    const unsigned char VOLUME_DOWN_OFFSET = 0x4;
-    const unsigned char NEXT_SONG_OFFSET = 0x8;
-    const unsigned char PREVIOUS_SONG_OFFSET = 0x10;
+    const unsigned char VOLUME_UP_OFFSET = 0x1;
+    const unsigned char VOLUME_DOWN_OFFSET = 0x2;
+    const unsigned char NEXT_SONG_OFFSET = 0x4;
+    const unsigned char PREVIOUS_SONG_OFFSET = 0x8;
 
     const unsigned char BRAKES_OFFSET = 0x1;
     const unsigned char FORWARD_OFFSET = 0x2;
@@ -22,6 +21,7 @@ namespace
     const unsigned char PUSH_TO_TALK_OFFSET = 0x8;
     const unsigned char HORN_OFFSET = 0x10;
     const unsigned char RESET_OFFSET = 0x20;
+    const unsigned char AUX_OFFSET = 0x40;
 }
 
 DriverControlsData::DriverControlsData()
@@ -80,11 +80,6 @@ bool DriverControlsData::getInterior() const
     return static_cast<bool>(lightsInputs_ & INTERIOR_OFFSET);
 }
 
-bool DriverControlsData::getAux() const
-{
-    return static_cast<bool>(musicInputs_ & AUX_OFFSET);
-}
-
 bool DriverControlsData::getVolumeUp() const
 {
     return static_cast<bool>(musicInputs_ & VOLUME_UP_OFFSET);
@@ -133,6 +128,10 @@ bool DriverControlsData::getHorn() const
 bool DriverControlsData::getReset() const
 {
     return static_cast<bool>(driverInputs_ & RESET_OFFSET);
+}
+bool DriverControlsData::getAux() const
+{
+    return static_cast<bool>(driverInputs_ & AUX_OFFSET);
 }
 
 unsigned short DriverControlsData::getAcceleration() const

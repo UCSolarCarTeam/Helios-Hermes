@@ -18,7 +18,6 @@ public:
     virtual bool getSignalLeft() const = 0;
     virtual bool getHazard() const = 0;
     virtual bool getInterior() const = 0;
-    virtual bool getAux() const = 0;
     virtual bool getVolumeUp() const = 0;
     virtual bool getVolumeDown() const = 0;
     virtual bool getNextSong() const = 0;
@@ -29,6 +28,7 @@ public:
     virtual bool getPushToTalk() const = 0;
     virtual bool getHorn() const = 0;
     virtual bool getReset() const = 0;
+    virtual bool getAux() const = 0;
     virtual unsigned short getAcceleration() const = 0;
     virtual unsigned short getRegenBraking() const = 0;
 
