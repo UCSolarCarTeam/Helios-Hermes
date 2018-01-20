@@ -24,7 +24,7 @@ int MessageDefines::getLengthForMessage(MessageDefines::Type type)
 
         case DRIVER_CONTROLS:
             return DRIVER_CONTROLS_DATA_LENGTH;
-        
+
         case KEY_MOTOR:
             return KEY_MOTOR_DATA_LENGTH;
 
