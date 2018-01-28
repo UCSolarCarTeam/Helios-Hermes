@@ -174,8 +174,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     const float M0_MOTOR_VOLTAGE_IMAGINARY_VAL = 4;
     const float M0_MOTOR_CURRENT_REAL_VAL = 5;
     const float M0_MOTOR_CURRENT_IMAGINARY_VAL = 6;
-    const float M0_BACK_EMF_REAL_VAL = 7;
-    const float M0_BACK_EMF_IMAGINARY_VAL = 8;
+    const float M0_BACK_EMF_VAL = 7;
     const float M0_VOLTAGE_RAIL_15V_SUPPLY_VAL = 9;
     const float M0_VOLTAGE_RAIL_3V_SUPPLY_VAL = 10;
     const float M0_VOLTAGE_RAIL_1V_SUPPLY_VAL = 11;
@@ -192,8 +191,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     const float M1_MOTOR_VOLTAGE_IMAGINARY_VAL = 21;
     const float M1_MOTOR_CURRENT_REAL_VAL = 22;
     const float M1_MOTOR_CURRENT_IMAGINARY_VAL = 23;
-    const float M1_BACK_EMF_REAL_VAL = 24;
-    const float M1_BACK_EMF_IMAGINARY_VAL = 25;
+    const float M1_BACK_EMF_VAL = 24;
     const float M1_VOLTAGE_RAIL_15V_SUPPLY_VAL = 26;
     const float M1_VOLTAGE_RAIL_3V_SUPPLY_VAL = 27;
     const float M1_VOLTAGE_RAIL_1V_SUPPLY_VAL = 28;
@@ -218,10 +216,8 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M0_MOTOR_CURRENT_REAL_VAL));
     ON_CALL(mockMotorDetailsUnit_0, getMotorCurrentImaginary())
     .WillByDefault(Return(M0_MOTOR_CURRENT_IMAGINARY_VAL));
-    ON_CALL(mockMotorDetailsUnit_0, getBackEmfReal())
-    .WillByDefault(Return(M0_BACK_EMF_REAL_VAL));
-    ON_CALL(mockMotorDetailsUnit_0, getBackEmfImaginary())
-    .WillByDefault(Return(M0_BACK_EMF_IMAGINARY_VAL));
+    ON_CALL(mockMotorDetailsUnit_0, getBackEmf())
+    .WillByDefault(Return(M0_BACK_EMF_VAL));
     ON_CALL(mockMotorDetailsUnit_0, getVoltageRailSuppply15V())
     .WillByDefault(Return(M0_VOLTAGE_RAIL_15V_SUPPLY_VAL));
     ON_CALL(mockMotorDetailsUnit_0, getVoltageRailSupply33V())
@@ -230,7 +226,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M0_VOLTAGE_RAIL_1V_SUPPLY_VAL));
     ON_CALL(mockMotorDetailsUnit_0, getHeatSinkTemperature())
     .WillByDefault(Return(M0_HEAT_SINK_TEMP_VAL));
-    ON_CALL(mockMotorDetailsUnit_0, getMotorTempterature())
+    ON_CALL(mockMotorDetailsUnit_0, getMotorTemperature())
     .WillByDefault(Return(M0_MOTOR_TEMP__VAL));
     ON_CALL(mockMotorDetailsUnit_0, getDspBoardTemperature())
     .WillByDefault(Return(M0_DSP_BOARD_TEMP_VAL));
@@ -255,10 +251,8 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M1_MOTOR_CURRENT_REAL_VAL));
     ON_CALL(mockMotorDetailsUnit_1, getMotorCurrentImaginary())
     .WillByDefault(Return(M1_MOTOR_CURRENT_IMAGINARY_VAL));
-    ON_CALL(mockMotorDetailsUnit_1, getBackEmfReal())
-    .WillByDefault(Return(M1_BACK_EMF_REAL_VAL));
-    ON_CALL(mockMotorDetailsUnit_1, getBackEmfImaginary())
-    .WillByDefault(Return(M1_BACK_EMF_IMAGINARY_VAL));
+    ON_CALL(mockMotorDetailsUnit_1, getBackEmf())
+    .WillByDefault(Return(M1_BACK_EMF_VAL));
     ON_CALL(mockMotorDetailsUnit_1, getVoltageRailSuppply15V())
     .WillByDefault(Return(M1_VOLTAGE_RAIL_15V_SUPPLY_VAL));
     ON_CALL(mockMotorDetailsUnit_1, getVoltageRailSupply33V())
@@ -267,7 +261,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M1_VOLTAGE_RAIL_1V_SUPPLY_VAL));
     ON_CALL(mockMotorDetailsUnit_1, getHeatSinkTemperature())
     .WillByDefault(Return(M1_HEAT_SINK_TEMP_VAL));
-    ON_CALL(mockMotorDetailsUnit_1, getMotorTempterature())
+    ON_CALL(mockMotorDetailsUnit_1, getMotorTemperature())
     .WillByDefault(Return(M1_MOTOR_TEMP_VAL));
     ON_CALL(mockMotorDetailsUnit_1, getDspBoardTemperature())
     .WillByDefault(Return(M1_DSP_BOARD_TEMP_VAL));
@@ -557,7 +551,7 @@ TEST(JsonMessageBuilderTest, motorFaults)
     .WillByDefault(Return(M0_BUS_VOLTAGE_UPPER));
     ON_CALL(mockMotorFaultsData, m0BusVoltageLowerLimit())
     .WillByDefault(Return(M0_BUS_VOLTAGE_LOWER));
-    ON_CALL(mockMotorFaultsData, m0IpmOrMotorTelemetryLimit())
+    ON_CALL(mockMotorFaultsData, m0IpmOrMotorTemperatureLimit())
     .WillByDefault(Return(M0_IPM_OR_MOTOR_TEMPERATURE));
 
     ON_CALL(mockMotorFaultsData, m1OutputVoltagePwmLimit())
@@ -572,7 +566,7 @@ TEST(JsonMessageBuilderTest, motorFaults)
     .WillByDefault(Return(M1_BUS_VOLTAGE_UPPER));
     ON_CALL(mockMotorFaultsData, m1BusVoltageLowerLimit())
     .WillByDefault(Return(M1_BUS_VOLTAGE_LOWER));
-    ON_CALL(mockMotorFaultsData, m1IpmOrMotorTelemetryLimit())
+    ON_CALL(mockMotorFaultsData, m1IpmOrMotorTemperatureLimit())
     .WillByDefault(Return(M1_IPM_OR_MOTOR_TEMPERATURE));
 
     QJsonArray ACTUAL_JSON_ARRAY =

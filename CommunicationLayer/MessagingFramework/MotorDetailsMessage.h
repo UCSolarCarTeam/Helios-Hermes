@@ -15,13 +15,12 @@ public:
     float motorVoltageImaginary() const;
     float motorCurrentReal() const;
     float motorCurrentImaginary() const;
-    float backEmfReal() const;
-    float backEmfImaginary() const;
+    float backEmf() const;
     float voltageRailSuppply15V() const;
     float voltageRailSupply33V() const;
     float voltageRailSupply19V() const;
     float heatSinkTemperature() const;
-    float motorTempterature() const;
+    float motorTemperature() const;
     float dspBoardTemperature() const;
     float dcBusAmpHours() const;
     float odometer() const;

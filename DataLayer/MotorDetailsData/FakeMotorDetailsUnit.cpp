@@ -45,14 +45,9 @@ float FakeMotorDetailsUnit::getMotorCurrentImaginary() const
     return 6;
 }
 
-float FakeMotorDetailsUnit::getBackEmfReal() const
+float FakeMotorDetailsUnit::getBackEmf() const
 {
     return 7;
-}
-
-float FakeMotorDetailsUnit::getBackEmfImaginary() const
-{
-    return 8;
 }
 
 float FakeMotorDetailsUnit::getVoltageRailSuppply15V() const
@@ -75,7 +70,7 @@ float FakeMotorDetailsUnit::getHeatSinkTemperature() const
     return 12;
 }
 
-float FakeMotorDetailsUnit::getMotorTempterature() const
+float FakeMotorDetailsUnit::getMotorTemperature() const
 {
     return 13;
 }
@@ -108,13 +103,12 @@ void FakeMotorDetailsUnit::setMotorVoltageReal(const float& motorVoltageReal) {}
 void FakeMotorDetailsUnit::setMotorVoltageImaginary(const float& motorVoltageImaginary) {}
 void FakeMotorDetailsUnit::setMotorCurrentReal(const float& motorCurrentReal) {}
 void FakeMotorDetailsUnit::setMotorCurrentImaginary(const float& motorCurrentImaginary) {}
-void FakeMotorDetailsUnit::setBackEmfReal(const float& backEmfReal) {}
-void FakeMotorDetailsUnit::setBackEmfImaginary(const float& backEmfImaginary) {}
+void FakeMotorDetailsUnit::setBackEmf(const float& backEmf) {}
 void FakeMotorDetailsUnit::setVoltageRailSuppply15V(const float& voltageRailSuppply15V) {}
 void FakeMotorDetailsUnit::setVoltageRailSupply33V(const float& voltageRailSupply33V) {}
 void FakeMotorDetailsUnit::setVoltageRailSupply19V(const float& voltageRailSupply19V) {}
 void FakeMotorDetailsUnit::setHeatSinkTemperature(const float& heatSinkTemperature) {}
-void FakeMotorDetailsUnit::setMotorTempterature(const float& motorTempterature) {}
+void FakeMotorDetailsUnit::setMotorTemperature(const float& motorTemperature) {}
 void FakeMotorDetailsUnit::setDspBoardTemperature(const float& dspBoardTemperature) {}
 void FakeMotorDetailsUnit::setDcBusAmpHours(const float& dcBusAmpHours) {}
 void FakeMotorDetailsUnit::setOdometer(const float& odometer) {}

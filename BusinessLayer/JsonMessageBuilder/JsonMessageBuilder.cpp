@@ -140,7 +140,6 @@ QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControl
     driverControlsJson[JsonFormat::SIGNAL_LEFT] = data.getSignalLeft();
     driverControlsJson[JsonFormat::HAZARD] = data.getHazard();
     driverControlsJson[JsonFormat::INTERIOR] = data.getInterior();
-    driverControlsJson[JsonFormat::AUX] = data.getAux();
     driverControlsJson[JsonFormat::VOLUME_UP] = data.getVolumeUp();
     driverControlsJson[JsonFormat::VOLUME_DOWN] = data.getVolumeDown();
     driverControlsJson[JsonFormat::NEXT_SONG] = data.getNextSong();
@@ -151,6 +150,7 @@ QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControl
     driverControlsJson[JsonFormat::PUSH_TO_TALK] = data.getPushToTalk();
     driverControlsJson[JsonFormat::HORN] = data.getHorn();
     driverControlsJson[JsonFormat::RESET] = data.getReset();
+    driverControlsJson[JsonFormat::AUX] = data.getAux();
     driverControlsJson[JsonFormat::ACCELERATION] = float(data.getAcceleration()) / 10000;
     driverControlsJson[JsonFormat::REGEN_BRAKING] = float(data.getRegenBraking()) / 10000;
 
@@ -227,13 +227,12 @@ QJsonArray JsonMessageBuilder::buildMotorDetailsMessage(const I_MotorDetailsData
         motorDetailsJsonUnit[JsonFormat::MOTOR_VOLTAGE_IMAGINARY] = motorDetailsUnit.getMotorVoltageImaginary();
         motorDetailsJsonUnit[JsonFormat::MOTOR_CURRENT_REAL] = motorDetailsUnit.getMotorCurrentReal();
         motorDetailsJsonUnit[JsonFormat::MOTOR_CURRENT_IMAGINARY] = motorDetailsUnit.getMotorCurrentImaginary();
-        motorDetailsJsonUnit[JsonFormat::BACK_EMF] = motorDetailsUnit.getBackEmfReal();
-        // motorDetailsJsonUnit[JsonFormat::BACK_EMF_IMAGINARY] = motorDetailsUnit.getBackEmfImaginary(); // mistake made in original protcol, should ignore this
+        motorDetailsJsonUnit[JsonFormat::BACK_EMF] = motorDetailsUnit.getBackEmf();
         motorDetailsJsonUnit[JsonFormat::VOLTAGE_RAIL_15V_SUPPLY] = motorDetailsUnit.getVoltageRailSuppply15V();
         motorDetailsJsonUnit[JsonFormat::VOLTAGE_RAIL_3V_SUPPLY] = motorDetailsUnit.getVoltageRailSupply33V();
         motorDetailsJsonUnit[JsonFormat::VOLTAGE_RAIL_1V_SUPPLY] = motorDetailsUnit.getVoltageRailSupply19V();
         motorDetailsJsonUnit[JsonFormat::HEAT_SINK_TEMP] = motorDetailsUnit.getHeatSinkTemperature();
-        motorDetailsJsonUnit[JsonFormat::MOTOR_TEMP] = motorDetailsUnit.getMotorTempterature();
+        motorDetailsJsonUnit[JsonFormat::MOTOR_TEMP] = motorDetailsUnit.getMotorTemperature();
         motorDetailsJsonUnit[JsonFormat::DSP_BOARD_TEMP] = motorDetailsUnit.getDspBoardTemperature();
         motorDetailsJsonUnit[JsonFormat::DC_BUS_AMP_HOURS] = motorDetailsUnit.getDcBusAmpHours();
         motorDetailsJsonUnit[JsonFormat::ODOMETER_] = motorDetailsUnit.getOdometer();
@@ -280,7 +279,7 @@ QJsonArray JsonMessageBuilder::buildMotorFaultsMessage(const I_MotorFaultsData& 
     m0LimitsFlagsJson[JsonFormat::BUS_CURRENT] = data.m0BusCurrentLimit();
     m0LimitsFlagsJson[JsonFormat::BUS_VOLTAGE_UPPER] = data.m0BusVoltageUpperLimit();
     m0LimitsFlagsJson[JsonFormat::BUS_VOLTAGE_LOWER] = data.m0BusVoltageLowerLimit();
-    m0LimitsFlagsJson[JsonFormat::IPM_OR_MOTOR_TEMPERATURE] = data.m0IpmOrMotorTelemetryLimit();
+    m0LimitsFlagsJson[JsonFormat::IPM_OR_MOTOR_TEMPERATURE] = data.m0IpmOrMotorTemperatureLimit();
     motor0FaultsJson[JsonFormat::LIMITS_FLAGS] = m0LimitsFlagsJson;
 
     QJsonObject m1LimitsFlagsJson = QJsonObject();
@@ -290,7 +289,7 @@ QJsonArray JsonMessageBuilder::buildMotorFaultsMessage(const I_MotorFaultsData& 
     m1LimitsFlagsJson[JsonFormat::BUS_CURRENT] = data.m1BusCurrentLimit();
     m1LimitsFlagsJson[JsonFormat::BUS_VOLTAGE_UPPER] = data.m1BusVoltageUpperLimit();
     m1LimitsFlagsJson[JsonFormat::BUS_VOLTAGE_LOWER] = data.m1BusVoltageLowerLimit();
-    m1LimitsFlagsJson[JsonFormat::IPM_OR_MOTOR_TEMPERATURE] = data.m1IpmOrMotorTelemetryLimit();
+    m1LimitsFlagsJson[JsonFormat::IPM_OR_MOTOR_TEMPERATURE] = data.m1IpmOrMotorTemperatureLimit();
     motor1FaultsJson[JsonFormat::LIMITS_FLAGS] = m1LimitsFlagsJson;
 
     motor0FaultsJson[JsonFormat::RX_ERROR_COUNT] = data.getM0CanRxErrorCount();

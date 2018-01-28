@@ -8,7 +8,7 @@ namespace
 {
     const int BMU_ALIVE_OFFSET = 1;
     const int BMS_RELAY_STATUS_OFFSET = 2;
-    const int POPULATED_CELSS_OFFSET = 3;
+    const int POPULATED_CELLS_OFFSET = 3;
     const int INPUT_VOLTAGE_12V_OFFSET = 4;
     const int FAN_VOLTAGE_OFFSET = 8;
     const int PACK_CURRENT_OFFSET = 12;
@@ -27,11 +27,11 @@ namespace
     const int LOW_CELL_VOLTAGE_OFFSET = 40;
     const int LOW_CELL_VOLTAGE_ID_OFFSET = 42;
     const int HIGH_CELL_VOLTAGE_OFFSET = 43;
-    const int HIGH_CELL_VOLTAGE_ID_OFFSET = 46;
-    const int AVERAGE_CELL_VOLTAGE_OFFSET = 47;
-    const int PRECHARGE_STATE_OFFSET = 49;
-    const int AUX_VOLTAGE_OFFSET = 50;
-    const int AUX_BMS_ALIVE_OFFSET = 51;
+    const int HIGH_CELL_VOLTAGE_ID_OFFSET = 45;
+    const int AVERAGE_CELL_VOLTAGE_OFFSET = 46;
+    const int PRECHARGE_STATE_OFFSET = 48;
+    const int AUX_VOLTAGE_OFFSET = 49;
+    const int AUX_BMS_ALIVE_OFFSET = 50;
 }
 
 BatteryMessage::BatteryMessage(const QByteArray& messageData)
@@ -51,7 +51,7 @@ unsigned char BatteryMessage::bmsRelayStatus() const
 
 unsigned char BatteryMessage::populatedCells() const
 {
-    return getUnsignedChar(messageData_, POPULATED_CELSS_OFFSET);
+    return getUnsignedChar(messageData_, POPULATED_CELLS_OFFSET);
 }
 
 float BatteryMessage::inputVoltage12V() const

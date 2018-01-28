@@ -192,7 +192,7 @@ bool MotorFaultsData::m0BusVoltageLowerLimit() const
     return static_cast<bool>(m0LimitFlags_ & BUS_VOLTAGE_LOWER_LIMIT_FLAG);
 }
 
-bool MotorFaultsData::m0IpmOrMotorTelemetryLimit() const
+bool MotorFaultsData::m0IpmOrMotorTemperatureLimit() const
 {
     return static_cast<bool>(m0LimitFlags_ & IPM_OR_MOTOR_TELEMETRY_LIMIT_FLAG);
 }
@@ -227,7 +227,7 @@ bool MotorFaultsData::m1BusVoltageLowerLimit() const
     return static_cast<bool>(m1LimitFlags_ & BUS_VOLTAGE_LOWER_LIMIT_FLAG);
 }
 
-bool MotorFaultsData::m1IpmOrMotorTelemetryLimit() const
+bool MotorFaultsData::m1IpmOrMotorTemperatureLimit() const
 {
     return static_cast<bool>(m1LimitFlags_ & IPM_OR_MOTOR_TELEMETRY_LIMIT_FLAG);
 }

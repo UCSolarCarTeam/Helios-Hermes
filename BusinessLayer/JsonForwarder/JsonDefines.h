@@ -47,7 +47,6 @@ namespace JsonFormat
     const QString SIGNAL_LEFT = "SignalLeft";
     const QString HAZARD = "Hazard";
     const QString INTERIOR = "Interior";
-    const QString AUX = "Aux";
     const QString VOLUME_UP = "VolumeUp";
     const QString VOLUME_DOWN = "VolumeDown";
     const QString NEXT_SONG = "NextSong";
@@ -58,6 +57,7 @@ namespace JsonFormat
     const QString PUSH_TO_TALK = "PushToTalk";
     const QString HORN = "Horn";
     const QString RESET = "Reset";
+    const QString AUX = "Aux";
     const QString ACCELERATION = "Acceleration";
     const QString REGEN_BRAKING = "RegenBraking";
 

@@ -16,13 +16,12 @@ void MotorDetailsPopulator::populateData(const MotorDetailsMessage message)
     motorDetailsUnit.setMotorVoltageImaginary(message.motorVoltageImaginary());
     motorDetailsUnit.setMotorCurrentReal(message.motorCurrentReal());
     motorDetailsUnit.setMotorCurrentImaginary(message.motorCurrentImaginary());
-    motorDetailsUnit.setBackEmfReal(message.backEmfReal());
-    motorDetailsUnit.setBackEmfImaginary(message.backEmfImaginary());
+    motorDetailsUnit.setBackEmf(message.backEmf());
     motorDetailsUnit.setVoltageRailSuppply15V(message.voltageRailSuppply15V());
     motorDetailsUnit.setVoltageRailSupply33V(message.voltageRailSupply33V());
     motorDetailsUnit.setVoltageRailSupply19V(message.voltageRailSupply19V());
     motorDetailsUnit.setHeatSinkTemperature(message.heatSinkTemperature());
-    motorDetailsUnit.setMotorTempterature(message.motorTempterature());
+    motorDetailsUnit.setMotorTemperature(message.motorTemperature());
     motorDetailsUnit.setDspBoardTemperature(message.dspBoardTemperature());
     motorDetailsUnit.setDcBusAmpHours(message.dcBusAmpHours());
     motorDetailsUnit.setOdometer(message.odometer());

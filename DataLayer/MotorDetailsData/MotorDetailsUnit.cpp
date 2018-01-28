@@ -9,13 +9,12 @@ MotorDetailsUnit::MotorDetailsUnit()
     , motorVoltageImaginary_(0)
     , motorCurrentReal_(0)
     , motorCurrentImaginary_(0)
-    , backEmfReal_(0)
-    , backEmfImaginary_(0)
+    , backEmf_(0)
     , voltageRailSuppply15V_(0)
     , voltageRailSupply33V_(0)
     , voltageRailSupply19V_(0)
     , heatSinkTemperature_(0)
-    , motorTempterature_(0)
+    , motorTemperature_(0)
     , dspBoardTemperature_(0)
     , dcBusAmpHours_(0)
     , odometer_(0)
@@ -64,14 +63,9 @@ float MotorDetailsUnit::getMotorCurrentImaginary() const
     return motorCurrentImaginary_;
 }
 
-float MotorDetailsUnit::getBackEmfReal() const
+float MotorDetailsUnit::getBackEmf() const
 {
-    return backEmfReal_;
-}
-
-float MotorDetailsUnit::getBackEmfImaginary() const
-{
-    return backEmfImaginary_;
+    return backEmf_;
 }
 
 float MotorDetailsUnit::getVoltageRailSuppply15V() const
@@ -94,9 +88,9 @@ float MotorDetailsUnit::getHeatSinkTemperature() const
     return heatSinkTemperature_;
 }
 
-float MotorDetailsUnit::getMotorTempterature() const
+float MotorDetailsUnit::getMotorTemperature() const
 {
-    return motorTempterature_;
+    return motorTemperature_;
 }
 
 float MotorDetailsUnit::getDspBoardTemperature() const
@@ -157,16 +151,10 @@ void MotorDetailsUnit::setMotorCurrentImaginary(const float& motorCurrentImagina
     emit motorCurrentImaginaryReceived(motorCurrentImaginary_);
 }
 
-void MotorDetailsUnit::setBackEmfReal(const float& backEmfReal)
+void MotorDetailsUnit::setBackEmf(const float& backEmf)
 {
-    backEmfReal_ = backEmfReal;
-    emit backEmfRealReceived(backEmfReal_);
-}
-
-void MotorDetailsUnit::setBackEmfImaginary(const float& backEmfImaginary)
-{
-    backEmfImaginary_ = backEmfImaginary;
-    emit backEmfImaginaryReceived(backEmfImaginary_);
+    backEmf_ = backEmf;
+    emit backEmfReceived(backEmf_);
 }
 
 void MotorDetailsUnit::setVoltageRailSuppply15V(const float& voltageRailSuppply15V)
@@ -193,10 +181,10 @@ void MotorDetailsUnit::setHeatSinkTemperature(const float& heatSinkTemperature)
     emit heatSinkTemperatureReceived(heatSinkTemperature_);
 }
 
-void MotorDetailsUnit::setMotorTempterature(const float& motorTempterature)
+void MotorDetailsUnit::setMotorTemperature(const float& motorTemperature)
 {
-    motorTempterature_ = motorTempterature;
-    emit motorTempteratureReceived(motorTempterature_);
+    motorTemperature_ = motorTemperature;
+    emit motorTemperatureReceived(motorTemperature_);
 }
 
 void MotorDetailsUnit::setDspBoardTemperature(const float& dspBoardTemperature)

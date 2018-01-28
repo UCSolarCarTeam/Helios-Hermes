@@ -38,14 +38,14 @@ public:
     MOCK_CONST_METHOD0(m0BusCurrentLimit, bool());
     MOCK_CONST_METHOD0(m0BusVoltageUpperLimit, bool());
     MOCK_CONST_METHOD0(m0BusVoltageLowerLimit, bool());
-    MOCK_CONST_METHOD0(m0IpmOrMotorTelemetryLimit, bool());
+    MOCK_CONST_METHOD0(m0IpmOrMotorTemperatureLimit, bool());
     MOCK_CONST_METHOD0(m1OutputVoltagePwmLimit, bool());
     MOCK_CONST_METHOD0(m1MotorCurrentLimit, bool());
     MOCK_CONST_METHOD0(m1VelocityLimit, bool());
     MOCK_CONST_METHOD0(m1BusCurrentLimit, bool());
     MOCK_CONST_METHOD0(m1BusVoltageUpperLimit, bool());
     MOCK_CONST_METHOD0(m1BusVoltageLowerLimit, bool());
-    MOCK_CONST_METHOD0(m1IpmOrMotorTelemetryLimit, bool());
+    MOCK_CONST_METHOD0(m1IpmOrMotorTemperatureLimit, bool());
 
     /* MotorFaults Sets */
     MOCK_METHOD1(setM0ErrorFlags, void(const unsigned char&));

@@ -46,14 +46,14 @@ public:
     virtual bool m0BusCurrentLimit() const = 0;
     virtual bool m0BusVoltageUpperLimit() const = 0;
     virtual bool m0BusVoltageLowerLimit() const = 0;
-    virtual bool m0IpmOrMotorTelemetryLimit() const = 0;
+    virtual bool m0IpmOrMotorTemperatureLimit() const = 0;
     virtual bool m1OutputVoltagePwmLimit() const = 0;
     virtual bool m1MotorCurrentLimit() const = 0;
     virtual bool m1VelocityLimit() const = 0;
     virtual bool m1BusCurrentLimit() const = 0;
     virtual bool m1BusVoltageUpperLimit() const = 0;
     virtual bool m1BusVoltageLowerLimit() const = 0;
-    virtual bool m1IpmOrMotorTelemetryLimit() const = 0;
+    virtual bool m1IpmOrMotorTemperatureLimit() const = 0;
 
     /* MotorFaults Sets */
     virtual void setM0ErrorFlags(const unsigned char& m0ErrorFlags) = 0;
