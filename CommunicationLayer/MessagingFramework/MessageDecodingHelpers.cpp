@@ -38,12 +38,29 @@ namespace
 
 float MessageDecodingHelpers::getFloat(const QByteArray& data, int startIndex)
 {
-    return data.mid(startIndex, numberOfBytesInData(Type::FLOAT)).toFloat();
+    float value;
+
+    QDataStream dataStream(data.mid(startIndex, numberOfBytesInData(Type::FLOAT)));
+
+    dataStream.setByteOrder(QDataStream::LittleEndian);
+    dataStream.setFloatingPointPrecision(QDataStream::SinglePrecision);
+
+    dataStream >> value;
+
+    return value;
 }
 
 unsigned short MessageDecodingHelpers::getUnsignedShort(const QByteArray& data, int startIndex)
 {
-    return data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_SHORT)).toUShort();
+    unsigned short value;
+
+    QDataStream dataStream(data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_SHORT)));
+
+    dataStream.setByteOrder(QDataStream::LittleEndian);
+
+    dataStream >> value;
+
+    return value;
 }
 
 unsigned char MessageDecodingHelpers::getUnsignedChar(const QByteArray& data, int startIndex)
@@ -53,7 +70,14 @@ unsigned char MessageDecodingHelpers::getUnsignedChar(const QByteArray& data, in
 
 unsigned int MessageDecodingHelpers::getUnsignedInt(const QByteArray& data, int startIndex)
 {
-    return data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_INT)).toUInt();
+    unsigned int value;
+
+    QDataStream dataStream(data.mid(startIndex, numberOfBytesInData(Type::UNSIGNED_INT)));
+
+    dataStream.setByteOrder(QDataStream::LittleEndian);
+
+    dataStream >> value;
+    return value;
 }
 
 
