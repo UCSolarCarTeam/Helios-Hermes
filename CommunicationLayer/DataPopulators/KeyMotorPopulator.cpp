@@ -4,7 +4,7 @@ KeyMotorPopulator::KeyMotorPopulator(I_PacketDecoder& packetDecoder, I_KeyMotorD
     : packetDecoder_(packetDecoder)
     , keyMotorData_(keyMotorData)
 {
-    connect(&packetDecoder_, SIGNAL(packetDecoded(const KeyMotorPopulator)), this, SLOT(populateData(const KeyMotorPopulator)));
+    connect(&packetDecoder_, SIGNAL(packetDecoded(const KeyMotorMessage)), this, SLOT(populateData(const KeyMotorMessage)));
 }
 
 void KeyMotorPopulator::populateData(const KeyMotorMessage message)
