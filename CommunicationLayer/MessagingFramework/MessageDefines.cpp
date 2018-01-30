@@ -2,14 +2,14 @@
 
 namespace
 {
-    const int BATTERY_DATA_LENGTH = 55;
-    const int BATTERY_FAULTS_DATA_LENGTH = 10;
-    const int DRIVER_CONTROLS_DATA_LENGTH = 13;
-    const int KEY_MOTOR_DATA_LENGTH = 47;
-    const int LIGHTS_DATA_LENGTH = 7;
-    const int MOTOR_DETAILS_DATA_LENGTH = 73;
-    const int MOTOR_FAULTS_DATA_LENGTH = 13;
-    const int MPPT_DATA_LENGTH = 14;
+    const int BATTERY_DATA_LENGTH = 51;
+    const int BATTERY_FAULTS_DATA_LENGTH = 6;
+    const int DRIVER_CONTROLS_DATA_LENGTH = 9;
+    const int KEY_MOTOR_DATA_LENGTH = 43;
+    const int LIGHTS_DATA_LENGTH = 3;
+    const int MOTOR_DETAILS_DATA_LENGTH = 69;
+    const int MOTOR_FAULTS_DATA_LENGTH = 9;
+    const int MPPT_DATA_LENGTH = 10;
 }
 
 int MessageDefines::getLengthForMessage(MessageDefines::Type type)
