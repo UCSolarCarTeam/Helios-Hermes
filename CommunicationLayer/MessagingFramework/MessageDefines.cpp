@@ -2,6 +2,7 @@
 
 namespace
 {
+    // Message lengths do not include metadata
     const int BATTERY_DATA_LENGTH = 51;
     const int BATTERY_FAULTS_DATA_LENGTH = 6;
     const int DRIVER_CONTROLS_DATA_LENGTH = 9;
