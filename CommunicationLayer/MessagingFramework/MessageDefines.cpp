@@ -8,7 +8,7 @@ namespace
     const int DRIVER_CONTROLS_DATA_LENGTH = 9;
     const int KEY_MOTOR_DATA_LENGTH = 43;
     const int LIGHTS_DATA_LENGTH = 3;
-    const int MOTOR_DETAILS_DATA_LENGTH = 69;
+    const int MOTOR_DETAILS_DATA_LENGTH = 65;
     const int MOTOR_FAULTS_DATA_LENGTH = 9;
     const int MPPT_DATA_LENGTH = 10;
 }
