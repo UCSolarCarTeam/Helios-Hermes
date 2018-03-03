@@ -34,6 +34,9 @@ public:
     unsigned char prechargeState() const;
     unsigned char auxVoltage() const;
     bool auxBmsAlive() const;
+    bool strobeBmsLight() const;
+    bool allowCharge() const;
+    bool contactorError() const;
 
     QString toString() const;
 

@@ -795,6 +795,9 @@ TEST(JsonMessageBuilderTest, battery)
         \"PrechargeState\": \"IDLE\", \
         \"AuxVoltage\": 22, \
         \"AuxBmsAlive\": true \
+        \"StrobeBmsLight\": true \
+        \"AllowCharge\": true \
+        \"ContactorError\": true \
     }";
     // *INDENT-ON*
 
@@ -835,6 +838,9 @@ TEST(JsonMessageBuilderTest, battery)
     const I_BatteryData::PrechargeState PRECHARGE_STATE_VAL = I_BatteryData::PrechargeState::IDLE;
     const unsigned char AUX_VOLTAGE_VAL = 22;
     const bool AUX_BMS_ALIVE_VAL = true;
+    const bool STROBE_BMS_LIGHT_VAL = true;
+    const bool ALLOW_CHARGE_VAL = true;
+    const bool CONTACTOR_ERROR_VAL = true;
 
     ON_CALL(mockBatteryData, getAlive())
     .WillByDefault(Return(ALIVE_VAL));
@@ -902,6 +908,12 @@ TEST(JsonMessageBuilderTest, battery)
     .WillByDefault(Return(AUX_VOLTAGE_VAL));
     ON_CALL(mockBatteryData, getAuxBmsAlive())
     .WillByDefault(Return(AUX_BMS_ALIVE_VAL));
+    ON_CALL(mockBatteryData, getStrobeBmsLight())
+    .WillByDefault(Return(STROBE_BMS_LIGHT_VAL));
+    ON_CALL(mockBatteryData, getAllowCharge())
+    .WillByDefault(Return(ALLOW_CHARGE_VAL));
+    ON_CALL(mockBatteryData, getContactorError())
+    .WillByDefault(Return(CONTACTOR_ERROR_VAL));
 
     QJsonObject ACTUAL_JSON =
         jsonMessageBuilder.buildBatteryMessage(mockBatteryData);

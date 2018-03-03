@@ -32,6 +32,9 @@ namespace
     const int PRECHARGE_STATE_OFFSET = 48;
     const int AUX_VOLTAGE_OFFSET = 49;
     const int AUX_BMS_ALIVE_OFFSET = 50;
+    const int STROBE_BMS_LIGHT_OFFSET = 51;
+    const int ALLOW_CHARGE_OFFSET = 52;
+    const int CONTACTOR_ERROR_OFFSET = 53;
 }
 
 BatteryMessage::BatteryMessage(const QByteArray& messageData)
@@ -167,6 +170,21 @@ bool BatteryMessage::auxBmsAlive() const
     return static_cast<bool>(messageData_.at(AUX_BMS_ALIVE_OFFSET));
 }
 
+bool BatteryMessage::strobeBmsLight() const
+{
+    return static_cast<bool>(messageData_.at(STROBE_BMS_LIGHT_OFFSET));
+}
+
+bool BatteryMessage::allowCharge() const
+{
+    return static_cast<bool>(messageData_.at(ALLOW_CHARGE_OFFSET));
+}
+
+bool BatteryMessage::contactorError() const
+{
+    return static_cast<bool>(messageData_.at(CONTACTOR_ERROR_OFFSET));
+}
+
 QString BatteryMessage::toString() const
 {
     QString messageString;
@@ -197,5 +215,8 @@ QString BatteryMessage::toString() const
     messageString += QString::number(prechargeState()) + ", ";
     messageString += QString::number(auxVoltage()) + ", ";
     messageString += QString::number(auxBmsAlive()) + ", ";
+    messageString += QString::number(strobeBmsLight()) + ", ";
+    messageString += QString::number(allowCharge()) + ", ";
+    messageString += QString::number(contactorError()) + ", ";
     return messageString;
 }

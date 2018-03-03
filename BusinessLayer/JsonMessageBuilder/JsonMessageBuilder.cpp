@@ -76,6 +76,9 @@ QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
 
     batteryJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
     batteryJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
+    batteryJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
+    batteryJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
+    batteryJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
 
     batteryJson[JsonFormat::BMS_RELAY_STATUS_FLAGS] = bmsRelayStatusFlagsJson;
     return batteryJson;

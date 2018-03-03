@@ -39,6 +39,9 @@ BatteryData::BatteryData()
     , prechargeState_(BatteryData::PrechargeState::IDLE)
     , auxVoltage_()
     , auxBmsAlive_(false)
+    , strobeBmsLight_(false)
+    , allowCharge_(false)
+    , contactorError_(false)
 {
     // initialize to 0
 }
@@ -181,6 +184,21 @@ unsigned char BatteryData::getAuxVoltage() const
 bool BatteryData::getAuxBmsAlive() const
 {
     return auxBmsAlive_;
+}
+
+bool BatteryData::getStrobeBmsLight() const
+{
+    return strobeBmsLight_;
+}
+
+bool BatteryData::getAllowCharge() const
+{
+    return allowCharge_;
+}
+
+bool BatteryData::getContactorError() const
+{
+    return contactorError_;
 }
 
 /* BMS relay status getter */
@@ -379,4 +397,22 @@ void BatteryData::setAuxBmsAlive(const bool& auxBmsAlive)
 {
     auxBmsAlive_ = auxBmsAlive;
     emit auxBmsAliveReceived(auxBmsAlive_);
+}
+
+void BatteryData::setStrobeBmsLight(const bool& strobeBmsLight)
+{
+    strobeBmsLight_ = strobeBmsLight;
+    emit strobeBmsLightRecieved(strobeBmsLight_);
+}
+
+void BatteryData::setAllowCharge(const bool& allowCharge)
+{
+    allowCharge_ = allowCharge;
+    emit allowChargeRecieved(allowCharge_);
+}
+
+void BatteryData::setContactorError(const bool& contactorError)
+{
+    contactorError_ = contactorError;
+    emit contactorErrorRecieved(contactorError);
 }
