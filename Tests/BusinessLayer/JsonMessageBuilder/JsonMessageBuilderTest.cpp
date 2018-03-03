@@ -794,9 +794,9 @@ TEST(JsonMessageBuilderTest, battery)
         \"AverageCellVoltage\": 21, \
         \"PrechargeState\": \"IDLE\", \
         \"AuxVoltage\": 22, \
-        \"AuxBmsAlive\": true \
-        \"StrobeBmsLight\": true \
-        \"AllowCharge\": true \
+        \"AuxBmsAlive\": true, \
+        \"StrobeBmsLight\": true, \
+        \"AllowCharge\": true, \
         \"ContactorError\": true \
     }";
     // *INDENT-ON*
