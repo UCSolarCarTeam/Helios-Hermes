@@ -414,5 +414,5 @@ void BatteryData::setAllowCharge(const bool& allowCharge)
 void BatteryData::setContactorError(const bool& contactorError)
 {
     contactorError_ = contactorError;
-    emit contactorErrorRecieved(contactorError);
+    emit contactorErrorRecieved(contactorError_);
 }
