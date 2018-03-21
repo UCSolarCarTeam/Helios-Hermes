@@ -1114,7 +1114,7 @@ TEST(JsonMessageBuilderTest, auxBms)
     .WillByDefault(Return(CONTACTOR_ERROR_VAL));
 
     QJsonObject ACTUAL_JSON =
-            jsonMessageBuilder.buildAuxBMSMessage(mockAuxBmsData);
+        jsonMessageBuilder.buildAuxBMSMessage(mockAuxBmsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 

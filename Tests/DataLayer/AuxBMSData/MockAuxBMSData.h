@@ -14,7 +14,7 @@ public:
     MOCK_CONST_METHOD0(getAllowCharge, bool());
     MOCK_CONST_METHOD0(getContactorError, bool());
 
-     /*AuxBMSData "Sets"*/
+    /*AuxBMSData "Sets"*/
     MOCK_METHOD1(setPrechargeState, void(const unsigned char&));
     MOCK_METHOD1(setAuxVoltage, void(const unsigned char&));
     MOCK_METHOD1(setAuxBmsAlive, void(const bool&));

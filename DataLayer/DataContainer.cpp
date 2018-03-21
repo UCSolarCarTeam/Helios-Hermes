@@ -82,6 +82,6 @@ I_MpptData& DataContainer::mpptData()
     return *mpptData_;
 }
 
-I_AuxBMSData& DataContainer::auxBmsData(){
+I_AuxBMSData& DataContainer::auxBmsData() {
     return *auxBmsData_;
 }
