@@ -15,30 +15,31 @@ JsonMessageBuilder::JsonMessageBuilder()
 {
 }
 
-QJsonObject JsonMessageBuilder::buildAuxBMSMessage(const I_AuxBMSData &data) {
+QJsonObject JsonMessageBuilder::buildAuxBMSMessage(const I_AuxBMSData& data)
+{
     QJsonObject auxBMSJson = QJsonObject();
 
     switch (data.getPrechargeState())
     {
-    case I_AuxBMSData::PrechargeState::IDLE:
-        auxBMSJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
-        break;
+        case I_AuxBMSData::PrechargeState::IDLE:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
+            break;
 
-    case I_AuxBMSData::PrechargeState::PRECHARGE:
-        auxBMSJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
-        break;
+        case I_AuxBMSData::PrechargeState::PRECHARGE:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
+            break;
 
-    case I_AuxBMSData::PrechargeState::MEASURE:
-        auxBMSJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
-        break;
+        case I_AuxBMSData::PrechargeState::MEASURE:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
+            break;
 
-    case I_AuxBMSData::PrechargeState::ENABLE_PACK:
-        auxBMSJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
-        break;
+        case I_AuxBMSData::PrechargeState::ENABLE_PACK:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
+            break;
 
-    case I_AuxBMSData::PrechargeState::RUN:
-        auxBMSJson[JsonFormat::PRECHARGE_STATE] = "RUN";
-        break;
+        case I_AuxBMSData::PrechargeState::RUN:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "RUN";
+            break;
     }
 
     auxBMSJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();

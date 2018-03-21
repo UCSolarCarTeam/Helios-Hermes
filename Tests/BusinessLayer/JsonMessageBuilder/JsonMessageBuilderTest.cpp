@@ -1118,7 +1118,7 @@ TEST(JsonMessageBuilderTest, auxBms)
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 
-    if(HasFailure())
+    if (HasFailure())
     {
         qDebug() << "Actual is " << ACTUAL_JSON;
         qDebug() << "Expected is " << EXPECTED_JSON;

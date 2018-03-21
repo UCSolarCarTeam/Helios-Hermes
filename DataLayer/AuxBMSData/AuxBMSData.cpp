@@ -1,6 +1,7 @@
 #include "AuxBMSData.h"
 
-namespace name {
+namespace name
+{
 
 }
 
