@@ -93,7 +93,7 @@ Then, run the following commands to copy the library over:
 
 5) Configure linker
 
-After adding the library files to /usr.local/lib. The linker needs to be configure with: 
+After adding the library files to `/usr/local/lib`, configure the dynamic linker with SimpleAmqpClient with:
 
 `sudo ldconfig`
 
