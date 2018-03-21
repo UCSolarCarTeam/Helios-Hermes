@@ -32,10 +32,4 @@ void BatteryPopulator::populateData(const BatteryMessage message)
     batteryData_.setHighCellVoltage(message.highCellVoltage());
     batteryData_.setHighCellVoltageId(message.highCellVoltageId());
     batteryData_.setAverageCellVoltage(message.averageCellVoltage());
-    batteryData_.setPrechargeState(message.prechargeState());
-    batteryData_.setAuxVoltage(message.auxVoltage());
-    batteryData_.setAuxBmsAlive(message.auxBmsAlive());
-    batteryData_.setStrobeBmsLight(message.strobeBmsLight());
-    batteryData_.setAllowCharge(message.allowCharge());
-    batteryData_.setContactorError(message.contactorError());
 }

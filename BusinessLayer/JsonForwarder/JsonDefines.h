@@ -151,12 +151,6 @@ namespace JsonFormat
     const QString HIGH_CELL_VOLTAGE = "HighCellVoltage";
     const QString HIGH_CELL_VOLTAGE_ID = "HighCellVoltageId";
     const QString AVERAGE_CELL_VOLTAGE = "AverageCellVoltage";
-    const QString PRECHARGE_STATE = "PrechargeState";
-    const QString AUX_VOLTAGE = "AuxVoltage";
-    const QString AUX_BMS_ALIVE = "AuxBmsAlive";
-    const QString STROBE_BMS_LIGHT = "StrobeBmsLight";
-    const QString ALLOW_CHARGE = "AllowCharge";
-    const QString CONTACTOR_ERROR = "ContactorError";
 
     /* Mppt */
     const QString MPPT = "MPPT";
@@ -174,4 +168,13 @@ namespace JsonFormat
     const QString LIGHTS_RIGHT_SIGNAL = "RightSignal";
     const QString LIGHTS_BMS_STROBE_LIGHT = "BmsStrobeLight";
     const QString LIGHTS_ALIVE = "LightsAlive";
+
+    /* AuxBMS */
+    const QString AUX_BMS = "AuxBMS";
+    const QString PRECHARGE_STATE = "PrechargeState";
+    const QString AUX_VOLTAGE = "AuxVoltage";
+    const QString AUX_BMS_ALIVE = "AuxBmsAlive";
+    const QString STROBE_BMS_LIGHT = "StrobeBmsLight";
+    const QString ALLOW_CHARGE = "AllowCharge";
+    const QString CONTACTOR_ERROR = "ContactorError";
 }

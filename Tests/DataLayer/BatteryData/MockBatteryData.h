@@ -30,12 +30,6 @@ public:
     MOCK_CONST_METHOD0(getHighCellVoltage, unsigned short());
     MOCK_CONST_METHOD0(getHighCellVoltageId, unsigned char());
     MOCK_CONST_METHOD0(getAverageCellVoltage, unsigned short());
-    MOCK_CONST_METHOD0(getPrechargeState, I_BatteryData::PrechargeState());
-    MOCK_CONST_METHOD0(getAuxVoltage, unsigned char());
-    MOCK_CONST_METHOD0(getAuxBmsAlive, bool());
-    MOCK_CONST_METHOD0(getStrobeBmsLight, bool());
-    MOCK_CONST_METHOD0(getAllowCharge, bool());
-    MOCK_CONST_METHOD0(getContactorError, bool());
 
     MOCK_CONST_METHOD0(bmsDischargeRelayEnabled, bool());
     MOCK_CONST_METHOD0(bmsChargeRelayEnabled, bool());
@@ -70,10 +64,4 @@ public:
     MOCK_METHOD1(setHighCellVoltage, void(const unsigned short&));
     MOCK_METHOD1(setHighCellVoltageId, void(const unsigned char&));
     MOCK_METHOD1(setAverageCellVoltage, void(const unsigned short&));
-    MOCK_METHOD1(setPrechargeState, void(const unsigned char&));
-    MOCK_METHOD1(setAuxVoltage, void(const unsigned char&));
-    MOCK_METHOD1(setAuxBmsAlive, void(const bool&));
-    MOCK_METHOD1(setStrobeBmsLight, void(const bool&));
-    MOCK_METHOD1(setAllowCharge, void(const bool&));
-    MOCK_METHOD1(setContactorError, void(const bool&));
 };

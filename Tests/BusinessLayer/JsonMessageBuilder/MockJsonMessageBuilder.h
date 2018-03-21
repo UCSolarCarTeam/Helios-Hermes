@@ -5,6 +5,7 @@
 class MockJsonMessageBuilder : public I_JsonMessageBuilder
 {
 public:
+    MOCK_METHOD1(buildAuxBMSMessage, QJsonObject(const I_AuxBMSData&));
     MOCK_METHOD1(buildBatteryMessage, QJsonObject(const I_BatteryData&));
     MOCK_METHOD1(buildBatteryFaultsMessage, QJsonObject(const I_BatteryFaultsData&));
     MOCK_METHOD1(buildDriverControlsMessage, QJsonObject(const I_DriverControlsData&));

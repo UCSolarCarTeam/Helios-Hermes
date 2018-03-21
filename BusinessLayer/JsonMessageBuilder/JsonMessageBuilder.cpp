@@ -9,9 +9,44 @@
 #include "DataLayer/BatteryData/I_BatteryData.h"
 #include "DataLayer/MpptData/I_MpptData.h"
 #include "DataLayer/LightsData/I_LightsData.h"
+#include "DataLayer/AuxBMSData/I_AuxBMSData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
+}
+
+QJsonObject JsonMessageBuilder::buildAuxBMSMessage(const I_AuxBMSData &data){
+    QJsonObject auxBMSJson = QJsonObject();
+
+    switch (data.getPrechargeState())
+    {
+        case I_AuxBMSData::PrechargeState::IDLE:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
+            break;
+
+        case I_AuxBMSData::PrechargeState::PRECHARGE:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
+            break;
+
+        case I_AuxBMSData::PrechargeState::MEASURE:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
+            break;
+
+        case I_AuxBMSData::PrechargeState::ENABLE_PACK:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
+            break;
+
+        case I_AuxBMSData::PrechargeState::RUN:
+            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "RUN";
+            break;
+    }
+
+    auxBMSJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
+    auxBMSJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
+    auxBMSJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
+    auxBMSJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
+    auxBMSJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
+    return auxBMSJson;
 }
 
 QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
@@ -50,36 +85,6 @@ QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
     batteryJson[JsonFormat::HIGH_CELL_VOLTAGE] = data.getHighCellVoltage();
     batteryJson[JsonFormat::HIGH_CELL_VOLTAGE_ID] = data.getHighCellVoltageId();
     batteryJson[JsonFormat::AVERAGE_CELL_VOLTAGE] = data.getAverageCellVoltage();
-
-    switch (data.getPrechargeState())
-    {
-        case I_BatteryData::PrechargeState::IDLE:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
-            break;
-
-        case I_BatteryData::PrechargeState::PRECHARGE:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
-            break;
-
-        case I_BatteryData::PrechargeState::MEASURE:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
-            break;
-
-        case I_BatteryData::PrechargeState::ENABLE_PACK:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
-            break;
-
-        case I_BatteryData::PrechargeState::RUN:
-            batteryJson[JsonFormat::PRECHARGE_STATE] = "RUN";
-            break;
-    }
-
-    batteryJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
-    batteryJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
-    batteryJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
-    batteryJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
-    batteryJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
-
     batteryJson[JsonFormat::BMS_RELAY_STATUS_FLAGS] = bmsRelayStatusFlagsJson;
     return batteryJson;
 }

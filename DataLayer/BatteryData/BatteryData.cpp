@@ -36,12 +36,6 @@ BatteryData::BatteryData()
     , highCellVoltage_(0)
     , highCellVoltageId_(0)
     , averageCellVoltage_(0)
-    , prechargeState_(BatteryData::PrechargeState::IDLE)
-    , auxVoltage_()
-    , auxBmsAlive_(false)
-    , strobeBmsLight_(false)
-    , allowCharge_(false)
-    , contactorError_(false)
 {
     // initialize to 0
 }
@@ -169,36 +163,6 @@ unsigned char BatteryData::getHighCellVoltageId() const
 unsigned short BatteryData::getAverageCellVoltage() const
 {
     return averageCellVoltage_;
-}
-
-BatteryData::PrechargeState BatteryData::getPrechargeState() const
-{
-    return prechargeState_;
-}
-
-unsigned char BatteryData::getAuxVoltage() const
-{
-    return auxVoltage_;
-}
-
-bool BatteryData::getAuxBmsAlive() const
-{
-    return auxBmsAlive_;
-}
-
-bool BatteryData::getStrobeBmsLight() const
-{
-    return strobeBmsLight_;
-}
-
-bool BatteryData::getAllowCharge() const
-{
-    return allowCharge_;
-}
-
-bool BatteryData::getContactorError() const
-{
-    return contactorError_;
 }
 
 /* BMS relay status getter */
@@ -379,40 +343,4 @@ void BatteryData::setAverageCellVoltage(const unsigned short& averageCellVoltage
 {
     averageCellVoltage_ = averageCellVoltage;
     emit averageCellVoltageReceived(averageCellVoltage_);
-}
-
-void BatteryData::setPrechargeState(const unsigned char& prechargeState)
-{
-    prechargeState_ = static_cast<PrechargeState>(prechargeState);
-    emit prechargeStateReceived(prechargeState_);
-}
-
-void BatteryData::setAuxVoltage(const unsigned char& auxVoltage)
-{
-    auxVoltage_ = auxVoltage;
-    emit auxVoltageReceived(auxVoltage_);
-}
-
-void BatteryData::setAuxBmsAlive(const bool& auxBmsAlive)
-{
-    auxBmsAlive_ = auxBmsAlive;
-    emit auxBmsAliveReceived(auxBmsAlive_);
-}
-
-void BatteryData::setStrobeBmsLight(const bool& strobeBmsLight)
-{
-    strobeBmsLight_ = strobeBmsLight;
-    emit strobeBmsLightRecieved(strobeBmsLight_);
-}
-
-void BatteryData::setAllowCharge(const bool& allowCharge)
-{
-    allowCharge_ = allowCharge;
-    emit allowChargeRecieved(allowCharge_);
-}
-
-void BatteryData::setContactorError(const bool& contactorError)
-{
-    contactorError_ = contactorError;
-    emit contactorErrorRecieved(contactorError_);
 }

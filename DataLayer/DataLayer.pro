@@ -29,7 +29,9 @@ HEADERS += \
    MpptData/MpptData.h \
    MpptData/I_MpptData.h \
    MpptData/I_MpptUnit.h \
-   MpptData/MpptUnit.h
+   MpptData/MpptUnit.h \
+    AuxBMSData/AuxBMSData.h \
+    AuxBMSData/I_AuxBMSData.h
 
 SOURCES += \
    DataContainer.cpp \
@@ -42,4 +44,5 @@ SOURCES += \
    KeyMotorData/KeyMotorData.cpp \
    DriverControlsData/DriverControlsData.cpp \
    MpptData/MpptData.cpp \
-   MpptData/MpptUnit.cpp
+   MpptData/MpptUnit.cpp \
+    AuxBMSData/AuxBMSData.cpp
