@@ -15,7 +15,7 @@
 #include "Tests/InfrastructureLayer/Settings/MockSettings.h"
 #include "Tests/CommunicationLayer/CommDeviceControl/MockMessageForwarder.h"
 #include "Tests/BusinessLayer/JsonMessageBuilder/MockJsonMessageBuilder.h"
-#include "Tests/DataLayer/AuxBMSData/MockAuxBMSData.h"
+#include "Tests/DataLayer/AuxBmsData/MockAuxBmsData.h"
 #include "Tests/DataLayer/BatteryData/MockBatteryData.h"
 #include "Tests/DataLayer/BatteryFaultsData/MockBatteryFaultsData.h"
 #include "Tests/DataLayer/DriverControlsData/MockDriverControlsData.h"
@@ -41,7 +41,7 @@ namespace
 class JsonForwarderTest : public ::testing::Test
 {
 protected:
-    QScopedPointer<MockAuxBMSData> auxBmsData_;
+    QScopedPointer<MockAuxBmsData> auxBmsData_;
     QScopedPointer<MockBatteryData> batteryData_ ;
     QScopedPointer<MockBatteryFaultsData> batteryFaultsData_ ;
     QScopedPointer<MockDriverControlsData> driverControlsData_ ;
@@ -57,7 +57,7 @@ protected:
 
     virtual void SetUp()
     {
-        auxBmsData_.reset(new MockAuxBMSData());
+        auxBmsData_.reset(new MockAuxBmsData());
         batteryData_.reset(new MockBatteryData());
         batteryFaultsData_.reset(new MockBatteryFaultsData());
         driverControlsData_.reset(new MockDriverControlsData());

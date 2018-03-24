@@ -3,10 +3,10 @@
 #include <QByteArray>
 #include <QString>
 
-class AuxBMSMessage
+class AuxBmsMessage
 {
 public:
-    AuxBMSMessage(const QByteArray& messageData);
+    AuxBmsMessage(const QByteArray& messageData);
 
     unsigned char prechargeState() const;
     unsigned char auxVoltage() const;

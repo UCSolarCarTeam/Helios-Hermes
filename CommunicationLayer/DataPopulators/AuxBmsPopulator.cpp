@@ -1,13 +1,13 @@
-#include "AuxBMSPopulator.h"
+#include "AuxBmsPopulator.h"
 
-AuxBMSPopulator::AuxBMSPopulator(I_PacketDecoder& packetDecoder, I_AuxBMSData& auxBmsData)
+AuxBmsPopulator::AuxBmsPopulator(I_PacketDecoder& packetDecoder, I_AuxBmsData& auxBmsData)
     : packetDecoder_(packetDecoder)
     , auxBmsData_(auxBmsData)
 {
-    connect(&packetDecoder_, SIGNAL(packetDecoded(const AuxBMSMessage)), this, SLOT(populateData(const AuxBMSMessage)));
+    connect(&packetDecoder_, SIGNAL(packetDecoded(const AuxBmsMessage)), this, SLOT(populateData(const AuxBmsMessage)));
 }
 
-void AuxBMSPopulator::populateData(const AuxBMSMessage message)
+void AuxBmsPopulator::populateData(const AuxBmsMessage message)
 {
     auxBmsData_.setPrechargeState(message.prechargeState());
     auxBmsData_.setAuxVoltage(message.auxVoltage());

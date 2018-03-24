@@ -30,8 +30,8 @@ HEADERS += \
    MpptData/I_MpptData.h \
    MpptData/I_MpptUnit.h \
    MpptData/MpptUnit.h \
-    AuxBMSData/AuxBMSData.h \
-    AuxBMSData/I_AuxBMSData.h
+   AuxBmsData/AuxBmsData.h \
+   AuxBmsData/I_AuxBmsData.h
 
 SOURCES += \
    DataContainer.cpp \
@@ -45,4 +45,4 @@ SOURCES += \
    DriverControlsData/DriverControlsData.cpp \
    MpptData/MpptData.cpp \
    MpptData/MpptUnit.cpp \
-    AuxBMSData/AuxBMSData.cpp
+    AuxBmsData/AuxBmsData.cpp

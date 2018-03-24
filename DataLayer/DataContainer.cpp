@@ -1,4 +1,4 @@
-#include "AuxBMSData/AuxBMSData.h"
+#include "AuxBmsData/AuxBmsData.h"
 #include "DataContainer.h"
 #include "BatteryData/BatteryData.h"
 #include "BatteryFaultsData/BatteryFaultsData.h"
@@ -17,7 +17,7 @@ DataContainer::DataContainer(const I_Settings& settings)
     , keyMotorData_(new KeyMotorData())
     , lightsData_(new LightsData())
     , motorFaultsData_(new MotorFaultsData())
-    , auxBmsData_(new AuxBMSData())
+    , auxBmsData_(new AuxBmsData())
 {
     QList<I_MotorDetailsUnit*> motorUnits;
 
@@ -82,7 +82,7 @@ I_MpptData& DataContainer::mpptData()
     return *mpptData_;
 }
 
-I_AuxBMSData& DataContainer::auxBmsData()
+I_AuxBmsData& DataContainer::auxBmsData()
 {
     return *auxBmsData_;
 }

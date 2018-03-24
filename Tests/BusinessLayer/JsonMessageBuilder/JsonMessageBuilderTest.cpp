@@ -21,7 +21,7 @@
 #include "Tests/DataLayer/MpptData/MockMpptData.h"
 #include "Tests/DataLayer/MpptData/MockMpptUnit.h"
 #include "Tests/DataLayer/LightsData/MockLightsData.h"
-#include "Tests/DataLayer/AuxBMSData/MockAuxBMSData.h"
+#include "Tests/DataLayer/AuxBmsData/MockAuxBmsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -1092,8 +1092,8 @@ TEST(JsonMessageBuilderTest, auxBms)
     QJsonDocument EXPECTED_JSON_DOC = QJsonDocument::fromJson(EXPECTED_JSON_MSG.toLatin1());
     QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
 
-    NiceMock<MockAuxBMSData> mockAuxBmsData;
-    const I_AuxBMSData::PrechargeState PRECHARGE_STATE_VAL = I_AuxBMSData::PrechargeState::IDLE;
+    NiceMock<MockAuxBmsData> mockAuxBmsData;
+    const I_AuxBmsData::PrechargeState PRECHARGE_STATE_VAL = I_AuxBmsData::PrechargeState::IDLE;
     const unsigned char AUX_VOLTAGE_VAL = 22;
     const bool AUX_BMS_ALIVE_VAL = true;
     const bool STROBE_BMS_LIGHT_VAL = true;
@@ -1114,7 +1114,7 @@ TEST(JsonMessageBuilderTest, auxBms)
     .WillByDefault(Return(CONTACTOR_ERROR_VAL));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder.buildAuxBMSMessage(mockAuxBmsData);
+        jsonMessageBuilder.buildAuxBmsMessage(mockAuxBmsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 

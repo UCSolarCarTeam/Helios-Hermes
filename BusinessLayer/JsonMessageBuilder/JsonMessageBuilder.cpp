@@ -9,45 +9,45 @@
 #include "DataLayer/BatteryData/I_BatteryData.h"
 #include "DataLayer/MpptData/I_MpptData.h"
 #include "DataLayer/LightsData/I_LightsData.h"
-#include "DataLayer/AuxBMSData/I_AuxBMSData.h"
+#include "DataLayer/AuxBmsData/I_AuxBmsData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
 }
 
-QJsonObject JsonMessageBuilder::buildAuxBMSMessage(const I_AuxBMSData& data)
+QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
 {
-    QJsonObject auxBMSJson = QJsonObject();
+    QJsonObject auxBmsJson = QJsonObject();
 
     switch (data.getPrechargeState())
     {
-        case I_AuxBMSData::PrechargeState::IDLE:
-            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
+        case I_AuxBmsData::PrechargeState::IDLE:
+            auxBmsJson[JsonFormat::PRECHARGE_STATE] = "IDLE";
             break;
 
-        case I_AuxBMSData::PrechargeState::PRECHARGE:
-            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
+        case I_AuxBmsData::PrechargeState::PRECHARGE:
+            auxBmsJson[JsonFormat::PRECHARGE_STATE] = "PRECHARGE";
             break;
 
-        case I_AuxBMSData::PrechargeState::MEASURE:
-            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
+        case I_AuxBmsData::PrechargeState::MEASURE:
+            auxBmsJson[JsonFormat::PRECHARGE_STATE] = "MEASURE";
             break;
 
-        case I_AuxBMSData::PrechargeState::ENABLE_PACK:
-            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
+        case I_AuxBmsData::PrechargeState::ENABLE_PACK:
+            auxBmsJson[JsonFormat::PRECHARGE_STATE] = "ENABLE_PACK";
             break;
 
-        case I_AuxBMSData::PrechargeState::RUN:
-            auxBMSJson[JsonFormat::PRECHARGE_STATE] = "RUN";
+        case I_AuxBmsData::PrechargeState::RUN:
+            auxBmsJson[JsonFormat::PRECHARGE_STATE] = "RUN";
             break;
     }
 
-    auxBMSJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
-    auxBMSJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
-    auxBMSJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
-    auxBMSJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
-    auxBMSJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
-    return auxBMSJson;
+    auxBmsJson[JsonFormat::AUX_VOLTAGE] = data.getAuxVoltage();
+    auxBmsJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
+    auxBmsJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
+    auxBmsJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
+    auxBmsJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
+    return auxBmsJson;
 }
 
 QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)

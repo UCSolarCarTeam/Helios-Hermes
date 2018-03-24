@@ -1,20 +1,20 @@
 #pragma once
 
-#include "DataLayer/AuxBMSData/I_AuxBMSData.h"
+#include "DataLayer/AuxBmsData/I_AuxBmsData.h"
 
-class MockAuxBMSData : public I_AuxBMSData
+class MockAuxBmsData : public I_AuxBmsData
 {
 public:
 
-    /*AuxBMSData "Gets"*/
-    MOCK_CONST_METHOD0(getPrechargeState, I_AuxBMSData::PrechargeState());
+    /*AuxBmsData "Gets"*/
+    MOCK_CONST_METHOD0(getPrechargeState, I_AuxBmsData::PrechargeState());
     MOCK_CONST_METHOD0(getAuxVoltage, unsigned char());
     MOCK_CONST_METHOD0(getAuxBmsAlive, bool());
     MOCK_CONST_METHOD0(getStrobeBmsLight, bool());
     MOCK_CONST_METHOD0(getAllowCharge, bool());
     MOCK_CONST_METHOD0(getContactorError, bool());
 
-    /*AuxBMSData "Sets"*/
+    /*AuxBmsData "Sets"*/
     MOCK_METHOD1(setPrechargeState, void(const unsigned char&));
     MOCK_METHOD1(setAuxVoltage, void(const unsigned char&));
     MOCK_METHOD1(setAuxBmsAlive, void(const bool&));

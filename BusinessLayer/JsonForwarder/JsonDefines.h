@@ -169,8 +169,8 @@ namespace JsonFormat
     const QString LIGHTS_BMS_STROBE_LIGHT = "BmsStrobeLight";
     const QString LIGHTS_ALIVE = "LightsAlive";
 
-    /* AuxBMS */
-    const QString AUX_BMS = "AuxBMS";
+    /* AuxBms */
+    const QString AUX_BMS = "AuxBms";
     const QString PRECHARGE_STATE = "PrechargeState";
     const QString AUX_VOLTAGE = "AuxVoltage";
     const QString AUX_BMS_ALIVE = "AuxBmsAlive";

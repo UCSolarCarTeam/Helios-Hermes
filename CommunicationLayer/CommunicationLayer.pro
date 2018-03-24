@@ -41,8 +41,8 @@ HEADERS += \
    PacketUnstuffer/I_DataInjectionService.h \
    PacketUnstuffer/I_PacketUnstuffer.h \
    PacketUnstuffer/PacketUnstuffer.h \
-    DataPopulators/AuxBMSPopulator.h \
-    MessagingFramework/AuxBMSMessage.h
+    DataPopulators/AuxBmsPopulator.h \
+    MessagingFramework/AuxBmsMessage.h
 
 SOURCES += \
    CommDeviceControl/RadioCommDevice.cpp \
@@ -70,5 +70,5 @@ SOURCES += \
    PacketDecoder/PacketDecoder.cpp \
    PacketSynchronizer/PacketSynchronizer.cpp \
    PacketUnstuffer/PacketUnstuffer.cpp \
-    DataPopulators/AuxBMSPopulator.cpp \
-    MessagingFramework/AuxBMSMessage.cpp
+    DataPopulators/AuxBmsPopulator.cpp \
+    MessagingFramework/AuxBmsMessage.cpp

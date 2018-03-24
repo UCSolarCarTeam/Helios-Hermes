@@ -2,12 +2,12 @@
 
 #include <QObject>
 
-class I_AuxBMSData : public QObject
+class I_AuxBmsData : public QObject
 {
     Q_OBJECT
 
 public:
-    virtual ~I_AuxBMSData() {}
+    virtual ~I_AuxBmsData() {}
 
     enum PrechargeState
     {
@@ -26,7 +26,7 @@ public:
     virtual bool getAllowCharge() const = 0;
     virtual bool getContactorError() const = 0;
 
-    /*AuxBMSData "Sets"*/
+    /*AuxBmsData "Sets"*/
     virtual void setPrechargeState(const unsigned char&) = 0;
     virtual void setAuxVoltage(const unsigned char&) = 0;
     virtual void setAuxBmsAlive(const bool&) = 0;

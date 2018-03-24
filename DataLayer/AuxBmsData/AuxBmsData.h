@@ -1,13 +1,13 @@
 #pragma once
 
-#include "I_AuxBMSData.h"
+#include "I_AuxBmsData.h"
 
-class AuxBMSData : public I_AuxBMSData
+class AuxBmsData : public I_AuxBmsData
 {
 public:
 
-    AuxBMSData();
-    virtual ~AuxBMSData();
+    AuxBmsData();
+    virtual ~AuxBmsData();
 
     /*Data "Gets"*/
     PrechargeState getPrechargeState() const;
@@ -17,7 +17,7 @@ public:
     bool getAllowCharge() const;
     bool getContactorError() const;
 
-    /*AuxBMSData "Sets"*/
+    /*AuxBmsData "Sets"*/
     void setPrechargeState(const unsigned char&);
     void setAuxVoltage(const unsigned char&);
     void setAuxBmsAlive(const bool&);

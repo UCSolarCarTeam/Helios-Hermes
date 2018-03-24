@@ -62,7 +62,7 @@ void PacketDecoder::handleValidData(QByteArray messageData)
                 return;
 
             case MessageDefines::AUX_BMS:
-                emit packetDecoded(AuxBMSMessage(messageData));
+                emit packetDecoded(AuxBmsMessage(messageData));
                 return;
         }
     }

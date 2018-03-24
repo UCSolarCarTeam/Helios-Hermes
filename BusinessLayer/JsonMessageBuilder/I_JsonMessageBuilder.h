@@ -3,7 +3,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-class I_AuxBMSData;
+class I_AuxBmsData;
 class I_BatteryData;
 class I_BatteryFaultsData;
 class I_DriverControlsData;
@@ -17,7 +17,7 @@ class I_JsonMessageBuilder
 {
 public:
     virtual ~I_JsonMessageBuilder() {}
-    virtual QJsonObject buildAuxBMSMessage(const I_AuxBMSData& data) = 0;
+    virtual QJsonObject buildAuxBmsMessage(const I_AuxBmsData& data) = 0;
     virtual QJsonObject buildBatteryMessage(const I_BatteryData& data) = 0;
     virtual QJsonObject buildBatteryFaultsMessage(const I_BatteryFaultsData& data) = 0;
     virtual QJsonObject buildDriverControlsMessage(const I_DriverControlsData& data) = 0;

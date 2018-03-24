@@ -1,4 +1,4 @@
-#include "AuxBMSMessage.h"
+#include "AuxBmsMessage.h"
 #include "MessageDecodingHelpers.h"
 #include "MessageDefines.h"
 
@@ -14,41 +14,41 @@ namespace
     const int CONTACTOR_ERROR_OFFSET = 6;
 }
 
-AuxBMSMessage::AuxBMSMessage(const QByteArray& messageData)
+AuxBmsMessage::AuxBmsMessage(const QByteArray& messageData)
     : messageData_(messageData)
 {
 }
 
-unsigned char AuxBMSMessage::prechargeState() const
+unsigned char AuxBmsMessage::prechargeState() const
 {
     return getUnsignedChar(messageData_, PRECHARGE_STATE_OFFSET);
 }
-unsigned char AuxBMSMessage::auxVoltage() const
+unsigned char AuxBmsMessage::auxVoltage() const
 {
     return getUnsignedChar(messageData_, AUX_VOLTAGE_OFFSET);
 }
 
-bool AuxBMSMessage::auxBmsAlive() const
+bool AuxBmsMessage::auxBmsAlive() const
 {
     return static_cast<bool>(messageData_.at(AUX_BMS_ALIVE_OFFSET));
 }
 
-bool AuxBMSMessage::strobeBmsLight() const
+bool AuxBmsMessage::strobeBmsLight() const
 {
     return static_cast<bool>(messageData_.at(STROBE_BMS_LIGHT_OFFSET));
 }
 
-bool AuxBMSMessage::allowCharge() const
+bool AuxBmsMessage::allowCharge() const
 {
     return static_cast<bool>(messageData_.at(ALLOW_CHARGE_OFFSET));
 }
 
-bool AuxBMSMessage::contactorError() const
+bool AuxBmsMessage::contactorError() const
 {
     return static_cast<bool>(messageData_.at(CONTACTOR_ERROR_OFFSET));
 }
 
-QString AuxBMSMessage::toString() const
+QString AuxBmsMessage::toString() const
 {
     QString messageString;
     messageString += QString::number(MessageDefines::AUX_BMS) + ", ";

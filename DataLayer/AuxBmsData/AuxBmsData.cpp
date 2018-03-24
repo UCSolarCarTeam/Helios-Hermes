@@ -1,12 +1,12 @@
-#include "AuxBMSData.h"
+#include "AuxBmsData.h"
 
 namespace name
 {
 
 }
 
-AuxBMSData::AuxBMSData()
-    : prechargeState_(AuxBMSData::PrechargeState::IDLE)
+AuxBmsData::AuxBmsData()
+    : prechargeState_(AuxBmsData::PrechargeState::IDLE)
     , auxVoltage_()
     , auxBmsAlive_(false)
     , strobeBmsLight_(false)
@@ -16,73 +16,73 @@ AuxBMSData::AuxBMSData()
 
 }
 
-AuxBMSData::~AuxBMSData()
+AuxBmsData::~AuxBmsData()
 {
 }
 
 /*Data "Gets"*/
-AuxBMSData::PrechargeState AuxBMSData::getPrechargeState() const
+AuxBmsData::PrechargeState AuxBmsData::getPrechargeState() const
 {
     return prechargeState_;
 }
 
-unsigned char AuxBMSData::getAuxVoltage() const
+unsigned char AuxBmsData::getAuxVoltage() const
 {
     return auxVoltage_;
 }
 
-bool AuxBMSData::getAuxBmsAlive() const
+bool AuxBmsData::getAuxBmsAlive() const
 {
     return auxBmsAlive_;
 }
 
-bool AuxBMSData::getStrobeBmsLight() const
+bool AuxBmsData::getStrobeBmsLight() const
 {
     return strobeBmsLight_;
 }
 
-bool AuxBMSData::getAllowCharge() const
+bool AuxBmsData::getAllowCharge() const
 {
     return allowCharge_;
 }
 
-bool AuxBMSData::getContactorError() const
+bool AuxBmsData::getContactorError() const
 {
     return contactorError_;
 }
 
-/*AuxBMSData "Sets"*/
-void AuxBMSData::setPrechargeState(const unsigned char& prechargeState)
+/*AuxBmsData "Sets"*/
+void AuxBmsData::setPrechargeState(const unsigned char& prechargeState)
 {
     prechargeState_ = static_cast<PrechargeState>(prechargeState);
     emit prechargeStateReceived(prechargeState_);
 }
 
-void AuxBMSData::setAuxVoltage(const unsigned char& auxVoltage)
+void AuxBmsData::setAuxVoltage(const unsigned char& auxVoltage)
 {
     auxVoltage_ = auxVoltage;
     emit auxVoltageReceived(auxVoltage_);
 }
 
-void AuxBMSData::setAuxBmsAlive(const bool& auxBmsAlive)
+void AuxBmsData::setAuxBmsAlive(const bool& auxBmsAlive)
 {
     auxBmsAlive_ = auxBmsAlive;
     emit auxBmsAliveReceived(auxBmsAlive_);
 }
 
-void AuxBMSData::setStrobeBmsLight(const bool& strobeBmsLight)
+void AuxBmsData::setStrobeBmsLight(const bool& strobeBmsLight)
 {
     strobeBmsLight_ = strobeBmsLight;
     emit strobeBmsLightRecieved(strobeBmsLight_);
 }
 
-void AuxBMSData::setAllowCharge(const bool& allowCharge)
+void AuxBmsData::setAllowCharge(const bool& allowCharge)
 {
     allowCharge_ = allowCharge;
     emit allowChargeRecieved(allowCharge_);
 }
 
-void AuxBMSData::setContactorError(const bool& contactorError)
+void AuxBmsData::setContactorError(const bool& contactorError)
 {
     contactorError_ = contactorError;
     emit contactorErrorRecieved(contactorError_);
