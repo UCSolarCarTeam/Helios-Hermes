@@ -32,7 +32,6 @@ HEADERS += \
     DataLayer/MotorFaultsData/MockMotorFaultsData.h \
     DataLayer/MpptData/MockMpptData.h \
     DataLayer/MpptData/MockMpptUnit.h \
-    DataLayer/AuxBmsData/MockAuxBmsData.h \
     DataLayer/AuxBmsData/MockAuxBmsData.h
 
 SOURCES += \
