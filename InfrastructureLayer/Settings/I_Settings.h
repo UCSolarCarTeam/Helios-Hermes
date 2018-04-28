@@ -18,6 +18,10 @@ public:
     virtual QString serialPortName() const = 0;
     virtual int baudrate() const = 0;
 
+    // OutputSerialPort
+    virtual QString outputSerialPortName() const = 0;
+    virtual int outputBaudrate() const = 0;
+
     // RabbitMq
     virtual QString ipAddress() const = 0;
     virtual quint16 port() const = 0;

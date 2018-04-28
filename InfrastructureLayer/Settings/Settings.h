@@ -23,6 +23,10 @@ public:
     QString serialPortName() const;
     int baudrate() const;
 
+    // Output SerialPort
+    QString outputSerialPortName() const;
+    int outputBaudrate() const;
+
     // RabbitMq
     QString ipAddress() const;
     quint16 port() const;

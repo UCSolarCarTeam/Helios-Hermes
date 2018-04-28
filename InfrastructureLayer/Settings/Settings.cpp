@@ -50,6 +50,17 @@ int Settings::baudrate() const
     return settings_.value("SerialPort/baudrate").toInt();
 }
 
+// Output SerialPort
+QString Settings::outputSerialPortName() const
+{
+    return settings_.value("OutputSerialPort/portName").toString();
+}
+
+int Settings::outputBaudrate() const
+{
+    return settings_.value("OutputSerialPort/baudrate").toInt();
+}
+
 // RabbitMq
 
 QString Settings::ipAddress() const
