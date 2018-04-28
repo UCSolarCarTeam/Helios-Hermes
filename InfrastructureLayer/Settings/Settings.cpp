@@ -51,6 +51,11 @@ int Settings::baudrate() const
 }
 
 // Output SerialPort
+bool Settings::outputSerialEnabled() const
+{
+    return settings_.value("OutputSerialPort/outputSerialEnabled").toBool();
+}
+
 QString Settings::outputSerialPortName() const
 {
     return settings_.value("OutputSerialPort/portName").toString();

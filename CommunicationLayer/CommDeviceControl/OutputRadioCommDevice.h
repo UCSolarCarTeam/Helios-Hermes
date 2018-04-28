@@ -14,7 +14,8 @@ public:
     virtual ~OutputRadioCommDevice();
 
 private slots:
-    void handleSerialDataOutgoing(QByteArray input);
+    void handleSerialDataIncoming(const QByteArray data);
+    void forwardSerialData(const QByteArray input);
     bool connectToDataSource();
 
 private:

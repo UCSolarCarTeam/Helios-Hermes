@@ -9,10 +9,17 @@ OutputRadioCommDevice::OutputRadioCommDevice(I_CommDevice& inputSerialPort, QSer
     , inputSerialPort_(inputSerialPort)
 {
     setSerialParameters(settings.outputSerialPortName(), settings.outputBaudrate());
+
     // This makes sure that it is connected after everything is created.
     // Otherwise the error messages won't be sent to the GUI
-    QTimer::singleShot(0, this, SLOT(connectToDataSource()));
-    connect(&inputSerialPort_, SIGNAL(dataRecieved(QByteArray)), this, SLOT(handleSerialDataOutgoing(QByteArray)));
+    if (settings.outputSerialEnabled())
+    {
+        QTimer::singleShot(0, this, SLOT(connectToDataSource()));
+        connect(&inputSerialPort_, SIGNAL(dataReceived(QByteArray)),
+                this, SLOT(handleSerialDataIncoming(QByteArray)));
+        connect(this, SIGNAL(dataReceived(QByteArray)),
+                this, SLOT(forwardSerialData(QByteArray)));
+    }
 }
 
 OutputRadioCommDevice::~OutputRadioCommDevice()
@@ -44,8 +51,19 @@ bool OutputRadioCommDevice::connectToDataSource()
         return false;
     }
 }
-
-void OutputRadioCommDevice::handleSerialDataOutgoing(QByteArray input)
+void OutputRadioCommDevice::handleSerialDataIncoming(QByteArray data)
 {
-     qDebug() << input;
+    emit dataReceived(data);
+}
+void OutputRadioCommDevice::forwardSerialData(QByteArray input)
+{
+    if (outputSerialPort_.write(input) != -1)
+    {
+        qDebug() << "Wrote to output port";
+    }
+    else
+    {
+        qDebug() << "Could not write to port";
+    }
+
 }

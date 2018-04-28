@@ -18,6 +18,7 @@ public:
     MOCK_CONST_METHOD0(ipAddress, QString());
 
     // Output SerialPort
+    MOCK_CONST_METHOD0(outputSerialEnabled, bool());
     MOCK_CONST_METHOD0(outputSerialPortName, QString());
     MOCK_CONST_METHOD0(outputBaudrate, int());
 

@@ -15,6 +15,7 @@ public:
     virtual QString packetTitle() const = 0;
 
     // SerialPort
+    virtual bool outputSerialEnabled() const = 0;
     virtual QString serialPortName() const = 0;
     virtual int baudrate() const = 0;
 

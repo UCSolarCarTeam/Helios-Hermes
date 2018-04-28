@@ -31,6 +31,11 @@ TEST_F(SettingsTest, baudrate)
     EXPECT_EQ(settings_->baudrate(), 9600);
 }
 
+TEST_F(SettingsTest, outputSerialEnabled)
+{
+    EXPECT_EQ(settings_->outputSerialEnabled(), false);
+}
+
 TEST_F(SettingsTest, outputSerialPortName)
 {
     EXPECT_EQ(settings_->outputSerialPortName(), "/dev/pts/8");

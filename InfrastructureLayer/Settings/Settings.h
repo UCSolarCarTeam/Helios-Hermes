@@ -24,8 +24,10 @@ public:
     int baudrate() const;
 
     // Output SerialPort
+    bool outputSerialEnabled() const;
     QString outputSerialPortName() const;
     int outputBaudrate() const;
+
 
     // RabbitMq
     QString ipAddress() const;
