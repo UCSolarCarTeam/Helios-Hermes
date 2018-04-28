@@ -45,4 +45,4 @@ SOURCES += \
    DriverControlsData/DriverControlsData.cpp \
    MpptData/MpptData.cpp \
    MpptData/MpptUnit.cpp \
-    AuxBmsData/AuxBmsData.cpp
+   AuxBmsData/AuxBmsData.cpp

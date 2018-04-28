@@ -1093,7 +1093,7 @@ TEST(JsonMessageBuilderTest, auxBms)
     QJsonObject EXPECTED_JSON = EXPECTED_JSON_DOC.object();
 
     NiceMock<MockAuxBmsData> mockAuxBmsData;
-    const I_AuxBmsData::PrechargeState PRECHARGE_STATE_VAL = I_AuxBmsData::PrechargeState::IDLE;
+    const I_AuxBmsData::PrechargeState PRECHARGE_STATE_VAL = I_AuxBmsData::PrechargeState::OFF;
     const unsigned char AUX_VOLTAGE_VAL = 22;
     const bool AUX_BMS_ALIVE_VAL = true;
     const bool STROBE_BMS_LIGHT_VAL = true;

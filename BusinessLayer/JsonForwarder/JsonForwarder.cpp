@@ -76,6 +76,5 @@ void JsonForwarder::forwardData(QDateTime& currentTime)
     baseJson[JsonFormat::MPPT] = jsonMessageBuilder_.buildMpptMessage(mpptData_);
     baseJson[JsonFormat::LIGHTS] = jsonMessageBuilder_.buildLightsMessage(lightsData_);
     baseJson[JsonFormat::AUX_BMS] = jsonMessageBuilder_.buildAuxBmsMessage(auxBmsData_);
-
     messageForwarder_.forwardData(QJsonDocument(baseJson).toJson(QJsonDocument::Compact));
 }

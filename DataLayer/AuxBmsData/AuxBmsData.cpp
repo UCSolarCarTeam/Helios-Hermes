@@ -6,7 +6,7 @@ namespace name
 }
 
 AuxBmsData::AuxBmsData()
-    : prechargeState_(AuxBmsData::PrechargeState::IDLE)
+    : prechargeState_(AuxBmsData::PrechargeState::OFF)
     , auxVoltage_()
     , auxBmsAlive_(false)
     , strobeBmsLight_(false)

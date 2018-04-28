@@ -11,11 +11,12 @@ public:
 
     enum PrechargeState
     {
-        IDLE = 0,
-        PRECHARGE = 1,
-        MEASURE = 2,
-        ENABLE_PACK = 3,
-        RUN = 4
+        OFF = 0,
+        COMMON_ENGAGED = 1,
+        CHARGE_ENGAGED = 2,
+        DISCHARGE_ENGAGED = 3,
+        ALL_ENGAGED = 4,
+        INVALID_STATE = 5,
     };
 
     /*Data "Gets"*/
