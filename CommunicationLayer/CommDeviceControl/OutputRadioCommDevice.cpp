@@ -8,18 +8,18 @@ OutputRadioCommDevice::OutputRadioCommDevice(I_CommDevice& inputSerialPort, QSer
     : outputSerialPort_(outputSerialPort)
     , inputSerialPort_(inputSerialPort)
 {
-    setSerialParameters(settings.outputSerialPortName(), settings.outputBaudrate());
-
     // This makes sure that it is connected after everything is created.
     // Only if the config file enables it.
-    if (settings.outputSerialEnabled())
+    if (!settings.outputSerialEnabled())
     {
-        QTimer::singleShot(0, this, SLOT(connectToDataSource()));
-        connect(&inputSerialPort_, SIGNAL(dataReceived(QByteArray)),
-                this, SLOT(handleSerialDataIncoming(QByteArray)));
-        connect(this, SIGNAL(dataReceived(QByteArray)),
-                this, SLOT(forwardSerialData(QByteArray)));
+        return;
     }
+    setSerialParameters(settings.outputSerialPortName(), settings.outputBaudrate());
+    QTimer::singleShot(0, this, SLOT(connectToDataSource()));
+    connect(&inputSerialPort_, SIGNAL(dataReceived(QByteArray)),
+            this, SLOT(handleSerialDataIncoming(QByteArray)));
+    connect(this, SIGNAL(dataReceived(QByteArray)),
+            this, SLOT(forwardSerialData(QByteArray)));
 }
 
 OutputRadioCommDevice::~OutputRadioCommDevice()
