@@ -14,6 +14,7 @@ OutputRadioCommDevice::OutputRadioCommDevice(I_CommDevice& inputSerialPort, QSer
     {
         return;
     }
+
     setSerialParameters(settings.outputSerialPortName(), settings.outputBaudrate());
     QTimer::singleShot(0, this, SLOT(connectToDataSource()));
     connect(&inputSerialPort_, SIGNAL(dataReceived(QByteArray)),
