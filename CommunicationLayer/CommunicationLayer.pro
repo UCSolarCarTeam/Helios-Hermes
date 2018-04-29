@@ -14,6 +14,7 @@ HEADERS += \
    CommDeviceControl/RabbitMqMessageForwarder.h \
    CommDeviceControl/I_MessageForwarder.h \
    CommunicationContainer.h \
+   DataPopulators/AuxBmsPopulator.h \
    DataPopulators/BatteryFaultsPopulator.h \
    DataPopulators/BatteryPopulator.h \
    DataPopulators/DriverControlsPopulator.h \
@@ -22,6 +23,7 @@ HEADERS += \
    DataPopulators/MotorDetailsPopulator.h \
    DataPopulators/MotorFaultsPopulator.h \
    DataPopulators/MpptPopulator.h \
+   MessagingFramework/AuxBmsMessage.h \
    MessagingFramework/BatteryFaultsMessage.h \
    MessagingFramework/BatteryMessage.h \
    MessagingFramework/DriverControlsMessage.h \
@@ -46,6 +48,7 @@ SOURCES += \
    CommDeviceControl/RadioCommDevice.cpp \
    CommDeviceControl/RabbitMqMessageForwarder.cpp \
    CommunicationContainer.cpp \
+   DataPopulators/AuxBmsPopulator.cpp \
    DataPopulators/BatteryFaultsPopulator.cpp \
    DataPopulators/BatteryPopulator.cpp \
    DataPopulators/DriverControlsPopulator.cpp \
@@ -54,6 +57,7 @@ SOURCES += \
    DataPopulators/MotorDetailsPopulator.cpp \
    DataPopulators/MotorFaultsPopulator.cpp \
    DataPopulators/MpptPopulator.cpp \
+   MessagingFramework/AuxBmsMessage.cpp \
    MessagingFramework/BatteryFaultsMessage.cpp \
    MessagingFramework/BatteryMessage.cpp \
    MessagingFramework/DriverControlsMessage.cpp \
