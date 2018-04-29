@@ -4,7 +4,7 @@
 
 namespace
 {
-QString SETTINGS_FILE_NAME = "config.ini";
+    QString SETTINGS_FILE_NAME = "config.ini";
 }
 
 InfrastructureContainer::InfrastructureContainer()
