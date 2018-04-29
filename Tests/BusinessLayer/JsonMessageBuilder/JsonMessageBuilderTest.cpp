@@ -1079,7 +1079,7 @@ TEST(JsonMessageBuilderTest, auxBms)
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
         { \
-            \"PrechargeState\": \"IDLE\", \
+            \"PrechargeState\": \"OFF\", \
             \"AuxVoltage\": 22, \
             \"AuxBmsAlive\": true, \
             \"StrobeBmsLight\": true, \
