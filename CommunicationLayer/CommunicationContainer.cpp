@@ -6,6 +6,7 @@
 #include "CommDeviceControl/OutputRadioCommDevice.h"
 #include "CommDeviceControl/RabbitMqMessageForwarder.h"
 #include "CommunicationContainer.h"
+#include "DataPopulators/AuxBmsPopulator.h"
 #include "DataPopulators/BatteryFaultsPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
 #include "DataPopulators/DriverControlsPopulator.h"
@@ -30,6 +31,7 @@ public:
         , packetUnstuffer(packetSynchronizer)
         , packetChecksumChecker(packetUnstuffer)
         , packetDecoder(packetChecksumChecker)
+        , auxBmsPopulator(packetDecoder, dataContainer.auxBmsData())
         , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
         , batteryPopulator(packetDecoder, dataContainer.batteryData())
         , driverControlsPopulator(packetDecoder, dataContainer.driverControlsData())
@@ -50,6 +52,7 @@ public:
     PacketUnstuffer packetUnstuffer;
     PacketChecksumChecker packetChecksumChecker;
     PacketDecoder packetDecoder;
+    AuxBmsPopulator auxBmsPopulator;
     BatteryFaultsPopulator batteryFaultsPopulator;
     BatteryPopulator batteryPopulator;
     DriverControlsPopulator driverControlsPopulator;
