@@ -3,6 +3,7 @@
 #include "InfrastructureLayer/InfrastructureContainer.h"
 #include "DataLayer/DataContainer.h"
 #include "CommDeviceControl/RadioCommDevice.h"
+#include "CommDeviceControl/OutputRadioCommDevice.h"
 #include "CommDeviceControl/RabbitMqMessageForwarder.h"
 #include "CommunicationContainer.h"
 #include "DataPopulators/AuxBmsPopulator.h"
@@ -24,6 +25,7 @@ class CommunicationContainerPrivate
 public:
     CommunicationContainerPrivate(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)
         : radioCommDevice(serialPort, infrastructureContainer.settings())
+        , outputRadioCommDevice(radioCommDevice, outputSerialPort, infrastructureContainer.settings())
         , messageForwarder(infrastructureContainer.settings())
         , packetSynchronizer(radioCommDevice)
         , packetUnstuffer(packetSynchronizer)
@@ -42,7 +44,9 @@ public:
     }
 
     QSerialPort serialPort;
+    QSerialPort outputSerialPort;
     RadioCommDevice radioCommDevice;
+    OutputRadioCommDevice outputRadioCommDevice;
     RabbitMqMessageForwarder messageForwarder;
     PacketSynchronizer packetSynchronizer;
     PacketUnstuffer packetUnstuffer;
@@ -71,6 +75,11 @@ CommunicationContainer::~CommunicationContainer()
 I_CommDevice& CommunicationContainer::commDevice()
 {
     return impl_->radioCommDevice;
+}
+
+I_CommDevice& CommunicationContainer::outputCommDevice()
+{
+    return impl_->outputRadioCommDevice;
 }
 
 I_PacketSynchronizer& CommunicationContainer::packetSynchronizer()
