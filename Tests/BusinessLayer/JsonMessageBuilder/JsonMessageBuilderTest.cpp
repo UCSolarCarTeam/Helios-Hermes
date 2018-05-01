@@ -1029,7 +1029,7 @@ TEST(JsonMessageBuilderTest, lights)
         \"LeftSignal\":false, \
         \"RightSignal\":true, \
         \"BmsStrobeLight\":false, \
-        \"LightsAlive\":false \
+        \"Alive\":false \
     }";
     // *INDENT-ON*
 
