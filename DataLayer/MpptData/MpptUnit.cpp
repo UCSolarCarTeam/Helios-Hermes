@@ -56,19 +56,19 @@ void MpptUnit::setArrayVoltage(const unsigned short& arrayVoltage)
 
 void MpptUnit::setArrayCurrent(const unsigned short& arrayCurrent)
 {
-    arrayCurrent_ = arrayCurrent;
+    arrayCurrent_ = (arrayCurrent * 1000);
     emit arrayCurrentReceived(arrayCurrent_);
 }
 
 void MpptUnit::setBatteryVoltage(const unsigned short& batteryVoltage)
 {
-    batteryVoltage_ = batteryVoltage;
+    batteryVoltage_ = (batteryVoltage * 100);
     emit batteryVoltageReceived(batteryVoltage_);
 }
 
 void MpptUnit::setTemperature(const unsigned short& temperature)
 {
-    temperature_ = temperature;
+    temperature_ = (temperature * 100);
     emit temperatureReceived(temperature_);
 }
 
