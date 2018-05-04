@@ -50,7 +50,7 @@ void MpptUnit::setMpptStatus(const unsigned char& mpptStatus)
 
 void MpptUnit::setArrayVoltage(const unsigned short& arrayVoltage)
 {
-    arrayVoltage_ = arrayVoltage;
+    arrayVoltage_ = (arrayVoltage * 100);
     emit arrayVoltageReceived(arrayVoltage_);
 }
 
