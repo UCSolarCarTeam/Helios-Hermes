@@ -167,7 +167,7 @@ namespace JsonFormat
     const QString LIGHTS_LEFT_SIGNAL = "LeftSignal";
     const QString LIGHTS_RIGHT_SIGNAL = "RightSignal";
     const QString LIGHTS_BMS_STROBE_LIGHT = "BmsStrobeLight";
-    const QString LIGHTS_ALIVE = "LightsAlive";
+    const QString LIGHTS_ALIVE = "Alive";
 
     /* AuxBms */
     const QString AUX_BMS = "AuxBms";
