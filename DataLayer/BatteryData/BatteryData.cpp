@@ -10,9 +10,9 @@ namespace
     const unsigned char BMS_ALWAYS_ON_OFFSET = 0x20;
     const unsigned char BMS_IS_READY_OFFSET = 0x40;
     const unsigned char BMS_IS_CHARGING_OFFSET = 0x80;
-    const int TWO = 2;
-    const int TEN = 10;
-    const int HUNDRED = 100;
+    const int PERCENTAGE_CONVERSION = 2;
+    const int DECI_TO_ONES = 10;
+    const int CENTI_TO_ONES = 100;
 }
 
 BatteryData::BatteryData()
@@ -230,43 +230,43 @@ void BatteryData::setPopulatedCells(const unsigned char& populatedCells)
 
 void BatteryData::set12VInputVoltage(const float& inputVoltage12V)
 {
-    inputVoltage12_ = (inputVoltage12V / TEN);
+    inputVoltage12_ = (inputVoltage12V / DECI_TO_ONES);
     emit inputVoltage12VReceived(inputVoltage12_);
 }
 
 void BatteryData::setFanVoltage(const float& fanVoltage)
 {
-    fanVoltage_ = (fanVoltage / HUNDRED);
+    fanVoltage_ = (fanVoltage / CENTI_TO_ONES);
     emit fanVoltageReceived(fanVoltage_);
 }
 
 void BatteryData::setPackCurrent(const float& packCurrent)
 {
-    packCurrent_ = (packCurrent / TEN);
+    packCurrent_ = (packCurrent / DECI_TO_ONES);
     emit packCurrentReceived(packCurrent_);
 }
 
 void BatteryData::setPackVoltage(const float& packVoltage)
 {
-    packVoltage_ = (packVoltage / TEN);
+    packVoltage_ = (packVoltage / DECI_TO_ONES);
     emit packVoltageReceived(packVoltage_);
 }
 
 void BatteryData::setPackStateOfCharge(const float& packStateOfCharge)
 {
-    packStateOfCharge_ = (packStateOfCharge / TWO);
+    packStateOfCharge_ = (packStateOfCharge / PERCENTAGE_CONVERSION);
     emit packStateOfChargeReceived(packStateOfCharge_);
 }
 
 void BatteryData::setPackAmphours(const float& packAmphours)
 {
-    packAmphours_ = (packAmphours / TEN);
+    packAmphours_ = (packAmphours / DECI_TO_ONES);
     emit packAmphoursReceived(packAmphours_);
 }
 
 void BatteryData::setPackDepthOfDischarge(const float& packDepthOfDischarge)
 {
-    packDepthOfDischarge_ = (packDepthOfDischarge / TWO);
+    packDepthOfDischarge_ = (packDepthOfDischarge / PERCENTAGE_CONVERSION);
     emit packDepthOfDischargeReceived(packDepthOfDischarge_);
 }
 
@@ -320,7 +320,7 @@ void BatteryData::setRequestedFanSpeed(const unsigned char& requestedFanSpeed)
 
 void BatteryData::setLowCellVoltage(const unsigned short& lowCellVoltage)
 {
-    lowCellVoltage_ = (lowCellVoltage / TEN);
+    lowCellVoltage_ = (lowCellVoltage / DECI_TO_ONES);
     emit lowCellVoltageIdReceived(lowCellVoltage_);
 }
 
@@ -332,7 +332,7 @@ void BatteryData::setLowCellVoltageId(const unsigned char& lowCellVoltageId)
 
 void BatteryData::setHighCellVoltage(const unsigned short& highCellVoltage)
 {
-    highCellVoltage_ = (highCellVoltage / TEN);
+    highCellVoltage_ = (highCellVoltage / DECI_TO_ONES);
     emit highCellVoltageReceived(highCellVoltage_);
 }
 
@@ -344,6 +344,6 @@ void BatteryData::setHighCellVoltageId(const unsigned char& highCellVoltageId)
 
 void BatteryData::setAverageCellVoltage(const unsigned short& averageCellVoltage)
 {
-    averageCellVoltage_ = (averageCellVoltage / TEN);
+    averageCellVoltage_ = (averageCellVoltage / DECI_TO_ONES);
     emit averageCellVoltageReceived(averageCellVoltage_);
 }

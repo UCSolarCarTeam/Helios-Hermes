@@ -2,8 +2,8 @@
 
 namespace
 {
-    const int HUNDERED = 100;
-    const int THOUSAND = 1000;
+    const int CENTI_TO_ONES = 100;
+    const int MILLI_TO_ONES = 1000;
 }
 
 MpptUnit::MpptUnit()
@@ -56,25 +56,25 @@ void MpptUnit::setMpptStatus(const unsigned char& mpptStatus)
 
 void MpptUnit::setArrayVoltage(const unsigned short& arrayVoltage)
 {
-    arrayVoltage_ = (arrayVoltage / HUNDRED);
+    arrayVoltage_ = (arrayVoltage / CENTI_TO_ONES);
     emit arrayVoltageReceived(arrayVoltage_);
 }
 
 void MpptUnit::setArrayCurrent(const unsigned short& arrayCurrent)
 {
-    arrayCurrent_ = (arrayCurrent / THOUSAND);
+    arrayCurrent_ = (arrayCurrent / MILLI_TO_ONES);
     emit arrayCurrentReceived(arrayCurrent_);
 }
 
 void MpptUnit::setBatteryVoltage(const unsigned short& batteryVoltage)
 {
-    batteryVoltage_ = (batteryVoltage / HUNDRED);
+    batteryVoltage_ = (batteryVoltage / CENTI_TO_ONES);
     emit batteryVoltageReceived(batteryVoltage_);
 }
 
 void MpptUnit::setTemperature(const unsigned short& temperature)
 {
-    temperature_ = (temperature / HUNDRED);
+    temperature_ = (temperature / CENTI_TO_ONES);
     emit temperatureReceived(temperature_);
 }
 
