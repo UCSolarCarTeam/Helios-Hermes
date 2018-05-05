@@ -1,5 +1,11 @@
 #include "MpptUnit.h"
 
+namespace
+{
+    const int CENTI_TO_ONES = 100;
+    const int MILLI_TO_ONES = 1000;
+}
+
 MpptUnit::MpptUnit()
     : mpptStatus_(0)
     , arrayVoltage_(0)
@@ -50,25 +56,25 @@ void MpptUnit::setMpptStatus(const unsigned char& mpptStatus)
 
 void MpptUnit::setArrayVoltage(const unsigned short& arrayVoltage)
 {
-    arrayVoltage_ = arrayVoltage;
+    arrayVoltage_ = (arrayVoltage / CENTI_TO_ONES);
     emit arrayVoltageReceived(arrayVoltage_);
 }
 
 void MpptUnit::setArrayCurrent(const unsigned short& arrayCurrent)
 {
-    arrayCurrent_ = arrayCurrent;
+    arrayCurrent_ = (arrayCurrent / MILLI_TO_ONES);
     emit arrayCurrentReceived(arrayCurrent_);
 }
 
 void MpptUnit::setBatteryVoltage(const unsigned short& batteryVoltage)
 {
-    batteryVoltage_ = batteryVoltage;
+    batteryVoltage_ = (batteryVoltage / CENTI_TO_ONES);
     emit batteryVoltageReceived(batteryVoltage_);
 }
 
 void MpptUnit::setTemperature(const unsigned short& temperature)
 {
-    temperature_ = temperature;
+    temperature_ = (temperature / CENTI_TO_ONES);
     emit temperatureReceived(temperature_);
 }
 
