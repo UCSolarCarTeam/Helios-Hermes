@@ -1,7 +1,8 @@
 #include "KeyMotorData.h"
 
-namespace {
-    float M_PER_SEC_TO_KM_PER_HOUR = 3.6;
+namespace
+{
+    const float M_PER_SEC_TO_KM_PER_HOUR = 3.6;
 }
 
 KeyMotorData::KeyMotorData()
@@ -121,7 +122,7 @@ void KeyMotorData::setM0BusVoltage(const float& m0BusVoltage)
 
 void KeyMotorData::setM0VehicleVelocity(const float& m0VehicleVelocity)
 {
-    m0VehicleVelocity_ = m0VehicleVelocity * M_PER_SEC_TO_KM_PER_HOUR;
+    m0VehicleVelocity_ = (m0VehicleVelocity * M_PER_SEC_TO_KM_PER_HOUR);
     emit m0VehicleVelocityReceived(m0VehicleVelocity_);
 }
 
@@ -157,7 +158,7 @@ void KeyMotorData::setM1BusVoltage(const float& m1BusVoltage)
 
 void KeyMotorData::setM1VehicleVelocity(const float& m1VehicleVelocity)
 {
-    m1VehicleVelocity_ = m1VehicleVelocity * M_PER_SEC_TO_KM_PER_HOUR;
+    m1VehicleVelocity_ = (m1VehicleVelocity * M_PER_SEC_TO_KM_PER_HOUR);
     emit m1VehicleVelocityReceived(m1VehicleVelocity_);
 }
 
