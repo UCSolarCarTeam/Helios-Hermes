@@ -103,7 +103,7 @@ void KeyMotorData::setM0SetCurrent(const float& m0SetCurrent)
 }
 
 void KeyMotorData::setM0SetVelocity(const float& m0SetVelocity)
-{    
+{
     m0SetVelocity_ = m0SetVelocity;
     emit m0SetVelocityReceived(m0SetVelocity_);
 }
