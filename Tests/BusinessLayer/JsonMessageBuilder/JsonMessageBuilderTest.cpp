@@ -305,8 +305,8 @@ TEST(JsonMessageBuilderTest, driverControls)
         \"VolumeDown\": true, \
         \"NextSong\": false, \
         \"PrevSong\": true, \
-        \"Acceleration\": 0.5, \
-        \"RegenBraking\": 0.25, \
+        \"Acceleration\": 5, \
+        \"RegenBraking\": 2, \
         \"Brakes\": true, \
         \"Forward\": false, \
         \"Reverse\": true, \
@@ -339,8 +339,8 @@ TEST(JsonMessageBuilderTest, driverControls)
     const bool PUSH_TO_TALK_VAL = false;
     const bool HORN_VAL = true;
     const bool RESET_VAL = false;
-    const unsigned short ACCELERATION_VAL = 5000;
-    const unsigned short REGEN_BRAKING_VAL = 2500;
+    const unsigned short ACCELERATION_VAL = 5;
+    const unsigned short REGEN_BRAKING_VAL = 2;
 
     ON_CALL(mockDriverControlsData, getDriverControlsBoardAlive())
     .WillByDefault(Return(ALIVE_VAL));
