@@ -12,6 +12,7 @@ namespace
     const int STROBE_BMS_LIGHT_OFFSET = 4;
     const int ALLOW_CHARGE_OFFSET = 5;
     const int CONTACTOR_ERROR_OFFSET = 6;
+    const int HIGH_VOLTAGE_ENABLE_OFFSET = 7;
 }
 
 AuxBmsMessage::AuxBmsMessage(const QByteArray& messageData)
@@ -48,6 +49,10 @@ bool AuxBmsMessage::contactorError() const
     return static_cast<bool>(messageData_.at(CONTACTOR_ERROR_OFFSET));
 }
 
+bool AuxBmsMessage::highVoltageEnable() const
+{
+    return static_cast<bool>(messageData_.at(HIGH_VOLTAGE_ENABLE_OFFSET));
+}
 QString AuxBmsMessage::toString() const
 {
     QString messageString;
@@ -58,5 +63,6 @@ QString AuxBmsMessage::toString() const
     messageString += QString::number(strobeBmsLight()) + ", ";
     messageString += QString::number(allowCharge()) + ", ";
     messageString += QString::number(contactorError()) + ", ";
+    messageString += QString::number(highVoltageEnable()) + ", ";
     return messageString;
 }

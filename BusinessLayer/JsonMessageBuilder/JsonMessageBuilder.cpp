@@ -51,6 +51,7 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
     auxBmsJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
     auxBmsJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
     auxBmsJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
+    auxBmsJson[JsonFormat::HIGH_VOLTAGE_ENABLE] = data.getHighVoltageEnable();
     return auxBmsJson;
 }
 

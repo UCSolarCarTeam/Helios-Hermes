@@ -16,6 +16,7 @@ public:
     bool getStrobeBmsLight() const;
     bool getAllowCharge() const;
     bool getContactorError() const;
+    bool getHighVoltageEnable() const;
 
     /*AuxBmsData "Sets"*/
     void setPrechargeState(const unsigned char&);
@@ -24,6 +25,7 @@ public:
     void setStrobeBmsLight(const bool&);
     void setAllowCharge(const bool&);
     void setContactorError(const bool&);
+    void setHighVoltageEnable(const bool&);
 
 private:
     PrechargeState prechargeState_;
@@ -32,4 +34,5 @@ private:
     bool strobeBmsLight_;
     bool allowCharge_;
     bool contactorError_;
+    bool highVoltageEnable_;
 };
