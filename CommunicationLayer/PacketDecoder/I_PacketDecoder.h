@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include "../MessagingFramework/AuxBmsMessage.h"
+#include "../MessagingFramework/CcsMessage.h"
 #include "../MessagingFramework/BatteryMessage.h"
 #include "../MessagingFramework/BatteryFaultsMessage.h"
 #include "../MessagingFramework/DriverControlsMessage.h"
@@ -19,6 +20,7 @@ public:
 
 signals:
     void packetDecoded(const AuxBmsMessage);
+    void packetDecoded(const CcsMessage);
     void packetDecoded(const BatteryMessage);
     void packetDecoded(const BatteryFaultsMessage);
     void packetDecoded(const DriverControlsMessage);

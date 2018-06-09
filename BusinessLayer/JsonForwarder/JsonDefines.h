@@ -177,4 +177,8 @@ namespace JsonFormat
     const QString STROBE_BMS_LIGHT = "StrobeBmsLight";
     const QString ALLOW_CHARGE = "AllowCharge";
     const QString CONTACTOR_ERROR = "ContactorError";
+
+    /* Ccs */
+    const QString CCS = "Ccs";
+    const QString CCS_ALIVE = "CcsAlive";
 }

@@ -7,6 +7,7 @@
 
 class I_JsonMessageBuilder;
 class I_AuxBmsData;
+class I_CcsData;
 class I_BatteryData;
 class I_BatteryFaultsData;
 class I_DriverControlsData;
@@ -25,6 +26,7 @@ public:
     JsonForwarder(
         I_JsonMessageBuilder& jsonMessageBuilder,
         I_AuxBmsData& auxBmsData,
+        I_CcsData& ccsData,
         I_BatteryData& batteryData,
         I_BatteryFaultsData& batteryFaultsData,
         I_DriverControlsData& driverControlsData,
@@ -45,6 +47,7 @@ private slots:
 private:
     I_JsonMessageBuilder& jsonMessageBuilder_;
     I_AuxBmsData& auxBmsData_;
+    I_CcsData& ccsData_;
     I_BatteryData& batteryData_;
     I_BatteryFaultsData& batteryFaultsData_;
     I_DriverControlsData& driverControlsData_;

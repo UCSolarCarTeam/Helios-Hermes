@@ -2,8 +2,10 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QObject>
 
 class I_AuxBmsData;
+class I_CcsData;
 class I_BatteryData;
 class I_BatteryFaultsData;
 class I_DriverControlsData;
@@ -13,11 +15,13 @@ class I_MotorDetailsData;
 class I_MotorFaultsData;
 class I_MpptData;
 
-class I_JsonMessageBuilder
+class I_JsonMessageBuilder : public QObject
 {
+    Q_OBJECT
 public:
     virtual ~I_JsonMessageBuilder() {}
     virtual QJsonObject buildAuxBmsMessage(const I_AuxBmsData& data) = 0;
+    virtual QJsonObject buildCcsMessage(const I_CcsData& data) = 0;
     virtual QJsonObject buildBatteryMessage(const I_BatteryData& data) = 0;
     virtual QJsonObject buildBatteryFaultsMessage(const I_BatteryFaultsData& data) = 0;
     virtual QJsonObject buildDriverControlsMessage(const I_DriverControlsData& data) = 0;

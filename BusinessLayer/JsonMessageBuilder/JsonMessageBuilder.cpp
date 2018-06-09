@@ -1,5 +1,6 @@
 #include "JsonMessageBuilder.h"
 #include "JsonForwarder/JsonDefines.h"
+#include "../CommunicationLayer/PacketDecoder/PacketDecoder.h"
 #include "DataLayer/KeyMotorData/I_KeyMotorData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsUnit.h"
@@ -10,9 +11,16 @@
 #include "DataLayer/MpptData/I_MpptData.h"
 #include "DataLayer/LightsData/I_LightsData.h"
 #include "DataLayer/AuxBmsData/I_AuxBmsData.h"
+#include "DataLayer/CcsData/I_CcsData.h"
+#include "DataLayer/CcsData/CcsData.h"
+#include "../CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
 
-JsonMessageBuilder::JsonMessageBuilder()
+JsonMessageBuilder::JsonMessageBuilder(const I_PacketChecksumChecker& checksumChecker)
 {
+    connect(&checksumChecker, SIGNAL(validDataReceived(QByteArray)),
+            this, SLOT(validData()));
+
+    timer_.start();
 }
 
 QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
@@ -52,6 +60,22 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
     auxBmsJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
     auxBmsJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
     return auxBmsJson;
+}
+
+QJsonObject JsonMessageBuilder::buildCcsMessage(const I_CcsData& data)
+{
+    CcsData ccs;
+    if(timer_.elapsed() > 3000)
+    {
+        ccs.setCcsAlive(false);
+    }
+    else
+    {
+       ccs.setCcsAlive(true);
+    }
+    QJsonObject ccsJson = QJsonObject();
+    ccsJson[JsonFormat::CCS_ALIVE] = data.getCcsAlive();
+    return ccsJson;
 }
 
 QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)

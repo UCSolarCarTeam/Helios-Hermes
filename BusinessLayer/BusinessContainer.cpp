@@ -12,10 +12,11 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                      DataContainer& dataContainer)
     : communicationsMonitoringService_(new CommunicationsMonitoringService(
                                            communicationContainer.packetChecksumChecker()))
-    , jsonMessageBuilder_(new JsonMessageBuilder())
+    , jsonMessageBuilder_(new JsonMessageBuilder(communicationContainer.packetChecksumChecker()))
     , jsonForwarder_(new JsonForwarder(
                          *jsonMessageBuilder_,
                          dataContainer.auxBmsData(),
+                         dataContainer.ccsData(),
                          dataContainer.batteryData(),
                          dataContainer.batteryFaultsData(),
                          dataContainer.driverControlsData(),

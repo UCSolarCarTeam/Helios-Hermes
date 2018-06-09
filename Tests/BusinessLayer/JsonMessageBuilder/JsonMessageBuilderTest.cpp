@@ -22,6 +22,7 @@
 #include "Tests/DataLayer/MpptData/MockMpptUnit.h"
 #include "Tests/DataLayer/LightsData/MockLightsData.h"
 #include "Tests/DataLayer/AuxBmsData/MockAuxBmsData.h"
+//#include "Tests/DataLayer/CcsData/MockCcsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -31,9 +32,10 @@ class JsonMessageBuilderTest : public ::testing::Test
 {
 };
 
+
 TEST(JsonMessageBuilderTest, keyMotor)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -101,7 +103,7 @@ TEST(JsonMessageBuilderTest, keyMotor)
     .WillByDefault(Return(M1_VEHICLE_VELOCITY_VAL));
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder.buildKeyMotorMessage(mockKeyMotorData);
+        jsonMessageBuilder().buildKeyMotorMessage(mockKeyMotorData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -114,7 +116,7 @@ TEST(JsonMessageBuilderTest, keyMotor)
 
 TEST(JsonMessageBuilderTest, motorDetails)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -274,7 +276,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
     .WillByDefault(Return(M1_SLIP_SPEED_VAL));
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder.buildMotorDetailsMessage(mockMotorDetailsData);
+        jsonMessageBuilder().buildMotorDetailsMessage(mockMotorDetailsData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -287,7 +289,7 @@ TEST(JsonMessageBuilderTest, motorDetails)
 
 TEST(JsonMessageBuilderTest, driverControls)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -386,7 +388,7 @@ TEST(JsonMessageBuilderTest, driverControls)
     .WillByDefault(Return(REGEN_BRAKING_VAL));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder.buildDriverControlsMessage(mockDriverControlsData);
+        jsonMessageBuilder().buildDriverControlsMessage(mockDriverControlsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 
@@ -399,7 +401,7 @@ TEST(JsonMessageBuilderTest, driverControls)
 
 TEST(JsonMessageBuilderTest, motorFaults)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -571,7 +573,7 @@ TEST(JsonMessageBuilderTest, motorFaults)
     .WillByDefault(Return(M1_IPM_OR_MOTOR_TEMPERATURE));
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder.buildMotorFaultsMessage(mockMotorFaultsData);
+        jsonMessageBuilder().buildMotorFaultsMessage(mockMotorFaultsData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -584,7 +586,7 @@ TEST(JsonMessageBuilderTest, motorFaults)
 
 TEST(JsonMessageBuilderTest, batteryFaults)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -743,7 +745,7 @@ TEST(JsonMessageBuilderTest, batteryFaults)
     .WillByDefault(Return(CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder.buildBatteryFaultsMessage(mockBatteryFaultsData);
+        jsonMessageBuilder().buildBatteryFaultsMessage(mockBatteryFaultsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 
@@ -756,7 +758,7 @@ TEST(JsonMessageBuilderTest, batteryFaults)
 
 TEST(JsonMessageBuilderTest, battery)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -893,7 +895,7 @@ TEST(JsonMessageBuilderTest, battery)
     .WillByDefault(Return(AVERAGE_CELL_VOLTAGE_VAL));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder.buildBatteryMessage(mockBatteryData);
+        jsonMessageBuilder().buildBatteryMessage(mockBatteryData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 
@@ -906,7 +908,7 @@ TEST(JsonMessageBuilderTest, battery)
 
 TEST(JsonMessageBuilderTest, mppt)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -1005,7 +1007,7 @@ TEST(JsonMessageBuilderTest, mppt)
 
 
     QJsonArray ACTUAL_JSON_ARRAY =
-        jsonMessageBuilder.buildMpptMessage(mockMpptData);
+        jsonMessageBuilder().buildMpptMessage(mockMpptData);
 
     EXPECT_EQ(EXPECTED_JSON_ARRAY, ACTUAL_JSON_ARRAY);
 
@@ -1018,7 +1020,7 @@ TEST(JsonMessageBuilderTest, mppt)
 
 TEST(JsonMessageBuilderTest, lights)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -1061,7 +1063,7 @@ TEST(JsonMessageBuilderTest, lights)
     .WillByDefault(Return(BMS_STROBE_LIGHT_VAL));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder.buildLightsMessage(mockLightsData);
+        jsonMessageBuilder().buildLightsMessage(mockLightsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 
@@ -1074,7 +1076,7 @@ TEST(JsonMessageBuilderTest, lights)
 
 TEST(JsonMessageBuilderTest, auxBms)
 {
-    JsonMessageBuilder jsonMessageBuilder;
+    JsonMessageBuilder jsonMessageBuilder();
 
     // *INDENT-OFF*
     QString EXPECTED_JSON_MSG = "\
@@ -1114,7 +1116,7 @@ TEST(JsonMessageBuilderTest, auxBms)
     .WillByDefault(Return(CONTACTOR_ERROR_VAL));
 
     QJsonObject ACTUAL_JSON =
-        jsonMessageBuilder.buildAuxBmsMessage(mockAuxBmsData);
+        jsonMessageBuilder().buildAuxBmsMessage(mockAuxBmsData);
 
     EXPECT_EQ(EXPECTED_JSON, ACTUAL_JSON);
 

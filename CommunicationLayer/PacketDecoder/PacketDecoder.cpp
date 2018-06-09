@@ -1,5 +1,7 @@
 #include <QDebug>
+#include <QElapsedTimer>
 
+#include "../../DataLayer/CcsData/CcsData.h"
 #include "PacketDecoder.h"
 #include "../PacketChecksumChecker/I_PacketChecksumChecker.h"
 #include "../MessagingFramework/MessageDefines.h"
@@ -21,11 +23,13 @@ PacketDecoder::~PacketDecoder()
 
 void PacketDecoder::handleValidData(QByteArray messageData)
 {
+
     MessageDefines::Type messageType =
         static_cast<MessageDefines::Type>(messageData.at(INDEX_OF_PACKET_TYPE));
 
     if (MessageDefines::getLengthForMessage(messageType) == messageData.size())
     {
+
         switch (messageType)
         {
             case MessageDefines::KEY_MOTOR:
@@ -64,6 +68,7 @@ void PacketDecoder::handleValidData(QByteArray messageData)
             case MessageDefines::AUX_BMS:
                 emit packetDecoded(AuxBmsMessage(messageData));
                 return;
+
         }
     }
     else
