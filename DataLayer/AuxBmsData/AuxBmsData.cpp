@@ -12,6 +12,7 @@ AuxBmsData::AuxBmsData()
     , strobeBmsLight_(false)
     , allowCharge_(false)
     , contactorError_(false)
+    , highVoltageEnable_(false)
 {
 
 }
@@ -51,6 +52,11 @@ bool AuxBmsData::getContactorError() const
     return contactorError_;
 }
 
+bool AuxBmsData::getHighVoltageEnable() const
+{
+    return highVoltageEnable_;
+}
+
 /*AuxBmsData "Sets"*/
 void AuxBmsData::setPrechargeState(const unsigned char& prechargeState)
 {
@@ -86,4 +92,10 @@ void AuxBmsData::setContactorError(const bool& contactorError)
 {
     contactorError_ = contactorError;
     emit contactorErrorRecieved(contactorError_);
+}
+
+void AuxBmsData::setHighVoltageEnable(const bool& highVoltageEnable)
+{
+    highVoltageEnable_ = highVoltageEnable;
+    emit highVoltageEnableRecieved(highVoltageEnable_);
 }
