@@ -22,6 +22,15 @@ JsonMessageBuilder::JsonMessageBuilder(const I_PacketChecksumChecker& checksumCh
 
     timer_.start();
 }
+JsonMessageBuilder::JsonMessageBuilder()
+{
+
+}
+
+void JsonMessageBuilder::validData()
+{
+
+}
 
 QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
 {
@@ -367,3 +376,5 @@ QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
 
     return mpptJson;
 }
+
+

@@ -12,6 +12,7 @@ class JsonMessageBuilder : public I_JsonMessageBuilder
     Q_OBJECT
 public:
     virtual ~JsonMessageBuilder() {}
+    JsonMessageBuilder();
     JsonMessageBuilder(const I_PacketChecksumChecker& checksumChecker);
     QJsonObject buildAuxBmsMessage(const I_AuxBmsData& data);
     QJsonObject buildCcsMessage(const I_CcsData& data);
