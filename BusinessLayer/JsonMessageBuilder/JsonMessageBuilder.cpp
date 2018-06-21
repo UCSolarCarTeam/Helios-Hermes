@@ -29,7 +29,7 @@ JsonMessageBuilder::JsonMessageBuilder()
 
 void JsonMessageBuilder::validData()
 {
-
+    timer_.restart();
 }
 
 QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
