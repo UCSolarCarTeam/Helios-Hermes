@@ -15,14 +15,14 @@ int main(int argc, char* argv[])
      */
     if (!lockFile.tryLock(100))
     {
-        qDebug() << "An instance of Hermes already exists." << endl;
-        qDebug() << "Quitting..." << endl;
+        qDebug() << "An instance of Hermes already exists.";
+        qDebug() << "Quitting...";
         return 1;
     }
     else
     {
-        qDebug() << "No other instance of Hermes exists." << endl;
-        qDebug() << "Launching Hermes..." << endl;
+        qDebug() << "No other instance of Hermes exists.";
+        qDebug() << "Launching Hermes...";
     }
 
     QScopedPointer<SchulichEpsilonHermes> app;
