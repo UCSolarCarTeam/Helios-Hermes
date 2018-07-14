@@ -13,6 +13,7 @@ public:
     MOCK_CONST_METHOD0(getStrobeBmsLight, bool());
     MOCK_CONST_METHOD0(getAllowCharge, bool());
     MOCK_CONST_METHOD0(getContactorError, bool());
+    MOCK_CONST_METHOD0(getHighVoltageEnable, bool());
 
     /*AuxBmsData "Sets"*/
     MOCK_METHOD1(setPrechargeState, void(const unsigned char&));
@@ -21,4 +22,5 @@ public:
     MOCK_METHOD1(setStrobeBmsLight, void(const bool&));
     MOCK_METHOD1(setAllowCharge, void(const bool&));
     MOCK_METHOD1(setContactorError, void(const bool&));
+    MOCK_METHOD1(setHighVoltageEnable, void(const bool&));
 };

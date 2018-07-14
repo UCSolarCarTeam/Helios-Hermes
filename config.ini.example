@@ -4,19 +4,24 @@ forwardPeriod=500
 
 [UnitNumbers]
 numberOfMotors=2
-numberOfMppts=3
+numberOfMppts=4
 
 [JsonFormat]
 packetTitle=Gen5
 
 [SerialPort]
 portName=/dev/pts/7
-baudrate=9600
+baudrate=115200
+
+[OutputSerialPort]
+outputSerialEnabled=false
+portName=/dev/pts/8
+baudrate=115200
 
 [RabbitMq]
 exchangeName=hermesExchange
-ipAddress=239.255.43.21
-port=44550
+ipAddress=127.0.0.1
+port=5672
 
 [Logging]
 logLevel=3

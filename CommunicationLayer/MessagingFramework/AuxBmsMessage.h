@@ -14,6 +14,7 @@ public:
     bool strobeBmsLight() const;
     bool allowCharge() const;
     bool contactorError() const;
+    bool highVoltageEnable() const;
 
     QString toString() const;
 

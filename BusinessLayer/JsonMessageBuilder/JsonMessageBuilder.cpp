@@ -68,6 +68,7 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
     auxBmsJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
     auxBmsJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
     auxBmsJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
+    auxBmsJson[JsonFormat::HIGH_VOLTAGE_ENABLE] = data.getHighVoltageEnable();
     return auxBmsJson;
 }
 
@@ -197,9 +198,8 @@ QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControl
     driverControlsJson[JsonFormat::HORN] = data.getHorn();
     driverControlsJson[JsonFormat::RESET] = data.getReset();
     driverControlsJson[JsonFormat::AUX] = data.getAux();
-    driverControlsJson[JsonFormat::ACCELERATION] = float(data.getAcceleration()) / 10000;
-    driverControlsJson[JsonFormat::REGEN_BRAKING] = float(data.getRegenBraking()) / 10000;
-
+    driverControlsJson[JsonFormat::ACCELERATION] = float(data.getAcceleration());
+    driverControlsJson[JsonFormat::REGEN_BRAKING] = float(data.getRegenBraking());
     return driverControlsJson;
 }
 
