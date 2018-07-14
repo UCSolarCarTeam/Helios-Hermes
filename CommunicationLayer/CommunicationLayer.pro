@@ -43,12 +43,10 @@ HEADERS += \
    PacketUnstuffer/I_DataInjectionService.h \
    PacketUnstuffer/I_PacketUnstuffer.h \
    PacketUnstuffer/PacketUnstuffer.h \
-<<<<<<< HEAD
     DataPopulators/CcsPopulator.h \
-    MessagingFramework/CcsMessage.h
-=======
+    MessagingFramework/CcsMessage.h\
     CommDeviceControl/OutputRadioCommDevice.h
->>>>>>> f888ff603ee51788d68ffddd9bcc241e8808ab85
+
 
 SOURCES += \
    CommDeviceControl/RadioCommDevice.cpp \
@@ -78,9 +76,6 @@ SOURCES += \
    PacketDecoder/PacketDecoder.cpp \
    PacketSynchronizer/PacketSynchronizer.cpp \
    PacketUnstuffer/PacketUnstuffer.cpp \
-<<<<<<< HEAD
     DataPopulators/CcsPopulator.cpp \
-    MessagingFramework/CcsMessage.cpp
-=======
+    MessagingFramework/CcsMessage.cpp \
     CommDeviceControl/OutputRadioCommDevice.cpp
->>>>>>> f888ff603ee51788d68ffddd9bcc241e8808ab85
