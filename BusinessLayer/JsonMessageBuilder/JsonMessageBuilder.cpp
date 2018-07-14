@@ -73,16 +73,16 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
 
 QJsonObject JsonMessageBuilder::buildCcsMessage(const I_CcsData& data)
 {
-    CcsData ccs;
+    QJsonObject ccsJson = QJsonObject();
+
     if(timer_.elapsed() > 3000)
     {
-        ccs.setCcsAlive(false);
+        ccsJson[JsonFormat::CCS_ALIVE] = false;
     }
     else
     {
-       ccs.setCcsAlive(true);
+        ccsJson[JsonFormat::CCS_ALIVE] = true;
     }
-    QJsonObject ccsJson = QJsonObject();
     ccsJson[JsonFormat::CCS_ALIVE] = data.getCcsAlive();
     return ccsJson;
 }
