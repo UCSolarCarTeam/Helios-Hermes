@@ -1,13 +1,28 @@
 #include "CcsPopulator.h"
+#include <QDebug>
 
-CcsPopulator::CcsPopulator(I_PacketDecoder& packetDecoder, I_CcsData& ccsData)
-    : packetDecoder_(packetDecoder)
+CcsPopulator::CcsPopulator(I_PacketChecksumChecker& checksumChecker, I_CcsData& ccsData)
+    : checksumChecker_(checksumChecker)
     , ccsData_(ccsData)
+    , timer_(new QTimer())
 {
-    connect(&packetDecoder_, SIGNAL(packetDecoded(const CcsMessage)), this, SLOT(populateData(const CcsMessage)));
+    connect(&checksumChecker_, SIGNAL(validDataReceived(QByteArray)), this, SLOT(validData()));
+    connect(timer_, SIGNAL(timeout()), this, SLOT(timerExpired()));
+    timer_->start(3);
+    qDebug("CcsPopulator");
 }
 
-void CcsPopulator::populateData(const CcsMessage message)
+void CcsPopulator::validData()
 {
-    ccsData_.setCcsAlive(message.ccsAlive());
+    timer_->start();
+    ccsData_.setCcsAlive(true);
+    qDebug("helloooooo");
+    //qDebug() << timer_;
 }
+
+void CcsPopulator::timerExpired()
+{
+    ccsData_.setCcsAlive(false);
+    qDebug("hello");
+}
+

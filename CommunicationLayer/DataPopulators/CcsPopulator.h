@@ -1,19 +1,24 @@
 #pragma once
 
 #include <QObject>
-#include "CommunicationLayer/PacketDecoder/I_PacketDecoder.h"
+#include <QTimer>
+#include "CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
 #include "DataLayer/CcsData/I_CcsData.h"
 
 class CcsPopulator : public QObject
 {
     Q_OBJECT
 public:
-    CcsPopulator(I_PacketDecoder& packetDecoder,
-                    I_CcsData& ccsData);
+    CcsPopulator(I_PacketChecksumChecker& checksumChecker,
+                    I_CcsData& ccsData  );
 public slots:
-    void populateData(const CcsMessage);
+    void validData();
+    void timerExpired();
 
 private:
-    I_PacketDecoder& packetDecoder_;
+    I_PacketChecksumChecker& checksumChecker_;
     I_CcsData& ccsData_;
+    QTimer* timer_;
+
+
 };
