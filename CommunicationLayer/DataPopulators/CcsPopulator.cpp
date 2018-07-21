@@ -8,7 +8,7 @@ CcsPopulator::CcsPopulator(I_PacketChecksumChecker& checksumChecker, I_CcsData& 
 {
     connect(&checksumChecker_, SIGNAL(validDataReceived(QByteArray)), this, SLOT(validData()));
     connect(timer_, SIGNAL(timeout()), this, SLOT(timerExpired()));
-    timer_->start(3);
+    timer_->start(3000);
     qDebug("CcsPopulator");
 }
 

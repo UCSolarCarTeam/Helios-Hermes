@@ -80,7 +80,7 @@ QJsonObject JsonMessageBuilder::buildCcsMessage(const I_CcsData& data)
 
     ccsJson[JsonFormat::CCS_ALIVE] = data.getCcsAlive();
     qDebug() << "Get CCS Alive" << data.getCcsAlive();
-   // qDebug() << ccsJson;
+    // qDebug() << ccsJson;
     return ccsJson;
 }
 

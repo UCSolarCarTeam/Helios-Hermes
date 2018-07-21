@@ -1,7 +1,7 @@
 #include "CcsData.h"
 
 CcsData::CcsData()
-    :ccsAlive_(false)
+    : ccsAlive_(false)
 {
 }
 

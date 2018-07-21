@@ -10,7 +10,7 @@ class CcsPopulator : public QObject
     Q_OBJECT
 public:
     CcsPopulator(I_PacketChecksumChecker& checksumChecker,
-                    I_CcsData& ccsData  );
+                 I_CcsData& ccsData  );
 public slots:
     void validData();
     void timerExpired();
