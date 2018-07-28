@@ -2,7 +2,6 @@
 
 namespace
 {
-    const float M_PER_SEC_TO_KM_PER_HOUR = 3.6;
 }
 
 KeyMotorData::KeyMotorData()
@@ -117,7 +116,7 @@ void KeyMotorData::setM0BusVoltage(const float& m0BusVoltage)
 
 void KeyMotorData::setM0VehicleVelocity(const float& m0VehicleVelocity)
 {
-    m0VehicleVelocity_ = (m0VehicleVelocity * M_PER_SEC_TO_KM_PER_HOUR);
+    m0VehicleVelocity_ = m0VehicleVelocity;
 }
 
 void KeyMotorData::setM1Alive(const unsigned char& m1Alive)
@@ -147,7 +146,7 @@ void KeyMotorData::setM1BusVoltage(const float& m1BusVoltage)
 
 void KeyMotorData::setM1VehicleVelocity(const float& m1VehicleVelocity)
 {
-    m1VehicleVelocity_ = (m1VehicleVelocity * M_PER_SEC_TO_KM_PER_HOUR);
+    m1VehicleVelocity_ = m1VehicleVelocity;
 }
 
 

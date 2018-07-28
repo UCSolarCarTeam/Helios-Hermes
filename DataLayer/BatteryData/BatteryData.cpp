@@ -10,9 +10,6 @@ namespace
     const unsigned char BMS_ALWAYS_ON_OFFSET = 0x20;
     const unsigned char BMS_IS_READY_OFFSET = 0x40;
     const unsigned char BMS_IS_CHARGING_OFFSET = 0x80;
-    const int PERCENTAGE_CONVERSION = 2;
-    const int DECI_TO_ONES = 10;
-    const int CENTI_TO_ONES = 100;
 }
 
 BatteryData::BatteryData()
@@ -227,37 +224,37 @@ void BatteryData::setPopulatedCells(const unsigned char& populatedCells)
 
 void BatteryData::set12VInputVoltage(const float& inputVoltage12V)
 {
-    inputVoltage12_ = (inputVoltage12V / DECI_TO_ONES);
+    inputVoltage12_ = inputVoltage12V;
 }
 
 void BatteryData::setFanVoltage(const float& fanVoltage)
 {
-    fanVoltage_ = (fanVoltage / CENTI_TO_ONES);
+    fanVoltage_ = fanVoltage;
 }
 
 void BatteryData::setPackCurrent(const float& packCurrent)
 {
-    packCurrent_ = (packCurrent / DECI_TO_ONES);
+    packCurrent_ = packCurrent;
 }
 
 void BatteryData::setPackVoltage(const float& packVoltage)
 {
-    packVoltage_ = (packVoltage / DECI_TO_ONES);
+    packVoltage_ = packVoltage;
 }
 
 void BatteryData::setPackStateOfCharge(const float& packStateOfCharge)
 {
-    packStateOfCharge_ = (packStateOfCharge / PERCENTAGE_CONVERSION);
+    packStateOfCharge_ = packStateOfCharge;
 }
 
 void BatteryData::setPackAmphours(const float& packAmphours)
 {
-    packAmphours_ = (packAmphours / DECI_TO_ONES);
+    packAmphours_ = packAmphours;
 }
 
 void BatteryData::setPackDepthOfDischarge(const float& packDepthOfDischarge)
 {
-    packDepthOfDischarge_ = (packDepthOfDischarge / PERCENTAGE_CONVERSION);
+    packDepthOfDischarge_ = packDepthOfDischarge;
 }
 
 void BatteryData::setHighTemperature(const unsigned char& highTemperature)
@@ -302,7 +299,7 @@ void BatteryData::setRequestedFanSpeed(const unsigned char& requestedFanSpeed)
 
 void BatteryData::setLowCellVoltage(const unsigned short& lowCellVoltage)
 {
-    lowCellVoltage_ = (lowCellVoltage / DECI_TO_ONES);
+    lowCellVoltage_ = lowCellVoltage;
 }
 
 void BatteryData::setLowCellVoltageId(const unsigned char& lowCellVoltageId)
@@ -312,7 +309,7 @@ void BatteryData::setLowCellVoltageId(const unsigned char& lowCellVoltageId)
 
 void BatteryData::setHighCellVoltage(const unsigned short& highCellVoltage)
 {
-    highCellVoltage_ = (highCellVoltage / DECI_TO_ONES);
+    highCellVoltage_ = highCellVoltage;
 }
 
 void BatteryData::setHighCellVoltageId(const unsigned char& highCellVoltageId)
@@ -322,5 +319,5 @@ void BatteryData::setHighCellVoltageId(const unsigned char& highCellVoltageId)
 
 void BatteryData::setAverageCellVoltage(const unsigned short& averageCellVoltage)
 {
-    averageCellVoltage_ = (averageCellVoltage / DECI_TO_ONES);
+    averageCellVoltage_ = averageCellVoltage;
 }
