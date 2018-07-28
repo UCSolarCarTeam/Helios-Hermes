@@ -22,7 +22,6 @@
 #include "Tests/DataLayer/MpptData/MockMpptUnit.h"
 #include "Tests/DataLayer/LightsData/MockLightsData.h"
 #include "Tests/DataLayer/AuxBmsData/MockAuxBmsData.h"
-//#include "Tests/DataLayer/CcsData/MockCcsData.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -31,7 +30,6 @@ using ::testing::NiceMock;
 class JsonMessageBuilderTest : public ::testing::Test
 {
 };
-
 
 TEST(JsonMessageBuilderTest, keyMotor)
 {

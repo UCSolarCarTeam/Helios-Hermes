@@ -19,6 +19,3 @@ bool CcsMessage::ccsAlive() const
 {
     return static_cast<bool>(messageData_.at(CCS_ALIVE_OFFSET));
 }
-
-
-

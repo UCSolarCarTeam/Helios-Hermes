@@ -20,8 +20,6 @@ JsonMessageBuilder::JsonMessageBuilder(const I_PacketChecksumChecker& checksumCh
 {
     connect(&checksumChecker, SIGNAL(validDataReceived(QByteArray)),
             this, SLOT(validData()));
-
-    //timer_.start();
 }
 JsonMessageBuilder::JsonMessageBuilder()
 {

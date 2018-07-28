@@ -32,8 +32,8 @@ HEADERS += \
    MpptData/MpptUnit.h \
    AuxBmsData/AuxBmsData.h \
    AuxBmsData/I_AuxBmsData.h \
-    CcsData/CcsData.h \
-    CcsData/I_CcsData.h
+   CcsData/CcsData.h \
+   CcsData/I_CcsData.h
 
 SOURCES += \
    DataContainer.cpp \

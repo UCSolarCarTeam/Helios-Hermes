@@ -19,6 +19,4 @@ private:
     I_PacketChecksumChecker& checksumChecker_;
     I_CcsData& ccsData_;
     QTimer* timer_;
-
-
 };
