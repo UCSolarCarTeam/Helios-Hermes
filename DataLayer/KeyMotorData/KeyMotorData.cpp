@@ -1,9 +1,5 @@
 #include "KeyMotorData.h"
 
-namespace
-{
-}
-
 KeyMotorData::KeyMotorData()
     : m0Alive_(0)
     , m0SetCurrent_(0)
@@ -148,5 +144,3 @@ void KeyMotorData::setM1VehicleVelocity(const float& m1VehicleVelocity)
 {
     m1VehicleVelocity_ = m1VehicleVelocity;
 }
-
-

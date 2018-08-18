@@ -10,6 +10,7 @@ namespace
     const unsigned char BMS_ALWAYS_ON_OFFSET = 0x20;
     const unsigned char BMS_IS_READY_OFFSET = 0x40;
     const unsigned char BMS_IS_CHARGING_OFFSET = 0x80;
+    const int DECI_TO_ONES = 10;
 }
 
 BatteryData::BatteryData()
@@ -299,7 +300,7 @@ void BatteryData::setRequestedFanSpeed(const unsigned char& requestedFanSpeed)
 
 void BatteryData::setLowCellVoltage(const unsigned short& lowCellVoltage)
 {
-    lowCellVoltage_ = lowCellVoltage;
+    lowCellVoltage_ = (lowCellVoltage / DECI_TO_ONES);
 }
 
 void BatteryData::setLowCellVoltageId(const unsigned char& lowCellVoltageId)
@@ -309,7 +310,7 @@ void BatteryData::setLowCellVoltageId(const unsigned char& lowCellVoltageId)
 
 void BatteryData::setHighCellVoltage(const unsigned short& highCellVoltage)
 {
-    highCellVoltage_ = highCellVoltage;
+    highCellVoltage_ = (highCellVoltage / DECI_TO_ONES);
 }
 
 void BatteryData::setHighCellVoltageId(const unsigned char& highCellVoltageId)
@@ -319,5 +320,5 @@ void BatteryData::setHighCellVoltageId(const unsigned char& highCellVoltageId)
 
 void BatteryData::setAverageCellVoltage(const unsigned short& averageCellVoltage)
 {
-    averageCellVoltage_ = averageCellVoltage;
+    averageCellVoltage_ = (averageCellVoltage / DECI_TO_ONES);
 }
