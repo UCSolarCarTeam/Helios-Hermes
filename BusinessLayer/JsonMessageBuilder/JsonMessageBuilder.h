@@ -25,10 +25,6 @@ public:
     QJsonArray buildMotorFaultsMessage(const I_MotorFaultsData& data);
     QJsonArray buildMpptMessage(const I_MpptData& data);
 
-private:
-    QElapsedTimer timer_;
-private slots:
-    void validData();
 };
 
 

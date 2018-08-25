@@ -14,21 +14,9 @@
 #include "DataLayer/CcsData/I_CcsData.h"
 #include "DataLayer/CcsData/CcsData.h"
 #include "../CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
-#include <QDebug>
 
-JsonMessageBuilder::JsonMessageBuilder(const I_PacketChecksumChecker& checksumChecker)
-{
-    connect(&checksumChecker, SIGNAL(validDataReceived(QByteArray)),
-            this, SLOT(validData()));
-}
 JsonMessageBuilder::JsonMessageBuilder()
 {
-
-}
-
-void JsonMessageBuilder::validData()
-{
-    //timer_.restart();
 
 }
 
@@ -77,7 +65,6 @@ QJsonObject JsonMessageBuilder::buildCcsMessage(const I_CcsData& data)
     QJsonObject ccsJson = QJsonObject();
 
     ccsJson[JsonFormat::CCS_ALIVE] = data.getCcsAlive();
-    qDebug() << "Get CCS Alive" << data.getCcsAlive();
     return ccsJson;
 }
 
