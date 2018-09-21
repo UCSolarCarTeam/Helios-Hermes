@@ -75,6 +75,7 @@ script:
                            --exclude=SimpleAmqpClient
                            --exclude=rabbitmq-c |
           grep Formatted)"
+    - cd src
     - qmake
     - make
     - make check
