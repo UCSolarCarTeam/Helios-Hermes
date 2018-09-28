@@ -15,11 +15,8 @@ before_install:
     - PATH="/opt/qt55/bin:$PATH"
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     - qt55-env.sh
-    - cd ..
-    - mv Epsilon-Hermes ./src
-    - mkdir -p Epsilon-Hermes/build/.lib/
-    - mv src Epsilon-Hermes/
-    - cd Epsilon-Hermes/src
+    - mkdir -p build/.lib/
+
 
 install:
     # install astyle
@@ -68,6 +65,7 @@ install:
     - sudo cp SimpleAmqpClient/src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient/
 
 script:
+    - cd src
     - "! (astyle *.h *.cpp -r
                            --dry-run
                            --options=astylerc
