@@ -29,14 +29,16 @@ install:
     - sudo cp -r googletest/googletest/include/gtest /usr/local/include
     - sudo cp -r googletest/googlemock/include/gmock /usr/local/include
     - (cd googletest &&
-       g++ -isystem googletest/include/
+       g++ -std=c++11
+           -isystem googletest/include/
            -Igoogletest
            -isystem googlemock/include/
            -Igooglemock
            -pthread
            -c
            googlemock/src/gmock-all.cc &&
-       g++ -isystem googletest/include/
+       g++ -std=c++11
+           -isystem googletest/include/
            -Igoogletest
            -isystem googlemock/include/
            -Igooglemock
@@ -44,7 +46,7 @@ install:
            -c
            googletest/src/gtest-all.cc &&
        ar -rv libgmock.a gtest-all.o gmock-all.o)
-    - cp googletest/libgmock.a ../build/.lib/
+    - cp googletest/libgmock.a build/.lib/
     # install rabbitmq-c
     - git clone https://github.com/alanxz/rabbitmq-c
     - sudo cp rabbitmq-c/librabbitmq/*.h /usr/local/include/
