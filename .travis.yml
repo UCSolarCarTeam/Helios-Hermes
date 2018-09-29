@@ -67,7 +67,6 @@ install:
     - sudo cp SimpleAmqpClient/src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient/
 
 script:
-    - cd src
     - "! (astyle *.h *.cpp -r
                            --dry-run
                            --options=astylerc
