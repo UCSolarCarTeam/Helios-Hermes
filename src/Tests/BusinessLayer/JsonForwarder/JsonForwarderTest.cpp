@@ -114,7 +114,7 @@ TEST_F(JsonForwarderTest, dataForwarded)
     EXPECT_CALL(*messageForwarder_, forwardData(_))
     .Times(AtLeast(FORWARD_ITERATIONS));
     jsonForwarder_->startForwardingData();
-    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC);
+    QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC * 0.75);
 }
 
 TEST_F(JsonForwarderTest, correctTimeStamp)
