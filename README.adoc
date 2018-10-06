@@ -5,24 +5,6 @@ It rebroadcasts a data feed from the Central Communication System and also logs 
 
 The name is inspired by the Olympian god Hermes who is portrayed as a messenger and scribe of the gods.
 
-== File Structure
-
-You have now successfully cloned the Hermes git repo, next is ensuring that you have the proper file structure.
-Originally it should look similar to this:
-
-  - root
-    * Epsilon-Hermes
-
-From the directory that this README is currently located in (we assume this is named Epsilon-Hermes), run the command:
-    `cd ../ && mv ./Epsilon-Hermes ./src && mkdir Epsilon-Hermes && mv ./src ./Epsilon-Hermes/`
-    (replace Epsilon-Hermes with the name of your cloned directory if it is different)
-This will rename the cloned directory to src and move it within a new directory called 'Epsilon-Hermes'.
-Your new file structure should look like:
-
-  - root
-    * Epsilon-Hermes
-      ** src
-      
 == Building in Qt
 
 When running this project in QTCreator, Shadow Build needs to be disabled in `Build` -> `General Settings`, or else a `[copyfiles] Error 1` error may appear.
@@ -131,10 +113,10 @@ To create a `libgmock.a` file in a Linux system follow these instructions in an 
     `cd googletest/`
 
 3. Compile googletest:
-    `g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googletest/src/gtest-all.cc`
+    `+++g++ std=c++11 -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googletest/src/gtest-all.cc+++`
 
 4. Compile googlemock:
-    `g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googlemock/src/gmock-all.cc`
+    `+++g++ std=c++11 -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googlemock/src/gmock-all.cc+++`
 
 5. Collect both the resulting .o files into an archive file:
     `ar -rv libgmock.a gtest-all.o gmock-all.o`
