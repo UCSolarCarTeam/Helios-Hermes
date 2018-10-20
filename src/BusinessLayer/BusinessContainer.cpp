@@ -12,6 +12,7 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                      DataContainer& dataContainer)
     : communicationsMonitoringService_(new CommunicationsMonitoringService(
                                            communicationContainer.packetChecksumChecker()))
+    , jsonMessageBuilder_(new JsonMessageBuilder())
     , jsonForwarder_(new JsonForwarder(
                          *jsonMessageBuilder_,
                          dataContainer.auxBmsData(),
