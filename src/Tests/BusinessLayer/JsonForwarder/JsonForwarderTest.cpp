@@ -32,8 +32,8 @@ using ::testing::NiceMock;
 
 namespace
 {
-    const int FORWARD_INTERVAL_MSEC = 50;
-    const int FORWARD_ITERATIONS = 10;
+    const int FORWARD_INTERVAL_MSEC = 500;
+    const int FORWARD_ITERATIONS = 1;
     const QString PACKET_TITLE = "Gen5";
     const QString MYSQL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }
@@ -112,7 +112,7 @@ MATCHER_P2(JsonStringIs, key, value, "")
 TEST_F(JsonForwarderTest, dataForwarded)
 {
     EXPECT_CALL(*messageForwarder_, forwardData(_))
-    .Times(FORWARD_ITERATIONS);
+    .Times(AtLeast(FORWARD_ITERATIONS));
     jsonForwarder_->startForwardingData();
     QTest::qWait(FORWARD_INTERVAL_MSEC * FORWARD_ITERATIONS + FORWARD_INTERVAL_MSEC * 0.75);
 }

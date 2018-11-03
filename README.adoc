@@ -42,11 +42,11 @@ You can now use cmake to generate the library required by SimpleAmqpClient:
 
 `cmake --build .`
 
-There should now be a `.a` file in your current directory, as well as multiple `*.so*` files. Use the following commands to make them visible to SimpleAmqpClient:
+There should now be a `.a` file in your current directory, as well as multiple `\*.so*` files. Use the following commands to make them visible to SimpleAmqpClient:
 
 `sudo cp librabbitmq/*.a /usr/local/lib/`
 
-`sudo cp librabbitmq/*.so* /usr/local/lib/`
+`sudo cp librabbitmq/\*.so* /usr/local/lib/`
 
 3) Generating SimpleAmqpClient library
 
@@ -73,7 +73,7 @@ The generated library needs to be included in the list of local libraries. To do
 
 Then, run the following commands to copy the library over:
 
-`sudo cp *.so* /usr/local/lib/`
+`sudo cp \*.so* /usr/local/lib/`
 
 `sudo cp ../src/SimpleAmqpClient/*.h /usr/local/include/SimpleAmqpClient`
 
