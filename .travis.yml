@@ -15,11 +15,8 @@ before_install:
     - PATH="/opt/qt55/bin:$PATH"
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     - qt55-env.sh
-    - cd ..
-    - mv Epsilon-Hermes ./src
-    - mkdir -p Epsilon-Hermes/build/.lib/
-    - mv src Epsilon-Hermes/
-    - cd Epsilon-Hermes/src
+    - mkdir -p build/.lib/
+
 
 install:
     # install astyle
@@ -32,14 +29,16 @@ install:
     - sudo cp -r googletest/googletest/include/gtest /usr/local/include
     - sudo cp -r googletest/googlemock/include/gmock /usr/local/include
     - (cd googletest &&
-       g++ -isystem googletest/include/
+       g++ -std=c++11
+           -isystem googletest/include/
            -Igoogletest
            -isystem googlemock/include/
            -Igooglemock
            -pthread
            -c
            googlemock/src/gmock-all.cc &&
-       g++ -isystem googletest/include/
+       g++ -std=c++11
+           -isystem googletest/include/
            -Igoogletest
            -isystem googlemock/include/
            -Igooglemock
@@ -47,7 +46,7 @@ install:
            -c
            googletest/src/gtest-all.cc &&
        ar -rv libgmock.a gtest-all.o gmock-all.o)
-    - cp googletest/libgmock.a ../build/.lib/
+    - cp googletest/libgmock.a build/.lib/
     # install rabbitmq-c
     - git clone https://github.com/alanxz/rabbitmq-c
     - sudo cp rabbitmq-c/librabbitmq/*.h /usr/local/include/
@@ -75,6 +74,7 @@ script:
                            --exclude=SimpleAmqpClient
                            --exclude=rabbitmq-c |
           grep Formatted)"
+    - cd src
     - qmake
     - make
     - make check
