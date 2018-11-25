@@ -18,3 +18,8 @@ SOURCES += \
     InfrastructureContainer.cpp \
     Settings/Settings.cpp \
     Logging/Logging.cpp \
+
+loggingDir.commands = mkdir -p ../../build/log
+
+QMAKE_EXTRA_TARGETS += loggingDir
+POST_TARGETDEPS += loggingDir
