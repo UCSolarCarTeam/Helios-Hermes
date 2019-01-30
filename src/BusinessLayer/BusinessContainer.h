@@ -4,7 +4,6 @@
 
 class CommunicationContainer;
 class DataContainer;
-class I_CommunicationsMonitoringService;
 class I_JsonForwarder;
 class InfrastructureContainer;
 class I_JsonMessageBuilder;
@@ -17,10 +16,7 @@ public:
                                DataContainer& dataContainer);
     ~BusinessContainer();
 
-    I_CommunicationsMonitoringService& communicationsMonitoringService();
-
 private:
-    QScopedPointer<I_CommunicationsMonitoringService> communicationsMonitoringService_;
     QScopedPointer<I_JsonMessageBuilder> jsonMessageBuilder_;
     QScopedPointer<I_JsonForwarder> jsonForwarder_;
 };
