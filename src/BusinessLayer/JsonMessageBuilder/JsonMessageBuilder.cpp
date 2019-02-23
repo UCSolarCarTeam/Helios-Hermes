@@ -1,6 +1,7 @@
 #include "JsonMessageBuilder.h"
 #include "JsonForwarder/JsonDefines.h"
-#include "../CommunicationLayer/PacketDecoder/PacketDecoder.h"
+#include "CommunicationLayer/PacketDecoder/PacketDecoder.h"
+#include "CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
 #include "DataLayer/KeyMotorData/I_KeyMotorData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsUnit.h"
@@ -13,7 +14,6 @@
 #include "DataLayer/AuxBmsData/I_AuxBmsData.h"
 #include "DataLayer/CcsData/I_CcsData.h"
 #include "DataLayer/CcsData/CcsData.h"
-#include "../CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
