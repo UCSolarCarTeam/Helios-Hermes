@@ -9,8 +9,6 @@ DESTDIR = ../../build/.lib
 
 HEADERS += \
    BusinessContainer.h \
-   CommunicationsMonitoringService/CommunicationsMonitoringService.h \
-   CommunicationsMonitoringService/I_CommunicationsMonitoringService.h \
    JsonForwarder/I_JsonForwarder.h \
    JsonForwarder/JsonForwarder.h \
    JsonMessageBuilder/JsonMessageBuilder.h \
@@ -19,6 +17,5 @@ HEADERS += \
 
 SOURCES += \
    BusinessContainer.cpp \
-   CommunicationsMonitoringService/CommunicationsMonitoringService.cpp \
    JsonMessageBuilder/JsonMessageBuilder.cpp \
    JsonForwarder/JsonForwarder.cpp \

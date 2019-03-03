@@ -1,5 +1,5 @@
 #pragma once
-
+#include<QElapsedTimer>
 #include <QObject>
 #include "I_PacketDecoder.h"
 class I_PacketChecksumChecker;
@@ -13,4 +13,5 @@ public:
 
 private slots:
     void handleValidData(QByteArray messageData);
+
 };

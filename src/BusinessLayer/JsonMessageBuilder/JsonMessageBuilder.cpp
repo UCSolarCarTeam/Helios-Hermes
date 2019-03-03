@@ -1,5 +1,7 @@
 #include "JsonMessageBuilder.h"
 #include "JsonForwarder/JsonDefines.h"
+#include "CommunicationLayer/PacketDecoder/PacketDecoder.h"
+#include "CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
 #include "DataLayer/KeyMotorData/I_KeyMotorData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsData.h"
 #include "DataLayer/MotorDetailsData/I_MotorDetailsUnit.h"
@@ -10,9 +12,12 @@
 #include "DataLayer/MpptData/I_MpptData.h"
 #include "DataLayer/LightsData/I_LightsData.h"
 #include "DataLayer/AuxBmsData/I_AuxBmsData.h"
+#include "DataLayer/CcsData/I_CcsData.h"
+#include "DataLayer/CcsData/CcsData.h"
 
 JsonMessageBuilder::JsonMessageBuilder()
 {
+
 }
 
 QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
@@ -53,6 +58,14 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
     auxBmsJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
     auxBmsJson[JsonFormat::HIGH_VOLTAGE_ENABLE] = data.getHighVoltageEnable();
     return auxBmsJson;
+}
+
+QJsonObject JsonMessageBuilder::buildCcsMessage(const I_CcsData& data)
+{
+    QJsonObject ccsJson = QJsonObject();
+
+    ccsJson[JsonFormat::CCS_ALIVE] = data.getCcsAlive();
+    return ccsJson;
 }
 
 QJsonObject JsonMessageBuilder::buildBatteryMessage(const I_BatteryData& data)
@@ -343,3 +356,5 @@ QJsonArray JsonMessageBuilder::buildMpptMessage(const I_MpptData& data)
 
     return mpptJson;
 }
+
+

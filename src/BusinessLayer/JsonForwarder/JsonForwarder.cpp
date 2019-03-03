@@ -18,6 +18,7 @@ namespace
 JsonForwarder::JsonForwarder(
     I_JsonMessageBuilder& jsonMessageBuilder,
     I_AuxBmsData& auxBmsData,
+    I_CcsData& ccsData,
     I_BatteryData& batteryData,
     I_BatteryFaultsData& batteryFaultsData,
     I_DriverControlsData& driverControlsData,
@@ -30,6 +31,7 @@ JsonForwarder::JsonForwarder(
     I_Settings& settings)
     : jsonMessageBuilder_(jsonMessageBuilder)
     , auxBmsData_(auxBmsData)
+    , ccsData_(ccsData)
     , batteryData_(batteryData)
     , batteryFaultsData_(batteryFaultsData)
     , driverControlsData_(driverControlsData)
@@ -76,5 +78,6 @@ void JsonForwarder::forwardData(QDateTime& currentTime)
     baseJson[JsonFormat::MPPT] = jsonMessageBuilder_.buildMpptMessage(mpptData_);
     baseJson[JsonFormat::LIGHTS] = jsonMessageBuilder_.buildLightsMessage(lightsData_);
     baseJson[JsonFormat::AUX_BMS] = jsonMessageBuilder_.buildAuxBmsMessage(auxBmsData_);
+    baseJson[JsonFormat::CCS] = jsonMessageBuilder_.buildCcsMessage(ccsData_);
     messageForwarder_.forwardData(QJsonDocument(baseJson).toJson(QJsonDocument::Compact));
 }

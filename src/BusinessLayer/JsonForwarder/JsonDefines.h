@@ -178,4 +178,8 @@ namespace JsonFormat
     const QString ALLOW_CHARGE = "AllowCharge";
     const QString CONTACTOR_ERROR = "ContactorError";
     const QString HIGH_VOLTAGE_ENABLE = "HighVoltageEnable";
+
+    /* Ccs */
+    const QString CCS = "Ccs";
+    const QString CCS_ALIVE = "CcsAlive";
 }

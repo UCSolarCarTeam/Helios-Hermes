@@ -7,6 +7,7 @@
 #include "CommDeviceControl/RabbitMqMessageForwarder.h"
 #include "CommunicationContainer.h"
 #include "DataPopulators/AuxBmsPopulator.h"
+#include "DataPopulators/CcsPopulator.h"
 #include "DataPopulators/BatteryFaultsPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
 #include "DataPopulators/DriverControlsPopulator.h"
@@ -40,6 +41,7 @@ public:
         , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
         , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
         , mpptPopulator(packetDecoder, dataContainer.mpptData())
+        , ccsPopulator(packetChecksumChecker, dataContainer.ccsData())
     {
     }
 
@@ -61,6 +63,7 @@ public:
     MotorDetailsPopulator motorDetailsPopulator;
     MotorFaultsPopulator motorFaultsPopulator;
     MpptPopulator mpptPopulator;
+    CcsPopulator ccsPopulator;
 };
 
 CommunicationContainer::CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)
