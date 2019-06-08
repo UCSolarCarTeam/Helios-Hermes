@@ -6,7 +6,7 @@ namespace
     const int AUX_BMS_DATA_LENGTH = 8;
     const int BATTERY_DATA_LENGTH = 48;
     const int BATTERY_FAULTS_DATA_LENGTH = 6;
-    const int DRIVER_CONTROLS_DATA_LENGTH = 10;
+    const int DRIVER_CONTROLS_DATA_LENGTH = 9;
     const int KEY_MOTOR_DATA_LENGTH = 43;
     const int LIGHTS_DATA_LENGTH = 3;
     const int MOTOR_DETAILS_DATA_LENGTH = 65;
