@@ -28,6 +28,7 @@ public:
     MOCK_CONST_METHOD0(getReset, bool());
     MOCK_CONST_METHOD0(getAcceleration, unsigned short());
     MOCK_CONST_METHOD0(getRegenBraking, unsigned short());
+    MOCK_CONST_METHOD0(getLapButton, bool());
 
     /*DriverControlsData "Gets"*/
     MOCK_METHOD1(setDriverControlsBoardAlive, void(const unsigned char&));

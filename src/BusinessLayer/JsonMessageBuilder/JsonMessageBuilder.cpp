@@ -178,6 +178,7 @@ QJsonObject JsonMessageBuilder::buildDriverControlsMessage(const I_DriverControl
     driverControlsJson[JsonFormat::HORN] = data.getHorn();
     driverControlsJson[JsonFormat::RESET] = data.getReset();
     driverControlsJson[JsonFormat::AUX] = data.getAux();
+    driverControlsJson[JsonFormat::LAP_BUTTON] = data.getLapButton();
     driverControlsJson[JsonFormat::ACCELERATION] = float(data.getAcceleration());
     driverControlsJson[JsonFormat::REGEN_BRAKING] = float(data.getRegenBraking());
     return driverControlsJson;
