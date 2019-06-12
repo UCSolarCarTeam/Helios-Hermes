@@ -136,7 +136,7 @@ bool DriverControlsData::getAux() const
     return static_cast<bool>(driverInputs_ & AUX_OFFSET);
 }
 
-bool DriverControlsData::getLapButton() const
+bool DriverControlsData::getLap() const
 {
     return static_cast<bool>(driverInputs_ & LAP_OFFSET);
 }

@@ -58,7 +58,7 @@ namespace JsonFormat
     const QString HORN = "Horn";
     const QString RESET = "Reset";
     const QString AUX = "Aux";
-    const QString LAP_BUTTON = "LapButton";
+    const QString LAP = "Lap";
     const QString ACCELERATION = "Acceleration";
     const QString REGEN_BRAKING = "RegenBraking";
 

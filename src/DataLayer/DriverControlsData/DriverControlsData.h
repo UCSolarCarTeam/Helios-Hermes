@@ -28,7 +28,7 @@ public:
     bool getHorn() const;
     bool getReset() const;
     bool getAux() const;
-    bool getLapButton() const;
+    bool getLap() const;
     unsigned short getAcceleration() const;
     unsigned short getRegenBraking() const;
 

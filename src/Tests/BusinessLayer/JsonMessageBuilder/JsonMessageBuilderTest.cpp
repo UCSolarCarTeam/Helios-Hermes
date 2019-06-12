@@ -300,7 +300,7 @@ TEST(JsonMessageBuilderTest, driverControls)
         \"SignalLeft\": true, \
         \"Hazard\": false, \
         \"Interior\": true, \
-        \"LapButton\": true, \
+        \"lap\": true, \
         \"Aux\": true, \
         \"VolumeUp\": false, \
         \"VolumeDown\": true, \
@@ -340,7 +340,7 @@ TEST(JsonMessageBuilderTest, driverControls)
     const bool PUSH_TO_TALK_VAL = false;
     const bool HORN_VAL = true;
     const bool RESET_VAL = false;
-    const bool LAP_BUTTON_VAL = true;
+    const bool LAP_VAL = true;
     const unsigned short ACCELERATION_VAL = 5;
     const unsigned short REGEN_BRAKING_VAL = 2;
 
@@ -382,8 +382,8 @@ TEST(JsonMessageBuilderTest, driverControls)
     .WillByDefault(Return(HORN_VAL));
     ON_CALL(mockDriverControlsData, getReset())
     .WillByDefault(Return(RESET_VAL));
-    ON_CALL(mockDriverControlsData, getLapButton())
-    .WillByDefault(Return(LAP_BUTTON_VAL));
+    ON_CALL(mockDriverControlsData, getLap())
+    .WillByDefault(Return(LAP_VAL));
     ON_CALL(mockDriverControlsData, getAcceleration())
     .WillByDefault(Return(ACCELERATION_VAL));
     ON_CALL(mockDriverControlsData, getRegenBraking())
