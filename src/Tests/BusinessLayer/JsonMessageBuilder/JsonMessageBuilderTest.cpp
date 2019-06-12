@@ -300,7 +300,7 @@ TEST(JsonMessageBuilderTest, driverControls)
         \"SignalLeft\": true, \
         \"Hazard\": false, \
         \"Interior\": true, \
-        \"lap\": true, \
+        \"Lap\": true, \
         \"Aux\": true, \
         \"VolumeUp\": false, \
         \"VolumeDown\": true, \
