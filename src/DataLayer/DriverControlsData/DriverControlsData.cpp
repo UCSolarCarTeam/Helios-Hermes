@@ -22,6 +22,7 @@ namespace
     const unsigned char HORN_OFFSET = 0x10;
     const unsigned char RESET_OFFSET = 0x20;
     const unsigned char AUX_OFFSET = 0x40;
+    const unsigned char LAP_OFFSET = 0x80;
 
 }
 
@@ -133,6 +134,11 @@ bool DriverControlsData::getReset() const
 bool DriverControlsData::getAux() const
 {
     return static_cast<bool>(driverInputs_ & AUX_OFFSET);
+}
+
+bool DriverControlsData::getLap() const
+{
+    return static_cast<bool>(driverInputs_ & LAP_OFFSET);
 }
 
 unsigned short DriverControlsData::getAcceleration() const

@@ -29,6 +29,7 @@ public:
     virtual bool getHorn() const = 0;
     virtual bool getReset() const = 0;
     virtual bool getAux() const = 0;
+    virtual bool getLap() const = 0;
     virtual unsigned short getAcceleration() const = 0;
     virtual unsigned short getRegenBraking() const = 0;
 
