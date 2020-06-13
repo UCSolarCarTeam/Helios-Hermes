@@ -11,8 +11,11 @@ namespace
     const int AUX_BMS_ALIVE_OFFSET = 3;
     const int STROBE_BMS_LIGHT_OFFSET = 4;
     const int ALLOW_CHARGE_OFFSET = 5;
-    const int CONTACTOR_ERROR_OFFSET = 6;
-    const int HIGH_VOLTAGE_ENABLE_OFFSET = 7;
+    const int HIGH_VOLTAGE_ENABLE_STATE_OFFSET = 6;
+    const int ALLOW_DISCHARGE_OFFSET = 7;
+    const int ORION_CAN_RECEIVED_RECENTLY = 8;
+    const int AUX_CONTACTOR_DEBUG_INFO_OFFSET = 9;
+    const int AUX_TRIP_OFFSET = 10;
 }
 
 AuxBmsMessage::AuxBmsMessage(const QByteArray& messageData)
@@ -44,15 +47,31 @@ bool AuxBmsMessage::allowCharge() const
     return static_cast<bool>(messageData_.at(ALLOW_CHARGE_OFFSET));
 }
 
-bool AuxBmsMessage::contactorError() const
+bool AuxBmsMessage::highVoltageEnableState() const
 {
-    return static_cast<bool>(messageData_.at(CONTACTOR_ERROR_OFFSET));
+    return static_cast<bool>(messageData_.at(HIGH_VOLTAGE_ENABLE_STATE_OFFSET));
 }
 
-bool AuxBmsMessage::highVoltageEnable() const
+bool AuxBmsMessage::allowDischarge() const
 {
-    return static_cast<bool>(messageData_.at(HIGH_VOLTAGE_ENABLE_OFFSET));
+    return static_cast<bool>(messageData_.at(ALLOW_DISCHARGE_OFFSET));
 }
+
+bool AuxBmsMessage::orionCanReceivedRecently() const
+{
+    return static_cast<bool>(messageData_.at(ORION_CAN_RECEIVED_RECENTLY));
+}
+
+unsigned char AuxBmsMessage::auxContactorDebugInfo() const
+{
+    return getUnsignedChar(messageData_, AUX_CONTACTOR_DEBUG_INFO_OFFSET);
+}
+
+unsigned char AuxBmsMessage::auxTrip() const
+{
+    return getUnsignedChar(messageData_, AUX_TRIP_OFFSET);
+}
+
 QString AuxBmsMessage::toString() const
 {
     QString messageString;
@@ -62,7 +81,9 @@ QString AuxBmsMessage::toString() const
     messageString += QString::number(auxBmsAlive()) + ", ";
     messageString += QString::number(strobeBmsLight()) + ", ";
     messageString += QString::number(allowCharge()) + ", ";
-    messageString += QString::number(contactorError()) + ", ";
-    messageString += QString::number(highVoltageEnable()) + ", ";
+    messageString += QString::number(highVoltageEnableState()) + ", ";
+    messageString += QString::number(allowDischarge()) + ", ";
+    messageString += QString::number(auxContactorDebugInfo()) + ", ";
+    messageString += QString::number(auxTrip()) + ", ";
     return messageString;
 }

@@ -55,8 +55,23 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
     auxBmsJson[JsonFormat::AUX_BMS_ALIVE] = data.getAuxBmsAlive();
     auxBmsJson[JsonFormat::STROBE_BMS_LIGHT] = data.getStrobeBmsLight();
     auxBmsJson[JsonFormat::ALLOW_CHARGE] = data.getAllowCharge();
-    auxBmsJson[JsonFormat::CONTACTOR_ERROR] = data.getContactorError();
-    auxBmsJson[JsonFormat::HIGH_VOLTAGE_ENABLE] = data.getHighVoltageEnable();
+    auxBmsJson[JsonFormat::HIGH_VOLTAGE_ENABLE_STATE] = data.getHighVoltageEnableState();
+    auxBmsJson[JsonFormat::ALLOW_DISCHARGE] = data.getAllowDischarge();
+    auxBmsJson[JsonFormat::ORION_CAN_RECEIVED_RECENTLY] = data.getOrionCanReceivedRecently();
+    auxBmsJson[JsonFormat::CHARGE_CONTACTOR_ERROR] = data.getChargeContactorError();
+    auxBmsJson[JsonFormat::DISCHARGE_CONTACTOR_ERROR] = data.getDischargeContactorError();
+    auxBmsJson[JsonFormat::COMMON_CONTACTOR_ERROR] = data.getCommonContactorError();
+    auxBmsJson[JsonFormat::DISCHARGE_SHOULD_TRIP] = data.getDischargeShouldTrip();
+    auxBmsJson[JsonFormat::CHARGE_SHOULD_TRIP] = data.getChargeShouldTrip();
+    auxBmsJson[JsonFormat::CHARGE_OPEN_BUT_SHOULD_BE_CLOSED] = data.getChargeOpenButShouldBeClosed();
+    auxBmsJson[JsonFormat::DISCHARGE_OPEN_BUT_SHOULD_BE_CLOSED] = data.getDischargeOpenButShouldBeClosed();
+    auxBmsJson[JsonFormat::CHARGE_TRIP_DUE_TO_HIGH_CELL_VOLTAGE] = data.getChargeTripDueToHighCellVoltage();
+    auxBmsJson[JsonFormat::CHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT] = data.getChargeTripDueToHighTemperatureAndCurrent();
+    auxBmsJson[JsonFormat::CHARGE_TRIP_DUE_TO_PACK_CURRENT] = data.getChargeTripDueToPackCurrent();
+    auxBmsJson[JsonFormat::DISCHARGE_TRIP_DUE_TO_LOW_CELL_VOLTAGE] = data.getDischargeTripDueToLowCellVoltage();
+    auxBmsJson[JsonFormat::DISCHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT] = data.getDischargeTripDueToHighTemperatureAndCurrent();
+    auxBmsJson[JsonFormat::DISCHARGE_TRIP_DUE_TO_PACK_CURRENT] = data.getDischargeTripDueToPackCurrent();
+    auxBmsJson[JsonFormat::PROTECTION_TRIP] = data.getProtectionTrip();
     return auxBmsJson;
 }
 
