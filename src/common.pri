@@ -4,9 +4,14 @@ CONFIG += c++11 debug console static
 
 INCLUDEPATH += ..
 
-OBJECTS_DIR = ../../build/.obj
-MOC_DIR = ../../build/.moc
-RCC_DIR = ../../build/.rcc
-UI_DIR = ../../build/.ui
+CONFIG += conan_basic_setup
+! include($$OUT_PWD/../conanbuildinfo.pri) {
+    error("Could not find conanbuildinfo.pri file!")
+}
 
-LIBS += -lSimpleAmqpClient -lrabbitmq
+OBJECTS_DIR = .obj
+MOC_DIR = .moc
+RCC_DIR = .rcc
+UI_DIR = .ui
+
+LIBS += -ldl
