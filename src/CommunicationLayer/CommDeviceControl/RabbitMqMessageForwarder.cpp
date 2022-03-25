@@ -19,6 +19,18 @@ RabbitMqMessageForwarder::RabbitMqMessageForwarder(I_Settings& settings)
     exchangeName_ = settings.exchangeName();
     ipAddress_ = settings.ipAddress();
     port_ = settings.port();
+
+
+    //Setting up openOpts
+    AmqpClient::Channel::OpenOpts::BasicAuth auth;
+    auth.password = "guest";
+    auth.username = "guest";
+    openOpts_.host = ipAddress_.toStdString();
+    openOpts_.port = port_;
+    openOpts_.auth = auth;
+    //Vhost and Frame max value are taken from default value in Channel
+    openOpts_.vhost = "/";
+    openOpts_.frame_max = 131072;
     setupChannel();
 }
 
@@ -40,7 +52,7 @@ void RabbitMqMessageForwarder::setupChannel()
 
         try
         {
-            channel_ = AmqpClient::Channel::Create(ipAddress_.toStdString(), port_);
+            channel_ = AmqpClient::Channel::Open(openOpts_);
         }
         catch (std::exception&)
         {
