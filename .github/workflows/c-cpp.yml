@@ -23,5 +23,6 @@ jobs:
       run: conan install ../Epsilon-Hermes --build=missing -s compiler.libcxx="libstdc++11"
     - name: qmake
       run: qmake ../Epsilon-Hermes/src/
+    - run: cd ../Epsilon-Hermes/src/
     - run: make
     - run: make check
