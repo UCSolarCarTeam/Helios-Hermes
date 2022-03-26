@@ -46,7 +46,7 @@ void PacketUnstuffer::handleFramedPacket(QByteArray packet)
 
         if (indexOfNextCode < 0xFF && indexOfNextCode < length)
         {
-            decodedData.append(QChar(0x00));
+            decodedData.append(char(0x00));
         }
 
         indexOfCode = indexOfNextCode;
