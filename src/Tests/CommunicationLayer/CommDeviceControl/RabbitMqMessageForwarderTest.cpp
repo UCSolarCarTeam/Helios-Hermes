@@ -72,7 +72,7 @@ protected:
 void RabbitMqMessageForwarderTest::sendMessage(const QString& message)
 {
     QByteArray expectedBytes = QByteArray();
-    expectedBytes.append(message);
+    expectedBytes.append(message.toStdString().c_str());
     forwarder->forwardData(expectedBytes);
 }
 
@@ -89,7 +89,19 @@ QString RabbitMqMessageForwarderTest::receiveMessage(bool setupConsume)
 
 void RabbitMqMessageForwarderTest::setupReceiver()
 {
-    receiver = AmqpClient::Channel::Create(MOCK_IP.toStdString(), MOCK_PORT);
+    AmqpClient::Channel::OpenOpts mockOpts;
+    //Setting up openOpts
+    AmqpClient::Channel::OpenOpts::BasicAuth auth;
+    auth.password = "guest";
+    auth.username = "guest";
+    mockOpts.host = MOCK_IP.toStdString();
+    mockOpts.port = MOCK_PORT;
+    mockOpts.auth = auth;
+    //Vhost and Frame max value are taken from default value in Channel
+    mockOpts.vhost = "/";
+    mockOpts.frame_max = 131072;
+
+    receiver = AmqpClient::Channel::Open(mockOpts);
     // passive (false), durable (true), exclusive (false), auto_delete (false)
     receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
     receiver->DeclareExchange(MOCK_EXCHANGE.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
