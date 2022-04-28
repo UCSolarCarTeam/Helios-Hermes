@@ -36,7 +36,9 @@ bool RadioCommDevice::connectToDataSource()
     }
     else
     {
-        qWarning() << serialPort_.errorString();
+        // Use qWarning to redirect these to stderr
+        qDebug() << serialPort_.error();
+        qDebug() << serialPort_.errorString();
         return false;
     }
 }
@@ -48,7 +50,8 @@ void RadioCommDevice::handleSerialDataIncoming()
 
     if (incomingData.isEmpty())
     {
-        qWarning() << "Incoming data empty";
+        // Use qWarning to redirect these to stderr
+        qDebug() << "Incoming data empty";
         return;
     }
 

@@ -8,7 +8,7 @@ class CommunicationContainer;
 class DataContainer;
 class BusinessContainer;
 
-class SchulichEpsilonHermes : public QApplication
+class SchulichEpsilonHermes : public QCoreApplication
 {
 public:
     SchulichEpsilonHermes(int& argc, char** argv);
