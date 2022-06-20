@@ -1105,6 +1105,10 @@ TEST(JsonMessageBuilderTest, auxBms)
             \"DischargeTripDueToHighTemperatureAndCurrent\": true, \
             \"DischargeTripDueToPackCurrent\": false, \
             \"ProtectionTrip\": false \
+            \"TripDueToOrionMessageTimeout\": false \
+            \"ChargeNotClosedDueToHighCurrent\": false \
+            \"DischargeNotClosedDueToHighCurrent\": false \
+            \"TripDueToContactorDisconnectedUnexpectedly\": false \
         }";
 
        //*INDENT-ON*
@@ -1137,6 +1141,10 @@ TEST(JsonMessageBuilderTest, auxBms)
     const bool DISCHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT_VAL = true;
     const bool DISCHARGE_TRIP_DUE_TO_PACK_CURRENT_VAL = false;
     const bool PROTECTION_TRIP_VAL = false;
+    const bool TRIP_DUE_TO_ORION_MESSAGE_TIMEOUT_VAL = false;
+    const bool CHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_VAL = false;
+    const bool DISCHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_VAL = false;
+    const bool TRIP_DUE_TO_CONTACTOR_DISCONNECTED_UNEXPECTEDLY = false;
 
     ON_CALL(mockAuxBmsData, getPrechargeState())
     .WillByDefault(Return(PRECHARGE_STATE_VAL));
@@ -1184,6 +1192,14 @@ TEST(JsonMessageBuilderTest, auxBms)
     .WillByDefault(Return(DISCHARGE_TRIP_DUE_TO_PACK_CURRENT_VAL));
     ON_CALL(mockAuxBmsData, getProtectionTrip())
     .WillByDefault(Return(PROTECTION_TRIP_VAL));
+    ON_CALL(mockAuxBmsData, getTripDueToOrionMessageTimeout())
+    .WillByDefault(Return(TRIP_DUE_TO_ORION_MESSAGE_TIMEOUT_VAL));
+    ON_CALL(mockAuxBmsData, getChargeNotClosedDueToHighCurrent())
+    .WillByDefault(Return(CHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_VAL));
+    ON_CALL(mockAuxBmsData, getDischargeNotClosedDueToHighCurrent())
+    .WillByDefault(Return(DISCHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_VAL));
+    ON_CALL(mockAuxBmsData, getTripDueToContactorDisconnectedUnexpectedly())
+    .WillByDefault(Return(TRIP_DUE_TO_CONTACTOR_DISCONNECTED_UNEXPECTEDLY));
 
     QJsonObject ACTUAL_JSON =
         jsonMessageBuilder.buildAuxBmsMessage(mockAuxBmsData);

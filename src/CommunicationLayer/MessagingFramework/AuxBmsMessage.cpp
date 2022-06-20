@@ -67,9 +67,9 @@ unsigned char AuxBmsMessage::auxContactorDebugInfo() const
     return getUnsignedChar(messageData_, AUX_CONTACTOR_DEBUG_INFO_OFFSET);
 }
 
-unsigned char AuxBmsMessage::auxTrip() const
+unsigned short AuxBmsMessage::auxTrip() const
 {
-    return getUnsignedChar(messageData_, AUX_TRIP_OFFSET);
+    return getUnsignedShort(messageData_, AUX_TRIP_OFFSET);
 }
 
 QString AuxBmsMessage::toString() const

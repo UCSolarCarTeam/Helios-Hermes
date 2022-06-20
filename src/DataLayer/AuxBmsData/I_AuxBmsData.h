@@ -45,6 +45,11 @@ public:
     virtual bool getDischargeTripDueToPackCurrent() const = 0;
     virtual bool getProtectionTrip() const = 0;
 
+    virtual bool getTripDueToOrionMessageTimeout() const = 0;
+    virtual bool getChargeNotClosedDueToHighCurrent() const = 0;
+    virtual bool getDischargeNotClosedDueToHighCurrent() const = 0;
+    virtual bool getTripDueToContactorDisconnectedUnexpectedly() const = 0;
+
     /*AuxBmsData "Sets"*/
     virtual void setPrechargeState(const unsigned char&) = 0;
     virtual void setAuxVoltage(const unsigned char&) = 0;
@@ -56,5 +61,5 @@ public:
     virtual void setOrionCanReceivedRecently(const bool&) = 0;
 
     virtual void setAuxContactorDebugInfo(const unsigned char auxContactorDebugInfo) = 0;
-    virtual void setAuxTrip(const unsigned char auxTrip) = 0;
+    virtual void setAuxTrip(const unsigned short auxTrip) = 0;
 };

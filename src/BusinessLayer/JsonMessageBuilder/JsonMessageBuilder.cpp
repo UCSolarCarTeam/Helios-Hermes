@@ -72,6 +72,10 @@ QJsonObject JsonMessageBuilder::buildAuxBmsMessage(const I_AuxBmsData& data)
     auxBmsJson[JsonFormat::DISCHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT] = data.getDischargeTripDueToHighTemperatureAndCurrent();
     auxBmsJson[JsonFormat::DISCHARGE_TRIP_DUE_TO_PACK_CURRENT] = data.getDischargeTripDueToPackCurrent();
     auxBmsJson[JsonFormat::PROTECTION_TRIP] = data.getProtectionTrip();
+    auxBmsJson[JsonFormat::TRIP_DUE_TO_ORION_MESSAGE_TIMEOUT] = data.getTripDueToOrionMessageTimeout();
+    auxBmsJson[JsonFormat::CHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT] = data.getChargeNotClosedDueToHighCurrent();
+    auxBmsJson[JsonFormat::DISCHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT] = data.getDischargeNotClosedDueToHighCurrent();
+    auxBmsJson[JsonFormat::TRIP_DUE_TO_CONTACTOR_DISCONNECTED_UNEXPECTEDLY] = data.getTripDueToContactorDisconnectedUnexpectedly();
     return auxBmsJson;
 }
 

@@ -1,4 +1,6 @@
 #pragma once
+#include <QString>
+
 
 namespace JsonFormat
 {
@@ -194,6 +196,10 @@ namespace JsonFormat
     const QString DISCHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT = "DischargeTripDueToHighTemperatureAndCurrent";
     const QString DISCHARGE_TRIP_DUE_TO_PACK_CURRENT = "DischargeTripDueToPackCurrent";
     const QString PROTECTION_TRIP = "ProtectionTrip";
+    const QString TRIP_DUE_TO_ORION_MESSAGE_TIMEOUT = "TripDueToOrionMessageTimeout";
+    const QString CHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT = "ChargeNotClosedDueToHighCurrent";
+    const QString DISCHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT = "DischargeNotClosedDueToHighCurrent";
+    const QString TRIP_DUE_TO_CONTACTOR_DISCONNECTED_UNEXPECTEDLY = "TripDueToContactorDisconnectedUnexpectedly";
 
     /* Ccs */
     const QString CCS = "Ccs";

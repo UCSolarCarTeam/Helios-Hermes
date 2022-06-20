@@ -10,13 +10,19 @@ namespace
     const unsigned char CHARGE_OPEN_BUT_SHOULD_BE_CLOSED_MASK                  = 0x20;
     const unsigned char DISCHARGE_OPEN_BUT_SHOULD_BE_CLOSED_MASK               = 0x40;
 
-    const unsigned char CHARGE_TRIP_DUE_TO_HIGH_CELL_VOLTAGE_MASK              = 0x01;
-    const unsigned char CHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT_MASK   = 0x02;
-    const unsigned char CHARGE_TRIP_DUE_TO_PACK_CURRENT_MASK                   = 0x04;
-    const unsigned char DISCHARGE_TRIP_DUE_TO_LOW_CELL_VOLTAGE_MASK            = 0x08;
-    const unsigned char DISCHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT_MASK = 0x10;
-    const unsigned char DISCHARGE_TRIP_DUE_TO_PACK_CURRENT_MASK                = 0x20;
-    const unsigned char PROTECTION_TRIP_MASK                                   = 0x40;
+    const unsigned short CHARGE_TRIP_DUE_TO_HIGH_CELL_VOLTAGE_MASK              = 0x0001;
+    const unsigned short CHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT_MASK   = 0x0002;
+    const unsigned short CHARGE_TRIP_DUE_TO_PACK_CURRENT_MASK                   = 0x0004;
+    const unsigned short DISCHARGE_TRIP_DUE_TO_LOW_CELL_VOLTAGE_MASK            = 0x0008;
+    const unsigned short DISCHARGE_TRIP_DUE_TO_HIGH_TEMPERATURE_AND_CURRENT_MASK= 0x0010;
+    const unsigned short DISCHARGE_TRIP_DUE_TO_PACK_CURRENT_MASK                = 0x0020;
+    const unsigned short PROTECTION_TRIP_MASK                                   = 0x0040;
+
+    const unsigned short TRIP_DUE_TO_ORION_MESSAGE_TIMEOUT_MASK                 = 0X0080;
+
+    const unsigned short CHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_MASK             = 0x0100;
+    const unsigned short DISCHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_MASK          = 0x0200;
+    const unsigned short TRIP_DUE_TO_CONTACTOR_DISCONNECTED_UNEXPECTEDLY_MASK   = 0x0400;
 }
 
 AuxBmsData::AuxBmsData()
@@ -149,6 +155,26 @@ bool AuxBmsData::getProtectionTrip() const
     return auxMaskedBit(PROTECTION_TRIP_MASK, auxTrip_);
 }
 
+bool AuxBmsData::getTripDueToOrionMessageTimeout() const
+{
+    return auxMaskedBit(TRIP_DUE_TO_ORION_MESSAGE_TIMEOUT_MASK, auxTrip_);
+}
+
+bool AuxBmsData::getChargeNotClosedDueToHighCurrent() const
+{
+    return auxMaskedBit(CHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_MASK, auxTrip_);
+}
+
+bool AuxBmsData::getDischargeNotClosedDueToHighCurrent() const
+{
+    return auxMaskedBit(DISCHARGE_NOT_CLOSED_DUE_TO_HIGH_CURRENT_MASK, auxTrip_);
+}
+
+bool AuxBmsData::getTripDueToContactorDisconnectedUnexpectedly() const
+{
+    return auxMaskedBit(TRIP_DUE_TO_CONTACTOR_DISCONNECTED_UNEXPECTEDLY_MASK, auxTrip_);
+}
+
 /*AuxBmsData "Sets"*/
 void AuxBmsData::setPrechargeState(const unsigned char& prechargeState)
 {
@@ -195,12 +221,12 @@ void AuxBmsData::setAuxContactorDebugInfo(const unsigned char auxContactorDebugI
     auxContactorDebugInfo_ = auxContactorDebugInfo;
 }
 
-void AuxBmsData::setAuxTrip(const unsigned char auxTrip)
+void AuxBmsData::setAuxTrip(const unsigned short auxTrip)
 {
     auxTrip_ = auxTrip;
 }
 
-bool AuxBmsData::auxMaskedBit(const unsigned char mask, unsigned char bits) const
+bool AuxBmsData::auxMaskedBit(const unsigned short mask, unsigned short bits) const
 {
     return static_cast<bool>(bits & mask);
 }

@@ -17,7 +17,7 @@ public:
     bool allowDischarge() const;
     bool orionCanReceivedRecently() const;
     unsigned char auxContactorDebugInfo() const;
-    unsigned char auxTrip() const;
+    unsigned short auxTrip() const;
 
     QString toString() const;
 

@@ -31,6 +31,10 @@ public:
     MOCK_CONST_METHOD0(getDischargeTripDueToHighTemperatureAndCurrent, bool());
     MOCK_CONST_METHOD0(getDischargeTripDueToPackCurrent, bool());
     MOCK_CONST_METHOD0(getProtectionTrip, bool());
+    MOCK_CONST_METHOD0(getTripDueToOrionMessageTimeout, bool());
+    MOCK_CONST_METHOD0(getChargeNotClosedDueToHighCurrent, bool());
+    MOCK_CONST_METHOD0(getDischargeNotClosedDueToHighCurrent, bool());
+    MOCK_CONST_METHOD0(getTripDueToContactorDisconnectedUnexpectedly, bool());
 
     /*AuxBmsData "Sets"*/
     MOCK_METHOD1(setPrechargeState, void(const unsigned char&));
@@ -43,5 +47,5 @@ public:
     MOCK_METHOD1(setOrionCanReceivedRecently, void(const bool&));
 
     MOCK_METHOD1(setAuxContactorDebugInfo, void(const unsigned char));
-    MOCK_METHOD1(setAuxTrip, void(const unsigned char));
+    MOCK_METHOD1(setAuxTrip, void(const unsigned short));
 };

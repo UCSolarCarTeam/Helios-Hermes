@@ -35,6 +35,12 @@ public:
     bool getDischargeTripDueToPackCurrent() const;
     bool getProtectionTrip() const;
 
+    bool getTripDueToOrionMessageTimeout() const;
+    bool getChargeNotClosedDueToHighCurrent() const;
+    bool getDischargeNotClosedDueToHighCurrent() const;
+    bool getTripDueToContactorDisconnectedUnexpectedly() const;
+
+
     /*AuxBmsData "Sets"*/
     void setPrechargeState(const unsigned char&);
     void setAuxVoltage(const unsigned char&);
@@ -46,10 +52,10 @@ public:
     void setOrionCanReceivedRecently(const bool&);
 
     void setAuxContactorDebugInfo(const unsigned char auxContactorDebugInfo);
-    void setAuxTrip(const unsigned char auxTrip);
+    void setAuxTrip(const unsigned short auxTrip);
 
 private:
-    bool auxMaskedBit(const unsigned char mask, unsigned char bits) const;
+    bool auxMaskedBit(const unsigned short mask, unsigned short bits) const;
 
     PrechargeState prechargeState_;
     unsigned char auxVoltage_;
@@ -60,5 +66,5 @@ private:
     bool allowDischarge_;
     bool orionCanReceivedRecently_;
     unsigned char auxContactorDebugInfo_;
-    unsigned char auxTrip_;
+    unsigned short auxTrip_;
 };
