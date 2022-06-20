@@ -67,7 +67,7 @@ void JsonForwarder::forwardData(QDateTime& currentTime)
 {
     QJsonObject baseJson = QJsonObject();
     baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
-    baseJson[JsonFormat::TIMESTAMP] = currentTime.toUTC().toString(MYSQL_DATE_FORMAT);
+    baseJson[JsonFormat::TIMESTAMP] = currentTime.toUTC().toMSecsSinceEpoch();
 
     baseJson[JsonFormat::KEY_MOTOR] = jsonMessageBuilder_.buildKeyMotorMessage(keyMotorData_);
     baseJson[JsonFormat::MOTOR_DETAILS] = jsonMessageBuilder_.buildMotorDetailsMessage(motorDetailsData_);
