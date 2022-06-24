@@ -1,4 +1,5 @@
 #include "AuxBmsPopulator.h"
+#include "QDebug"
 
 AuxBmsPopulator::AuxBmsPopulator(I_PacketDecoder& packetDecoder, I_AuxBmsData& auxBmsData)
     : packetDecoder_(packetDecoder)
@@ -19,4 +20,6 @@ void AuxBmsPopulator::populateData(const AuxBmsMessage message)
     auxBmsData_.setOrionCanReceivedRecently(message.orionCanReceivedRecently());
     auxBmsData_.setAuxContactorDebugInfo(message.auxContactorDebugInfo());
     auxBmsData_.setAuxTrip(message.auxTrip());
+
+    //qDebug() << message.toString();
 }

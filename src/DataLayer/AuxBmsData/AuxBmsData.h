@@ -55,7 +55,8 @@ public:
     void setAuxTrip(const unsigned short auxTrip);
 
 private:
-    bool auxMaskedBit(const unsigned short mask, unsigned short bits) const;
+    bool auxTripMaskedBit(const unsigned short mask, unsigned short bits) const;
+    bool auxContactorMaskedBit(const unsigned char mask, unsigned char bits) const;
 
     PrechargeState prechargeState_;
     unsigned char auxVoltage_;
