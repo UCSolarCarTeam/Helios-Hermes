@@ -60,7 +60,7 @@ count(TRAVIS_DEFINED, 0) {
 
 DESTDIR = ../bin/tests/
 
-copyfiles.commands += cp ../../src/Tests/testconfig.ini $${DESTDIR}
+copyfiles.commands += cp $$PWD/testconfig.ini $${DESTDIR}
 
 QMAKE_EXTRA_TARGETS += copyfiles
 POST_TARGETDEPS += copyfiles

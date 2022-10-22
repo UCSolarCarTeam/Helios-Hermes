@@ -6,7 +6,7 @@
 #include "SchulichEpsilonHermes.h"
 
 SchulichEpsilonHermes::SchulichEpsilonHermes(int& argc, char** argv)
-    : QApplication(argc, argv)
+    : QCoreApplication(argc, argv)
     , infrastructureContainer_(new InfrastructureContainer())
     , dataContainer_(new DataContainer(infrastructureContainer_->settings()))
     , communicationContainer_(new CommunicationContainer(*dataContainer_,

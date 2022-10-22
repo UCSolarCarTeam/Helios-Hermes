@@ -5,7 +5,7 @@
 
 namespace
 {
-    const QChar FRAMING_BYTE = 0x00;
+    const char FRAMING_BYTE = 0x00;
 }
 
 PacketSynchronizer::PacketSynchronizer(

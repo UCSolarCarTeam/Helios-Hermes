@@ -20,6 +20,7 @@ public slots:
 private:
     void setupChannel();
     AmqpClient::Channel::ptr_t channel_;
+    AmqpClient::Channel::OpenOpts openOpts_;
     QString exchangeName_;
     QString ipAddress_;
     quint16 port_;
