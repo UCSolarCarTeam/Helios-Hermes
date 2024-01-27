@@ -1,7 +1,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include <QHostAddress>
-#include <QTextCodec>
+#include <QtCore5Compat/QTextCodec>
 
 
 #include "InfrastructureLayer/Settings/I_Settings.h"
@@ -22,15 +22,15 @@ RabbitMqMessageForwarder::RabbitMqMessageForwarder(I_Settings& settings)
 
 
     //Setting up openOpts
-    AmqpClient::Channel::OpenOpts::BasicAuth auth;
-    auth.password = "guest";
-    auth.username = "guest";
-    openOpts_.host = ipAddress_.toStdString();
-    openOpts_.port = port_;
-    openOpts_.auth = auth;
-    //Vhost and Frame max value are taken from default value in Channel
-    openOpts_.vhost = "/";
-    openOpts_.frame_max = 131072;
+    // AmqpClient::Channel::OpenOpts::BasicAuth auth;
+    // auth.password = "guest";
+    // auth.username = "guest";
+    // openOpts_.host = ipAddress_.toStdString();
+    // openOpts_.port = port_;
+    // openOpts_.auth = auth;
+    // //Vhost and Frame max value are taken from default value in Channel
+    // openOpts_.vhost = "/";
+    // openOpts_.frame_max = 131072;
     setupChannel();
 }
 
@@ -41,59 +41,59 @@ RabbitMqMessageForwarder::~RabbitMqMessageForwarder()
 
 void RabbitMqMessageForwarder::setupChannel()
 {
-    quint32 i = 0;
+    // quint32 i = 0;
 
-    do
-    {
-        if (i++)
-        {
-            qInfo() << "RabbitMqMessageForwarder: Attempting to reconnect";
-        }
+    // do
+    // {
+    //     if (i++)
+    //     {
+    //         qInfo() << "RabbitMqMessageForwarder: Attempting to reconnect";
+    //     }
 
-        try
-        {
-            channel_ = AmqpClient::Channel::Open(openOpts_);
-        }
-        catch (std::exception&)
-        {
-            if (channel_ == NULL)
-            {
-                if (i == (TIMEOUT / SLEEP_TIME))
-                {
-                    qWarning() << "RabbitMqMessageForwarder timed out waiting for connection to broker";
-                    throw;
-                }
+    //     try
+    //     {
+    //         channel_ = AmqpClient::Channel::Open(openOpts_);
+    //     }
+    //     catch (std::exception&)
+    //     {
+    //         if (channel_ == NULL)
+    //         {
+    //             if (i == (TIMEOUT / SLEEP_TIME))
+    //             {
+    //                 qWarning() << "RabbitMqMessageForwarder timed out waiting for connection to broker";
+    //                 throw;
+    //             }
 
-                qWarning() << "RabbitMqMessageForwarder: error creating channel";
-                QThread::sleep(SLEEP_TIME);
-            }
-            else
-            {
-                throw;
-            }
-        }
-    }
-    while (channel_ == NULL);
+    //             qWarning() << "RabbitMqMessageForwarder: error creating channel";
+    //             QThread::sleep(SLEEP_TIME);
+    //         }
+    //         else
+    //         {
+    //             throw;
+    //         }
+    //     }
+    // }
+    // while (channel_ == NULL);
 
-    channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
+    // channel_->DeclareExchange(exchangeName_.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
 }
 
 void RabbitMqMessageForwarder::forwardData(QByteArray data)
 {
     qDebug() << "RabbitMqMessageForwarder: Forwarding data";
-    AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
+    // AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
 
-    try
-    {
-        channel_->BasicPublish(exchangeName_.toStdString(), "", mq_msg);
-    }
-    catch (AmqpClient::ChannelException& ex)
-    {
-        qCritical() << "RabbitMqMessageForwarder: Failed to forward data";
-    }
-    catch (AmqpClient::ConnectionException& ex)
-    {
-        qWarning() << "RabbitMqMessageForwarder: Connection to broker terminated";
-        setupChannel();
-    }
+    // try
+    // {
+    //     channel_->BasicPublish(exchangeName_.toStdString(), "", mq_msg);
+    // }
+    // catch (AmqpClient::ChannelException& ex)
+    // {
+    //     qCritical() << "RabbitMqMessageForwarder: Failed to forward data";
+    // }
+    // catch (AmqpClient::ConnectionException& ex)
+    // {
+    //     qWarning() << "RabbitMqMessageForwarder: Connection to broker terminated";
+    //     setupChannel();
+    // }
 }

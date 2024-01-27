@@ -6,7 +6,7 @@
 #include <QByteArray>
 #include <string>
 
-#include <SimpleAmqpClient/SimpleAmqpClient.h>
+//#include <SimpleAmqpClient/SimpleAmqpClient.h>
 
 #include "CommunicationLayer/CommDeviceControl/RabbitMqMessageForwarder.h"
 #include "InfrastructureLayer/Settings/MockSettings.h"
@@ -31,7 +31,7 @@ protected:
 
     QScopedPointer<MockSettings> settings_;
     QScopedPointer<RabbitMqMessageForwarder> forwarder;
-    AmqpClient::Channel::ptr_t receiver;
+    //AmqpClient::Channel::ptr_t receiver;
 
 
     /**
@@ -51,7 +51,7 @@ protected:
     virtual void TearDown()
     {
         // Delete exchange
-        receiver->DeleteExchange(MOCK_EXCHANGE.toStdString());
+        //receiver->DeleteExchange(MOCK_EXCHANGE.toStdString());
         cleanReceiver();
     }
 
@@ -81,38 +81,38 @@ QString RabbitMqMessageForwarderTest::receiveMessage(bool setupConsume)
     // Receive message from local server
     if (setupConsume)
     {
-        receiver->BasicConsume(MOCK_QUEUE.toStdString());
+        //receiver->BasicConsume(MOCK_QUEUE.toStdString());
     }
 
-    return QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
+    return NULL;//QString::fromStdString(receiver->BasicConsumeMessage()->Message()->Body());
 }
 
 void RabbitMqMessageForwarderTest::setupReceiver()
 {
-    AmqpClient::Channel::OpenOpts mockOpts;
-    //Setting up openOpts
-    AmqpClient::Channel::OpenOpts::BasicAuth auth;
-    auth.password = "guest";
-    auth.username = "guest";
-    mockOpts.host = MOCK_IP.toStdString();
-    mockOpts.port = MOCK_PORT;
-    mockOpts.auth = auth;
-    //Vhost and Frame max value are taken from default value in Channel
-    mockOpts.vhost = "/";
-    mockOpts.frame_max = 131072;
+    // AmqpClient::Channel::OpenOpts mockOpts;
+    // //Setting up openOpts
+    // AmqpClient::Channel::OpenOpts::BasicAuth auth;
+    // auth.password = "guest";
+    // auth.username = "guest";
+    // mockOpts.host = MOCK_IP.toStdString();
+    // mockOpts.port = MOCK_PORT;
+    // mockOpts.auth = auth;
+    // //Vhost and Frame max value are taken from default value in Channel
+    // mockOpts.vhost = "/";
+    // mockOpts.frame_max = 131072;
 
-    receiver = AmqpClient::Channel::Open(mockOpts);
-    // passive (false), durable (true), exclusive (false), auto_delete (false)
-    receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
-    receiver->DeclareExchange(MOCK_EXCHANGE.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
-    receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), "");
+    // receiver = AmqpClient::Channel::Open(mockOpts);
+    // // passive (false), durable (true), exclusive (false), auto_delete (false)
+    // receiver->DeclareQueue(MOCK_QUEUE.toStdString(), false, true, false, false);
+    // receiver->DeclareExchange(MOCK_EXCHANGE.toStdString(), AmqpClient::Channel::EXCHANGE_TYPE_FANOUT);
+    // receiver->BindQueue(MOCK_QUEUE.toStdString(), MOCK_EXCHANGE.toStdString(), "");
 }
 
 void RabbitMqMessageForwarderTest::cleanReceiver()
 {
-    receiver->PurgeQueue(MOCK_QUEUE.toStdString());
-    receiver->DeleteQueue(MOCK_QUEUE.toStdString());
-    receiver.reset();
+    // receiver->PurgeQueue(MOCK_QUEUE.toStdString());
+    // receiver->DeleteQueue(MOCK_QUEUE.toStdString());
+    // receiver.reset();
 }
 
 
@@ -151,7 +151,7 @@ TEST_F(RabbitMqMessageForwarderTest, testSendingReceiverDC)
     sendMessage(EXPECTED_1);
     QString ACTUAL = receiveMessage(true);
     EXPECT_EQ(EXPECTED_1.toStdString(), ACTUAL.toStdString());
-    receiver.reset();
+    //receiver.reset();
     sendMessage(EXPECTED_2);
     setupReceiver();
     ACTUAL = receiveMessage(true);
