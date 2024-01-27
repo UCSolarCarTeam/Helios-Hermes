@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QThread>
-#include <SimpleAmqpClient/SimpleAmqpClient.h>
+//#include <SimpleAmqpClient/SimpleAmqpClient.h>
 
 #include "CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
 
@@ -19,8 +19,8 @@ public slots:
 
 private:
     void setupChannel();
-    AmqpClient::Channel::ptr_t channel_;
-    AmqpClient::Channel::OpenOpts openOpts_;
+    //AmqpClient::Channel::ptr_t channel_;
+    //AmqpClient::Channel::OpenOpts openOpts_;
     QString exchangeName_;
     QString ipAddress_;
     quint16 port_;
