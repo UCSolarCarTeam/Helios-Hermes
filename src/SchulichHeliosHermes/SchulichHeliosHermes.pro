@@ -16,15 +16,15 @@ PRE_TARGETDEPS += \
     ../DataLayer/.lib/* \
     ../InfrastructureLayer/.lib/*
 
-TARGET = SchulichEpsilonHermes
+TARGET = SchulichHeliosHermes
 DESTDIR = ../bin
 
 HEADERS += \
-   SchulichEpsilonHermes.h
+    SchulichHeliosHermes.h
 
 SOURCES += \
-   main.cpp \
-   SchulichEpsilonHermes.cpp
+   SchulichHeliosHermes.cpp \
+   main.cpp
 
 copyconfigfile.commands = cp $$PWD/../config.ini.example ../bin/config.ini
 QMAKE_EXTRA_TARGETS += copyconfigfile

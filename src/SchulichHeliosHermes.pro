@@ -9,4 +9,4 @@ SUBDIRS = \
    CommunicationLayer \
    BusinessLayer \
    # Tests \
-   SchulichEpsilonHermes
+   SchulichHeliosHermes

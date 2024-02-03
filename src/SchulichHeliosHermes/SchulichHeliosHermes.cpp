@@ -3,9 +3,9 @@
 #include "CommunicationLayer/CommunicationContainer.h"
 #include "BusinessLayer/BusinessContainer.h"
 
-#include "SchulichEpsilonHermes.h"
+#include "SchulichHeliosHermes.h"
 
-SchulichEpsilonHermes::SchulichEpsilonHermes(int& argc, char** argv)
+SchulichHeliosHermes::SchulichHeliosHermes(int& argc, char** argv)
     : QCoreApplication(argc, argv)
     , infrastructureContainer_(new InfrastructureContainer())
     , dataContainer_(new DataContainer(infrastructureContainer_->settings()))
@@ -17,6 +17,6 @@ SchulichEpsilonHermes::SchulichEpsilonHermes(int& argc, char** argv)
 {
 }
 
-SchulichEpsilonHermes::~SchulichEpsilonHermes()
+SchulichHeliosHermes::~SchulichHeliosHermes()
 {
 }

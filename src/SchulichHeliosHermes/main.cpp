@@ -1,4 +1,4 @@
-#include "SchulichEpsilonHermes.h"
+#include "SchulichHeliosHermes.h"
 #include <QApplication>
 #include <QLockFile>
 #include <QDebug>
@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
         qDebug() << "Launching Hermes...";
     }
 
-    QScopedPointer<SchulichEpsilonHermes> app;
-    app.reset(new SchulichEpsilonHermes(argc, argv));
+    QScopedPointer<SchulichHeliosHermes> app;
+    app.reset(new SchulichHeliosHermes(argc, argv));
     return app->exec();
 }
