@@ -8,11 +8,11 @@ class CommunicationContainer;
 class DataContainer;
 class BusinessContainer;
 
-class SchulichEpsilonHermes : public QCoreApplication
+class SchulichHeliosHermes : public QCoreApplication
 {
 public:
-    SchulichEpsilonHermes(int& argc, char** argv);
-    ~SchulichEpsilonHermes();
+    SchulichHeliosHermes(int& argc, char** argv);
+    ~SchulichHeliosHermes();
 
 private:
     QScopedPointer<InfrastructureContainer> infrastructureContainer_;
