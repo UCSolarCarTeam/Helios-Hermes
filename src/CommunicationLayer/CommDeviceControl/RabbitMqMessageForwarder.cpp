@@ -2,7 +2,8 @@
 #include <QDebug>
 #include <QHostAddress>
 #include <QtCore5Compat/QTextCodec>
-
+#include <QMqttClient>
+#include <QMqttTopicFilter>
 
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "RabbitMqMessageForwarder.h"
@@ -41,6 +42,30 @@ RabbitMqMessageForwarder::~RabbitMqMessageForwarder()
 
 void RabbitMqMessageForwarder::setupChannel()
 {
+    qDebug() << "SETTING UP";
+
+    client_ = new QMqttClient(this);
+    client_->setHostname("127.0.0.1");
+    client_->setPort(6969);
+
+    QObject::connect(client_, &QMqttClient::connected, []() {
+        qDebug() << "connected";
+
+    });
+
+    QObject::connect(client_, &QMqttClient::disconnected, []() {
+        qDebug() << "disconnected";
+    });
+
+
+    client_->connectToHost();
+
+
+
+    //client->disconnectFromHost();
+
+
+
     // quint32 i = 0;
 
     // do
@@ -81,6 +106,10 @@ void RabbitMqMessageForwarder::setupChannel()
 void RabbitMqMessageForwarder::forwardData(QByteArray data)
 {
     qDebug() << "RabbitMqMessageForwarder: Forwarding data";
+    //QByteArray messageData = "message sent";
+    QMqttTopicName topicName("test");
+    client_->publish(topicName, data);
+
     // AmqpClient::BasicMessage::ptr_t mq_msg = AmqpClient::BasicMessage::Create(QTextCodec::codecForMib(106)->toUnicode(data).toStdString());
 
     // try

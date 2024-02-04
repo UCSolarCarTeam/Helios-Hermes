@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QMqttClient>
 #include <QThread>
 //#include <SimpleAmqpClient/SimpleAmqpClient.h>
 
@@ -24,4 +25,5 @@ private:
     QString exchangeName_;
     QString ipAddress_;
     quint16 port_;
+    QMqttClient* client_;
 };
