@@ -21,7 +21,7 @@ baudrate=115200
 [RabbitMq]
 exchangeName=hermesExchange
 ipAddress=127.0.0.1
-port=5672
+port=6969
 
 [Logging]
 logLevel=3

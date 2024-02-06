@@ -10,8 +10,8 @@ DESTDIR = .lib
 HEADERS += \
    CommDeviceControl/I_CommDevice.h \
    CommDeviceControl/I_ConnectionService.h \
+    CommDeviceControl/MqttMessageForwarder.h \
    CommDeviceControl/RadioCommDevice.h \
-   CommDeviceControl/RabbitMqMessageForwarder.h \
    CommDeviceControl/I_MessageForwarder.h \
    CommunicationContainer.h \
    DataPopulators/AuxBmsPopulator.h \
@@ -48,8 +48,8 @@ HEADERS += \
 
 
 SOURCES += \
+    CommDeviceControl/MqttMessageForwarder.cpp \
    CommDeviceControl/RadioCommDevice.cpp \
-   CommDeviceControl/RabbitMqMessageForwarder.cpp \
    CommunicationContainer.cpp \
    DataPopulators/AuxBmsPopulator.cpp \
    DataPopulators/BatteryFaultsPopulator.cpp \
