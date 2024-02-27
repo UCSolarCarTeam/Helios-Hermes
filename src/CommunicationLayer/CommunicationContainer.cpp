@@ -4,7 +4,7 @@
 #include "DataLayer/DataContainer.h"
 #include "CommDeviceControl/RadioCommDevice.h"
 #include "CommDeviceControl/OutputRadioCommDevice.h"
-#include "CommDeviceControl/RabbitMqMessageForwarder.h"
+#include "CommDeviceControl/MqttMessageForwarder.h"
 #include "CommunicationContainer.h"
 #include "DataPopulators/AuxBmsPopulator.h"
 #include "DataPopulators/CcsPopulator.h"

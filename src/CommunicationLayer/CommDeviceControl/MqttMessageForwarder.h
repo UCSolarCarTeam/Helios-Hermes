@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QMqttClient>
 #include <QThread>
 //#include <SimpleAmqpClient/SimpleAmqpClient.h>
 
@@ -18,10 +19,11 @@ public slots:
     void forwardData(QByteArray data);
 
 private:
-    void setupChannel();
+    void setupClient();
     //AmqpClient::Channel::ptr_t channel_;
     //AmqpClient::Channel::OpenOpts openOpts_;
-    QString exchangeName_;
+    QString topic_;
     QString ipAddress_;
     quint16 port_;
+    QMqttClient* client_;
 };
