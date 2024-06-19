@@ -4,6 +4,7 @@
 #include <QtCore5Compat/QTextCodec>
 #include <QMqttClient>
 #include <QMqttTopicFilter>
+#include <QTimer>
 
 #include "InfrastructureLayer/Settings/I_Settings.h"
 #include "MqttMessageForwarder.h"
@@ -15,7 +16,7 @@ namespace
     quint32 SLEEP_TIME = 2;
 }
 
-RabbitMqMessageForwarder::RabbitMqMessageForwarder(I_Settings& settings)
+MqttMessageForwarder::MqttMessageForwarder(I_Settings& settings)
 {
     topic_ = settings.exchangeName();
     ipAddress_ = settings.ipAddress();
@@ -24,12 +25,12 @@ RabbitMqMessageForwarder::RabbitMqMessageForwarder(I_Settings& settings)
     setupClient();
 }
 
-RabbitMqMessageForwarder::~RabbitMqMessageForwarder()
+MqttMessageForwarder::~MqttMessageForwarder()
 {
 }
 
 
-void RabbitMqMessageForwarder::setupClient()
+void MqttMessageForwarder::setupClient()
 {
 
     //TO IMPLEMENT
@@ -47,16 +48,16 @@ void RabbitMqMessageForwarder::setupClient()
 
     });
 
-    QObject::connect(client_, &QMqttClient::disconnected, []() {
+    QObject::connect(client_, &QMqttClient::disconnected, [this]() {
         qDebug() << "Connection to MQTT Service Failed";
-        throw;
+        QTimer::singleShot(5000, this, &MqttMessageForwarder::setupClient); // Retry after 5 seconds
     });
 
 
     client_->connectToHost();
 }
 
-void RabbitMqMessageForwarder::forwardData(QByteArray data)
+void MqttMessageForwarder::forwardData(QByteArray data)
 {
     //TO IMPLEMENT
     //failed to publish -> qCritical()

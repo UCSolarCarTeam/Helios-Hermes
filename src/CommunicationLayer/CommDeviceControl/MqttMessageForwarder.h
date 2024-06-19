@@ -8,12 +8,12 @@
 
 class I_Settings;
 
-class RabbitMqMessageForwarder : public I_MessageForwarder
+class MqttMessageForwarder : public I_MessageForwarder
 {
     Q_OBJECT
 public:
-    RabbitMqMessageForwarder(I_Settings& settings);
-    virtual ~RabbitMqMessageForwarder();
+    MqttMessageForwarder(I_Settings& settings);
+    virtual ~MqttMessageForwarder();
 
 public slots:
     void forwardData(QByteArray data);
@@ -26,4 +26,6 @@ private:
     QString ipAddress_;
     quint16 port_;
     QMqttClient* client_;
+
+    QMqttClient* telemtryClient_;
 };
