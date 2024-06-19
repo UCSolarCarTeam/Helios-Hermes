@@ -23,6 +23,7 @@ MqttMessageForwarder::MqttMessageForwarder(I_Settings& settings)
     port_ = settings.port();
 
     setupClient();
+    setupTelemetryClient();
 }
 
 MqttMessageForwarder::~MqttMessageForwarder()
@@ -38,13 +39,12 @@ void MqttMessageForwarder::setupClient()
 
     qDebug() << "Attempting to Setup MQTT Client";
 
-
     client_ = new QMqttClient(this);
     client_->setHostname(ipAddress_);
     client_->setPort(port_);
 
     QObject::connect(client_, &QMqttClient::connected, []() {
-        qDebug() << "Connected to MQTT Service Established";
+        qDebug() << "Connection to MQTT Service Established";
 
     });
 
@@ -57,14 +57,38 @@ void MqttMessageForwarder::setupClient()
     client_->connectToHost();
 }
 
+void MqttMessageForwarder::setupTelemetryClient(){
+    qDebug() << "Attempting to Setup TELEMETRY MQTT Client";
+
+    telemtryClient_ = new QMqttClient(this);
+    telemtryClient_->setHostname("localhost"); //Telemetry host
+    telemtryClient_->setPort(6900); //port
+
+    QObject::connect(client_, &QMqttClient::connected, []() {
+        qDebug() << "Connection to AWS MQTT Service Established";
+
+    });
+
+    QObject::connect(telemtryClient_, &QMqttClient::disconnected, [this]() {
+        qDebug() << "Connection to AWS MQTT Service Failed";
+        QTimer::singleShot(5000, this, &MqttMessageForwarder::setupTelemetryClient); // Retry after 5 seconds
+    });
+
+    telemtryClient_->connectToHost();
+}
+
 void MqttMessageForwarder::forwardData(QByteArray data)
 {
     //TO IMPLEMENT
     //failed to publish -> qCritical()
     //lost connection -> setupClient()
 
-    qDebug() << "RabbitMqMessageForwarder: Forwarding data";
+    qDebug() << "MqttMessageForwarder: Forwarding data to dashboard";
     //QByteArray messageData = "message sent";
     QMqttTopicName topicName(topic_);
     client_->publish(topicName, data);
+
+    qDebug() << "MqttMessageForwarder: Forwarding data to AWS";
+    QMqttTopicName telemetryTopic("skeeterAedes");
+    telemtryClient_->publish(telemetryTopic, data);
 }

@@ -20,6 +20,7 @@ public slots:
 
 private:
     void setupClient();
+    void setupTelemetryClient();
     //AmqpClient::Channel::ptr_t channel_;
     //AmqpClient::Channel::OpenOpts openOpts_;
     QString topic_;
