@@ -27,6 +27,8 @@ private:
     QString ipAddress_;
     quint16 port_;
     QMqttClient* client_;
+    QMqttTopicName clientTopic_;
 
     QMqttClient* telemtryClient_;
+    QMqttTopicName telemetryTopic_;
 };

@@ -37,19 +37,20 @@ void MqttMessageForwarder::setupClient()
     //TO IMPLEMENT
     //attempt to reconnect (optional)
 
-    qDebug() << "Attempting to Setup MQTT Client";
+    qDebug() << "Attempting to Setup LOCAL MQTT Client";
 
     client_ = new QMqttClient(this);
     client_->setHostname(ipAddress_);
     client_->setPort(port_);
+    clientTopic_.setName("hermesExchange");
 
     QObject::connect(client_, &QMqttClient::connected, []() {
-        qDebug() << "Connection to MQTT Service Established";
+        qDebug() << "Connection to LOCAL MQTT Service Established";
 
     });
 
     QObject::connect(client_, &QMqttClient::disconnected, [this]() {
-        qDebug() << "Connection to MQTT Service Failed";
+        qDebug() << "Connection to LOCAL MQTT Service Failed - retrying in 5s...";
         QTimer::singleShot(5000, this, &MqttMessageForwarder::setupClient); // Retry after 5 seconds
     });
 
@@ -61,34 +62,39 @@ void MqttMessageForwarder::setupTelemetryClient(){
     qDebug() << "Attempting to Setup TELEMETRY MQTT Client";
 
     telemtryClient_ = new QMqttClient(this);
-    telemtryClient_->setHostname("localhost"); //Telemetry host
-    telemtryClient_->setPort(6900); //port
 
-    QObject::connect(client_, &QMqttClient::connected, []() {
-        qDebug() << "Connection to AWS MQTT Service Established";
+    telemtryClient_->setHostname("aedes.calgarysolarcar.ca"); //Telemetry host
+    telemtryClient_->setPort(1883); //port
+    telemtryClient_->setUsername("----");
+    telemtryClient_->setPassword("----");
+    telemetryTopic_.setName("test topic");
 
+    QObject::connect(telemtryClient_, &QMqttClient::connected, []() {
+        qDebug() << "Connection to TELEMETRY MQTT Service Established";
     });
 
     QObject::connect(telemtryClient_, &QMqttClient::disconnected, [this]() {
-        qDebug() << "Connection to AWS MQTT Service Failed";
+        qDebug() << "Connection to TELEMETRY MQTT Service Failed - retrying in 5s...";
         QTimer::singleShot(5000, this, &MqttMessageForwarder::setupTelemetryClient); // Retry after 5 seconds
     });
+
+    //TODO - Error handling for failed auth
 
     telemtryClient_->connectToHost();
 }
 
 void MqttMessageForwarder::forwardData(QByteArray data)
 {
-    //TO IMPLEMENT
+    //TODO - ERROR HANDLING
     //failed to publish -> qCritical()
     //lost connection -> setupClient()
 
     qDebug() << "MqttMessageForwarder: Forwarding data to dashboard";
     //QByteArray messageData = "message sent";
-    QMqttTopicName topicName(topic_);
-    client_->publish(topicName, data);
+    //QMqttTopicName topicName(topic_);
+    client_->publish(clientTopic_, data);
 
     qDebug() << "MqttMessageForwarder: Forwarding data to AWS";
-    QMqttTopicName telemetryTopic("skeeterAedes");
-    telemtryClient_->publish(telemetryTopic, data);
+    //QMqttTopicName telemetryTopic("skeeterAedes");
+    telemtryClient_->publish(telemetryTopic_, data);
 }
