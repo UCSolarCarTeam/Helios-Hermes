@@ -65,8 +65,8 @@ void MqttMessageForwarder::setupTelemetryClient(){
 
     telemtryClient_->setHostname("aedes.calgarysolarcar.ca"); //Telemetry host
     telemtryClient_->setPort(1883); //port
-    telemtryClient_->setUsername("----");
-    telemtryClient_->setPassword("----");
+    telemtryClient_->setUsername("urMom");
+    telemtryClient_->setPassword("hasAedes");
     telemetryTopic_.setName("test topic");
 
     QObject::connect(telemtryClient_, &QMqttClient::connected, []() {
@@ -85,16 +85,15 @@ void MqttMessageForwarder::setupTelemetryClient(){
 
 void MqttMessageForwarder::forwardData(QByteArray data)
 {
-    //TODO - ERROR HANDLING
-    //failed to publish -> qCritical()
-    //lost connection -> setupClient()
 
-    qDebug() << "MqttMessageForwarder: Forwarding data to dashboard";
-    //QByteArray messageData = "message sent";
-    //QMqttTopicName topicName(topic_);
-    client_->publish(clientTopic_, data);
+    if(client_->state() == QMqttClient::Connected){
+        qDebug() << "MqttMessageForwarder: Forwarding data to dashboard";
+        client_->publish(clientTopic_, data);
+    }
 
-    qDebug() << "MqttMessageForwarder: Forwarding data to AWS";
-    //QMqttTopicName telemetryTopic("skeeterAedes");
-    telemtryClient_->publish(telemetryTopic_, data);
+    if(telemtryClient_->state() == QMqttClient::Connected){
+        qDebug() << "MqttMessageForwarder: Forwarding data to AWS";
+        telemtryClient_->publish(telemetryTopic_, data);
+    }
+
 }
