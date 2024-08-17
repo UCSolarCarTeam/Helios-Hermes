@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_HeliosHermes_FILE /home/mbullock/Documents/solarCar/Helios-Hermes/build/Desktop_Qt_6_7_2-Debug/HeliosHermes)
+set(__QT_DEPLOY_TARGET_HeliosHermes_TYPE EXECUTABLE)
