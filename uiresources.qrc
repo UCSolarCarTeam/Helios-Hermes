@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/SolarCarTestUI">
-        <file>Resources/SolarCarTeamIcon.ico</file>
-    </qresource>
-</RCC>
