@@ -49,7 +49,7 @@ public:
     QSerialPort outputSerialPort;
     RadioCommDevice radioCommDevice;
     OutputRadioCommDevice outputRadioCommDevice;
-    RabbitMqMessageForwarder messageForwarder;
+    MqttMessageForwarder messageForwarder;
     PacketSynchronizer packetSynchronizer;
     PacketUnstuffer packetUnstuffer;
     PacketChecksumChecker packetChecksumChecker;
