@@ -15,12 +15,16 @@ PacketChecksumChecker::~PacketChecksumChecker()
 
 void PacketChecksumChecker::checkChecksum(QByteArray decodedData)
 {
+
+    qDebug() << "Doing Checksum" << decodedData;
+
     const quint16 checksum = retrieveChecksumFromPacket(decodedData);
     decodedData.chop(sizeof(checksum));
     quint16 calculatedChecksum = qChecksum(decodedData.constData(), decodedData.size());
 
     if (calculatedChecksum == checksum)
     {
+        qDebug() << "Successful checksum";
         emit validDataReceived(decodedData);
     }
     else

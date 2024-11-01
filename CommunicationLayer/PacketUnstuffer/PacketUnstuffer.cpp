@@ -25,6 +25,9 @@ void PacketUnstuffer::injectFramedData(const QByteArray& data)
 
 void PacketUnstuffer::handleFramedPacket(QByteArray packet)
 {
+
+    qDebug() << "Unstuffing" << packet;
+
     if (!isPacketAtLeastMinimumSize(packet))
     {
         qWarning() << "Incoming packet is less that " << MINIMUM_LENGTH_OF_A_PACKET << " bytes";

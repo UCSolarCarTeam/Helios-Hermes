@@ -17,7 +17,7 @@ class I_MessageForwarder;
 class CommunicationContainer
 {
 public:
-    explicit CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer);
+    explicit CommunicationContainer(/*DataContainer& dataContainer, */InfrastructureContainer& infrastructureContainer);
     ~CommunicationContainer();
 
     I_PacketSynchronizer& packetSynchronizer();
