@@ -17,6 +17,20 @@ add_executable(HeliosHermes
   CommunicationLayer/CommDeviceControl/I_CommDevice.h CommunicationLayer/CommDeviceControl/I_ConnectionService.h CommunicationLayer/CommDeviceControl/I_MessageForwarder.h CommunicationLayer/CommDeviceControl/MqttMessageForwarder.cpp CommunicationLayer/CommDeviceControl/MqttMessageForwarder.h CommunicationLayer/CommDeviceControl/OutputRadioCommDevice.cpp CommunicationLayer/CommDeviceControl/OutputRadioCommDevice.h CommunicationLayer/CommDeviceControl/RadioCommDevice.cpp CommunicationLayer/CommDeviceControl/RadioCommDevice.h CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h CommunicationLayer/PacketChecksumChecker/PacketChecksumChecker.cpp CommunicationLayer/PacketChecksumChecker/PacketChecksumChecker.h CommunicationLayer/PacketSynchronizer/I_PacketSynchronizer.h CommunicationLayer/PacketSynchronizer/PacketSynchronizer.cpp CommunicationLayer/PacketSynchronizer/PacketSynchronizer.h CommunicationLayer/PacketUnstuffer/I_DataInjectionService.h CommunicationLayer/PacketUnstuffer/I_PacketUnstuffer.h CommunicationLayer/PacketUnstuffer/PacketUnstuffer.cpp CommunicationLayer/PacketUnstuffer/PacketUnstuffer.h CommunicationLayer/CommunicationContainer.cpp CommunicationLayer/CommunicationContainer.h
   HeliosHermes.h HeliosHermes.cpp
   InfrastructureLayer/Logging/Logging.cpp InfrastructureLayer/Logging/Logging.h InfrastructureLayer/Settings/I_Settings.h InfrastructureLayer/Settings/Settings.cpp InfrastructureLayer/Settings/Settings.h InfrastructureLayer/InfrastructureContainer.cpp InfrastructureLayer/InfrastructureContainer.h
+  CommunicationLayer/MessagingFramework/KeyMotorMessage.h CommunicationLayer/MessagingFramework/KeyMotorMessage.cpp
+  CommunicationLayer/MessagingFramework/MessageDecodingUtils.h CommunicationLayer/MessagingFramework/MessageDecodingUtils.cpp
+  CommunicationLayer/PacketDecoder/PacketDecoder.h CommunicationLayer/PacketDecoder/PacketDecoder.cpp
+  CommunicationLayer/PacketDecoder/I_PacketDecoder.h
+  CommunicationLayer/DataPopulators/KeyMotorPopulator.h CommunicationLayer/DataPopulators/KeyMotorPopulator.cpp
+  DataLayer/DataContainer.h DataLayer/DataContainer.cpp
+
+  DataLayer/KeyMotorData/KeyMotorData.h DataLayer/KeyMotorData/KeyMotorData.cpp
+
+  DataLayer/SerialDefines.h
+  BusinessLayer/BusinessContainer.h BusinessLayer/BusinessContainer.cpp
+  BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.h BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.cpp
+  BusinessLayer/JsonForwarder/JsonForwarder.h BusinessLayer/JsonForwarder/JsonForwarder.cpp
+  BusinessLayer/JsonDefines.h
 )
 
 target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)

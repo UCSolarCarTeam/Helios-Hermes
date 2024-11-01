@@ -16,9 +16,9 @@ public:
     ~HeliosHermes();
 private:
     QScopedPointer<InfrastructureContainer> infrastructureContainer_;
-    //QScopedPointer<DataContainer> dataContainer_;
+    QScopedPointer<DataContainer> dataContainer_;
     QScopedPointer<CommunicationContainer> communicationContainer_;
-    //QScopedPointer<BusinessContainer> businessContainer_;
+    QScopedPointer<BusinessContainer> businessContainer_;
 };
 
 #endif // HELIOSHERMES_H

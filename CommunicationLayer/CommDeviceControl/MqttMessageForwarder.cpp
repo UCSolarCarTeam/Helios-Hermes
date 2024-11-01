@@ -62,7 +62,7 @@ void RabbitMqMessageForwarder::forwardData(QByteArray data)
     //failed to publish -> qCritical()
     //lost connection -> setupClient()
 
-    qDebug() << "MqttMessageForwarder: Forwarding data";
+    qDebug() << "MqttMessageForwarder: Forwarding data" << data;
     //QByteArray messageData = "message sent";
     QMqttTopicName topicName(topic_);
     client_->publish(topicName, data);
