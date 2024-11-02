@@ -48,14 +48,14 @@ void JsonForwarder::forwardData(QDateTime& currentTime) {
     json[JsonFormat::PACKET_TITLE] = packetTitle_;
     json[JsonFormat::TIMESTAMP] = currentTime.toUTC().toString(DATE_FORMAT);
 
-    // json[JsonFormat::KEY_MOTOR] = builder_.buildKeyMotorMessage(keyMotorData_);
-    // json[JsonFormat::PROXIMITY_SENSORS] = builder_.buildProximitySensorsMessage(proximitySensorsData_);
-    // json[JsonFormat::B3] = builder_.buildB3Message(b3Data_);
-    // json[JsonFormat::TELEMETRY] = builder_.buildTelemetryMessage(telemetryData_);
-    // json[JsonFormat::BATTERY] = builder_.buildBatteryMessage(batteryData_);
-    // json[JsonFormat::BATTERY_FAULTS] = builder_.buildBatteryFaultsMessage(batteryFaultsData_);
-    // json[JsonFormat::MBMS] = builder_.buildMbmsMessage(mbmsData_);
-    // json[JsonFormat::MPPT] = builder_.buildMpptMessage(mpptData_);
+    json[JsonFormat::KEY_MOTOR] = builder_.buildKeyMotorMessage(keyMotorData_);
+    json[JsonFormat::PROXIMITY_SENSORS] = builder_.buildProximitySensorsMessage(proximitySensorsData_);
+    json[JsonFormat::B3] = builder_.buildB3Message(b3Data_);
+    json[JsonFormat::TELEMETRY] = builder_.buildTelemetryMessage(telemetryData_);
+    json[JsonFormat::BATTERY] = builder_.buildBatteryMessage(batteryData_);
+    json[JsonFormat::BATTERY_FAULTS] = builder_.buildBatteryFaultsMessage(batteryFaultsData_);
+    json[JsonFormat::MBMS] = builder_.buildMbmsMessage(mbmsData_);
+    json[JsonFormat::MPPT] = builder_.buildMpptMessage(mpptData_);
     json[JsonFormat::MOTOR_DETAILS] = builder_.buildMotorDetailsMessage(motorDetailsData_);
 
     forwarder_.forwardData(QJsonDocument(json).toJson(QJsonDocument::Compact));
