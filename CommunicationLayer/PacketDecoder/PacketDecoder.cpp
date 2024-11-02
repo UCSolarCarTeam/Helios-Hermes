@@ -20,6 +20,9 @@ namespace {
     const int BATTERY_ID = 7;
     const int BATTERY_LENGTH = 48;
 
+    const int MPPT_ID = 8;
+    const int MPPT_LENGTH = 10;
+
     const int MBMS_ID = 9;
     const int MBMS_LENGTH = 26;
 
@@ -34,7 +37,7 @@ namespace {
         TELEMETRY_LENGTH,
         BATTERY_FAULTS_LENGTH, 
         BATTERY_LENGTH, 
-        -1, 
+        MPPT_LENGTH, 
         MBMS_LENGTH,
         PROXIMITY_SENSORS_LENGTH
     };
@@ -69,11 +72,13 @@ void PacketDecoder::handleValidData(QByteArray message){
             emit packetDecoded(TelemetryMessage(message));
             return;
         case BATTERY_FAULTS_ID:
-            qDebug() << "HERE I AM - ---------------------------------------------";
             emit packetDecoded(BatteryFaultsMessage(message));
             return;
         case BATTERY_ID:
             emit packetDecoded(BatteryMessage(message));
+            return;
+        case MPPT_ID:
+            emit packetDecoded(MpptMessage(message));
             return;
         case MBMS_ID:
             emit packetDecoded(MbmsMessage(message));

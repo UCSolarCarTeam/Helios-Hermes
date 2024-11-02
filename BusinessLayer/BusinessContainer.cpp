@@ -13,6 +13,7 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                     dataContainer.telemetryData(),
                                     dataContainer.batteryFaultsData(),
                                     dataContainer.batteryData(),
+                                    dataContainer.mpptData(),
                                     dataContainer.mbmsData(),
                                     dataContainer.proximitySensorsData(),
                                     communicationContainer.messageForwarder(),

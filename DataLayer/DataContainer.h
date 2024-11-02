@@ -10,6 +10,7 @@
 #include "BatteryData/BatteryData.h"
 #include "BatteryFaultsData/BatteryFaultsData.h"
 #include "MbmsData/MbmsData.h"
+#include "MpptData/MpptData.h"
 
 class I_Settings;
 
@@ -24,6 +25,7 @@ public:
     TelemetryData& telemetryData();
     BatteryData& batteryData();
     BatteryFaultsData& batteryFaultsData();
+    MpptData& mpptData();
     MbmsData& mbmsData();
 
 private:
@@ -34,6 +36,7 @@ private:
     QScopedPointer<BatteryData> batteryData_;
     QScopedPointer<BatteryFaultsData> batteryFaultsData_;
     QScopedPointer<MbmsData> mbmsData_;
+    QScopedPointer<MpptData> mpptData_;
 };
 
 #endif // DATACONTAINER_H

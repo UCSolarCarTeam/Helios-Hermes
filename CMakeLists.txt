@@ -48,6 +48,11 @@ add_executable(HeliosHermes
   CommunicationLayer/MessagingFramework/MbmsMessage.h CommunicationLayer/MessagingFramework/MbmsMessage.cpp
   DataLayer/MbmsData/MbmsData.h DataLayer/MbmsData/MbmsData.cpp
   CommunicationLayer/DataPopulators/MbmsPopulator.h CommunicationLayer/DataPopulators/MbmsPopulator.cpp
+  CommunicationLayer/MessagingFramework/MpptMessage.h CommunicationLayer/MessagingFramework/MpptMessage.cpp
+  DataLayer/MpptData/MpptData.h DataLayer/MpptData/MpptData.cpp
+  DataLayer/MpptData/MpptUnit.h DataLayer/MpptData/MpptUnit.cpp
+  CommunicationLayer/DataPopulators/MpptPopulator.h CommunicationLayer/DataPopulators/MpptPopulator.cpp
+
 
 
 )

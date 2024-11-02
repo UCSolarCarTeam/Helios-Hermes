@@ -12,6 +12,7 @@
 #include "../../DataLayer/BatteryData/BatteryData.h"
 #include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
 #include "../../DataLayer/MbmsData/MbmsData.h"
+#include "../../DataLayer/MpptData/MpptData.h"
 
 class I_MessageForwarder;
 class I_Settings;
@@ -25,6 +26,7 @@ public:
                   TelemetryData& telemetryData,
                   BatteryFaultsData& batteryFaultsData,
                   BatteryData& batteryData,
+                  MpptData& mpptData,
                   MbmsData& mbmsData,
                   ProximitySensorsData& proximitySensorsData,
                   I_MessageForwarder& forwarder,
@@ -44,6 +46,7 @@ private:
     TelemetryData& telemetryData_;
     BatteryFaultsData& batteryFaultsData_;
     BatteryData& batteryData_;
+    MpptData& mpptData_;
     MbmsData& mbmsData_;
     ProximitySensorsData& proximitySensorsData_;
     I_MessageForwarder& forwarder_;

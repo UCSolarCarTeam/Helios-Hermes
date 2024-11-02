@@ -210,3 +210,22 @@ QJsonObject JsonMessageBuilder::buildMbmsMessage(const MbmsData& data){
 
     return json;
 }
+
+QJsonArray JsonMessageBuilder::buildMpptMessage(const MpptData& data){
+    QJsonArray json = QJsonArray();
+
+    for(int i = 0; i < data.getNumberOfUnits(); i++){
+        QJsonObject unitJson = QJsonObject();
+        const MpptUnit& unit = data.getMpptUnit(i);
+
+        unitJson[JsonFormat::ALIVE] = unit.mpptStatus();
+        unitJson[JsonFormat::ARRAY_VOLTAGE] = unit.arrayVoltage();
+        unitJson[JsonFormat::ARRAY_CURRENT] = unit.arrayCurrent();
+        unitJson[JsonFormat::BATTERY_VOLTAGE] = unit.batteryVoltage();
+        unitJson[JsonFormat::TEMPERATURE] = unit.temperature();
+
+        json.append(unitJson);
+    }
+
+    return json;
+}

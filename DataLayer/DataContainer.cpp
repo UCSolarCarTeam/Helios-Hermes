@@ -1,5 +1,7 @@
 #include "DataContainer.h"
 
+#include "../InfrastructureLayer/Settings/I_Settings.h"
+
 DataContainer::DataContainer(const I_Settings& settings)
     : keyMotorData_(new KeyMotorData()),
         b3Data_(new B3Data()),
@@ -7,7 +9,15 @@ DataContainer::DataContainer(const I_Settings& settings)
         batteryData_(new BatteryData()),
         proximitySensorsData_(new ProximitySensorsData()),
         mbmsData_(new MbmsData()),
-        telemetryData_(new TelemetryData()) {}
+        telemetryData_(new TelemetryData()) {
+    QList<MpptUnit*> mpptUnits;
+
+    for(int i = 0; i < settings.numberOfMppts(); ++i){
+        mpptUnits.append(new MpptUnit());
+    }
+
+    mpptData_.reset(new MpptData(mpptUnits));
+}
 
 DataContainer::~DataContainer() {}
 
@@ -37,4 +47,8 @@ BatteryFaultsData& DataContainer::batteryFaultsData(){
 
 MbmsData& DataContainer::mbmsData(){
     return *mbmsData_;
+}
+
+MpptData& DataContainer::mpptData(){
+    return *mpptData_;
 }

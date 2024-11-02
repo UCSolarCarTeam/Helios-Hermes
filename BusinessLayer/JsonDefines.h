@@ -173,6 +173,11 @@ namespace JsonFormat {
     constexpr const char* PROTECTION_TRIP = "ProtectionTrip";
     constexpr const char* ORION_MESSAGE_TIMEOUT_TRIP = "OrionMessageTimeoutTrip";
     constexpr const char* CONTACTOR_DISCONNECTED_UNEXPECTEDLY_TRIP = "ContactorDisconnectedUnexpectedlyTrip";
+
+    constexpr const char* MPPT = "MPPT";
+    constexpr const char* ALIVE = "Alive";
+    constexpr const char* BATTERY_VOLTAGE = "BatteryVoltage";
+    constexpr const char* TEMPERATURE = "Temperature";
 }
 
 #endif // JSONDEFINES_H
