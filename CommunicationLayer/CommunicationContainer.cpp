@@ -12,6 +12,7 @@
 // #include "DataPopulators/BatteryPopulator.h"
 // #include "DataPopulators/DriverControlsPopulator.h"
 #include "DataPopulators/KeyMotorPopulator.h"
+#include "DataPopulators/ProximitySensorsPopulator.h"
 // #include "DataPopulators/LightsPopulator.h"
 // #include "DataPopulators/MotorDetailsPopulator.h"
 // #include "DataPopulators/MotorFaultsPopulator.h"
@@ -37,13 +38,14 @@ public:
         // , batteryPopulator(packetDecoder, dataContainer.batteryData())
         // , driverControlsPopulator(packetDecoder, dataContainer.driverControlsData())
         , keyMotorPopulator(packetDecoder, dataContainer.keyMotorData())
+        , proximitySensorPopulator(packetDecoder, dataContainer.proximitySensorsData())
         // , lightsPopulator(packetDecoder, dataContainer.lightsData())
         // , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
         // , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
         // , mpptPopulator(packetDecoder, dataContainer.mpptData())
         // , ccsPopulator(packetChecksumChecker, dataContainer.ccsData())
     {
-        qDebug() << "CALLED";
+        qDebug() << "CALLED" ;
     }
 
     QSerialPort serialPort;
@@ -60,6 +62,7 @@ public:
     // BatteryPopulator batteryPopulator;
     // DriverControlsPopulator driverControlsPopulator;
     KeyMotorPopulator keyMotorPopulator;
+    ProximitySensorsPopulator proximitySensorPopulator;
     // LightsPopulator lightsPopulator;
     // MotorDetailsPopulator motorDetailsPopulator;
     // MotorFaultsPopulator motorFaultsPopulator;

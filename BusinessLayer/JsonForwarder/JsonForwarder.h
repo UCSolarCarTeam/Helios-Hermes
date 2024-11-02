@@ -5,6 +5,7 @@
 #include <QTimer>
 
 #include "../../DataLayer/KeyMotorData/KeyMotorData.h"
+#include "../../DataLayer/ProximitySensorsData/ProximitySensorsData.h"
 #include "../JsonMessageBuilder/JsonMessageBuilder.h"
 
 class I_MessageForwarder;
@@ -13,7 +14,11 @@ class I_Settings;
 class JsonForwarder : public QObject{
     Q_OBJECT
 public:
-    JsonForwarder(JsonMessageBuilder& builder, KeyMotorData& keyMotorData, I_MessageForwarder& forwarder, I_Settings& settings);
+    JsonForwarder(JsonMessageBuilder& builder,
+                  KeyMotorData& keyMotorData,
+                  ProximitySensorsData& proximitySensorsData,
+                  I_MessageForwarder& forwarder,
+                  I_Settings& settings);
     virtual ~JsonForwarder();
 
     void startForwardingData();
@@ -25,6 +30,7 @@ private slots:
 private:
     JsonMessageBuilder& builder_;
     KeyMotorData& keyMotorData_;
+    ProximitySensorsData& proximitySensorsData_;
     I_MessageForwarder& forwarder_;
     QScopedPointer<QTimer> readTimer_;
     int forwardPeriod_;

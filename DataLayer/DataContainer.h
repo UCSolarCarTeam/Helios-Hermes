@@ -4,6 +4,7 @@
 #include <QScopedPointer>
 
 #include "KeyMotorData/KeyMotorData.h"
+#include "ProximitySensorsData/ProximitySensorsData.h"
 
 class I_Settings;
 
@@ -13,9 +14,11 @@ public:
     ~DataContainer();
 
     KeyMotorData& keyMotorData();
+    ProximitySensorsData& proximitySensorsData();
 
 private:
     QScopedPointer<KeyMotorData> keyMotorData_;
+    QScopedPointer<ProximitySensorsData> proximitySensorsData_;
 };
 
 #endif // DATACONTAINER_H

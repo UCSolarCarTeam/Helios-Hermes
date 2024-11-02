@@ -11,8 +11,6 @@ public:
     unsigned short motorSetpoint() const;
     unsigned char controlBits() const;
 
-    QString toString() const;
-
 private:
     const QByteArray message_;
 

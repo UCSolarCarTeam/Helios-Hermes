@@ -31,6 +31,10 @@ add_executable(HeliosHermes
   BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.h BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.cpp
   BusinessLayer/JsonForwarder/JsonForwarder.h BusinessLayer/JsonForwarder/JsonForwarder.cpp
   BusinessLayer/JsonDefines.h
+  CommunicationLayer/MessagingFramework/ProximitySensorsMessage.h CommunicationLayer/MessagingFramework/ProximitySensorsMessage.cpp
+  CommunicationLayer/DataPopulators/ProximitySensorsPopulator.h CommunicationLayer/DataPopulators/ProximitySensorsPopulator.cpp
+  DataLayer/ProximitySensorsData/ProximitySensorsData.h DataLayer/ProximitySensorsData/ProximitySensorsData.cpp
+
 )
 
 target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)

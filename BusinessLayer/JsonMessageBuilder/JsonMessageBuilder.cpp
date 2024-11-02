@@ -15,3 +15,14 @@ QJsonObject JsonMessageBuilder::buildKeyMotorMessage(const KeyMotorData& data){
 
     return json;
 }
+
+QJsonObject JsonMessageBuilder::buildProximitySensorsMessage(const ProximitySensorsData& data){
+    QJsonObject json = QJsonObject();
+
+    json[JsonFormat::PROXIMITY_SENSOR_1] = data.getProximitySensor1();
+    json[JsonFormat::PROXIMITY_SENSOR_2] = data.getProximitySensor2();
+    json[JsonFormat::PROXIMITY_SENSOR_3] = data.getProximitySensor3();
+    json[JsonFormat::PROXIMITY_SENSOR_4] = data.getProximitySensor4();
+
+    return json;
+}

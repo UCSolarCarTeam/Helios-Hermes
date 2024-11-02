@@ -14,6 +14,12 @@ namespace JsonFormat {
     constexpr const char* MOTOR_MODE = "MotorMode";
     constexpr const char* SOFTWARE_ENABLE = "SoftwareEnable";
     constexpr const char* DEBUG_MODE= "DebugMode";
+
+    constexpr const char* PROXIMITY_SENSORS = "ProximitySensors";
+    constexpr const char* PROXIMITY_SENSOR_1 = "ProximitySensor1";
+    constexpr const char* PROXIMITY_SENSOR_2 = "ProximitySensor2";
+    constexpr const char* PROXIMITY_SENSOR_3 = "ProximitySensor3";
+    constexpr const char* PROXIMITY_SENSOR_4 = "ProximitySensor4";
 }
 
 #endif // JSONDEFINES_H

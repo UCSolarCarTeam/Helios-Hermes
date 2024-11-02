@@ -11,7 +11,7 @@ public:
     KeyMotorPopulator(I_PacketDecoder& packetDecoder, KeyMotorData& data);
 
 public slots:
-    void populatorData(const KeyMotorMessage);
+    void populateData(const KeyMotorMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;

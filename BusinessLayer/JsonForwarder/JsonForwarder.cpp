@@ -12,10 +12,11 @@ namespace {
 
 JsonForwarder::JsonForwarder(JsonMessageBuilder& builder,
                              KeyMotorData& keyMotorData,
+                             ProximitySensorsData& proximitySensorsData,
                              I_MessageForwarder& forwarder,
                              I_Settings& settings)
-    : builder_(builder), keyMotorData_(keyMotorData), forwarder_(forwarder),
-      readTimer_(new QTimer()), forwardPeriod_(settings.forwardPeriod()),
+    : builder_(builder), keyMotorData_(keyMotorData), proximitySensorsData_(proximitySensorsData),
+      forwarder_(forwarder), readTimer_(new QTimer()), forwardPeriod_(settings.forwardPeriod()),
       packetTitle_(settings.packetTitle()){
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(handleTimeout()));
 }
@@ -40,6 +41,7 @@ void JsonForwarder::forwardData(QDateTime& currentTime) {
     json[JsonFormat::TIMESTAMP] = currentTime.toUTC().toString(DATE_FORMAT);
 
     json[JsonFormat::KEY_MOTOR] = builder_.buildKeyMotorMessage(keyMotorData_);
+    json[JsonFormat::PROXIMITY_SENSORS] = builder_.buildProximitySensorsMessage(proximitySensorsData_);
 
     forwarder_.forwardData(QJsonDocument(json).toJson(QJsonDocument::Compact));
 

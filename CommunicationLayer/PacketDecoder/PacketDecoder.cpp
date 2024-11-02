@@ -8,9 +8,14 @@ namespace {
     const int KEY_MOTOR_ID = 1;
     const int KEY_MOTOR_LENGTH = 4;
 
-    const std::array<int, 2> packetLength = {
+    const int PROXIMITY_SENSORS_ID = 10;
+    const int PROXIMITY_SENSORS_LENGTH = 9;
+
+    const std::array<int, 11> packetLength = {
         -69,
-        KEY_MOTOR_LENGTH
+        KEY_MOTOR_LENGTH,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        PROXIMITY_SENSORS_LENGTH
     };
 }
 
@@ -34,11 +39,14 @@ void PacketDecoder::handleValidData(QByteArray message){
 
     switch(id){
         case KEY_MOTOR_ID:
+            qDebug() << "Key Motor Packet";
             emit packetDecoded(KeyMotorMessage(message));
+            return;
+        case PROXIMITY_SENSORS_ID:
+            qDebug() << "PROX SENS PACKET";
+            emit packetDecoded(ProximitySensorsMessage(message));
             return;
         default:
             qWarning() << "Unkown Packet ID:" << id;
     }
-
-    // if message length = to namespace length definition
 }
