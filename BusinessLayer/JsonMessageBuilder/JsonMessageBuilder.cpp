@@ -229,3 +229,114 @@ QJsonArray JsonMessageBuilder::buildMpptMessage(const MpptData& data){
 
     return json;
 }
+
+QJsonArray JsonMessageBuilder::buildMotorDetailsMessage(const MotorDetailsData& data){
+    QJsonArray json = QJsonArray();
+
+    for(int i = 0; i < data.getNumberOfUnits(); i++){
+        QJsonObject motorJson = QJsonObject();
+        const MotorDetailsUnit& motor = data.getMotorDetailsUnit(i);
+
+        motorJson[JsonFormat::CONTROL_VALUE] = motor.controlValue();
+        motorJson[JsonFormat::CONTROL_MODE] = motor.controlMode();
+        motorJson[JsonFormat::MOTOR_MODE] = motor.motorMode();
+        motorJson[JsonFormat::SOFTWARE_ENABLE] = motor.softwareEnable();
+        motorJson[JsonFormat::DEBUG_MODE] = motor.debugMode();
+
+        motorJson[JsonFormat::CURRENT_MOTOR_TORQUE] = motor.currentMotorTorque();
+        motorJson[JsonFormat::CURRENT_RPM_VALUE] = motor.currentRpmValue();
+        motorJson[JsonFormat::MOTOR_TEMPERATURE] = motor.motorTemperature();
+        motorJson[JsonFormat::INVERTER_PEAK_CURRENT] = motor.inverterPeakCurrent();
+        motorJson[JsonFormat::CURRENT_MOTOR_POWER] = motor.currentMotorPower();
+        motorJson[JsonFormat::ABSOLUTE_ANGLE] = motor.AbsoluteAngle();
+
+        motorJson[JsonFormat::MOTOR_ABOUT_TO_STALL] = motor.motorAboutToStall();
+        motorJson[JsonFormat::DELAY_IN_READING_TEMP_SENSOR] = motor.delayInReadingTempSensor();
+        motorJson[JsonFormat::DELAY_IN_READING_POS_SENSOR] = motor.delayInReadingPosSensor();
+        motorJson[JsonFormat::INVERTER1_TEMP_VERY_HIGH] = motor.inverter1TempVeryHigh();
+        motorJson[JsonFormat::INVERTER2_TEMP_VERY_HIGH] = motor.inverter2TempVeryHigh();
+        motorJson[JsonFormat::INVERTER3_TEMP_VERY_HIGH] = motor.inverter3TempVeryHigh();
+        motorJson[JsonFormat::INVERTER4_TEMP_VERY_HIGH] = motor.inverter4TempVeryHigh();
+        motorJson[JsonFormat::INVERTER5_TEMP_VERY_HIGH] = motor.inverter5TempVeryHigh();
+
+        motorJson[JsonFormat::INVERTER6_TEMP_VERY_HIGH] = motor.inverter6TempVeryHigh();
+        motorJson[JsonFormat::CPU_TEMPERATURE_VERY_HIGH] = motor.cpuTemperatureVeryHigh();
+        motorJson[JsonFormat::HALL_TEMPERATURE_VERY_HIGH] = motor.hallTemperatureVeryHigh();
+        motorJson[JsonFormat::DCLINK_TEMPERATURE_VERY_HIGH] = motor.dclinkTemperatureVeryHigh();
+        motorJson[JsonFormat::DELAY_IN_DCLINK_COMMUNICATION] = motor.delayInDclinkCommunication();
+        motorJson[JsonFormat::INVERTER1_OVER_CURRENT] = motor.inverter1OverCurrent();
+        motorJson[JsonFormat::INVERTER2_OVER_CURRENT] = motor.inverter2OverCurrent();
+        motorJson[JsonFormat::INVERTER3_OVER_CURRENT] = motor.inverter3OverCurrent();
+
+        motorJson[JsonFormat::INVERTER4_OVER_CURRENT] = motor.inverter4OverCurrent();
+        motorJson[JsonFormat::INVERTER5_OVER_CURRENT] = motor.inverter5OverCurrent();
+        motorJson[JsonFormat::INVERTER6_OVER_CURRENT] = motor.inverter6OverCurrent();
+        motorJson[JsonFormat::DC_OVERVOLTAGE_WARNING] = motor.dcOvervoltageWarning();
+        motorJson[JsonFormat::DC_UNDERVOLTAGE_WARNING] = motor.dcUndervoltageWarning();
+        motorJson[JsonFormat::CAN_COMMS_TIMEOUT_WARNING] = motor.canCommsTimeout();
+        motorJson[JsonFormat::INVERTER1_FAULT_WARNING] = motor.inverter1faultWarning();
+        motorJson[JsonFormat::INVERTER2_FAULT_WARNING] = motor.inverter2faultWarning();
+
+        motorJson[JsonFormat::INVERTER3_FAULT_WARNING] = motor.inverter3faultWarning();
+        motorJson[JsonFormat::INVERTER4_FAULT_WARNING] = motor.inverter4faultWarning();
+        motorJson[JsonFormat::INVERTER5_FAULT_WARNING] = motor.inverter5faultWarning();
+        motorJson[JsonFormat::INVERTER6_FAULT_WARNING] = motor.inverter6faultWarning();
+        motorJson[JsonFormat::CAN_SEND_WARNING] = motor.canSendWarning();
+        motorJson[JsonFormat::LOST_FRAMES_ON_CAN_BUS_WARNING] = motor.lostFramesOnCanBusWarning();
+        motorJson[JsonFormat::OVERSPEED_WARNING] = motor.overspeedWarning();
+        motorJson[JsonFormat::CPU_OVERLOAD] = motor.cpuOverload();
+
+        motorJson[JsonFormat::TORQUE_LIMITED] = motor.torqueLimited();
+        motorJson[JsonFormat::START_AT_HIGH_RPM] = motor.startAtHighRpm();
+
+        motorJson[JsonFormat::INIT_ERROR] = motor.initError();
+        motorJson[JsonFormat::SETTINGS_NOT_FOUND] = motor.settingsNotFound();
+        motorJson[JsonFormat::MOTOR_STALLED] = motor.motorStalled();
+        motorJson[JsonFormat::CONTROLLER_DATA_READING_TIMEOUT] = motor.controllerDataReadingTimeout();
+        motorJson[JsonFormat::INVALID_HALL_SENSOR_SEQUENCE] = motor.invalidHallSensorSequence();
+        motorJson[JsonFormat::INVALID_HALL_SECTOR] = motor.invalidHallSector();
+        motorJson[JsonFormat::ERROR_READING_TEMP_SENSOR] = motor.errorReadingTempSensor();
+        motorJson[JsonFormat::POSITION_SENSOR_READING_ERROR] = motor.positionSensorReadingError();
+
+        motorJson[JsonFormat::ERROR_READING_ENCODER] = motor.errorReadingEncoder();
+        motorJson[JsonFormat::ZERO_POSITION_OFFSET_NOT_SET] = motor.zeroPositionOffsetNotSet();
+        motorJson[JsonFormat::HW_ENABLE_NOT_SET] = motor.hwEnableNotSet();
+        motorJson[JsonFormat::INVERTER1_TEMP_TOO_HIGH] = motor.inverter1TempTooHigh();
+        motorJson[JsonFormat::INVERTER2_TEMP_TOO_HIGH] = motor.inverter2TempTooHigh();
+        motorJson[JsonFormat::INVERTER3_TEMP_TOO_HIGH] = motor.inverter3TempTooHigh();
+        motorJson[JsonFormat::INVERTER4_TEMP_TOO_HIGH] = motor.inverter4TempTooHigh();
+        motorJson[JsonFormat::INVERTER5_TEMP_TOO_HIGH] = motor.inverter5TempTooHigh();
+
+        motorJson[JsonFormat::INVERTER6_TEMP_TOO_HIGH] = motor.inverter6TempTooHigh();
+        motorJson[JsonFormat::CPU_TEMPERATURE_TOO_HIGH] = motor.cpuTemperatureTooHigh();
+        motorJson[JsonFormat::HALL_TEMP_TOO_HIGH] = motor.hallTemperatureTooHigh();
+        motorJson[JsonFormat::DCLINK_TEMP_TOO_HIGH] = motor.dclinkTemperatureTooHigh();
+        motorJson[JsonFormat::ERROR_IN_DCLINK_COMMUNICATION] = motor.errorInDclinkCommunication();
+        motorJson[JsonFormat::INVERTER1_OVERCURRENT] = motor.inverter1Overcurrent();
+        motorJson[JsonFormat::INVERTER2_OVERCURRENT] = motor.inverter2Overcurrent();
+        motorJson[JsonFormat::INVERTER3_OVERCURRENT] = motor.inverter3Overcurrent();
+
+        motorJson[JsonFormat::INVERTER4_OVERCURRENT] = motor.inverter4Overcurrent();
+        motorJson[JsonFormat::INVERTER5_OVERCURRENT] = motor.inverter5Overcurrent();
+        motorJson[JsonFormat::INVERTER6_OVERCURRENT] = motor.inverter6Overcurrent();
+        motorJson[JsonFormat::DC_UNDERVOLTAGE_ERROR] = motor.dcUndervoltageError();
+        motorJson[JsonFormat::DC_OVERVOLTAGE_ERROR] = motor.dcOvervoltageError();
+        //motorJson[JsonFormat::DOUBLE_CAN_ID_ON_BUS] = motor.doubleCanIdOnBus(); FIX
+        motorJson[JsonFormat::CAN_COMMS_TIMEOUT_ERROR] = motor.canCommsTimeoutError();
+        motorJson[JsonFormat::INVERTER1_FAULT_ERROR] = motor.inverter1FaultError();
+        motorJson[JsonFormat::INVERTER2_FAULT_ERROR] = motor.inverter2FaultError();
+        motorJson[JsonFormat::INVERTER3_FAULT_ERROR] = motor.inverter3FaultError();
+        motorJson[JsonFormat::INVERTER4_FAULT_ERROR] = motor.inverter4FaultError();
+        motorJson[JsonFormat::INVERTER5_FAULT_ERROR] = motor.inverter5FaultError();
+        motorJson[JsonFormat::INVERTER6_FAULT_ERROR] = motor.inverter6FaultError();
+        motorJson[JsonFormat::CAN_SEND_ERROR] = motor.canSendError();
+        motorJson[JsonFormat::LOST_FRAMES_ON_CAN_BUS_ERROR] = motor.lostFramesOnCanBusError();
+        motorJson[JsonFormat::OVERSPEED_ERROR] = motor.overspeedError();
+
+        motorJson[JsonFormat::CPU_OVERLOADED] = motor.cpuOverloaded();
+
+        json.append(motorJson);
+    }
+
+    return json;
+}

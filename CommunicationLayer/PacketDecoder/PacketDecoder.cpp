@@ -8,6 +8,12 @@ namespace {
     const int KEY_MOTOR_ID = 1;
     const int KEY_MOTOR_LENGTH = 4;
 
+    const int MOTOR_DETAILS_0_ID = 2;
+    const int MOTOR_DETAILS_0_LENGTH = 33;
+
+    const int MOTOR_DETAILS_1_ID = 3;
+    const int MOTOR_DETAILS_1_LENGTH = 33;
+
     const int B3_ID = 4;
     const int B3_LENGTH = 7;
 
@@ -32,7 +38,8 @@ namespace {
     const std::array<int, 11> packetLength = {
         -69,
         KEY_MOTOR_LENGTH,
-        -1, -1,
+        MOTOR_DETAILS_0_LENGTH, 
+        MOTOR_DETAILS_1_LENGTH,
         B3_LENGTH,
         TELEMETRY_LENGTH,
         BATTERY_FAULTS_LENGTH, 
@@ -50,7 +57,7 @@ PacketDecoder::PacketDecoder(const I_PacketChecksumChecker& checksumChecker) {
 PacketDecoder::~PacketDecoder(){}
 
 void PacketDecoder::handleValidData(QByteArray message){
-    qDebug() << "DECODING PACKET" << message;
+    qDebug() << "DECODING PACKET" << message << " -- " << message.length();
 
     const unsigned char id = message.at(ID_INDEX);
 
@@ -64,6 +71,12 @@ void PacketDecoder::handleValidData(QByteArray message){
     switch(id){
         case KEY_MOTOR_ID:
             emit packetDecoded(KeyMotorMessage(message));
+            return;
+        case MOTOR_DETAILS_0_ID:
+            emit packetDecoded(MotorDetailsMessage(message, id));
+            return;
+        case MOTOR_DETAILS_1_ID:
+            emit packetDecoded(MotorDetailsMessage(message, id));
             return;
         case B3_ID:
             emit packetDecoded(B3Message(message));

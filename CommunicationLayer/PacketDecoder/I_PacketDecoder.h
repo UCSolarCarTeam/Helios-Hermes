@@ -11,6 +11,7 @@
 #include "../MessagingFramework/BatteryFaultsMessage.h"
 #include "../MessagingFramework/MbmsMessage.h"
 #include "../MessagingFramework/MpptMessage.h"
+#include "../MessagingFramework/MotorDetailsMessage.h"
 
 class I_PacketDecoder : public QObject{
     Q_OBJECT
@@ -26,6 +27,7 @@ signals:
     void packetDecoded(const BatteryFaultsMessage);
     void packetDecoded(const MbmsMessage);
     void packetDecoded(const MpptMessage);
+    void packetDecoded(const MotorDetailsMessage);
 };
 
 #endif // I_PACKETDECODER_H

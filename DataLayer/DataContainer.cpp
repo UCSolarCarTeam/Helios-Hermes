@@ -10,12 +10,18 @@ DataContainer::DataContainer(const I_Settings& settings)
         proximitySensorsData_(new ProximitySensorsData()),
         mbmsData_(new MbmsData()),
         telemetryData_(new TelemetryData()) {
+    QList<MotorDetailsUnit*> motorDetailsUnits;
     QList<MpptUnit*> mpptUnits;
+
+    for(int i = 0; i < settings.numberOfMotors(); ++i){
+        motorDetailsUnits.append(new MotorDetailsUnit());
+    }
 
     for(int i = 0; i < settings.numberOfMppts(); ++i){
         mpptUnits.append(new MpptUnit());
     }
 
+    motorDetailsData_.reset(new MotorDetailsData(motorDetailsUnits));
     mpptData_.reset(new MpptData(mpptUnits));
 }
 
@@ -51,4 +57,8 @@ MbmsData& DataContainer::mbmsData(){
 
 MpptData& DataContainer::mpptData(){
     return *mpptData_;
+}
+
+MotorDetailsData& DataContainer::motorDetailsData(){
+    return *motorDetailsData_;
 }

@@ -13,6 +13,7 @@
 #include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
 #include "../../DataLayer/MbmsData/MbmsData.h"
 #include "../../DataLayer/MpptData/MpptData.h"
+#include "../../DataLayer/MotorDetailsData/MotorDetailsData.h"
 
 class I_MessageForwarder;
 class I_Settings;
@@ -22,6 +23,7 @@ class JsonForwarder : public QObject{
 public:
     JsonForwarder(JsonMessageBuilder& builder,
                   KeyMotorData& keyMotorData,
+                  MotorDetailsData& motorDetailsData,
                   B3Data& b3Data,
                   TelemetryData& telemetryData,
                   BatteryFaultsData& batteryFaultsData,
@@ -42,6 +44,7 @@ private slots:
 private:
     JsonMessageBuilder& builder_;
     KeyMotorData& keyMotorData_;
+    MotorDetailsData& motorDetailsData_;
     B3Data& b3Data_;
     TelemetryData& telemetryData_;
     BatteryFaultsData& batteryFaultsData_;

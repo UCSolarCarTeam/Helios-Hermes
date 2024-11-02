@@ -52,6 +52,10 @@ add_executable(HeliosHermes
   DataLayer/MpptData/MpptData.h DataLayer/MpptData/MpptData.cpp
   DataLayer/MpptData/MpptUnit.h DataLayer/MpptData/MpptUnit.cpp
   CommunicationLayer/DataPopulators/MpptPopulator.h CommunicationLayer/DataPopulators/MpptPopulator.cpp
+  CommunicationLayer/MessagingFramework/MotorDetailsMessage.h CommunicationLayer/MessagingFramework/MotorDetailsMessage.cpp
+  DataLayer/MotorDetailsData/MotorDetailsData.h DataLayer/MotorDetailsData/MotorDetailsData.cpp
+  DataLayer/MotorDetailsData/MotorDetailsUnit.h DataLayer/MotorDetailsData/MotorDetailsUnit.cpp
+  CommunicationLayer/DataPopulators/MotorDetailsPopulator.h CommunicationLayer/DataPopulators/MotorDetailsPopulator.cpp
 
 
 
