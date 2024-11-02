@@ -39,6 +39,9 @@ add_executable(HeliosHermes
   CommunicationLayer/MessagingFramework/TelemetryMessage.h CommunicationLayer/MessagingFramework/TelemetryMessage.cpp
   DataLayer/TelemetryData/TelemetryData.h DataLayer/TelemetryData/TelemetryData.cpp
   CommunicationLayer/DataPopulators/TelemetryPopulator.h CommunicationLayer/DataPopulators/TelemetryPopulator.cpp
+  CommunicationLayer/MessagingFramework/BatteryMessage.h CommunicationLayer/MessagingFramework/BatteryMessage.cpp
+  DataLayer/BatteryData/BatteryData.h DataLayer/BatteryData/BatteryData.cpp
+  CommunicationLayer/DataPopulators/BatteryPopulator.h CommunicationLayer/DataPopulators/BatteryPopulator.cpp
 
 
 )

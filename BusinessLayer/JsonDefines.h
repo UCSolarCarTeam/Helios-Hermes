@@ -65,6 +65,38 @@ namespace JsonFormat {
     constexpr const char* MPU_ROTATION_Y = "MpuRotationY";
     constexpr const char* MPU_ROTATION_Z = "MpuRotationZ";
     constexpr const char* MPU_TEMPERATURE = "MpuTemperature";
+
+    constexpr const char* BATTERY = "Battery";
+    constexpr const char* BMU_ALIVE = "BmuAlive";
+    constexpr const char* DISCHARGE_RELAY_ENABLED = "DischargeRelayEnabled";
+    constexpr const char* CHARGE_RELAY_ENABLED = "ChargeRelayEnabled";
+    constexpr const char* CHARGER_SAFETY_ENABLED = "ChargerSafetyEnabled";
+    constexpr const char* MALFUNCTION_INDICATOR_ACTIVE = "MalfunctionIndicatorActive";
+    constexpr const char* MULTI_PURPOSE_INPUT_SIGNAL_STATUS = "MultiPurposeInputSignalStatus";
+    constexpr const char* ALWAYS_ON_SIGNAL_STATUS = "AlwaysOnSignalStatus";
+    constexpr const char* IS_READY_SIGNAL_STATUS = "IsReadySignalStatus";
+    constexpr const char* IS_CHARGING_SIGNAL_STATUS = "IsChargingSignalStatus";
+    constexpr const char* POPULATED_CELLS = "PopulatedCells";
+    constexpr const char* INPUT_12V = "Input12V";
+    constexpr const char* FAN_VOLTAGE = "FanVoltage";
+    constexpr const char* PACK_CURRENT = "PackCurrent";
+    constexpr const char* PACK_VOLTAGE = "PackVoltage";
+    constexpr const char* PACK_STATE_OF_CHARGE = "PackStateOfCharge";
+    constexpr const char* PACK_AMPHOURS = "PackAmphours";
+    constexpr const char* PACK_DEPTH_OF_DISCHARGE = "PackDepthOfDischarge";
+    constexpr const char* HIGH_TEMPERATURE = "HighTemperature";
+    constexpr const char* HIGH_THERMISTOR_ID = "HighThermistorId";
+    constexpr const char* LOW_TEMPERATURE = "LowTemperature";
+    constexpr const char* LOW_THERMISTOR_ID = "LowThermistorId";
+    constexpr const char* AVERAGE_TEMPERATURE = "AverageTemperature";
+    constexpr const char* INTERNAL_TEMPERATURE = "InternalTemperature";
+    constexpr const char* FAN_SPEED = "FanSpeed";
+    constexpr const char* REQUESTED_FAN_SPEED = "RequestedFanSpeed";
+    constexpr const char* LOW_CELL_VOLTAGE = "LowCellVoltage";
+    constexpr const char* LOW_CELL_VOLTAGE_ID = "LowCellVoltageId";
+    constexpr const char* HIGH_CELL_VOLTAGE = "HighCellVoltage";
+    constexpr const char* HIGH_CELL_VOLTAGE_ID = "HighCellVoltageId";
+    constexpr const char* AVERAGE_CELL_VOLTAGE = "AverageCellVoltage";
 }
 
 #endif // JSONDEFINES_H

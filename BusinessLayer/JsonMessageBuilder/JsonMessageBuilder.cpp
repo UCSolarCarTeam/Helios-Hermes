@@ -84,3 +84,42 @@ QJsonObject JsonMessageBuilder::buildTelemetryMessage(const TelemetryData& data)
 
     return json;
 }
+
+QJsonObject JsonMessageBuilder::buildBatteryMessage(const BatteryData& data){
+    QJsonObject json = QJsonObject();
+
+    json[JsonFormat::BMU_ALIVE] = data.bmuAlive();
+
+    json[JsonFormat::DISCHARGE_RELAY_ENABLED] = data.dischargeRelayEnabled();
+    json[JsonFormat::CHARGE_RELAY_ENABLED] = data.chargeRelayEnabled();
+    json[JsonFormat::CHARGER_SAFETY_ENABLED] = data.chargerSafetyEnabled();
+    json[JsonFormat::MALFUNCTION_INDICATOR_ACTIVE] = data.malfunctionIndicatorActive();
+    json[JsonFormat::MULTI_PURPOSE_INPUT_SIGNAL_STATUS] = data.multiPurposeInputSignalStatus();
+    json[JsonFormat::ALWAYS_ON_SIGNAL_STATUS] = data.alwaysOnSignalStatus();
+    json[JsonFormat::IS_READY_SIGNAL_STATUS] = data.isReadySignalStatus();
+    json[JsonFormat::IS_CHARGING_SIGNAL_STATUS] = data.isChargingSignalStatus();
+
+    json[JsonFormat::POPULATED_CELLS] = data.populatedCells();
+    json[JsonFormat::INPUT_12V] = data.input12V();
+    json[JsonFormat::FAN_VOLTAGE] = data.fanVoltage();
+    json[JsonFormat::PACK_CURRENT] = data.packCurrent();
+    json[JsonFormat::PACK_VOLTAGE] = data.packVoltage();
+    json[JsonFormat::PACK_STATE_OF_CHARGE] = data.packStateOfCharge();
+    json[JsonFormat::PACK_AMPHOURS] = data.packAmphours();
+    json[JsonFormat::PACK_DEPTH_OF_DISCHARGE] = data.packDepthOfDischarge();
+    json[JsonFormat::HIGH_TEMPERATURE] = data.highTemperature();
+    json[JsonFormat::HIGH_THERMISTOR_ID] = data.highThermistorId();
+    json[JsonFormat::LOW_TEMPERATURE] = data.lowTemperature();
+    json[JsonFormat::LOW_THERMISTOR_ID] = data.lowThermistorId();
+    json[JsonFormat::AVERAGE_TEMPERATURE] = data.averageTemperature();
+    json[JsonFormat::INTERNAL_TEMPERATURE] = data.internalTemperature();
+    json[JsonFormat::FAN_SPEED] = data.fanSpeed();
+    json[JsonFormat::REQUESTED_FAN_SPEED] = data.requestedFanSpeed();
+    json[JsonFormat::LOW_CELL_VOLTAGE] = data.lowCellVoltage();
+    json[JsonFormat::LOW_CELL_VOLTAGE_ID] = data.lowCellVoltageId();
+    json[JsonFormat::HIGH_CELL_VOLTAGE] = data.highCellVoltage();
+    json[JsonFormat::HIGH_CELL_VOLTAGE_ID] = data.highCellVoltageId();
+    json[JsonFormat::AVERAGE_CELL_VOLTAGE] = data.averageCellVoltage();
+   
+    return json;
+}

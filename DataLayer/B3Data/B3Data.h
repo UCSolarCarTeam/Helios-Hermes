@@ -40,32 +40,32 @@ public:
     void setLightsOutputs(const unsigned char& val);
 
 private:
-    bool rightSignalIn_;
-    bool leftSignalIn_;
-    bool hazardLights_;
-    bool headlightsSwitch_;
-    bool forwardSwitch_;
-    bool hornSwitch_;
-    bool forward_;
+    bool rightSignalIn_ = 0;
+    bool leftSignalIn_ = 0;
+    bool hazardLights_ = 0;
+    bool headlightsSwitch_ = 0;
+    bool forwardSwitch_ = 0;
+    bool hornSwitch_ = 0;
+    bool forward_ = 0;
 
-    bool neutral_;
-    bool reverse_;
-    bool brakeSwitch_;
-    bool handBrakeSwitch_;
-    bool motorReset_;
-    bool raceMode_;
-    bool lap_;
-    bool zoomZoom_;
+    bool neutral_ = 0;
+    bool reverse_ = 0;
+    bool brakeSwitch_ = 0;
+    bool handBrakeSwitch_ = 0;
+    bool motorReset_ = 0;
+    bool raceMode_ = 0;
+    bool lap_ = 0;
+    bool zoomZoom_ = 0;
 
-    unsigned short acceleration_;
-    unsigned short regenBraking_;
+    unsigned short acceleration_ = 0;
+    unsigned short regenBraking_ = 0;
 
-    bool rightSignalOut_;
-    bool leftSignalOut_;
-    bool daytimeRunningLightSignal_;
-    bool headlightSignal_;
-    bool brakeLightSignal_;
-    bool hornSignal_;
+    bool rightSignalOut_ = 0;
+    bool leftSignalOut_ = 0;
+    bool daytimeRunningLightSignal_ = 0;
+    bool headlightSignal_ = 0;
+    bool brakeLightSignal_ = 0;
+    bool hornSignal_ = 0;
 };
 
 #endif // B3DATA_H
