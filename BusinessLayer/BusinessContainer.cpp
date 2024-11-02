@@ -10,6 +10,7 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
       forwarder_(new JsonForwarder(*builder_,
                                     dataContainer.keyMotorData(),
                                     dataContainer.b3Data(),
+                                    dataContainer.telemetryData(),
                                     dataContainer.proximitySensorsData(),
                                     communicationContainer.messageForwarder(),
                                     infrastructureContainer.settings())) {

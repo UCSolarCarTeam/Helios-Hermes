@@ -7,6 +7,7 @@
 #include "../../DataLayer/KeyMotorData/KeyMotorData.h"
 #include "../../DataLayer/B3Data/B3Data.h"
 #include "../../DataLayer/ProximitySensorsData/ProximitySensorsData.h"
+#include "../../DataLayer/TelemetryData/TelemetryData.h"
 #include "../JsonMessageBuilder/JsonMessageBuilder.h"
 
 class I_MessageForwarder;
@@ -18,6 +19,7 @@ public:
     JsonForwarder(JsonMessageBuilder& builder,
                   KeyMotorData& keyMotorData,
                   B3Data& b3Data,
+                  TelemetryData& telemetryData,
                   ProximitySensorsData& proximitySensorsData,
                   I_MessageForwarder& forwarder,
                   I_Settings& settings);
@@ -33,6 +35,7 @@ private:
     JsonMessageBuilder& builder_;
     KeyMotorData& keyMotorData_;
     B3Data& b3Data_;
+    TelemetryData& telemetryData_;
     ProximitySensorsData& proximitySensorsData_;
     I_MessageForwarder& forwarder_;
     QScopedPointer<QTimer> readTimer_;

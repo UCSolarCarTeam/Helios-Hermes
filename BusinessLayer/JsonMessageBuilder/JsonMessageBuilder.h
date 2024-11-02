@@ -7,6 +7,7 @@
 #include "../../DataLayer/KeyMotorData/KeyMotorData.h"
 #include "../../DataLayer/ProximitySensorsData/ProximitySensorsData.h"
 #include "../../DataLayer/B3Data/B3Data.h"
+#include "../../DataLayer/TelemetryData/TelemetryData.h"
 
 class I_PacketChecksumChecker;
 
@@ -20,6 +21,7 @@ public:
     QJsonObject buildKeyMotorMessage(const KeyMotorData& data);
     QJsonObject buildProximitySensorsMessage(const ProximitySensorsData& data);
     QJsonObject buildB3Message(const B3Data& data);
+    QJsonObject buildTelemetryMessage(const TelemetryData& data);
 };
 
 #endif // JSONMESSAGEBUILDER_H

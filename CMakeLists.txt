@@ -26,7 +26,6 @@ add_executable(HeliosHermes
 
   DataLayer/KeyMotorData/KeyMotorData.h DataLayer/KeyMotorData/KeyMotorData.cpp
 
-  DataLayer/SerialDefines.h
   BusinessLayer/BusinessContainer.h BusinessLayer/BusinessContainer.cpp
   BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.h BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.cpp
   BusinessLayer/JsonForwarder/JsonForwarder.h BusinessLayer/JsonForwarder/JsonForwarder.cpp
@@ -37,6 +36,10 @@ add_executable(HeliosHermes
   CommunicationLayer/MessagingFramework/B3Message.h CommunicationLayer/MessagingFramework/B3Message.cpp
   DataLayer/B3Data/B3Data.h DataLayer/B3Data/B3Data.cpp
   CommunicationLayer/DataPopulators/B3Populator.h CommunicationLayer/DataPopulators/B3Populator.cpp
+  CommunicationLayer/MessagingFramework/TelemetryMessage.h CommunicationLayer/MessagingFramework/TelemetryMessage.cpp
+  DataLayer/TelemetryData/TelemetryData.h DataLayer/TelemetryData/TelemetryData.cpp
+  CommunicationLayer/DataPopulators/TelemetryPopulator.h CommunicationLayer/DataPopulators/TelemetryPopulator.cpp
+
 
 )
 

@@ -59,3 +59,28 @@ QJsonObject JsonMessageBuilder::buildB3Message(const B3Data& data){
 
     return json;
 }
+
+QJsonObject JsonMessageBuilder::buildTelemetryMessage(const TelemetryData& data){
+    QJsonObject json = QJsonObject();
+
+    json[JsonFormat::GPS_YEAR] = data.gpsYear();
+    json[JsonFormat::GPS_MONTH] = data.gpsMonth();
+    json[JsonFormat::GPS_DAY] = data.gpsDay();
+    json[JsonFormat::GPS_HOUR] = data.gpsHour();
+    json[JsonFormat::GPS_MINUTE] = data.gpsMinute();
+    json[JsonFormat::GPS_SECOND] = data.gpsSecond();
+    json[JsonFormat::GPS_VALIDITY_FLAGS] = data.gpsValidityFlags();
+    json[JsonFormat::GPS_FIX_STATUS_FLAGS] = data.gpsFixStatusFlags();
+    json[JsonFormat::GPS_ADDITIONAL_FLAGS] = data.gpsAdditionalFlags();
+    json[JsonFormat::GPS_LONGITUDE] = data.gpsLongitude();
+    json[JsonFormat::GPS_LATITUDE] = data.gpsLatitude();
+    json[JsonFormat::MPU_ACCELERATION_X] = data.mpuAccelerationX();
+    json[JsonFormat::MPU_ACCELERATION_Y] = data.mpuAccelerationY();
+    json[JsonFormat::MPU_ACCELERATION_Z] = data.mpuAccelerationZ();
+    json[JsonFormat::MPU_ROTATION_X] = data.mpuRotationX();
+    json[JsonFormat::MPU_ROTATION_Y] = data.mpuRotationY();
+    json[JsonFormat::MPU_ROTATION_Z] = data.mpuRotationZ();
+    json[JsonFormat::MPU_TEMPERATURE] = data.mpuTemperature();
+
+    return json;
+}

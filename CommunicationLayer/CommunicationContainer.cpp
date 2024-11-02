@@ -14,6 +14,7 @@
 #include "DataPopulators/KeyMotorPopulator.h"
 #include "DataPopulators/ProximitySensorsPopulator.h"
 #include "DataPopulators/B3Populator.h"
+#include "DataPopulators/TelemetryPopulator.h"
 // #include "DataPopulators/LightsPopulator.h"
 // #include "DataPopulators/MotorDetailsPopulator.h"
 // #include "DataPopulators/MotorFaultsPopulator.h"
@@ -41,6 +42,7 @@ public:
         , keyMotorPopulator(packetDecoder, dataContainer.keyMotorData())
         , proximitySensorPopulator(packetDecoder, dataContainer.proximitySensorsData())
         , b3Populator(packetDecoder, dataContainer.b3Data())
+        , telemetryPopulator(packetDecoder, dataContainer.telemetryData())
         // , lightsPopulator(packetDecoder, dataContainer.lightsData())
         // , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
         // , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
@@ -66,6 +68,7 @@ public:
     KeyMotorPopulator keyMotorPopulator;
     ProximitySensorsPopulator proximitySensorPopulator;
     B3Populator b3Populator;
+    TelemetryPopulator telemetryPopulator;
     // LightsPopulator lightsPopulator;
     // MotorDetailsPopulator motorDetailsPopulator;
     // MotorFaultsPopulator motorFaultsPopulator;

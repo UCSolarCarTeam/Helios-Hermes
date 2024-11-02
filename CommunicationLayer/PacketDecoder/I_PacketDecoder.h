@@ -5,6 +5,7 @@
 
 #include "../MessagingFramework/KeyMotorMessage.h"
 #include "../MessagingFramework/ProximitySensorsMessage.h"
+#include "../MessagingFramework/TelemetryMessage.h"
 #include "../MessagingFramework/B3Message.h"
 
 class I_PacketDecoder : public QObject{
@@ -16,6 +17,7 @@ signals:
     void packetDecoded(const KeyMotorMessage);
     void packetDecoded(const ProximitySensorsMessage);
     void packetDecoded(const B3Message);
+    void packetDecoded(const TelemetryMessage);
 };
 
 #endif // I_PACKETDECODER_H
