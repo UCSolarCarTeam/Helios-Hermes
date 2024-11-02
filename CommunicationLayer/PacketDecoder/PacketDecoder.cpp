@@ -20,6 +20,9 @@ namespace {
     const int BATTERY_ID = 7;
     const int BATTERY_LENGTH = 48;
 
+    const int MBMS_ID = 9;
+    const int MBMS_LENGTH = 26;
+
     const int PROXIMITY_SENSORS_ID = 10;
     const int PROXIMITY_SENSORS_LENGTH = 9;
 
@@ -31,7 +34,8 @@ namespace {
         TELEMETRY_LENGTH,
         BATTERY_FAULTS_LENGTH, 
         BATTERY_LENGTH, 
-        -1, -1,
+        -1, 
+        MBMS_LENGTH,
         PROXIMITY_SENSORS_LENGTH
     };
 }
@@ -70,6 +74,9 @@ void PacketDecoder::handleValidData(QByteArray message){
             return;
         case BATTERY_ID:
             emit packetDecoded(BatteryMessage(message));
+            return;
+        case MBMS_ID:
+            emit packetDecoded(MbmsMessage(message));
             return;
         case PROXIMITY_SENSORS_ID:
             emit packetDecoded(ProximitySensorsMessage(message));

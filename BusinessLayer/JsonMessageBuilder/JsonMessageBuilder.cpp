@@ -166,3 +166,47 @@ QJsonObject JsonMessageBuilder::buildBatteryFaultsMessage(const BatteryFaultsDat
     
     return json;
 }
+
+QJsonObject JsonMessageBuilder::buildMbmsMessage(const MbmsData& data){
+    QJsonObject json = QJsonObject();
+
+    json[JsonFormat::COMMON_CONTACTOR_STATE] = data.commonContactorState();
+    json[JsonFormat::MOTOR_CONTACTOR_STATE] = data.motorContactorState();
+    json[JsonFormat::ARRAY_CONTACTOR_STATE] = data.arrayContactorState();
+    json[JsonFormat::LV_CONTACTOR_STATE] = data.lvContactorState();
+    json[JsonFormat::CHARGE_CONTACTOR_STATE] = data.chargeContactorState();
+    json[JsonFormat::COMMON_CONTACTOR_ERROR] = data.commonContactorError();
+    json[JsonFormat::MOTOR_CONTACTOR_ERROR] = data.motorContactorError();
+    json[JsonFormat::ARRAY_CONTACTOR_ERROR] = data.arrayContactorError();
+    json[JsonFormat::LV_CONTACTOR_ERROR] = data.lvContactorError();
+    json[JsonFormat::CHARGE_CONTACTOR_ERROR] = data.chargeContactorError();
+    json[JsonFormat::STROBE_BMS_LIGHT] = data.strobeBmsLight();
+    json[JsonFormat::ALLOW_CHARGE] = data.allowCharge();
+    json[JsonFormat::HIGH_VOLTAGE_ENABLE_STATE] = data.highVoltageEnableState();
+    json[JsonFormat::ALLOW_DISCHARGE] = data.allowDischarge();
+    json[JsonFormat::ORION_CAN_RECEIVED_RECENTLY] = data.orionCanReceivedRecently();
+    json[JsonFormat::DISCHARGE_SHOULD_TRIP] = data.dischargeShouldTrip();
+    json[JsonFormat::CHARGE_SHOULD_TRIP] = data.chargeShouldTrip();
+    json[JsonFormat::AUXILLARY_BATTERY_VOLTAGE] = data.auxillaryBatteryVoltage();
+    json[JsonFormat::MOTOR_VOLTAGE] = data.motorVoltage();
+    json[JsonFormat::ARRAY_VOLTAGE] = data.arrayVoltage();
+    json[JsonFormat::LV_VOLTAGE] = data.lvVoltage();
+    json[JsonFormat::CHARGE_VOLTAGE] = data.chargeVoltage();
+    json[JsonFormat::COMMON_CURRENT] = data.commonCurrent();
+    json[JsonFormat::MOTOR_CURRENT] = data.motorCurrent();
+    json[JsonFormat::ARRAY_CURRENT] = data.arrayCurrent();
+    json[JsonFormat::LV_CURRENT] = data.lvCurrent();
+    json[JsonFormat::CHARGE_CURRENT] = data.chargeCurrent();
+    json[JsonFormat::HIGH_CELL_VOLTAGE_TRIP] = data.highCellVoltageTrip();
+    json[JsonFormat::LOW_CELL_VOLTAGE_TRIP] = data.lowCellVoltageTrip();
+    json[JsonFormat::HIGH_COMMON_CURRENT_TRIP] = data.highCommonCurrentTrip();
+    json[JsonFormat::MOTOR_HIGH_TEMPERATURE_CURRENT_TRIP] = data.motorHighTemperatureCurrentTrip();
+    json[JsonFormat::ARRAY_HIGH_TEMPERATURE_CURRENT_TRIP] = data.arrayHighTemperatureCurrentTrip();
+    json[JsonFormat::LV_HIGH_TEMPERATURE_CURRENT_TRIP] = data.lvHighTemperatureCurrentTrip();
+    json[JsonFormat::CHARGE_HIGH_TEMPERATURE_CURRENT_TRIP] = data.chargeHighTemperatureCurrentTrip();
+    json[JsonFormat::PROTECTION_TRIP] = data.protectionTrip();
+    json[JsonFormat::ORION_MESSAGE_TIMEOUT_TRIP] = data.orionMessageTimeoutTrip();
+    json[JsonFormat::CONTACTOR_DISCONNECTED_UNEXPECTEDLY_TRIP] = data.contactorDisconnectedUnexpectedlyTrip();
+
+    return json;
+}

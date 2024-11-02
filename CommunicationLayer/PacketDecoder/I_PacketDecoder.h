@@ -9,6 +9,7 @@
 #include "../MessagingFramework/B3Message.h"
 #include "../MessagingFramework/BatteryMessage.h"
 #include "../MessagingFramework/BatteryFaultsMessage.h"
+#include "../MessagingFramework/MbmsMessage.h"
 
 class I_PacketDecoder : public QObject{
     Q_OBJECT
@@ -22,6 +23,7 @@ signals:
     void packetDecoded(const TelemetryMessage);
     void packetDecoded(const BatteryMessage);
     void packetDecoded(const BatteryFaultsMessage);
+    void packetDecoded(const MbmsMessage);
 };
 
 #endif // I_PACKETDECODER_H

@@ -6,6 +6,7 @@ DataContainer::DataContainer(const I_Settings& settings)
         batteryFaultsData_(new BatteryFaultsData()),
         batteryData_(new BatteryData()),
         proximitySensorsData_(new ProximitySensorsData()),
+        mbmsData_(new MbmsData()),
         telemetryData_(new TelemetryData()) {}
 
 DataContainer::~DataContainer() {}
@@ -32,4 +33,8 @@ BatteryData& DataContainer::batteryData(){
 
 BatteryFaultsData& DataContainer::batteryFaultsData(){
     return *batteryFaultsData_;
+}
+
+MbmsData& DataContainer::mbmsData(){
+    return *mbmsData_;
 }

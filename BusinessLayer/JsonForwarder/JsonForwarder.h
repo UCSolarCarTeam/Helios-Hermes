@@ -11,6 +11,7 @@
 #include "../JsonMessageBuilder/JsonMessageBuilder.h"
 #include "../../DataLayer/BatteryData/BatteryData.h"
 #include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
+#include "../../DataLayer/MbmsData/MbmsData.h"
 
 class I_MessageForwarder;
 class I_Settings;
@@ -24,6 +25,7 @@ public:
                   TelemetryData& telemetryData,
                   BatteryFaultsData& batteryFaultsData,
                   BatteryData& batteryData,
+                  MbmsData& mbmsData,
                   ProximitySensorsData& proximitySensorsData,
                   I_MessageForwarder& forwarder,
                   I_Settings& settings);
@@ -42,6 +44,7 @@ private:
     TelemetryData& telemetryData_;
     BatteryFaultsData& batteryFaultsData_;
     BatteryData& batteryData_;
+    MbmsData& mbmsData_;
     ProximitySensorsData& proximitySensorsData_;
     I_MessageForwarder& forwarder_;
     QScopedPointer<QTimer> readTimer_;

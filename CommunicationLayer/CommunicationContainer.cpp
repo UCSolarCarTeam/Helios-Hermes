@@ -17,6 +17,7 @@
 #include "DataPopulators/TelemetryPopulator.h"
 #include "DataPopulators/BatteryPopulator.h"
 #include "DataPopulators/BatteryFaultsPopulator.h"
+#include "DataPopulators/MbmsPopulator.h"
 // #include "DataPopulators/LightsPopulator.h"
 // #include "DataPopulators/MotorDetailsPopulator.h"
 // #include "DataPopulators/MotorFaultsPopulator.h"
@@ -47,6 +48,7 @@ public:
         , telemetryPopulator(packetDecoder, dataContainer.telemetryData())
         , batteryPopulator(packetDecoder, dataContainer.batteryData())
         , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
+        , mbmsPopulator(packetDecoder, dataContainer.mbmsData())
         // , lightsPopulator(packetDecoder, dataContainer.lightsData())
         // , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
         // , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
@@ -75,6 +77,7 @@ public:
     TelemetryPopulator telemetryPopulator;
     BatteryPopulator batteryPopulator;
     BatteryFaultsPopulator batteryFaultsPopulator;
+    MbmsPopulator mbmsPopulator;
     // LightsPopulator lightsPopulator;
     // MotorDetailsPopulator motorDetailsPopulator;
     // MotorFaultsPopulator motorFaultsPopulator;
