@@ -34,6 +34,9 @@ add_executable(HeliosHermes
   CommunicationLayer/MessagingFramework/ProximitySensorsMessage.h CommunicationLayer/MessagingFramework/ProximitySensorsMessage.cpp
   CommunicationLayer/DataPopulators/ProximitySensorsPopulator.h CommunicationLayer/DataPopulators/ProximitySensorsPopulator.cpp
   DataLayer/ProximitySensorsData/ProximitySensorsData.h DataLayer/ProximitySensorsData/ProximitySensorsData.cpp
+  CommunicationLayer/MessagingFramework/B3Message.h CommunicationLayer/MessagingFramework/B3Message.cpp
+  DataLayer/B3Data/B3Data.h DataLayer/B3Data/B3Data.cpp
+  CommunicationLayer/DataPopulators/B3Populator.h CommunicationLayer/DataPopulators/B3Populator.cpp
 
 )
 

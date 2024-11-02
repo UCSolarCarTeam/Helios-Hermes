@@ -20,6 +20,31 @@ namespace JsonFormat {
     constexpr const char* PROXIMITY_SENSOR_2 = "ProximitySensor2";
     constexpr const char* PROXIMITY_SENSOR_3 = "ProximitySensor3";
     constexpr const char* PROXIMITY_SENSOR_4 = "ProximitySensor4";
+
+    constexpr const char* B3 = "B3";
+    constexpr const char* RIGHT_SIGNAL_IN = "RightSignalIn";
+    constexpr const char* LEFT_SIGNAL_IN = "LeftSignalIn";
+    constexpr const char* HAZARD_LIGHTS = "HazardLights";
+    constexpr const char* HEADLIGHTS_SWITCH = "HeadightsSwitch";
+    constexpr const char* FORWARD_SWITCH = "ForwardSwitch";
+    constexpr const char* HORN_SWITCH = "HornSwitch";
+    constexpr const char* FORWARD = "Forward";
+    constexpr const char* NEUTRAL = "Neutral";
+    constexpr const char* REVERSE = "Reverse";
+    constexpr const char* BRAKE_SWITCH = "BrakeSwitch";
+    constexpr const char* HANDBRAKE_SWITCH = "HandbrakeSwitch";
+    constexpr const char* MOTOR_RESET = "MotorReset";
+    constexpr const char* RACE_MODE = "RaceMode";
+    constexpr const char* LAP = "Lap";
+    constexpr const char* ZOOM_ZOOM = "ZoomZoom";
+    constexpr const char* ACCELERATION = "Acceleration";
+    constexpr const char* REGEN_BRAKING = "RegenBraking";
+    constexpr const char* RIGHT_SIGNAL_OUT = "RightSignalOut";
+    constexpr const char* LEFT_SIGNAL_OUT = "LeftSignalOut";
+    constexpr const char* DAYTIME_RUNNING_LIGHT_SIGNAL = "DaytimeRunningLightSignal";
+    constexpr const char* HEADLIGHT_SIGNAL = "HeadlightSignal";
+    constexpr const char* BRAKE_LIGHT_SIGNAL = "BrakeLightSignal";
+    constexpr const char* HORN_SIGNAL = "HornSignal";
 }
 
 #endif // JSONDEFINES_H

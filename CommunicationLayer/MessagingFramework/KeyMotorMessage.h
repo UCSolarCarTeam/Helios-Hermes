@@ -3,8 +3,7 @@
 
 #include <QByteArray>
 
-class KeyMotorMessage
-{
+class KeyMotorMessage {
 public:
     KeyMotorMessage(const QByteArray& message);
 

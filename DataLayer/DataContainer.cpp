@@ -2,7 +2,8 @@
 
 DataContainer::DataContainer(const I_Settings& settings)
     : keyMotorData_(new KeyMotorData()),
-      proximitySensorsData_(new ProximitySensorsData()) {}
+        b3Data_(new B3Data()),
+        proximitySensorsData_(new ProximitySensorsData()) {}
 
 DataContainer::~DataContainer() {}
 
@@ -12,4 +13,8 @@ KeyMotorData& DataContainer::keyMotorData(){
 
 ProximitySensorsData& DataContainer::proximitySensorsData(){
     return *proximitySensorsData_;
+}
+
+B3Data& DataContainer::b3Data(){
+    return *b3Data_;
 }
