@@ -97,6 +97,43 @@ namespace JsonFormat {
     constexpr const char* HIGH_CELL_VOLTAGE = "HighCellVoltage";
     constexpr const char* HIGH_CELL_VOLTAGE_ID = "HighCellVoltageId";
     constexpr const char* AVERAGE_CELL_VOLTAGE = "AverageCellVoltage";
+
+    constexpr const char* BATTERY_FAULTS = "BatteryFaults";
+    constexpr const char* INTERNAL_COMMUNICATION_FAULT = "InternalCommunicationFault";
+    constexpr const char* INTERNAL_CONVERSION_FAULT = "InternalConversionFault";
+    constexpr const char* WEAK_CELL_FAULT = "WeakCellFault";
+    constexpr const char* LOW_CELL_VOLTAGE_FAULT = "LowCellVoltageFault";
+    constexpr const char* OPEN_WIRING_FAULT = "OpenWiringFault";
+    constexpr const char* CURRENT_SENSOR_FAULT = "CurrentSensorFault";
+    constexpr const char* PACK_VOLTAGE_SENSOR_FAULT = "PackVoltageSensorFault";
+    constexpr const char* WEAK_PACK_FAULT = "WeakPackFault";
+    constexpr const char* VOLTAGE_REDUNDANCY_FAULT = "VoltageRedundancyFault";
+    constexpr const char* FAN_MONITOR_FAULT = "FanMonitorFault";
+    constexpr const char* THERMISTOR_FAULT = "ThermistorFault";
+    constexpr const char* CANBUS_COMMUNICATION_FAULT = "CanbusCommunicationFault";
+    constexpr const char* ALWAYS_ON_SUPPLY_FAULT = "AlwaysOnSupplyFault";
+    constexpr const char* HIGH_VOLTAGE_ISOLATION_FAULT = "HighVoltageIsolationFault";
+    constexpr const char* POWER_SUPPLY_12V_FAULT = "PowerSupply12VFault";
+    constexpr const char* CHARGE_LIMIT_ENFORCEMENT_FAULT = "ChargeLimitEnforcementFault";
+    constexpr const char* DISCHARGE_LIMIT_ENFORCEMENT_FAULT = "DischargeLimitEnforcementFault";
+    constexpr const char* CHARGER_SAFETY_RELAY_FAULT = "ChargerSafetyRelayFault";
+    constexpr const char* INTERNAL_MEMORY_FAULT = "InternalMemoryFault";
+    constexpr const char* INTERNAL_THERMISTOR_FAULT = "InternalThermistorFault";
+    constexpr const char* INTERNAL_LOGIC_FAULT = "InternalLogicFault";
+    constexpr const char* DCL_REDUCED_DUE_TO_LOW_SOC = "DclReducedDueToLowSoc";
+    constexpr const char* DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE = "DclReducedDueToHighCellResistance";
+    constexpr const char* DCL_REDUCED_DUE_TO_TEMPERATURE = "DclReducedDueToTemperature";
+    constexpr const char* DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE = "DclReducedDueToLowCellVoltage";
+    constexpr const char* DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE = "DclReducedDueToLowPackVoltage";
+    constexpr const char* DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE = "DclAndCclReducedDueToVoltageFailsafe";
+    constexpr const char* DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE = "DclAndCclReducedDueToCommunicationFailsafe";
+    constexpr const char* CCL_REDUCED_DUE_TO_HIGH_SOC = "CclReducedDueToHighSoc";
+    constexpr const char* CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE = "CclReducedDueToHighCellResistance";
+    constexpr const char* CCL_REDUCED_DUE_TO_TEMPERATURE = "CclReducedDueToTemperature";
+    constexpr const char* CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE = "CclReducedDueToHighCellVoltage";
+    constexpr const char* CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE = "CclReducedDueToHighPackVoltage";
+    constexpr const char* CCL_REDUCED_DUE_TO_CHARGER_LATCH = "CclReducedDueToChargerLatch";
+    constexpr const char* CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT = "CclReducedDueToAlternateCurrentLimit";
 }
 
 #endif // JSONDEFINES_H

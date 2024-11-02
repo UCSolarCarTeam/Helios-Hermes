@@ -65,38 +65,38 @@ public:
     void setBmsRelayStatus(unsigned char val);
 
 private:
-    unsigned char bmuAlive_;
+    unsigned char bmuAlive_ = 0;
 
-    bool dischargeRelayEnabled_;
-    bool chargeRelayEnabled_;
-    bool chargerSafetyEnabled_;
-    bool malfunctionIndicatorActive_;
-    bool multiPurposeInputSignalStatus_;
-    bool alwaysOnSignalStatus_;
-    bool isReadySignalStatus_;
-    bool isChargingSignalStatus_;
+    bool dischargeRelayEnabled_ = 0;
+    bool chargeRelayEnabled_ = 0;
+    bool chargerSafetyEnabled_ = 0;
+    bool malfunctionIndicatorActive_ = 0;
+    bool multiPurposeInputSignalStatus_ = 0;
+    bool alwaysOnSignalStatus_ = 0;
+    bool isReadySignalStatus_ = 0;
+    bool isChargingSignalStatus_ = 0;
 
-    unsigned char populatedCells_;
-    float input12V_;
-    float fanVoltage_;
-    float packCurrent_;
-    float packVoltage_;
-    float packStateOfCharge_;
-    float packAmphours_;
-    float packDepthOfDischarge_;
-    unsigned char highTemperature_;
-    unsigned char highThermistorId_;
-    unsigned char lowTemperature_;
-    unsigned char lowThermistorId_;
-    unsigned char averageTemperature_;
-    unsigned char internalTemperature_;
-    unsigned char fanSpeed_;
-    unsigned char requestedFanSpeed_;
-    short int lowCellVoltage_;
-    unsigned char lowCellVoltageId_;
-    short int highCellVoltage_;
-    unsigned char highCellVoltageId_;
-    short int averageCellVoltage_;
+    unsigned char populatedCells_ = 0;
+    float input12V_ = 0;
+    float fanVoltage_ = 0;
+    float packCurrent_ = 0;
+    float packVoltage_ = 0;
+    float packStateOfCharge_ = 0;
+    float packAmphours_ = 0;
+    float packDepthOfDischarge_ = 0;
+    unsigned char highTemperature_ = 0;
+    unsigned char highThermistorId_ = 0;
+    unsigned char lowTemperature_ = 0;
+    unsigned char lowThermistorId_ = 0;
+    unsigned char averageTemperature_ = 0;
+    unsigned char internalTemperature_ = 0;
+    unsigned char fanSpeed_ = 0;
+    unsigned char requestedFanSpeed_ = 0;
+    short int lowCellVoltage_ = 0;
+    unsigned char lowCellVoltageId_ = 0;
+    short int highCellVoltage_ = 0;
+    unsigned char highCellVoltageId_ = 0;
+    short int averageCellVoltage_ = 0;
 };
 
 #endif // BATTERYDATA_H

@@ -123,3 +123,46 @@ QJsonObject JsonMessageBuilder::buildBatteryMessage(const BatteryData& data){
    
     return json;
 }
+
+QJsonObject JsonMessageBuilder::buildBatteryFaultsMessage(const BatteryFaultsData& data){
+    QJsonObject json = QJsonObject();
+
+    json[JsonFormat::INTERNAL_COMMUNICATION_FAULT] = data.internalCommunicationFault();
+    json[JsonFormat::INTERNAL_CONVERSION_FAULT] = data.internalConverversionFault();
+    json[JsonFormat::WEAK_CELL_FAULT] = data.weakCellFault();
+    json[JsonFormat::LOW_CELL_VOLTAGE_FAULT] = data.lowCellVoltageFault();
+    json[JsonFormat::OPEN_WIRING_FAULT] = data.openWiringFault();
+    json[JsonFormat::CURRENT_SENSOR_FAULT] = data.currentSensorFault();
+    json[JsonFormat::PACK_VOLTAGE_SENSOR_FAULT] = data.packVoltageSensorFault();
+    json[JsonFormat::WEAK_PACK_FAULT] = data.weakPackFault();
+    json[JsonFormat::VOLTAGE_REDUNDANCY_FAULT] = data.voltageRedundancyFault();
+    json[JsonFormat::FAN_MONITOR_FAULT] = data.fanMonitorFault();
+    json[JsonFormat::THERMISTOR_FAULT] = data.thermistorFault();
+    json[JsonFormat::CANBUS_COMMUNICATION_FAULT] = data.canbusCommunicationFault();
+    json[JsonFormat::ALWAYS_ON_SUPPLY_FAULT] = data.alwaysOnSupplyFault();
+    json[JsonFormat::HIGH_VOLTAGE_ISOLATION_FAULT] = data.highVoltageIsolationFault();
+    json[JsonFormat::POWER_SUPPLY_12V_FAULT] = data.powerSupply12VFault();
+    json[JsonFormat::CHARGE_LIMIT_ENFORCEMENT_FAULT] = data.chargeLimitEnforcementFault();
+    json[JsonFormat::DISCHARGE_LIMIT_ENFORCEMENT_FAULT] = data.dischargeLimitEnforcementFault();
+    json[JsonFormat::CHARGER_SAFETY_RELAY_FAULT] = data.chargerSafetyRelayFault();
+    json[JsonFormat::INTERNAL_MEMORY_FAULT] = data.internalMemoryFault();
+    json[JsonFormat::INTERNAL_THERMISTOR_FAULT] = data.internalThermistorFault();
+    json[JsonFormat::INTERNAL_LOGIC_FAULT] = data.internalLogicFault();
+
+    json[JsonFormat::DCL_REDUCED_DUE_TO_LOW_SOC] = data.dclReducedDueToLowSoc();
+    json[JsonFormat::DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE] = data.dclReducedDueToHighCellResistance();
+    json[JsonFormat::DCL_REDUCED_DUE_TO_TEMPERATURE] = data.dclReducedDueToTemperature();
+    json[JsonFormat::DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE] = data.dclReducedDueToLowCellVoltage();
+    json[JsonFormat::DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE] = data.dclReducedDueToLowPackVoltage();
+    json[JsonFormat::DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE] = data.dclAndCclReducedDueToVoltageFailsafe();
+    json[JsonFormat::DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE] = data.dclAndCclReducedDueToCommunicationFailsafe();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_SOC] = data.cclReducedDueToHighSoc();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE] = data.cclReducedDueToHighCellResistance();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_TEMPERATURE] = data.cclReducedDueToTemperature();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE] = data.cclReducedDueToHighCellVoltage();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE] = data.cclReducedDueToHighPackVoltage();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_CHARGER_LATCH] = data.cclReducedDueToChargerLatch();
+    json[JsonFormat::CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT] = data.cclReducedDueToAlternateCurrentLimit();
+    
+    return json;
+}

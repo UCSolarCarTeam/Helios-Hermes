@@ -9,6 +9,7 @@
 #include "../../DataLayer/B3Data/B3Data.h"
 #include "../../DataLayer/TelemetryData/TelemetryData.h"
 #include "../../DataLayer/BatteryData/BatteryData.h"
+#include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
 
 class I_PacketChecksumChecker;
 
@@ -24,6 +25,7 @@ public:
     QJsonObject buildB3Message(const B3Data& data);
     QJsonObject buildTelemetryMessage(const TelemetryData& data);
     QJsonObject buildBatteryMessage(const BatteryData& data);
+    QJsonObject buildBatteryFaultsMessage(const BatteryFaultsData& data);
 };
 
 #endif // JSONMESSAGEBUILDER_H

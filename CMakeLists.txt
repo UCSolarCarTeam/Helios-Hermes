@@ -42,6 +42,9 @@ add_executable(HeliosHermes
   CommunicationLayer/MessagingFramework/BatteryMessage.h CommunicationLayer/MessagingFramework/BatteryMessage.cpp
   DataLayer/BatteryData/BatteryData.h DataLayer/BatteryData/BatteryData.cpp
   CommunicationLayer/DataPopulators/BatteryPopulator.h CommunicationLayer/DataPopulators/BatteryPopulator.cpp
+  CommunicationLayer/MessagingFramework/BatteryFaultsMessage.h CommunicationLayer/MessagingFramework/BatteryFaultsMessage.cpp
+  DataLayer/BatteryFaultsData/BatteryFaultsData.h DataLayer/BatteryFaultsData/BatteryFaultsData.cpp
+  CommunicationLayer/DataPopulators/BatteryFaultsPopulator.h CommunicationLayer/DataPopulators/BatteryFaultsPopulator.cpp
 
 
 )

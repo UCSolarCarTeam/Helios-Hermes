@@ -14,12 +14,13 @@ JsonForwarder::JsonForwarder(JsonMessageBuilder& builder,
                              KeyMotorData& keyMotorData,
                              B3Data& b3Data,
                              TelemetryData& telemetryData,
+                             BatteryFaultsData& batteryFaultsData,
                              BatteryData& batteryData,
                              ProximitySensorsData& proximitySensorsData,
                              I_MessageForwarder& forwarder,
                              I_Settings& settings)
-    : builder_(builder), keyMotorData_(keyMotorData), b3Data_(b3Data), telemetryData_(telemetryData), batteryData_(batteryData),
-      proximitySensorsData_(proximitySensorsData), forwarder_(forwarder), readTimer_(new QTimer()), 
+    : builder_(builder), keyMotorData_(keyMotorData), b3Data_(b3Data), telemetryData_(telemetryData), batteryFaultsData_(batteryFaultsData),
+      batteryData_(batteryData), proximitySensorsData_(proximitySensorsData), forwarder_(forwarder), readTimer_(new QTimer()), 
       forwardPeriod_(settings.forwardPeriod()), packetTitle_(settings.packetTitle()){
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(handleTimeout()));
 }
@@ -48,6 +49,7 @@ void JsonForwarder::forwardData(QDateTime& currentTime) {
     json[JsonFormat::B3] = builder_.buildB3Message(b3Data_);
     json[JsonFormat::TELEMETRY] = builder_.buildTelemetryMessage(telemetryData_);
     json[JsonFormat::BATTERY] = builder_.buildBatteryMessage(batteryData_);
+    json[JsonFormat::BATTERY_FAULTS] = builder_.buildBatteryFaultsMessage(batteryFaultsData_);
 
     forwarder_.forwardData(QJsonDocument(json).toJson(QJsonDocument::Compact));
 

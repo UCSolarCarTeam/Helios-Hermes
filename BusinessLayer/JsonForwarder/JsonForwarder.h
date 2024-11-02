@@ -10,6 +10,7 @@
 #include "../../DataLayer/TelemetryData/TelemetryData.h"
 #include "../JsonMessageBuilder/JsonMessageBuilder.h"
 #include "../../DataLayer/BatteryData/BatteryData.h"
+#include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
 
 class I_MessageForwarder;
 class I_Settings;
@@ -21,6 +22,7 @@ public:
                   KeyMotorData& keyMotorData,
                   B3Data& b3Data,
                   TelemetryData& telemetryData,
+                  BatteryFaultsData& batteryFaultsData,
                   BatteryData& batteryData,
                   ProximitySensorsData& proximitySensorsData,
                   I_MessageForwarder& forwarder,
@@ -38,6 +40,7 @@ private:
     KeyMotorData& keyMotorData_;
     B3Data& b3Data_;
     TelemetryData& telemetryData_;
+    BatteryFaultsData& batteryFaultsData_;
     BatteryData& batteryData_;
     ProximitySensorsData& proximitySensorsData_;
     I_MessageForwarder& forwarder_;

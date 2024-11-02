@@ -11,6 +11,7 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                     dataContainer.keyMotorData(),
                                     dataContainer.b3Data(),
                                     dataContainer.telemetryData(),
+                                    dataContainer.batteryFaultsData(),
                                     dataContainer.batteryData(),
                                     dataContainer.proximitySensorsData(),
                                     communicationContainer.messageForwarder(),
