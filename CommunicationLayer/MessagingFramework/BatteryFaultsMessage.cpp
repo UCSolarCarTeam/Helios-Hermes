@@ -3,7 +3,7 @@
 
 namespace {
     const int ERROR_FLAGS_OFFSET = 1;
-    const int LIMIT_FLAGS_OFFSET = 5;
+    const int LIMIT_FLAGS_OFFSET = 4;
 }
 
 BatteryFaultsMessage::BatteryFaultsMessage(const QByteArray& message) : message_(message) {}

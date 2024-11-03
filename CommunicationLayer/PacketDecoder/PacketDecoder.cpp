@@ -21,7 +21,7 @@ namespace {
     const int TELEMETRY_LENGTH = 33;
 
     const int BATTERY_FAULTS_ID = 6;
-    const int BATTERY_FAULTS_LENGTH = 7;
+    const int BATTERY_FAULTS_LENGTH = 6;
 
     const int BATTERY_ID = 7;
     const int BATTERY_LENGTH = 48;
@@ -58,18 +58,16 @@ PacketDecoder::~PacketDecoder(){}
 
 void PacketDecoder::handleValidData(QByteArray message){
     qDebug() << "DECODING PACKET" << message << " -- " << message.length();
-
     const unsigned char id = message.at(ID_INDEX);
-
     if(packetLength[id] != message.length()){
         qWarning() << "Packet is invalid: (INVALID LENGTH) Found Length " << message.length()
                  << "When it should be " << packetLength[id]
                  << "For packet ID: " << id;
         return;
     }
-
     switch(id){
         case KEY_MOTOR_ID:
+
             emit packetDecoded(KeyMotorMessage(message));
             return;
         case MOTOR_DETAILS_0_ID:
