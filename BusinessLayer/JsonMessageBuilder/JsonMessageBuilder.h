@@ -22,7 +22,6 @@ class JsonMessageBuilder : public QObject {
 public:
     JsonMessageBuilder();
     JsonMessageBuilder(const I_PacketChecksumChecker& checksumChecker);
-    virtual ~JsonMessageBuilder() {}
 
     QJsonObject buildKeyMotorMessage(const KeyMotorData& data);
     QJsonObject buildProximitySensorsMessage(const ProximitySensorsData& data);
