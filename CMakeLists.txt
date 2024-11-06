@@ -49,6 +49,8 @@ add_executable(HeliosHermes
   DataLayer/MbmsData/MbmsData.h DataLayer/MbmsData/MbmsData.cpp
   CommunicationLayer/DataPopulators/MbmsPopulator.h CommunicationLayer/DataPopulators/MbmsPopulator.cpp
   CommunicationLayer/MessagingFramework/MpptMessage.h CommunicationLayer/MessagingFramework/MpptMessage.cpp
+  CommunicationLayer/DataPopulators/WiegandPopulator.h CommunicationLayer/DataPopulators/WiegandPopulator.cpp CommunicationLayer/Wiegand/Wiegand26.cpp CommunicationLayer/Wiegand/Wiegand26.h
+  DataLayer/WiegandData/WiegandData.h DataLayer/WiegandData/WiegandData.cpp
   DataLayer/MpptData/MpptData.h DataLayer/MpptData/MpptData.cpp
   DataLayer/MpptData/MpptUnit.h DataLayer/MpptData/MpptUnit.cpp
   CommunicationLayer/DataPopulators/MpptPopulator.h CommunicationLayer/DataPopulators/MpptPopulator.cpp
@@ -56,9 +58,6 @@ add_executable(HeliosHermes
   DataLayer/MotorDetailsData/MotorDetailsData.h DataLayer/MotorDetailsData/MotorDetailsData.cpp
   DataLayer/MotorDetailsData/MotorDetailsUnit.h DataLayer/MotorDetailsData/MotorDetailsUnit.cpp
   CommunicationLayer/DataPopulators/MotorDetailsPopulator.h CommunicationLayer/DataPopulators/MotorDetailsPopulator.cpp
-
-
-
 )
 
 target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)
