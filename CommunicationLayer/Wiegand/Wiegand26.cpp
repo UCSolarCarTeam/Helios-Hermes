@@ -1,103 +1,86 @@
-// #include "Wiegand.h"
-// #include <stdio.h>
+#include "Wiegand26.h"
+#include <QDebug>
+#include <QThread>
 
-// // Helper function to set bit in the bit array
-// inline void setBit(bool* bits, uint8_t bit, bool value) {
-//     bits[MAX_BITS - bit - 1] = value;
-// }
+// Constructor
+Wiegand26::Wiegand26(QObject *parent) : QThread(parent), _bitCnt(0), _swapData(false) {
+    _bitData.fill(false, MAX_BITS);
+    connect(&_timeoutTimer, &QTimer::timeout, this, &Wiegand26::reset);
+}
 
+// Begin function initializes pins
+void Wiegand26::begin(int pinData0, int pinData1, bool swapData) {
+    _pinData0 = pinData0;
+    _pinData1 = pinData1;
+    _swapData = swapData;
 
+    // Assuming a GPIO abstraction layer, you can initialize GPIO here.
+    // Replace with actual GPIO handling for your system, e.g., wiringPi, or custom wrapper.
+    qDebug() << "Initializing Wiegand on pins" << _pinData0 << "and" << _pinData1;
 
-// // Reset function
-// void Wiegand34::reset(void) {
-//     for (uint8_t i = 0; i < MAX_BITS; i++) {
-//         _bitData[i] = false;
-//     }
-//     _bitCnt = 0;
-//     _timestamp = gpioTick();
-// }
+    // Setup debounce timer for timeouts
+    _timeoutTimer.setInterval(20); // Adjust timeout as needed
+}
 
-// // Emit data function (called when 34 bits have been received)
-// void Wiegand34::emitData(void) {
-//     unsigned long data = 0;
+// Reset state
+void Wiegand26::reset() {
+    _bitCnt = 0;
+    _bitData.fill(false, MAX_BITS);
+    _timeoutTimer.stop();
+}
 
-//     bool evenParity = false;
-//     bool oddParity = false;
+// Process received bit
+void Wiegand26::processBit(int bitValue) {
+    if (_bitCnt >= MAX_BITS) return; // Ignore extra bits
 
-//     for(uint8_t i = 1; i < 16; i++) {
-//         evenParity ^= _bitData[i];
-//     }
+    _bitData[_bitCnt++] = (bitValue > 0);
+    _timeoutTimer.start();  // Restart timeout
 
-//     for (uint8_t i = 16; i < 32; i++) {
-//         oddParity ^= _bitData[i];
-//     }
+    if (_bitCnt == MAX_BITS) {
+        emitData();
+    }
+}
 
-//     if (evenParity != _bitData[0]) {
-//         printf("Even parity error.\n");
-//     }
+// Emit data if 26 bits received
+void Wiegand26::emitData() {
+    _timeoutTimer.stop();
 
-//     if (oddParity != _bitData[0]) {
-//         printf("Odd parity error.\n");
-//     }
+    unsigned long data = 0;
+    for (int i = 0; i < MAX_BITS; ++i) {
+        if (_bitData[i]) {
+            data |= (1UL << (MAX_BITS - i - 1));
+        }
+    }
 
-//     for(uint8_t i = 1; i < MAX_BITS; i++) {
-//         if(_bitData[i]) {
-//             data |= (1UL << (1-i));
-//         }
-//     }
+    if (!checkParity()) {
+        emit errorOccurred("Parity check failed");
+        reset();
+        return;
+    }
 
-//     if (function_data) {
-//         function_data(data);
-//     }
+    emit dataReceived(data);
+    reset();
+}
 
-//     reset();
-// }
+// Simple parity check for 26-bit Wiegand
+bool Wiegand26::checkParity() {
+    // Adjust parity validation logic here
+    return true;  // Placeholder: actual parity logic implementation
+}
 
-// // ISR for Data0 (logical 0)
-// void Wiegand34::data0ISR(int gpio, int level, uint32_t tick, void *userdata) {
-//     Wiegand34* instance = (Wiegand34*)userdata;
-//     if (level == 0) {
-//         time_sleep(0.01); // 10ms debounce delay
-//         setBit(instance->_bitData, instance->_bitCnt, false);
-//         instance->_bitCnt++;
-//         if (instance->_bitCnt >= MAX_BITS) {
-//             instance->emitData();
-//         }
-//     }
-// }
+// Main run loop to monitor GPIO pins
+void Wiegand26::run() {
+    while (true) {
+        // Simulate GPIO readings, replace with actual reads
+        QThread::msleep(5); // Adjust to debounce
 
-// // ISR for Data1 (logical 1)
-// void Wiegand34::data1ISR(int gpio, int level, uint32_t tick, void *userdata) {
-//     Wiegand34* instance = (Wiegand34*)userdata;
-//     if (level == 0) {
-//         time_sleep(0.01); // 10ms debounce delay
-//         setBit(instance->_bitData, instance->_bitCnt, true);
-//         instance->_bitCnt++;
-//         if (instance->_bitCnt >= MAX_BITS) {
-//             instance->emitData();
-//         }
-//     }
-// }
+        int data0 = 0; // Read GPIO value (dummy)
+        int data1 = 0; // Read GPIO value (dummy)
 
-// // Begin function (initializes GPIO and sets up interrupts)
-// void Wiegand34::begin(uint8_t pinData0, uint8_t pinData1, bool status, bool swapData) {
-//     _pinData0 = pinData0;
-//     _pinData1 = pinData1;
-//     _swapData = swapData;
-
-//     // Initialize pigpio
-//     if (gpioInitialise() < 0) {
-//         printf("pigpio initialization failed.\n");
-//         return;
-//     }
-
-//     // Set pin modes
-//     gpioSetMode(_pinData0, PI_INPUT);
-//     gpioSetMode(_pinData1, PI_INPUT);
-
-//     // Attach interrupts
-//     gpioSetAlertFuncEx(_pinData0, data0ISR, this);
-//     gpioSetAlertFuncEx(_pinData1, data1ISR, this);
-
-//     reset();
-// }
+        if (data0 == 0) {
+            processBit(0);
+        } else if (data1 == 0) {
+            processBit(1);
+        }
+    }
+}
