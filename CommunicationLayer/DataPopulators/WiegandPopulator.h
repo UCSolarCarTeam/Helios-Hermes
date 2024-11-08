@@ -5,6 +5,7 @@
 #include <QTimer>
 #include "../../CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
 #include "../../DataLayer/WiegandData/WiegandData.h"
+#include "../Wiegand/Wiegand26.h"
 
 class WiegandPopulator : public QObject {
     Q_OBJECT
@@ -18,6 +19,7 @@ public slots:
 private:
     I_PacketChecksumChecker& checksumChecker_;
     WiegandData& wiegandData_;
+    Wiegand26 wiegandReader_;
     QTimer* timer_;
 };
 

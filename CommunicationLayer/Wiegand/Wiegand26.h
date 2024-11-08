@@ -6,7 +6,6 @@
 #include <QThread>
 #include <QVector>
 
-// Settings
 #define MAX_BITS 26
 
 class Wiegand26 : public QThread {
@@ -15,6 +14,8 @@ class Wiegand26 : public QThread {
 public:
     explicit Wiegand26(QObject *parent = nullptr);
     void begin(int pinData0, int pinData1, bool swapData = false);
+    QByteArray readData();  // New method to retrieve raw Wiegand data
+    QByteArray parse(const QByteArray& rawData);  // Parse raw data to ID + parity
 
 signals:
     void dataReceived(unsigned long data);
@@ -34,7 +35,7 @@ private:
     void reset();
     void processBit(int bitValue);
     void emitData();
-    bool checkParity();
+    bool checkParity(const QVector<bool>& bits);  // Parity check for raw bits
 };
 
 #endif // WIEGAND26_H

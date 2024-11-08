@@ -2,80 +2,83 @@
 #include <QDebug>
 #include <QThread>
 
-// Constructor
-Wiegand26::Wiegand26(QObject *parent) : QThread(parent), _bitCnt(0), _swapData(false) {
+Wiegand26::Wiegand26(QObject *parent)
+    : QThread(parent), _bitCnt(0), _swapData(false) {
     _bitData.fill(false, MAX_BITS);
     connect(&_timeoutTimer, &QTimer::timeout, this, &Wiegand26::reset);
 }
 
-// Begin function initializes pins
 void Wiegand26::begin(int pinData0, int pinData1, bool swapData) {
     _pinData0 = pinData0;
     _pinData1 = pinData1;
     _swapData = swapData;
 
-    // Assuming a GPIO abstraction layer, you can initialize GPIO here.
-    // Replace with actual GPIO handling for your system, e.g., wiringPi, or custom wrapper.
     qDebug() << "Initializing Wiegand on pins" << _pinData0 << "and" << _pinData1;
 
-    // Setup debounce timer for timeouts
-    _timeoutTimer.setInterval(20); // Adjust timeout as needed
+    _timeoutTimer.setInterval(20);
 }
 
-// Reset state
 void Wiegand26::reset() {
     _bitCnt = 0;
     _bitData.fill(false, MAX_BITS);
     _timeoutTimer.stop();
 }
 
-// Process received bit
 void Wiegand26::processBit(int bitValue) {
-    if (_bitCnt >= MAX_BITS) return; // Ignore extra bits
+    if (_bitCnt >= MAX_BITS) return;
 
     _bitData[_bitCnt++] = (bitValue > 0);
-    _timeoutTimer.start();  // Restart timeout
+    _timeoutTimer.start();
 
     if (_bitCnt == MAX_BITS) {
         emitData();
     }
 }
 
-// Emit data if 26 bits received
 void Wiegand26::emitData() {
     _timeoutTimer.stop();
 
-    unsigned long data = 0;
-    for (int i = 0; i < MAX_BITS; ++i) {
-        if (_bitData[i]) {
-            data |= (1UL << (MAX_BITS - i - 1));
-        }
+    QByteArray rawData;
+    for (bool bit : _bitData) {
+        rawData.append(bit ? '1' : '0');
     }
 
-    if (!checkParity()) {
+    if (!checkParity(_bitData)) {
         emit errorOccurred("Parity check failed");
         reset();
         return;
     }
 
-    emit dataReceived(data);
+    emit dataReceived(rawData.toULongLong(nullptr, 2));
     reset();
 }
 
-// Simple parity check for 26-bit Wiegand
-bool Wiegand26::checkParity() {
-    // Adjust parity validation logic here
-    return true;  // Placeholder: actual parity logic implementation
+bool Wiegand26::checkParity(const QVector<bool>& bits) {
+    // Implement parity checks (Placeholder logic)
+    return true;
 }
 
-// Main run loop to monitor GPIO pins
+QByteArray Wiegand26::readData() {
+    QByteArray data;
+    // Logic to convert _bitData to QByteArray
+    for (int i = 0; i < _bitCnt; ++i) {
+        data.append(_bitData[i] ? '1' : '0');
+    }
+    return data;
+}
+
+QByteArray Wiegand26::parse(const QByteArray& rawData) {
+    // Implement parsing logic here
+    QByteArray parsedData = rawData.mid(1, 24);  // Example: Extract data bits
+    return parsedData;
+}
+
 void Wiegand26::run() {
     while (true) {
-        // Simulate GPIO readings, replace with actual reads
-        QThread::msleep(5); // Adjust to debounce
+        QThread::msleep(5);
 
-        int data0 = 0; // Read GPIO value (dummy)
-        int data1 = 0; // Read GPIO value (dummy)
+        int data0 = 0;  // Simulate GPIO value
+        int data1 = 0;  // Simulate GPIO value
 
         if (data0 == 0) {
             processBit(0);

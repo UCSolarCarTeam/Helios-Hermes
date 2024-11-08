@@ -7,22 +7,19 @@ WiegandPopulator::WiegandPopulator(WiegandData& wiegandData, I_PacketChecksumChe
     : wiegandData_(wiegandData), checksumChecker_(checksumChecker) {}
 
 void WiegandPopulator::handleNewData() {
-    // Initialize Wiegand26 instance for reading
-    Wiegand26 wiegandReader;
+    connect(&wiegandReader_, &Wiegand26::dataReceived, this, [this](unsigned long data) {
+        QByteArray wiegandPacket = QByteArray::number(data, 16);  // Convert to hex for simplicity
 
-    // Read and parse data using Wiegand26 protocol
-    QByteArray rawData = wiegandReader.readData();  // Assuming readData() returns raw 26-bit data
+        wiegandData_.setData(wiegandPacket);
+        qDebug() << "WiegandPopulator: Data populated successfully.";
+    });
 
-    if (rawData.isEmpty()) {
-        qDebug() << "WiegandPopulator: No data read from Wiegand26.";
-        return;
-    }
+    wiegandReader_.start();  // Start the Wiegand reader thread
 
-    // Create a Wiegand packet
-    QByteArray wiegandPacket = wiegandReader.parse(rawData);  // Parse the raw data into packet format
+}
 
-    // Validate the packet if the checksum checker has a valid method
-    wiegandData_.setData(wiegandPacket);
-    qDebug() << "WiegandPopulator: Data populated successfully.";
-
+void WiegandPopulator::timerExpired() {
+    qDebug() << "Timer expired, refreshing data.";
+    // You could clear data or perform other maintenance tasks here
+    wiegandData_.clearData();
 }

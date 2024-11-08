@@ -20,3 +20,7 @@ int WiegandData::getWiegandId() const {
     // Replace with real extraction logic
     return static_cast<int>(wiegandData_.at(0));
 }
+
+void WiegandData::clearData() {
+    wiegandData_.clear();  // Assuming data_ is a QByteArray or similar type
+}

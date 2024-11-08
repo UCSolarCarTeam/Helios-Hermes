@@ -10,6 +10,7 @@ public:
     QByteArray getData() const;
     void setData(const QByteArray& data);
     int getWiegandId() const;
+    void clearData();
 
 private:
     QByteArray wiegandData_;
