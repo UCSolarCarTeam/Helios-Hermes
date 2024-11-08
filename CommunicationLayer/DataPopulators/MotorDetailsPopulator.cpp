@@ -6,7 +6,7 @@ MotorDetailsPopulator::MotorDetailsPopulator(I_PacketDecoder& packetDecoder, Mot
 }
 
 void MotorDetailsPopulator::populateData(const MotorDetailsMessage message){
-    MotorDetailsUnit& unit = data_.getMotorDetailsUnit(message.motorId());
+    MotorDetailsUnit& unit = data_.getMotorDetailsUnit(message.motorId() - 2);
     unit.setControlValue(message.controlValue());
     unit.setControlBits(message.controlBits());
     unit.setCurrentMotorTorque(message.currentMotorTorque());
