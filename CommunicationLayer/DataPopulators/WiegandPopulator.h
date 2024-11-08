@@ -1,22 +1,24 @@
-#pragma once
+#ifndef WIEGANDPOPULATOR_H
+#define WIEGANDPOPULATOR_H
 
 #include <QObject>
 #include <QTimer>
 #include "../../CommunicationLayer/PacketChecksumChecker/I_PacketChecksumChecker.h"
-#include "../../DataLayer/WiegandData/I_WiegandData.h"
+#include "../../DataLayer/WiegandData/WiegandData.h"
 
-class WiegandPopulator : public QObject
-{
+class WiegandPopulator : public QObject {
     Q_OBJECT
 public:
-    WiegandPopulator(I_PacketChecksumChecker& checksumChecker, I_WiegandData& wiegandData);
+    WiegandPopulator(I_PacketChecksumChecker& checksumChecker, WiegandData& wiegandData);
 
 public slots:
     void handleNewData();  // Called when new Wiegand data is available
-    void timerExpired();   // Optional: Handle cases where data may need refreshing
+    void timerExpired();   // Handle cases where data may need refreshing
 
 private:
     I_PacketChecksumChecker& checksumChecker_;
-    I_WiegandData& wiegandData_;
+    WiegandData& wiegandData_;
     QTimer* timer_;
 };
+
+#endif

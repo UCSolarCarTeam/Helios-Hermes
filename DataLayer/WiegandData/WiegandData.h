@@ -1,23 +1,18 @@
-#pragma once
+#ifndef WIEGANDDATA_H
+#define WIEGANDDATA_H
 
-#include "I_WiegandData.h"  // Interface file for WiegandData
+#include <QByteArray>
 
-class WiegandData : public I_WiegandData {
+class WiegandData {
 public:
-    WiegandData();
-    virtual ~WiegandData();
+    WiegandData() = default;
 
-    bool getWiegandAlive() const;            // Getter for Wiegand active status
-    void setWiegandAlive(const bool& alive); // Setter for Wiegand active status
-
-    int getLastReceivedData() const;         // Example: Last data received from Wiegand reader
-    void setLastReceivedData(int data);      // Example setter for last received data
-
-signals:
-    void wiegandAliveReceived(bool alive);   // Signal for when Wiegand status is updated
-    void newDataReceived(int data);          // Signal for new data received
+    QByteArray getData() const;
+    void setData(const QByteArray& data);
+    int getWiegandId() const;
 
 private:
-    bool wiegandAlive_;       // Status indicator
-    int lastReceivedData_;    // Example data storage
+    QByteArray wiegandData_;
 };
+
+#endif  // WIEGANDDATA_H
