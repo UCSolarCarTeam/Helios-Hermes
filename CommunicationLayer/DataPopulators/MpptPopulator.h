@@ -1,19 +1,21 @@
-#pragma once
+#ifndef MPPTPOPULATOR_H
+#define MPPTPOPULATOR_H
 
 #include <QObject>
 #include "../../CommunicationLayer/PacketDecoder/I_PacketDecoder.h"
-#include "../../DataLayer/MpptData/I_MpptData.h"
+#include "../../DataLayer/MpptData/MpptData.h"
 
-class MpptPopulator : public QObject
-{
+class MpptPopulator : public QObject {
     Q_OBJECT
 public:
-    MpptPopulator(I_PacketDecoder& packetDecoder, I_MpptData& mpptData);
+    MpptPopulator(I_PacketDecoder& packetDecoder, MpptData& data);
 
 public slots:
     void populateData(const MpptMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;
-    I_MpptData& mpptData_;
+    MpptData& data_;
 };
+
+#endif // MPPTPOPULATOR_H

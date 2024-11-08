@@ -1,30 +1,33 @@
-#pragma once
+#ifndef I_PACKETDECODER_H
+#define I_PACKETDECODER_H
 
 #include <QObject>
-#include "../MessagingFramework/AuxBmsMessage.h"
+
+#include "../MessagingFramework/KeyMotorMessage.h"
+#include "../MessagingFramework/ProximitySensorsMessage.h"
+#include "../MessagingFramework/TelemetryMessage.h"
+#include "../MessagingFramework/B3Message.h"
 #include "../MessagingFramework/BatteryMessage.h"
 #include "../MessagingFramework/BatteryFaultsMessage.h"
-#include "../MessagingFramework/DriverControlsMessage.h"
-#include "../MessagingFramework/KeyMotorMessage.h"
-#include "../MessagingFramework/LightsMessage.h"
-#include "../MessagingFramework/MotorDetailsMessage.h"
-#include "../MessagingFramework/MotorFaultsMessage.h"
+#include "../MessagingFramework/MbmsMessage.h"
 #include "../MessagingFramework/MpptMessage.h"
+#include "../MessagingFramework/MotorDetailsMessage.h"
 
-class I_PacketDecoder : public QObject
-{
+class I_PacketDecoder : public QObject{
     Q_OBJECT
 public:
-    virtual ~I_PacketDecoder() {}
+    virtual ~I_PacketDecoder(){}
 
 signals:
-    void packetDecoded(const AuxBmsMessage);
+    void packetDecoded(const KeyMotorMessage);
+    void packetDecoded(const ProximitySensorsMessage);
+    void packetDecoded(const B3Message);
+    void packetDecoded(const TelemetryMessage);
     void packetDecoded(const BatteryMessage);
     void packetDecoded(const BatteryFaultsMessage);
-    void packetDecoded(const DriverControlsMessage);
-    void packetDecoded(const KeyMotorMessage);
-    void packetDecoded(const LightsMessage);
-    void packetDecoded(const MotorDetailsMessage);
-    void packetDecoded(const MotorFaultsMessage);
+    void packetDecoded(const MbmsMessage);
     void packetDecoded(const MpptMessage);
+    void packetDecoded(const MotorDetailsMessage);
 };
+
+#endif // I_PACKETDECODER_H

@@ -6,16 +6,17 @@
 #include "CommDeviceControl/OutputRadioCommDevice.h"
 #include "CommDeviceControl/MqttMessageForwarder.h"
 #include "CommunicationContainer.h"
-#include "DataPopulators/AuxBmsPopulator.h"
-#include "DataPopulators/CcsPopulator.h"
-#include "DataPopulators/BatteryFaultsPopulator.h"
-#include "DataPopulators/BatteryPopulator.h"
-#include "DataPopulators/DriverControlsPopulator.h"
+
 #include "DataPopulators/KeyMotorPopulator.h"
-#include "DataPopulators/LightsPopulator.h"
-#include "DataPopulators/MotorDetailsPopulator.h"
-#include "DataPopulators/MotorFaultsPopulator.h"
+#include "DataPopulators/ProximitySensorsPopulator.h"
+#include "DataPopulators/B3Populator.h"
+#include "DataPopulators/TelemetryPopulator.h"
+#include "DataPopulators/BatteryPopulator.h"
+#include "DataPopulators/BatteryFaultsPopulator.h"
+#include "DataPopulators/MbmsPopulator.h"
 #include "DataPopulators/MpptPopulator.h"
+#include "DataPopulators/MotorDetailsPopulator.h"
+
 #include "PacketChecksumChecker/PacketChecksumChecker.h"
 #include "PacketDecoder/PacketDecoder.h"
 #include "PacketSynchronizer/PacketSynchronizer.h"
@@ -32,17 +33,17 @@ public:
         , packetUnstuffer(packetSynchronizer)
         , packetChecksumChecker(packetUnstuffer)
         , packetDecoder(packetChecksumChecker)
-        , auxBmsPopulator(packetDecoder, dataContainer.auxBmsData())
-        , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
-        , batteryPopulator(packetDecoder, dataContainer.batteryData())
-        , driverControlsPopulator(packetDecoder, dataContainer.driverControlsData())
         , keyMotorPopulator(packetDecoder, dataContainer.keyMotorData())
-        , lightsPopulator(packetDecoder, dataContainer.lightsData())
-        , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
-        , motorFaultsPopulator(packetDecoder, dataContainer.motorFaultsData())
+        , proximitySensorPopulator(packetDecoder, dataContainer.proximitySensorsData())
+        , b3Populator(packetDecoder, dataContainer.b3Data())
+        , telemetryPopulator(packetDecoder, dataContainer.telemetryData())
+        , batteryPopulator(packetDecoder, dataContainer.batteryData())
+        , batteryFaultsPopulator(packetDecoder, dataContainer.batteryFaultsData())
+        , mbmsPopulator(packetDecoder, dataContainer.mbmsData())
         , mpptPopulator(packetDecoder, dataContainer.mpptData())
-        , ccsPopulator(packetChecksumChecker, dataContainer.ccsData())
+        , motorDetailsPopulator(packetDecoder, dataContainer.motorDetailsData())
     {
+        qDebug() << "CALLED" ;
     }
 
     QSerialPort serialPort;
@@ -54,16 +55,15 @@ public:
     PacketUnstuffer packetUnstuffer;
     PacketChecksumChecker packetChecksumChecker;
     PacketDecoder packetDecoder;
-    AuxBmsPopulator auxBmsPopulator;
-    BatteryFaultsPopulator batteryFaultsPopulator;
-    BatteryPopulator batteryPopulator;
-    DriverControlsPopulator driverControlsPopulator;
     KeyMotorPopulator keyMotorPopulator;
-    LightsPopulator lightsPopulator;
-    MotorDetailsPopulator motorDetailsPopulator;
-    MotorFaultsPopulator motorFaultsPopulator;
+    ProximitySensorsPopulator proximitySensorPopulator;
+    B3Populator b3Populator;
+    TelemetryPopulator telemetryPopulator;
+    BatteryPopulator batteryPopulator;
+    BatteryFaultsPopulator batteryFaultsPopulator;
+    MbmsPopulator mbmsPopulator;
     MpptPopulator mpptPopulator;
-    CcsPopulator ccsPopulator;
+    MotorDetailsPopulator motorDetailsPopulator;
 };
 
 CommunicationContainer::CommunicationContainer(DataContainer& dataContainer, InfrastructureContainer& infrastructureContainer)

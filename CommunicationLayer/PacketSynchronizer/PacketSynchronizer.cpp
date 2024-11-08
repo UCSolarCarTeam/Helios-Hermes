@@ -1,4 +1,5 @@
 #include <QChar>
+#include <QDebug>
 
 #include "PacketSynchronizer.h"
 #include "../../CommunicationLayer/CommDeviceControl/I_CommDevice.h"
@@ -22,6 +23,9 @@ PacketSynchronizer::~PacketSynchronizer()
 
 void PacketSynchronizer::handleIncomingData(QByteArray incomingData)
 {
+
+    qDebug() << "synchro " << incomingData;
+
     if (incomingData.isEmpty())
     {
         return;

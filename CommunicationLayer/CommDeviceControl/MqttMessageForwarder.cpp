@@ -96,5 +96,4 @@ void MqttMessageForwarder::forwardData(QByteArray data)
         qDebug() << "MqttMessageForwarder: Forwarding data to AWS";
         telemtryClient_->publish(telemetryTopic_, data);
     }
-
 }

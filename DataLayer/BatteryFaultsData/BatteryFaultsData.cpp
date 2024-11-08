@@ -1,361 +1,267 @@
 #include "BatteryFaultsData.h"
 
-#include <QString>
+#include <QDebug>
 
-namespace
-{
-// error flag masks
-    const unsigned int INTERNAL_COMMUNICATION_FAULT_MASK      = 0x00000001;
-    const unsigned int INTERNAL_CONVERSION_FAULT_MASK         = 0x00000002;
-    const unsigned int WEAK_CELL_FAULT_MASK                   = 0x00000004;
-    const unsigned int LOW_CELL_VOLTAGE_FAULT_MASK            = 0x00000008;
-    const unsigned int OPEN_WIRING_FAULT_MASK                 = 0x00000010;
-    const unsigned int CURRENT_SENSOR_FAULT_MASK              = 0x00000020;
-    const unsigned int PACK_VOLTAGE_SENSOR_FAULT_MASK         = 0x00000040;
-    const unsigned int WEAK_PACK_FAULT_MASK                   = 0x00000080;
-    const unsigned int VOLTAGE_REDUNDANCY_FAULT_MASK          = 0x00000100;
-    const unsigned int FAN_MONITOR_FAULT_MASK                 = 0x00000200;
-    const unsigned int THERMISTOR_FAULT_MASK                  = 0x00000400;
-    const unsigned int CANBUS_COMMUNICATIONS_FAULT_MASK       = 0x00000800;
-    const unsigned int ALWAYS_ON_SUPPLY_FAULT_MASK            = 0x00001000;
-    const unsigned int HIGH_VOLTAGE_ISOLATION_FAULT_MASK      = 0x00002000;
-    const unsigned int POWER_SUPPLY_12V_FAULT_MASK            = 0x00004000;
-    const unsigned int CHARGE_LIMIT_ENFORCEMENT_FAULT_MASK    = 0x00008000;
-    const unsigned int DISCHARGE_LIMIT_ENFORCEMENT_FAULT_MASK = 0x00010000;
-    const unsigned int CHARGER_SAFETY_RELAY_FAULT_MASK        = 0x00020000;
-    const unsigned int INTERNAL_MEMORY_FAULT_MASK             = 0x00040000;
-    const unsigned int INTERNAL_THERMISTOR_FAULT_MASK         = 0x00080000;
-    const unsigned int INTERNAL_LOGIC_FAULT_MASK              = 0x00100000;
+namespace {
+    const unsigned int INTERNAL_COMMUNICATION_FAULT_OFFSET = 0x00000001;
+    const unsigned int INTERNAL_CONVERSION_FAULT_OFFSET = 0x00000002;
+    const unsigned int WEAK_CELL_FAULT_OFFSET = 0x00000004;
+    const unsigned int LOW_CELL_VOLTAGE_FAULT_OFFSET = 0x00000008;
+    const unsigned int OPEN_WIRING_FAULT_OFFSET = 0x00000010;
+    const unsigned int CURRENT_SENSOR_FAULT_OFFSET = 0x00000020;
+    const unsigned int PACK_VOLTAGE_SENSOR_FAULT_OFFSET = 0x00000040;
+    const unsigned int WEAK_PACK_FAULT_OFFSET = 0x00000080;
+    const unsigned int VOLTAGE_REDUNDANCY_FAULT_OFFSET = 0x00000100;
+    const unsigned int FAN_MONITOR_FAULT_OFFSET = 0x00000200;
+    const unsigned int THERMISTOR_FAULT_OFFSET = 0x00000400;
+    const unsigned int CANBUS_COMMUNICATION_FAULT_OFFSET = 0x00000800;
+    const unsigned int ALWAYS_ON_SUPPLY_FAULT_OFFSET = 0x00001000;
+    const unsigned int HIGH_VOLTAGE_ISOLATION_FAULT_OFFSET = 0x00002000;
+    const unsigned int POWER_SUPPLY_12V_FAULT_OFFSET = 0x00004000;
+    const unsigned int CHARGE_LIMIT_ENFORCEMENT_FAULT_OFFSET = 0x00008000;
+    const unsigned int DISCHARGE_LIMIT_ENFORCEMENT_FAULT_OFFSET = 0x00010000;
+    const unsigned int CHARGER_SAFETY_RELAY_FAULT_OFFSET = 0x00020000;
+    const unsigned int INTERNAL_MEMORY_FAULT_OFFSET = 0x00040000;
+    const unsigned int INTERNAL_THERMISTOR_FAULT_OFFSET = 0x00080000;
+    const unsigned int INTERNAL_LOGIC_FAULT_OFFSET = 0x00100000;
 
-// limit flag masks
-    const unsigned short DCL_REDUCED_DUE_TO_LOW_SOC_MASK              = 0x0001;
-    const unsigned short DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK = 0x0002;
-    const unsigned short DCL_REDUCED_DUE_TO_TEMPERATURE_MASK          = 0x0004;
-    const unsigned short DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE_MASK     = 0x0008;
-    const unsigned short DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE_MASK     = 0x0010;
-// 0x0020 N/A
-    const unsigned short DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE_MASK       = 0x0040;
-    const unsigned short DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE_MASK = 0x0080;
-// 0x0100 N/A
-    const unsigned short CCL_REDUCED_DUE_TO_HIGH_SOC_MASK                = 0x0200;
-    const unsigned short CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK    = 0x0400;
-    const unsigned short CCL_REDUCED_DUE_TO_TEMPERATURE_MASK             = 0x0800;
-    const unsigned short CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE_MASK       = 0x1000;
-    const unsigned short CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE_MASK       = 0x2000;
-    const unsigned short CCL_REDUCED_DUE_TO_CHARGER_LATCH_MASK           = 0x4000;
-    const unsigned short CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT_MASK = 0x8000;
+    const unsigned short DCL_REDUCED_DUE_TO_LOW_SOC_OFFSET = 0x0001;
+    const unsigned short DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE_OFFSET = 0x0002;
+    const unsigned short DCL_REDUCED_DUE_TO_TEMPERATURE_OFFSET = 0x0004;
+    const unsigned short DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE_OFFSET = 0x0008;
+    const unsigned short DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE_OFFSET = 0x0010;
+
+    const unsigned short DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE_OFFSET = 0x0040;
+    const unsigned short DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE_OFFSET = 0x0080;
+
+    const unsigned short CCL_REDUCED_DUE_TO_HIGH_SOC_OFFSET = 0x0200;
+    const unsigned short CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE_OFFSET = 0x0400;
+    const unsigned short CCL_REDUCED_DUE_TO_TEMPERATURE_OFFSET = 0x0800;
+    const unsigned short CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE_OFFSET = 0x1000;
+    const unsigned short CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE_OFFSET = 0x2000;
+    const unsigned short CCL_REDUCED_DUE_TO_CHARGER_LATCH_OFFSET = 0x4000;
+    const unsigned short CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT_OFFSET = 0x8000;
 }
 
-BatteryFaultsData::BatteryFaultsData()
-    : errorFlags_(0), limitFlags_(0)
-{
-    // Initialize to 0
-}
-BatteryFaultsData::~BatteryFaultsData()
-{
-}
+BatteryFaultsData::BatteryFaultsData() {}
 
-/* BatteryFaults Gets */
-unsigned int BatteryFaultsData::getErrorFlags() const
-{
-    return errorFlags_;
-}
+BatteryFaultsData::~BatteryFaultsData() {}
 
-unsigned short BatteryFaultsData::getLimitFlags() const
-{
-    return limitFlags_;
-}
-
-
-bool BatteryFaultsData::errorFlagPresent(const unsigned int errorMask) const
-{
-    return static_cast<bool>(errorFlags_ & errorMask);
-}
-
-bool BatteryFaultsData::limitFlagPresent(const unsigned short limitMask) const
-{
-    return static_cast<bool>(limitFlags_ & limitMask);
-}
-
-/* BatteryFaults status (error flags) */
 bool BatteryFaultsData::internalCommunicationFault() const
 {
-    return errorFlagPresent(INTERNAL_COMMUNICATION_FAULT_MASK);
+    return internalCommunicationFault_;
 }
 
-bool BatteryFaultsData::internalConversionFault() const
+bool BatteryFaultsData::internalConverversionFault() const
 {
-    return errorFlagPresent(INTERNAL_CONVERSION_FAULT_MASK);
+    return internalConverversionFault_;
 }
 
 bool BatteryFaultsData::weakCellFault() const
 {
-    return errorFlagPresent(WEAK_CELL_FAULT_MASK);
+    return weakCellFault_;
 }
 
 bool BatteryFaultsData::lowCellVoltageFault() const
 {
-    return errorFlagPresent(LOW_CELL_VOLTAGE_FAULT_MASK);
+    return lowCellVoltageFault_;
 }
 
 bool BatteryFaultsData::openWiringFault() const
 {
-    return errorFlagPresent(OPEN_WIRING_FAULT_MASK);
+    return openWiringFault_;
 }
 
 bool BatteryFaultsData::currentSensorFault() const
 {
-    return errorFlagPresent(CURRENT_SENSOR_FAULT_MASK);
+    return currentSensorFault_;
 }
 
 bool BatteryFaultsData::packVoltageSensorFault() const
 {
-    return errorFlagPresent(PACK_VOLTAGE_SENSOR_FAULT_MASK);
+    return packVoltageSensorFault_;
 }
 
 bool BatteryFaultsData::weakPackFault() const
 {
-    return errorFlagPresent(WEAK_PACK_FAULT_MASK);
+    return weakPackFault_;
 }
 
 bool BatteryFaultsData::voltageRedundancyFault() const
 {
-    return errorFlagPresent(VOLTAGE_REDUNDANCY_FAULT_MASK);
+    return voltageRedundancyFault_;
 }
 
 bool BatteryFaultsData::fanMonitorFault() const
 {
-    return errorFlagPresent(FAN_MONITOR_FAULT_MASK);
+    return fanMonitorFault_;
 }
 
 bool BatteryFaultsData::thermistorFault() const
 {
-    return errorFlagPresent(THERMISTOR_FAULT_MASK);
+    return thermistorFault_;
 }
 
-bool BatteryFaultsData::canbusCommunicationsFault() const
+bool BatteryFaultsData::canbusCommunicationFault() const
 {
-    return errorFlagPresent(CANBUS_COMMUNICATIONS_FAULT_MASK);
+    return canbusCommunicationFault_;
 }
 
 bool BatteryFaultsData::alwaysOnSupplyFault() const
 {
-    return errorFlagPresent(ALWAYS_ON_SUPPLY_FAULT_MASK);
+    return alwaysOnSupplyFault_;
 }
 
 bool BatteryFaultsData::highVoltageIsolationFault() const
 {
-    return errorFlagPresent(HIGH_VOLTAGE_ISOLATION_FAULT_MASK);
+    return highVoltageIsolationFault_;
 }
 
 bool BatteryFaultsData::powerSupply12VFault() const
 {
-    return errorFlagPresent(POWER_SUPPLY_12V_FAULT_MASK);
+    return powerSupply12VFault_;
 }
 
 bool BatteryFaultsData::chargeLimitEnforcementFault() const
 {
-    return errorFlagPresent(CHARGE_LIMIT_ENFORCEMENT_FAULT_MASK);
+    return chargeLimitEnforcementFault_;
 }
 
 bool BatteryFaultsData::dischargeLimitEnforcementFault() const
 {
-    return errorFlagPresent(DISCHARGE_LIMIT_ENFORCEMENT_FAULT_MASK);
+    return dischargeLimitEnforcementFault_;
 }
 
 bool BatteryFaultsData::chargerSafetyRelayFault() const
 {
-    return errorFlagPresent(CHARGER_SAFETY_RELAY_FAULT_MASK);
+    return chargerSafetyRelayFault_;
 }
 
 bool BatteryFaultsData::internalMemoryFault() const
 {
-    return errorFlagPresent(INTERNAL_MEMORY_FAULT_MASK);
+    return internalMemoryFault_;
 }
 
 bool BatteryFaultsData::internalThermistorFault() const
 {
-    return errorFlagPresent(INTERNAL_THERMISTOR_FAULT_MASK);
+    return internalThermistorFault_;
 }
 
 bool BatteryFaultsData::internalLogicFault() const
 {
-    return errorFlagPresent(INTERNAL_LOGIC_FAULT_MASK);
+    return internalLogicFault_;
 }
 
-/* BatteryFaultsData status (limit flags) */
 bool BatteryFaultsData::dclReducedDueToLowSoc() const
 {
-    return limitFlagPresent(DCL_REDUCED_DUE_TO_LOW_SOC_MASK);
+    return dclReducedDueToLowSoc_;
 }
 
-bool BatteryFaultsData::dclReducedDueToHighCellResistence() const
+bool BatteryFaultsData::dclReducedDueToHighCellResistance() const
 {
-    return limitFlagPresent(DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK);
+    return dclReducedDueToHighCellResistance_;
 }
 
 bool BatteryFaultsData::dclReducedDueToTemperature() const
 {
-    return limitFlagPresent(DCL_REDUCED_DUE_TO_TEMPERATURE_MASK);
+    return dclReducedDueToTemperature_;
 }
 
 bool BatteryFaultsData::dclReducedDueToLowCellVoltage() const
 {
-    return limitFlagPresent(DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE_MASK);
+    return dclReducedDueToLowCellVoltage_;
 }
 
 bool BatteryFaultsData::dclReducedDueToLowPackVoltage() const
 {
-    return limitFlagPresent(DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE_MASK);
+    return dclReducedDueToLowPackVoltage_;
 }
 
 bool BatteryFaultsData::dclAndCclReducedDueToVoltageFailsafe() const
 {
-    return limitFlagPresent(DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE_MASK);
+    return dclAndCclReducedDueToVoltageFailsafe_;
 }
 
 bool BatteryFaultsData::dclAndCclReducedDueToCommunicationFailsafe() const
 {
-    return limitFlagPresent(DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE_MASK);
+    return dclAndCclReducedDueToCommunicationFailsafe_;
 }
 
 bool BatteryFaultsData::cclReducedDueToHighSoc() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_HIGH_SOC_MASK);
+    return cclReducedDueToHighSoc_;
 }
 
-bool BatteryFaultsData::cclReducedDueToHighCellResistence() const
+bool BatteryFaultsData::cclReducedDueToHighCellResistance() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK);
+    return cclReducedDueToHighCellResistance_;
 }
 
 bool BatteryFaultsData::cclReducedDueToTemperature() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_TEMPERATURE_MASK);
+    return cclReducedDueToTemperature_;
 }
 
 bool BatteryFaultsData::cclReducedDueToHighCellVoltage() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE_MASK);
+    return cclReducedDueToHighCellVoltage_;
 }
 
 bool BatteryFaultsData::cclReducedDueToHighPackVoltage() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE_MASK);
+    return cclReducedDueToHighPackVoltage_;
 }
 
 bool BatteryFaultsData::cclReducedDueToChargerLatch() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_CHARGER_LATCH_MASK);
+    return cclReducedDueToChargerLatch_;
 }
 
 bool BatteryFaultsData::cclReducedDueToAlternateCurrentLimit() const
 {
-    return limitFlagPresent(CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT_MASK);
+    return cclReducedDueToAlternateCurrentLimit_;
 }
 
-bool BatteryFaultsData::operator==(const I_BatteryFaultsData& other) const
+void BatteryFaultsData::setErrorFlags(const unsigned int& val)
 {
-    return errorFlags_ == other.getErrorFlags() && limitFlags_ == other.getLimitFlags();
+    qDebug() << "ASSIGNING --------------------------------------------------" << val;
+    internalCommunicationFault_ = val & INTERNAL_COMMUNICATION_FAULT_OFFSET;
+    internalConverversionFault_ = val & INTERNAL_CONVERSION_FAULT_OFFSET;
+    weakCellFault_ = val & WEAK_CELL_FAULT_OFFSET;
+    lowCellVoltageFault_ = val & LOW_CELL_VOLTAGE_FAULT_OFFSET;
+    openWiringFault_ = val & OPEN_WIRING_FAULT_OFFSET;
+    currentSensorFault_ = val & CURRENT_SENSOR_FAULT_OFFSET;
+    packVoltageSensorFault_ = val & PACK_VOLTAGE_SENSOR_FAULT_OFFSET;
+    weakPackFault_ = val & WEAK_PACK_FAULT_OFFSET;
+    voltageRedundancyFault_ = val & VOLTAGE_REDUNDANCY_FAULT_OFFSET;
+    fanMonitorFault_ = val & FAN_MONITOR_FAULT_OFFSET;
+    thermistorFault_ = val & THERMISTOR_FAULT_OFFSET;
+    canbusCommunicationFault_ = val & CANBUS_COMMUNICATION_FAULT_OFFSET;
+    alwaysOnSupplyFault_ = val & ALWAYS_ON_SUPPLY_FAULT_OFFSET;
+    highVoltageIsolationFault_ = val & HIGH_VOLTAGE_ISOLATION_FAULT_OFFSET;
+    powerSupply12VFault_ = val & POWER_SUPPLY_12V_FAULT_OFFSET;
+    chargeLimitEnforcementFault_ = val & CHARGE_LIMIT_ENFORCEMENT_FAULT_OFFSET;
+    dischargeLimitEnforcementFault_ = val & DISCHARGE_LIMIT_ENFORCEMENT_FAULT_OFFSET;
+    chargerSafetyRelayFault_ = val & CHARGER_SAFETY_RELAY_FAULT_OFFSET;
+    internalMemoryFault_ = val & INTERNAL_MEMORY_FAULT_OFFSET;
+    internalThermistorFault_ = val & INTERNAL_THERMISTOR_FAULT_OFFSET;
+    internalLogicFault_ = val & INTERNAL_LOGIC_FAULT_OFFSET;
 }
 
-/* BatteryFaults Sets */
-void BatteryFaultsData::setErrorFlags(const unsigned int& errorFlags)
-{
-    errorFlags_ = errorFlags;
-}
-
-void BatteryFaultsData::setLimitFlags(const unsigned short& limitFlags)
-{
-    limitFlags_ = limitFlags;
-}
-
-void BatteryFaultsData::appendIfPresent(QString& messageString, const unsigned int errorMask, QString errorDescription) const
-{
-    if (errorFlagPresent(errorMask))
-    {
-        messageString.append(errorDescription);
-    }
-}
-
-void BatteryFaultsData::appendIfPresent(QString& messageString, const unsigned short limitMask, QString limitDescription) const
-{
-    if (errorFlagPresent(limitMask))
-    {
-        messageString.append(limitDescription);
-    }
-}
-
-QString BatteryFaultsData::toString() const
-{
-    QString messageString;
-
-    if (!static_cast<bool>(errorFlags_))
-    {
-        messageString += "NO_ERROR";
-    }
-    else
-    {
-        appendIfPresent(messageString, INTERNAL_COMMUNICATION_FAULT_MASK, "INTERNAL_COMMUNICATION_FAULT ");
-        appendIfPresent(messageString, INTERNAL_CONVERSION_FAULT_MASK, "INTERNAL_CONVERSION_FAULT_MASK ");
-        appendIfPresent(messageString, WEAK_CELL_FAULT_MASK, "WEAK_CELL_FAULT_MASK ");
-        appendIfPresent(messageString, LOW_CELL_VOLTAGE_FAULT_MASK, "LOW_CELL_VOLTAGE_FAULT_MASK ");
-        appendIfPresent(messageString, OPEN_WIRING_FAULT_MASK, "OPEN_WIRING_FAULT_MASK ");
-        appendIfPresent(messageString, CURRENT_SENSOR_FAULT_MASK, "CURRENT_SENSOR_FAULT_MASK ");
-        appendIfPresent(messageString, PACK_VOLTAGE_SENSOR_FAULT_MASK, "PACK_VOLTAGE_SENSOR_FAULT_MASK ");
-        appendIfPresent(messageString, WEAK_PACK_FAULT_MASK, "WEAK_PACK_FAULT_MASK ");
-        appendIfPresent(messageString, VOLTAGE_REDUNDANCY_FAULT_MASK, "VOLTAGE_REDUNDANCY_FAULT_MASK ");
-        appendIfPresent(messageString, FAN_MONITOR_FAULT_MASK, "FAN_MONITOR_FAULT_MASK ");
-        appendIfPresent(messageString, THERMISTOR_FAULT_MASK, "THERMISTOR_FAULT_MASK ");
-        appendIfPresent(messageString, CANBUS_COMMUNICATIONS_FAULT_MASK, "CANBUS_COMMUNICATIONS_FAULT_MASK ");
-        appendIfPresent(messageString, ALWAYS_ON_SUPPLY_FAULT_MASK, "ALWAYS_ON_SUPPLY_FAULT_MASK ");
-        appendIfPresent(messageString, HIGH_VOLTAGE_ISOLATION_FAULT_MASK, "HIGH_VOLTAGE_ISOLATION_FAULT_MASK ");
-        appendIfPresent(messageString, POWER_SUPPLY_12V_FAULT_MASK, "POWER_SUPPLY_12V_FAULT_MASK ");
-        appendIfPresent(messageString, CHARGE_LIMIT_ENFORCEMENT_FAULT_MASK, "CHARGE_LIMIT_ENFORCEMENT_FAULT_MASK ");
-        appendIfPresent(messageString, DISCHARGE_LIMIT_ENFORCEMENT_FAULT_MASK, "DISCHARGE_LIMIT_ENFORCEMENT_FAULT_MASK ");
-        appendIfPresent(messageString, CHARGER_SAFETY_RELAY_FAULT_MASK, "CHARGER_SAFETY_RELAY_FAULT_MASK ");
-        appendIfPresent(messageString, INTERNAL_MEMORY_FAULT_MASK, "INTERNAL_MEMORY_FAULT_MASK ");
-        appendIfPresent(messageString, INTERNAL_THERMISTOR_FAULT_MASK, "INTERNAL_THERMISTOR_FAULT_MASK ");
-        appendIfPresent(messageString, INTERNAL_LOGIC_FAULT_MASK, "INTERNAL_LOGIC_FAULT_MASK ");
-    }
-
-    if (!static_cast<bool>(limitFlags_))
-    {
-        messageString += "NO_LIMIT_FLAGS_PRESENT";
-    }
-    else
-    {
-        appendIfPresent(messageString, DCL_REDUCED_DUE_TO_LOW_SOC_MASK,
-                        "DCL_REDUCED_DUE_TO_LOW_SOC_MASK ");
-        appendIfPresent(messageString, DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK,
-                        "DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK ");
-        appendIfPresent(messageString, DCL_REDUCED_DUE_TO_TEMPERATURE_MASK,
-                        "DCL_REDUCED_DUE_TO_TEMPERATURE_MASK ");
-        appendIfPresent(messageString, DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE_MASK,
-                        "DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE_MASK ");
-        appendIfPresent(messageString, DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE_MASK,
-                        "DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE_MASK ");
-
-        appendIfPresent(messageString, DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE_MASK,
-                        "DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE_MASK ");
-        appendIfPresent(messageString, DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE_MASK,
-                        "DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE_MASK ");
-
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_HIGH_SOC_MASK,
-                        "CCL_REDUCED_DUE_TO_HIGH_SOC_MASK ");
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK,
-                        "CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTENCE_MASK ");
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_TEMPERATURE_MASK,
-                        "CCL_REDUCED_DUE_TO_TEMPERATURE_MASK ");
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE_MASK,
-                        "CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE_MASK ");
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE_MASK,
-                        "CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE_MASK ");
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_CHARGER_LATCH_MASK,
-                        "CCL_REDUCED_DUE_TO_CHARGER_LATCH_MASK ");
-        appendIfPresent(messageString, CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT_MASK,
-                        "CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT_MASK ");
-    }
-
-    return messageString;
+void BatteryFaultsData::setLimitFlags(const unsigned short& val){
+    qDebug() << "ASSIGNING2 --------------------------------------------------" << val;
+    dclReducedDueToLowSoc_ = val & DCL_REDUCED_DUE_TO_LOW_SOC_OFFSET;
+    dclReducedDueToHighCellResistance_ = val & DCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE_OFFSET;
+    dclReducedDueToTemperature_ = val & DCL_REDUCED_DUE_TO_TEMPERATURE_OFFSET;
+    dclReducedDueToLowCellVoltage_ = val & DCL_REDUCED_DUE_TO_LOW_CELL_VOLTAGE_OFFSET;
+    dclReducedDueToLowPackVoltage_ = val & DCL_REDUCED_DUE_TO_LOW_PACK_VOLTAGE_OFFSET;
+    dclAndCclReducedDueToVoltageFailsafe_ = val & DCL_AND_CCL_REDUCED_DUE_TO_VOLTAGE_FAILSAFE_OFFSET;
+    dclAndCclReducedDueToCommunicationFailsafe_ = val & DCL_AND_CCL_REDUCED_DUE_TO_COMMUNICATION_FAILSAFE_OFFSET;
+    cclReducedDueToHighSoc_ = val & CCL_REDUCED_DUE_TO_HIGH_SOC_OFFSET;
+    cclReducedDueToHighCellResistance_ = val & CCL_REDUCED_DUE_TO_HIGH_CELL_RESISTANCE_OFFSET;
+    cclReducedDueToTemperature_ = val & CCL_REDUCED_DUE_TO_TEMPERATURE_OFFSET;
+    cclReducedDueToHighCellVoltage_ = val & CCL_REDUCED_DUE_TO_HIGH_CELL_VOLTAGE_OFFSET;
+    cclReducedDueToHighPackVoltage_ = val & CCL_REDUCED_DUE_TO_HIGH_PACK_VOLTAGE_OFFSET;
+    cclReducedDueToChargerLatch_ = val & CCL_REDUCED_DUE_TO_CHARGER_LATCH_OFFSET;
+    cclReducedDueToAlternateCurrentLimit_ = val & CCL_REDUCED_DUE_TO_ALTERNATE_CURRENT_LIMIT_OFFSET;
 }

@@ -1,30 +1,39 @@
-#pragma once
+#ifndef JSONMESSAGEBUILDER_H
+#define JSONMESSAGEBUILDER_H
 
+#include <QObject>
 #include <QJsonObject>
-#include <QElapsedTimer>
+#include <QJsonArray>
 
-#include "I_JsonMessageBuilder.h"
+#include "../../DataLayer/KeyMotorData/KeyMotorData.h"
+#include "../../DataLayer/ProximitySensorsData/ProximitySensorsData.h"
+#include "../../DataLayer/B3Data/B3Data.h"
+#include "../../DataLayer/TelemetryData/TelemetryData.h"
+#include "../../DataLayer/BatteryData/BatteryData.h"
+#include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
+#include "../../DataLayer/MbmsData/MbmsData.h"
+#include "../../DataLayer/MpptData/MpptData.h"
+#include "../../DataLayer/MotorDetailsData/MotorDetailsData.h"
 
 class I_PacketChecksumChecker;
 
-class JsonMessageBuilder : public I_JsonMessageBuilder
-{
+class JsonMessageBuilder : public QObject {
     Q_OBJECT
 public:
-    virtual ~JsonMessageBuilder() {}
     JsonMessageBuilder();
     JsonMessageBuilder(const I_PacketChecksumChecker& checksumChecker);
-    QJsonObject buildAuxBmsMessage(const I_AuxBmsData& data);
-    QJsonObject buildCcsMessage(const I_CcsData& data);
-    QJsonObject buildBatteryMessage(const I_BatteryData& data);
-    QJsonObject buildBatteryFaultsMessage(const I_BatteryFaultsData& data);
-    QJsonObject buildDriverControlsMessage(const I_DriverControlsData& data);
-    QJsonArray buildKeyMotorMessage(const I_KeyMotorData& data);
-    QJsonObject buildLightsMessage(const I_LightsData& data);
-    QJsonArray buildMotorDetailsMessage(const I_MotorDetailsData& data);
-    QJsonArray buildMotorFaultsMessage(const I_MotorFaultsData& data);
-    QJsonArray buildMpptMessage(const I_MpptData& data);
+    virtual ~JsonMessageBuilder() {}
 
+    QJsonObject buildKeyMotorMessage(const KeyMotorData& data);
+    QJsonObject buildProximitySensorsMessage(const ProximitySensorsData& data);
+    QJsonObject buildB3Message(const B3Data& data);
+    QJsonObject buildTelemetryMessage(const TelemetryData& data);
+    QJsonObject buildBatteryMessage(const BatteryData& data);
+    QJsonObject buildBatteryFaultsMessage(const BatteryFaultsData& data);
+    QJsonObject buildMbmsMessage(const MbmsData& data);
+
+    QJsonArray buildMpptMessage(const MpptData& data);
+    QJsonArray buildMotorDetailsMessage(const MotorDetailsData& data);
 };
 
-
+#endif // JSONMESSAGEBUILDER_H

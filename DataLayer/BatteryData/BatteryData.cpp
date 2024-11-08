@@ -1,324 +1,288 @@
 #include "BatteryData.h"
 
-namespace
-{
-    const unsigned char BMS_DISCHARGE_RELAY_OFFSET = 0x1;
-    const unsigned char BMS_CHARGE_RELAY_OFFSET = 0x2;
-    const unsigned char BMS_CHARGER_SAFETY_OFFSET = 0x4;
-    const unsigned char BMS_MALFUNCTION_INDICATOR_OFFSET = 0x8;
-    const unsigned char BMS_MULTI_PURPOSE_INPUT_OFFSET = 0x10;
-    const unsigned char BMS_ALWAYS_ON_OFFSET = 0x20;
-    const unsigned char BMS_IS_READY_OFFSET = 0x40;
-    const unsigned char BMS_IS_CHARGING_OFFSET = 0x80;
-    const int DECI_TO_ONES = 10;
+namespace {
+    const unsigned char DISCHARGE_RELAY_ENABLED_OFFSET = 0x01;
+    const unsigned char CHARGE_RELAY_ENABLED_OFFSET = 0x02;
+    const unsigned char CHARGER_SAFETY_ENABLED_OFFSET = 0x04;
+    const unsigned char MALFUNCTION_INDICATOR_ACTIVE_OFFSET = 0x08;
+    const unsigned char MULTI_PURPOSE_INPUT_SIGNAL_STATUS_OFFSET = 0x10;
+    const unsigned char ALWAYS_ON_SIGNAL_STATUS_OFFSET = 0x20;
+    const unsigned char IS_READY_SIGNAL_STATUS_OFFSET = 0x40;
+    const unsigned char IS_CHARGING_SIGNAL_STATUS_OFFSET = 0x80;
 }
 
-BatteryData::BatteryData()
-    : alive_(false)
-    , bmsRelayStatus_(0)
-    , populatedCells_(0.0f)
-    , inputVoltage12_(0.0f)
-    , fanVoltage_(0.0f)
-    , packCurrent_(0.0f)
-    , packVoltage_(0.0f)
-    , packStateOfCharge_(0.0f)
-    , packAmphours_(0.0f)
-    , packDepthOfDischarge_(0.0f)
-    , highTemperature_(0)
-    , highThermistorId_(0)
-    , lowTemperature_(0)
-    , lowThermistorId_(0)
-    , averageTemperature_(0)
-    , internalTemperature_(0)
-    , fanSpeed_(0)
-    , requestedFanSpeed_(0)
-    , lowCellVoltage_(0)
-    , lowCellVoltageId_(0)
-    , highCellVoltage_(0)
-    , highCellVoltageId_(0)
-    , averageCellVoltage_(0)
+BatteryData::BatteryData() {}
+
+BatteryData::~BatteryData() {}
+
+unsigned char BatteryData::bmuAlive() const
 {
-    // initialize to 0
+    return bmuAlive_;
 }
 
-BatteryData::~BatteryData()
+void BatteryData::setBmuAlive(unsigned char newBmuAlive)
 {
+    bmuAlive_ = newBmuAlive;
 }
 
-bool BatteryData::bmsRelayStatusFlagPresent(const unsigned char statusMask) const
+bool BatteryData::dischargeRelayEnabled() const
 {
-    return static_cast<bool>(bmsRelayStatus_ & statusMask);
+    return dischargeRelayEnabled_;
 }
 
-/*Data "Gets"*/
-bool BatteryData::getAlive() const
+bool BatteryData::chargeRelayEnabled() const
 {
-    return alive_;
+    return chargeRelayEnabled_;
 }
 
-unsigned char BatteryData::getBmsRelayStatus() const
+bool BatteryData::chargerSafetyEnabled() const
 {
-    return bmsRelayStatus_;
+    return chargerSafetyEnabled_;
 }
 
-unsigned char BatteryData::getPopulatedCells() const
+bool BatteryData::malfunctionIndicatorActive() const
+{
+    return malfunctionIndicatorActive_;
+}
+
+bool BatteryData::multiPurposeInputSignalStatus() const
+{
+    return multiPurposeInputSignalStatus_;
+}
+
+bool BatteryData::alwaysOnSignalStatus() const
+{
+    return alwaysOnSignalStatus_;
+}
+
+bool BatteryData::isReadySignalStatus() const
+{
+    return isReadySignalStatus_;
+}
+
+bool BatteryData::isChargingSignalStatus() const
+{
+    return isChargingSignalStatus_;
+}
+
+unsigned char BatteryData::populatedCells() const
 {
     return populatedCells_;
 }
 
-float BatteryData::get12VInputVoltage() const
+void BatteryData::setPopulatedCells(unsigned char newPopulatedCells)
 {
-    return inputVoltage12_;
+    populatedCells_ = newPopulatedCells;
 }
 
-float BatteryData::getFanVoltage() const
+float BatteryData::input12V() const
+{
+    return input12V_;
+}
+
+void BatteryData::setInput12V(float newInput12V)
+{
+    input12V_ = newInput12V;
+}
+
+float BatteryData::fanVoltage() const
 {
     return fanVoltage_;
 }
 
-float BatteryData::getPackCurrent() const
+void BatteryData::setFanVoltage(float newFanVoltage)
+{
+    fanVoltage_ = newFanVoltage;
+}
+
+float BatteryData::packCurrent() const
 {
     return packCurrent_;
 }
 
-float BatteryData::getPackVoltage() const
+void BatteryData::setPackCurrent(float newPackCurrent)
+{
+    packCurrent_ = newPackCurrent;
+}
+
+float BatteryData::packVoltage() const
 {
     return packVoltage_;
 }
 
-float BatteryData::getPackStateOfCharge() const
+void BatteryData::setPackVoltage(float newPackVoltage)
+{
+    packVoltage_ = newPackVoltage;
+}
+
+float BatteryData::packStateOfCharge() const
 {
     return packStateOfCharge_;
 }
 
-float BatteryData::getPackAmphours() const
+void BatteryData::setPackStateOfCharge(float newPackStateOfCharge)
+{
+    packStateOfCharge_ = newPackStateOfCharge;
+}
+
+float BatteryData::packAmphours() const
 {
     return packAmphours_;
 }
 
-float BatteryData::getPackDepthOfDischarge() const
+void BatteryData::setPackAmphours(float newPackAmphours)
+{
+    packAmphours_ = newPackAmphours;
+}
+
+float BatteryData::packDepthOfDischarge() const
 {
     return packDepthOfDischarge_;
 }
 
-unsigned char BatteryData::getHighTemperature() const
+void BatteryData::setPackDepthOfDischarge(float newPackDepthOfDischarge)
+{
+    packDepthOfDischarge_ = newPackDepthOfDischarge;
+}
+
+unsigned char BatteryData::highTemperature() const
 {
     return highTemperature_;
 }
 
-unsigned char BatteryData::getHighThermistorId() const
+void BatteryData::setHighTemperature(unsigned char newHighTemperature)
+{
+    highTemperature_ = newHighTemperature;
+}
+
+unsigned char BatteryData::highThermistorId() const
 {
     return highThermistorId_;
 }
 
-unsigned char BatteryData::getLowTemperature() const
+void BatteryData::setHighThermistorId(unsigned char newHighThermistorId)
+{
+    highThermistorId_ = newHighThermistorId;
+}
+
+unsigned char BatteryData::lowTemperature() const
 {
     return lowTemperature_;
 }
 
-unsigned char BatteryData::getLowThermistorId() const
+void BatteryData::setLowTemperature(unsigned char newLowTemperature)
+{
+    lowTemperature_ = newLowTemperature;
+}
+
+unsigned char BatteryData::lowThermistorId() const
 {
     return lowThermistorId_;
 }
 
-unsigned char BatteryData::getAverageTemperature() const
+void BatteryData::setLowThermistorId(unsigned char newLowThermistorId)
+{
+    lowThermistorId_ = newLowThermistorId;
+}
+
+unsigned char BatteryData::averageTemperature() const
 {
     return averageTemperature_;
 }
 
-unsigned char BatteryData::getInternalTemperature() const
+void BatteryData::setAverageTemperature(unsigned char newAverageTemperature)
+{
+    averageTemperature_ = newAverageTemperature;
+}
+
+unsigned char BatteryData::internalTemperature() const
 {
     return internalTemperature_;
 }
 
-unsigned char BatteryData::getFanSpeed() const
+void BatteryData::setInternalTemperature(unsigned char newInternalTemperature)
+{
+    internalTemperature_ = newInternalTemperature;
+}
+
+unsigned char BatteryData::fanSpeed() const
 {
     return fanSpeed_;
 }
 
-unsigned char BatteryData::getRequestedFanSpeed() const
+void BatteryData::setFanSpeed(unsigned char newFanSpeed)
+{
+    fanSpeed_ = newFanSpeed;
+}
+
+unsigned char BatteryData::requestedFanSpeed() const
 {
     return requestedFanSpeed_;
 }
 
-unsigned short BatteryData::getLowCellVoltage() const
+void BatteryData::setRequestedFanSpeed(unsigned char newRequestedFanSpeed)
+{
+    requestedFanSpeed_ = newRequestedFanSpeed;
+}
+
+short BatteryData::lowCellVoltage() const
 {
     return lowCellVoltage_;
 }
 
-unsigned char BatteryData::getLowCellVoltageId() const
+void BatteryData::setLowCellVoltage(short newLowCellVoltage)
+{
+    lowCellVoltage_ = newLowCellVoltage;
+}
+
+unsigned char BatteryData::lowCellVoltageId() const
 {
     return lowCellVoltageId_;
 }
 
-unsigned short BatteryData::getHighCellVoltage() const
+void BatteryData::setLowCellVoltageId(unsigned char newLowCellVoltageId)
+{
+    lowCellVoltageId_ = newLowCellVoltageId;
+}
+
+short BatteryData::highCellVoltage() const
 {
     return highCellVoltage_;
 }
 
-unsigned char BatteryData::getHighCellVoltageId() const
+void BatteryData::setHighCellVoltage(short newHighCellVoltage)
+{
+    highCellVoltage_ = newHighCellVoltage;
+}
+
+unsigned char BatteryData::highCellVoltageId() const
 {
     return highCellVoltageId_;
 }
 
-unsigned short BatteryData::getAverageCellVoltage() const
+void BatteryData::setHighCellVoltageId(unsigned char newHighCellVoltageId)
+{
+    highCellVoltageId_ = newHighCellVoltageId;
+}
+
+short BatteryData::averageCellVoltage() const
 {
     return averageCellVoltage_;
 }
 
-/* BMS relay status getter */
-bool BatteryData::bmsDischargeRelayEnabled() const
+void BatteryData::setAverageCellVoltage(short newAverageCellVoltage)
 {
-    return bmsRelayStatusFlagPresent(BMS_DISCHARGE_RELAY_OFFSET);
+    averageCellVoltage_ = newAverageCellVoltage;
 }
 
-bool BatteryData::bmsChargeRelayEnabled() const
+void BatteryData::setBmsRelayStatus(unsigned char val)
 {
-    return bmsRelayStatusFlagPresent(BMS_CHARGE_RELAY_OFFSET);
-}
-
-bool BatteryData::bmsChargerSafetyEnabled() const
-{
-    return bmsRelayStatusFlagPresent(BMS_CHARGER_SAFETY_OFFSET);
-}
-
-bool BatteryData::bmsMalfunctionIndicatorActive() const
-{
-    return bmsRelayStatusFlagPresent(BMS_MALFUNCTION_INDICATOR_OFFSET);
-}
-
-bool BatteryData::bmsGetMultiPurposeInputSignalStatus() const
-{
-    return bmsRelayStatusFlagPresent(BMS_MULTI_PURPOSE_INPUT_OFFSET);
-}
-
-bool BatteryData::bmsGetAlwaysOnSignalStatus() const
-{
-    return bmsRelayStatusFlagPresent(BMS_ALWAYS_ON_OFFSET);
-}
-
-bool BatteryData::bmsGetIsReadySignalStatus() const
-{
-    return bmsRelayStatusFlagPresent(BMS_IS_READY_OFFSET);
-}
-
-bool BatteryData::bmsGetIsChargingSignalStatus() const
-{
-    return bmsRelayStatusFlagPresent(BMS_IS_CHARGING_OFFSET);
-}
-
-/*BatteryData "Sets"*/
-void BatteryData::setAlive(const bool& alive)
-{
-    alive_ = alive;
-}
-
-void BatteryData::setBmsRelayStatus(const unsigned char& bmsRelayStatus)
-{
-    bmsRelayStatus_ = bmsRelayStatus;
-}
-
-void BatteryData::setPopulatedCells(const unsigned char& populatedCells)
-{
-    populatedCells_ = populatedCells;
-}
-
-void BatteryData::set12VInputVoltage(const float& inputVoltage12V)
-{
-    inputVoltage12_ = inputVoltage12V;
-}
-
-void BatteryData::setFanVoltage(const float& fanVoltage)
-{
-    fanVoltage_ = fanVoltage;
-}
-
-void BatteryData::setPackCurrent(const float& packCurrent)
-{
-    packCurrent_ = packCurrent;
-}
-
-void BatteryData::setPackVoltage(const float& packVoltage)
-{
-    packVoltage_ = packVoltage;
-}
-
-void BatteryData::setPackStateOfCharge(const float& packStateOfCharge)
-{
-    packStateOfCharge_ = packStateOfCharge;
-}
-
-void BatteryData::setPackAmphours(const float& packAmphours)
-{
-    packAmphours_ = packAmphours;
-}
-
-void BatteryData::setPackDepthOfDischarge(const float& packDepthOfDischarge)
-{
-    packDepthOfDischarge_ = packDepthOfDischarge;
-}
-
-void BatteryData::setHighTemperature(const unsigned char& highTemperature)
-{
-    highTemperature_ = highTemperature;
-}
-
-void BatteryData::setHighThermistorId(const unsigned char& highThermistorId)
-{
-    highThermistorId_ = highThermistorId;
-}
-
-void BatteryData::setLowTemperature(const unsigned char& lowTemperature)
-{
-    lowTemperature_ = lowTemperature;
-}
-
-void BatteryData::setLowThermistorId(const unsigned char& lowThermistorId)
-{
-    lowThermistorId_ = lowThermistorId;
-}
-
-void BatteryData::setAverageTemperature(const unsigned char& averageTemperature)
-{
-    averageTemperature_ = averageTemperature;
-}
-
-void BatteryData::setInternalTemperature(const unsigned char& internalTemperature)
-{
-    internalTemperature_ = internalTemperature;
-}
-
-void BatteryData::setFanSpeed(const unsigned char& fanSpeed)
-{
-    fanSpeed_ = fanSpeed;
-}
-
-void BatteryData::setRequestedFanSpeed(const unsigned char& requestedFanSpeed)
-{
-    requestedFanSpeed_ = requestedFanSpeed;
-}
-
-void BatteryData::setLowCellVoltage(const unsigned short& lowCellVoltage)
-{
-    lowCellVoltage_ = (lowCellVoltage / DECI_TO_ONES);
-}
-
-void BatteryData::setLowCellVoltageId(const unsigned char& lowCellVoltageId)
-{
-    lowCellVoltageId_ = lowCellVoltageId;
-}
-
-void BatteryData::setHighCellVoltage(const unsigned short& highCellVoltage)
-{
-    highCellVoltage_ = (highCellVoltage / DECI_TO_ONES);
-}
-
-void BatteryData::setHighCellVoltageId(const unsigned char& highCellVoltageId)
-{
-    highCellVoltageId_ = highCellVoltageId;
-}
-
-void BatteryData::setAverageCellVoltage(const unsigned short& averageCellVoltage)
-{
-    averageCellVoltage_ = (averageCellVoltage / DECI_TO_ONES);
+    dischargeRelayEnabled_ = val & DISCHARGE_RELAY_ENABLED_OFFSET;
+    chargeRelayEnabled_ = val & CHARGE_RELAY_ENABLED_OFFSET;
+    chargerSafetyEnabled_ = val & CHARGER_SAFETY_ENABLED_OFFSET;
+    malfunctionIndicatorActive_ = val & MALFUNCTION_INDICATOR_ACTIVE_OFFSET;
+    multiPurposeInputSignalStatus_ = val & MULTI_PURPOSE_INPUT_SIGNAL_STATUS_OFFSET;
+    alwaysOnSignalStatus_ = val & ALWAYS_ON_SIGNAL_STATUS_OFFSET;
+    isReadySignalStatus_ = val & IS_READY_SIGNAL_STATUS_OFFSET;
+    isChargingSignalStatus_ = val & IS_CHARGING_SIGNAL_STATUS_OFFSET;
 }

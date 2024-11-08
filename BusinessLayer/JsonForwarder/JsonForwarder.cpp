@@ -1,83 +1,62 @@
-#include <QTimer>
-#include <QDebug>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QDateTime>
-
-#include "../../CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
-#include "../../InfrastructureLayer/Settings/I_Settings.h"
-#include "JsonDefines.h"
 #include "JsonForwarder.h"
-#include "../../BusinessLayer/JsonMessageBuilder/JsonMessageBuilder.h"
 
-namespace
-{
-    const QString MYSQL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+#include "../../InfrastructureLayer/Settings/I_Settings.h"
+#include "../JsonDefines.h"
+#include "../../CommunicationLayer/CommDeviceControl/I_MessageForwarder.h"
+
+#include <QJsonDocument>
+
+namespace {
+    const QString DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }
 
-JsonForwarder::JsonForwarder(
-    I_JsonMessageBuilder& jsonMessageBuilder,
-    I_AuxBmsData& auxBmsData,
-    I_CcsData& ccsData,
-    I_BatteryData& batteryData,
-    I_BatteryFaultsData& batteryFaultsData,
-    I_DriverControlsData& driverControlsData,
-    I_KeyMotorData& keyMotorData,
-    I_LightsData& lightsData,
-    I_MotorDetailsData& motorDetailsData,
-    I_MotorFaultsData& motorFaultsData,
-    I_MpptData& mpptData,
-    I_MessageForwarder& messageForwarder,
-    I_Settings& settings)
-    : jsonMessageBuilder_(jsonMessageBuilder)
-    , auxBmsData_(auxBmsData)
-    , ccsData_(ccsData)
-    , batteryData_(batteryData)
-    , batteryFaultsData_(batteryFaultsData)
-    , driverControlsData_(driverControlsData)
-    , keyMotorData_(keyMotorData)
-    , lightsData_(lightsData)
-    , motorDetailsData_(motorDetailsData)
-    , motorFaultsData_(motorFaultsData)
-    , mpptData_(mpptData)
-    , messageForwarder_(messageForwarder)
-    , readTimer_(new QTimer())
-    , forwardPeriod_(settings.forwardPeriod())
-    , PACKET_TITLE_(settings.packetTitle())
-{
+JsonForwarder::JsonForwarder(JsonMessageBuilder& builder,
+                             KeyMotorData& keyMotorData,
+                             MotorDetailsData& motorDetailsData,
+                             B3Data& b3Data,
+                             TelemetryData& telemetryData,
+                             BatteryFaultsData& batteryFaultsData,
+                             BatteryData& batteryData,
+                             MpptData& mpptData,
+                             MbmsData& mbmsData,
+                             ProximitySensorsData& proximitySensorsData,
+                             I_MessageForwarder& forwarder,
+                             I_Settings& settings)
+    : builder_(builder), keyMotorData_(keyMotorData), motorDetailsData_(motorDetailsData), b3Data_(b3Data), telemetryData_(telemetryData), 
+      batteryFaultsData_(batteryFaultsData), batteryData_(batteryData), mpptData_(mpptData), mbmsData_(mbmsData), 
+      proximitySensorsData_(proximitySensorsData), forwarder_(forwarder), readTimer_(new QTimer()), forwardPeriod_(settings.forwardPeriod()), 
+      packetTitle_(settings.packetTitle()){
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(handleTimeout()));
 }
 
-JsonForwarder::~JsonForwarder()
-{}
+JsonForwarder::~JsonForwarder() {}
 
-void JsonForwarder::startForwardingData()
-{
+void JsonForwarder::startForwardingData() {
     readTimer_->setInterval(forwardPeriod_);
     readTimer_->start();
 }
 
-void JsonForwarder::handleTimeout()
-{
+void JsonForwarder::handleTimeout(){
+    qWarning() << "Json Forwarder: Timeout Occured";
     QDateTime currentTime = QDateTime::currentDateTime();
     forwardData(currentTime);
 }
 
-void JsonForwarder::forwardData(QDateTime& currentTime)
-{
-    QJsonObject baseJson = QJsonObject();
-    baseJson[JsonFormat::PACKET_TITLE] = PACKET_TITLE_;
-    baseJson[JsonFormat::TIMESTAMP] = currentTime.toUTC().toString(MYSQL_DATE_FORMAT);
+void JsonForwarder::forwardData(QDateTime& currentTime) {
+    QJsonObject json = QJsonObject();
 
-    baseJson[JsonFormat::KEY_MOTOR] = jsonMessageBuilder_.buildKeyMotorMessage(keyMotorData_);
-    baseJson[JsonFormat::MOTOR_DETAILS] = jsonMessageBuilder_.buildMotorDetailsMessage(motorDetailsData_);
-    baseJson[JsonFormat::DRIVER_CONTROLS] = jsonMessageBuilder_.buildDriverControlsMessage(driverControlsData_);
-    baseJson[JsonFormat::MOTOR_FAULTS] = jsonMessageBuilder_.buildMotorFaultsMessage(motorFaultsData_);
-    baseJson[JsonFormat::BATTERY_FAULTS] = jsonMessageBuilder_.buildBatteryFaultsMessage(batteryFaultsData_);
-    baseJson[JsonFormat::BATTERY] = jsonMessageBuilder_.buildBatteryMessage(batteryData_);
-    baseJson[JsonFormat::MPPT] = jsonMessageBuilder_.buildMpptMessage(mpptData_);
-    baseJson[JsonFormat::LIGHTS] = jsonMessageBuilder_.buildLightsMessage(lightsData_);
-    baseJson[JsonFormat::AUX_BMS] = jsonMessageBuilder_.buildAuxBmsMessage(auxBmsData_);
-    baseJson[JsonFormat::CCS] = jsonMessageBuilder_.buildCcsMessage(ccsData_);
-    messageForwarder_.forwardData(QJsonDocument(baseJson).toJson(QJsonDocument::Compact));
+    json[JsonFormat::PACKET_TITLE] = packetTitle_;
+    json[JsonFormat::TIMESTAMP] = currentTime.toUTC().toString(DATE_FORMAT);
+
+    json[JsonFormat::KEY_MOTOR] = builder_.buildKeyMotorMessage(keyMotorData_);
+    json[JsonFormat::PROXIMITY_SENSORS] = builder_.buildProximitySensorsMessage(proximitySensorsData_);
+    json[JsonFormat::B3] = builder_.buildB3Message(b3Data_);
+    json[JsonFormat::TELEMETRY] = builder_.buildTelemetryMessage(telemetryData_);
+    json[JsonFormat::BATTERY] = builder_.buildBatteryMessage(batteryData_);
+    json[JsonFormat::BATTERY_FAULTS] = builder_.buildBatteryFaultsMessage(batteryFaultsData_);
+    json[JsonFormat::MBMS] = builder_.buildMbmsMessage(mbmsData_);
+    json[JsonFormat::MPPT] = builder_.buildMpptMessage(mpptData_);
+    json[JsonFormat::MOTOR_DETAILS] = builder_.buildMotorDetailsMessage(motorDetailsData_);
+
+    forwarder_.forwardData(QJsonDocument(json).toJson(QJsonDocument::Compact));
 }

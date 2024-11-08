@@ -1,149 +1,102 @@
 #include "MotorDetailsMessage.h"
-#include "MessageDecodingHelpers.h"
-#include "MessageDefines.h"
+#include "MessageDecodingUtils.h"
 
-using namespace MessageDecodingHelpers;
-
-#include <QDebug>
-
-namespace
-{
-    const int PACKAGE_ID_OFFSET = 0;
-    const int PHASE_CCURRENT_OFFSET = 1;
-    const int PHASE_BCURRENT_OFFSET = 5;
-    const int MOTOR_VOLTAGE_REAL_OFFSET = 9;
-    const int MOTOR_VOLTAGE_IMAGINARY_OFFSET = 13;
-    const int MOTOR_CURRENT_REAL_OFFSET = 17;
-    const int MOTOR_CURRENT_IMAGINARY_OFFSET = 21;
-    const int BACK_EMF_OFFSET = 25;
-    const int VOLTAGE_RAIL_SUPPPLY_15_V_OFFSET = 29;
-    const int VOLTAGE_RAIL_SUPPLY_33_V_OFFSET = 33;
-    const int VOLTAGE_RAIL_SUPPLY_19_V_OFFSET = 37;
-    const int HEAT_SINK_TEMPERATURE_OFFSET = 41;
-    const int MOTOR_TEMPERATURE_OFFSET = 45;
-    const int DSP_BOARD_TEMPERATURE_OFFSET = 49;
-    const int DC_BUS_AMP_HOURS_OFFSET = 53;
-    const int ODOMETER_OFFSET = 57;
-    const int SLIP_SPEED_OFFSET = 61;
+namespace {
+    const int CONTROL_VALUE_OFFSET = 1;
+    const int CONTROL_BITS_OFFSET = 3;
+    const int CURRENT_MOTOR_TORQUE_OFFSET = 4;
+    const int CURRENT_RPM_VALUE_OFFSET = 6;
+    const int MOTOR_TEMPERATURE_OFFSET = 8;
+    const int INVERTER_PEAK_CURRENT_OFFSET = 9;
+    const int CURRENT_MOTOR_POWER_OFFSET = 11;
+    const int ABSOLUTE_ANGLE_OFFSET = 13;
+    const int WARNING_CODE_1_OFFSET = 15;
+    const int WARNING_CODE_2_OFFSET = 17;
+    const int WARNING_CODE_3_OFFSET = 19;
+    const int WARNING_CODE_4_OFFSET = 21;
+    const int WARNING_CODE_5_OFFSET = 23;
+    const int ERROR_CODE_1_OFFSET = 24;
+    const int ERROR_CODE_2_OFFSET = 26;
+    const int ERROR_CODE_3_OFFSET = 28;
+    const int ERROR_CODE_4_OFFSET = 30;
+    const int ERROR_CODE_5_OFFSET = 32;
 }
 
-MotorDetailsMessage::MotorDetailsMessage(const QByteArray& messageData)
-    : messageData_(messageData)
-{
+MotorDetailsMessage::MotorDetailsMessage(const QByteArray& message, const int& id) : message_(message), motorId_(id) {}
+
+unsigned short MotorDetailsMessage::controlValue() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, CONTROL_VALUE_OFFSET);
 }
 
-unsigned char MotorDetailsMessage::motorNumber() const
-{
-    const unsigned char packageID = getUnsignedChar(messageData_, PACKAGE_ID_OFFSET);
-    // ID of motor 0 == 2, ID of motor 1 == 3
-    return packageID - 2;
+unsigned char MotorDetailsMessage::controlBits() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, CONTROL_BITS_OFFSET);
 }
 
-float MotorDetailsMessage::phaseCCurrent() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, PHASE_CCURRENT_OFFSET);
+short MotorDetailsMessage::currentMotorTorque() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, CURRENT_MOTOR_TORQUE_OFFSET);
 }
 
-float MotorDetailsMessage::phaseBCurrent() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, PHASE_BCURRENT_OFFSET);
+short MotorDetailsMessage::currentRpmValue() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, CURRENT_RPM_VALUE_OFFSET);
 }
 
-float MotorDetailsMessage::motorVoltageReal() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_VOLTAGE_REAL_OFFSET);
+char MotorDetailsMessage::motorTemperature() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, MOTOR_TEMPERATURE_OFFSET);
 }
 
-float MotorDetailsMessage::motorVoltageImaginary() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_VOLTAGE_IMAGINARY_OFFSET);
+unsigned short MotorDetailsMessage::inverterPeakCurrent() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, INVERTER_PEAK_CURRENT_OFFSET);
 }
 
-float MotorDetailsMessage::motorCurrentReal() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_CURRENT_REAL_OFFSET);
+unsigned short MotorDetailsMessage::currentMotorPower() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, CURRENT_MOTOR_POWER_OFFSET);
 }
 
-float MotorDetailsMessage::motorCurrentImaginary() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_CURRENT_IMAGINARY_OFFSET);
+unsigned short MotorDetailsMessage::AbsoluteAngle() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, ABSOLUTE_ANGLE_OFFSET);
 }
 
-float MotorDetailsMessage::backEmf() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, BACK_EMF_OFFSET);
+unsigned short MotorDetailsMessage::warningCode1() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, WARNING_CODE_1_OFFSET);
 }
 
-float MotorDetailsMessage::voltageRailSuppply15V() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, VOLTAGE_RAIL_SUPPPLY_15_V_OFFSET);
+unsigned short MotorDetailsMessage::warningCode2() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, WARNING_CODE_2_OFFSET);
 }
 
-float MotorDetailsMessage::voltageRailSupply33V() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, VOLTAGE_RAIL_SUPPLY_33_V_OFFSET);
+unsigned short MotorDetailsMessage::warningCode3() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, WARNING_CODE_3_OFFSET);
 }
 
-float MotorDetailsMessage::voltageRailSupply19V() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, VOLTAGE_RAIL_SUPPLY_19_V_OFFSET);
+unsigned short MotorDetailsMessage::warningCode4() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, WARNING_CODE_4_OFFSET);
 }
 
-float MotorDetailsMessage::heatSinkTemperature() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, HEAT_SINK_TEMPERATURE_OFFSET);
+unsigned char MotorDetailsMessage::warningCode5() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, WARNING_CODE_5_OFFSET);
 }
 
-float MotorDetailsMessage::motorTemperature() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, MOTOR_TEMPERATURE_OFFSET);
+unsigned short MotorDetailsMessage::errorCode1() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, ERROR_CODE_1_OFFSET);
 }
 
-float MotorDetailsMessage::dspBoardTemperature() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, DSP_BOARD_TEMPERATURE_OFFSET);
+unsigned short MotorDetailsMessage::errorCode2() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, ERROR_CODE_2_OFFSET);
 }
 
-float MotorDetailsMessage::dcBusAmpHours() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, DC_BUS_AMP_HOURS_OFFSET);
+unsigned short MotorDetailsMessage::errorCode3() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, ERROR_CODE_3_OFFSET);
 }
 
-float MotorDetailsMessage::odometer() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, ODOMETER_OFFSET);
+unsigned short MotorDetailsMessage::errorCode4() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, ERROR_CODE_4_OFFSET);
 }
 
-float MotorDetailsMessage::slipSpeed() const
-{
-    return MessageDecodingHelpers::getFloat(messageData_, SLIP_SPEED_OFFSET);
+unsigned char MotorDetailsMessage::errorCode5() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, ERROR_CODE_5_OFFSET);
 }
 
-QString MotorDetailsMessage::toString() const
+int MotorDetailsMessage::motorId() const
 {
-    QString messageString;
-
-    if ((motorNumber() & 0xe) != 0x0)
-    {
-        qCritical() << "Invalid motor number, unexpected behaviour likely";
-    }
-
-    messageString += QString::number(MessageDefines::MOTOR_0_DETAILS + motorNumber()) + ", ";
-    messageString += QString::number(phaseCCurrent()) + ", ";
-    messageString += QString::number(phaseBCurrent()) + ", ";
-    messageString += QString::number(motorVoltageReal()) + ", ";
-    messageString += QString::number(motorVoltageImaginary()) + ", ";
-    messageString += QString::number(motorCurrentReal()) + ", ";
-    messageString += QString::number(motorCurrentImaginary()) + ", ";
-    messageString += QString::number(backEmf()) + ", ";
-    messageString += QString::number(voltageRailSuppply15V()) + ", ";
-    messageString += QString::number(voltageRailSupply33V()) + ", ";
-    messageString += QString::number(voltageRailSupply19V()) + ", ";
-    messageString += QString::number(heatSinkTemperature()) + ", ";
-    messageString += QString::number(motorTemperature()) + ", ";
-    messageString += QString::number(dspBoardTemperature()) + ", ";
-    messageString += QString::number(dcBusAmpHours()) + ", ";
-    messageString += QString::number(odometer()) + ", ";
-    messageString += QString::number(slipSpeed()) + ", ";
-    return messageString;
+    return motorId_;
 }

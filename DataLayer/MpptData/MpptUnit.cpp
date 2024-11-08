@@ -1,77 +1,60 @@
 #include "MpptUnit.h"
-#include <QDebug>
 
-namespace
-{
-    const int CENTI_TO_ONES = 100.0;
-    const int MILLI_TO_ONES = 1000.0;
+namespace {
+    const int CENTI_TO_ONES = 100;
+    const int MILLI_TO_ONES = 1000;
 }
 
-MpptUnit::MpptUnit()
-    : mpptStatus_(0)
-    , arrayVoltage_(0)
-    , arrayCurrent_(0)
-    , batteryVoltage_(0)
-    , temperature_(0)
-{
-    //  Initialize to 0
-}
+MpptUnit::MpptUnit() {}
 
-MpptUnit::~MpptUnit()
-{
-}
+MpptUnit::~MpptUnit() {}
 
-/* MpptUnit Gets */
-unsigned char MpptUnit::getMpptStatus() const
+unsigned char MpptUnit::mpptStatus() const
 {
     return mpptStatus_;
 }
 
-float MpptUnit::getArrayVoltage() const
+void MpptUnit::setMpptStatus(const unsigned char newMpptStatus)
+{
+    mpptStatus_ = newMpptStatus;
+}
+
+float MpptUnit::arrayVoltage() const
 {
     return arrayVoltage_;
 }
 
-float MpptUnit::getArrayCurrent() const
+void MpptUnit::setArrayVoltage(const unsigned short newArrayVoltage)
+{
+    arrayVoltage_ =  static_cast<float>(newArrayVoltage) / CENTI_TO_ONES;
+}
+
+float MpptUnit::arrayCurrent() const
 {
     return arrayCurrent_;
 }
 
-float MpptUnit::getBatteryVoltage() const
+void MpptUnit::setArrayCurrent(const unsigned short newArrayCurrent)
+{
+    arrayCurrent_ = static_cast<float>(newArrayCurrent) / MILLI_TO_ONES;
+}
+
+float MpptUnit::batteryVoltage() const
 {
     return batteryVoltage_;
 }
 
-float MpptUnit::getTemperature() const
+void MpptUnit::setBatteryVoltage(const unsigned short newBatteryVoltage)
+{
+    batteryVoltage_ = static_cast<float>(newBatteryVoltage) / CENTI_TO_ONES;
+}
+
+float MpptUnit::temperature() const
 {
     return temperature_;
 }
 
-
-/* MpptUnit Sets */
-void MpptUnit::setMpptStatus(const unsigned char& mpptStatus)
+void MpptUnit::setTemperature(const unsigned short newTemperature)
 {
-    mpptStatus_ = mpptStatus;
+    temperature_ = static_cast<float>(newTemperature) / CENTI_TO_ONES;
 }
-
-void MpptUnit::setArrayVoltage(const unsigned short& arrayVoltage)
-{
-    arrayVoltage_ = ((float)arrayVoltage / CENTI_TO_ONES);
-}
-
-void MpptUnit::setArrayCurrent(const unsigned short& arrayCurrent)
-{
-    arrayCurrent_ = ((float)arrayCurrent / MILLI_TO_ONES);
-}
-
-void MpptUnit::setBatteryVoltage(const unsigned short& batteryVoltage)
-{
-    batteryVoltage_ = ((float)batteryVoltage / CENTI_TO_ONES);
-}
-
-void MpptUnit::setTemperature(const unsigned short& temperature)
-{
-    temperature_ = (temperature / CENTI_TO_ONES);
-}
-
-

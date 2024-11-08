@@ -1,17 +1,19 @@
-#pragma once
+#ifndef MOTORDETAILSDATA_H
+#define MOTORDETAILSDATA_H
 
+#include <QObject>
 #include <QScopedArrayPointer>
-
-#include "I_MotorDetailsData.h"
 #include "MotorDetailsUnit.h"
 
-class MotorDetailsData : public I_MotorDetailsData
-{
+class MotorDetailsData : public QObject {
+    Q_OBJECT
 public:
-    MotorDetailsData(QList<I_MotorDetailsUnit*> units);
+    MotorDetailsData(QList<MotorDetailsUnit*> units);
     unsigned char getNumberOfUnits() const;
-    I_MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index) const;
+    MotorDetailsUnit& getMotorDetailsUnit(const unsigned char& index) const;
 
 private:
-    QList<I_MotorDetailsUnit*> motorDetailsUnits_;
+    QList<MotorDetailsUnit*> motorDetailsUnits_;
 };
+
+#endif // MOTORDETAILSDATA_H

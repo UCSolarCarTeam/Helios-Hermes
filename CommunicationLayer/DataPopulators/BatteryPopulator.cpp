@@ -1,35 +1,32 @@
 #include "BatteryPopulator.h"
 
-BatteryPopulator::BatteryPopulator(I_PacketDecoder& packetDecoder, I_BatteryData& batteryData)
-    : packetDecoder_(packetDecoder)
-    , batteryData_(batteryData)
-{
-    connect(&packetDecoder_, SIGNAL(packetDecoded(const BatteryMessage)), this, SLOT(populateData(const BatteryMessage)));
+BatteryPopulator::BatteryPopulator(I_PacketDecoder& packetDecoder, BatteryData& data)
+    : packetDecoder_(packetDecoder), data_(data) {
+    connect(&packetDecoder_, SIGNAL(packetDecoded(BatteryMessage)), this, SLOT(populateData(BatteryMessage)));
 }
 
-void BatteryPopulator::populateData(const BatteryMessage message)
-{
-    batteryData_.setAlive(message.alive());
-    batteryData_.setBmsRelayStatus(message.bmsRelayStatus());
-    batteryData_.setPopulatedCells(message.populatedCells());
-    batteryData_.set12VInputVoltage(message.inputVoltage12V());
-    batteryData_.setFanVoltage(message.fanVoltage());
-    batteryData_.setPackCurrent(message.packCurrent());
-    batteryData_.setPackVoltage(message.packVoltage());
-    batteryData_.setPackStateOfCharge(message.packStateOfCharge());
-    batteryData_.setPackAmphours(message.packAmphorus());
-    batteryData_.setPackDepthOfDischarge(message.packDepthOfDischarge());
-    batteryData_.setHighTemperature(message.highTemperature());
-    batteryData_.setHighThermistorId(message.highThermistorId());
-    batteryData_.setLowTemperature(message.lowTemperature());
-    batteryData_.setLowThermistorId(message.lowThermistorId());
-    batteryData_.setAverageTemperature(message.averageTemperature());
-    batteryData_.setInternalTemperature(message.internalTemperature());
-    batteryData_.setFanSpeed(message.fanSpeed());
-    batteryData_.setRequestedFanSpeed(message.requestedFanSpeed());
-    batteryData_.setLowCellVoltage(message.lowCellVoltage());
-    batteryData_.setLowCellVoltageId(message.lowCellVoltageId());
-    batteryData_.setHighCellVoltage(message.highCellVoltage());
-    batteryData_.setHighCellVoltageId(message.highCellVoltageId());
-    batteryData_.setAverageCellVoltage(message.averageCellVoltage());
+void BatteryPopulator::populateData(const BatteryMessage message){
+    data_.setBmuAlive(message.bmuAlive());
+    data_.setBmsRelayStatus(message.bmsRelayStatus());
+    data_.setPopulatedCells(message.populatedCells());
+    data_.setInput12V(message.input12V());
+    data_.setFanVoltage(message.fanVoltage());
+    data_.setPackCurrent(message.packCurrent());
+    data_.setPackVoltage(message.packVoltage());
+    data_.setPackStateOfCharge(message.packStateOfCharge());
+    data_.setPackAmphours(message.packAmphours());
+    data_.setPackDepthOfDischarge(message.packDepthOfDischarge());
+    data_.setHighTemperature(message.highTemperature());
+    data_.setHighThermistorId(message.highThermistorId());
+    data_.setLowTemperature(message.lowTemperature());
+    data_.setLowThermistorId(message.lowThermistorId());
+    data_.setAverageTemperature(message.averageTemperature());
+    data_.setInternalTemperature(message.internalTemperature());
+    data_.setFanSpeed(message.fanSpeed());
+    data_.setRequestedFanSpeed(message.requestedFanSpeed());
+    data_.setLowCellVoltage(message.lowCellVoltage());
+    data_.setLowCellVoltageId(message.lowCellVoltageId());
+    data_.setHighCellVoltage(message.highCellVoltage());
+    data_.setHighCellVoltageId(message.highCellVoltageId());
+    data_.setAverageCellVoltage(message.averageCellVoltage());
 }
