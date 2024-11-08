@@ -9,7 +9,7 @@
 class WiegandPopulator : public QObject {
     Q_OBJECT
 public:
-    WiegandPopulator(I_PacketChecksumChecker& checksumChecker, WiegandData& wiegandData);
+    WiegandPopulator(WiegandData& wiegandData, I_PacketChecksumChecker& checksumChecker);
 
 public slots:
     void handleNewData();  // Called when new Wiegand data is available

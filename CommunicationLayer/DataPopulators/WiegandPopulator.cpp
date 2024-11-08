@@ -1,21 +1,28 @@
 #include "WiegandPopulator.h"
+#include "../../DataLayer/WiegandData/WiegandData.h"
+#include "../Wiegand/Wiegand26.h"  // Include Wiegand26 protocol header
 #include <QDebug>
 
-WiegandPopulator::WiegandPopulator(I_PacketChecksumChecker& checksumChecker, WiegandData& wiegandData)
-    : checksumChecker_(checksumChecker), wiegandData_(wiegandData), timer_(new QTimer(this)) {
-    connect(timer_, &QTimer::timeout, this, &WiegandPopulator::timerExpired);
-    timer_->start(3000);  // Adjust interval as needed
-}
+WiegandPopulator::WiegandPopulator(WiegandData& wiegandData, I_PacketChecksumChecker& checksumChecker)
+    : wiegandData_(wiegandData), checksumChecker_(checksumChecker) {}
 
 void WiegandPopulator::handleNewData() {
-    QByteArray wiegandPacket = wiegandData_.getData();
+    // Initialize Wiegand26 instance for reading
+    Wiegand26 wiegandReader;
 
-    qDebug() << "Valid Wiegand data with ID:" << wiegandData_.getWiegandId();
+    // Read and parse data using Wiegand26 protocol
+    QByteArray rawData = wiegandReader.readData();  // Assuming readData() returns raw 26-bit data
 
+    if (rawData.isEmpty()) {
+        qDebug() << "WiegandPopulator: No data read from Wiegand26.";
+        return;
+    }
 
-    timer_->start();  // Reset the timer
-}
+    // Create a Wiegand packet
+    QByteArray wiegandPacket = wiegandReader.parse(rawData);  // Parse the raw data into packet format
 
-void WiegandPopulator::timerExpired() {
-    qDebug() << "Wiegand data expired";
+    // Validate the packet if the checksum checker has a valid method
+    wiegandData_.setData(wiegandPacket);
+    qDebug() << "WiegandPopulator: Data populated successfully.";
+
 }
