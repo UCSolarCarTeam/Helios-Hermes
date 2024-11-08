@@ -166,6 +166,7 @@ void B3Data::setDriverInputs(const unsigned char& val){
     neutral_ = val & NEUTRAL_OFFSET;
     reverse_ = val & REVERSE_OFFSET;
     brakeSwitch_ = val & BRAKE_SWITCH_OFFSET;
+    handBrakeSwitch_ = val & HANDBRAKE_SWITCH_OFFSET;
     motorReset_ = val & MOTOR_RESET_OFFSET;
     raceMode_ = val & RACE_MODE_OFFSET;
     lap_ = val & LAP_OFFSET;
