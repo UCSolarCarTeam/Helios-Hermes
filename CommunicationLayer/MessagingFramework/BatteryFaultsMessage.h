@@ -1,18 +1,17 @@
-#pragma once
+#ifndef BATTERYFAULTSMESSAGE_H
+#define BATTERYFAULTSMESSAGE_H
 
-#include <QString>
 #include <QByteArray>
 
-class BatteryFaultsMessage
-{
+class BatteryFaultsMessage {
 public:
-    BatteryFaultsMessage(QByteArray& messageData);
+    BatteryFaultsMessage(const QByteArray& message);
 
     unsigned int errorFlags() const;
     unsigned short limitFlags() const;
 
-    QString toString() const;
-
 private:
-    const QByteArray messageData_;
+    const QByteArray message_;
 };
+
+#endif // BATTERYFAULTSMESSAGE_H

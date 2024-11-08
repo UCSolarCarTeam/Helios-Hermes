@@ -1,33 +1,36 @@
-#pragma once
+#ifndef MOTORDETAILSMESSAGE_H
+#define MOTORDETAILSMESSAGE_H
 
 #include <QByteArray>
-#include <QString>
 
-class MotorDetailsMessage
-{
+class MotorDetailsMessage {
 public:
-    MotorDetailsMessage(const QByteArray& messageData);
+    MotorDetailsMessage(const QByteArray& message, const int& id);
 
-    unsigned char motorNumber() const;
-    float phaseCCurrent() const;
-    float phaseBCurrent() const;
-    float motorVoltageReal() const;
-    float motorVoltageImaginary() const;
-    float motorCurrentReal() const;
-    float motorCurrentImaginary() const;
-    float backEmf() const;
-    float voltageRailSuppply15V() const;
-    float voltageRailSupply33V() const;
-    float voltageRailSupply19V() const;
-    float heatSinkTemperature() const;
-    float motorTemperature() const;
-    float dspBoardTemperature() const;
-    float dcBusAmpHours() const;
-    float odometer() const;
-    float slipSpeed() const;
+    unsigned short controlValue() const;
+    unsigned char controlBits() const;
+    short currentMotorTorque() const;
+    short currentRpmValue() const;
+    char motorTemperature() const;
+    unsigned short inverterPeakCurrent() const;
+    unsigned short currentMotorPower() const;
+    unsigned short AbsoluteAngle() const;
+    unsigned short warningCode1() const;
+    unsigned short warningCode2() const;
+    unsigned short warningCode3() const;
+    unsigned short warningCode4() const;
+    unsigned char warningCode5() const;
+    unsigned short errorCode1() const;
+    unsigned short errorCode2() const;
+    unsigned short errorCode3() const;
+    unsigned short errorCode4() const;
+    unsigned char errorCode5() const;
 
-    QString toString() const;
+    int motorId() const;
 
 private:
-    const QByteArray messageData_;
+    const QByteArray message_;
+    const int motorId_;
 };
+
+#endif // MOTORDETAILSMESSAGE_H

@@ -1,14 +1,11 @@
 #include "BatteryFaultsPopulator.h"
 
-BatteryFaultsPopulator::BatteryFaultsPopulator(I_PacketDecoder& packetDecoder, I_BatteryFaultsData& batteryFaultsData)
-    : packetDecoder_(packetDecoder)
-    , batteryFaultsData_(batteryFaultsData)
-{
-    connect(&packetDecoder_, SIGNAL(packetDecoded(const BatteryFaultsMessage)), this, SLOT(populateData(const BatteryFaultsMessage)));
+BatteryFaultsPopulator::BatteryFaultsPopulator(I_PacketDecoder& packetDecoder, BatteryFaultsData& data)
+    : packetDecoder_(packetDecoder), data_(data) {
+    connect(&packetDecoder_, SIGNAL(packetDecoded(BatteryFaultsMessage)), this, SLOT(populateData(BatteryFaultsMessage)));
 }
 
-void BatteryFaultsPopulator::populateData(const BatteryFaultsMessage message)
-{
-    batteryFaultsData_.setErrorFlags(message.errorFlags());
-    batteryFaultsData_.setLimitFlags(message.limitFlags());
+void BatteryFaultsPopulator::populateData(const BatteryFaultsMessage message){
+    data_.setErrorFlags(message.errorFlags());
+    data_.setLimitFlags(message.limitFlags());
 }

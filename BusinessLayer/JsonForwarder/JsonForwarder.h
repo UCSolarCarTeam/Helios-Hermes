@@ -1,43 +1,40 @@
-#pragma once
+#ifndef JSONFORWARDER_H
+#define JSONFORWARDER_H
 
-#include <QScopedPointer>
+#include <QObject>
 #include <QTimer>
 
-#include "I_JsonForwarder.h"
+#include "../../DataLayer/KeyMotorData/KeyMotorData.h"
+#include "../../DataLayer/B3Data/B3Data.h"
+#include "../../DataLayer/ProximitySensorsData/ProximitySensorsData.h"
+#include "../../DataLayer/TelemetryData/TelemetryData.h"
+#include "../JsonMessageBuilder/JsonMessageBuilder.h"
+#include "../../DataLayer/BatteryData/BatteryData.h"
+#include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
+#include "../../DataLayer/MbmsData/MbmsData.h"
+#include "../../DataLayer/MpptData/MpptData.h"
+#include "../../DataLayer/MotorDetailsData/MotorDetailsData.h"
 
-class I_JsonMessageBuilder;
-class I_AuxBmsData;
-class I_CcsData;
-class I_BatteryData;
-class I_BatteryFaultsData;
-class I_DriverControlsData;
-class I_KeyMotorData;
-class I_LightsData;
-class I_MotorDetailsData;
-class I_MotorFaultsData;
-class I_MpptData;
 class I_MessageForwarder;
 class I_Settings;
 
-class JsonForwarder : public I_JsonForwarder
-{
+class JsonForwarder : public QObject{
     Q_OBJECT
 public:
-    JsonForwarder(
-        I_JsonMessageBuilder& jsonMessageBuilder,
-        I_AuxBmsData& auxBmsData,
-        I_CcsData& ccsData,
-        I_BatteryData& batteryData,
-        I_BatteryFaultsData& batteryFaultsData,
-        I_DriverControlsData& driverControlsData,
-        I_KeyMotorData& keyMotorData,
-        I_LightsData& lightsData,
-        I_MotorDetailsData& motorDetailsData,
-        I_MotorFaultsData& motorFaultsData,
-        I_MpptData& mpptData,
-        I_MessageForwarder& messageForwarder,
-        I_Settings& settings);
+    JsonForwarder(JsonMessageBuilder& builder,
+                  KeyMotorData& keyMotorData,
+                  MotorDetailsData& motorDetailsData,
+                  B3Data& b3Data,
+                  TelemetryData& telemetryData,
+                  BatteryFaultsData& batteryFaultsData,
+                  BatteryData& batteryData,
+                  MpptData& mpptData,
+                  MbmsData& mbmsData,
+                  ProximitySensorsData& proximitySensorsData,
+                  I_MessageForwarder& forwarder,
+                  I_Settings& settings);
     virtual ~JsonForwarder();
+
     void startForwardingData();
     void forwardData(QDateTime& currentTime);
 
@@ -45,19 +42,20 @@ private slots:
     void handleTimeout();
 
 private:
-    I_JsonMessageBuilder& jsonMessageBuilder_;
-    I_AuxBmsData& auxBmsData_;
-    I_CcsData& ccsData_;
-    I_BatteryData& batteryData_;
-    I_BatteryFaultsData& batteryFaultsData_;
-    I_DriverControlsData& driverControlsData_;
-    I_KeyMotorData& keyMotorData_;
-    I_LightsData& lightsData_;
-    I_MotorDetailsData& motorDetailsData_;
-    I_MotorFaultsData& motorFaultsData_;
-    I_MpptData& mpptData_;
-    I_MessageForwarder& messageForwarder_;
+    JsonMessageBuilder& builder_;
+    KeyMotorData& keyMotorData_;
+    MotorDetailsData& motorDetailsData_;
+    B3Data& b3Data_;
+    TelemetryData& telemetryData_;
+    BatteryFaultsData& batteryFaultsData_;
+    BatteryData& batteryData_;
+    MpptData& mpptData_;
+    MbmsData& mbmsData_;
+    ProximitySensorsData& proximitySensorsData_;
+    I_MessageForwarder& forwarder_;
     QScopedPointer<QTimer> readTimer_;
     int forwardPeriod_;
-    const QString PACKET_TITLE_;
+    const QString packetTitle_;
 };
+
+#endif // JSONFORWARDER_H

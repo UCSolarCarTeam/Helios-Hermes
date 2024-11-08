@@ -1,34 +1,25 @@
 #include "BusinessContainer.h"
-
-#include "../CommunicationLayer/CommunicationContainer.h"
 #include "../DataLayer/DataContainer.h"
+#include "../CommunicationLayer/CommunicationContainer.h"
 #include "../InfrastructureLayer/InfrastructureContainer.h"
-#include "JsonForwarder/JsonForwarder.h"
-#include "JsonMessageBuilder/JsonMessageBuilder.h"
 
 BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureContainer,
                                      CommunicationContainer& communicationContainer,
                                      DataContainer& dataContainer)
-    : jsonMessageBuilder_(new JsonMessageBuilder())
-    , jsonForwarder_(new JsonForwarder(
-                         *jsonMessageBuilder_,
-                         dataContainer.auxBmsData(),
-                         dataContainer.ccsData(),
-                         dataContainer.batteryData(),
-                         dataContainer.batteryFaultsData(),
-                         dataContainer.driverControlsData(),
-                         dataContainer.keyMotorData(),
-                         dataContainer.lightsData(),
-                         dataContainer.motorDetailsData(),
-                         dataContainer.motorFaultsData(),
-                         dataContainer.mpptData(),
-                         communicationContainer.messageForwarder(),
-                         infrastructureContainer.settings()))
-{
-    jsonForwarder_->startForwardingData();
+    : builder_(new JsonMessageBuilder()),
+      forwarder_(new JsonForwarder(*builder_,
+                                    dataContainer.keyMotorData(),
+                                    dataContainer.motorDetailsData(),
+                                    dataContainer.b3Data(),
+                                    dataContainer.telemetryData(),
+                                    dataContainer.batteryFaultsData(),
+                                    dataContainer.batteryData(),
+                                    dataContainer.mpptData(),
+                                    dataContainer.mbmsData(),
+                                    dataContainer.proximitySensorsData(),
+                                    communicationContainer.messageForwarder(),
+                                    infrastructureContainer.settings())) {
+    forwarder_->startForwardingData();
 }
 
-BusinessContainer::~BusinessContainer()
-{
-}
-
+BusinessContainer::~BusinessContainer() {}

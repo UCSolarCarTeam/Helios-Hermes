@@ -1,32 +1,31 @@
-#pragma once
+#ifndef MPPTUNIT_H
+#define MPPTUNIT_H
 
-#include "I_MpptUnit.h"
-
-class MpptUnit : public I_MpptUnit
+#include <QObject>
+class MpptUnit : public QObject
 {
+    Q_OBJECT
 public:
     MpptUnit();
     virtual ~MpptUnit();
 
-    /* MpptUnit Gets */
-    unsigned char getMpptStatus() const;
-    float getArrayVoltage() const;
-    float getArrayCurrent() const;
-    float getBatteryVoltage() const;
-    float getTemperature() const;
-
-    /* MpptUnit Sets */
-    void setMpptStatus(const unsigned char& mpptStatus);
-    void setArrayVoltage(const unsigned short& arrayVoltage);
-    void setArrayCurrent(const unsigned short& arrayCurrent);
-    void setBatteryVoltage(const unsigned short& batteryVoltage);
-    void setTemperature(const unsigned short& temperature);
-
+    unsigned char mpptStatus() const;
+    void setMpptStatus(const unsigned char newMpptStatus);
+    float arrayVoltage() const;
+    void setArrayVoltage(const unsigned short newArrayVoltage);
+    float arrayCurrent() const;
+    void setArrayCurrent(const unsigned short newArrayCurrent);
+    float batteryVoltage() const;
+    void setBatteryVoltage(const unsigned short newBatteryVoltage);
+    float temperature() const;
+    void setTemperature(const unsigned short newTemperature);
 
 private:
-    unsigned char mpptStatus_;
-    float arrayVoltage_;
-    float arrayCurrent_;
-    float batteryVoltage_;
-    float temperature_;
+    unsigned char mpptStatus_ = 0;
+    float arrayVoltage_ = 0;
+    float arrayCurrent_ = 0;
+    float batteryVoltage_ = 0;
+    float temperature_ = 0;
 };
+
+#endif // MPPTUNIT_H

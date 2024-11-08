@@ -1,15 +1,11 @@
 #include "BatteryMessage.h"
-#include "MessageDecodingHelpers.h"
-#include "MessageDefines.h"
+#include "MessageDecodingUtils.h"
 
-using namespace MessageDecodingHelpers;
-
-namespace
-{
+namespace {
     const int BMU_ALIVE_OFFSET = 1;
     const int BMS_RELAY_STATUS_OFFSET = 2;
     const int POPULATED_CELLS_OFFSET = 3;
-    const int INPUT_VOLTAGE_12V_OFFSET = 4;
+    const int INPUT_12V_OFFSET = 4;
     const int FAN_VOLTAGE_OFFSET = 8;
     const int PACK_CURRENT_OFFSET = 12;
     const int PACK_VOLTAGE_OFFSET = 16;
@@ -31,151 +27,96 @@ namespace
     const int AVERAGE_CELL_VOLTAGE_OFFSET = 46;
 }
 
-BatteryMessage::BatteryMessage(const QByteArray& messageData)
-    : messageData_(messageData)
-{
+BatteryMessage::BatteryMessage(const QByteArray& message) : message_(message) {}
+
+unsigned char BatteryMessage::bmuAlive() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, BMU_ALIVE_OFFSET);
 }
 
-bool BatteryMessage::alive() const
-{
-    return static_cast<bool>(messageData_.at(BMU_ALIVE_OFFSET));
+unsigned char BatteryMessage::bmsRelayStatus() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, BMS_RELAY_STATUS_OFFSET);
 }
 
-unsigned char BatteryMessage::bmsRelayStatus() const
-{
-    return getUnsignedChar(messageData_, BMS_RELAY_STATUS_OFFSET);
+unsigned char BatteryMessage::populatedCells() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, POPULATED_CELLS_OFFSET);
 }
 
-unsigned char BatteryMessage::populatedCells() const
-{
-    return getUnsignedChar(messageData_, POPULATED_CELLS_OFFSET);
+float BatteryMessage::input12V() const {
+    return MessageDecodingUtils::getFloat(message_, INPUT_12V_OFFSET);
 }
 
-float BatteryMessage::inputVoltage12V() const
-{
-    return getFloat(messageData_, INPUT_VOLTAGE_12V_OFFSET);
+float BatteryMessage::fanVoltage() const {
+    return MessageDecodingUtils::getFloat(message_, FAN_VOLTAGE_OFFSET);
 }
 
-float BatteryMessage::fanVoltage() const
-{
-    return getFloat(messageData_, FAN_VOLTAGE_OFFSET);
+float BatteryMessage::packCurrent() const {
+    return MessageDecodingUtils::getFloat(message_, PACK_CURRENT_OFFSET);
 }
 
-float BatteryMessage::packCurrent() const
-{
-    return getFloat(messageData_, PACK_CURRENT_OFFSET);
+float BatteryMessage::packVoltage() const {
+    return MessageDecodingUtils::getFloat(message_, PACK_VOLTAGE_OFFSET);
 }
 
-float BatteryMessage::packVoltage() const
-{
-    return getFloat(messageData_, PACK_VOLTAGE_OFFSET);
+float BatteryMessage::packStateOfCharge() const {
+    return MessageDecodingUtils::getFloat(message_, PACK_STATE_OF_CHARGE_OFFSET);
 }
 
-float BatteryMessage::packStateOfCharge() const
-{
-    return getFloat(messageData_, PACK_STATE_OF_CHARGE_OFFSET);
+float BatteryMessage::packAmphours() const {
+    return MessageDecodingUtils::getFloat(message_, PACK_AMPHOURS_OFFSET);
 }
 
-float BatteryMessage::packAmphorus() const
-{
-    return getFloat(messageData_, PACK_AMPHOURS_OFFSET);
+float BatteryMessage::packDepthOfDischarge() const {
+    return MessageDecodingUtils::getFloat(message_, PACK_DEPTH_OF_DISCHARGE_OFFSET);
 }
 
-float BatteryMessage::packDepthOfDischarge() const
-{
-    return getFloat(messageData_, PACK_DEPTH_OF_DISCHARGE_OFFSET);
+unsigned char BatteryMessage::highTemperature() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, HIGH_TEMPERATURE_OFFSET);
 }
 
-unsigned char BatteryMessage::highTemperature() const
-{
-    return getUnsignedChar(messageData_, HIGH_TEMPERATURE_OFFSET);
+unsigned char BatteryMessage::highThermistorId() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, HIGH_THERMISTOR_ID_OFFSET);
 }
 
-unsigned char BatteryMessage::highThermistorId() const
-{
-    return getUnsignedChar(messageData_, HIGH_THERMISTOR_ID_OFFSET);
+unsigned char BatteryMessage::lowTemperature() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, LOW_TEMPERATURE_OFFSET);
 }
 
-unsigned char BatteryMessage::lowTemperature() const
-{
-    return getUnsignedChar(messageData_, LOW_TEMPERATURE_OFFSET);
+unsigned char BatteryMessage::lowThermistorId() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, LOW_THERMISTOR_ID_OFFSET);
 }
 
-unsigned char BatteryMessage::lowThermistorId() const
-{
-    return getUnsignedChar(messageData_, LOW_THERMISTOR_ID_OFFSET);
+unsigned char BatteryMessage::averageTemperature() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, AVERAGE_TEMPERATURE_OFFSET);
 }
 
-unsigned char BatteryMessage::averageTemperature() const
-{
-    return getUnsignedChar(messageData_, AVERAGE_TEMPERATURE_OFFSET);
+unsigned char BatteryMessage::internalTemperature() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, INTERNAL_TEMPERATURE_OFFSET);
 }
 
-unsigned char BatteryMessage::internalTemperature() const
-{
-    return getUnsignedChar(messageData_, INTERNAL_TEMPERATURE_OFFSET);
+unsigned char BatteryMessage::fanSpeed() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, FAN_SPEED_OFFSET);
 }
 
-unsigned char BatteryMessage::fanSpeed() const
-{
-    return getUnsignedChar(messageData_, FAN_SPEED_OFFSET);
-}
-unsigned char BatteryMessage::requestedFanSpeed() const
-{
-    return getUnsignedChar(messageData_, REQUESTED_FAN_SPEED_OFFSET);
+unsigned char BatteryMessage::requestedFanSpeed() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, REQUESTED_FAN_SPEED_OFFSET);
 }
 
-unsigned short BatteryMessage::lowCellVoltage() const
-{
-    return getUnsignedShort(messageData_, LOW_CELL_VOLTAGE_OFFSET);
+short int BatteryMessage::lowCellVoltage() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, LOW_CELL_VOLTAGE_OFFSET);
 }
 
-unsigned char BatteryMessage::lowCellVoltageId() const
-{
-    return getUnsignedChar(messageData_, LOW_CELL_VOLTAGE_ID_OFFSET);
+unsigned char BatteryMessage::lowCellVoltageId() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, LOW_CELL_VOLTAGE_ID_OFFSET);
 }
 
-unsigned short BatteryMessage::highCellVoltage() const
-{
-    return getUnsignedShort(messageData_, HIGH_CELL_VOLTAGE_OFFSET);
+short int BatteryMessage::highCellVoltage() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, HIGH_CELL_VOLTAGE_OFFSET);
 }
 
-unsigned char BatteryMessage::highCellVoltageId() const
-{
-    return getUnsignedChar(messageData_, HIGH_CELL_VOLTAGE_ID_OFFSET);
+unsigned char BatteryMessage::highCellVoltageId() const {
+    return MessageDecodingUtils::getUnsignedChar(message_, HIGH_CELL_VOLTAGE_ID_OFFSET);
 }
 
-unsigned short BatteryMessage::averageCellVoltage() const
-{
-    return getUnsignedShort(messageData_, AVERAGE_CELL_VOLTAGE_OFFSET);
-}
-
-QString BatteryMessage::toString() const
-{
-    QString messageString;
-    messageString += QString::number(MessageDefines::BATTERY) + ", ";
-    messageString += QString::number(alive()) + ", ";
-    messageString += QString::number(bmsRelayStatus()) + ", ";
-    messageString += QString::number(populatedCells()) + ", ";
-    messageString += QString::number(inputVoltage12V()) + ", ";
-    messageString += QString::number(fanVoltage()) + ", ";
-    messageString += QString::number(packCurrent()) + ", ";
-    messageString += QString::number(packVoltage()) + ", ";
-    messageString += QString::number(packStateOfCharge()) + ", ";
-    messageString += QString::number(packAmphorus()) + ", ";
-    messageString += QString::number(packDepthOfDischarge()) + ", ";
-    messageString += QString::number(highTemperature()) + ", ";
-    messageString += QString::number(highThermistorId()) + ", ";
-    messageString += QString::number(lowTemperature()) + ", ";
-    messageString += QString::number(lowThermistorId()) + ", ";
-    messageString += QString::number(averageTemperature()) + ", ";
-    messageString += QString::number(internalTemperature()) + ", ";
-    messageString += QString::number(fanSpeed()) + ", ";
-    messageString += QString::number(requestedFanSpeed()) + ", ";
-    messageString += QString::number(lowCellVoltage()) + ", ";
-    messageString += QString::number(lowCellVoltageId()) + ", ";
-    messageString += QString::number(highCellVoltage()) + ", ";
-    messageString += QString::number(highCellVoltageId()) + ", ";
-    messageString += QString::number(averageCellVoltage()) + ", ";
-    return messageString;
+short int BatteryMessage::averageCellVoltage() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, AVERAGE_CELL_VOLTAGE_OFFSET);
 }

@@ -1,20 +1,16 @@
-#pragma once
+#ifndef BATTERYFAULTSDATA_H
+#define BATTERYFAULTSDATA_H
 
-#include "I_BatteryFaultsData.h"
+#include <QObject>
 
-class BatteryFaultsData : public I_BatteryFaultsData
-{
+class BatteryFaultsData : public QObject {
+    Q_OBJECT
 public:
     BatteryFaultsData();
     virtual ~BatteryFaultsData();
 
-    /* BatteryFaults Gets */
-    unsigned int getErrorFlags() const;
-    unsigned short getLimitFlags() const;
-
-    /* BatteryFaultsData status (error flags) */
     bool internalCommunicationFault() const;
-    bool internalConversionFault() const;
+    bool internalConverversionFault() const;
     bool weakCellFault() const;
     bool lowCellVoltageFault() const;
     bool openWiringFault() const;
@@ -24,7 +20,7 @@ public:
     bool voltageRedundancyFault() const;
     bool fanMonitorFault() const;
     bool thermistorFault() const;
-    bool canbusCommunicationsFault() const;
+    bool canbusCommunicationFault() const;
     bool alwaysOnSupplyFault() const;
     bool highVoltageIsolationFault() const;
     bool powerSupply12VFault() const;
@@ -34,38 +30,61 @@ public:
     bool internalMemoryFault() const;
     bool internalThermistorFault() const;
     bool internalLogicFault() const;
-
-    /* BatteryFaultsData status (limit flags) */
     bool dclReducedDueToLowSoc() const;
-    bool dclReducedDueToHighCellResistence() const;
+    bool dclReducedDueToHighCellResistance() const;
     bool dclReducedDueToTemperature() const;
     bool dclReducedDueToLowCellVoltage() const;
     bool dclReducedDueToLowPackVoltage() const;
     bool dclAndCclReducedDueToVoltageFailsafe() const;
     bool dclAndCclReducedDueToCommunicationFailsafe() const;
     bool cclReducedDueToHighSoc() const;
-    bool cclReducedDueToHighCellResistence() const;
+    bool cclReducedDueToHighCellResistance() const;
     bool cclReducedDueToTemperature() const;
     bool cclReducedDueToHighCellVoltage() const;
     bool cclReducedDueToHighPackVoltage() const;
     bool cclReducedDueToChargerLatch() const;
     bool cclReducedDueToAlternateCurrentLimit() const;
 
-    bool operator==(const I_BatteryFaultsData& other) const;
+    void setErrorFlags(const unsigned int& val);
+    void setLimitFlags(const unsigned short& val);
 
-    QString toString() const;
+private:
+    bool internalCommunicationFault_ = 0;
+    bool internalConverversionFault_ = 0;
+    bool weakCellFault_ = 0;
+    bool lowCellVoltageFault_ = 0;
+    bool openWiringFault_ = 0;
+    bool currentSensorFault_ = 0;
+    bool packVoltageSensorFault_ = 0;
+    bool weakPackFault_ = 0;
+    bool voltageRedundancyFault_ = 0;
+    bool fanMonitorFault_ = 0;
+    bool thermistorFault_ = 0;
+    bool canbusCommunicationFault_ = 0;
+    bool alwaysOnSupplyFault_ = 0;
+    bool highVoltageIsolationFault_ = 0;
+    bool powerSupply12VFault_ = 0;
+    bool chargeLimitEnforcementFault_ = 0;
+    bool dischargeLimitEnforcementFault_ = 0;
+    bool chargerSafetyRelayFault_ = 0;
+    bool internalMemoryFault_ = 0;
+    bool internalThermistorFault_ = 0;
+    bool internalLogicFault_ = 0;
 
-    /* BatteryFaults Sets */
-    void setErrorFlags(const unsigned int& errorFlags);
-    void setLimitFlags(const unsigned short& limitFlags);
-
-
-protected:
-    unsigned int errorFlags_;
-    unsigned short limitFlags_;
-
-    inline bool errorFlagPresent(const unsigned int errorMask) const;
-    inline bool limitFlagPresent(const unsigned short limitMask) const;
-    inline void appendIfPresent(QString& messageString, const unsigned int errorMask, QString errorDescription) const;
-    inline void appendIfPresent(QString& messageString, const unsigned short limitMask, QString limitDescription) const;
+    bool dclReducedDueToLowSoc_ = 0;
+    bool dclReducedDueToHighCellResistance_ = 0;
+    bool dclReducedDueToTemperature_ = 0;
+    bool dclReducedDueToLowCellVoltage_ = 0;
+    bool dclReducedDueToLowPackVoltage_ = 0;
+    bool dclAndCclReducedDueToVoltageFailsafe_ = 0;
+    bool dclAndCclReducedDueToCommunicationFailsafe_ = 0;
+    bool cclReducedDueToHighSoc_ = 0;
+    bool cclReducedDueToHighCellResistance_ = 0;
+    bool cclReducedDueToTemperature_ = 0;
+    bool cclReducedDueToHighCellVoltage_ = 0;
+    bool cclReducedDueToHighPackVoltage_ = 0;
+    bool cclReducedDueToChargerLatch_ = 0;
+    bool cclReducedDueToAlternateCurrentLimit_ = 0;
 };
+
+#endif // BATTERYFAULTSDATA_H

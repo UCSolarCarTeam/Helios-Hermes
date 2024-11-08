@@ -1,36 +1,17 @@
 #include "BatteryFaultsMessage.h"
-#include "MessageDecodingHelpers.h"
-#include "MessageDefines.h"
+#include "MessageDecodingUtils.h"
 
-using namespace MessageDecodingHelpers;
-
-namespace
-{
+namespace {
     const int ERROR_FLAGS_OFFSET = 1;
     const int LIMIT_FLAGS_OFFSET = 4;
 }
 
-BatteryFaultsMessage::BatteryFaultsMessage(QByteArray& messageData)
-    : messageData_(messageData)
-{
-    // Initialize messageData
+BatteryFaultsMessage::BatteryFaultsMessage(const QByteArray& message) : message_(message) {}
+
+unsigned int BatteryFaultsMessage::errorFlags() const {
+    return MessageDecodingUtils::getUnsignedInt(message_, ERROR_FLAGS_OFFSET);
 }
 
-unsigned int BatteryFaultsMessage::errorFlags() const
-{
-    return getUnsignedInt(messageData_, ERROR_FLAGS_OFFSET);
-}
-
-unsigned short BatteryFaultsMessage::limitFlags() const
-{
-    return getUnsignedShort(messageData_, LIMIT_FLAGS_OFFSET);
-}
-
-QString BatteryFaultsMessage::toString() const
-{
-    QString messageString;
-    messageString += QString::number(MessageDefines::BATTERY_FAULTS) + ", ";
-    messageString += QString::number(errorFlags()) + ", ";
-    messageString += QString::number(limitFlags()) + ", ";
-    return messageString;
+unsigned short BatteryFaultsMessage::limitFlags() const {
+    return MessageDecodingUtils::getUnsignedShort(message_, LIMIT_FLAGS_OFFSET);
 }

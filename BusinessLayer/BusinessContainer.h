@@ -1,15 +1,15 @@
-#pragma once
+#ifndef BUSINESSCONTAINER_H
+#define BUSINESSCONTAINER_H
 
-#include <QScopedPointer>
+#include "JsonMessageBuilder/JsonMessageBuilder.h"
+#include "JsonForwarder/JsonForwarder.h"
 
+class InfrastructureContainer;
 class CommunicationContainer;
 class DataContainer;
-class I_JsonForwarder;
-class InfrastructureContainer;
-class I_JsonMessageBuilder;
 
-class BusinessContainer
-{
+class BusinessContainer {
+
 public:
     explicit BusinessContainer(InfrastructureContainer& infrastructureContainer,
                                CommunicationContainer& communicationContainer,
@@ -17,6 +17,9 @@ public:
     ~BusinessContainer();
 
 private:
-    QScopedPointer<I_JsonMessageBuilder> jsonMessageBuilder_;
-    QScopedPointer<I_JsonForwarder> jsonForwarder_;
+    QScopedPointer<JsonMessageBuilder> builder_;
+    QScopedPointer<JsonForwarder> forwarder_;
+
 };
+
+#endif // BUSINESSCONTAINER_H

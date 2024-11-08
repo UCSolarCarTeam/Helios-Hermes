@@ -1,22 +1,21 @@
-#pragma once
+#ifndef BATTERYMESSAGE_H
+#define BATTERYMESSAGE_H
 
 #include <QByteArray>
-#include <QString>
 
-class BatteryMessage
-{
+class BatteryMessage{
 public:
-    BatteryMessage(const QByteArray& messageData);
+    BatteryMessage(const QByteArray& message);
 
-    bool alive() const;
+    unsigned char bmuAlive() const;
     unsigned char bmsRelayStatus() const;
     unsigned char populatedCells() const;
-    float inputVoltage12V() const;
+    float input12V() const;
     float fanVoltage() const;
     float packCurrent() const;
     float packVoltage() const;
     float packStateOfCharge() const;
-    float packAmphorus() const;
+    float packAmphours() const;
     float packDepthOfDischarge() const;
     unsigned char highTemperature() const;
     unsigned char highThermistorId() const;
@@ -26,14 +25,14 @@ public:
     unsigned char internalTemperature() const;
     unsigned char fanSpeed() const;
     unsigned char requestedFanSpeed() const;
-    unsigned short lowCellVoltage() const;
+    short int lowCellVoltage() const;
     unsigned char lowCellVoltageId() const;
-    unsigned short highCellVoltage() const;
+    short int highCellVoltage() const;
     unsigned char highCellVoltageId() const;
-    unsigned short averageCellVoltage() const;
-
-    QString toString() const;
+    short int averageCellVoltage() const;
 
 private:
-    const QByteArray messageData_;
+    const QByteArray message_;
 };
+
+#endif // BATTERYMESSAGE_H

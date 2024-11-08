@@ -7,6 +7,7 @@
 RadioCommDevice::RadioCommDevice(QSerialPort& serialPort, I_Settings& settings)
     : serialPort_(serialPort)
 {
+    qDebug() << "STRTING";
     setSerialParameters(settings.serialPortName(), settings.baudrate());
     // This makes sure that it is connected after everything is created.
     // Otherwise the error messages won't be sent to the GUI
@@ -19,8 +20,8 @@ RadioCommDevice::~RadioCommDevice()
 
 void RadioCommDevice::setSerialParameters(QString serialPortName, int baudRate)
 {
-    serialPort_.setPortName("/dev/pts/4");
-    serialPort_.setBaudRate(baudRate);
+    serialPort_.setPortName("/dev/pts/2");
+    serialPort_.setBaudRate(QSerialPort::Baud115200);
     serialPort_.setParity(QSerialPort::NoParity);
     serialPort_.setStopBits(QSerialPort::OneStop);
     serialPort_.setDataBits(QSerialPort::Data8);
@@ -47,7 +48,7 @@ void RadioCommDevice::handleSerialDataIncoming()
 {
     qDebug() << "Serial port received data";
     QByteArray incomingData = serialPort_.readAll();
-
+    qDebug() << incomingData;
     if (incomingData.isEmpty())
     {
         // Use qWarning to redirect these to stderr

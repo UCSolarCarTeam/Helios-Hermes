@@ -1,19 +1,21 @@
-#pragma once
+#ifndef KEYMOTORPOPULATOR_H
+#define KEYMOTORPOPULATOR_H
 
 #include <QObject>
 #include "../../CommunicationLayer/PacketDecoder/I_PacketDecoder.h"
-#include "../../DataLayer/KeyMotorData/I_KeyMotorData.h"
+#include "../../DataLayer/KeyMotorData/KeyMotorData.h"
 
-class KeyMotorPopulator : public QObject
-{
+class KeyMotorPopulator : public QObject {
     Q_OBJECT
 public:
-    KeyMotorPopulator(I_PacketDecoder& packetDecoder, I_KeyMotorData& keyMotorData);
+    KeyMotorPopulator(I_PacketDecoder& packetDecoder, KeyMotorData& data);
 
 public slots:
     void populateData(const KeyMotorMessage);
 
 private:
     I_PacketDecoder& packetDecoder_;
-    I_KeyMotorData& keyMotorData_;
+    KeyMotorData& data_;
 };
+
+#endif // KEYMOTORPOPULATOR_H

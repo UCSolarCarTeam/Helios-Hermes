@@ -1,17 +1,19 @@
-#pragma once
+#ifndef MPPTDATA_H
+#define MPPTDATA_H
 
 #include <QScopedArrayPointer>
 
 #include "MpptUnit.h"
-#include "I_MpptData.h"
 
-class MpptData: public I_MpptData
-{
+class MpptData : public QObject {
+    Q_OBJECT
 public:
-    MpptData(QList<I_MpptUnit*> units);
+    MpptData(QList<MpptUnit*> mpptUnits);
     unsigned char getNumberOfUnits() const;
-    I_MpptUnit& getMpptUnit(const unsigned char& index) const;
+    MpptUnit& getMpptUnit(const unsigned char& index) const;
 
 private:
-    QList<I_MpptUnit*> mpptUnits_;
+    QList<MpptUnit*> mpptUnits_;
 };
+
+#endif // MPPTDATA_H
