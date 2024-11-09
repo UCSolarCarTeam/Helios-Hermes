@@ -211,6 +211,12 @@ QJsonObject JsonMessageBuilder::buildMbmsMessage(const MbmsData& data){
     return json;
 }
 
+QJsonObject JsonMessageBuilder::buildWiegandMessage(const WiegandData& data) {
+    QJsonObject json;
+    json[JsonFormat::WIEGAND_DATA] = data.getDataAsLongLong();
+    return json;
+}
+
 QJsonArray JsonMessageBuilder::buildMpptMessage(const MpptData& data){
     QJsonArray json = QJsonArray();
 

@@ -14,6 +14,7 @@
 #include "../../DataLayer/MbmsData/MbmsData.h"
 #include "../../DataLayer/MpptData/MpptData.h"
 #include "../../DataLayer/MotorDetailsData/MotorDetailsData.h"
+#include "../../DataLayer/WiegandData/WiegandData.h"
 
 class I_PacketChecksumChecker;
 
@@ -31,6 +32,7 @@ public:
     QJsonObject buildBatteryMessage(const BatteryData& data);
     QJsonObject buildBatteryFaultsMessage(const BatteryFaultsData& data);
     QJsonObject buildMbmsMessage(const MbmsData& data);
+    QJsonObject buildWiegandMessage(const WiegandData& data);
 
     QJsonArray buildMpptMessage(const MpptData& data);
     QJsonArray buildMotorDetailsMessage(const MotorDetailsData& data);

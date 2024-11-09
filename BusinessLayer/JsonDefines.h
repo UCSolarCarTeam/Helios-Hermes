@@ -175,7 +175,7 @@ namespace JsonFormat {
     constexpr const char* CONTACTOR_DISCONNECTED_UNEXPECTEDLY_TRIP = "ContactorDisconnectedUnexpectedlyTrip";
 
     constexpr const char* WIEGAND = "Wiegand";
-    constexpr const char* WIEGAND_DATA = "Wiegand Data";
+    constexpr const char* WIEGAND_DATA = "WiegandData";
 
     constexpr const char* MPPT = "MPPT";
     constexpr const char* ALIVE = "Alive";

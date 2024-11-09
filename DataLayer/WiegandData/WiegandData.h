@@ -8,8 +8,8 @@ public:
     WiegandData() = default;
 
     QByteArray getData() const;
+    qlonglong getDataAsLongLong() const;
     void setData(const QByteArray& data);
-    int getWiegandId() const;
     void clearData();
 
 private:
