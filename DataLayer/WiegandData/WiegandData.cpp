@@ -16,5 +16,5 @@ void WiegandData::setData(const QByteArray& data) {
 }
 
 void WiegandData::clearData() {
-    wiegandData_.clear();  // Assuming data_ is a QByteArray or similar type
+    wiegandData_.clear();
 }
