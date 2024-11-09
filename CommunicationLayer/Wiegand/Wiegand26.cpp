@@ -1,89 +1,71 @@
 #include "Wiegand26.h"
 #include <QDebug>
-#include <QThread>
 
-Wiegand26::Wiegand26(QObject *parent)
-    : QThread(parent), _bitCnt(0), _swapData(false) {
-    _bitData.fill(false, MAX_BITS);
-    connect(&_timeoutTimer, &QTimer::timeout, this, &Wiegand26::reset);
+Wiegand26::Wiegand26(QObject *parent) : QThread(parent), serialPort(new QSerialPort(this)) {
+    connect(serialPort, &QSerialPort::readyRead, this, &Wiegand26::handleReadyRead);
 }
 
-void Wiegand26::begin(int pinData0, int pinData1, bool swapData) {
-    _pinData0 = pinData0;
-    _pinData1 = pinData1;
-    _swapData = swapData;
+void Wiegand26::begin(const QString &portName) {
+    serialPort->setPortName(portName);
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setStopBits(QSerialPort::OneStop);
+    serialPort->setFlowControl(QSerialPort::NoFlowControl);
 
-    qDebug() << "Initializing Wiegand on pins" << _pinData0 << "and" << _pinData1;
+    if (serialPort->open(QIODevice::ReadOnly)) {
+        qDebug() << "Serial port opened successfully.";
+    } else {
+        qWarning() << "Failed to open serial port.";
+        return;
+    }
 
-    _timeoutTimer.setInterval(20);
+    start();
+}
+
+void Wiegand26::run() {
+    while (running) {
+        QThread::msleep(10);
+    }
+}
+
+void Wiegand26::stop() {
+    running = false;
+    serialPort->close();
+    wait();
 }
 
 void Wiegand26::reset() {
     _bitCnt = 0;
-    _bitData.fill(false, MAX_BITS);
-    _timeoutTimer.stop();
+    buffer.clear();
+    std::fill(std::begin(_bitData), std::end(_bitData), false);
 }
 
-void Wiegand26::processBit(int bitValue) {
-    if (_bitCnt >= MAX_BITS) return;
+void Wiegand26::processBuffer() {
+    while (buffer.size() > 0 && _bitCnt < MAX_BITS) {
+        char byte = buffer.at(0);
+        buffer.remove(0, 1);
 
-    _bitData[_bitCnt++] = (bitValue > 0);
-    _timeoutTimer.start();
+        if (byte == '0') {
+            _bitData[_bitCnt++] = false;
+        } else if (byte == '1') {
+            _bitData[_bitCnt++] = true;
+        }
 
-    if (_bitCnt == MAX_BITS) {
-        emitData();
-    }
-}
-
-void Wiegand26::emitData() {
-    _timeoutTimer.stop();
-
-    QByteArray rawData;
-    for (bool bit : _bitData) {
-        rawData.append(bit ? '1' : '0');
-    }
-
-    if (!checkParity(_bitData)) {
-        emit errorOccurred("Parity check failed");
-        reset();
-        return;
-    }
-
-    emit dataReceived(rawData.toULongLong(nullptr, 2));
-    reset();
-}
-
-bool Wiegand26::checkParity(const QVector<bool>& bits) {
-    // Implement parity checks (Placeholder logic)
-    return true;
-}
-
-QByteArray Wiegand26::readData() {
-    QByteArray data;
-    // Logic to convert _bitData to QByteArray
-    for (int i = 0; i < _bitCnt; ++i) {
-        data.append(_bitData[i] ? '1' : '0');
-    }
-    return data;
-}
-
-QByteArray Wiegand26::parse(const QByteArray& rawData) {
-    // Implement parsing logic here
-    QByteArray parsedData = rawData.mid(1, 24);  // Example: Extract data bits
-    return parsedData;
-}
-
-void Wiegand26::run() {
-    while (true) {
-        QThread::msleep(5);
-
-        int data0 = 0;  // Simulate GPIO value
-        int data1 = 0;  // Simulate GPIO value
-
-        if (data0 == 0) {
-            processBit(0);
-        } else if (data1 == 0) {
-            processBit(1);
+        if (_bitCnt >= MAX_BITS) {
+            unsigned long data = 0;
+            for (int i = 1; i < MAX_BITS - 1; i++) {
+                if (_bitData[i]) {
+                    data |= (1UL << (i - 1));
+                }
+            }
+            emit onData(data);
+            reset();
         }
     }
+}
+
+void Wiegand26::handleReadyRead() {
+    buffer.append(serialPort->readAll());
+    processBuffer();
 }

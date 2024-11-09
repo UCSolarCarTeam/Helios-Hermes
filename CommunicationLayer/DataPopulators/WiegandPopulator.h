@@ -13,8 +13,8 @@ public:
     WiegandPopulator(WiegandData& wiegandData, I_PacketChecksumChecker& checksumChecker);
 
 public slots:
-    void handleNewData();  // Called when new Wiegand data is available
-    void timerExpired();   // Handle cases where data may need refreshing
+    void handleNewData(unsigned long data);
+    void timerExpired();
 
 private:
     I_PacketChecksumChecker& checksumChecker_;
@@ -23,4 +23,4 @@ private:
     QTimer* timer_;
 };
 
-#endif
+#endif // WIEGANDPOPULATOR_H

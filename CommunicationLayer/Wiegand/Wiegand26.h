@@ -2,9 +2,9 @@
 #define WIEGAND26_H
 
 #include <QObject>
-#include <QTimer>
+#include <QSerialPort>
 #include <QThread>
-#include <QVector>
+#include <QByteArray>
 
 #define MAX_BITS 26
 
@@ -13,29 +13,27 @@ class Wiegand26 : public QThread {
 
 public:
     explicit Wiegand26(QObject *parent = nullptr);
-    void begin(int pinData0, int pinData1, bool swapData = false);
-    QByteArray readData();  // New method to retrieve raw Wiegand data
-    QByteArray parse(const QByteArray& rawData);  // Parse raw data to ID + parity
+    void begin(const QString &portName);
+    void stop();
 
 signals:
-    void dataReceived(unsigned long data);
-    void errorOccurred(const QString &error);
+    void onData(unsigned long data);
 
 protected:
     void run() override;
 
 private:
-    int _pinData0;
-    int _pinData1;
-    bool _swapData;
-    QVector<bool> _bitData;
-    unsigned int _bitCnt;
-    QTimer _timeoutTimer;
-
     void reset();
-    void processBit(int bitValue);
-    void emitData();
-    bool checkParity(const QVector<bool>& bits);  // Parity check for raw bits
+    void processBuffer();
+
+    QSerialPort *serialPort;
+    QByteArray buffer;
+    bool _bitData[MAX_BITS] = {false};
+    int _bitCnt = 0;
+    bool running = true;
+
+private slots:
+    void handleReadyRead();
 };
 
 #endif // WIEGAND26_H
