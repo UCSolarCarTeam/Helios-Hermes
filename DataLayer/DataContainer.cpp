@@ -9,6 +9,7 @@ DataContainer::DataContainer(const I_Settings& settings)
         batteryData_(new BatteryData()),
         proximitySensorsData_(new ProximitySensorsData()),
         mbmsData_(new MbmsData()),
+        wiegandData_(new WiegandData()),
         telemetryData_(new TelemetryData()) {
     QList<MotorDetailsUnit*> motorDetailsUnits;
     QList<MpptUnit*> mpptUnits;
@@ -53,6 +54,10 @@ BatteryFaultsData& DataContainer::batteryFaultsData(){
 
 MbmsData& DataContainer::mbmsData(){
     return *mbmsData_;
+}
+
+WiegandData& DataContainer::wiegandData(){
+    return *wiegandData_;
 }
 
 MpptData& DataContainer::mpptData(){

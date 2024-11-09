@@ -12,6 +12,7 @@
 #include "../../DataLayer/BatteryData/BatteryData.h"
 #include "../../DataLayer/BatteryFaultsData/BatteryFaultsData.h"
 #include "../../DataLayer/MbmsData/MbmsData.h"
+#include "../../DataLayer/WiegandData/WiegandData.h"
 #include "../../DataLayer/MpptData/MpptData.h"
 #include "../../DataLayer/MotorDetailsData/MotorDetailsData.h"
 
@@ -30,6 +31,7 @@ public:
                   BatteryData& batteryData,
                   MpptData& mpptData,
                   MbmsData& mbmsData,
+                  WiegandData& wiegandData,
                   ProximitySensorsData& proximitySensorsData,
                   I_MessageForwarder& forwarder,
                   I_Settings& settings);
@@ -51,6 +53,7 @@ private:
     BatteryData& batteryData_;
     MpptData& mpptData_;
     MbmsData& mbmsData_;
+    WiegandData& wiegandData_;
     ProximitySensorsData& proximitySensorsData_;
     I_MessageForwarder& forwarder_;
     QScopedPointer<QTimer> readTimer_;

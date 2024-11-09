@@ -12,6 +12,7 @@
 #include "MbmsData/MbmsData.h"
 #include "MpptData/MpptData.h"
 #include "MotorDetailsData/MotorDetailsData.h"
+#include "WiegandData/WiegandData.h"
 
 class I_Settings;
 
@@ -28,6 +29,7 @@ public:
     BatteryFaultsData& batteryFaultsData();
     MpptData& mpptData();
     MbmsData& mbmsData();
+    WiegandData& wiegandData();
     MotorDetailsData& motorDetailsData();
 
 private:
@@ -38,6 +40,7 @@ private:
     QScopedPointer<BatteryData> batteryData_;
     QScopedPointer<BatteryFaultsData> batteryFaultsData_;
     QScopedPointer<MbmsData> mbmsData_;
+    QScopedPointer<WiegandData> wiegandData_;
     QScopedPointer<MpptData> mpptData_;
     QScopedPointer<MotorDetailsData> motorDetailsData_;
 };

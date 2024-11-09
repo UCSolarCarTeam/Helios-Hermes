@@ -19,11 +19,12 @@ JsonForwarder::JsonForwarder(JsonMessageBuilder& builder,
                              BatteryData& batteryData,
                              MpptData& mpptData,
                              MbmsData& mbmsData,
+                             WiegandData& wiegandData,
                              ProximitySensorsData& proximitySensorsData,
                              I_MessageForwarder& forwarder,
                              I_Settings& settings)
-    : builder_(builder), keyMotorData_(keyMotorData), motorDetailsData_(motorDetailsData), b3Data_(b3Data), telemetryData_(telemetryData), 
-      batteryFaultsData_(batteryFaultsData), batteryData_(batteryData), mpptData_(mpptData), mbmsData_(mbmsData), 
+    : builder_(builder), keyMotorData_(keyMotorData), motorDetailsData_(motorDetailsData), b3Data_(b3Data), telemetryData_(telemetryData),
+    batteryFaultsData_(batteryFaultsData), batteryData_(batteryData), mpptData_(mpptData), mbmsData_(mbmsData), wiegandData_(wiegandData),
       proximitySensorsData_(proximitySensorsData), forwarder_(forwarder), readTimer_(new QTimer()), forwardPeriod_(settings.forwardPeriod()), 
       packetTitle_(settings.packetTitle()){
     connect(readTimer_.data(), SIGNAL(timeout()), this, SLOT(handleTimeout()));
@@ -55,6 +56,7 @@ void JsonForwarder::forwardData(QDateTime& currentTime) {
     json[JsonFormat::BATTERY] = builder_.buildBatteryMessage(batteryData_);
     json[JsonFormat::BATTERY_FAULTS] = builder_.buildBatteryFaultsMessage(batteryFaultsData_);
     json[JsonFormat::MBMS] = builder_.buildMbmsMessage(mbmsData_);
+    json[JsonFormat::WIEGAND] = builder_.buildWiegandMessage(wiegandData_);
     json[JsonFormat::MPPT] = builder_.buildMpptMessage(mpptData_);
     json[JsonFormat::MOTOR_DETAILS] = builder_.buildMotorDetailsMessage(motorDetailsData_);
 

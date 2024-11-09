@@ -16,6 +16,7 @@ BusinessContainer::BusinessContainer(InfrastructureContainer& infrastructureCont
                                     dataContainer.batteryData(),
                                     dataContainer.mpptData(),
                                     dataContainer.mbmsData(),
+                                    dataContainer.wiegandData(),
                                     dataContainer.proximitySensorsData(),
                                     communicationContainer.messageForwarder(),
                                     infrastructureContainer.settings())) {
