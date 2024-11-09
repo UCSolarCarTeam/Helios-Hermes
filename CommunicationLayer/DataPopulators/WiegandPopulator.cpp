@@ -1,6 +1,6 @@
 #include "WiegandPopulator.h"
 #include "../../DataLayer/WiegandData/WiegandData.h"
-#include "../Wiegand/Wiegand26.h"  // Include Wiegand26 protocol header
+#include "../Wiegand/Wiegand26.h"
 #include <QDebug>
 
 WiegandPopulator::WiegandPopulator(WiegandData& wiegandData, I_PacketChecksumChecker& checksumChecker)
@@ -8,18 +8,16 @@ WiegandPopulator::WiegandPopulator(WiegandData& wiegandData, I_PacketChecksumChe
 
 void WiegandPopulator::handleNewData() {
     connect(&wiegandReader_, &Wiegand26::dataReceived, this, [this](unsigned long data) {
-        QByteArray wiegandPacket = QByteArray::number(data, 16);  // Convert to hex for simplicity
+        QByteArray wiegandPacket = QByteArray::number(data, 16);  // Convert to hex
 
         wiegandData_.setData(wiegandPacket);
-        qDebug() << "WiegandPopulator: Data populated successfully.";
     });
 
-    wiegandReader_.start();  // Start the Wiegand reader thread
+    wiegandReader_.start();
 
 }
 
 void WiegandPopulator::timerExpired() {
-    qDebug() << "Timer expired, refreshing data.";
-    // You could clear data or perform other maintenance tasks here
+    // qDebug() << "Timer expired, refreshing data.";
     wiegandData_.clearData();
 }
