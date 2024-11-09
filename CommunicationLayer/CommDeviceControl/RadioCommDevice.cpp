@@ -20,7 +20,7 @@ RadioCommDevice::~RadioCommDevice()
 
 void RadioCommDevice::setSerialParameters(QString serialPortName, int baudRate)
 {
-    serialPort_.setPortName("/dev/pts/2");
+    serialPort_.setPortName(serialPortName);
     serialPort_.setBaudRate(QSerialPort::Baud115200);
     serialPort_.setParity(QSerialPort::NoParity);
     serialPort_.setStopBits(QSerialPort::OneStop);
