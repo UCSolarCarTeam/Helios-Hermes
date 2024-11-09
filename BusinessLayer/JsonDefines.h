@@ -174,6 +174,9 @@ namespace JsonFormat {
     constexpr const char* ORION_MESSAGE_TIMEOUT_TRIP = "OrionMessageTimeoutTrip";
     constexpr const char* CONTACTOR_DISCONNECTED_UNEXPECTEDLY_TRIP = "ContactorDisconnectedUnexpectedlyTrip";
 
+    constexpr const char* WIEGAND = "Wiegand";
+    constexpr const char* WIEGAND_DATA = "Wiegand Data";
+
     constexpr const char* MPPT = "MPPT";
     constexpr const char* ALIVE = "Alive";
     constexpr const char* BATTERY_VOLTAGE = "BatteryVoltage";
