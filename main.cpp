@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
      */
     if (!lockFile.tryLock(100))
     {
-        qDebug() << "An instance of Hermes already exists.";
-        qDebug() << "If you are sure you only have one instance of Hermes running, please delete the file /tmp/epsilonHermes.lock as root.";
-        qDebug() << "Quitting...";
+        qDebug() << "An instance of Hermes is already running";
+        qDebug() << "If you are sure you only have one instance of Hermes running, please delete the file /tmp/heliosHermes.lock.";
+        qDebug() << "Exiting - Get it right next time...";
         return 1;
     }
     else
