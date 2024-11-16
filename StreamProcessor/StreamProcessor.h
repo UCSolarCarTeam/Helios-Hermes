@@ -19,6 +19,7 @@ private:
     QByteArray extractPacket();
     QByteArray decodePacket(QByteArray packet);
     bool isValidChecksum(QByteArray& decodedPacket);
+    void validateAndForwardPacket(QByteArray& packetBody);
 
     QByteArray buffer_;
     PacketFactory* packetFactory_;

@@ -35,6 +35,7 @@ add_executable(HeliosHermes
   PacketFactory/Packets/MpptPacket.h PacketFactory/Packets/MpptPacket.cpp
   PacketFactory/Packets/MbmsPacket.h PacketFactory/Packets/MbmsPacket.cpp
   PacketFactory/Packets/ProximitySensorsPacket.h PacketFactory/Packets/ProximitySensorsPacket.cpp
+  Config/PacketDefinitions.h
 )
 
 target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)

@@ -1,12 +1,7 @@
 #include "StreamProcessor.h"
+#include "../Config/PacketDefinitions.h"
 
 #include <QDebug>
-
-namespace {
-    const char FRAMING_BYTE = 0x00;
-
-    const int MIN_PACKET_LENGTH = 4; //TODO: set to smallest packet
-}
 
 /** 
  * Takes in serialReciever to connect signal and slot for data recieved 
@@ -14,7 +9,7 @@ namespace {
  */
 StreamProcessor::StreamProcessor(SerialReciever* SerialReciever, PacketFactory* packetFactory) : packetFactory_(packetFactory) {
     buffer_.resize(1);
-    buffer_.fill(FRAMING_BYTE);
+    buffer_.fill(PacketDefinitions::FRAMING_BYTE);
     QObject::connect(SerialReciever, &SerialReciever::dataRecieved, this, &StreamProcessor::processData);
 }
 
@@ -54,23 +49,23 @@ void StreamProcessor::processData(const QByteArray& data) {
     //checksum
     if(!isValidChecksum(decodedPacket)) return;
 
-    
 
     //identify and verify size then send to packet factory
+    validateAndForwardPacket(decodedPacket);
 }
 
 /** Extract bytes between FRAMING_BYTES (this is a packet) */
 QByteArray StreamProcessor::extractPacket() {
     while (true) {
         //Find start of packet at the framing byte
-        int startOfPacketIndex = buffer_.indexOf(FRAMING_BYTE);
+        int startOfPacketIndex = buffer_.indexOf(PacketDefinitions::FRAMING_BYTE);
 
         if(startOfPacketIndex == -1) return NULL;
 
         buffer_ = buffer_.mid(startOfPacketIndex);
 
         //Find end of packet (next occurance of framing byte)
-        int endOfPacketIndex = buffer_.indexOf(FRAMING_BYTE, 1);
+        int endOfPacketIndex = buffer_.indexOf(PacketDefinitions::FRAMING_BYTE, 1);
 
         if(endOfPacketIndex == -1) return NULL;
 
@@ -98,7 +93,7 @@ QByteArray StreamProcessor::decodePacket(QByteArray packet) {
     const int length = packet.size();
     int indexOfZero = 0;
 
-    if(length < MIN_PACKET_LENGTH) return NULL;
+    if(length < PacketDefinitions::MIN_PACKET_LENGTH) return NULL;
 
     while(indexOfZero < length) {
         const int indexOfNextZero = static_cast<unsigned char>(packet.at(indexOfZero)) + indexOfZero;
@@ -142,4 +137,67 @@ bool StreamProcessor::isValidChecksum(QByteArray& decodedPacket){
     qDebug() << "Error decoding data, checksum doesn't match. Data is: " << decodedPacket;
 
     return false;
+}
+
+/** 
+ * Checks if PacketBody has valid ID and size. If so, it sends that data
+ * to the packet factory for the respective packet to be populated
+ * */
+void StreamProcessor::validateAndForwardPacket(QByteArray& packetBody) {
+    const int id = packetBody.at(PacketDefinitions::ID_INDEX);
+
+    if(PacketDefinitions::packetLength[id] != packetBody.size()) {
+        qDebug() << "Packet length is incorrect for ID: " << id;
+        qDebug() << "Got: " << packetBody.size() << " Expected: " << PacketDefinitions::packetLength[id];
+        return;
+    }
+
+    switch(id){
+        case PacketDefinitions::KEY_MOTOR_ID:
+            qDebug() << "Key Motor Packet";
+            packetFactory_->getKeyMotorPacket().populatePacket(packetBody);
+            return;
+        case PacketDefinitions::MOTOR_DETAILS_0_ID:
+            qDebug() << "Motor Details 0 Packet";
+            packetFactory_->getMotorDetailsPacket(0).populatePacket(packetBody);
+            return;
+        case PacketDefinitions::MOTOR_DETAILS_1_ID:
+            qDebug() << "Motor Details 1 Packet";
+            packetFactory_->getMotorDetailsPacket(1).populatePacket(packetBody);
+            return;
+        case PacketDefinitions::B3_ID:
+            qDebug() << "B3 Packet";
+            packetFactory_->getB3Packet().populatePacket(packetBody);
+            return;
+        case PacketDefinitions::TELEMETRY_ID:
+            qDebug() << "Telemetry Packet";
+            packetFactory_->getTelemetryPacket().populatePacket(packetBody);
+            return;
+        case PacketDefinitions::BATTERY_FAULTS_ID:
+            qDebug() << "Battery Faults Packet";
+            packetFactory_->getBatteryFaultsPacket().populatePacket(packetBody);
+            return;
+        case PacketDefinitions::BATTERY_ID:
+            qDebug() << "Battery Packet";
+            packetFactory_->getBatteryPacket().populatePacket(packetBody);
+            return;
+        case PacketDefinitions::MPPT_ID: {
+            //TODO: This step is currently done twice, once here and once in the populatePacket function - fix this
+            const unsigned char mpptNum = static_cast<unsigned char>(packetBody.at(1)) & 0x03;
+            qDebug() << "MPPT Packet: " << mpptNum;
+            packetFactory_->getMpptPacket(mpptNum).populatePacket(packetBody);
+            return;
+        }
+        case PacketDefinitions::MBMS_ID:
+            qDebug() << "MBMS Packet";
+            packetFactory_->getMbmsPacket().populatePacket(packetBody);
+            return;
+        case PacketDefinitions::PROXIMITY_SENSORS_ID:
+            qDebug() << "Proximity Sensors Packet";
+            packetFactory_->getProximitySensorsPacket().populatePacket(packetBody);
+            return;
+        default:
+            qWarning() << "Unknown Packet ID: " << id;
+            return;
+    }
 }
