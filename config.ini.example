@@ -1,4 +1,4 @@
-; Schulich Epsilon Hermes Specification File
+; Hermes Specification File
 
 forwardPeriod=500
 
@@ -7,7 +7,7 @@ numberOfMotors=2
 numberOfMppts=4
 
 [JsonFormat]
-packetTitle=Gen5
+packetTitle=Helios
 
 [SerialPort]
 portName=/dev/pts/7
