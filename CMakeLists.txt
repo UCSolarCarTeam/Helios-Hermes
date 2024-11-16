@@ -15,6 +15,13 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core SerialPort Mqtt)
 add_executable(HeliosHermes
   main.cpp
   HeliosHermes.h HeliosHermes.cpp
+  Config/ConfigManager.h Config/ConfigManager.cpp
+  Config/JsonDefinitions.h
+  SerialReciever/SerialReciever.h SerialReciever/SerialReciever.cpp
+  StreamProcessor/StreamProcessor.h StreamProcessor/StreamProcessor.cpp
+  PacketFactory/Packet.h PacketFactory/Packet.cpp
+  MessageAggregator/MessageAggregator.h MessageAggregator/MessageAggregator.cpp
+  MessageTransmitter/MessageTransmitter.h MessageTransmitter/MessageTransmitter.cpp
 )
 
 target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)
