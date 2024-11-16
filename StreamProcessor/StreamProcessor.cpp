@@ -36,9 +36,10 @@ void StreamProcessor::processData(const QByteArray& data) {
         return;
     };
 
-    qDebug() << "DECODED: " << decodedPacket;
-
     //checksum
+    if(!isValidChecksum(decodedPacket)) return;
+
+    
 
     //identify and verify size then send to packet factory
 }
@@ -101,4 +102,29 @@ QByteArray StreamProcessor::decodePacket(QByteArray packet) {
     }
 
     return decodedPacket;
+}
+
+/** Checks if Checksum (last 2 bytes at this stage) is valid and drops those bytes from the packet */
+bool StreamProcessor::isValidChecksum(QByteArray& decodedPacket){
+    const int endOfPacketIndex = decodedPacket.size() - 1;
+
+    //extract last 2 bytes in checksum and flip
+    const quint16 checksum = (static_cast<quint16>(decodedPacket.at(endOfPacketIndex - 1)) & 0xFF) |
+                        (static_cast<quint16>(decodedPacket.at(endOfPacketIndex)) << 8);
+
+    //remove checksum bytes from packet
+    decodedPacket.chop(sizeof(checksum));
+
+    const quint16 calculatedChecksum = qChecksum(QByteArrayView(decodedPacket));
+
+    if(calculatedChecksum == checksum){
+        qDebug() << "Checksum Passed";
+        return true;
+    }
+
+    qDebug() << "Calculated =" << QByteArray::number(calculatedChecksum, 16) 
+             << "retrieved =" << QByteArray::number(checksum, 16);
+    qDebug() << "Error decoding data, checksum doesn't match. Data is: " << decodedPacket;
+
+    return false;
 }

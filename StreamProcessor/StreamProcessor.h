@@ -17,6 +17,7 @@ public slots:
 private:
     QByteArray extractPacket();
     QByteArray decodePacket(QByteArray packet);
+    bool isValidChecksum(QByteArray& decodedPacket);
 
     QByteArray buffer_;
 };
