@@ -3,16 +3,18 @@
 
 #include <QByteArray>
 #include <QMqttClient>
+#include <QObject>
 
-class MessageTransmitter
-{
+class MessageTransmitter : public QObject {
+    Q_OBJECT
 public:
     MessageTransmitter();
 
-    void transmitMessage(const QByteArray& message);
-
     void setupLocalClient();
     void setupTelemetryClient();
+
+public slots:
+    void transmitMessage(const QByteArray& message);
 
 private:
     QMqttClient* localClient_;

@@ -4,6 +4,7 @@
 #include "StreamProcessor/StreamProcessor.h"
 #include "PacketFactory/PacketFactory.h"
 #include "MessageTransmitter/MessageTransmitter.h"
+#include "MessageAggregator/MessageAggregator.h"
 
 #include <QDebug>
 
@@ -21,7 +22,9 @@ HeliosHermes::HeliosHermes(int& argc, char** argv) :
     StreamProcessor* streamProcessor = new StreamProcessor(serialReciever, packetFactory);
 
     MessageTransmitter* messageTransmitter = new MessageTransmitter();
-    //send json message every interval
+
+    MessageAggregator* messageAggregator = new MessageAggregator(messageTransmitter, packetFactory);
+    messageAggregator->startTransmission();
 }
 
 HeliosHermes::~HeliosHermes(){}
