@@ -16,6 +16,7 @@ public slots:
 
 private:
     QByteArray extractPacket();
+    QByteArray decodePacket(QByteArray packet);
 
     QByteArray buffer_;
 };

@@ -4,6 +4,8 @@
 
 namespace {
     const char FRAMING_BYTE = 0x00;
+
+    const int MIN_PACKET_LENGTH = 4; //TODO: set to smallest packet
 }
 
 StreamProcessor::StreamProcessor(SerialReciever* SerialReciever) {
@@ -26,8 +28,15 @@ void StreamProcessor::processData(const QByteArray& data) {
         return;
     };
 
-    qDebug() << "Made it this far: " << bytePacket;
-    //decode
+    //decode packet
+    QByteArray decodedPacket = decodePacket(bytePacket);
+
+    if(decodedPacket.isNull()) {
+        qDebug() << "Packet is too small - figure it out: " << bytePacket;
+        return;
+    };
+
+    qDebug() << "DECODED: " << decodedPacket;
 
     //checksum
 
@@ -55,4 +64,41 @@ QByteArray StreamProcessor::extractPacket() {
 
         return packet;
     }
+}
+
+/** 
+ * Decodes the byte packet to insert 0x00s into there proper position 
+ * 
+ * Packets recieved have been encoded using bytestuffing. This function unstuffs
+ * the packet.
+ * 
+ * First byte of packet points to the index of where the next 0x00 should be.
+ * Then that byte points to the next encoded zero and so on until the 
+ * end of packet is reached.
+ * */
+QByteArray StreamProcessor::decodePacket(QByteArray packet) {
+
+    QByteArray decodedPacket;
+    const int length = packet.size();
+    int indexOfZero = 0;
+
+    if(length < MIN_PACKET_LENGTH) return NULL;
+
+    while(indexOfZero < length) {
+        const int indexOfNextZero = static_cast<unsigned char>(packet.at(indexOfZero)) + indexOfZero;
+
+        // appends between current zero and next zero
+        for (int i = indexOfZero + 1; i < indexOfNextZero && i < length; ++i) {
+            decodedPacket.append(packet.at(i));
+        }
+
+        // replaces encoded value with 0x00
+        if(indexOfNextZero < 0xFF && indexOfNextZero < length){
+            decodedPacket.append(char(0x00));
+        }
+
+        indexOfZero = indexOfNextZero;
+    }
+
+    return decodedPacket;
 }
