@@ -13,12 +13,7 @@ packetTitle=Gen5
 portName=/dev/pts/7
 baudrate=115200
 
-[OutputSerialPort]
-outputSerialEnabled=false
-portName=/dev/pts/8
-baudrate=115200
-
-[RabbitMq]
+[Mqtt]
 exchangeName=hermesExchange
 ipAddress=127.0.0.1
 port=6969
