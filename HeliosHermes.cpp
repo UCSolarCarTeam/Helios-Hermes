@@ -3,6 +3,7 @@
 #include "Config/ConfigManager.h"
 #include "StreamProcessor/StreamProcessor.h"
 #include "PacketFactory/PacketFactory.h"
+#include "MessageTransmitter/MessageTransmitter.h"
 
 #include <QDebug>
 
@@ -19,7 +20,7 @@ HeliosHermes::HeliosHermes(int& argc, char** argv) :
     SerialReciever* serialReciever = new SerialReciever();
     StreamProcessor* streamProcessor = new StreamProcessor(serialReciever, packetFactory);
 
-
+    MessageTransmitter* messageTransmitter = new MessageTransmitter();
     //send json message every interval
 }
 
