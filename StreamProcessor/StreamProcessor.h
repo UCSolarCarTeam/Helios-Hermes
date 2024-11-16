@@ -13,6 +13,11 @@ public:
 
 public slots:
     void processData(const QByteArray& data);
+
+private:
+    QByteArray extractPacket();
+
+    QByteArray buffer_;
 };
 
 #endif // STREAMPROCESSOR_H
