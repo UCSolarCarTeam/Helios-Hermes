@@ -8,12 +8,27 @@ namespace {
     const int MIN_PACKET_LENGTH = 4; //TODO: set to smallest packet
 }
 
-StreamProcessor::StreamProcessor(SerialReciever* SerialReciever) {
+/** 
+ * Takes in serialReciever to connect signal and slot for data recieved 
+ * and packetFactory to store all packet data in a single instance 
+ */
+StreamProcessor::StreamProcessor(SerialReciever* SerialReciever, PacketFactory* packetFactory) : packetFactory_(packetFactory) {
     buffer_.resize(1);
     buffer_.fill(FRAMING_BYTE);
     QObject::connect(SerialReciever, &SerialReciever::dataRecieved, this, &StreamProcessor::processData);
 }
 
+/** 
+ * Processes data recieved from serial port
+ * Fired every time data is recieved from serial port
+ * 
+ * Data is processed in the following steps:
+ * 1. Append data to buffer
+ * 2. Extract packet from buffer
+ * 3. Decode packet
+ * 4. Check checksum
+ * 5. Identify and verify size then send to packet factory
+ */
 void StreamProcessor::processData(const QByteArray& data) {
     qDebug() << "Starting data processing";
 

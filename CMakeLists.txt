@@ -21,9 +21,20 @@ add_executable(HeliosHermes
   Config/JsonDefinitions.h
   SerialReciever/SerialReciever.h SerialReciever/SerialReciever.cpp
   StreamProcessor/StreamProcessor.h StreamProcessor/StreamProcessor.cpp
-  PacketFactory/Packet.h PacketFactory/Packet.cpp
+
   MessageAggregator/MessageAggregator.h MessageAggregator/MessageAggregator.cpp
   MessageTransmitter/MessageTransmitter.h MessageTransmitter/MessageTransmitter.cpp
+  PacketFactory/PacketFactory.h PacketFactory/PacketFactory.cpp
+  PacketFactory/Packets/KeyMotorPacket.h PacketFactory/Packets/KeyMotorPacket.cpp
+  PacketFactory/Packets/IPacket.h
+  PacketFactory/Packets/MotorDetailsPacket.h PacketFactory/Packets/MotorDetailsPacket.cpp
+  PacketFactory/Packets/B3Packet.h PacketFactory/Packets/B3Packet.cpp
+  PacketFactory/Packets/TelemetryPacket.h PacketFactory/Packets/TelemetryPacket.cpp
+  PacketFactory/Packets/BatteryFaultsPacket.h PacketFactory/Packets/BatteryFaultsPacket.cpp
+  PacketFactory/Packets/BatteryPacket.h PacketFactory/Packets/BatteryPacket.cpp
+  PacketFactory/Packets/MpptPacket.h PacketFactory/Packets/MpptPacket.cpp
+  PacketFactory/Packets/MbmsPacket.h PacketFactory/Packets/MbmsPacket.cpp
+  PacketFactory/Packets/ProximitySensorsPacket.h PacketFactory/Packets/ProximitySensorsPacket.cpp
 )
 
 target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)

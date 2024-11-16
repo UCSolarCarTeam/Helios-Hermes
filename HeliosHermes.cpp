@@ -2,6 +2,7 @@
 #include "SerialReciever/SerialReciever.h"
 #include "Config/ConfigManager.h"
 #include "StreamProcessor/StreamProcessor.h"
+#include "PacketFactory/PacketFactory.h"
 
 #include <QDebug>
 
@@ -12,10 +13,11 @@ HeliosHermes::HeliosHermes(int& argc, char** argv) :
 
     //load in settings
     ConfigManager& config = ConfigManager::instance();
+    PacketFactory* packetFactory = new PacketFactory();
 
     //start serial port listener which will emit dataRecieved signal and populate packets as required
     SerialReciever* serialReciever = new SerialReciever();
-    StreamProcessor* streamProcessor = new StreamProcessor(serialReciever);
+    StreamProcessor* streamProcessor = new StreamProcessor(serialReciever, packetFactory);
 
 
     //send json message every interval
