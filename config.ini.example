@@ -14,9 +14,14 @@ portName=/dev/pts/7
 baudrate=115200
 
 [Mqtt]
-exchangeName=hermesExchange
-ipAddress=127.0.0.1
-port=6969
+localTopic=hermesExchange
+localHostname=127.0.0.1
+localPort=6969
+telemetryTopic=packet
+telemetryHostname=aedes.calgarysolarcar.ca
+telemetryPort=1883
+telemetryUsername=BEGONE
+telemetryPassword=NiceTryBud
 
 [Logging]
 logLevel=3
