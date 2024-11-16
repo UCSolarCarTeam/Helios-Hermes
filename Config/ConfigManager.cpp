@@ -22,68 +22,68 @@ ConfigManager::ConfigManager(const QString& path){
         return;
     }
 
-    forwardPeriod = settings.value("forwardPeriod", 500).toInt();
+    forwardPeriod_ = settings.value("forwardPeriod", 500).toInt();
 
     settings.beginGroup("UnitNumbers");
-    numberOfMotors = settings.value("numberOfMotors", 2).toInt();
-    numberOfMppts = settings.value("numberOfMppts", 4).toInt();
+    numberOfMotors_ = settings.value("numberOfMotors", 2).toInt();
+    numberOfMppts_ = settings.value("numberOfMppts", 4).toInt();
     settings.endGroup();
 
     settings.beginGroup("JsonFormat");
-    packetTitle = settings.value("packetTitle", "Hermes").toString();
+    packetTitle_ = settings.value("packetTitle", "Hermes").toString();
     settings.endGroup();
 
     settings.beginGroup("SerialPort");
-    portName = settings.value("portName", "/dev/ttyUSB0").toString();
-    baudrate = settings.value("baudrate", 115200).toInt();
+    portName_ = settings.value("portName", "/dev/ttyUSB0").toString();
+    baudrate_ = settings.value("baudrate", 115200).toInt();
     settings.endGroup();
 
     settings.beginGroup("Mqtt");
-    localTopic = settings.value("localTopic", "hermesExchange").toString();
-    localHostname = settings.value("localHostname", "127.0.0.1").toString();
-    localPort = settings.value("localPort", 6969).toInt();
-    telemetryTopic = settings.value("telemetryTopic", "packet").toString();
-    telemetryHostname = settings.value("telemetryHostname", "aedes.solarcar.ca").toString();
-    telemetryPort = settings.value("telemetryPort", 1883).toInt();
-    telemetryUsername = settings.value("telemetryUsername", "YouDontBelongHere").toString();
-    telemetryPassword = settings.value("telemetryPassword", "QuitBeingNaughty").toString();
+    localTopic_ = settings.value("localTopic", "hermesExchange").toString();
+    localHostname_ = settings.value("localHostname", "127.0.0.1").toString();
+    localPort_ = settings.value("localPort", 6969).toInt();
+    telemetryTopic_ = settings.value("telemetryTopic", "packet").toString();
+    telemetryHostname_ = settings.value("telemetryHostname", "aedes.solarcar.ca").toString();
+    telemetryPort_ = settings.value("telemetryPort", 1883).toInt();
+    telemetryUsername_ = settings.value("telemetryUsername", "YouDontBelongHere").toString();
+    telemetryPassword_ = settings.value("telemetryPassword", "QuitBeingNaughty").toString();
     settings.endGroup();
 
     settings.beginGroup("Logging");
-    logLevel = settings.value("logLevel", 3).toInt();
-    loggingEnabled = settings.value("loggingEnabled", true).toBool();
+    logLevel_ = settings.value("logLevel", 3).toInt();
+    loggingEnabled_ = settings.value("loggingEnabled", true).toBool();
     settings.endGroup();
 }
 
 //Getters
-int ConfigManager::getForwardPeriod() const { return forwardPeriod; }
+int ConfigManager::getForwardPeriod() const { return forwardPeriod_; }
 
-int ConfigManager::getNumberOfMotors() const { return numberOfMotors; }
+int ConfigManager::getNumberOfMotors() const { return numberOfMotors_; }
 
-int ConfigManager::getNumberOfMppts() const { return numberOfMppts; }
+int ConfigManager::getNumberOfMppts() const { return numberOfMppts_; }
 
-QString ConfigManager::getPacketTitle() const { return packetTitle; }
+QString ConfigManager::getPacketTitle() const { return packetTitle_; }
 
-QString ConfigManager::getPortName() const { return portName; }
+QString ConfigManager::getPortName() const { return portName_; }
 
-int ConfigManager::getBaudrate() const { return baudrate; }
+int ConfigManager::getBaudrate() const { return baudrate_; }
 
-QString ConfigManager::getLocalTopic() const { return localTopic; }
+QString ConfigManager::getLocalTopic() const { return localTopic_; }
 
-QString ConfigManager::getLocalHostname() const { return localHostname; }
+QString ConfigManager::getLocalHostname() const { return localHostname_; }
 
-int ConfigManager::getLocalPort() const { return localPort; }
+int ConfigManager::getLocalPort() const { return localPort_; }
 
-QString ConfigManager::getTelemetryTopic() const { return telemetryTopic; }
+QString ConfigManager::getTelemetryTopic() const { return telemetryTopic_; }
 
-QString ConfigManager::getTelemetryHostname() const { return telemetryHostname; }
+QString ConfigManager::getTelemetryHostname() const { return telemetryHostname_; }
 
-int ConfigManager::getTelemetryPort() const { return telemetryPort; }
+int ConfigManager::getTelemetryPort() const { return telemetryPort_; }
 
-QString ConfigManager::getTelemetryUsername() const { return telemetryUsername; }
+QString ConfigManager::getTelemetryUsername() const { return telemetryUsername_; }
 
-QString ConfigManager::getTelemetryPassword() const { return telemetryPassword; }
+QString ConfigManager::getTelemetryPassword() const { return telemetryPassword_; }
 
-int ConfigManager::getLogLevel() const { return logLevel; }
+int ConfigManager::getLogLevel() const { return logLevel_; }
 
-bool ConfigManager::getLoggingEnabled() const { return loggingEnabled; }
+bool ConfigManager::getLoggingEnabled() const { return loggingEnabled_; }

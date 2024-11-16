@@ -36,22 +36,22 @@ public:
 private:
     ConfigManager(const QString& path);
 
-    int forwardPeriod;
-    int numberOfMotors;
-    int numberOfMppts;
-    QString packetTitle;
-    QString portName;
-    int baudrate;
-    QString localTopic;
-    QString localHostname;
-    int localPort;
-    QString telemetryTopic;
-    QString telemetryHostname;
-    int telemetryPort;
-    QString telemetryUsername;
-    QString telemetryPassword;
-    int logLevel;
-    bool loggingEnabled;
+    int forwardPeriod_;
+    int numberOfMotors_;
+    int numberOfMppts_;
+    QString packetTitle_;
+    QString portName_;
+    int baudrate_;
+    QString localTopic_;
+    QString localHostname_;
+    int localPort_;
+    QString telemetryTopic_;
+    QString telemetryHostname_;
+    int telemetryPort_;
+    QString telemetryUsername_;
+    QString telemetryPassword_;
+    int logLevel_;
+    bool loggingEnabled_;
 };
 
 #endif // CONFIGMANAGER_H
