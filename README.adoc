@@ -1,5 +1,8 @@
 = README
 
+Core Universal Netflow Transformer Update
+Hermes Architecture has undergone a major update to simplify and streamline the process of data transfer from embedded systems to the dashboard and telemetry site. Making it easier to modify and add new packets to our data stream.
+
 Hermes is a background process on the Solar Car's Dashboard Pi.
 It reads in bytestream data from the Embedded systems via serial port and translates it to human readable JSON.
 

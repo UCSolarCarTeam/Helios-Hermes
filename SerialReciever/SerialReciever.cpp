@@ -16,7 +16,7 @@ SerialReciever::SerialReciever() {
 
     //TODO: add retry period/detection mechinism for serial device
     if (serialPort_->open(QIODevice::ReadOnly)) {
-        qDebug() << "Serial Port Opened: " << serialPort_->portName();
+        qDebug() << "Serial Port Opened: " << config.getPortName();
         connect(serialPort_, &QSerialPort::readyRead, this, &SerialReciever::handleReadyRead);
     } else {
         qWarning() << "EXITING - Failed to open serial port (" << config.getPortName() << "): " << serialPort_->errorString();
