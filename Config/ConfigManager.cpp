@@ -2,7 +2,6 @@
 
 #include <QSettings>
 #include <QFile>
-#include <QFileInfo>
 #include <QCoreApplication>
 #include <QDir>
 
