@@ -239,6 +239,48 @@ namespace JsonDefinitions {
     constexpr const char* TEMPERATURE = "Temperature";
 
     /**
+     * Mbms keys
+     */
+    constexpr const char* MBMS = "MBMS";
+    constexpr const char* COMMON_CONTACTOR_STATE = "CommonContactorState";
+    constexpr const char* MOTOR_CONTACTOR_STATE = "MotorContactorState";
+    constexpr const char* ARRAY_CONTACTOR_STATE = "ArrayContactorState";
+    constexpr const char* LV_CONTACTOR_STATE = "LvContactorState";
+    constexpr const char* CHARGE_CONTACTOR_STATE = "ChargeContactorState";
+    constexpr const char* COMMON_CONTACTOR_ERROR = "CommonContactorError";
+    constexpr const char* MOTOR_CONTACTOR_ERROR = "MotorContactorError";
+    constexpr const char* ARRAY_CONTACTOR_ERROR = "ArrayContactorError";
+    constexpr const char* LV_CONTACTOR_ERROR = "LvContactorError";
+    constexpr const char* CHARGE_CONTACTOR_ERROR = "ChargeContactorError";
+    constexpr const char* STROBE_BMS_LIGHT = "StrobeBmsLight";
+    constexpr const char* ALLOW_CHARGE = "AllowCharge";
+    constexpr const char* HIGH_VOLTAGE_ENABLE_STATE = "HighVoltageEnableState";
+    constexpr const char* ALLOW_DISCHARGE = "AllowDischarge";
+    constexpr const char* ORION_CAN_RECEIVED_RECENTLY = "OrionCanReceivedRecently";
+    constexpr const char* DISCHARGE_SHOULD_TRIP = "DischargeShouldTrip";
+    constexpr const char* CHARGE_SHOULD_TRIP = "ChargeShouldTrip";
+    constexpr const char* AUXILLARY_BATTERY_VOLTAGE = "AuxillaryBatteryVoltage";
+    constexpr const char* MOTOR_VOLTAGE = "MotorVoltage";
+    constexpr const char* ARRAY_VOLTAGE = "ArrayVoltage";
+    constexpr const char* LV_VOLTAGE = "LvVoltage";
+    constexpr const char* CHARGE_VOLTAGE = "ChargeVoltage";
+    constexpr const char* COMMON_CURRENT = "CommonCurrent";
+    constexpr const char* MOTOR_CURRENT = "MotorCurrent";
+    constexpr const char* ARRAY_CURRENT = "ArrayCurrent";
+    constexpr const char* LV_CURRENT = "LvCurrent";
+    constexpr const char* CHARGE_CURRENT = "ChargeCurrent";
+    constexpr const char* HIGH_CELL_VOLTAGE_TRIP = "HighCellVoltageTrip";
+    constexpr const char* LOW_CELL_VOLTAGE_TRIP = "LowCellVoltageTrip";
+    constexpr const char* HIGH_COMMON_CURRENT_TRIP = "HighCommonCurrentTrip";
+    constexpr const char* MOTOR_HIGH_TEMPERATURE_CURRENT_TRIP = "MotorHighTemperatureCurrentTrip";
+    constexpr const char* ARRAY_HIGH_TEMPERATURE_CURRENT_TRIP = "ArrayHighTemperatureCurrentTrip";
+    constexpr const char* LV_HIGH_TEMPERATURE_CURRENT_TRIP = "LvHighTemperatureCurrentTrip";
+    constexpr const char* CHARGE_HIGH_TEMPERATURE_CURRENT_TRIP = "ChargeHighTemperatureCurrentTrip";
+    constexpr const char* PROTECTION_TRIP = "ProtectionTrip";
+    constexpr const char* ORION_MESSAGE_TIMEOUT_TRIP = "OrionMessageTimeoutTrip";
+    constexpr const char* CONTACTOR_DISCONNECTED_UNEXPECTEDLY_TRIP = "ContactorDisconnectedUnexpectedlyTrip";
+
+    /**
      * Proximity Sensor keys
      */
     constexpr const char* PROXIMITY_SENSORS = "ProximitySensors";
