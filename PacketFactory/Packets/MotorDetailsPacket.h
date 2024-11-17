@@ -24,7 +24,7 @@ private:
     short currentMotorPower_;
     unsigned short absuluteAngle_;
 
-    // Warning Code Flags
+    // Warning Flags
     bool motorAboutToStall_;
     bool delayInReadingTempSensor_;
     bool delayInReadingPosSensor_;
@@ -60,7 +60,7 @@ private:
     bool torqueLimited_;
     bool startAtHighRpm_;
 
-    // Error Code Flags
+    // Error Flags
     bool initError_;
     bool settingsNotFound_;
     bool motorStalled_;
