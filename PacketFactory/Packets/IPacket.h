@@ -7,7 +7,11 @@
 class IPacket {
 public:
     virtual ~IPacket() {}
+
+    /** Populate class vars given a QByteArray */
     virtual void populatePacket(const QByteArray& data) = 0;
+
+    /** returns Json object of all class data */
     virtual QJsonObject toJson() = 0;
 
     /** Extracts value of type T from QByteArray at startIndex */

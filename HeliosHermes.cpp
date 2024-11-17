@@ -11,18 +11,22 @@
 HeliosHermes::HeliosHermes(int& argc, char** argv) :
     QCoreApplication(argc, argv)
 {
-    qDebug() << "Here We Go Again";
+    qDebug() << "Firing 'er up";
 
-    //load in settings
+    //load in settings and initialize Packet factory
     ConfigManager& config = ConfigManager::instance();
     PacketFactory* packetFactory = new PacketFactory();
 
-    //start serial port listener which will emit dataRecieved signal and populate packets as required
+    //initialize SerialReciever which will begin to listen to serial port for incoming data
     SerialReciever* serialReciever = new SerialReciever();
+
+    //initialize StreamProcessor which will process incoming data via signal/slot connected to serialReciever
     StreamProcessor* streamProcessor = new StreamProcessor(serialReciever, packetFactory);
 
+    //initialize MessageTransmitter which will transmit data every period of time deinifed in config.ini
     MessageTransmitter* messageTransmitter = new MessageTransmitter();
 
+    //initialize MessageAggregator which will aggregate all packets into one json message and transmit
     MessageAggregator* messageAggregator = new MessageAggregator(messageTransmitter, packetFactory);
     messageAggregator->startTransmission();
 }
