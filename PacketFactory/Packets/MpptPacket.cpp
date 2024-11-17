@@ -3,8 +3,8 @@
 
 namespace {
     const int STATUS_AND_CHANNEL_NUMBER_OFFSET = 1;
-    const unsigned char MPPT_STATUS_MASK = 0x03;
-    const unsigned char CHANNEL_NUMBER_MASK = 0x80;
+    const unsigned char CHANNEL_NUMBER_MASK = 0x03;
+    const unsigned char MPPT_STATUS_MASK = 0x80;
 
     const int ARRAY_VOLTAGE_OFFSET = 3;
     const int ARRAY_CURRENT_OFFSET = 5;
