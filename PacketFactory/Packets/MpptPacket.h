@@ -10,7 +10,13 @@ public:
     QJsonObject toJson() override;
 
 private:
-    //assign packet fields here
+    unsigned char channelNumber_;
+    unsigned char mpptStatus_;
+
+    unsigned short arrayVoltage_;
+    unsigned short arrayCurrent_;
+    unsigned short batteryVoltage_;
+    unsigned short temperature_;
 };
 
 #endif // MPPTPACKET_H

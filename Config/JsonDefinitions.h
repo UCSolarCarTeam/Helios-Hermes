@@ -228,6 +228,17 @@ namespace JsonDefinitions {
     constexpr const char* AVERAGE_CELL_VOLTAGE = "AverageCellVoltage";
 
     /**
+     * Mppt keys
+     */
+    constexpr const char* MPPT = "MPPT";
+    constexpr const char* CHANNEL_NUMBER = "ChannelNumber";
+    constexpr const char* IS_ALIVE = "IsAlive";
+    constexpr const char* ARRAY_VOLTAGE = "ArrayVoltage";
+    constexpr const char* ARRAY_CURRENT = "ArrayCurrent";
+    constexpr const char* BATTERY_VOLTAGE = "BatteryVoltage";
+    constexpr const char* TEMPERATURE = "Temperature";
+
+    /**
      * Proximity Sensor keys
      */
     constexpr const char* PROXIMITY_SENSORS = "ProximitySensors";
