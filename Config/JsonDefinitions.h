@@ -130,6 +130,29 @@ namespace JsonDefinitions {
     constexpr const char* HORN_SIGNAL_OUT = "HornSignalOut";
 
     /**
+     * Telemetry keys
+     */
+    constexpr const char* TELEMETRY = "Telemetry";
+    constexpr const char* GPS_YEAR = "GpsYear";
+    constexpr const char* GPS_MONTH = "GpsMonth";
+    constexpr const char* GPS_DAY = "GpsDay";
+    constexpr const char* GPS_HOUR = "GpsHour";
+    constexpr const char* GPS_MINUTE = "GpsMinute";
+    constexpr const char* GPS_SECOND = "GpsSecond";
+    constexpr const char* GPS_VALIDITY_FLAGS = "GpsValidityFlags";
+    constexpr const char* GPS_FIX_STATUS_FLAGS = "GpsFixStatusFlags";
+    constexpr const char* GPS_ADDITIONAL_FLAGS = "GpsAdditionalFlags";
+    constexpr const char* GPS_LONGITUDE = "GpsLongitude";
+    constexpr const char* GPS_LATITUDE = "GpsLatitude";
+    constexpr const char* MPU_ACCELERATION_X = "MpuAccelerationX";
+    constexpr const char* MPU_ACCELERATION_Y = "MpuAccelerationY";
+    constexpr const char* MPU_ACCELERATION_Z = "MpuAccelerationZ";
+    constexpr const char* MPU_ROTATION_X = "MpuRotationX";
+    constexpr const char* MPU_ROTATION_Y = "MpuRotationY";
+    constexpr const char* MPU_ROTATION_Z = "MpuRotationZ";
+    constexpr const char* MPU_TEMPERATURE = "MpuTemperature";
+
+    /**
      * Proximity sensor keys
      */
     constexpr const char* PROXIMITY_SENSORS = "ProximitySensors";
