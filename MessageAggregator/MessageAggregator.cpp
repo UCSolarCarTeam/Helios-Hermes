@@ -1,5 +1,6 @@
 #include "MessageAggregator.h"
 #include "../Config/ConfigManager.h"
+#include "../Config/JsonDefinitions.h"
 
 #include <QJsonDocument>
 
@@ -19,23 +20,23 @@ void MessageAggregator::createJsonMessage() {
 
     QJsonObject message;
 
-    message["Title"] = "Helios";
-    message["Timestamp"] = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    message[JsonDefinitions::TITLE] = ConfigManager::instance().getPacketTitle();
+    message[JsonDefinitions::TIMESTAMP] = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
 
-    message["KeyMotor"] = packetFactory_->getKeyMotorPacket().toJson();
-    message["B3"] = packetFactory_->getB3Packet().toJson();
-    message["Telemetry"] = packetFactory_->getTelemetryPacket().toJson();
-    message["BatteryFaults"] = packetFactory_->getBatteryFaultsPacket().toJson();
-    message["Battery"] = packetFactory_->getBatteryPacket().toJson();
-    message["Mbms"] = packetFactory_->getMbmsPacket().toJson();
-    message["ProximitySensors"] = packetFactory_->getProximitySensorsPacket().toJson();
+    message[JsonDefinitions::KEY_MOTOR] = packetFactory_->getKeyMotorPacket().toJson();
+    message[JsonDefinitions::B3] = packetFactory_->getB3Packet().toJson();
+    message[JsonDefinitions::TELEMETRY] = packetFactory_->getTelemetryPacket().toJson();
+    message[JsonDefinitions::BATTERY_FAULTS] = packetFactory_->getBatteryFaultsPacket().toJson();
+    message[JsonDefinitions::BATTERY] = packetFactory_->getBatteryPacket().toJson();
+    message[JsonDefinitions::MBMS] = packetFactory_->getMbmsPacket().toJson();
+    message[JsonDefinitions::PROXIMITY_SENSORS] = packetFactory_->getProximitySensorsPacket().toJson();
 
     for(int i = 0; i < ConfigManager::instance().getNumberOfMotors(); i++) {
-        message["MotorDetails" + QString::number(i)] = packetFactory_->getMotorDetailsPacket(i).toJson();
+        message[JsonDefinitions::MOTOR_DETAILS + QString::number(i)] = packetFactory_->getMotorDetailsPacket(i).toJson();
     }
 
     for(int i = 0; i < ConfigManager::instance().getNumberOfMppts(); i++) {
-        message["Mppt" + QString::number(i)] = packetFactory_->getMpptPacket(i).toJson();
+        message[JsonDefinitions::MPPT + QString::number(i)] = packetFactory_->getMpptPacket(i).toJson();
     }
     
     emit jsonPacketReady(QJsonDocument(message).toJson(QJsonDocument::Compact));

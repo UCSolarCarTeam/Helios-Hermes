@@ -4,6 +4,12 @@
 namespace JsonDefinitions {
 
     /**
+     * Common keys
+     */
+    constexpr const char* TITLE = "Title";
+    constexpr const char* TIMESTAMP = "Timestamp";
+
+    /**
      * Key motor keys
      */
     constexpr const char* KEY_MOTOR = "KeyMotor";
