@@ -1,4 +1,4 @@
-; Schulich Epsilon Hermes Specification File
+; Hermes Specification File
 
 forwardPeriod=500
 
@@ -7,21 +7,21 @@ numberOfMotors=2
 numberOfMppts=4
 
 [JsonFormat]
-packetTitle=Gen5
+packetTitle=Helios
 
 [SerialPort]
 portName=/dev/pts/7
 baudrate=115200
 
-[OutputSerialPort]
-outputSerialEnabled=false
-portName=/dev/pts/8
-baudrate=115200
-
-[RabbitMq]
-exchangeName=hermesExchange
-ipAddress=127.0.0.1
-port=6969
+[Mqtt]
+localTopic=hermesExchange
+localHostname=127.0.0.1
+localPort=6969
+telemetryTopic=packet
+telemetryHostname=aedes.calgarysolarcar.ca
+telemetryPort=1883
+telemetryUsername=BEGONE
+telemetryPassword=NiceTryBud
 
 [Logging]
 logLevel=3
