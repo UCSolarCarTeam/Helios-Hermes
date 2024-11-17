@@ -102,6 +102,34 @@ namespace JsonDefinitions {
     constexpr const char* CPU_OVERLOADED = "CpuOverload";
 
     /**
+     * B3 keys
+     */
+    constexpr const char* B3 = "B3";
+    constexpr const char* RIGHT_SIGNAL_IN = "RightSignalIn";
+    constexpr const char* LEFT_SIGNAL_IN = "LeftSignalIn";
+    constexpr const char* HAZARD_LIGHTS_IN = "HazardLightsIn";
+    constexpr const char* HEADLIGHTS_SWITCH_IN = "HeadightsSwitchIn";
+    constexpr const char* FORWARD_SWITCH_IN = "ForwardSwitchIn";
+    constexpr const char* HORN_SWITCH_IN = "HornSwitchIn";
+    constexpr const char* FORWARD_IN = "ForwardIn";
+    constexpr const char* NEUTRAL = "Neutral";
+    constexpr const char* REVERSE = "Reverse";
+    constexpr const char* BRAKE_SWITCH = "BrakeSwitch";
+    constexpr const char* HANDBRAKE_SWITCH = "HandbrakeSwitch";
+    constexpr const char* MOTOR_RESET = "MotorReset";
+    constexpr const char* RACE_MODE = "RaceMode";
+    constexpr const char* LAP = "Lap";
+    constexpr const char* ZOOM_ZOOM = "ZoomZoom";
+    constexpr const char* ACCELERATION = "Acceleration";
+    constexpr const char* REGEN_BRAKING = "RegenBraking";
+    constexpr const char* RIGHT_SIGNAL_OUT = "RightSignalOut";
+    constexpr const char* LEFT_SIGNAL_OUT = "LeftSignalOut";
+    constexpr const char* DAYTIME_RUNNING_LIGHT_SIGNAL_OUT = "DaytimeRunningLightSignalOut";
+    constexpr const char* HEADLIGHT_SIGNAL_OUT = "HeadlightSignalOut";
+    constexpr const char* BRAKE_LIGHT_SIGNAL_OUT = "BrakeLightSignalOut";
+    constexpr const char* HORN_SIGNAL_OUT = "HornSignalOut";
+
+    /**
      * Proximity sensor keys
      */
     constexpr const char* PROXIMITY_SENSORS = "ProximitySensors";
