@@ -10,7 +10,10 @@ public:
     QJsonObject toJson() override;
 
 private:
-    //assign packet fields here
+    unsigned short proximitySensor1_;
+    unsigned short proximitySensor2_;
+    unsigned short proximitySensor3_;
+    unsigned short proximitySensor4_;
 };
 
 #endif // PROXIMITYSENSORSPACKET_H
