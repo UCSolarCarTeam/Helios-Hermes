@@ -33,7 +33,34 @@ namespace {
     const char HORN_SIGNAL_OUT_MASK = 0x20;
 }
 
-B3Packet::B3Packet() {}
+B3Packet::B3Packet() {
+    rightSignalIn_ = false;
+    leftSignalIn_ = false;
+    hazardLightsIn_ = false;
+    headlightsSwitchIn_ = false;
+    forwardSwitchIn_ = false;
+    hornSwitchIn_ = false;
+    forwardIn_ = false;
+
+    neutral_ = false;
+    reverse_ = false;
+    brakeSwitch_ = false;
+    handbrakeSwitch_ = false;
+    motorReset_ = false;
+    raceMode_ = false;
+    lap_ = false;
+    zoomZoom_ = false;
+
+    acceleration_ = 0;
+    regenbraking_ = 0;
+
+    rightSignalOut_ = false;
+    leftSignalOut_ = false;
+    daytimeRunningLightSignalOut_ = false;
+    headlightSignalOut_ = false;
+    brakeLightSignalOut_ = false;
+    hornSignalOut_ = false;
+}
 
 void B3Packet::populatePacket(const QByteArray& data) {
     unsigned char lightInputs = getValue<unsigned char>(data, LIGHT_INPUTS_OFFSET);
