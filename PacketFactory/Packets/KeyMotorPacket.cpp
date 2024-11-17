@@ -5,10 +5,10 @@ namespace {
     const int MOTOR_SETPOINT_OFFSET = 1;
     const int CONTROL_BITS_OFFSET = 3;
 
-    const int CONTROL_MODE_MASK = 0x01;
-    const int MOTOR_MODE_MASK = 0x02;
-    const int SOFTWARE_ENABLE_MASK = 0x04;
-    const int DEBUG_MODE_MASK = 0x08;
+    const char CONTROL_MODE_MASK = 0x01;
+    const char MOTOR_MODE_MASK = 0x02;
+    const char SOFTWARE_ENABLE_MASK = 0x04;
+    const char DEBUG_MODE_MASK = 0x08;
 }
 
 KeyMotorPacket::KeyMotorPacket() {}
