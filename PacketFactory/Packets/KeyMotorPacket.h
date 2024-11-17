@@ -10,7 +10,11 @@ public:
     QJsonObject toJson() override;
 
 private:
-    //assign packet fields here
+    unsigned short motorSetpoint_;
+    bool controlMode_;
+    bool motorMode_;
+    bool softwareEnable_;
+    bool debugMode_;
 };
 
 #endif // KEYMOTORPACKET_H
