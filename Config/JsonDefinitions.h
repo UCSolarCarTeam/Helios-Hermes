@@ -297,7 +297,7 @@ namespace JsonDefinitions {
      * Pi keys
      */
     constexpr const char* PI = "Pi";
-    constexpr const char* WIEGAND_DATA = "WiegandData";
+    constexpr const char* RFID = "RFIDData";
 }
 
 #endif // JSONDEFINITIONS_H

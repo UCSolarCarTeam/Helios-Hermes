@@ -14,7 +14,7 @@ void PiPacket::populatePacket(const QByteArray& data) {
 QJsonObject PiPacket::toJson() {
     QJsonObject json;
 
-    json[JsonDefinitions::WIEGAND_DATA] = getDataAsLongLong();
+    json[JsonDefinitions::RFID] = getDataAsLongLong();
 
     return json;
 }
