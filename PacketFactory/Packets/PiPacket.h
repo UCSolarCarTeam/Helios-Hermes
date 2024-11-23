@@ -12,12 +12,9 @@ public:
 
     QByteArray getData() const;
     qlonglong getDataAsLongLong() const;
-    void setData(const QByteArray& data);
-    void clearData();
 
 private:
     QByteArray wiegandData_;
-
 };
 
 #endif // PIPACKET_H
