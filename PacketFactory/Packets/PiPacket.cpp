@@ -3,7 +3,8 @@
 
 
 void PiPacket::populatePacket(const QByteArray& data) {
-    wiegandData_ =
+    setData(data);  // Use the setter to store Wiegand data
+    qDebug() << "Populated packet with Wiegand data:" << data;
 }
 
 QByteArray PiPacket::getData() const {
