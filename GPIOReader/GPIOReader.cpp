@@ -1,79 +1,89 @@
 #include "GPIOReader.h"
 #include <QDebug>
+#include <unistd.h>
 
-GPIOReader::GPIOReader(QObject* parent) : QThread(parent), serialPort(new QSerialPort(this)) {
-    connect(serialPort, &QSerialPort::readyRead, this, &GPIOReader::handleReadyRead);
-}
+// Constructor
+GPIOReader::GPIOReader(QObject* parent) : QThread(parent) {}
 
+// Destructor
 GPIOReader::~GPIOReader() {
     stop();
-    delete serialPort;
+    gpioTerminate();
 }
 
-void GPIOReader::begin(const QString& portName) {
-    serialPort->setPortName(portName);
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->setDataBits(QSerialPort::Data8);
-    serialPort->setParity(QSerialPort::NoParity);
-    serialPort->setStopBits(QSerialPort::OneStop);
-    serialPort->setFlowControl(QSerialPort::NoFlowControl);
+// Begin function to initialize GPIO pins
+void GPIOReader::begin(int pinData0, int pinData1) {
+    _pinData0 = pinData0;
+    _pinData1 = pinData1;
 
-    if (serialPort->open(QIODevice::ReadOnly)) {
-        qDebug() << "Serial port opened successfully.";
-    } else {
-        qWarning() << "Failed to open serial port.";
+    if (gpioInitialise() < 0) {
+        qWarning() << "pigpio initialization failed.";
         return;
     }
 
+    gpioSetMode(_pinData0, PI_INPUT);
+    gpioSetMode(_pinData1, PI_INPUT);
+
+    gpioSetAlertFuncEx(_pinData0, data0ISR, this);
+    gpioSetAlertFuncEx(_pinData1, data1ISR, this);
+
+    reset();
     running = true;
     start();
 }
 
-void GPIOReader::run() {
-    while (running) {
-        QThread::msleep(10);
-    }
-}
-
+// Stop function to clean up
 void GPIOReader::stop() {
     running = false;
-    if (serialPort->isOpen()) {
-        serialPort->close();
-    }
     wait();
+    gpioSetAlertFunc(_pinData0, nullptr);
+    gpioSetAlertFunc(_pinData1, nullptr);
+    gpioTerminate();
 }
 
+// Reset the internal state
 void GPIOReader::reset() {
     _bitCnt = 0;
-    buffer.clear();
+    _data = 0;
     std::fill(std::begin(_bitData), std::end(_bitData), false);
 }
 
-void GPIOReader::processBuffer() {
-    while (buffer.size() > 0 && _bitCnt < MAX_BITS) {
-        char byte = buffer.at(0);
-        buffer.remove(0, 1);
-
-        if (byte == '0') {
-            _bitData[_bitCnt++] = false;
-        } else if (byte == '1') {
-            _bitData[_bitCnt++] = true;
+// Emit data after full 26 bits received
+void GPIOReader::emitData() {
+    for (int i = 1; i < MAX_BITS - 1; ++i) {
+        if (_bitData[i]) {
+            _data |= (1UL << (i - 1));
         }
+    }
+    emit onData(_data);
+    reset();
+}
 
-        if (_bitCnt >= MAX_BITS) {
-            unsigned long data = 0;
-            for (int i = 1; i < MAX_BITS - 1; i++) {
-                if (_bitData[i]) {
-                    data |= (1UL << (i - 1));
-                }
-            }
-            emit onData(data);
-            reset();
+// ISR for Data0 (logical 0)
+void GPIOReader::data0ISR(int gpio, int level, uint32_t tick, void* userdata) {
+    GPIOReader* instance = static_cast<GPIOReader*>(userdata);
+    if (level == 0) { // Falling edge
+        instance->_bitData[instance->_bitCnt++] = false;
+        if (instance->_bitCnt >= MAX_BITS) {
+            instance->emitData();
         }
     }
 }
 
-void GPIOReader::handleReadyRead() {
-    buffer.append(serialPort->readAll());
-    processBuffer();
+// ISR for Data1 (logical 1)
+void GPIOReader::data1ISR(int gpio, int level, uint32_t tick, void* userdata) {
+    GPIOReader* instance = static_cast<GPIOReader*>(userdata);
+    if (level == 0) { // Falling edge
+        instance->_bitData[instance->_bitCnt++] = true;
+        if (instance->_bitCnt >= MAX_BITS) {
+            instance->emitData();
+        }
+    }
+}
+
+// Main run loop (can be used for additional logic)
+void GPIOReader::run() {
+    while (running) {
+        usleep(10000); // Polling interval (10ms)
+    }
 }

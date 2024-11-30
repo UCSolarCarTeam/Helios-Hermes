@@ -15,6 +15,7 @@ QJsonObject PiPacket::toJson() {
     QJsonObject json;
 
     json[JsonDefinitions::RFID] = getDataAsLongLong();
+    // json[JsonDefinitions::RFID] = 8027501;
 
     return json;
 }

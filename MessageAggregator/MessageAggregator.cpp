@@ -41,6 +41,8 @@ void MessageAggregator::createJsonMessage() {
     }
     
     emit jsonPacketReady(QJsonDocument(message).toJson(QJsonDocument::Compact));
+
+    qDebug() << message;
 }
 
 /** Begin transmission timer, fires every 0.5s by default */

@@ -13,6 +13,8 @@ configure_file(${CMAKE_SOURCE_DIR}/config.ini.example ${CMAKE_BINARY_DIR}/config
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core SerialPort Mqtt)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core SerialPort Mqtt)
+find_package(PkgConfig REQUIRED)
+include_directories("/home/solarcar/pigpio")
 
 add_executable(HeliosHermes
   main.cpp
@@ -40,7 +42,7 @@ add_executable(HeliosHermes
   GPIOReader/GPIOReader.cpp GPIOReader/GPIOReader.h
 )
 
-target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort)
+target_link_libraries(HeliosHermes Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Mqtt Qt${QT_VERSION_MAJOR}::SerialPort /home/solarcar/pigpio/libpigpio.so)
 
 include(GNUInstallDirs)
 install(TARGETS HeliosHermes

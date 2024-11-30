@@ -19,6 +19,7 @@ MessageTransmitter::MessageTransmitter() {
 void MessageTransmitter::transmitMessage(const QByteArray& message) {
     if(localClient_->state() == QMqttClient::Connected) {
         qDebug() << "Publishing to LOCAL MQTT Service";
+        qDebug() << message;
         localClient_->publish(localTopic_, message);
     }
 
