@@ -3,7 +3,9 @@
 #include <unistd.h>
 
 // Constructor
-GPIOReader::GPIOReader(QObject* parent) : QThread(parent) {}
+GPIOReader::GPIOReader(QObject* parent) : QThread(parent) {
+    begin(20, 21);
+}
 
 // Destructor
 GPIOReader::~GPIOReader() {

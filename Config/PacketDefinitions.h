@@ -43,7 +43,7 @@ namespace PacketDefinitions {
     const int PI_ID = 11;
     const int PI_LENGTH = 4;
 
-    const std::array<int, 12> packetLength = {
+    const std::array<int, 11> packetLength = {
         -69,
         KEY_MOTOR_LENGTH,
         MOTOR_DETAILS_0_LENGTH, 
@@ -53,7 +53,7 @@ namespace PacketDefinitions {
         BATTERY_FAULTS_LENGTH, 
         BATTERY_LENGTH,
         MPPT_LENGTH,
-        PI_LENGTH,
+        // PI_LENGTH,
         MBMS_LENGTH,
         PROXIMITY_SENSORS_LENGTH
     };
