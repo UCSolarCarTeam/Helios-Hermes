@@ -27,10 +27,11 @@ public:
     MbmsPacket& getMbmsPacket();
     BatteryFaultsPacket& getBatteryFaultsPacket();
     B3Packet& getB3Packet();
-    PiPacket& getPiPacket();
 
     MotorDetailsPacket& getMotorDetailsPacket(int index);
     MpptPacket& getMpptPacket(int index);
+
+    PiPacket& getPiPacket();
 
 private:
     QScopedPointer<KeyMotorPacket> keyMotorPacket_;
@@ -40,11 +41,12 @@ private:
     QScopedPointer<MbmsPacket> mbmsPacket_;
     QScopedPointer<BatteryFaultsPacket> batteryFaultsPacket_;
     QScopedPointer<B3Packet> b3Packet_;
-    QScopedPointer<PiPacket> piPacket_;
 
     //amounts defined in config.ini
     QVector<MotorDetailsPacket*> motorDetailsPackets_;
     QVector<MpptPacket*> mpptPackets_;
+
+    QScopedPointer<PiPacket> piPacket_;
 };
 
 #endif // PACKETFACTORY_H
