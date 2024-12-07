@@ -29,6 +29,7 @@ private:
     static const int MAX_BITS = 26;
     bool _bitData[MAX_BITS] = {false};
     unsigned long _data = 0;
+    unsigned long _timestamp;
     PacketFactory* packetFactory_;
 
     void reset();
