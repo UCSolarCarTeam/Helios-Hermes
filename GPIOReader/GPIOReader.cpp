@@ -55,7 +55,9 @@ void GPIOReader::emitData() {
             _data |= (1UL << (i - 1));
         }
     }
-    emit onData(_data);
+    // emit onData(_data);
+    QByteArray dataArray = QByteArray::number(_data);
+    packetFactory_->getPiPacket().populatePacket(dataArray);
     reset();
 }
 

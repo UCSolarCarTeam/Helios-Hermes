@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QThread>
 #include <pigpio.h>
+#include "../PacketFactory/PacketFactory.h"
 
 class GPIOReader : public QThread {
     Q_OBJECT
@@ -28,6 +29,7 @@ private:
     static const int MAX_BITS = 26;
     bool _bitData[MAX_BITS] = {false};
     unsigned long _data = 0;
+    PacketFactory* packetFactory_;
 
     void reset();
     void emitData();
