@@ -4,7 +4,7 @@
 #include <algorithm>
 
 // Constructor
-GPIOReader::GPIOReader(QObject* parent) : QThread(parent) {
+GPIOReader::GPIOReader(QObject* parent, PacketFactory* packetFactory) : QThread(parent), packetFactory_(packetFactory) {
     qDebug() << "ENTER CONSRTUCTOR";
     begin(20, 21);
 }
@@ -74,6 +74,7 @@ void GPIOReader::data0ISR(int gpio, int level, uint32_t tick, void* userdata) {
     qDebug() << "ENTER DATA 0";
     GPIOReader* instance = static_cast<GPIOReader*>(userdata);
     if (level == 0) { // Falling edge
+        usleep(10000);
         uint32_t timeElapsed = tick - instance->_timestamp;
         instance->_timestamp = tick;
         // if (timeElapsed > TIMEOUT) {
@@ -93,6 +94,7 @@ void GPIOReader::data1ISR(int gpio, int level, uint32_t tick, void* userdata) {
     qDebug() << "ENTER DATA 1";
     GPIOReader* instance = static_cast<GPIOReader*>(userdata);
     if (level == 0) { // Falling edge
+        usleep(10000);
         uint32_t timeElapsed = tick - instance->_timestamp;
         instance->_timestamp = tick;
         // if (timeElapsed > TIMEOUT) {

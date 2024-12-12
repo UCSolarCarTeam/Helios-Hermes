@@ -10,7 +10,7 @@ class GPIOReader : public QThread {
     Q_OBJECT
 
 public:
-    explicit GPIOReader(QObject* parent = nullptr);
+    explicit GPIOReader(QObject* parent = nullptr, PacketFactory* packetFactory = nullptr);
     ~GPIOReader();
 
     void begin(int pinData0, int pinData1);

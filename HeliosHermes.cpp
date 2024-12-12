@@ -25,7 +25,7 @@ HeliosHermes::HeliosHermes(int& argc, char** argv) :
     StreamProcessor* streamProcessor = new StreamProcessor(serialReciever, packetFactory);
 
     //initialize GPIOReader which will read GPIO data and forward directly to the PiPacket
-    GPIOReader* gpioReader = new GPIOReader();
+    GPIOReader* gpioReader = new GPIOReader(nullptr, packetFactory);
 
     //initialize MessageTransmitter which will transmit data every period of time deinifed in config.ini
     MessageTransmitter* messageTransmitter = new MessageTransmitter();
