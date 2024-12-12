@@ -5,7 +5,6 @@
 
 // Constructor
 GPIOReader::GPIOReader(QObject* parent, PacketFactory* packetFactory) : QThread(parent), packetFactory_(packetFactory) {
-    qDebug() << "ENTER CONSRTUCTOR";
     begin(20, 21);
 }
 
@@ -17,7 +16,6 @@ GPIOReader::~GPIOReader() {
 
 // Begin function to initialize GPIO pins
 void GPIOReader::begin(int pinData0, int pinData1) {
-    qDebug() << "ENTER BEGIN";
     _pinData0 = pinData0;
     _pinData1 = pinData1;
 
@@ -48,7 +46,6 @@ void GPIOReader::stop() {
 
 // Reset the internal state
 void GPIOReader::reset() {
-    qDebug() << "ENTER RESET";
     std::fill(std::begin(_bitData), std::end(_bitData), false);
     _bitCnt = 0;
     _data = 0;
@@ -57,29 +54,21 @@ void GPIOReader::reset() {
 
 // Emit data after receiving 26 bits
 void GPIOReader::emitData() {
-    qDebug() << "ENTER EMIT DATA";
     for (int i = 1; i < MAX_BITS - 1; ++i) {
         if (_bitData[i]) {
             _data |= (1UL << (i - 1));
         }
     }
     QByteArray dataArray = QByteArray::number(_data);
-    qDebug() << "FORWARDING DATA";
     packetFactory_->getPiPacket().populatePacket(dataArray);
     reset();
 }
 
 // ISR for Data0 (logical 0)
 void GPIOReader::data0ISR(int gpio, int level, uint32_t tick, void* userdata) {
-    qDebug() << "ENTER DATA 0";
     GPIOReader* instance = static_cast<GPIOReader*>(userdata);
     if (level == 0) { // Falling edge
         usleep(10000);
-        uint32_t timeElapsed = tick - instance->_timestamp;
-        instance->_timestamp = tick;
-        // if (timeElapsed > TIMEOUT) {
-        //     instance->reset();
-        // }
         if (instance->_bitCnt < MAX_BITS) {
             instance->_bitData[instance->_bitCnt++] = false;
             if (instance->_bitCnt == MAX_BITS) {
@@ -91,15 +80,9 @@ void GPIOReader::data0ISR(int gpio, int level, uint32_t tick, void* userdata) {
 
 // ISR for Data1 (logical 1)
 void GPIOReader::data1ISR(int gpio, int level, uint32_t tick, void* userdata) {
-    qDebug() << "ENTER DATA 1";
     GPIOReader* instance = static_cast<GPIOReader*>(userdata);
     if (level == 0) { // Falling edge
         usleep(10000);
-        uint32_t timeElapsed = tick - instance->_timestamp;
-        instance->_timestamp = tick;
-        // if (timeElapsed > TIMEOUT) {
-        //     instance->reset();
-        // }
         if (instance->_bitCnt < MAX_BITS) {
             instance->_bitData[instance->_bitCnt++] = true;
             if (instance->_bitCnt == MAX_BITS) {
